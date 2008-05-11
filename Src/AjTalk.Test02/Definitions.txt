@@ -1,0 +1,13 @@
+class Point
+variables x y
+
+method
+x ^x.
+
+method
+y ^y.
+
+class Rectangle
+variables point1 point2
+class Square Rectangle
+
