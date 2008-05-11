@@ -161,7 +161,18 @@ namespace AjTalk
 			{
 				mthname = token.Value;
 				CompileUnaryExpression();
-				method.CompileSend(mthname);
+
+                if (mthname == "+")
+                    method.CompileByteCode(ByteCode.Add);
+                else if (mthname == "-")
+                    method.CompileByteCode(ByteCode.Substract);
+                else if (mthname == "*")
+                    method.CompileByteCode(ByteCode.Multiply);
+                else if (mthname == "/")
+                    method.CompileByteCode(ByteCode.Divide);
+                else
+                    method.CompileSend(mthname);
+
 				token = NextToken();
 			}
 

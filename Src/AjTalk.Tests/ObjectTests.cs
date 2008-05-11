@@ -28,7 +28,7 @@ namespace AjTalk.Tests
         {
             IObject obj = GetRectangleClass().NewObject();
 
-            obj.SendMessage("side", new object[] { 10 });
+            obj.SendMessage("side:", new object[] { 10 });
 
             Assert.AreEqual(10, obj[0]);
             Assert.AreEqual(10, obj[1]);
