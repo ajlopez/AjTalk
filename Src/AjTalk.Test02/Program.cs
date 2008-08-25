@@ -7,11 +7,15 @@ namespace AjTalk.Test02
 {
     class Program
     {
+        static Machine machine;
+
         static IClass cls;
         static Dictionary<string, IObject> objects = new Dictionary<string, IObject>();
 
         static void Main(string[] args)
         {
+            machine = new Machine();
+
             foreach (string filename in args)
                 ProcessFile(filename);
 
@@ -50,9 +54,9 @@ namespace AjTalk.Test02
             if (words[0] == "class")
             {
                 if (words.Length > 2)
-                    cls = new BaseClass(words[1], (IClass) objects[words[2]]);
+                    cls = new BaseClass(words[1], (IClass) objects[words[2]], machine);
                 else
-                    cls = new BaseClass(words[1]);
+                    cls = new BaseClass(words[1], machine);
 
                 objects[words[1]]=cls;
             }

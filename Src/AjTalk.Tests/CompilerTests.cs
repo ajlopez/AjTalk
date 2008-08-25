@@ -32,6 +32,18 @@ namespace AjTalk.Tests
         }
 
         [Test]
+        public void ShouldCompileMethodWithLocals()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("Rectangle");
+            cls.DefineInstanceVariable("x");
+            Compiler compiler = new Compiler("x | temp | temp := x. ^temp");
+            compiler.CompileMethod(cls);
+
+            Assert.IsNotNull(cls.GetInstanceMethod("x"));
+        }
+
+        [Test]
         public void ShouldCompileSetMethod()
         {
             Machine machine = new Machine();
@@ -86,7 +98,7 @@ namespace AjTalk.Tests
             Assert.AreEqual(20, obj[1]);
 
             Assert.AreEqual(10, cls.GetInstanceMethod("x").Execute(obj, new object[] {}));
-            Assert.AreEqual(20, cls.GetInstanceMethod("y").Execute(obj, new object[] {}));
+            Assert.AreEqual(20, cls.GetInstanceMethod("y").Execute(obj, new object[] { }));
         }
 
         [Test]
@@ -103,11 +115,42 @@ namespace AjTalk.Tests
         }
 
         [Test]
+        public void ShouldCompileMultiCommandMethodWithLocal()
+        {
+            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
+                new string[] {
+                    "side: newSide | temp | temp := x. x := temp. y := temp"
+                });
+
+            Assert.IsNotNull(cls);
+
+            Assert.IsNotNull(cls.GetInstanceMethod("side:"));
+        }
+
+        [Test]
         public void ShouldRunMultiCommandMethod()
         {
             IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
                 new string[] {
                     "side: newSide x := newSide. y := newSide"
+                });
+
+            Assert.IsNotNull(cls);
+
+            IObject obj = cls.NewObject();
+
+            cls.GetInstanceMethod("side:").Execute(obj, new object[] { 10 });
+
+            Assert.AreEqual(10, obj[0]);
+            Assert.AreEqual(10, obj[1]);
+        }
+
+        [Test]
+        public void ShouldRunMultiCommandMethodWithLocal()
+        {
+            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
+                new string[] {
+                    "side: newSide | temp | temp := newSide. x := temp. y := temp"
                 });
 
             Assert.IsNotNull(cls);

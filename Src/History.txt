@@ -6,10 +6,16 @@ An Smalltalk-like interpreter, written in C#.
 Work in progress.
 
 2007-09-15
-Creation of this project folder
+	Creation of this project folder
 
 2008-05-04
-Begin to work with TDD (late but sure)
+	Begin to work with TDD (late but sure)
+
+2008-07-11
+	Publish the code in Google Code
+
+2008-08-24
+	Add support for local variables in compiling method
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

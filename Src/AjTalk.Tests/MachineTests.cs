@@ -20,6 +20,15 @@ namespace AjTalk.Tests
         }
 
         [Test]
+        public void ShouldHasGlobals()
+        {
+            Machine machine = new Machine();
+
+            Assert.IsNotNull(machine.GetGlobalObject("Object"));
+            Assert.IsNotNull(machine.GetGlobalObject("Class"));
+        }
+
+        [Test]
         public void ShouldCreateClass()
         {
             Machine machine = new Machine();

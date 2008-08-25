@@ -10,6 +10,7 @@ namespace AjTalk
 	{
 		private Tokenizer tokenizer;
 		private IList arguments = new ArrayList();
+        private IList locals = new ArrayList();
 		private string methodname;
 		private Method method;
 
@@ -61,6 +62,35 @@ namespace AjTalk
 				arguments.Add(token.Value);
 			}
 		}
+
+        private void CompileLocals()
+        {
+            Token token = NextToken();
+
+            if (token == null)
+                return;
+
+            if (token.Value != "|")
+            {
+                PushToken(token);
+                return;
+            }
+
+            token = NextToken();
+
+            while (token != null && token.Value != "|")
+            {
+                if (token.Type != TokenType.Name)
+                    throw new CompilerException("Local variable name expected");
+
+                locals.Add(token.Value);
+
+                token = NextToken();
+            }
+
+            if (token == null)
+                throw new CompilerException("'|' expected");
+        }
 
 		private void CompileArguments() 
 		{
@@ -258,11 +288,15 @@ namespace AjTalk
 		public void CompileMethod(IClass cls) 
 		{
 			CompileArguments();
+            CompileLocals();
 
 			method = new Method(cls, methodname);
 
 			foreach (string argname in arguments)
 				method.CompileArgument(argname);
+
+            foreach (string locname in locals)
+                method.CompileLocal(locname);
 
 			cls.DefineInstanceMethod(method);
 

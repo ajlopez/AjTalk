@@ -42,6 +42,27 @@ namespace AjTalk.Tests
             Assert.AreEqual(mth, cls.GetInstanceMethod("x:"));
         }
 
+        public void ShouldCompileWithLocals()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("TestClass");
+            cls.DefineInstanceVariable("x");
+
+            Method mth;
+
+            mth = new Method(cls, "x:");
+            mth.CompileArgument("newX");
+            mth.CompileLocal("l");
+            mth.CompileGet("newX");
+            mth.CompileSet("l");
+            mth.CompileGet("l");
+            mth.CompileSet("x");
+
+            cls.DefineInstanceMethod(mth);
+
+            Assert.AreEqual(mth, cls.GetInstanceMethod("x:"));
+        }
+
         public void ShouldCompileAndRun()
         {
             Machine machine = new Machine();
@@ -53,6 +74,31 @@ namespace AjTalk.Tests
             mth = new Method(cls, "x:");
             mth.CompileArgument("newX");
             mth.CompileGet("newX");
+            mth.CompileSet("x");
+
+            cls.DefineInstanceMethod(mth);
+
+            IObject obj = cls.NewObject();
+
+            mth.Execute(obj, new object[] { 10 });
+
+            Assert.AreEqual(10, obj[0]);
+        }
+
+        public void ShouldCompileWithLocalsAndRun()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("TestClass");
+            cls.DefineInstanceVariable("x");
+
+            Method mth;
+
+            mth = new Method(cls, "x:");
+            mth.CompileArgument("newX");
+            mth.CompileLocal("l");
+            mth.CompileGet("newX");
+            mth.CompileSet("l");
+            mth.CompileGet("l");
             mth.CompileSet("x");
 
             cls.DefineInstanceMethod(mth);

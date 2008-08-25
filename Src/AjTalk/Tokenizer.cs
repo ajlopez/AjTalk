@@ -44,7 +44,7 @@ namespace AjTalk
         private Stack<Token> tokenstack = new Stack<Token>();
 
 		private const string operators = "^<>:=-+*/&";
-		private const string separators = "().";
+		private const string separators = "().|";
 
         private const char stringdelimeter = '\'';
 

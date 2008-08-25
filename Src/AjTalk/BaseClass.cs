@@ -12,27 +12,25 @@ namespace AjTalk
 	{
 		private IClass superclass;
 		private string name;
+        private Machine machine;
+
         private Dictionary<string, IMethod> classmethods = new Dictionary<string, IMethod>();
         private Dictionary<string, IMethod> instancemethods = new Dictionary<string, IMethod>();
         private List<string> classvariables = new List<string>();
         private List<string> instancevariables = new List<string>();
-
-		public BaseClass(string name) 
+        
+		public BaseClass(string name, Machine machine) : this(name,null,machine)
 		{
-            if (name == null)
-                throw new ArgumentNullException("name");
-
-			this.name = name;
-			this.superclass = null;
 		}
 
-		public BaseClass(string name, IClass superclass)
+		public BaseClass(string name, IClass superclass, Machine machine)
 		{
             if (name == null)
                 throw new ArgumentNullException("name");
 
             this.name = name;
 			this.superclass = superclass;
+            this.machine = machine;
 		}
 
 		public IClass SuperClass
@@ -50,6 +48,14 @@ namespace AjTalk
 				return name;
 			}
 		}
+
+        public Machine Machine
+        {
+            get
+            {
+                return machine;
+            }
+        }
 
         public void DefineClassMethod(IMethod method)
         {
