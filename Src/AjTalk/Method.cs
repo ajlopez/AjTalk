@@ -7,20 +7,10 @@ namespace AjTalk
 	/// <summary>
 	/// Summary description for Method.
 	/// </summary>
-	public class Method : IMethod
+	public class Method : Block, IMethod
 	{
 		private string name;
 		private IClass mthclass;
-		private byte [] bytecodes;
-		private short nextbytecode;
-		private IList constants = new ArrayList(5);
-		private IList argnames = new ArrayList(5);
-		private IList localnames = new ArrayList(5);
-        private List<string> globalnames = new List<string>();
-
-        public Method()
-        {
-        }
 
         public Method(string name)
         {
@@ -32,257 +22,78 @@ namespace AjTalk
 			this.mthclass = cls;
 		}
 
-		public int Arity
-		{
-			get 
-			{
-				return this.argnames.Count;
-			}
-		}
-
-		public int NoLocals
-		{
-			get 
-			{
-				if (this.localnames==null)
-					return 0;
-
-				return this.localnames.Count;
-			}
-		}
-
         public IClass Class
         {
             get { return this.mthclass; }
         }
 
-		public void CompileArgument(string argname) 
-		{
-			if (argnames.Contains(argname))
-				throw new Exception("Repeated Argument: " + argname);
-			argnames.Add(argname);
-		}
-
-		public void CompileLocal(string localname)
-		{
-			if (localnames.Contains(localname))
-				throw new Exception("Repeated Local: " + localname);
-			localnames.Add(localname);
-		}
-
-		public byte CompileConstant(object obj)
-		{
-			int p = constants.IndexOf(obj);
-
-			if (p>=0)
-				return (byte) p;
-
-			constants.Add(obj);
-
-			return (byte) (constants.Count-1);
-		}
-
-        public byte CompileGlobal(string globalname)
+        private bool TryCompileGetVariable(string name)
         {
-            int p = globalnames.IndexOf(globalname);
+            int p = mthclass.GetInstanceVariableOffset(name);
 
             if (p >= 0)
-                return (byte)p;
+            {
+                CompileByteCode(ByteCode.GetVariable, (byte)p);
+                return true;
+            }
 
-            globalnames.Add(globalname);
+            // TODO Review if a class variable can be used in an instance method
+            p = mthclass.GetClassVariableOffset(name);
 
-            return (byte)(globalnames.Count - 1);
+            if (p >= 0)
+            {
+                CompileByteCode(ByteCode.GetClassVariable, (byte)p);
+                return true;
+            }
+
+            return false;
         }
 
-		public void CompileGetConstant(object obj) 
-		{
-			CompileByteCode(ByteCode.GetConstant,CompileConstant(obj));
-		}
+        public override void CompileGet(string name)
+        {
+            if (TryCompileGet(name))
+                return;
 
-		private void CompileByte(byte b)
-		{
-			if (bytecodes==null) 
-			{
-				bytecodes = new byte [] { b };
-				nextbytecode = 1;
-				return;
-			}
-
-			if (nextbytecode >= bytecodes.Length) 
-			{
-				byte [] aux = new byte[bytecodes.Length+10];
-				Array.Copy(bytecodes,aux,bytecodes.Length);
-				bytecodes=aux;
-			}
-
-			bytecodes[nextbytecode++] = b;
-		}
-
-		public void CompileByteCode(ByteCode b)
-		{
-			CompileByte((byte) b);
-		}
-
-		public void CompileByteCode(ByteCode b, byte arg) 
-		{
-			CompileByteCode(b);
-			CompileByte(arg);
-		}
-
-		public void CompileByteCode(ByteCode b, byte arg1, byte arg2) 
-		{
-			CompileByteCode(b);
-			CompileByte(arg1);
-			CompileByte(arg2);
-		}
-
-		private byte MessageArity(string msgname) 
-		{
-			if (!Char.IsLetter(msgname[0]))
-				return 2;
-
-			int p = msgname.IndexOf(':');
-
-			if (p<0)
-				return 1;
-
-			byte n=0;
-
-			foreach (char ch in msgname)
-				if (ch==':')
-					n++;
-
-			return n;
-		}
-
-		public void CompileSend(string msgname) 
-		{
-			CompileByteCode(ByteCode.Send,CompileConstant(msgname),MessageArity(msgname));
-		}
-
-		public void CompileGet(string name) 
-		{
-			if (name=="self") 
-			{
-				CompileByteCode(ByteCode.GetSelf);
-				return;
-			}
-
-			int p;
-
-			if (localnames!=null) 
-			{
-				p = localnames.IndexOf(name);
-
-				if (p>=0) 
-				{
-					CompileByteCode(ByteCode.GetLocal,(byte) p);
-					return;
-				}
-			}
-
-			if (argnames!=null) 
-			{
-				p = argnames.IndexOf(name);
-
-				if (p>=0) 
-				{
-					CompileByteCode(ByteCode.GetArgument,(byte) p);
-					return;
-				}
-			}
-
-            if (this.mthclass != null)
-            {
-                p = mthclass.GetInstanceVariableOffset(name);
-
-                if (p >= 0)
-                {
-                    CompileByteCode(ByteCode.GetVariable, (byte)p);
-                    return;
-                }
-
-                p = mthclass.GetClassVariableOffset(name);
-
-                if (p >= 0)
-                {
-                    CompileByteCode(ByteCode.GetClassVariable, (byte)p);
-                    return;
-                }
-            }
+            if (TryCompileGetVariable(name))
+                return;
 
             CompileByteCode(ByteCode.GetGlobalVariable, this.CompileGlobal(name));
-		}
-
-		public void CompileSet(string name) 
-		{
-			int p;
-
-			if (localnames!=null) 
-			{
-				p = localnames.IndexOf(name);
-
-				if (p>=0) 
-				{
-					CompileByteCode(ByteCode.SetLocal,(byte) p);
-					return;
-				}
-			}
-
-			if (argnames!=null) 
-			{
-				p = argnames.IndexOf(name);
-
-				if (p>=0) 
-				{
-					CompileByteCode(ByteCode.SetArgument,(byte) p);
-					return;
-				}
-			}
-
-            if (mthclass != null)
-            {
-                p = mthclass.GetInstanceVariableOffset(name);
-
-                if (p >= 0)
-                {
-                    CompileByteCode(ByteCode.SetVariable, (byte)p);
-                    return;
-                }
-
-                p = mthclass.Class.GetInstanceVariableOffset(name);
-
-                if (p >= 0)
-                {
-                    CompileByteCode(ByteCode.SetClassVariable, (byte)p);
-                    return;
-                }
-            }
-
-            CompileByteCode(ByteCode.SetGlobalVariable, CompileGlobal(name));
-		}
-
-		public byte [] ByteCodes 
-		{
-			get 
-			{
-				return bytecodes;
-			}
-		}
-
-		public object GetConstant(int nc) 
-		{
-			return constants[nc];
-		}
-
-        public string GetGlobalName(int ng)
-        {
-            return globalnames[ng];
         }
 
-		#region IMethod Members
+        private bool TryCompileSetVariable(string name)
+        {
+            int p = mthclass.GetInstanceVariableOffset(name);
 
-		public string Name
+            if (p >= 0)
+            {
+                CompileByteCode(ByteCode.SetVariable, (byte)p);
+                return true;
+            }
+
+            // TODO Is this code needed?
+            p = mthclass.Class.GetInstanceVariableOffset(name);
+
+            if (p >= 0)
+            {
+                CompileByteCode(ByteCode.SetClassVariable, (byte)p);
+                return true;
+            }
+
+            return false;
+        }
+
+        public override void CompileSet(string name)
+        {
+            if (TryCompileSet(name))
+                return;
+
+            if (TryCompileSetVariable(name))
+                return;
+
+            CompileByteCode(ByteCode.SetGlobalVariable, CompileGlobal(name));
+        }
+
+        public string Name
 		{
 			get
 			{
@@ -290,17 +101,22 @@ namespace AjTalk
 			}
 		}
 
-		public object Execute(IObject self, IObject receiver, object[] args)
-		{
-			return (new ExecutionBlock(self,receiver,this,args)).Execute();
-		}
+        // TODO how to implements super, sender
+        public override object Execute(Machine machine, object[] args)
+        {
+            throw new InvalidOperationException("A method needs a self object");
+        }
 
         // TODO how to implements super, sender
-		public object Execute(IObject receiver, object[] args)
-		{
-			return (new ExecutionBlock(receiver,receiver,this,args)).Execute();
-		}
+        public object Execute(IObject self, object[] args)
+        {
+            return Execute(self, self, args);
+        }
 
-		#endregion
-	}
+        // TODO how to implements super, sender
+        public object Execute(IObject self, IObject receiver, object[] args)
+        {
+            return (new ExecutionBlock(self, receiver, this, args)).Execute();
+        }
+    }
 }

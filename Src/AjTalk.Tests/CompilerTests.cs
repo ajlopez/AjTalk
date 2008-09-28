@@ -59,14 +59,22 @@ namespace AjTalk.Tests
         public void ShouldCompileSimpleCommand()
         {
             Compiler compiler = new Compiler("nil invokeWith: 10");
-            compiler.CompileAnonymousMethod();
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
         }
 
         [Test]
         public void ShouldCompileTwoCommands()
         {
             Compiler compiler = new Compiler("nil invokeWith: 10. Global := 20");
-            compiler.CompileAnonymousMethod();
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
         }
 
         [Test]

@@ -40,6 +40,8 @@
     <Compile Include="BaseObjectTests.cs" />
     <Compile Include="ClassTests.cs" />
     <Compile Include="CompilerTests.cs" />
+    <Compile Include="BlockTests.cs" />
+    <Compile Include="LoaderTests.cs" />
     <Compile Include="MachineTests.cs" />
     <Compile Include="MethodTests.cs" />
     <Compile Include="ObjectTests.cs" />
@@ -51,6 +53,9 @@
       <Project>{232A3EF3-8392-409E-8D6B-961EFEE30347}</Project>
       <Name>AjTalk</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CodeFiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

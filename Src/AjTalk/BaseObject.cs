@@ -61,7 +61,7 @@ namespace AjTalk
             // TODO objclass to review
 			IMethod mth = objclass.GetInstanceMethod(msgname);
             // TODO add does not understand logic
-			return mth.Execute(this, args);
+			return mth.Execute(this, this, args);
 		}
 
 		#endregion

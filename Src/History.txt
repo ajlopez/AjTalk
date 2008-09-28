@@ -24,9 +24,8 @@ Work in progress.
 	Set/Get global bytecodes
 	Global objects in Machine
 	Symbol support in tokenizer
-
-TODO
-	Load .st file
+	Method inherits from Block
+	Loader from file and tests
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

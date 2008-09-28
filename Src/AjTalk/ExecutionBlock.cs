@@ -5,7 +5,8 @@ namespace AjTalk
 {
 	public class ExecutionBlock
 	{
-		private Method method;
+		private Block block;
+        private Machine machine;
 		private IObject self;
 		private IObject receiver;
 		private object [] arguments;
@@ -14,15 +15,30 @@ namespace AjTalk
 		private int ip;
 		private IList stack;
 
-		public ExecutionBlock(IObject self, IObject receiver, Method method, object [] arguments) 
+        public ExecutionBlock(Machine machine, IObject receiver, Block block, object[] arguments)
+        {
+            this.self = null;
+            this.machine = machine;
+            this.receiver = receiver;
+            this.block = block;
+            this.arguments = arguments;
+            this.stack = new ArrayList(5);
+            if (this.block.NoLocals > 0)
+                this.locals = new object[this.block.NoLocals];
+            else
+                this.locals = null;
+        }
+
+		public ExecutionBlock(IObject self, IObject receiver, Block block, object [] arguments) 
 		{
 			this.self = self;
+            this.machine = self.Class.Machine;
 			this.receiver = receiver;
-			this.method = method;
+			this.block = block;
 			this.arguments = arguments;
 			this.stack = new ArrayList(5);
-			if (method.NoLocals>0)
-				this.locals = new object[method.NoLocals];
+			if (this.block.NoLocals>0)
+				this.locals = new object[this.block.NoLocals];
 			else
 				this.locals = null;
 		}
@@ -51,9 +67,9 @@ namespace AjTalk
 		{
 			ip = 0;
 
-			while (ip < method.ByteCodes.Length) 
+			while (ip < block.ByteCodes.Length) 
 			{
-				ByteCode bc = (ByteCode) method.ByteCodes[ip];
+				ByteCode bc = (ByteCode) block.ByteCodes[ip];
 				Byte arg;
 
 				switch (bc) 
@@ -64,12 +80,12 @@ namespace AjTalk
 						return Top;
 					case ByteCode.GetConstant:
 						ip++;
-						arg = method.ByteCodes[ip];
-						Push(method.GetConstant(arg));
+						arg = block.ByteCodes[ip];
+						Push(block.GetConstant(arg));
 						break;
 					case ByteCode.GetArgument:
 						ip++;
-						arg = method.ByteCodes[ip];
+						arg = block.ByteCodes[ip];
 						Push(arguments[arg]);
 						break;
 					case ByteCode.GetClass:
@@ -79,12 +95,12 @@ namespace AjTalk
 						throw new Exception("Not implemented");
                     case ByteCode.GetGlobalVariable:
 						ip++;
-						arg = method.ByteCodes[ip];
-                        ((IObject)receiver).Class.Machine.GetGlobalObject(method.GetGlobalName(arg));
+						arg = block.ByteCodes[ip];
+                        machine.GetGlobalObject(block.GetGlobalName(arg));
                         break;
                     case ByteCode.GetLocal:
 						ip++;
-						arg = method.ByteCodes[ip];
+						arg = block.ByteCodes[ip];
 						Push(locals[arg]);
 						break;
 					case ByteCode.GetSelf:
@@ -95,7 +111,7 @@ namespace AjTalk
 						break;
 					case ByteCode.GetVariable:
 						ip++;
-						arg = method.ByteCodes[ip];
+						arg = block.ByteCodes[ip];
 						Push(receiver[arg]);
 						break;
 					case ByteCode.NewObject:
@@ -128,11 +144,11 @@ namespace AjTalk
 						break;
 					case ByteCode.Send:
 						ip++;
-						arg = method.ByteCodes[ip];
+						arg = block.ByteCodes[ip];
 						string mthname;
-						mthname = (string) method.GetConstant(arg);
+						mthname = (string) block.GetConstant(arg);
 						ip++;
-						arg = method.ByteCodes[ip];
+						arg = block.ByteCodes[ip];
 						object [] args = new object[arg];
 						for (int k = arg-1; k>=0; k--)
 							args[k] = Pop();
@@ -141,25 +157,25 @@ namespace AjTalk
 						break;
 					case ByteCode.SetArgument:				
 						ip++;
-						arg = method.ByteCodes[ip];
+						arg = block.ByteCodes[ip];
 						arguments[arg] = Pop();
 						break;
 					case ByteCode.SetClassVariable:
 						throw new Exception("Not implemented");
 					case ByteCode.SetLocal:
 						ip++;
-						arg = method.ByteCodes[ip];
+						arg = block.ByteCodes[ip];
 						locals[arg] = Pop();
 						break;
                     case ByteCode.SetVariable:
 						ip++;
-						arg = method.ByteCodes[ip];
+						arg = block.ByteCodes[ip];
 						receiver[arg] = Pop();
 						break;
                     case ByteCode.SetGlobalVariable:
                         ip++;
-                        arg = method.ByteCodes[ip];
-                        ((IObject)receiver).Class.Machine.SetGlobalObject(method.GetGlobalName(arg), Pop());
+                        arg = block.ByteCodes[ip];
+                        machine.SetGlobalObject(block.GetGlobalName(arg), Pop());
                         break;
                     default:
 						throw new Exception("Not implemented");

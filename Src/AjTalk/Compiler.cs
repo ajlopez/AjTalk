@@ -12,7 +12,7 @@ namespace AjTalk
 		private IList arguments = new ArrayList();
         private IList locals = new ArrayList();
 		private string methodname;
-		private Method method;
+		private Block block;
 
 		public Compiler(Tokenizer tok)
 		{
@@ -141,19 +141,19 @@ namespace AjTalk
 
 			if (token.Type==TokenType.Integer) 
 			{
-				method.CompileGetConstant(Convert.ToInt32(token.Value));
+				block.CompileGetConstant(Convert.ToInt32(token.Value));
 				return;
 			}
 
 			if (token.Type==TokenType.String)
 			{
-				method.CompileGetConstant(token.Value);
+				block.CompileGetConstant(token.Value);
 				return;
 			}
 
 			if (token.Type==TokenType.Name) 
 			{
-				method.CompileGet(token.Value);
+				block.CompileGet(token.Value);
 				return;
 			}
 
@@ -170,7 +170,7 @@ namespace AjTalk
 
 			while (token!=null && token.Type==TokenType.Name && !token.Value.EndsWith(":") && token.Value!="self") 
 			{
-				method.CompileSend(token.Value);
+				block.CompileSend(token.Value);
 				token = NextToken();
 			}
 
@@ -193,15 +193,15 @@ namespace AjTalk
 				CompileUnaryExpression();
 
                 if (mthname == "+")
-                    method.CompileByteCode(ByteCode.Add);
+                    block.CompileByteCode(ByteCode.Add);
                 else if (mthname == "-")
-                    method.CompileByteCode(ByteCode.Substract);
+                    block.CompileByteCode(ByteCode.Substract);
                 else if (mthname == "*")
-                    method.CompileByteCode(ByteCode.Multiply);
+                    block.CompileByteCode(ByteCode.Multiply);
                 else if (mthname == "/")
-                    method.CompileByteCode(ByteCode.Divide);
+                    block.CompileByteCode(ByteCode.Divide);
                 else
-                    method.CompileSend(mthname);
+                    block.CompileSend(mthname);
 
 				token = NextToken();
 			}
@@ -230,7 +230,7 @@ namespace AjTalk
 				PushToken(token);
 
 			if (mthname != "")
-				method.CompileSend(mthname);
+				block.CompileSend(mthname);
 		}
 
 		private void CompileExpression() 
@@ -253,7 +253,7 @@ namespace AjTalk
 			if (token.Value=="^") 
 			{
 				CompileExpression();
-				method.CompileByteCode(ByteCode.ReturnPop);
+				block.CompileByteCode(ByteCode.ReturnPop);
 				return true;
 			}
 
@@ -264,7 +264,7 @@ namespace AjTalk
                 if (token2.Type == TokenType.Operator && token2.Value == ":=")
                 {
                     CompileExpression();
-                    method.CompileSet(token.Value);
+                    block.CompileSet(token.Value);
 
                     return true;
                 }
@@ -285,10 +285,12 @@ namespace AjTalk
 				;
 		}
 
-        public void CompileAnonymousMethod()
+        public Block CompileBlock()
         {
-            method = new Method();
+            block = new Block();
             CompileBody();
+
+            return block;
         }
 
         private void CompileMethod(IClass cls)
@@ -296,13 +298,13 @@ namespace AjTalk
             CompileArguments();
             CompileLocals();
 
-            method = new Method(cls, methodname);
+            block = new Method(cls, methodname);
 
             foreach (string argname in arguments)
-                method.CompileArgument(argname);
+                block.CompileArgument(argname);
 
             foreach (string locname in locals)
-                method.CompileLocal(locname);
+                block.CompileLocal(locname);
 
             CompileBody();
         }
@@ -310,14 +312,14 @@ namespace AjTalk
 		public void CompileInstanceMethod(IClass cls) 
 		{
             CompileMethod(cls);
-            cls.DefineInstanceMethod(method);
+            cls.DefineInstanceMethod((IMethod) block);
         }
 
         // TODO Review implementation, use DefineClassMethod instead
         public void CompileClassMethod(IClass cls)
         {
             CompileMethod(cls.Class); // use metaclass
-            cls.Class.DefineInstanceMethod(method);
+            cls.Class.DefineInstanceMethod((IMethod) block);
         }
     }
 

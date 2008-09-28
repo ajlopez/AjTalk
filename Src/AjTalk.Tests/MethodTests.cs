@@ -44,39 +44,6 @@ namespace AjTalk.Tests
         }
 
         [Test]
-        public void ShouldCompileWithoutClassAndGlobals()
-        {
-            Machine machine = new Machine();
-            Method mth;
-
-            mth = new Method("setGlobal:");
-            mth.CompileArgument("newGlobal");
-            mth.CompileGet("newGlobal");
-            mth.CompileSet("Global");
-
-            Assert.AreEqual("Global", mth.GetGlobalName(0));
-        }
-
-        [Test]
-        public void ShouldCompileAndRunWithoutClassAndGlobals()
-        {
-            Machine machine = new Machine();
-            Method mth;
-
-            IClass clsobject = (IClass) machine.GetGlobalObject("Object");
-            IObject anyobject = clsobject.NewObject();
-
-            mth = new Method("setGlobal:");
-            mth.CompileArgument("newGlobal");
-            mth.CompileGet("newGlobal");
-            mth.CompileSet("Global");
-
-            mth.Execute(anyobject, new object[] { 10 });
-
-            Assert.AreEqual(10, machine.GetGlobalObject("Global"));
-        }
-
-        [Test]
         public void ShouldCompileWithLocals()
         {
             Machine machine = new Machine();
@@ -154,33 +121,6 @@ namespace AjTalk.Tests
             byte p = mth.CompileGlobal("Class");
 
             Assert.AreEqual(0, p);
-        }
-
-        [Test]
-        public void ShouldCompileGlobalNames()
-        {
-            Method mth = new Method("test");
-            byte p1 = mth.CompileGlobal("Class");
-            byte p2 = mth.CompileGlobal("Object");
-            byte p3 = mth.CompileGlobal("Class");
-
-            Assert.AreEqual(0, p1);
-            Assert.AreEqual(1, p2);
-            Assert.AreEqual(0, p3);
-        }
-
-        [Test]
-        public void ShouldCompileGetGlobalVariable()
-        {
-            Method mth = new Method("test");
-            mth.CompileGet("Class");
-            mth.CompileGet("Object");
-
-            byte p1 = mth.CompileGlobal("Object");
-            byte p2 = mth.CompileGlobal("Class");
-
-            Assert.AreEqual(1, p1);
-            Assert.AreEqual(0, p2);
         }
     }
 }
