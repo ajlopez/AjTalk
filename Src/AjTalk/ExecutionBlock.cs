@@ -77,7 +77,12 @@ namespace AjTalk
 						break;
 					case ByteCode.GetClassVariable:
 						throw new Exception("Not implemented");
-					case ByteCode.GetLocal:
+                    case ByteCode.GetGlobalVariable:
+						ip++;
+						arg = method.ByteCodes[ip];
+                        ((IObject)receiver).Class.Machine.GetGlobalObject(method.GetGlobalName(arg));
+                        break;
+                    case ByteCode.GetLocal:
 						ip++;
 						arg = method.ByteCodes[ip];
 						Push(locals[arg]);
@@ -146,12 +151,17 @@ namespace AjTalk
 						arg = method.ByteCodes[ip];
 						locals[arg] = Pop();
 						break;
-					case ByteCode.SetVariable:
+                    case ByteCode.SetVariable:
 						ip++;
 						arg = method.ByteCodes[ip];
 						receiver[arg] = Pop();
 						break;
-					default:
+                    case ByteCode.SetGlobalVariable:
+                        ip++;
+                        arg = method.ByteCodes[ip];
+                        ((IObject)receiver).Class.Machine.SetGlobalObject(method.GetGlobalName(arg), Pop());
+                        break;
+                    default:
 						throw new Exception("Not implemented");
 				}
 

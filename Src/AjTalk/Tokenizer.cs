@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Text;
 
 namespace AjTalk
 {
@@ -10,7 +11,8 @@ namespace AjTalk
 		Integer = 1,
 		String = 2,
 		Punctuation = 3,
-		Operator = 4
+		Operator = 4,
+        Symbol
 	}
 
 	public class Token
@@ -47,6 +49,10 @@ namespace AjTalk
 		private const string separators = "().|";
 
         private const char stringdelimeter = '\'';
+
+        private const char commentdelimeter = '"';
+
+        private const char symbolmark = '#';
 
 		public Tokenizer(TextReader input)
 		{
@@ -101,9 +107,30 @@ namespace AjTalk
 			return ch;
 		}
 
+        private char NextCharSkipBlanksAndComments()
+        {
+            char ch;
+
+            ch = NextCharSkipBlanks();
+
+            // Skip Comments
+            while (ch == commentdelimeter)
+            {
+                ch = NextChar();
+                while (ch != commentdelimeter)
+                    ch = NextChar();
+
+                // After comment, skip blanks again
+                ch = NextCharSkipBlanks();
+            }
+
+            return ch;
+        }
+
 		private Token NextName(char firstchar) 
 		{
-			string name = new String(firstchar,1);
+            StringBuilder sb = new StringBuilder(10);
+            sb.Append(firstchar);
 
 			try 
 			{
@@ -113,12 +140,12 @@ namespace AjTalk
 
 				while (Char.IsLetterOrDigit(ch)) 
 				{
-					name += ch;
+					sb.Append(ch);
 					ch = NextChar();
 				}
 
 				if (ch==':')
-					name += ch;
+					sb.Append(ch);
 				else
 					PushChar(ch);
 			}
@@ -127,11 +154,40 @@ namespace AjTalk
 			}
 
 			Token token = new Token();
-			token.Type=TokenType.Name;
-			token.Value = name;
+			token.Type = TokenType.Name;
+			token.Value = sb.ToString();
 
 			return token;
 		}
+
+        private Token NextSymbol()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            try
+            {
+                char ch;
+
+                ch = NextChar();
+
+                while (!Char.IsWhiteSpace(ch))
+                {
+                    sb.Append(ch);
+                    ch = NextChar();
+                }
+
+                PushChar(ch);
+            }
+            catch (EndOfInputException)
+            {
+            }
+
+            Token token = new Token();
+            token.Type = TokenType.Symbol;
+            token.Value = sb.ToString();
+
+            return token;
+        }
 
 		private Token NextString() 
 		{
@@ -242,7 +298,7 @@ namespace AjTalk
 
 			try 
 			{
-				ch = NextCharSkipBlanks();
+				ch = NextCharSkipBlanksAndComments();
 
 				if (Char.IsLetter(ch) || ch=='_')
 					return NextName(ch);
@@ -252,6 +308,9 @@ namespace AjTalk
 
                 if (ch == stringdelimeter)
                     return NextString();
+
+                if (ch == symbolmark)
+                    return NextSymbol();
 
 				if (operators.IndexOf(ch)>=0)
 					return NextOperator(ch);

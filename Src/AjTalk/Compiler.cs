@@ -285,24 +285,41 @@ namespace AjTalk
 				;
 		}
 
-		public void CompileMethod(IClass cls) 
-		{
-			CompileArguments();
+        public void CompileAnonymousMethod()
+        {
+            method = new Method();
+            CompileBody();
+        }
+
+        private void CompileMethod(IClass cls)
+        {
+            CompileArguments();
             CompileLocals();
 
-			method = new Method(cls, methodname);
+            method = new Method(cls, methodname);
 
-			foreach (string argname in arguments)
-				method.CompileArgument(argname);
+            foreach (string argname in arguments)
+                method.CompileArgument(argname);
 
             foreach (string locname in locals)
                 method.CompileLocal(locname);
 
-			cls.DefineInstanceMethod(method);
+            CompileBody();
+        }
 
-			CompileBody();
-		}
-	}
+		public void CompileInstanceMethod(IClass cls) 
+		{
+            CompileMethod(cls);
+            cls.DefineInstanceMethod(method);
+        }
+
+        // TODO Review implementation, use DefineClassMethod instead
+        public void CompileClassMethod(IClass cls)
+        {
+            CompileMethod(cls.Class); // use metaclass
+            cls.Class.DefineInstanceMethod(method);
+        }
+    }
 
     public class CompilerException : Exception
     {

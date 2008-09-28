@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace AjTalk
 {
@@ -15,18 +16,27 @@ namespace AjTalk
 		private IList constants = new ArrayList(5);
 		private IList argnames = new ArrayList(5);
 		private IList localnames = new ArrayList(5);
+        private List<string> globalnames = new List<string>();
 
-		public Method(IClass cls, string name)
+        public Method()
+        {
+        }
+
+        public Method(string name)
+        {
+            this.name = name;
+        }
+
+		public Method(IClass cls, string name) : this(name)
 		{
-			mthclass = cls;
-			this.name = name;
+			this.mthclass = cls;
 		}
 
 		public int Arity
 		{
 			get 
 			{
-				return argnames.Count;
+				return this.argnames.Count;
 			}
 		}
 
@@ -34,16 +44,16 @@ namespace AjTalk
 		{
 			get 
 			{
-				if (localnames==null)
+				if (this.localnames==null)
 					return 0;
 
-				return localnames.Count;
+				return this.localnames.Count;
 			}
 		}
 
         public IClass Class
         {
-            get { return mthclass; }
+            get { return this.mthclass; }
         }
 
 		public void CompileArgument(string argname) 
@@ -71,6 +81,18 @@ namespace AjTalk
 
 			return (byte) (constants.Count-1);
 		}
+
+        public byte CompileGlobal(string globalname)
+        {
+            int p = globalnames.IndexOf(globalname);
+
+            if (p >= 0)
+                return (byte)p;
+
+            globalnames.Add(globalname);
+
+            return (byte)(globalnames.Count - 1);
+        }
 
 		public void CompileGetConstant(object obj) 
 		{
@@ -170,23 +192,26 @@ namespace AjTalk
 				}
 			}
 
-			p = mthclass.GetInstanceVariableOffset(name);
+            if (this.mthclass != null)
+            {
+                p = mthclass.GetInstanceVariableOffset(name);
 
-			if (p>=0) 
-			{
-				CompileByteCode(ByteCode.GetVariable,(byte) p);
-				return;
-			}
+                if (p >= 0)
+                {
+                    CompileByteCode(ByteCode.GetVariable, (byte)p);
+                    return;
+                }
 
-			p = mthclass.GetClassVariableOffset(name);
+                p = mthclass.GetClassVariableOffset(name);
 
-			if (p>=0) 
-			{
-				CompileByteCode(ByteCode.GetClassVariable,(byte) p);
-				return;
-			}
+                if (p >= 0)
+                {
+                    CompileByteCode(ByteCode.GetClassVariable, (byte)p);
+                    return;
+                }
+            }
 
-			throw new Exception("Unknown '" + name + "'");
+            CompileByteCode(ByteCode.GetGlobalVariable, this.CompileGlobal(name));
 		}
 
 		public void CompileSet(string name) 
@@ -215,23 +240,26 @@ namespace AjTalk
 				}
 			}
 
-			p = mthclass.GetInstanceVariableOffset(name);
+            if (mthclass != null)
+            {
+                p = mthclass.GetInstanceVariableOffset(name);
 
-			if (p>=0) 
-			{
-				CompileByteCode(ByteCode.SetVariable,(byte) p);
-				return;
-			}
+                if (p >= 0)
+                {
+                    CompileByteCode(ByteCode.SetVariable, (byte)p);
+                    return;
+                }
 
-			p = mthclass.Class.GetInstanceVariableOffset(name);
+                p = mthclass.Class.GetInstanceVariableOffset(name);
 
-			if (p>=0) 
-			{
-				CompileByteCode(ByteCode.SetClassVariable,(byte) p);
-				return;
-			}
+                if (p >= 0)
+                {
+                    CompileByteCode(ByteCode.SetClassVariable, (byte)p);
+                    return;
+                }
+            }
 
-			throw new CompilerException("Unknown '" + name + "'");
+            CompileByteCode(ByteCode.SetGlobalVariable, CompileGlobal(name));
 		}
 
 		public byte [] ByteCodes 
@@ -246,6 +274,11 @@ namespace AjTalk
 		{
 			return constants[nc];
 		}
+
+        public string GetGlobalName(int ng)
+        {
+            return globalnames[ng];
+        }
 
 		#region IMethod Members
 
@@ -263,7 +296,6 @@ namespace AjTalk
 		}
 
         // TODO how to implements super, sender
-
 		public object Execute(IObject receiver, object[] args)
 		{
 			return (new ExecutionBlock(receiver,receiver,this,args)).Execute();

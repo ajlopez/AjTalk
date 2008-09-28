@@ -11,7 +11,7 @@ namespace AjTalk
 		private BaseClass objectclass;
 		private BaseClass classclass;
 
-        private Dictionary<string, IObject> globals = new Dictionary<string, IObject>();
+        private Dictionary<string, object> globals = new Dictionary<string, object>();
 
 		public Machine()
 		{
@@ -37,12 +37,17 @@ namespace AjTalk
             return cls;
         }
 
-        public IObject GetGlobalObject(string objname)
+        public object GetGlobalObject(string objname)
         {
             if (globals.ContainsKey(objname))
                 return globals[objname];
 
             return null;
+        }
+
+        public void SetGlobalObject(string objname, object value)
+        {
+            globals[objname] = value;
         }
     }
 }

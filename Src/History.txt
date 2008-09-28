@@ -17,6 +17,17 @@ Work in progress.
 2008-08-24
 	Add support for local variables in compiling method
 
+2008-09-28
+	Skip comments in tokenizer
+	More test for Method
+	Compile global name in Method
+	Set/Get global bytecodes
+	Global objects in Machine
+	Symbol support in tokenizer
+
+TODO
+	Load .st file
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

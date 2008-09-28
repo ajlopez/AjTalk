@@ -19,16 +19,30 @@ namespace AjTalk.Tests
         }
 
         [Test]
-        public void ShouldProcessBlank()
+        public void ShouldProcessEmptyString()
         {
             Tokenizer tokenizer = new Tokenizer("");
             Assert.IsNull(tokenizer.NextToken());
         }
 
         [Test]
-        public void ShouldProcessBlank2()
+        public void ShouldProcessBlank()
         {
             Tokenizer tokenizer = new Tokenizer(" ");
+            Assert.IsNull(tokenizer.NextToken());
+        }
+
+        [Test]
+        public void ShouldSkipComment()
+        {
+            Tokenizer tokenizer = new Tokenizer("\"This is a comment\"");
+            Assert.IsNull(tokenizer.NextToken());
+        }
+
+        [Test]
+        public void ShouldSkipMultiLineComment()
+        {
+            Tokenizer tokenizer = new Tokenizer("\"This is a \n a multi-line\ncomment\"");
             Assert.IsNull(tokenizer.NextToken());
         }
 
@@ -40,6 +54,22 @@ namespace AjTalk.Tests
             Assert.IsNotNull(token);
             Assert.AreEqual("token", token.Value);
             Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
+
+        [Test]
+        public void ShouldProcessOneTokenWithSpacesAndComment()
+        {
+            Tokenizer tokenizer = new Tokenizer(" \"This is a token \" token \"This another comment\"");
+            Token token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("token", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
         }
 
         [Test]
@@ -57,6 +87,9 @@ namespace AjTalk.Tests
             Assert.IsNotNull(token);
             Assert.AreEqual("token2", token.Value);
             Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
         }
 
         [Test]
@@ -69,6 +102,59 @@ namespace AjTalk.Tests
             Assert.IsNotNull(token);
             Assert.AreEqual("string", token.Value);
             Assert.AreEqual(TokenType.String, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
+
+        [Test]
+        public void ShouldProcessSymbol()
+        {
+            Tokenizer tokenizer = new Tokenizer("#aSymbol");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("aSymbol", token.Value);
+            Assert.AreEqual(TokenType.Symbol, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
+
+        [Test]
+        public void ShouldProcessComplexSymbol()
+        {
+            Tokenizer tokenizer = new Tokenizer("#aSymbol:with:many>chars");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("aSymbol:with:many>chars", token.Value);
+            Assert.AreEqual(TokenType.Symbol, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
+
+        [Test]
+        public void ShouldProcessTwoSymbols()
+        {
+            Tokenizer tokenizer = new Tokenizer("#aSymbol #anotherSymbol");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("aSymbol", token.Value);
+            Assert.AreEqual(TokenType.Symbol, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("anotherSymbol", token.Value);
+            Assert.AreEqual(TokenType.Symbol, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
         }
 
         [Test]

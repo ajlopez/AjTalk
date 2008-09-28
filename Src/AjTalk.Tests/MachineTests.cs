@@ -35,11 +35,29 @@ namespace AjTalk.Tests
             IClass cls = machine.CreateClass("TestClass");
 
             Assert.IsNotNull(cls);
-            Assert.AreEqual("TestClass",cls.Name);
-            Assert.AreEqual(-1,cls.GetInstanceVariableOffset("x"));
+            Assert.AreEqual("TestClass", cls.Name);
+            Assert.AreEqual(-1, cls.GetInstanceVariableOffset("x"));
             Assert.IsNull(cls.GetInstanceMethod("x"));
             Assert.IsNotNull(cls.SuperClass);
             Assert.AreEqual("Class", cls.SuperClass.Name);
+        }
+
+        [Test]
+        public void ShouldSetGlobalVariable()
+        {
+            Machine machine = new Machine();
+
+            machine.SetGlobalObject("One", 1);
+
+            Assert.AreEqual(1, machine.GetGlobalObject("One"));
+        }
+
+        [Test]
+        public void ShouldGetNullIfGlobalVariableDoesNotExists()
+        {
+            Machine machine = new Machine();
+
+            Assert.IsNull(machine.GetGlobalObject("InexistenteGlobal"));
         }
     }
 }

@@ -26,7 +26,7 @@ namespace AjTalk.Tests
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
             Compiler compiler = new Compiler("x ^x");
-            compiler.CompileMethod(cls);
+            compiler.CompileInstanceMethod(cls);
 
             Assert.IsNotNull(cls.GetInstanceMethod("x"));
         }
@@ -38,7 +38,7 @@ namespace AjTalk.Tests
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
             Compiler compiler = new Compiler("x | temp | temp := x. ^temp");
-            compiler.CompileMethod(cls);
+            compiler.CompileInstanceMethod(cls);
 
             Assert.IsNotNull(cls.GetInstanceMethod("x"));
         }
@@ -50,9 +50,23 @@ namespace AjTalk.Tests
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
             Compiler compiler = new Compiler("x: newX x := newX");
-            compiler.CompileMethod(cls);
+            compiler.CompileInstanceMethod(cls);
 
             Assert.IsNotNull(cls.GetInstanceMethod("x:"));
+        }
+
+        [Test]
+        public void ShouldCompileSimpleCommand()
+        {
+            Compiler compiler = new Compiler("nil invokeWith: 10");
+            compiler.CompileAnonymousMethod();
+        }
+
+        [Test]
+        public void ShouldCompileTwoCommands()
+        {
+            Compiler compiler = new Compiler("nil invokeWith: 10. Global := 20");
+            compiler.CompileAnonymousMethod();
         }
 
         [Test]
@@ -176,7 +190,7 @@ namespace AjTalk.Tests
                 foreach (string method in methods)
                 {
                     Compiler compiler = new Compiler(method);
-                    compiler.CompileMethod(cls);
+                    compiler.CompileInstanceMethod(cls);
                 }
 
             return cls;

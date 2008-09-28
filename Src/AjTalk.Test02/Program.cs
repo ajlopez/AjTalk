@@ -80,7 +80,7 @@ namespace AjTalk.Test02
                 }
 
                 Compiler compiler = new Compiler(body);
-                compiler.CompileMethod(cls);
+                compiler.CompileInstanceMethod(cls);
             }
             else
                 Console.WriteLine("Unknown {0}", words[0]);
