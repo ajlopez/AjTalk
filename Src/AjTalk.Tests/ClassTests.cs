@@ -23,7 +23,7 @@ namespace AjTalk.Tests
             Assert.IsNull(cls.GetInstanceMethod("x"));
             Assert.IsNull(cls.GetClassMethod("x"));
             Assert.IsNotNull(cls.SuperClass);
-            Assert.AreEqual("Class", cls.SuperClass.Name);
+            Assert.AreEqual("nil", cls.SuperClass.Name);
         }
 
         [TestMethod]

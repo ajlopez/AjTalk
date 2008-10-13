@@ -24,8 +24,9 @@ namespace AjTalk.Tests
         {
             Machine machine = new Machine();
 
-            Assert.IsNotNull(machine.GetGlobalObject("Object"));
-            Assert.IsNotNull(machine.GetGlobalObject("Class"));
+            Assert.IsNotNull(machine.GetGlobalObject("nil"));
+            //Assert.IsNotNull(machine.GetGlobalObject("Object"));
+            //Assert.IsNotNull(machine.GetGlobalObject("Class"));
         }
 
         [TestMethod]
@@ -39,7 +40,7 @@ namespace AjTalk.Tests
             Assert.AreEqual(-1, cls.GetInstanceVariableOffset("x"));
             Assert.IsNull(cls.GetInstanceMethod("x"));
             Assert.IsNotNull(cls.SuperClass);
-            Assert.AreEqual("Class", cls.SuperClass.Name);
+            Assert.AreEqual("nil", cls.SuperClass.Name);
         }
 
         [TestMethod]

@@ -67,6 +67,28 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void ShouldCompileSubClassDefinition()
+        {
+            Compiler compiler = new Compiler("nil subclass: #Object");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
+        public void ShouldCompileSubClassDefinitionWithInstances()
+        {
+            Compiler compiler = new Compiler("nil subclass: #Object instanceVariables: 'a b c'");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
         public void ShouldCompileTwoCommands()
         {
             Compiler compiler = new Compiler("nil invokeWith: 10. Global := 20");

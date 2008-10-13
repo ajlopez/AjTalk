@@ -8,32 +8,31 @@ namespace AjTalk
 	/// </summary>
 	public class Machine
 	{
-		private BaseClass objectclass;
 		private BaseClass classclass;
 
         private Dictionary<string, object> globals = new Dictionary<string, object>();
 
 		public Machine()
 		{
-			objectclass = new BaseClass("Object", this);
-			classclass = new BaseClass("Class", objectclass, this);
+			classclass = new BaseClass("nil", null, this);
 
-			objectclass.SetClass(classclass);
+            // TODO Review this tricky autoreference
 			classclass.SetClass(classclass);
 
-            globals["Object"] = objectclass;
-            globals["Class"] = classclass;
+            globals["nil"] = classclass;
 		}
 
 		public IClass CreateClass(string clsname) 
 		{
-			BaseClass cls = new BaseClass(clsname, classclass, this);
+            // TODO Review Tricky fourth param
+			BaseClass cls = new BaseClass(clsname, classclass, classclass, this);
 			return cls;
 		}
 
         public IClass CreateClass(string clsname, IClass superclass)
         {
-            BaseClass cls = new BaseClass(clsname, superclass, this);
+            // TODO Review Tricky fourth param
+            BaseClass cls = new BaseClass(clsname, superclass, classclass, this);
             return cls;
         }
 

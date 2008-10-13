@@ -1,0 +1,2 @@
+﻿nil subclass: #Object
+!

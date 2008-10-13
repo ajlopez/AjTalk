@@ -96,7 +96,7 @@ namespace AjTalk
                     case ByteCode.GetGlobalVariable:
 						ip++;
 						arg = block.ByteCodes[ip];
-                        machine.GetGlobalObject(block.GetGlobalName(arg));
+                        Push(machine.GetGlobalObject(block.GetGlobalName(arg)));
                         break;
                     case ByteCode.GetLocal:
 						ip++;

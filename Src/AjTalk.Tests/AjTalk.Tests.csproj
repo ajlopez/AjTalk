@@ -7,8 +7,8 @@
     <ProjectGuid>{982F7B02-75F1-44E6-A757-4E5D25A7FE49}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AjTalk.NewTests</RootNamespace>
-    <AssemblyName>AjTalk.NewTests</AssemblyName>
+    <RootNamespace>AjTalk.Tests</RootNamespace>
+    <AssemblyName>AjTalk.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -36,12 +36,15 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseObjectTests.cs" />
     <Compile Include="BlockTests.cs" />
     <Compile Include="ClassTests.cs" />
     <Compile Include="CompilerTests.cs" />
+    <Compile Include="DoesNotUnderstandMethod.cs" />
     <Compile Include="LoaderTests.cs" />
     <Compile Include="MachineTests.cs" />
     <Compile Include="MethodTests.cs" />
@@ -54,6 +57,26 @@
       <Project>{232A3EF3-8392-409E-8D6B-961EFEE30347}</Project>
       <Name>AjTalk</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CodeFiles\DefineClassSubclass.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CodeFiles\DefineRectangle.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CodeFiles\DefineSubclassWithVariables.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CodeFiles\DefineSubclass.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CodeFiles\SetObjects.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CodeFiles\SetObject.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

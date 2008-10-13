@@ -30,6 +30,8 @@ Work in progress.
 2008-10-13
 	Update to VS 2008
 	VS Tests instead NUnit tests
+	Loader support for subclassing, instance variables,
+		and method definition
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

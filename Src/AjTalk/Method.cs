@@ -29,7 +29,10 @@ namespace AjTalk
 
         private bool TryCompileGetVariable(string name)
         {
-            int p = mthclass.GetInstanceVariableOffset(name);
+            if (this.mthclass == null)
+                return false;
+
+            int p = this.mthclass.GetInstanceVariableOffset(name);
 
             if (p >= 0)
             {
@@ -38,7 +41,7 @@ namespace AjTalk
             }
 
             // TODO Review if a class variable can be used in an instance method
-            p = mthclass.GetClassVariableOffset(name);
+            p = this.mthclass.GetClassVariableOffset(name);
 
             if (p >= 0)
             {

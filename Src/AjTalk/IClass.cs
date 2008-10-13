@@ -9,6 +9,7 @@ namespace AjTalk
 		IClass SuperClass { get; }
 		string Name { get; }
         Machine Machine { get; }
+        int NoInstanceVariables { get; }
 
         void DefineClassMethod(IMethod method);
         void DefineInstanceMethod(IMethod method);

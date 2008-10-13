@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace AjTalk
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class Block : IBlock
     {
         private byte[] bytecodes;
@@ -21,12 +21,22 @@ namespace AjTalk
             }
         }
 
+        public byte[] ByteCodes
+        {
+            get
+            {
+                return this.bytecodes;
+            }
+        }
+
         public int NoLocals
         {
             get
             {
                 if (this.localnames == null)
+                {
                     return 0;
+                }
 
                 return this.localnames.Count;
             }
@@ -34,106 +44,78 @@ namespace AjTalk
 
         public void CompileArgument(string argname)
         {
-            if (argnames.Contains(argname))
+            if (this.argnames.Contains(argname))
+            {
                 throw new Exception("Repeated Argument: " + argname);
-            argnames.Add(argname);
+            }
+
+            this.argnames.Add(argname);
         }
 
         public void CompileLocal(string localname)
         {
-            if (localnames.Contains(localname))
+            if (this.localnames.Contains(localname))
+            {
                 throw new Exception("Repeated Local: " + localname);
-            localnames.Add(localname);
+            }
+
+            this.localnames.Add(localname);
         }
 
         public byte CompileConstant(object obj)
         {
-            int p = constants.IndexOf(obj);
+            int p = this.constants.IndexOf(obj);
 
             if (p >= 0)
+            {
                 return (byte)p;
+            }
 
-            constants.Add(obj);
+            this.constants.Add(obj);
 
-            return (byte)(constants.Count - 1);
+            return (byte)(this.constants.Count - 1);
         }
 
         public byte CompileGlobal(string globalname)
         {
-            int p = globalnames.IndexOf(globalname);
+            int p = this.globalnames.IndexOf(globalname);
 
             if (p >= 0)
+            {
                 return (byte)p;
+            }
 
-            globalnames.Add(globalname);
+            this.globalnames.Add(globalname);
 
-            return (byte)(globalnames.Count - 1);
+            return (byte)(this.globalnames.Count - 1);
         }
 
         public void CompileGetConstant(object obj)
         {
-            CompileByteCode(ByteCode.GetConstant, CompileConstant(obj));
-        }
-
-        private void CompileByte(byte b)
-        {
-            if (bytecodes == null)
-            {
-                bytecodes = new byte[] { b };
-                nextbytecode = 1;
-                return;
-            }
-
-            if (nextbytecode >= bytecodes.Length)
-            {
-                byte[] aux = new byte[bytecodes.Length + 10];
-                Array.Copy(bytecodes, aux, bytecodes.Length);
-                bytecodes = aux;
-            }
-
-            bytecodes[nextbytecode++] = b;
+            this.CompileByteCode(ByteCode.GetConstant, this.CompileConstant(obj));
         }
 
         public void CompileByteCode(ByteCode b)
         {
-            CompileByte((byte)b);
+            this.CompileByte((byte)b);
         }
 
         public void CompileByteCode(ByteCode b, byte arg)
         {
-            CompileByteCode(b);
-            CompileByte(arg);
+            this.CompileByteCode(b);
+            this.CompileByte(arg);
         }
 
         public void CompileByteCode(ByteCode b, byte arg1, byte arg2)
         {
-            CompileByteCode(b);
-            CompileByte(arg1);
-            CompileByte(arg2);
-        }
-
-        private byte MessageArity(string msgname)
-        {
-            if (!Char.IsLetter(msgname[0]))
-                return 2;
-
-            int p = msgname.IndexOf(':');
-
-            if (p < 0)
-                return 1;
-
-            byte n = 0;
-
-            foreach (char ch in msgname)
-                if (ch == ':')
-                    n++;
-
-            return n;
+            this.CompileByteCode(b);
+            this.CompileByte(arg1);
+            this.CompileByte(arg2);
         }
 
         public void CompileSend(string msgname)
         {
-            CompileByteCode(ByteCode.Send, CompileConstant(msgname), MessageArity(msgname));
+            this.CompileByteCode(ByteCode.Send, this.CompileConstant(msgname), MessageArity(msgname));
         }
 
         // TODO how to implements super, sender
@@ -142,71 +124,94 @@ namespace AjTalk
             return (new ExecutionBlock(machine, null, this, args)).Execute();
         }
 
+        public virtual void CompileGet(string name)
+        {
+            if (this.TryCompileGet(name))
+            {
+                return;
+            }
+
+            this.CompileByteCode(ByteCode.GetGlobalVariable, this.CompileGlobal(name));
+        }
+
+        public virtual void CompileSet(string name)
+        {
+            if (this.TryCompileSet(name))
+            {
+                return;
+            }
+
+            this.CompileByteCode(ByteCode.SetGlobalVariable, this.CompileGlobal(name));
+        }
+
+        public object GetConstant(int nc)
+        {
+            return this.constants[nc];
+        }
+
+        public string GetGlobalName(int ng)
+        {
+            return this.globalnames[ng];
+        }
+
         protected bool TryCompileGet(string name)
         {
             if (name == "self")
             {
-                CompileByteCode(ByteCode.GetSelf);
+                this.CompileByteCode(ByteCode.GetSelf);
                 return true;
             }
 
             int p;
 
-            if (localnames != null)
+            if (this.localnames != null)
             {
-                p = localnames.IndexOf(name);
+                p = this.localnames.IndexOf(name);
 
                 if (p >= 0)
                 {
-                    CompileByteCode(ByteCode.GetLocal, (byte)p);
+                    this.CompileByteCode(ByteCode.GetLocal, (byte)p);
+
                     return true;
                 }
             }
 
-            if (argnames != null)
+            if (this.argnames != null)
             {
-                p = argnames.IndexOf(name);
+                p = this.argnames.IndexOf(name);
 
                 if (p >= 0)
                 {
-                    CompileByteCode(ByteCode.GetArgument, (byte)p);
+                    this.CompileByteCode(ByteCode.GetArgument, (byte)p);
                     return true;
                 }
             }
 
             return false;
-        }
-
-        public virtual void CompileGet(string name)
-        {
-            if (TryCompileGet(name))
-                return;
-
-            CompileByteCode(ByteCode.GetGlobalVariable, this.CompileGlobal(name));
         }
 
         protected bool TryCompileSet(string name)
         {
             int p;
 
-            if (localnames != null)
+            if (this.localnames != null)
             {
-                p = localnames.IndexOf(name);
+                p = this.localnames.IndexOf(name);
 
                 if (p >= 0)
                 {
-                    CompileByteCode(ByteCode.SetLocal, (byte)p);
+                    this.CompileByteCode(ByteCode.SetLocal, (byte)p);
                     return true;
                 }
             }
 
-            if (argnames != null)
+            if (this.argnames != null)
             {
-                p = argnames.IndexOf(name);
+                p = this.argnames.IndexOf(name);
 
                 if (p >= 0)
                 {
-                    CompileByteCode(ByteCode.SetArgument, (byte)p);
+                    this.CompileByteCode(ByteCode.SetArgument, (byte)p);
                     return true;
                 }
             }
@@ -214,30 +219,50 @@ namespace AjTalk
             return false;
         }
 
-        public virtual void CompileSet(string name)
+        public static byte MessageArity(string msgname)
         {
-            if (TryCompileSet(name))
-                return;
-
-            CompileByteCode(ByteCode.SetGlobalVariable, CompileGlobal(name));
-        }
-
-        public byte[] ByteCodes
-        {
-            get
+            if (!Char.IsLetter(msgname[0]))
             {
-                return bytecodes;
+                return 2;
             }
+
+            int p = msgname.IndexOf(':');
+
+            if (p < 0)
+            {
+                return 0;
+            }
+
+            byte n = 0;
+
+            foreach (char ch in msgname)
+            {
+                if (ch == ':')
+                {
+                    n++;
+                }
+            }
+
+            return n;
         }
 
-        public object GetConstant(int nc)
+        private void CompileByte(byte b)
         {
-            return constants[nc];
-        }
+            if (this.bytecodes == null)
+            {
+                this.bytecodes = new byte[] { b };
+                this.nextbytecode = 1;
+                return;
+            }
 
-        public string GetGlobalName(int ng)
-        {
-            return globalnames[ng];
+            if (this.nextbytecode >= this.bytecodes.Length)
+            {
+                byte[] aux = new byte[this.bytecodes.Length + 10];
+                Array.Copy(this.bytecodes, aux, this.bytecodes.Length);
+                this.bytecodes = aux;
+            }
+
+            this.bytecodes[this.nextbytecode++] = b;
         }
     }
 }

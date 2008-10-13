@@ -1,69 +1,78 @@
-using System;
-
 namespace AjTalk
 {
-	/// <summary>
-	/// Summary description for BaseObject.
-	/// </summary>
-	public class BaseObject : IObject
-	{
-		private IClass objclass;
-		private object[] variables;
+    using System;
 
-		public BaseObject()
-		{
-			objclass = null;
-			variables = null;
-		}
+    /// <summary>
+    /// Summary description for BaseObject.
+    /// </summary>
+    public class BaseObject : IObject
+    {
+        private IClass objclass;
+        private object[] variables;
 
-		public BaseObject(IClass cls, int nvars) 
-		{
-			objclass = cls;
-			variables = new object[nvars];
-		}
+        public BaseObject()
+        {
+            this.objclass = null;
+            this.variables = null;
+        }
 
-		public BaseObject(IClass cls, object [] vars) 
-		{
-			objclass = cls;
-			variables = vars;
-		}
+        public BaseObject(IClass cls, int nvars) 
+        {
+            this.objclass = cls;
+            this.variables = new object[nvars];
+        }
 
-		internal void SetClass(IClass cls)
-		{
-			objclass = cls;
-		}
+        public BaseObject(IClass cls, object[] vars) 
+        {
+            this.objclass = cls;
+            this.variables = vars;
+        }
 
-		#region IObject Members
+        public IClass Class
+        {
+            get
+            {
+                // TODO:  Add BaseObject.Class getter implementation
+                return this.objclass;
+            }
+        }
 
-		public IClass Class
-		{
-			get
-			{
-				// TODO:  Add BaseObject.Class getter implementation
-				return objclass;
-			}
-		}
+        public object this[int n]
+        {
+            get
+            {
+                return this.variables[n];
+            }
 
-		public Object this[int n]
-		{
-			get
-			{
-				return variables[n];
-			}
-			set
-			{
-				variables[n] = value;
-			}
-		}
+            set
+            {
+                this.variables[n] = value;
+            }
+        }
 
-		public Object SendMessage(string msgname, Object[] args)
-		{
+        public object SendMessage(string msgname, object[] args)
+        {
             // TODO objclass to review
-			IMethod mth = objclass.GetInstanceMethod(msgname);
-            // TODO add does not understand logic
-			return mth.Execute(this, this, args);
-		}
+            IMethod mth = this.objclass.GetInstanceMethod(msgname);
 
-		#endregion
-	}
+            if (mth != null)
+            {
+                return mth.Execute(this, this, args);
+            }
+
+            mth = this.objclass.GetInstanceMethod("doesNotUnderstand:");
+
+            if (mth != null)
+            {
+                return mth.Execute(this, this, new object[] { msgname, args });
+            }
+
+            throw new InvalidProgramException(string.Format("Does not understand {0}", msgname));
+        }
+
+        internal void SetClass(IClass cls)
+        {
+            this.objclass = cls;
+        }
+    }
 }

@@ -151,6 +151,13 @@ namespace AjTalk
 				return;
 			}
 
+            // TODO Review compile of Symbol
+            if (token.Type == TokenType.Symbol)
+            {
+                block.CompileGetConstant(token.Value);
+                return;
+            }
+
 			if (token.Type==TokenType.Name) 
 			{
 				block.CompileGet(token.Value);

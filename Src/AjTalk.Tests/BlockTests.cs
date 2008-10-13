@@ -161,6 +161,14 @@ namespace AjTalk.Tests
             Assert.AreEqual(1, p1);
             Assert.AreEqual(0, p2);
         }
+
+        [TestMethod]
+        public void ShouldCalculateArity()
+        {
+            Assert.AreEqual(0, Block.MessageArity("class"));
+            Assert.AreEqual(1, Block.MessageArity("with:"));
+            Assert.AreEqual(2, Block.MessageArity("with:with:"));
+        }
     }
 }
 
