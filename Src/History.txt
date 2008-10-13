@@ -27,6 +27,10 @@ Work in progress.
 	Method inherits from Block
 	Loader from file and tests
 
+2008-10-13
+	Update to VS 2008
+	VS Tests instead NUnit tests
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

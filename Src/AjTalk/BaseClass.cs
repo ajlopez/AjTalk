@@ -26,7 +26,9 @@ namespace AjTalk
 		public BaseClass(string name, IClass superclass, Machine machine)
 		{
             if (name == null)
+            {
                 throw new ArgumentNullException("name");
+            }
 
             this.name = name;
 			this.superclass = superclass;
@@ -60,7 +62,9 @@ namespace AjTalk
         public void DefineClassMethod(IMethod method)
         {
             if (method == null)
+            {
                 throw new ArgumentNullException("method");
+            }
 
             classmethods[method.Name] = method;
         }
@@ -73,10 +77,14 @@ namespace AjTalk
         public void DefineClassVariable(string varname)
         {
             if (varname == null)
+            {
                 throw new ArgumentNullException("varname");
+            }
 
             if (classvariables.Contains(varname))
+            {
                 throw new InvalidOperationException(String.Format("Instance Variable {0} already defined", varname));
+            }
 
             classvariables.Add(varname);
         }
@@ -84,10 +92,14 @@ namespace AjTalk
         public void DefineInstanceVariable(string varname)
         {
             if (varname == null)
+            {
                 throw new ArgumentNullException("varname");
+            }
 
             if (instancevariables.Contains(varname))
+            {
                 throw new InvalidOperationException(String.Format("Instance Variable {0} already defined", varname));
+            }
 
             instancevariables.Add(varname);
         }
@@ -100,10 +112,14 @@ namespace AjTalk
 		public IMethod GetClassMethod(string mthname)
 		{
             if (mthname == null)
+            {
                 throw new ArgumentNullException("mthname");
+            }
 
             if (!classmethods.ContainsKey(mthname))
+            {
                 return null;
+            }
 
 			return classmethods[mthname];
 		}
@@ -111,10 +127,14 @@ namespace AjTalk
         public IMethod GetInstanceMethod(string mthname)
         {
             if (mthname == null)
+            {
                 throw new ArgumentNullException("mthname");
+            }
 
             if (!instancemethods.ContainsKey(mthname))
+            {
                 return null;
+            }
 
             return instancemethods[mthname];
         }
@@ -133,13 +153,17 @@ namespace AjTalk
                 offset = superclass.GetInstanceVariableOffset(varname);
 
                 if (offset >= 0)
+                {
                     return offset;
+                }
             }
                 
             offset = instancevariables.IndexOf(varname);
 
             if (offset >= 0 && superclass != null && superclass is BaseClass)
+            {
                 offset += ((BaseClass)superclass).instancevariables.Count;
+            }
 
             return offset;
         }
