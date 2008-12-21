@@ -46,13 +46,14 @@ namespace AjTalk
         private Stack<Token> tokenstack = new Stack<Token>();
 
 		private const string operators = "^<>:=-+*/&";
-		private const string separators = "().|";
+		private const string separators = "().|[]";
 
         private const char stringdelimeter = '\'';
 
         private const char commentdelimeter = '"';
 
         private const char symbolmark = '#';
+        private const char specialnamemark = '@';
 
 		public Tokenizer(TextReader input)
 		{
@@ -189,6 +190,35 @@ namespace AjTalk
             return token;
         }
 
+        private Token NextSpecialName()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            try
+            {
+                char ch;
+
+                ch = NextChar();
+
+                while (!Char.IsWhiteSpace(ch))
+                {
+                    sb.Append(ch);
+                    ch = NextChar();
+                }
+
+                PushChar(ch);
+            }
+            catch (EndOfInputException)
+            {
+            }
+
+            Token token = new Token();
+            token.Type = TokenType.Name;
+            token.Value = sb.ToString();
+
+            return token;
+        }
+
 		private Token NextString() 
 		{
 			string value = "";
@@ -312,7 +342,10 @@ namespace AjTalk
                 if (ch == symbolmark)
                     return NextSymbol();
 
-				if (operators.IndexOf(ch)>=0)
+                if (ch == specialnamemark)
+                    return NextSpecialName();
+
+                if (operators.IndexOf(ch) >= 0)
 					return NextOperator(ch);
 
 				if (separators.IndexOf(ch)>=0)

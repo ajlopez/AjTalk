@@ -54,6 +54,18 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void ShouldGetDotNetTypeAsGlobal()
+        {
+            Machine machine = new Machine();
+
+            object type = machine.GetGlobalObject("System.IO.FileInfo");
+
+            Assert.IsNotNull(type);
+            Assert.IsInstanceOfType(type, typeof(Type));
+            Assert.AreEqual(type, typeof(System.IO.FileInfo));
+        }
+
+        [TestMethod]
         public void ShouldGetNullIfGlobalVariableDoesNotExists()
         {
             Machine machine = new Machine();

@@ -42,6 +42,19 @@ namespace AjTalk
             }
         }
 
+        public int NoConstants
+        {
+            get
+            {
+                if (this.constants == null)
+                {
+                    return 0;
+                }
+
+                return this.constants.Count;
+            }
+        }
+
         public void CompileArgument(string argname)
         {
             if (this.argnames.Contains(argname))
@@ -93,6 +106,11 @@ namespace AjTalk
         public void CompileGetConstant(object obj)
         {
             this.CompileByteCode(ByteCode.GetConstant, this.CompileConstant(obj));
+        }
+
+        public void CompileGetBlock(object obj)
+        {
+            this.CompileByteCode(ByteCode.GetBlock, this.CompileConstant(obj));
         }
 
         public void CompileByteCode(ByteCode b)

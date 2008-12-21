@@ -99,6 +99,7 @@ namespace AjTalk
 			if (token==null)
 				throw new CompilerException("Argument expected");
 
+            // TODO Review if this code is needed
 			if (token.Type == TokenType.Operator) 
 			{
 				methodname = token.Value;
@@ -132,12 +133,24 @@ namespace AjTalk
 
 			if (token.Value=="(") 
 			{
-				CompileExpression();
+				this.CompileExpression();
 				token = NextToken();
 				if (token==null || token.Value!=")")
 					throw new CompilerException("')' expected");
 				return;
 			}
+
+            if (token.Value == "[")
+            {
+                Compiler newcompiler = new Compiler(this.tokenizer);
+                newcompiler.arguments = this.arguments;
+                newcompiler.locals = this.locals;
+
+                Block newblock = newcompiler.CompileBlock();
+
+                block.CompileGetBlock(newblock);
+                return;
+            }
 
 			if (token.Type==TokenType.Integer) 
 			{
@@ -257,7 +270,11 @@ namespace AjTalk
 			if (token.Value==".")
 				return true;
 
-			if (token.Value=="^") 
+            // TODO raise failure if not open block, and nested blocks
+            if (token.Value == "]")
+                return true;
+
+            if (token.Value == "^") 
 			{
 				CompileExpression();
 				block.CompileByteCode(ByteCode.ReturnPop);

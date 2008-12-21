@@ -65,6 +65,9 @@ namespace AjTalk
 
         private bool TryCompileSetVariable(string name)
         {
+            if (mthclass == null)
+                return false;
+
             int p = mthclass.GetInstanceVariableOffset(name);
 
             if (p >= 0)

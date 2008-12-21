@@ -100,6 +100,46 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void ShouldCompileBlock()
+        {
+            Compiler compiler = new Compiler("nil ifFalse: [self halt]");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(2, block.NoConstants);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
+
+            object constant = block.GetConstant(0);
+
+            Assert.IsNotNull(constant);
+            Assert.IsInstanceOfType(constant, typeof(Block));
+        }
+
+        [TestMethod]
+        public void ShouldExecuteBlock()
+        {
+            Machine machine = new Machine();
+
+            object nil = machine.GetGlobalObject("nil");
+
+            Assert.IsNotNull(nil);
+            Assert.IsInstanceOfType(nil, typeof(IClass));
+
+            ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
+
+            Compiler compiler = new Compiler("nil ifFalse: [GlobalName := 'foo']");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+
+            block.Execute(machine, null);
+
+            Assert.IsNotNull(machine.GetGlobalObject("GlobalName"));
+        }
+
+        [TestMethod]
         public void ShouldCompileMethods()
         {
             IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },

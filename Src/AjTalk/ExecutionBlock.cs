@@ -83,6 +83,22 @@ namespace AjTalk
 						arg = block.ByteCodes[ip];
 						Push(block.GetConstant(arg));
 						break;
+                    case ByteCode.GetBlock:
+						ip++;
+						arg = block.ByteCodes[ip];
+						
+                        Block newblock = (Block) block.GetConstant(arg);
+
+                        if (this.self == null)
+                        {
+                            Push(new ExecutionBlock(this.machine, this.receiver, newblock, this.arguments));
+                        }
+                        else
+                        {
+                            Push(new ExecutionBlock(this.self, this.receiver, newblock, this.arguments));
+                        }
+
+                        break;
 					case ByteCode.GetArgument:
 						ip++;
 						arg = block.ByteCodes[ip];
@@ -148,12 +164,22 @@ namespace AjTalk
 						string mthname;
 						mthname = (string) block.GetConstant(arg);
 						ip++;
+
 						arg = block.ByteCodes[ip];
 						object [] args = new object[arg];
+
 						for (int k = arg-1; k>=0; k--)
 							args[k] = Pop();
-						IObject obj = (IObject) Pop();
-						Push(obj.SendMessage(mthname,args));
+
+                        object obj = Pop();
+
+						IObject iobj = obj as IObject;
+
+                        if (iobj != null)
+                            Push(iobj.SendMessage(mthname, args));
+                        else
+                            Push(DotNetObject.SendMessage(obj, mthname, args));
+
 						break;
 					case ByteCode.SetArgument:				
 						ip++;

@@ -16,6 +16,7 @@ namespace AjTalk
 		SetClassVariable = 9,
         GetGlobalVariable = 10,
         SetGlobalVariable = 11,
+        GetBlock = 12,
 
 		GetSelf = 20,
 		GetClass = 21,

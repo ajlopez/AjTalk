@@ -123,6 +123,22 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void ShouldProcessSpecialName()
+        {
+            Tokenizer tokenizer = new Tokenizer("@System.IO.FileInfo");
+
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("System.IO.FileInfo", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
+
+        [TestMethod]
         public void ShouldProcessComplexSymbol()
         {
             Tokenizer tokenizer = new Tokenizer("#aSymbol:with:many>chars");
@@ -244,7 +260,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ShouldProcessPunctuations()
         {
-            string punct = "().";
+            string punct = "().|[]";
             Tokenizer tokenizer = new Tokenizer(punct);
             Token token;
 

@@ -122,6 +122,22 @@ namespace AjTalk.Tests
 
             Assert.AreEqual(0, p);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ShouldNotRunWithMachine()
+        {
+            Machine machine = new Machine();
+
+            Method method;
+
+            method = new Method("invalidMethod");
+            method.CompileArgument("newX");
+            method.CompileGet("newX");
+            method.CompileSet("GlobalX");
+
+            method.Execute(machine, new object[] { 10 });
+        }
     }
 }
 

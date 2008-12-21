@@ -45,6 +45,7 @@
     <Compile Include="ClassTests.cs" />
     <Compile Include="CompilerTests.cs" />
     <Compile Include="DoesNotUnderstandMethod.cs" />
+    <Compile Include="DotNetObjectTest.cs" />
     <Compile Include="LoaderTests.cs" />
     <Compile Include="MachineTests.cs" />
     <Compile Include="MethodTests.cs" />
@@ -59,6 +60,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CodeFiles\SetDotNetObject.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\DefineClassSubclass.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

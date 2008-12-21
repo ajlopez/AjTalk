@@ -41,6 +41,14 @@ namespace AjTalk
             if (globals.ContainsKey(objname))
                 return globals[objname];
 
+            if (objname.IndexOf('.') >= 0)
+            {
+                Type type = Type.GetType(objname);
+
+                if (type != null)
+                    return type;
+            }
+
             return null;
         }
 

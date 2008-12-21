@@ -4,7 +4,8 @@ http://code.google.com/p/ajtalk
 
 An Smalltalk-like interpreter written in .NET. Work in progress.
 
-More about AjTalk http://ajlopez.wordpress.com/category/ajtalk
+Blog posts about AjTalk
+http://ajlopez.wordpress.com/category/ajtalk
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

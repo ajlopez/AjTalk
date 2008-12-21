@@ -54,6 +54,14 @@
                 return newclass;
             }
 
+            if (msgname.Equals("ifFalse:"))
+            {
+                ExecutionBlock block = (ExecutionBlock) args[0];
+                block.Execute();
+                // TODO return block value??
+                return this.Machine.GetGlobalObject("nil");
+            }
+
             if (msgname.Equals("subclass:instanceVariables:"))
             {
                 IClass newclass = this.Machine.CreateClass((string)args[0], (IClass)self);

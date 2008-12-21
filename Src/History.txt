@@ -33,6 +33,11 @@ Work in progress.
 	Loader support for subclassing, instance variables,
 		and method definition
 
+2008-12-21
+	Support for [ block ] in compiler and execution block
+		(no parameters yet)
+	Initial .NET object creation and method invocation
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

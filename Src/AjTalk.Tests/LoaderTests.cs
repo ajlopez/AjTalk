@@ -110,6 +110,21 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\SetDotNetObject.st")]
+        public void ShouldExecuteSetDotNetObjectFile()
+        {
+            Loader loader = new Loader(@"SetDotNetObject.st");
+            Machine machine = new Machine();
+
+            loader.LoadAndExecute(machine);
+
+            object obj = machine.GetGlobalObject("FileInfo");
+
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(System.IO.FileInfo));
+        }
+
+        [TestMethod]
         [DeploymentItem(@"CodeFiles\SetObjects.st")]
         public void ShouldExecuteSetObjectsFile()
         {
@@ -127,14 +142,8 @@ namespace AjTalk.Tests
         public void ShouldExecuteDefineSubclassFile()
         {
             Loader loader = new Loader(@"DefineSubclass.st");
-            Machine machine = new Machine();
 
-            object nil = machine.GetGlobalObject("nil");
-
-            Assert.IsNotNull(nil);
-            Assert.IsInstanceOfType(nil, typeof(IClass));
-
-            ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
+            Machine machine = CreateMachine();
 
             Assert.IsNull(machine.GetGlobalObject("Object"));
 
@@ -143,11 +152,8 @@ namespace AjTalk.Tests
             Assert.IsNotNull(machine.GetGlobalObject("Object"));
         }
 
-        [TestMethod]
-        [DeploymentItem(@"CodeFiles\DefineSubclassWithVariables.st")]
-        public void ShouldExecuteDefineSubclassWithVariablesFile()
+        private static Machine CreateMachine()
         {
-            Loader loader = new Loader(@"DefineSubclassWithVariables.st");
             Machine machine = new Machine();
 
             object nil = machine.GetGlobalObject("nil");
@@ -156,6 +162,16 @@ namespace AjTalk.Tests
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
             ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
+            return machine;
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\DefineSubclassWithVariables.st")]
+        public void ShouldExecuteDefineSubclassWithVariablesFile()
+        {
+            Loader loader = new Loader(@"DefineSubclassWithVariables.st");
+
+            Machine machine = CreateMachine();
 
             Assert.IsNull(machine.GetGlobalObject("Rectangle"));
 
@@ -177,14 +193,8 @@ namespace AjTalk.Tests
         public void ShouldExecuteDefineRectangleFile()
         {
             Loader loader = new Loader(@"DefineRectangle.st");
-            Machine machine = new Machine();
 
-            object nil = machine.GetGlobalObject("nil");
-
-            Assert.IsNotNull(nil);
-            Assert.IsInstanceOfType(nil, typeof(IClass));
-
-            ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
+            Machine machine = CreateMachine();
 
             Assert.IsNull(machine.GetGlobalObject("Rectangle"));
 
@@ -213,14 +223,8 @@ namespace AjTalk.Tests
         public void ShouldExecuteDefineClassSubclassFile()
         {
             Loader loader = new Loader(@"DefineClassSubclass.st");
-            Machine machine = new Machine();
 
-            object nil = machine.GetGlobalObject("nil");
-
-            Assert.IsNotNull(nil);
-            Assert.IsInstanceOfType(nil, typeof(IClass));
-
-            ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
+            Machine machine = CreateMachine();
 
             Assert.IsNull(machine.GetGlobalObject("Rectangle"));
 
