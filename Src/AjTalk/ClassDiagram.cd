@@ -1,119 +1,134 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Font Name="Tahoma" Size="8.25" />
-  <Class Name="AjTalk.BaseClass" Collapsed="true">
-    <Position X="3.5" Y="4.75" Width="1.5" />
+  <Class Name="AjTalk.BaseClass">
+    <Position X="4.25" Y="3" Width="1.5" />
     <TypeIdentifier>
+      <HashCode>ABQAGAAAAAAAAAAEAIAIBAQAAAFEAIAAQAKAAAEAACg=</HashCode>
       <FileName>BaseClass.cs</FileName>
-      <HashCode>ABAACAAQAASAAAAAAIAAAASAAABEAAAAQAAAAAAAAAg=</HashCode>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="AjTalk.BaseObject" Collapsed="true">
-    <Position X="3.5" Y="3.5" Width="1.5" />
+  <Class Name="AjTalk.BaseObject">
+    <Position X="2.25" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <FileName>BaseObject.cs</FileName>
       <HashCode>AAAAAAAAAAAAQAAACCIAAAAAAIAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>BaseObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="AjTalk.Compiler" Collapsed="true">
     <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
+      <HashCode>RAIAAAAQAAgAAQgACoAAKAAAAIAgAACAQAICAAAQBAA=</HashCode>
       <FileName>Compiler.cs</FileName>
-      <HashCode>QAIAAAAAAAgAASgACoAAKAAAAIAgAACAAAACAAAQAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.ExecutionBlock" Collapsed="true">
     <Position X="11.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAUAAAAABAAAAACoAIAARAAgAAAADAA=</HashCode>
       <FileName>ExecutionBlock.cs</FileName>
-      <HashCode>AAAAAAAAAAAAACUAAAAAAAAAAACoAIAARAAgAAAACAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.Machine" Collapsed="true">
     <Position X="7.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAACAAAAAAAAAAAAAAIAAiAAAAAAAA=</HashCode>
       <FileName>Machine.cs</FileName>
-      <HashCode>QAAAAAAAAgQAAAAACAAAAAAAQAAAAEAAAAAAAQAAAAA=</HashCode>
     </TypeIdentifier>
-  </Class>
-  <Class Name="AjTalk.Method" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="9.5" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <FileName>Method.cs</FileName>
-      <HashCode>AAEAAAAACAAAAUQAAAEACCYBQAAEAEAAJAAIAICAjAA=</HashCode>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="AjTalk.Token" Collapsed="true">
     <Position X="11.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <FileName>Tokenizer.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
+      <FileName>Tokenizer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.EndOfInputException" Collapsed="true">
     <Position X="9.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <FileName>Tokenizer.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tokenizer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.TokenizerException" Collapsed="true">
     <Position X="9.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <FileName>Tokenizer.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tokenizer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.Tokenizer" Collapsed="true">
     <Position X="7.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
+      <HashCode>AYIAAAAQFAgBIAABAAIAQDAQAIAABBAAAAAgEAIhBAA=</HashCode>
       <FileName>Tokenizer.cs</FileName>
-      <HashCode>AQIAAAIQAAgBIAABAAIAQCAQAIAAADAAAAAgEAIBAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Interface Name="AjTalk.IClass" Collapsed="true">
+  <Class Name="AjTalk.Block">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAACAACAUQACAEAiSIBRAAAAEAAICAIAICAjAA=</HashCode>
+      <FileName>Block.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.3" />
+  </Class>
+  <Class Name="AjTalk.Method">
+    <Position X="2.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAQAAAIAAAQAAAAEAAAAJAAAEAAAgAA=</HashCode>
+      <FileName>Method.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="AjTalk.IClass">
     <Position X="0.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
+      <HashCode>AAQAEAAAAAAAAAAEAAAAAAQAAAEAAIAAQAKAAAEAACg=</HashCode>
       <FileName>IClass.cs</FileName>
-      <HashCode>AAAAAAAQAASAAAAAAAAAAASAAAAAAAAAQAAAAAAAAAg=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AjTalk.IMessage" Collapsed="true">
     <Position X="7.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <FileName>IMessage.cs</FileName>
       <HashCode>AAAAAAAAAAAAAEAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IMessage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AjTalk.IObject">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACCIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AjTalk.IBlock">
+    <Position X="6.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IBlock.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AjTalk.IMethod" Collapsed="true">
-    <Position X="9.5" Y="3.75" Width="1.5" />
+    <Position X="4.75" Y="8.5" Width="1.5" />
     <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAIAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IMethod.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="AjTalk.IObject" Collapsed="true">
-    <Position X="0.5" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <FileName>IObject.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAACCIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Enum Name="AjTalk.ByteCode" Collapsed="true">
     <Position X="7.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
+      <HashCode>gAJBIAQAARAAQIAAAEABAAQACiCIAQAAQAAAAIQAUAQ=</HashCode>
       <FileName>ByteCodes.cs</FileName>
-      <HashCode>gAJBIAQAAQAAQIAAAEABAAQACiCIAAAAQAAAAIQAUAA=</HashCode>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AjTalk.TokenType" Collapsed="true">
     <Position X="9.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAQAAAAAAgQAAAAAAAAAKAA=</HashCode>
       <FileName>Tokenizer.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAQAAAAAQAAAAAAgQAAAAAAAAAIAA=</HashCode>
     </TypeIdentifier>
   </Enum>
+  <Font Name="Tahoma" Size="8.25" />
 </ClassDiagram>
