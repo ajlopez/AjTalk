@@ -249,6 +249,29 @@ namespace AjTalk.Tests
             Assert.IsNotNull(cls.GetInstanceMethod("width"));
             Assert.IsNotNull(cls.GetInstanceMethod("height"));
         }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Library1.st")]
+        public void ShouldLoadLibrary()
+        {
+            Loader loader = new Loader(@"Library1.st");
+
+            Machine machine = CreateMachine();
+
+            Assert.IsNull(machine.GetGlobalObject("Object"));
+            Assert.IsNull(machine.GetGlobalObject("Behavior"));
+            Assert.IsNull(machine.GetGlobalObject("ClassDescription"));
+            Assert.IsNull(machine.GetGlobalObject("Class"));
+            Assert.IsNull(machine.GetGlobalObject("Metaclass"));
+
+            loader.LoadAndExecute(machine);
+
+            Assert.IsNotNull(machine.GetGlobalObject("Object"));
+            Assert.IsNotNull(machine.GetGlobalObject("Behavior"));
+            Assert.IsNotNull(machine.GetGlobalObject("ClassDescription"));
+            Assert.IsNotNull(machine.GetGlobalObject("Class"));
+            Assert.IsNotNull(machine.GetGlobalObject("Metaclass"));
+        }
     }
 }
 

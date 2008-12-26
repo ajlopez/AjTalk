@@ -1,2 +1,2 @@
-﻿nil subclass: #Rectangle instanceVariables: 'x y'
+﻿nil subclass: #Rectangle instanceVariableNames: 'x y'
 !

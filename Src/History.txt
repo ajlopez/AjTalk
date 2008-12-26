@@ -38,6 +38,10 @@ Work in progress.
 		(no parameters yet)
 	Initial .NET object creation and method invocation
 
+2008-12-25
+	Test loading Library1.st
+	methods without ^ return self
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

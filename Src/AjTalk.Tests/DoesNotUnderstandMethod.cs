@@ -62,7 +62,8 @@
                 return this.Machine.GetGlobalObject("nil");
             }
 
-            if (msgname.Equals("subclass:instanceVariables:"))
+            if (msgname.Equals("subclass:instanceVariableNames:") ||
+                msgname.Equals("subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:"))
             {
                 IClass newclass = this.Machine.CreateClass((string)args[0], (IClass)self);
 
@@ -70,7 +71,8 @@
 
                 foreach (string varname in varnames)
                 {
-                    newclass.DefineInstanceVariable(varname);
+                    if (!string.IsNullOrEmpty(varname))
+                        newclass.DefineInstanceVariable(varname);
                 }
 
                 this.Machine.SetGlobalObject(newclass.Name, newclass);

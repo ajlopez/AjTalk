@@ -210,7 +210,7 @@ namespace AjTalk
 				ip++;
 			}
 
-			return null;
+			return this.self;
 		}
 	}
 }
