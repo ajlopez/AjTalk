@@ -158,7 +158,22 @@ namespace AjTalk
 					case ByteCode.Pop:
 						Pop();
 						break;
-					case ByteCode.Send:
+                    case ByteCode.InstSize:
+                        IObject iobj = (IObject) Pop();
+                        Push(iobj.Class.NoInstanceVariables);
+                        break;
+                    case ByteCode.InstAt:
+                        int pos = (int) Pop();
+                        iobj = (IObject) Pop();
+                        Push(iobj[pos]);
+                        break;
+                    case ByteCode.InstAtPut:
+                        object par = Pop();
+                        pos = (int) Pop();
+                        iobj = (IObject)Pop();
+                        iobj[pos] = par;
+                        break;
+                    case ByteCode.Send:
 						ip++;
 						arg = block.ByteCodes[ip];
 						string mthname;
@@ -173,7 +188,7 @@ namespace AjTalk
 
                         object obj = Pop();
 
-						IObject iobj = obj as IObject;
+						iobj = obj as IObject;
 
                         if (iobj != null)
                             Push(iobj.SendMessage(mthname, args));

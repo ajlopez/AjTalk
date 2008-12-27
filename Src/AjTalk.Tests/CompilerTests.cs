@@ -140,6 +140,107 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void ShouldExecuteInstSize()
+        {
+            Machine machine = new Machine();
+
+            object nil = machine.GetGlobalObject("nil");
+
+            Assert.IsNotNull(nil);
+            Assert.IsInstanceOfType(nil, typeof(IClass));
+
+            ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
+
+            Compiler compiler = new Compiler("^nil new instSize");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+
+            object result = block.Execute(machine, null);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void ShouldExecuteInstSizeInRectangle()
+        {
+            Machine machine = new Machine();
+            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
+                new string[] {
+                    "x ^x",
+                    "x: newX x := newX",
+                    "y ^y",
+                    "y: newY y := newY"
+                });
+
+            machine.SetGlobalObject("aRectangle", cls.NewObject());
+
+            Compiler compiler = new Compiler("^aRectangle instSize");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+
+            object result = block.Execute(machine, null);
+
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
+        public void ShouldExecuteInstAt()
+        {
+            Machine machine = new Machine();
+            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
+                new string[] {
+                    "x ^x",
+                    "x: newX x := newX",
+                    "y ^y",
+                    "y: newY y := newY"
+                });
+
+            IObject iobj = cls.NewObject();
+
+            machine.SetGlobalObject("aRectangle", iobj);
+
+            iobj[0] = 100;
+
+            Compiler compiler = new Compiler("^aRectangle instAt: 0");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+
+            object result = block.Execute(machine, null);
+
+            Assert.AreEqual(100, result);
+        }
+
+        [TestMethod]
+        public void ShouldExecuteInstAtPut()
+        {
+            Machine machine = new Machine();
+            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
+                new string[] {
+                    "x ^x",
+                    "x: newX x := newX",
+                    "y ^y",
+                    "y: newY y := newY"
+                });
+
+            IObject iobj = cls.NewObject();
+
+            machine.SetGlobalObject("aRectangle", iobj);
+
+            Compiler compiler = new Compiler("aRectangle instAt: 0 put: 200");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+
+            block.Execute(machine, null);
+
+            Assert.AreEqual(200, iobj[0]);
+            Assert.IsNull(iobj[1]);
+        }
+
+        [TestMethod]
         public void ShouldCompileMethods()
         {
             IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },

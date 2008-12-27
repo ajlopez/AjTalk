@@ -29,6 +29,11 @@ namespace AjTalk
                 throw new ArgumentNullException("name");
             }
 
+            if (machine == null)
+            {
+                throw new ArgumentNullException("machine");
+            }
+
             this.name = name;
             this.superclass = superclass;
             this.machine = machine;

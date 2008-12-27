@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseObjectTests.cs" />
+    <Compile Include="BasicClassTests.cs" />
     <Compile Include="BlockTests.cs" />
     <Compile Include="ClassTests.cs" />
     <Compile Include="CompilerTests.cs" />

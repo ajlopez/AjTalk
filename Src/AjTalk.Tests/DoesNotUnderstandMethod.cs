@@ -47,6 +47,11 @@
 
         private object DoesNotUnderstand(IObject self, IObject receiver, string msgname, object[] args)
         {
+            if (msgname.Equals("new"))
+            {
+                return ((IClass)self).NewObject();
+            }
+
             if (msgname.Equals("subclass:"))
             {
                 IClass newclass = this.Machine.CreateClass((string) args[0], (IClass)self);

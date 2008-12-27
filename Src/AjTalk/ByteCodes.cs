@@ -31,6 +31,10 @@ namespace AjTalk
 		Multiply = 42,
 		Divide = 43,
 
-		Send = 50
+		Send = 50,
+
+        InstAt = 60,
+        InstAtPut = 61,
+        InstSize = 62
 	}
 }

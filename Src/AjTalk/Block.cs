@@ -133,7 +133,14 @@ namespace AjTalk
 
         public void CompileSend(string msgname)
         {
-            this.CompileByteCode(ByteCode.Send, this.CompileConstant(msgname), MessageArity(msgname));
+            if (msgname == "instSize")
+                this.CompileByteCode(ByteCode.InstSize);
+            else if (msgname == "instAt:")
+                this.CompileByteCode(ByteCode.InstAt);
+            else if (msgname == "instAt:put:")
+                this.CompileByteCode(ByteCode.InstAtPut);
+            else
+                this.CompileByteCode(ByteCode.Send, this.CompileConstant(msgname), MessageArity(msgname));
         }
 
         // TODO how to implements super, sender
