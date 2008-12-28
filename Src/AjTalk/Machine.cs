@@ -17,7 +17,7 @@ namespace AjTalk
 			classclass = new BaseClass("nil", null, this);
 
             // TODO Review this tricky autoreference
-			classclass.SetClass(classclass);
+			classclass.SetBehavior(classclass);
 
             globals["nil"] = classclass;
 		}

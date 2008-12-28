@@ -16,7 +16,7 @@ namespace AjTalk.Tests
         {
             BaseObject bo = new BaseObject();
 
-            Assert.IsNull(bo.Class);
+            Assert.IsNull(bo.Behavior);
         }
     }
 }

@@ -42,6 +42,17 @@ Work in progress.
 	Test loading Library1.st
 	methods without ^ return self
 
+2008-12-26
+	Test using Library1.st added
+
+2008-12-27
+	BaseClass new tests
+	New bytecodes instSize, instAt: instAt:put:
+
+2008-12-28
+	IBehavior, IClassDescription added
+	BaseBehavior, BaseClassDescription added
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

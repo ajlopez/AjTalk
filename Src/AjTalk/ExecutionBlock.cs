@@ -32,7 +32,7 @@ namespace AjTalk
 		public ExecutionBlock(IObject self, IObject receiver, Block block, object [] arguments) 
 		{
 			this.self = self;
-            this.machine = self.Class.Machine;
+            this.machine = self.Behavior.Machine;
 			this.receiver = receiver;
 			this.block = block;
 			this.arguments = arguments;
@@ -105,7 +105,7 @@ namespace AjTalk
 						Push(arguments[arg]);
 						break;
 					case ByteCode.GetClass:
-						Push(receiver.Class);
+						Push(receiver.Behavior);
 						break;
 					case ByteCode.GetClassVariable:
 						throw new Exception("Not implemented");
@@ -123,7 +123,7 @@ namespace AjTalk
 						Push(self);
 						break;
 					case ByteCode.GetSuperClass:
-						Push(receiver.Class.SuperClass);
+						Push(receiver.Behavior.SuperClass);
 						break;
 					case ByteCode.GetVariable:
 						ip++;
@@ -160,7 +160,7 @@ namespace AjTalk
 						break;
                     case ByteCode.InstSize:
                         IObject iobj = (IObject) Pop();
-                        Push(iobj.Class.NoInstanceVariables);
+                        Push(iobj.Behavior.NoInstanceVariables);
                         break;
                     case ByteCode.InstAt:
                         int pos = (int) Pop();

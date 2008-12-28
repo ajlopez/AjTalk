@@ -33,7 +33,7 @@ namespace AjTalk.Test01
 			mth.CompileSet("x");
 			mth.CompileGet("newValue");
 			mth.CompileSet("y");
-			mth.Execute(obj.Class,obj,new object[] {10});
+			mth.Execute(obj.Behavior,obj,new object[] {10});
 			cls.DefineInstanceMethod(mth);
 			Console.WriteLine(obj[0]);
 			Console.WriteLine(obj[1]);
@@ -45,7 +45,7 @@ namespace AjTalk.Test01
 			mth.CompileSet("x");
 			mth.CompileGet("newY");
 			mth.CompileSet("y");
-			mth.Execute(obj.Class,obj,new object[] {10,20});
+			mth.Execute(obj.Behavior,obj,new object[] {10,20});
 			cls.DefineInstanceMethod(mth);
 			Console.WriteLine(obj[0]);
 			Console.WriteLine(obj[1]);
@@ -55,14 +55,14 @@ namespace AjTalk.Test01
 			mth.CompileArgument("newX");
 			mth.CompileGet("newX");
 			mth.CompileSet("x");
-			mth.Execute(obj.Class,obj,new object[] {10,20});
+			mth.Execute(obj.Behavior,obj,new object[] {10,20});
 			cls.DefineInstanceMethod(mth);
 
 			mth = new Method(cls,"y:");
 			mth.CompileArgument("newY");
 			mth.CompileGet("newY");
 			mth.CompileSet("y");
-			mth.Execute(obj.Class,obj,new object[] {10,20});
+			mth.Execute(obj.Behavior,obj,new object[] {10,20});
 			cls.DefineInstanceMethod(mth);
 
 			Compiler compiler = new Compiler("set2: newValue self x: newValue self y: newValue.");

@@ -77,7 +77,7 @@ namespace AjTalk
             }
 
             // TODO Is this code needed?
-            p = mthclass.Class.GetInstanceVariableOffset(name);
+            p = mthclass.GetClassVariableOffset(name);
 
             if (p >= 0)
             {

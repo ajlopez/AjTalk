@@ -4,7 +4,7 @@ namespace AjTalk
 {
 	public interface IObject
 	{
-		IClass Class { get; }
+		IBehavior Behavior { get; }
 		object this[int n] { get; set;}
 		object SendMessage(string msgname, object [] args);
 	}

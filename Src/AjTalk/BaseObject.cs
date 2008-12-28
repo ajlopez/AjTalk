@@ -7,33 +7,33 @@ namespace AjTalk
     /// </summary>
     public class BaseObject : IObject
     {
-        private IClass objclass;
+        private IBehavior behavior;
         private object[] variables;
 
         public BaseObject()
         {
-            this.objclass = null;
+            this.behavior = null;
             this.variables = null;
         }
 
-        public BaseObject(IClass cls, int nvars) 
+        public BaseObject(IBehavior behavior, int nvars) 
         {
-            this.objclass = cls;
+            this.behavior = behavior;
             this.variables = new object[nvars];
         }
 
-        public BaseObject(IClass cls, object[] vars) 
+        public BaseObject(IBehavior behavior, object[] vars) 
         {
-            this.objclass = cls;
+            this.behavior = behavior;
             this.variables = vars;
         }
 
-        public IClass Class
+        public IBehavior Behavior
         {
             get
             {
                 // TODO:  Add BaseObject.Class getter implementation
-                return this.objclass;
+                return this.behavior;
             }
         }
 
@@ -53,14 +53,14 @@ namespace AjTalk
         public object SendMessage(string msgname, object[] args)
         {
             // TODO objclass to review
-            IMethod mth = this.objclass.GetInstanceMethod(msgname);
+            IMethod mth = this.behavior.GetInstanceMethod(msgname);
 
             if (mth != null)
             {
                 return mth.Execute(this, this, args);
             }
 
-            mth = this.objclass.GetInstanceMethod("doesNotUnderstand:");
+            mth = this.behavior.GetInstanceMethod("doesNotUnderstand:");
 
             if (mth != null)
             {
@@ -70,9 +70,9 @@ namespace AjTalk
             throw new InvalidProgramException(string.Format("Does not understand {0}", msgname));
         }
 
-        internal void SetClass(IClass cls)
+        internal void SetBehavior(IBehavior behavior)
         {
-            this.objclass = cls;
+            this.behavior = behavior;
         }
     }
 }

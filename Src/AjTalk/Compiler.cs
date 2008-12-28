@@ -342,8 +342,8 @@ namespace AjTalk
         // TODO Review implementation, use DefineClassMethod instead
         public void CompileClassMethod(IClass cls)
         {
-            CompileMethod(cls.Class); // use metaclass
-            cls.Class.DefineInstanceMethod((IMethod) block);
+            CompileMethod(cls.MetaClass); // use metaclass
+            cls.DefineClassMethod((IMethod) block);
         }
     }
 

@@ -89,6 +89,7 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BaseBehavior.cs" />
     <Compile Include="BaseClass.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,10 +103,13 @@
     <Compile Include="Compiler.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BaseClassDescription.cs" />
+    <Compile Include="IClassDescription.cs" />
     <Compile Include="DotNetObject.cs" />
     <Compile Include="ExecutionBlock.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IBehavior.cs" />
     <Compile Include="IBlock.cs" />
     <Compile Include="IClass.cs">
       <SubType>Code</SubType>
