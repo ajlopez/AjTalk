@@ -2,12 +2,12 @@ namespace AjTalk.Tests
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Text;
 
     using AjTalk;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.IO;
 
     [TestClass]
     public class LoaderTests
@@ -15,7 +15,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ShouldBeCreated()
         {
-            Loader loader = new Loader(new StringReader(""));
+            Loader loader = new Loader(new StringReader(string.Empty));
 
             Assert.IsNotNull(loader);
         }
@@ -152,19 +152,6 @@ namespace AjTalk.Tests
             Assert.IsNotNull(machine.GetGlobalObject("Object"));
         }
 
-        private static Machine CreateMachine()
-        {
-            Machine machine = new Machine();
-
-            object nil = machine.GetGlobalObject("nil");
-
-            Assert.IsNotNull(nil);
-            Assert.IsInstanceOfType(nil, typeof(IClass));
-
-            ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
-            return machine;
-        }
-
         [TestMethod]
         [DeploymentItem(@"CodeFiles\DefineSubclassWithVariables.st")]
         public void ShouldExecuteDefineSubclassWithVariablesFile()
@@ -271,6 +258,19 @@ namespace AjTalk.Tests
             Assert.IsNotNull(machine.GetGlobalObject("ClassDescription"));
             Assert.IsNotNull(machine.GetGlobalObject("Class"));
             Assert.IsNotNull(machine.GetGlobalObject("Metaclass"));
+        }
+
+        private static Machine CreateMachine()
+        {
+            Machine machine = new Machine();
+
+            object nil = machine.GetGlobalObject("nil");
+
+            Assert.IsNotNull(nil);
+            Assert.IsInstanceOfType(nil, typeof(IClass));
+
+            ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
+            return machine;
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AjTalk
+﻿namespace AjTalk
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class BaseBehavior : BaseObject, IBehavior
     {
         private IClass superclass;
@@ -32,7 +32,6 @@ namespace AjTalk
             }
         }
 
-        // TODO Change to IMetaClass
         public IClass MetaClass
         {
             get
@@ -54,7 +53,9 @@ namespace AjTalk
             get
             {
                 if (this.superclass != null)
+                {
                     return this.noinstancevariables + this.superclass.NoInstanceVariables;
+                }
 
                 return this.noinstancevariables;
             }
@@ -115,7 +116,7 @@ namespace AjTalk
             return this.instancemethods[mthname];
         }
 
-        public IObject NewObject()
+        public virtual IObject NewObject()
         {
             return new BaseObject(this, this.NoInstanceVariables);
         }

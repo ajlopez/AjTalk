@@ -54,6 +54,38 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void ShouldCompileAndExecuteGetDotNetType()
+        {
+            Block block;
+
+            block = new Block();
+            block.CompileGetDotNetType("System.IO.FileInfo");
+            block.CompileByteCode(ByteCode.ReturnPop);
+
+            object obj = block.Execute(null, null);
+
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(System.Type));
+        }
+
+        [TestMethod]
+        public void ShouldCompileAndExecuteNewDotNetObject()
+        {
+            Block block;
+
+            block = new Block();
+            block.CompileGetDotNetType("System.IO.FileInfo");
+            block.CompileGetConstant("FooBar.txt");
+            block.CompileSend("!new:");
+            block.CompileByteCode(ByteCode.ReturnPop);
+
+            object obj = block.Execute(null, null);
+
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(System.IO.FileInfo));
+        }
+
+        [TestMethod]
         public void ShouldCompileAndRunWithGlobal()
         {
             Block block;

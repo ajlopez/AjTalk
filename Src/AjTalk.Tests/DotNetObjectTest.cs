@@ -1,17 +1,14 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-
-using AjTalk;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace AjTalk.Tests
+﻿namespace AjTalk.Tests
 {
-    /// <summary>
-    /// Summary description for DotNetObjectTest
-    /// </summary>
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using AjTalk;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class DotNetObjectTest
     {
@@ -20,7 +17,7 @@ namespace AjTalk.Tests
         {
             Machine machine = new Machine();
 
-            object obj = DotNetObject.SendMessage(machine.GetGlobalObject("System.IO.FileInfo"), "new:", new object[] { "AnyFile.txt" });
+            object obj = DotNetObject.NewObject(Type.GetType("System.IO.FileInfo"), new object[] { "AnyFile.txt" });
 
             Assert.IsNotNull(obj);
             Assert.IsInstanceOfType(obj, typeof(System.IO.FileInfo));

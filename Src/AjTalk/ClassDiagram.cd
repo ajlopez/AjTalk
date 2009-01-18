@@ -3,7 +3,7 @@
   <Class Name="AjTalk.BaseClass">
     <Position X="4.25" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABQAGAAAAAAAAAAEAIAIBAQAAAFEAIAAQAKAAAEAACg=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BaseClass.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,7 +11,7 @@
   <Class Name="AjTalk.BaseObject">
     <Position X="2.25" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAACCIAAAAAAIAAAAAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACiAAAAgAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>BaseObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -82,9 +82,9 @@
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="AjTalk.IClass">
-    <Position X="0.5" Y="4.75" Width="1.5" />
+    <Position X="0.5" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAEAAAAAAAAAAEAAAAAAQAAAEAAIAAQAKAAAEAACg=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IClass.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -98,7 +98,7 @@
   <Interface Name="AjTalk.IObject">
     <Position X="0.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAACCIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACCAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IObject.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -116,10 +116,24 @@
       <FileName>IMethod.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="AjTalk.IClassDescription">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAQAAAEAAIAAAAIAAAAAAAA=</HashCode>
+      <FileName>IClassDescription.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AjTalk.IBehavior">
+    <Position X="5.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAEAAAAAAAAAAEAAAAAQACAAAEAACg=</HashCode>
+      <FileName>IBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="AjTalk.ByteCode" Collapsed="true">
     <Position X="7.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAJBIAQAARAAQIAAAEABAAQACiCIAQAAQAAAAIQAUAQ=</HashCode>
+      <HashCode>gAJBIAQgARAIQIAAAEARAAQACiGIAQAAQAAAAIQAUAQ=</HashCode>
       <FileName>ByteCodes.cs</FileName>
     </TypeIdentifier>
   </Enum>

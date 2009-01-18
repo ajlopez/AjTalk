@@ -1,52 +1,43 @@
-using System;
-using System.Collections.Generic;
-
 namespace AjTalk
 {
-	/// <summary>
-	/// Summary description for Machine.
-	/// </summary>
-	public class Machine
-	{
-		private BaseClass classclass;
+    using System;
+    using System.Collections.Generic;
+
+    public class Machine
+    {
+        private BaseClass classclass;
 
         private Dictionary<string, object> globals = new Dictionary<string, object>();
 
-		public Machine()
-		{
-			classclass = new BaseClass("nil", null, this);
+        public Machine()
+        {
+            this.classclass = new BaseClass("nil", null, this);
 
             // TODO Review this tricky autoreference
-			classclass.SetBehavior(classclass);
+            this.classclass.SetBehavior(this.classclass);
 
-            globals["nil"] = classclass;
-		}
+            this.globals["nil"] = this.classclass;
+        }
 
-		public IClass CreateClass(string clsname) 
-		{
+        public IClass CreateClass(string clsname)
+        {
             // TODO Review Tricky fourth param
-			BaseClass cls = new BaseClass(clsname, classclass, classclass, this);
-			return cls;
-		}
+            BaseClass cls = new BaseClass(clsname, this.classclass, this.classclass, this);
+            return cls;
+        }
 
         public IClass CreateClass(string clsname, IClass superclass)
         {
             // TODO Review Tricky fourth param
-            BaseClass cls = new BaseClass(clsname, superclass, classclass, this);
+            BaseClass cls = new BaseClass(clsname, superclass, this.classclass, this);
             return cls;
         }
 
         public object GetGlobalObject(string objname)
         {
-            if (globals.ContainsKey(objname))
-                return globals[objname];
-
-            if (objname.IndexOf('.') >= 0)
+            if (this.globals.ContainsKey(objname))
             {
-                Type type = Type.GetType(objname);
-
-                if (type != null)
-                    return type;
+                return this.globals[objname];
             }
 
             return null;
@@ -54,7 +45,7 @@ namespace AjTalk
 
         public void SetGlobalObject(string objname, object value)
         {
-            globals[objname] = value;
+            this.globals[objname] = value;
         }
     }
 }

@@ -25,8 +25,6 @@ namespace AjTalk.Tests
             Machine machine = new Machine();
 
             Assert.IsNotNull(machine.GetGlobalObject("nil"));
-            //Assert.IsNotNull(machine.GetGlobalObject("Object"));
-            //Assert.IsNotNull(machine.GetGlobalObject("Class"));
         }
 
         [TestMethod]
@@ -51,18 +49,6 @@ namespace AjTalk.Tests
             machine.SetGlobalObject("One", 1);
 
             Assert.AreEqual(1, machine.GetGlobalObject("One"));
-        }
-
-        [TestMethod]
-        public void ShouldGetDotNetTypeAsGlobal()
-        {
-            Machine machine = new Machine();
-
-            object type = machine.GetGlobalObject("System.IO.FileInfo");
-
-            Assert.IsNotNull(type);
-            Assert.IsInstanceOfType(type, typeof(Type));
-            Assert.AreEqual(type, typeof(System.IO.FileInfo));
         }
 
         [TestMethod]

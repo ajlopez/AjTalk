@@ -11,6 +11,31 @@ namespace AjTalk.Tests
     [TestClass]
     public class CompilerTests
     {
+        public static IClass CompileClass(string clsname, string[] varnames, string[] methods)
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass(clsname);
+
+            if (varnames != null)
+            {
+                foreach (string varname in varnames)
+                {
+                    cls.DefineInstanceVariable(varname);
+                }
+            }
+
+            if (methods != null)
+            {
+                foreach (string method in methods)
+                {
+                    Compiler compiler = new Compiler(method);
+                    compiler.CompileInstanceMethod(cls);
+                }
+            }
+
+            return cls;
+        }
+
         [TestMethod]
         public void ShouldBeCreated()
         {
@@ -165,8 +190,11 @@ namespace AjTalk.Tests
         public void ShouldExecuteInstSizeInRectangle()
         {
             Machine machine = new Machine();
-            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
-                new string[] {
+            IClass cls = CompileClass(
+                "Rectangle", 
+                new string[] { "x", "y" },
+                new string[] 
+                {
                     "x ^x",
                     "x: newX x := newX",
                     "y ^y",
@@ -189,8 +217,11 @@ namespace AjTalk.Tests
         public void ShouldExecuteInstAt()
         {
             Machine machine = new Machine();
-            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
-                new string[] {
+            IClass cls = CompileClass(
+                "Rectangle", 
+                new string[] { "x", "y" },
+                new string[] 
+                {
                     "x ^x",
                     "x: newX x := newX",
                     "y ^y",
@@ -217,8 +248,11 @@ namespace AjTalk.Tests
         public void ShouldExecuteInstAtPut()
         {
             Machine machine = new Machine();
-            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
-                new string[] {
+            IClass cls = CompileClass(
+                "Rectangle", 
+                new string[] { "x", "y" },
+                new string[] 
+                {
                     "x ^x",
                     "x: newX x := newX",
                     "y ^y",
@@ -241,10 +275,36 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void ShouldExecuteBasicNew()
+        {
+            Machine machine = new Machine();
+            IClass cls = CompileClass(
+                "Rectangle",
+                new string[] { "x", "y" },
+                null);
+
+            machine.SetGlobalObject("Rectangle", cls);
+
+            Compiler compiler = new Compiler("^Rectangle basicNew");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+
+            object obj = block.Execute(machine, null);
+
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(IObject));
+            Assert.AreEqual(cls, ((IObject)obj).Behavior);
+        }
+
+        [TestMethod]
         public void ShouldCompileMethods()
         {
-            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
-                new string[] {
+            IClass cls = CompileClass(
+                "Rectangle", 
+                new string[] { "x", "y" },
+                new string[] 
+                {
                     "x ^x",
                     "x: newX x := newX",
                     "y ^y",
@@ -262,8 +322,11 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ShouldRunMethods()
         {
-            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
-                new string[] {
+            IClass cls = CompileClass(
+                "Rectangle", 
+                new string[] { "x", "y" },
+                new string[] 
+                {
                     "x ^x",
                     "x: newX x := newX",
                     "y ^y",
@@ -282,15 +345,18 @@ namespace AjTalk.Tests
 
             Assert.AreEqual(20, obj[1]);
 
-            Assert.AreEqual(10, cls.GetInstanceMethod("x").Execute(obj, new object[] {}));
+            Assert.AreEqual(10, cls.GetInstanceMethod("x").Execute(obj, new object[] { }));
             Assert.AreEqual(20, cls.GetInstanceMethod("y").Execute(obj, new object[] { }));
         }
 
         [TestMethod]
         public void ShouldCompileMultiCommandMethod()
         {
-            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
-                new string[] {
+            IClass cls = CompileClass(
+                "Rectangle", 
+                new string[] { "x", "y" },
+                new string[] 
+                {
                     "side: newSide x := newSide. y := newSide"
                 });
 
@@ -302,8 +368,11 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ShouldCompileMultiCommandMethodWithLocal()
         {
-            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
-                new string[] {
+            IClass cls = CompileClass(
+                "Rectangle", 
+                new string[] { "x", "y" },
+                new string[] 
+                {
                     "side: newSide | temp | temp := x. x := temp. y := temp"
                 });
 
@@ -315,8 +384,11 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ShouldRunMultiCommandMethod()
         {
-            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
-                new string[] {
+            IClass cls = CompileClass(
+                "Rectangle", 
+                new string[] { "x", "y" },
+                new string[] 
+                {
                     "side: newSide x := newSide. y := newSide"
                 });
 
@@ -333,8 +405,11 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ShouldRunMultiCommandMethodWithLocal()
         {
-            IClass cls = CompileClass("Rectangle", new string[] { "x", "y" },
-                new string[] {
+            IClass cls = CompileClass(
+                "Rectangle", 
+                new string[] { "x", "y" },
+                new string[] 
+                {
                     "side: newSide | temp | temp := newSide. x := temp. y := temp"
                 });
 
@@ -346,25 +421,6 @@ namespace AjTalk.Tests
 
             Assert.AreEqual(10, obj[0]);
             Assert.AreEqual(10, obj[1]);
-        }
-
-        public static IClass CompileClass(string clsname, string[] varnames, string[] methods)
-        {
-            Machine machine = new Machine();
-            IClass cls = machine.CreateClass(clsname);
-
-            if (varnames != null)
-                foreach (string varname in varnames)
-                    cls.DefineInstanceVariable(varname);
-
-            if (methods != null)
-                foreach (string method in methods)
-                {
-                    Compiler compiler = new Compiler(method);
-                    compiler.CompileInstanceMethod(cls);
-                }
-
-            return cls;
         }
     }
 }

@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
 namespace AjTalk
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+
     public class Loader
     {
         private TextReader reader;
@@ -23,36 +23,36 @@ namespace AjTalk
 
         public bool IsInmediate()
         {
-            return inmediateLine != null;
+            return this.inmediateLine != null;
         }
 
         public bool IsMethod()
         {
-            return currentClass != null;
+            return this.currentClass != null;
         }
 
         public void ExecuteInmediate(Machine machine)
         {
-            inmediateLine = inmediateLine.Trim();
+            this.inmediateLine = this.inmediateLine.Trim();
 
-            if (inmediateLine.Length == 0)
+            if (this.inmediateLine.Length == 0)
             {
-                currentClass = null;
+                this.currentClass = null;
                 return;
             }
 
-            if (!inmediateLine.EndsWith(" methods"))
+            if (!this.inmediateLine.EndsWith(" methods"))
             {
-                throw new InvalidOperationException(string.Format("Unknown inmediate line '{0}'", inmediateLine));
+                throw new InvalidOperationException(string.Format("Unknown inmediate line '{0}'", this.inmediateLine));
             }
 
-            inmediateLine = "^" + inmediateLine.Substring(0, inmediateLine.Length - 8);
+            this.inmediateLine = "^" + this.inmediateLine.Substring(0, this.inmediateLine.Length - 8);
 
-            Compiler compiler = new Compiler(inmediateLine);
+            Compiler compiler = new Compiler(this.inmediateLine);
             Block block = compiler.CompileBlock();
             object value = block.Execute(machine, null);
 
-            currentClass = (IClass)value;
+            this.currentClass = (IClass)value;
         }
 
         public string GetInmediateText()
@@ -62,30 +62,34 @@ namespace AjTalk
 
         public string GetBlockText()
         {
-            inmediateLine = null;
+            this.inmediateLine = null;
 
             StringBuilder sb = new StringBuilder();
 
-            string line = reader.ReadLine();
+            string line = this.reader.ReadLine();
 
             while (line != null)
             {
-                if (line.Length>0 && line[0] == '!')
+                if (line.Length > 0 && line[0] == '!')
+                {
                     break;
+                }
 
                 sb.Append(line);
                 sb.Append("\n");
 
-                line = reader.ReadLine();
+                line = this.reader.ReadLine();
             }
 
             if (line != null && line.Length > 1 && line.EndsWith("!"))
             {
-                inmediateLine = line.Substring(1, line.Length - 2);
+                this.inmediateLine = line.Substring(1, line.Length - 2);
             }
 
             if (sb.Length == 0)
+            {
                 return null;
+            }
 
             return sb.ToString();
         }
@@ -94,15 +98,15 @@ namespace AjTalk
         {
             string blocktext;
 
-            blocktext = GetBlockText();
+            blocktext = this.GetBlockText();
 
             while (blocktext != null)
             {
                 Compiler compiler = new Compiler(blocktext);
 
-                if (IsMethod())
+                if (this.IsMethod())
                 {
-                    compiler.CompileInstanceMethod(currentClass);
+                    compiler.CompileInstanceMethod(this.currentClass);
                 }
                 else
                 {
@@ -110,14 +114,16 @@ namespace AjTalk
                     block.Execute(machine, null);
                 }
 
-                if (IsInmediate())
-                    ExecuteInmediate(machine);
+                if (this.IsInmediate())
+                {
+                    this.ExecuteInmediate(machine);
+                }
 
-                blocktext = GetBlockText();
+                blocktext = this.GetBlockText();
             }
 
-            reader.Close();
-            reader = null;
+            this.reader.Close();
+            this.reader = null;
         }
     }
 }

@@ -1,16 +1,17 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-
-using AjTalk;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace AjTalk.Tests
+﻿namespace AjTalk.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using AjTalk;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
-    public class BasicClassTest {
+    public class BasicClassTest 
+    {
         [TestMethod]
         public void ShouldCreate()
         {

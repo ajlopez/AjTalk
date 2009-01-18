@@ -6,52 +6,59 @@ An Smalltalk-like interpreter, written in C#.
 Work in progress.
 
 2007-09-15
-	Creation of this project folder
+Creation of this project folder
 
 2008-05-04
-	Begin to work with TDD (late but sure)
+Begin to work with TDD (late but sure)
 
 2008-07-11
-	Publish the code in Google Code
+Publish the code in Google Code
 
 2008-08-24
-	Add support for local variables in compiling method
+Add support for local variables in compiling method
 
 2008-09-28
-	Skip comments in tokenizer
-	More test for Method
-	Compile global name in Method
-	Set/Get global bytecodes
-	Global objects in Machine
-	Symbol support in tokenizer
-	Method inherits from Block
-	Loader from file and tests
+Skip comments in tokenizer
+More test for Method
+Compile global name in Method
+Set/Get global bytecodes
+Global objects in Machine
+Symbol support in tokenizer
+Method inherits from Block
+Loader from file and tests
 
 2008-10-13
-	Update to VS 2008
-	VS Tests instead NUnit tests
-	Loader support for subclassing, instance variables,
-		and method definition
+Update to VS 2008
+VS Tests instead NUnit tests
+Loader support for subclassing, instance variables,
+	and method definition
 
 2008-12-21
-	Support for [ block ] in compiler and execution block
-		(no parameters yet)
-	Initial .NET object creation and method invocation
+Support for [ block ] in compiler and execution block
+	(no parameters yet)
+Initial .NET object creation and method invocation
 
 2008-12-25
-	Test loading Library1.st
-	methods without ^ return self
+Test loading Library1.st
+methods without ^ return self
 
 2008-12-26
-	Test using Library1.st added
+Test using Library1.st added
 
 2008-12-27
-	BaseClass new tests
-	New bytecodes instSize, instAt: instAt:put:
+BaseClass new tests
+New bytecodes instSize, instAt: instAt:put:
 
 2008-12-28
-	IBehavior, IClassDescription added
-	BaseBehavior, BaseClassDescription added
+IBehavior, IClassDescription added
+BaseBehavior, BaseClassDescription added
+
+2009-01-18
+Reimplementing .NET object support
+New ByteCodes GetDotNetType, NewDotNetObject, InvokeDotNet
+StyleCop applied
+Send message basicNew as bytecode NewObject
+Special treatment for new on Behavior, ClassDescription
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

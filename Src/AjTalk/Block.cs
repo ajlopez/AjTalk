@@ -55,6 +55,33 @@ namespace AjTalk
             }
         }
 
+        public static byte MessageArity(string msgname)
+        {
+            if (!Char.IsLetter(msgname[0]))
+            {
+                return 2;
+            }
+
+            int p = msgname.IndexOf(':');
+
+            if (p < 0)
+            {
+                return 0;
+            }
+
+            byte n = 0;
+
+            foreach (char ch in msgname)
+            {
+                if (ch == ':')
+                {
+                    n++;
+                }
+            }
+
+            return n;
+        }
+
         public void CompileArgument(string argname)
         {
             if (this.argnames.Contains(argname))
@@ -131,16 +158,65 @@ namespace AjTalk
             this.CompileByte(arg2);
         }
 
+        public void CompileInvokeDotNet(string msgname)
+        {
+            msgname = msgname.Substring(1);
+
+            int p = msgname.IndexOf(':');
+
+            string mthname;
+
+            if (p >= 0)
+            {
+                mthname = msgname.Substring(0, p);
+            }
+            else
+            {
+                mthname = msgname;
+            }
+
+            if (mthname == "new")
+            {
+                this.CompileByteCode(ByteCode.NewDotNetObject, MessageArity(msgname));
+            }
+            else
+            {
+                this.CompileByteCode(ByteCode.InvokeDotNetMethod, this.CompileConstant(mthname), MessageArity(msgname));
+            }
+        }
+
         public void CompileSend(string msgname)
         {
+            if (msgname[0] == Tokenizer.SpecialDotNetInvokeMark)
+            {
+                this.CompileInvokeDotNet(msgname);
+                return;
+            }
+
             if (msgname == "instSize")
+            {
                 this.CompileByteCode(ByteCode.InstSize);
+            }
             else if (msgname == "instAt:")
+            {
                 this.CompileByteCode(ByteCode.InstAt);
+            }
             else if (msgname == "instAt:put:")
+            {
                 this.CompileByteCode(ByteCode.InstAtPut);
+            }
+            else if (msgname == "basicNew")
+            {
+                this.CompileByteCode(ByteCode.NewObject);
+            }
+            else if (msgname == "class")
+            {
+                this.CompileByteCode(ByteCode.GetClass);
+            }
             else
+            {
                 this.CompileByteCode(ByteCode.Send, this.CompileConstant(msgname), MessageArity(msgname));
+            }
         }
 
         // TODO how to implements super, sender
@@ -157,6 +233,11 @@ namespace AjTalk
             }
 
             this.CompileByteCode(ByteCode.GetGlobalVariable, this.CompileGlobal(name));
+        }
+
+        public virtual void CompileGetDotNetType(string name)
+        {
+            this.CompileByteCode(ByteCode.GetDotNetType, this.CompileGlobal(name));
         }
 
         public virtual void CompileSet(string name)
@@ -242,33 +323,6 @@ namespace AjTalk
             }
 
             return false;
-        }
-
-        public static byte MessageArity(string msgname)
-        {
-            if (!Char.IsLetter(msgname[0]))
-            {
-                return 2;
-            }
-
-            int p = msgname.IndexOf(':');
-
-            if (p < 0)
-            {
-                return 0;
-            }
-
-            byte n = 0;
-
-            foreach (char ch in msgname)
-            {
-                if (ch == ':')
-                {
-                    n++;
-                }
-            }
-
-            return n;
         }
 
         private void CompileByte(byte b)

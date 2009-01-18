@@ -11,10 +11,12 @@ namespace AjTalk.Tests
     [TestClass]
     public class ObjectTests
     {
+        private IClass rectangleClass;
+
         [TestMethod]
         public void ShouldBeCreated() 
         {
-            IObject obj = GetRectangleClass().NewObject();
+            IObject obj = this.GetRectangleClass().NewObject();
 
             Assert.IsNotNull(obj);
             Assert.IsNull(obj[0]);
@@ -26,7 +28,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ShouldRunMethod()
         {
-            IObject obj = GetRectangleClass().NewObject();
+            IObject obj = this.GetRectangleClass().NewObject();
 
             obj.SendMessage("side:", new object[] { 10 });
 
@@ -35,15 +37,15 @@ namespace AjTalk.Tests
             Assert.AreEqual(100, obj.SendMessage("area", null));
         }
 
-        IClass rectangleClass;
-
         private IClass GetRectangleClass()
         {
-            if (rectangleClass == null)
-                rectangleClass = CompilerTests.CompileClass(
+            if (this.rectangleClass == null)
+            {
+                this.rectangleClass = CompilerTests.CompileClass(
                     "Rectangle",
                     new string[] { "x", "y", "width", "height" },
-                    new string[] {
+                    new string[] 
+                    {
                         "x ^x",
                         "y ^y",
                         "x: newX x := newX",
@@ -54,10 +56,10 @@ namespace AjTalk.Tests
                         "width: newWidth width := newWidth",
                         "height: newHeight height := newHeight",
                         "side: newSide x := newSide. y := newSide"
-                    }
-                    );
+                    });
+            }
 
-            return rectangleClass;
+            return this.rectangleClass;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace AjTalk.Tests
             Machine machine = new Machine();
 
             IClass supercls = machine.CreateClass("Figure");
-            IClass cls = machine.CreateClass("Rectangle",supercls);
+            IClass cls = machine.CreateClass("Rectangle", supercls);
 
             Assert.IsNotNull(cls);
             Assert.AreEqual("Rectangle", cls.Name);
@@ -132,6 +132,28 @@ namespace AjTalk.Tests
             Assert.IsNotNull(obj);
             Assert.IsNull(obj[0]);
             Assert.IsNull(obj[1]);
+        }
+
+        [TestMethod]
+        public void ShouldCreateBehavior()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("Behavior");
+            IObject obj = cls.NewObject();
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(BaseBehavior));
+            Assert.IsNotInstanceOfType(obj, typeof(BaseClassDescription));
+        }
+
+        [TestMethod]
+        public void ShouldCreateClassDescription()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("ClassDescription");
+            IObject obj = cls.NewObject();
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(BaseClassDescription));
+            Assert.IsNotInstanceOfType(obj, typeof(BaseClass));
         }
     }
 }

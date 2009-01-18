@@ -1,212 +1,203 @@
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Text;
-
 namespace AjTalk
 {
-	public enum TokenType : int 
-	{
-		Name = 0,
-		Integer = 1,
-		String = 2,
-		Punctuation = 3,
-		Operator = 4,
-        Symbol
-	}
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
 
-	public class Token
-	{
-		public TokenType Type;
-		public string Value;
-	}
+    public class Tokenizer
+    {
+        public const char SpecialDotNetTypeMark = '@';
+        public const char SpecialDotNetInvokeMark = '!';
 
-	public class EndOfInputException : Exception
-	{
-		public EndOfInputException() : base("End of Input")
-		{
-		}
-	}
+        private const string Operators = "^<>:=-+*/&";
+        private const string Separators = "().|[]";
 
-	public class TokenizerException : Exception 
-	{
-		public TokenizerException(string msg) : base(msg) 
-		{
-		}
-	}
+        private const char StringDelimiter = '\'';
 
-	/// <summary>
-	/// Summary description for Tokenizer.
-	/// </summary>
-	public class Tokenizer
-	{
-		private TextReader input;
-		private char lastchar;
-		private bool haschar;
+        private const char CommentDelimeter = '"';
+
+        private const char SymbolMark = '#';
+
+        private TextReader input;
+        private char lastchar;
+        private bool haschar;
         private Stack<Token> tokenstack = new Stack<Token>();
 
-		private const string operators = "^<>:=-+*/&";
-		private const string separators = "().|[]";
+        public Tokenizer(TextReader input)
+        {
+            this.input = input;
+        }
 
-        private const char stringdelimeter = '\'';
+        public Tokenizer(string text)
+            : this(new StringReader(text))
+        {
+        }
 
-        private const char commentdelimeter = '"';
+        public void PushToken(Token token)
+        {
+            this.tokenstack.Push(token);
+        }
 
-        private const char symbolmark = '#';
-        private const char specialnamemark = '@';
+        public Token NextToken()
+        {
+            if (this.tokenstack.Count > 0)
+            {
+                return this.tokenstack.Pop();
+            }
 
-		public Tokenizer(TextReader input)
-		{
-			this.input = input;
-		}
+            char ch;
 
-		public Tokenizer(string text) : this(new StringReader(text))
-		{
-		}
+            try
+            {
+                ch = this.NextCharSkipBlanksAndComments();
 
-		private void PushChar(char ch)
-		{
-			lastchar = ch;
-			haschar = true;
-		}
+                if (Char.IsLetter(ch) || ch == '_')
+                {
+                    return this.NextName(ch);
+                }
 
-		private char NextChar() 
-		{
-			if (haschar) 
-			{
-				haschar = false;
-				return lastchar;
-			}
+                if (Char.IsDigit(ch))
+                {
+                    return this.NextInteger(ch);
+                }
 
-			int ch = input.Read();
+                if (ch == StringDelimiter)
+                {
+                    return this.NextString();
+                }
 
-			if (ch<0)
-				throw new EndOfInputException();
+                if (ch == SymbolMark)
+                {
+                    return this.NextSymbol();
+                }
 
-			return ((char) ch);
-		}
+                if (ch == SpecialDotNetTypeMark)
+                {
+                    return this.NextDotNetTypeName();
+                }
 
-		private void SkipToControl()
-		{
-			char ch;
+                if (ch == SpecialDotNetInvokeMark)
+                {
+                    return this.NextDotNetInvokeName();
+                }
 
-			ch = NextChar();
+                if (Operators.IndexOf(ch) >= 0)
+                {
+                    return this.NextOperator(ch);
+                }
 
-			while (!Char.IsControl(ch))
-				ch = NextChar();
-		}
+                if (Separators.IndexOf(ch) >= 0)
+                {
+                    return this.NextPunctuation(ch);
+                }
 
-		private char NextCharSkipBlanks() 
-		{
-			char ch;
+                throw new TokenizerException("Invalid Characater '" + ch + "'");
+            }
+            catch (EndOfInputException)
+            {
+                return null;
+            }
+        }
 
-			ch = NextChar();
+        private void PushChar(char ch)
+        {
+            this.lastchar = ch;
+            this.haschar = true;
+        }
 
-			while (Char.IsWhiteSpace(ch))
-				ch = NextChar();
+        private char NextChar()
+        {
+            if (this.haschar)
+            {
+                this.haschar = false;
+                return this.lastchar;
+            }
 
-			return ch;
-		}
+            int ch = this.input.Read();
 
-        private char NextCharSkipBlanksAndComments()
+            if (ch < 0)
+            {
+                throw new EndOfInputException();
+            }
+
+            return (char)ch;
+        }
+
+        private void SkipToControl()
         {
             char ch;
 
-            ch = NextCharSkipBlanks();
+            ch = this.NextChar();
 
-            // Skip Comments
-            while (ch == commentdelimeter)
+            while (!Char.IsControl(ch))
             {
-                ch = NextChar();
-                while (ch != commentdelimeter)
-                    ch = NextChar();
+                ch = this.NextChar();
+            }
+        }
 
-                // After comment, skip blanks again
-                ch = NextCharSkipBlanks();
+        private char NextCharSkipBlanks()
+        {
+            char ch;
+
+            ch = this.NextChar();
+
+            while (Char.IsWhiteSpace(ch))
+            {
+                ch = this.NextChar();
             }
 
             return ch;
         }
 
-		private Token NextName(char firstchar) 
-		{
+        private char NextCharSkipBlanksAndComments()
+        {
+            char ch;
+
+            ch = this.NextCharSkipBlanks();
+
+            // Skip Comments
+            while (ch == CommentDelimeter)
+            {
+                ch = this.NextChar();
+
+                while (ch != CommentDelimeter)
+                {
+                    ch = this.NextChar();
+                }
+
+                // After comment, skip blanks again
+                ch = this.NextCharSkipBlanks();
+            }
+
+            return ch;
+        }
+
+        private Token NextName(char firstchar)
+        {
             StringBuilder sb = new StringBuilder(10);
             sb.Append(firstchar);
 
-			try 
-			{
-				char ch;
-
-				ch = NextChar();
-
-				while (Char.IsLetterOrDigit(ch)) 
-				{
-					sb.Append(ch);
-					ch = NextChar();
-				}
-
-				if (ch==':')
-					sb.Append(ch);
-				else
-					PushChar(ch);
-			}
-			catch (EndOfInputException) 
-			{
-			}
-
-			Token token = new Token();
-			token.Type = TokenType.Name;
-			token.Value = sb.ToString();
-
-			return token;
-		}
-
-        private Token NextSymbol()
-        {
-            StringBuilder sb = new StringBuilder();
-
             try
             {
                 char ch;
 
-                ch = NextChar();
+                ch = this.NextChar();
 
-                while (!Char.IsWhiteSpace(ch))
+                while (Char.IsLetterOrDigit(ch))
                 {
                     sb.Append(ch);
-                    ch = NextChar();
+                    ch = this.NextChar();
                 }
 
-                PushChar(ch);
-            }
-            catch (EndOfInputException)
-            {
-            }
-
-            Token token = new Token();
-            token.Type = TokenType.Symbol;
-            token.Value = sb.ToString();
-
-            return token;
-        }
-
-        private Token NextSpecialName()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            try
-            {
-                char ch;
-
-                ch = NextChar();
-
-                while (!Char.IsWhiteSpace(ch))
+                if (ch == ':')
                 {
                     sb.Append(ch);
-                    ch = NextChar();
                 }
-
-                PushChar(ch);
+                else
+                {
+                    this.PushChar(ch);
+                }
             }
             catch (EndOfInputException)
             {
@@ -219,20 +210,109 @@ namespace AjTalk
             return token;
         }
 
-		private Token NextString() 
-		{
-			string value = "";
-
-			char ch;
+        private Token NextSymbol()
+        {
+            StringBuilder sb = new StringBuilder();
 
             try
             {
-                ch = NextChar();
+                char ch;
 
-                while (ch != stringdelimeter)
+                ch = this.NextChar();
+
+                while (!Char.IsWhiteSpace(ch))
+                {
+                    sb.Append(ch);
+                    ch = this.NextChar();
+                }
+
+                this.PushChar(ch);
+            }
+            catch (EndOfInputException)
+            {
+            }
+
+            Token token = new Token();
+            token.Type = TokenType.Symbol;
+            token.Value = sb.ToString();
+
+            return token;
+        }
+
+        private Token NextDotNetTypeName()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(SpecialDotNetTypeMark);
+
+            try
+            {
+                char ch;
+
+                ch = this.NextChar();
+
+                while (!Char.IsWhiteSpace(ch))
+                {
+                    sb.Append(ch);
+                    ch = this.NextChar();
+                }
+
+                this.PushChar(ch);
+            }
+            catch (EndOfInputException)
+            {
+            }
+
+            Token token = new Token();
+            token.Type = TokenType.Name;
+            token.Value = sb.ToString();
+
+            return token;
+        }
+
+        private Token NextDotNetInvokeName()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(SpecialDotNetInvokeMark);
+
+            try
+            {
+                char ch;
+
+                ch = this.NextChar();
+
+                while (!Char.IsWhiteSpace(ch))
+                {
+                    sb.Append(ch);
+                    ch = this.NextChar();
+                }
+
+                this.PushChar(ch);
+            }
+            catch (EndOfInputException)
+            {
+            }
+
+            Token token = new Token();
+            token.Type = TokenType.Name;
+            token.Value = sb.ToString();
+
+            return token;
+        }
+
+        private Token NextString()
+        {
+            string value = string.Empty;
+
+            char ch;
+
+            try
+            {
+                ch = this.NextChar();
+
+                while (ch != StringDelimiter)
                 {
                     value += ch;
-                    ch = NextChar();
+                    ch = this.NextChar();
                 }
             }
             catch (EndOfInputException)
@@ -240,124 +320,80 @@ namespace AjTalk
                 throw new TokenizerException("\"\'\" expected");
             }
 
-			Token token = new Token();
+            Token token = new Token();
 
-			token.Type = TokenType.String;
-			token.Value = value;
+            token.Type = TokenType.String;
+            token.Value = value;
 
-			return token;
-		}
+            return token;
+        }
 
-		private Token NextInteger(char firstdigit) 
-		{
-			string value = new String(firstdigit,1);
+        private Token NextInteger(char firstdigit)
+        {
+            string value = new string(firstdigit, 1);
 
-			char ch;
+            char ch;
 
-			try 
-			{
-				ch = NextChar();
+            try
+            {
+                ch = this.NextChar();
 
-				while (Char.IsDigit(ch)) 
-				{
-					value += ch;
-					ch = NextChar();
-				}
-				PushChar(ch);
-			}
-			catch (EndOfInputException) 
-			{
-			}
-
-			Token token = new Token();
-			token.Type = TokenType.Integer;
-			token.Value = value;
-
-			return token;
-		}
-
-		private Token NextOperator(char firstchar) 
-		{
-			string value = new String(firstchar,1);
-
-			char ch;
-
-			try 
-			{
-				ch = NextChar();
-
-                while (operators.IndexOf(ch) >= 0)
+                while (Char.IsDigit(ch))
                 {
                     value += ch;
-                    ch = NextChar();
+                    ch = this.NextChar();
                 }
 
-				PushChar(ch);
-			}
-			catch (EndOfInputException) 
-			{
-			}
+                this.PushChar(ch);
+            }
+            catch (EndOfInputException)
+            {
+            }
 
-			Token token = new Token();
-			token.Type = TokenType.Operator;
-			token.Value = value;
+            Token token = new Token();
+            token.Type = TokenType.Integer;
+            token.Value = value;
 
-			return token;
-		}
+            return token;
+        }
 
-		private Token NextPunctuation(char ch) 
-		{
-			Token token = new Token();
-			token.Value = new string(ch,1);
-			token.Type = TokenType.Punctuation;
+        private Token NextOperator(char firstchar)
+        {
+            string value = new string(firstchar, 1);
 
-			return token;
-		}
+            char ch;
 
-		public void PushToken(Token token) 
-		{
-            tokenstack.Push(token);
-		}
+            try
+            {
+                ch = this.NextChar();
 
-		public Token NextToken() 
-		{
-            if (tokenstack.Count > 0)
-                return tokenstack.Pop();
+                while (Operators.IndexOf(ch) >= 0)
+                {
+                    value += ch;
+                    ch = this.NextChar();
+                }
 
-			char ch;
+                this.PushChar(ch);
+            }
+            catch (EndOfInputException)
+            {
+            }
 
-			try 
-			{
-				ch = NextCharSkipBlanksAndComments();
+            Token token = new Token();
+            token.Type = TokenType.Operator;
+            token.Value = value;
 
-				if (Char.IsLetter(ch) || ch=='_')
-					return NextName(ch);
+            return token;
+        }
 
-				if (Char.IsDigit(ch))
-					return NextInteger(ch);
+        private Token NextPunctuation(char ch)
+        {
+            Token token = new Token();
+            token.Value = new string(ch, 1);
+            token.Type = TokenType.Punctuation;
 
-                if (ch == stringdelimeter)
-                    return NextString();
-
-                if (ch == symbolmark)
-                    return NextSymbol();
-
-                if (ch == specialnamemark)
-                    return NextSpecialName();
-
-                if (operators.IndexOf(ch) >= 0)
-					return NextOperator(ch);
-
-				if (separators.IndexOf(ch)>=0)
-					return NextPunctuation(ch);
-
-				throw new TokenizerException("Invalid Characater '" + ch + "'");
-			}
-			catch (EndOfInputException) 
-			{
-				return null;
-			}
-		}
-	}
+            return token;
+        }
+    }
 }
 

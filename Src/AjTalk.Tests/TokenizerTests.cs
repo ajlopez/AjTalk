@@ -21,7 +21,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ShouldProcessEmptyString()
         {
-            Tokenizer tokenizer = new Tokenizer("");
+            Tokenizer tokenizer = new Tokenizer(string.Empty);
             Assert.IsNull(tokenizer.NextToken());
         }
 
@@ -131,7 +131,7 @@ namespace AjTalk.Tests
 
             token = tokenizer.NextToken();
             Assert.IsNotNull(token);
-            Assert.AreEqual("System.IO.FileInfo", token.Value);
+            Assert.AreEqual("@System.IO.FileInfo", token.Value);
             Assert.AreEqual(TokenType.Name, token.Type);
 
             token = tokenizer.NextToken();
@@ -224,7 +224,7 @@ namespace AjTalk.Tests
         {
             string opers = "^<>:=-+*/&";
 
-            string opers2 = "";
+            string opers2 = string.Empty;
 
             foreach (char ch in opers)
             {
@@ -264,7 +264,8 @@ namespace AjTalk.Tests
             Tokenizer tokenizer = new Tokenizer(punct);
             Token token;
 
-            for (int k=0; k<punct.Length; k++) {
+            for (int k = 0; k < punct.Length; k++) 
+            {
                 token = tokenizer.NextToken();
                 Assert.IsNotNull(token);
                 Assert.AreEqual(punct[k], token.Value[0]);
@@ -287,6 +288,28 @@ namespace AjTalk.Tests
             token = tokenizer.NextToken();
             Assert.IsNotNull(token);
             Assert.AreEqual("string", token.Value);
+            Assert.AreEqual(TokenType.String, token.Type);
+        }
+
+        [TestMethod]
+        public void ShouldParseDotNetObjectAndMethod()
+        {
+            Tokenizer tokenizer = new Tokenizer("@System.FileInfo !new: 'FooBar.txt'");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("@System.FileInfo", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("!new:", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("FooBar.txt", token.Value);
             Assert.AreEqual(TokenType.String, token.Type);
         }
     }

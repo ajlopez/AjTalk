@@ -1,144 +1,185 @@
-using System;
-using System.Collections;
-
 namespace AjTalk
 {
-	/// <summary>
-	/// Summary description for Compiler.
-	/// </summary>
-	public class Compiler
-	{
-		private Tokenizer tokenizer;
-		private IList arguments = new ArrayList();
+    using System;
+    using System.Collections;
+
+    public class Compiler
+    {
+        private Tokenizer tokenizer;
+        private IList arguments = new ArrayList();
         private IList locals = new ArrayList();
-		private string methodname;
-		private Block block;
+        private string methodname;
+        private Block block;
 
-		public Compiler(Tokenizer tok)
-		{
-			tokenizer = tok;
-		}
+        public Compiler(Tokenizer tok)
+        {
+            this.tokenizer = tok;
+        }
 
-		public Compiler(string text) : this(new Tokenizer(text))
-		{
-		}
+        public Compiler(string text)
+            : this(new Tokenizer(text))
+        {
+        }
 
-		private Token NextToken() 
-		{
-			return tokenizer.NextToken();
-		}
+        public Block CompileBlock()
+        {
+            this.block = new Block();
+            this.CompileBody();
 
-		private void PushToken(Token token)
-		{
-			tokenizer.PushToken(token);
-		}
+            return this.block;
+        }
 
-		private void CompileKeywordArguments() 
-		{
-			Token token;
+        public void CompileInstanceMethod(IClass cls)
+        {
+            this.CompileMethod(cls);
+            cls.DefineInstanceMethod((IMethod)this.block);
+        }
 
-			methodname = "";
+        // TODO Review implementation, use DefineClassMethod instead
+        public void CompileClassMethod(IClass cls)
+        {
+            this.CompileMethod(cls.MetaClass); // use metaclass
+            cls.DefineClassMethod((IMethod)this.block);
+        }
 
-			while (true) 
-			{
-				token = NextToken();
-				
-				if (token==null)
-					return;
+        private Token NextToken()
+        {
+            return this.tokenizer.NextToken();
+        }
 
-				if (token.Type!=TokenType.Name || !token.Value.EndsWith(":")) 
-				{
-					PushToken(token);
-					return;
-				}
+        private void PushToken(Token token)
+        {
+            this.tokenizer.PushToken(token);
+        }
 
-				methodname += token.Value;
+        private void CompileKeywordArguments()
+        {
+            Token token;
 
-				token = NextToken();
+            this.methodname = string.Empty;
 
-				if (token==null || token.Type!=TokenType.Name)
-					throw new CompilerException("Argument expected");
+            while (true)
+            {
+                token = this.NextToken();
 
-				arguments.Add(token.Value);
-			}
-		}
+                if (token == null)
+                {
+                    return;
+                }
+
+                if (token.Type != TokenType.Name || !token.Value.EndsWith(":"))
+                {
+                    this.PushToken(token);
+                    return;
+                }
+
+                this.methodname += token.Value;
+
+                token = this.NextToken();
+
+                if (token == null || token.Type != TokenType.Name)
+                {
+                    throw new CompilerException("Argument expected");
+                }
+
+                this.arguments.Add(token.Value);
+            }
+        }
 
         private void CompileLocals()
         {
-            Token token = NextToken();
+            Token token = this.NextToken();
 
             if (token == null)
-                return;
-
-            if (token.Value != "|")
             {
-                PushToken(token);
                 return;
             }
 
-            token = NextToken();
+            if (token.Value != "|")
+            {
+                this.PushToken(token);
+                return;
+            }
+
+            token = this.NextToken();
 
             while (token != null && token.Value != "|")
             {
                 if (token.Type != TokenType.Name)
+                {
                     throw new CompilerException("Local variable name expected");
+                }
 
-                locals.Add(token.Value);
+                this.locals.Add(token.Value);
 
-                token = NextToken();
+                token = this.NextToken();
             }
 
             if (token == null)
+            {
                 throw new CompilerException("'|' expected");
+            }
         }
 
-		private void CompileArguments() 
-		{
-			Token token = NextToken();
+        private void CompileArguments()
+        {
+            Token token = this.NextToken();
 
-			if (token==null)
-				throw new CompilerException("Argument expected");
+            if (token == null)
+            {
+                throw new CompilerException("Argument expected");
+            }
 
             // TODO Review if this code is needed
-			if (token.Type == TokenType.Operator) 
-			{
-				methodname = token.Value;
-				token = NextToken();
-				if (token==null || token.Type!=TokenType.Name)
-					throw new CompilerException("Argument expected");
-				arguments.Add(token.Value);
+            if (token.Type == TokenType.Operator)
+            {
+                this.methodname = token.Value;
+                token = this.NextToken();
+                if (token == null || token.Type != TokenType.Name)
+                {
+                    throw new CompilerException("Argument expected");
+                }
 
-				return;
-			}
+                this.arguments.Add(token.Value);
 
-			if (token.Type != TokenType.Name)
-				throw new CompilerException("Argument expected");
+                return;
+            }
 
-			if (token.Value.EndsWith(":")) 
-			{
-				PushToken(token);
-				CompileKeywordArguments();
-				return;
-			}
+            if (token.Type != TokenType.Name)
+            {
+                throw new CompilerException("Argument expected");
+            }
 
-			methodname = token.Value;
-		}
+            if (token.Value.EndsWith(":"))
+            {
+                this.PushToken(token);
+                this.CompileKeywordArguments();
+                return;
+            }
 
-		private void CompileTerm() 
-		{
-			Token token = NextToken();
+            this.methodname = token.Value;
+        }
 
-			if (token==null)
-				return;
+        private void CompileTerm()
+        {
+            Token token = this.NextToken();
 
-			if (token.Value=="(") 
-			{
-				this.CompileExpression();
-				token = NextToken();
-				if (token==null || token.Value!=")")
-					throw new CompilerException("')' expected");
-				return;
-			}
+            if (token == null)
+            {
+                return;
+            }
+
+            if (token.Value == "(")
+            {
+                this.CompileExpression();
+                token = this.NextToken();
+                if (token == null || token.Value != ")")
+                {
+                    throw new CompilerException("')' expected");
+                }
+
+                return;
+            }
 
             if (token.Value == "[")
             {
@@ -148,210 +189,216 @@ namespace AjTalk
 
                 Block newblock = newcompiler.CompileBlock();
 
-                block.CompileGetBlock(newblock);
+                this.block.CompileGetBlock(newblock);
                 return;
             }
 
-			if (token.Type==TokenType.Integer) 
-			{
-				block.CompileGetConstant(Convert.ToInt32(token.Value));
-				return;
-			}
+            if (token.Type == TokenType.Integer)
+            {
+                this.block.CompileGetConstant(Convert.ToInt32(token.Value));
+                return;
+            }
 
-			if (token.Type==TokenType.String)
-			{
-				block.CompileGetConstant(token.Value);
-				return;
-			}
+            if (token.Type == TokenType.String)
+            {
+                this.block.CompileGetConstant(token.Value);
+                return;
+            }
 
             // TODO Review compile of Symbol
             if (token.Type == TokenType.Symbol)
             {
-                block.CompileGetConstant(token.Value);
+                this.block.CompileGetConstant(token.Value);
                 return;
             }
 
-			if (token.Type==TokenType.Name) 
-			{
-				block.CompileGet(token.Value);
-				return;
-			}
+            if (token.Type == TokenType.Name)
+            {
+                if (token.Value[0] == Tokenizer.SpecialDotNetTypeMark)
+                {
+                    this.block.CompileGetDotNetType(token.Value.Substring(1));
+                    return;
+                }
 
-			throw new CompilerException("Name expected");
-		}
+                this.block.CompileGet(token.Value);
+                return;
+            }
 
-		private void CompileUnaryExpression()
-		{
-			CompileTerm();
+            throw new CompilerException("Name expected");
+        }
 
-			Token token;
+        private void CompileUnaryExpression()
+        {
+            this.CompileTerm();
 
-			token = NextToken();
+            Token token;
 
-			while (token!=null && token.Type==TokenType.Name && !token.Value.EndsWith(":") && token.Value!="self") 
-			{
-				block.CompileSend(token.Value);
-				token = NextToken();
-			}
+            token = this.NextToken();
 
-			if (token!=null)
-				PushToken(token);
-		}
+            while (token != null && token.Type == TokenType.Name && !token.Value.EndsWith(":") && token.Value != "self")
+            {
+                this.block.CompileSend(token.Value);
+                token = this.NextToken();
+            }
 
-		private void CompileBinaryExpression() 
-		{
-			CompileUnaryExpression();
+            if (token != null)
+            {
+                this.PushToken(token);
+            }
+        }
 
-			string mthname;
-			Token token;
+        private void CompileBinaryExpression()
+        {
+            this.CompileUnaryExpression();
 
-			token = NextToken();
+            string mthname;
+            Token token;
 
-			while (token!=null && (token.Type==TokenType.Operator ||  (token.Type==TokenType.Name && !token.Value.EndsWith(":") && token.Value!="self"))) 
-			{
-				mthname = token.Value;
-				CompileUnaryExpression();
+            token = this.NextToken();
+
+            while (token != null && (token.Type == TokenType.Operator || (token.Type == TokenType.Name && !token.Value.EndsWith(":") && token.Value != "self")))
+            {
+                mthname = token.Value;
+                this.CompileUnaryExpression();
 
                 if (mthname == "+")
-                    block.CompileByteCode(ByteCode.Add);
+                {
+                    this.block.CompileByteCode(ByteCode.Add);
+                }
                 else if (mthname == "-")
-                    block.CompileByteCode(ByteCode.Substract);
+                {
+                    this.block.CompileByteCode(ByteCode.Substract);
+                }
                 else if (mthname == "*")
-                    block.CompileByteCode(ByteCode.Multiply);
+                {
+                    this.block.CompileByteCode(ByteCode.Multiply);
+                }
                 else if (mthname == "/")
-                    block.CompileByteCode(ByteCode.Divide);
+                {
+                    this.block.CompileByteCode(ByteCode.Divide);
+                }
                 else
-                    block.CompileSend(mthname);
+                {
+                    this.block.CompileSend(mthname);
+                }
 
-				token = NextToken();
-			}
+                token = this.NextToken();
+            }
 
-			if (token!=null)
-				PushToken(token);
-		}
+            if (token != null)
+            {
+                this.PushToken(token);
+            }
+        }
 
-		private void CompileKeywordExpression() 
-		{
-			CompileBinaryExpression();
+        private void CompileKeywordExpression()
+        {
+            this.CompileBinaryExpression();
 
-			string mthname = "";
-			Token token;
+            string mthname = string.Empty;
+            Token token;
 
-			token = NextToken();
+            token = this.NextToken();
 
-			while (token!=null && token.Type==TokenType.Name && token.Value.EndsWith(":")) 
-			{
-				mthname += token.Value;
-				CompileBinaryExpression();
-				token = NextToken();
-			}
+            while (token != null && token.Type == TokenType.Name && token.Value.EndsWith(":"))
+            {
+                mthname += token.Value;
+                this.CompileBinaryExpression();
+                token = this.NextToken();
+            }
 
-			if (token!=null)
-				PushToken(token);
+            if (token != null)
+            {
+                this.PushToken(token);
+            }
 
-			if (mthname != "")
-				block.CompileSend(mthname);
-		}
+            if (mthname != string.Empty)
+            {
+                this.block.CompileSend(mthname);
+            }
+        }
 
-		private void CompileExpression() 
-		{
-			CompileKeywordExpression();
-		}
+        private void CompileExpression()
+        {
+            this.CompileKeywordExpression();
+        }
 
-		private bool CompileCommand() 
-		{
-			Token token;
+        private bool CompileCommand()
+        {
+            Token token;
 
-			token = NextToken();
+            token = this.NextToken();
 
-			if (token==null)
-				return false;
+            if (token == null)
+            {
+                return false;
+            }
 
-			if (token.Value==".")
-				return true;
+            if (token.Value == ".")
+            {
+                return true;
+            }
 
             // TODO raise failure if not open block, and nested blocks
             if (token.Value == "]")
+            {
                 return true;
+            }
 
-            if (token.Value == "^") 
-			{
-				CompileExpression();
-				block.CompileByteCode(ByteCode.ReturnPop);
-				return true;
-			}
+            if (token.Value == "^")
+            {
+                this.CompileExpression();
+                this.block.CompileByteCode(ByteCode.ReturnPop);
+                return true;
+            }
 
             if (token.Type == TokenType.Name)
             {
-                Token token2 = NextToken();
+                Token token2 = this.NextToken();
 
                 if (token2.Type == TokenType.Operator && token2.Value == ":=")
                 {
-                    CompileExpression();
-                    block.CompileSet(token.Value);
+                    this.CompileExpression();
+                    this.block.CompileSet(token.Value);
 
                     return true;
                 }
 
-                PushToken(token2);
+                this.PushToken(token2);
             }
 
-			PushToken(token);
+            this.PushToken(token);
 
-			CompileExpression();
+            this.CompileExpression();
 
-			return true;
-		}
+            return true;
+        }
 
-		private void CompileBody() 
-		{
-			while (CompileCommand())
-				;
-		}
-
-        public Block CompileBlock()
+        private void CompileBody()
         {
-            block = new Block();
-            CompileBody();
-
-            return block;
+            while (this.CompileCommand())
+            {
+            }
         }
 
         private void CompileMethod(IClass cls)
         {
-            CompileArguments();
-            CompileLocals();
+            this.CompileArguments();
+            this.CompileLocals();
 
-            block = new Method(cls, methodname);
+            this.block = new Method(cls, this.methodname);
 
-            foreach (string argname in arguments)
-                block.CompileArgument(argname);
+            foreach (string argname in this.arguments)
+            {
+                this.block.CompileArgument(argname);
+            }
 
-            foreach (string locname in locals)
-                block.CompileLocal(locname);
+            foreach (string locname in this.locals)
+            {
+                this.block.CompileLocal(locname);
+            }
 
-            CompileBody();
-        }
-
-		public void CompileInstanceMethod(IClass cls) 
-		{
-            CompileMethod(cls);
-            cls.DefineInstanceMethod((IMethod) block);
-        }
-
-        // TODO Review implementation, use DefineClassMethod instead
-        public void CompileClassMethod(IClass cls)
-        {
-            CompileMethod(cls.MetaClass); // use metaclass
-            cls.DefineClassMethod((IMethod) block);
-        }
-    }
-
-    public class CompilerException : Exception
-    {
-        public CompilerException(string message)
-            : base(message)
-        {
+            this.CompileBody();
         }
     }
 }

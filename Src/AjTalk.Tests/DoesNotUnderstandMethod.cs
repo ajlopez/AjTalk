@@ -7,7 +7,7 @@
 
     using AjTalk;
 
-    class DoesNotUnderstandMethod : IMethod
+    public class DoesNotUnderstandMethod : IMethod
     {
         public DoesNotUnderstandMethod(Machine machine)
         {
@@ -37,7 +37,7 @@
 
         public object Execute(IObject self, IObject receiver, object[] args)
         {
-            return this.DoesNotUnderstand(self, receiver, (string) args[0], (object []) args[1]);
+            return this.DoesNotUnderstand(self, receiver, (string) args[0], (object[]) args[1]);
         }
 
         public object Execute(Machine machine, object[] args)
@@ -63,6 +63,7 @@
             {
                 ExecutionBlock block = (ExecutionBlock) args[0];
                 block.Execute();
+                
                 // TODO return block value??
                 return this.Machine.GetGlobalObject("nil");
             }
@@ -77,7 +78,9 @@
                 foreach (string varname in varnames)
                 {
                     if (!string.IsNullOrEmpty(varname))
+                    {
                         newclass.DefineInstanceVariable(varname);
+                    }
                 }
 
                 this.Machine.SetGlobalObject(newclass.Name, newclass);

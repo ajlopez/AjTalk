@@ -4,9 +4,6 @@ namespace AjTalk
     using System.Collections;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Summary description for BaseClass.
-    /// </summary>
     public class BaseClassDescription : BaseBehavior, IClassDescription
     {
         private List<string> classvariables = new List<string>();
@@ -32,7 +29,9 @@ namespace AjTalk
             get
             {
                 if (this.SuperClass != null)
+                {
                     return this.instancevariables.Count + this.SuperClass.NoInstanceVariables;
+                }
 
                 return this.instancevariables.Count;
             }

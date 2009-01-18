@@ -19,7 +19,7 @@ namespace AjTalk.Tests
             IMethod mth = new Method(cls, "method1");
 
             Assert.IsNotNull(mth);
-            Assert.AreEqual("method1",mth.Name);
+            Assert.AreEqual("method1", mth.Name);
             Assert.AreEqual(cls, mth.Class);
             Assert.AreEqual("TestClass", mth.Class.Name);
         }

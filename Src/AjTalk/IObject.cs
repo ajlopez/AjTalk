@@ -1,11 +1,16 @@
-using System;
-
 namespace AjTalk
 {
-	public interface IObject
-	{
-		IBehavior Behavior { get; }
-		object this[int n] { get; set;}
-		object SendMessage(string msgname, object [] args);
-	}
+    using System;
+
+    public interface IObject
+    {
+        IBehavior Behavior { get; }
+
+        object this[int n] 
+        {
+            get; set; 
+        }
+
+        object SendMessage(string msgname, object[] args);
+    }
 }

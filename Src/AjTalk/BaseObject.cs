@@ -2,9 +2,6 @@ namespace AjTalk
 {
     using System;
 
-    /// <summary>
-    /// Summary description for BaseObject.
-    /// </summary>
     public class BaseObject : IObject
     {
         private IBehavior behavior;
@@ -16,13 +13,13 @@ namespace AjTalk
             this.variables = null;
         }
 
-        public BaseObject(IBehavior behavior, int nvars) 
+        public BaseObject(IBehavior behavior, int nvars)
         {
             this.behavior = behavior;
             this.variables = new object[nvars];
         }
 
-        public BaseObject(IBehavior behavior, object[] vars) 
+        public BaseObject(IBehavior behavior, object[] vars)
         {
             this.behavior = behavior;
             this.variables = vars;
