@@ -24,8 +24,8 @@ namespace AjTalk
 
             this.name = name;
 
-            isBehavior = (name == "Behavior");
-            isClassDescription = (name == "ClassDescription");
+            this.isBehavior = (name == "Behavior");
+            this.isClassDescription = (name == "ClassDescription");
         }
 
         public BaseClass(string name, IClass superclass, IClass objclass, Machine machine)
@@ -44,12 +44,12 @@ namespace AjTalk
 
         public override IObject NewObject()
         {
-            if (isBehavior)
+            if (this.isBehavior)
             {
                 return new BaseBehavior(this, this.Machine);
             }
 
-            if (isClassDescription)
+            if (this.isClassDescription)
             {
                 return new BaseClassDescription(this, this.Machine);
             }

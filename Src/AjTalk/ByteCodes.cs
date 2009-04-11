@@ -36,6 +36,12 @@ namespace AjTalk
         InstAt = 60,
         InstAtPut = 61,
         InstSize = 62,
+        BasicSize = 63,
+        BasicAt = 64,
+        BasicAtPut = 65,
+
+        Value = 70,
+        MultiValue = 71,
 
         GetDotNetType = 80,
         NewDotNetObject = 81,

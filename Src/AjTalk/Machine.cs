@@ -21,8 +21,14 @@ namespace AjTalk
 
         public IClass CreateClass(string clsname)
         {
+            return this.CreateClass(clsname, false);
+        }
+
+        public IClass CreateClass(string clsname, bool isIndexed)
+        {
             // TODO Review Tricky fourth param
             BaseClass cls = new BaseClass(clsname, this.classclass, this.classclass, this);
+            cls.IsIndexed = isIndexed;
             return cls;
         }
 

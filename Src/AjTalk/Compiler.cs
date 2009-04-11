@@ -24,6 +24,7 @@ namespace AjTalk
         public Block CompileBlock()
         {
             this.block = new Block();
+            this.CompileBlockArguments();
             this.CompileBody();
 
             return this.block;
@@ -158,6 +159,40 @@ namespace AjTalk
             }
 
             this.methodname = token.Value;
+        }
+
+        private void CompileBlockArguments()
+        {
+            Token token = this.NextToken();
+
+            while (true)
+            {
+                if (token == null)
+                    throw new CompilerException("Unexpected end of input");
+
+                if (token.Value == "|")
+                    return;
+
+                if (token.Type != TokenType.Operator || token.Value != ":")
+                {
+                    PushToken(token);
+                    return;
+                }
+
+                this.block.CompileArgument(this.CompileName());
+
+                token = this.NextToken();
+            }
+        }
+
+        private string CompileName()
+        {
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != TokenType.Name)
+                throw new CompilerException("Name expected");
+
+            return token.Value;
         }
 
         private void CompileTerm()
@@ -342,7 +377,7 @@ namespace AjTalk
             // TODO raise failure if not open block, and nested blocks
             if (token.Value == "]")
             {
-                return true;
+                return false;
             }
 
             if (token.Value == "^")

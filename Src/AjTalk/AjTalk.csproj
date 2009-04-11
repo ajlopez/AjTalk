@@ -93,6 +93,7 @@
     <Compile Include="BaseClass.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BaseIndexedObject.cs" />
     <Compile Include="BaseObject.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -105,6 +106,7 @@
     </Compile>
     <Compile Include="BaseClassDescription.cs" />
     <Compile Include="CompilerException.cs" />
+    <Compile Include="IIndexedObject.cs" />
     <Compile Include="EndOfInputException.cs" />
     <Compile Include="IClassDescription.cs" />
     <Compile Include="DotNetObject.cs" />

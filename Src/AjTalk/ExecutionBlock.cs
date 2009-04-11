@@ -87,13 +87,42 @@ namespace AjTalk
 
                         Block newblock = (Block)this.block.GetConstant(arg);
 
+                        this.Push(newblock);
+
+                        break;
+                    case ByteCode.Value:
+                        newblock = (Block)this.Pop();
+
                         if (this.self == null)
                         {
-                            this.Push(new ExecutionBlock(this.machine, this.receiver, newblock, this.arguments));
+                            this.Push(new ExecutionBlock(this.machine, this.receiver, newblock, null).Execute());
                         }
                         else
                         {
-                            this.Push(new ExecutionBlock(this.self, this.receiver, newblock, this.arguments));
+                            this.Push(new ExecutionBlock(this.self, this.receiver, newblock, null).Execute());
+                        }
+
+                        break;
+                    case ByteCode.MultiValue:
+                        this.ip++;
+                        arg = this.block.ByteCodes[this.ip];
+
+                        args = new object[arg];
+
+                        for (int k = arg - 1; k >= 0; k--)
+                        {
+                            args[k] = this.Pop();
+                        }
+
+                        newblock = (Block)this.Pop();
+
+                        if (this.self == null)
+                        {
+                            this.Push(new ExecutionBlock(this.machine, this.receiver, newblock, args).Execute());
+                        }
+                        else
+                        {
+                            this.Push(new ExecutionBlock(this.self, this.receiver, newblock, args).Execute());
                         }
 
                         break;
@@ -104,6 +133,10 @@ namespace AjTalk
                         break;
                     case ByteCode.GetClass:
                         this.Push(((IObject) this.Pop()).Behavior);
+                        break;
+                    case ByteCode.BasicSize:
+                        IIndexedObject indexedObj = (IIndexedObject)this.Pop();
+                        this.Push(indexedObj.BasicSize);
                         break;
                     case ByteCode.GetClassVariable:
                         throw new Exception("Not implemented");
@@ -175,6 +208,17 @@ namespace AjTalk
                         pos = (int)this.Pop();
                         iobj = (IObject)this.Pop();
                         iobj[pos] = par;
+                        break;
+                    case ByteCode.BasicAt:
+                        pos = (int)this.Pop();
+                        indexedObj = (IIndexedObject)this.Pop();
+                        this.Push(indexedObj.GetIndexedValue(pos));
+                        break;
+                    case ByteCode.BasicAtPut:
+                        par = this.Pop();
+                        pos = (int)this.Pop();
+                        indexedObj = (IIndexedObject)this.Pop();
+                        indexedObj.SetIndexedValue(pos, par);
                         break;
                     case ByteCode.Send:
                         this.ip++;
@@ -260,6 +304,9 @@ namespace AjTalk
 
                 this.ip++;
             }
+
+            if (this.self == null && this.stack.Count>0)
+                return this.Pop();
 
             return this.self;
         }

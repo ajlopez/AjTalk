@@ -209,6 +209,26 @@ namespace AjTalk
             {
                 this.CompileByteCode(ByteCode.NewObject);
             }
+            else if (msgname == "basicSize")
+            {
+                this.CompileByteCode(ByteCode.BasicSize);
+            }
+            else if (msgname == "basicAt:")
+            {
+                this.CompileByteCode(ByteCode.BasicAt);
+            }
+            else if (msgname == "basicAt:put:")
+            {
+                this.CompileByteCode(ByteCode.BasicAtPut);
+            }
+            else if (msgname == "value")
+            {
+                this.CompileByteCode(ByteCode.Value);
+            }
+            else if (msgname.StartsWith("value:") && IsValueMessage(msgname))
+            {
+                this.CompileByteCode(ByteCode.MultiValue, MessageArity(msgname));
+            }
             else if (msgname == "class")
             {
                 this.CompileByteCode(ByteCode.GetClass);
@@ -342,6 +362,17 @@ namespace AjTalk
             }
 
             this.bytecodes[this.nextbytecode++] = b;
+        }
+
+        private static bool IsValueMessage(string msgname)
+        {
+            if (msgname == "value:")
+                return true;
+
+            if (msgname.StartsWith("value:"))
+                return IsValueMessage(msgname.Substring(6));
+
+            return false;
         }
     }
 }

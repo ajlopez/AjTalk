@@ -48,6 +48,8 @@
             }
         }
 
+        public bool IsIndexed { get; set; }
+
         public virtual int NoInstanceVariables
         {
             get
@@ -118,6 +120,9 @@
 
         public virtual IObject NewObject()
         {
+            if (this.IsIndexed)
+                return new BaseIndexedObject(this, this.NoInstanceVariables);
+
             return new BaseObject(this, this.NoInstanceVariables);
         }
     }
