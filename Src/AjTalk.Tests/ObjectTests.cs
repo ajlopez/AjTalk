@@ -14,7 +14,7 @@ namespace AjTalk.Tests
         private IClass rectangleClass;
 
         [TestMethod]
-        public void ShouldBeCreated() 
+        public void BeCreated() 
         {
             IObject obj = this.GetRectangleClass().NewObject();
 
@@ -26,7 +26,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldRunMethod()
+        public void RunMethod()
         {
             IObject obj = this.GetRectangleClass().NewObject();
 

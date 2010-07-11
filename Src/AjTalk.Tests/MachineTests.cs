@@ -12,7 +12,7 @@ namespace AjTalk.Tests
     public class MachineTests
     {
         [TestMethod]
-        public void ShouldBeCreated()
+        public void BeCreated()
         {
             Machine machine = new Machine();
 
@@ -20,7 +20,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldHasGlobals()
+        public void HasGlobals()
         {
             Machine machine = new Machine();
 
@@ -28,7 +28,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCreateClass()
+        public void CreateClass()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -42,7 +42,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldSetGlobalVariable()
+        public void SetGlobalVariable()
         {
             Machine machine = new Machine();
 
@@ -52,7 +52,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldGetNullIfGlobalVariableDoesNotExists()
+        public void GetNullIfGlobalVariableDoesNotExists()
         {
             Machine machine = new Machine();
 

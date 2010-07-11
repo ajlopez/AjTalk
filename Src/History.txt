@@ -60,6 +60,10 @@ StyleCop applied
 Send message basicNew as bytecode NewObject
 Special treatment for new on Behavior, ClassDescription
 
+2010-07-11
+Renaming test methods
+Fix ifFalse: using block
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

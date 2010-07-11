@@ -12,7 +12,7 @@ namespace AjTalk.Tests
     public class BlockTests
     {
         [TestMethod]
-        public void ShouldBeCreated()
+        public void BeCreated()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -22,7 +22,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompile()
+        public void Compile()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -42,7 +42,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileGlobal()
+        public void CompileGlobal()
         {
             Block block;
 
@@ -54,7 +54,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileAndExecuteGetDotNetType()
+        public void CompileAndExecuteGetDotNetType()
         {
             Block block;
 
@@ -69,7 +69,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileAndExecuteNewDotNetObject()
+        public void CompileAndExecuteNewDotNetObject()
         {
             Block block;
 
@@ -86,7 +86,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileAndRunWithGlobal()
+        public void CompileAndRunWithGlobal()
         {
             Block block;
 
@@ -102,7 +102,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileWithLocals()
+        public void CompileWithLocals()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -122,7 +122,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileAndRun()
+        public void CompileAndRun()
         {
             Machine machine = new Machine();
 
@@ -139,7 +139,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileWithLocalsAndRun()
+        public void CompileWithLocalsAndRun()
         {
             Machine machine = new Machine();
 
@@ -159,7 +159,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileGlobalName()
+        public void CompileGlobalName()
         {
             Block block = new Block();
             byte p = block.CompileGlobal("Class");
@@ -168,7 +168,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileGlobalNames()
+        public void CompileGlobalNames()
         {
             Block block = new Block();
             byte p1 = block.CompileGlobal("Class");
@@ -181,7 +181,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileGetGlobalVariable()
+        public void CompileGetGlobalVariable()
         {
             Block block = new Block();
             block.CompileGet("Class");
@@ -195,7 +195,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCalculateArity()
+        public void CalculateArity()
         {
             Assert.AreEqual(0, Block.MessageArity("class"));
             Assert.AreEqual(1, Block.MessageArity("with:"));

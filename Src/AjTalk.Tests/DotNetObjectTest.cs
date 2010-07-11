@@ -13,7 +13,7 @@
     public class DotNetObjectTest
     {
         [TestMethod]
-        public void ShouldCreateAnObject()
+        public void CreateAnObject()
         {
             Machine machine = new Machine();
 
@@ -24,7 +24,7 @@
         }
 
         [TestMethod]
-        public void ShouldInvokeMethod()
+        public void InvokeMethod()
         {
             Machine machine = new Machine();
 

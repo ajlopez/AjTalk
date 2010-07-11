@@ -12,7 +12,7 @@ namespace AjTalk.Tests
     public class ClassTests
     {
         [TestMethod]
-        public void ShouldBeCreated()
+        public void BeCreated()
         {
             Machine machine = new Machine();
 
@@ -27,7 +27,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldBeCreatedWithSuperclass()
+        public void BeCreatedWithSuperclass()
         {
             Machine machine = new Machine();
 
@@ -43,7 +43,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldInheritsVariables()
+        public void InheritsVariables()
         {
             Machine machine = new Machine();
 
@@ -69,7 +69,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ShouldAvoidNullName()
+        public void AvoidNullName()
         {
             Machine machine = new Machine();
 
@@ -77,7 +77,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldAddInstanceVariable()
+        public void AddInstanceVariable()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -90,7 +90,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void ShouldAvoidDuplicatedInstanceVariable()
+        public void AvoidDuplicatedInstanceVariable()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -99,7 +99,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldAddClassVariable()
+        public void AddClassVariable()
         {
             Machine machine = new Machine();
 
@@ -113,7 +113,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void ShouldAvoidDuplicatedClassVariable()
+        public void AvoidDuplicatedClassVariable()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -122,7 +122,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCreateObject()
+        public void CreateObject()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -135,7 +135,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCreateBehavior()
+        public void CreateBehavior()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Behavior");
@@ -146,7 +146,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCreateClassDescription()
+        public void CreateClassDescription()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("ClassDescription");

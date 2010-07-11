@@ -12,7 +12,7 @@ namespace AjTalk.Tests
     public class BaseObjectTests
     {
         [TestMethod]
-        public void ShouldBeCreated()
+        public void Create()
         {
             BaseObject bo = new BaseObject();
 

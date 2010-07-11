@@ -13,7 +13,7 @@
     public class BasicClassTest 
     {
         [TestMethod]
-        public void ShouldCreate()
+        public void Create()
         {
             Machine machine = new Machine();
             BaseClass bclass = new BaseClass("Class", machine);
@@ -26,7 +26,7 @@
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ShouldRaiseIfNameIsNull()
+        public void RaiseIfNameIsNull()
         {
             Machine machine = new Machine();
             BaseClass bclass = new BaseClass(null, machine);
@@ -34,13 +34,13 @@
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ShouldRaiseIfMachineIsNull()
+        public void RaiseIfMachineIsNull()
         {
             BaseClass bclass = new BaseClass("Class", null);
         }
 
         [TestMethod]
-        public void ShouldDefineInstanceVariables()
+        public void DefineInstanceVariables()
         {
             Machine machine = new Machine();
             BaseClass bclass = new BaseClass("Class", machine);

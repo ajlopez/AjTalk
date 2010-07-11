@@ -13,7 +13,7 @@ namespace AjTalk.Tests
     public class LoaderTests
     {
         [TestMethod]
-        public void ShouldBeCreated()
+        public void BeCreated()
         {
             Loader loader = new Loader(new StringReader(string.Empty));
 
@@ -21,7 +21,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldGetEmptyLine()
+        public void GetEmptyLine()
         {
             Loader loader = new Loader(new StringReader("\n"));
 
@@ -31,7 +31,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldGetTwoLinesBlock()
+        public void GetTwoLinesBlock()
         {
             Loader loader = new Loader(new StringReader("line 1\nline 2\n!"));
 
@@ -41,7 +41,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldGetTwoBlocks()
+        public void GetTwoBlocks()
         {
             Loader loader = new Loader(new StringReader("line 1\nline 2\n!\nline 3\nline 4\n!\n"));
 
@@ -52,7 +52,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldGetBlockAndInmediate()
+        public void GetBlockAndInmediate()
         {
             Loader loader = new Loader(new StringReader("line 1\nline 2\n!inmediate!\n"));
 
@@ -63,7 +63,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldExecuteBlock()
+        public void ExecuteBlock()
         {
             Loader loader = new Loader(new StringReader("One := 1\n!\n"));
             Machine machine = new Machine();
@@ -74,7 +74,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldExecuteBlockWithTwoCommands()
+        public void ExecuteBlockWithTwoCommands()
         {
             Loader loader = new Loader(new StringReader("One := 1.\nTwo := 2\n!\n"));
             Machine machine = new Machine();
@@ -86,7 +86,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldExecuteTwoBlocks()
+        public void ExecuteTwoBlocks()
         {
             Loader loader = new Loader(new StringReader("One := 1.\n!\nTwo := 2\n!\n"));
             Machine machine = new Machine();
@@ -99,7 +99,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem(@"CodeFiles\SetObject.st")]
-        public void ShouldExecuteSetObjectFile()
+        public void ExecuteSetObjectFile()
         {
             Loader loader = new Loader(@"SetObject.st");
             Machine machine = new Machine();
@@ -111,7 +111,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem(@"CodeFiles\SetDotNetObject.st")]
-        public void ShouldExecuteSetDotNetObjectFile()
+        public void ExecuteSetDotNetObjectFile()
         {
             Loader loader = new Loader(@"SetDotNetObject.st");
             Machine machine = new Machine();
@@ -126,7 +126,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem(@"CodeFiles\SetObjects.st")]
-        public void ShouldExecuteSetObjectsFile()
+        public void ExecuteSetObjectsFile()
         {
             Loader loader = new Loader(@"SetObjects.st");
             Machine machine = new Machine();
@@ -139,7 +139,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem(@"CodeFiles\DefineSubclass.st")]
-        public void ShouldExecuteDefineSubclassFile()
+        public void ExecuteDefineSubclassFile()
         {
             Loader loader = new Loader(@"DefineSubclass.st");
 
@@ -154,7 +154,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem(@"CodeFiles\DefineSubclassWithVariables.st")]
-        public void ShouldExecuteDefineSubclassWithVariablesFile()
+        public void ExecuteDefineSubclassWithVariablesFile()
         {
             Loader loader = new Loader(@"DefineSubclassWithVariables.st");
 
@@ -177,7 +177,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem(@"CodeFiles\DefineRectangle.st")]
-        public void ShouldExecuteDefineRectangleFile()
+        public void ExecuteDefineRectangleFile()
         {
             Loader loader = new Loader(@"DefineRectangle.st");
 
@@ -207,7 +207,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem(@"CodeFiles\DefineClassSubclass.st")]
-        public void ShouldExecuteDefineClassSubclassFile()
+        public void ExecuteDefineClassSubclassFile()
         {
             Loader loader = new Loader(@"DefineClassSubclass.st");
 
@@ -239,7 +239,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem(@"CodeFiles\Library1.st")]
-        public void ShouldLoadLibrary()
+        public void LoadLibrary()
         {
             Loader loader = new Loader(@"Library1.st");
 

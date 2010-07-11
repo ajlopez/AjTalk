@@ -12,42 +12,42 @@ namespace AjTalk.Tests
     public class TokenizerTests
     {
         [TestMethod]
-        public void ShouldBeCreate()
+        public void Create()
         {
             Tokenizer tok = new Tokenizer("token");
             Assert.IsNotNull(tok);
         }
 
         [TestMethod]
-        public void ShouldProcessEmptyString()
+        public void ProcessEmptyString()
         {
             Tokenizer tokenizer = new Tokenizer(string.Empty);
             Assert.IsNull(tokenizer.NextToken());
         }
 
         [TestMethod]
-        public void ShouldProcessBlank()
+        public void ProcessBlank()
         {
             Tokenizer tokenizer = new Tokenizer(" ");
             Assert.IsNull(tokenizer.NextToken());
         }
 
         [TestMethod]
-        public void ShouldSkipComment()
+        public void SkipComment()
         {
             Tokenizer tokenizer = new Tokenizer("\"This is a comment\"");
             Assert.IsNull(tokenizer.NextToken());
         }
 
         [TestMethod]
-        public void ShouldSkipMultiLineComment()
+        public void SkipMultiLineComment()
         {
             Tokenizer tokenizer = new Tokenizer("\"This is a \n a multi-line\ncomment\"");
             Assert.IsNull(tokenizer.NextToken());
         }
 
         [TestMethod]
-        public void ShouldProcessOneToken()
+        public void ProcessOneToken()
         {
             Tokenizer tokenizer = new Tokenizer("token");
             Token token = tokenizer.NextToken();
@@ -60,7 +60,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessOneTokenWithSpacesAndComment()
+        public void ProcessOneTokenWithSpacesAndComment()
         {
             Tokenizer tokenizer = new Tokenizer(" \"This is a token \" token \"This another comment\"");
             Token token = tokenizer.NextToken();
@@ -73,7 +73,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessTwoTokens()
+        public void ProcessTwoTokens()
         {
             Tokenizer tokenizer = new Tokenizer("token1 token2");
             Token token;
@@ -93,7 +93,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessString()
+        public void ProcessString()
         {
             Tokenizer tokenizer = new Tokenizer("'string'");
             Token token;
@@ -108,7 +108,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessSymbol()
+        public void ProcessSymbol()
         {
             Tokenizer tokenizer = new Tokenizer("#aSymbol");
             Token token;
@@ -123,7 +123,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessSpecialName()
+        public void ProcessSpecialName()
         {
             Tokenizer tokenizer = new Tokenizer("@System.IO.FileInfo");
 
@@ -139,7 +139,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessComplexSymbol()
+        public void ProcessComplexSymbol()
         {
             Tokenizer tokenizer = new Tokenizer("#aSymbol:with:many>chars");
             Token token;
@@ -154,7 +154,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessTwoSymbols()
+        public void ProcessTwoSymbols()
         {
             Tokenizer tokenizer = new Tokenizer("#aSymbol #anotherSymbol");
             Token token;
@@ -175,7 +175,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [ExpectedException(typeof(TokenizerException))]
-        public void ShouldProcessNotClosedString()
+        public void ProcessNotClosedString()
         {
             Tokenizer tokenizer = new Tokenizer("'string");
             Token token;
@@ -184,7 +184,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessInteger()
+        public void ProcessInteger()
         {
             Tokenizer tokenizer = new Tokenizer("10");
             Token token;
@@ -196,7 +196,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessOperator()
+        public void ProcessOperator()
         {
             Tokenizer tokenizer = new Tokenizer("+");
             Token token;
@@ -208,7 +208,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessSetOperator()
+        public void ProcessSetOperator()
         {
             Tokenizer tokenizer = new Tokenizer(":=");
             Token token;
@@ -220,7 +220,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessOperators()
+        public void ProcessOperators()
         {
             string opers = "^<>:=-+*/&";
 
@@ -246,7 +246,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessPunctuation()
+        public void ProcessPunctuation()
         {
             Tokenizer tokenizer = new Tokenizer(".");
             Token token;
@@ -258,7 +258,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessPunctuations()
+        public void ProcessPunctuations()
         {
             string punct = "().|[]";
             Tokenizer tokenizer = new Tokenizer(punct);
@@ -275,7 +275,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldProcessTokenAndString()
+        public void ProcessTokenAndString()
         {
             Tokenizer tokenizer = new Tokenizer("token 'string'");
             Token token;
@@ -292,7 +292,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldParseDotNetObjectAndMethod()
+        public void ParseDotNetObjectAndMethod()
         {
             Tokenizer tokenizer = new Tokenizer("@System.FileInfo !new: 'FooBar.txt'");
             Token token;

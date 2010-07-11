@@ -61,8 +61,8 @@
 
             if (msgname.Equals("ifFalse:"))
             {
-                ExecutionBlock block = (ExecutionBlock) args[0];
-                block.Execute();
+                Block block = (Block) args[0];
+                block.Execute(this.Machine, null);
                 
                 // TODO return block value??
                 return this.Machine.GetGlobalObject("nil");

@@ -12,7 +12,7 @@ namespace AjTalk.Tests
     public class MethodTests
     {
         [TestMethod]
-        public void ShouldBeCreated()
+        public void BeCreated()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -25,7 +25,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompile()
+        public void Compile()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -44,7 +44,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileWithLocals()
+        public void CompileWithLocals()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -66,7 +66,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileAndRun()
+        public void CompileAndRun()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -89,7 +89,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileWithLocalsAndRun()
+        public void CompileWithLocalsAndRun()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
@@ -115,7 +115,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileGlobalName()
+        public void CompileGlobalName()
         {
             Method mth = new Method("test");
             byte p = mth.CompileGlobal("Class");
@@ -125,7 +125,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void ShouldNotRunWithMachine()
+        public void NotRunWithMachine()
         {
             Machine machine = new Machine();
 

@@ -37,7 +37,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldBeCreated()
+        public void Create()
         {
             Compiler compiler = new Compiler("x ^x");
 
@@ -45,7 +45,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileMethod()
+        public void CompileMethod()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Rectangle");
@@ -57,7 +57,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileMethodWithLocals()
+        public void CompileMethodWithLocals()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Rectangle");
@@ -69,7 +69,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileSetMethod()
+        public void CompileSetMethod()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Rectangle");
@@ -81,7 +81,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileSimpleCommand()
+        public void CompileSimpleCommand()
         {
             Compiler compiler = new Compiler("nil invokeWith: 10");
             Block block = compiler.CompileBlock();
@@ -92,7 +92,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileSubClassDefinition()
+        public void CompileSubClassDefinition()
         {
             Compiler compiler = new Compiler("nil subclass: #Object");
             Block block = compiler.CompileBlock();
@@ -103,7 +103,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileSubClassDefinitionWithInstances()
+        public void CompileSubClassDefinitionWithInstances()
         {
             Compiler compiler = new Compiler("nil subclass: #Object instanceVariables: 'a b c'");
             Block block = compiler.CompileBlock();
@@ -114,7 +114,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileTwoCommands()
+        public void CompileTwoCommands()
         {
             Compiler compiler = new Compiler("nil invokeWith: 10. Global := 20");
             Block block = compiler.CompileBlock();
@@ -125,7 +125,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileBlock()
+        public void CompileBlock()
         {
             Compiler compiler = new Compiler("nil ifFalse: [self halt]");
             Block block = compiler.CompileBlock();
@@ -143,7 +143,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldExecuteBlock()
+        public void ExecuteBlock()
         {
             Machine machine = new Machine();
 
@@ -165,7 +165,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldExecuteInstSize()
+        public void ExecuteInstSize()
         {
             Machine machine = new Machine();
 
@@ -187,7 +187,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldExecuteInstSizeInRectangle()
+        public void ExecuteInstSizeInRectangle()
         {
             Machine machine = new Machine();
             IClass cls = CompileClass(
@@ -214,7 +214,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldExecuteInstAt()
+        public void ExecuteInstAt()
         {
             Machine machine = new Machine();
             IClass cls = CompileClass(
@@ -245,7 +245,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldExecuteInstAtPut()
+        public void ExecuteInstAtPut()
         {
             Machine machine = new Machine();
             IClass cls = CompileClass(
@@ -275,7 +275,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldExecuteBasicNew()
+        public void ExecuteBasicNew()
         {
             Machine machine = new Machine();
             IClass cls = CompileClass(
@@ -298,7 +298,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileMethods()
+        public void CompileMethods()
         {
             IClass cls = CompileClass(
                 "Rectangle", 
@@ -320,7 +320,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldRunMethods()
+        public void RunMethods()
         {
             IClass cls = CompileClass(
                 "Rectangle", 
@@ -350,7 +350,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileMultiCommandMethod()
+        public void CompileMultiCommandMethod()
         {
             IClass cls = CompileClass(
                 "Rectangle", 
@@ -366,7 +366,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldCompileMultiCommandMethodWithLocal()
+        public void CompileMultiCommandMethodWithLocal()
         {
             IClass cls = CompileClass(
                 "Rectangle", 
@@ -382,7 +382,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldRunMultiCommandMethod()
+        public void RunMultiCommandMethod()
         {
             IClass cls = CompileClass(
                 "Rectangle", 
@@ -403,7 +403,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        public void ShouldRunMultiCommandMethodWithLocal()
+        public void RunMultiCommandMethodWithLocal()
         {
             IClass cls = CompileClass(
                 "Rectangle", 
