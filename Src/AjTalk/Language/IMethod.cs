@@ -1,4 +1,4 @@
-namespace AjTalk
+namespace AjTalk.Language
 {
     using System;
 

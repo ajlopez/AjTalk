@@ -5,6 +5,7 @@ namespace AjTalk.Tests
     using System.Text;
 
     using AjTalk;
+    using AjTalk.Language;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

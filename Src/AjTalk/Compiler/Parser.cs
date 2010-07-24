@@ -3,6 +3,8 @@ namespace AjTalk.Compiler
     using System;
     using System.Collections;
 
+    using AjTalk.Language;
+
     public class Parser
     {
         private Lexer tokenizer;

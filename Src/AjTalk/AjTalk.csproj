@@ -89,49 +89,49 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BaseBehavior.cs" />
-    <Compile Include="BaseClass.cs">
+    <Compile Include="Language\BaseBehavior.cs" />
+    <Compile Include="Language\BaseClass.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BaseIndexedObject.cs" />
-    <Compile Include="BaseObject.cs">
+    <Compile Include="Language\BaseIndexedObject.cs" />
+    <Compile Include="Language\BaseObject.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Block.cs" />
-    <Compile Include="ByteCodes.cs">
+    <Compile Include="Language\Block.cs" />
+    <Compile Include="Language\ByteCodes.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Compiler\Parser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BaseClassDescription.cs" />
+    <Compile Include="Language\BaseClassDescription.cs" />
     <Compile Include="Compiler\ParserException.cs" />
-    <Compile Include="IIndexedObject.cs" />
-    <Compile Include="EndOfInputException.cs" />
-    <Compile Include="IClassDescription.cs" />
-    <Compile Include="DotNetObject.cs" />
-    <Compile Include="ExecutionBlock.cs">
+    <Compile Include="Language\IIndexedObject.cs" />
+    <Compile Include="Compiler\EndOfInputException.cs" />
+    <Compile Include="Language\IClassDescription.cs" />
+    <Compile Include="Language\DotNetObject.cs" />
+    <Compile Include="Language\ExecutionBlock.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IBehavior.cs" />
-    <Compile Include="IBlock.cs" />
-    <Compile Include="IClass.cs">
+    <Compile Include="Language\IBehavior.cs" />
+    <Compile Include="Language\IBlock.cs" />
+    <Compile Include="Language\IClass.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IMessage.cs">
+    <Compile Include="Language\IMessage.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IMethod.cs">
+    <Compile Include="Language\IMethod.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IObject.cs">
+    <Compile Include="Language\IObject.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Loader.cs" />
     <Compile Include="Machine.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Method.cs">
+    <Compile Include="Language\Method.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Compiler\Token.cs" />
@@ -142,7 +142,7 @@
     <Compile Include="Compiler\TokenType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <None Include="Language\ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

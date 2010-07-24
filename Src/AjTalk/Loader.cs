@@ -6,6 +6,7 @@ namespace AjTalk
     using System.Text;
 
     using AjTalk.Compiler;
+    using AjTalk.Language;
 
     public class Loader
     {

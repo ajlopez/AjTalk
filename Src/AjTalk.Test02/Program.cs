@@ -6,6 +6,7 @@ namespace AjTalk.Test02
     using System.IO;
 
     using AjTalk.Compiler;
+    using AjTalk.Language;
 
     class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace AjTalk
+﻿namespace AjTalk.Compiler
 {
     using System;
     using System.Collections.Generic;

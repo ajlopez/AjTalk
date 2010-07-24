@@ -4,6 +4,7 @@ namespace AjTalk.Test01
 
     using AjTalk;
     using AjTalk.Compiler;
+    using AjTalk.Language;
 
 	class Class1
 	{

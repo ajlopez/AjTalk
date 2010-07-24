@@ -67,6 +67,7 @@ Fix ifFalse: using block
 Renaming Tokenizer to Lexer
 Renaming Compiler to Parser
 New AjTalk.Compiler namespace
+New AjTalk.Language namespace
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

@@ -3,6 +3,8 @@ namespace AjTalk
     using System;
     using System.Collections.Generic;
 
+    using AjTalk.Language;
+
     public class Machine
     {
         private BaseClass classclass;
