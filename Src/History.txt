@@ -1,4 +1,3 @@
-
 AjTalk
 
 An Smalltalk-like interpreter, written in C#.
@@ -63,6 +62,10 @@ Special treatment for new on Behavior, ClassDescription
 2010-07-11
 Renaming test methods
 Fix ifFalse: using block
+
+2010-07-24
+Renaming Tokenizer to Lexer
+Renaming Compiler to Parser
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

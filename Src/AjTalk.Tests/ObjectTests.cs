@@ -41,7 +41,7 @@ namespace AjTalk.Tests
         {
             if (this.rectangleClass == null)
             {
-                this.rectangleClass = CompilerTests.CompileClass(
+                this.rectangleClass = ParserTests.CompileClass(
                     "Rectangle",
                     new string[] { "x", "y", "width", "height" },
                     new string[] 

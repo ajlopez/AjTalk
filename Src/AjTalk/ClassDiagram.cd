@@ -3,7 +3,7 @@
   <Class Name="AjTalk.BaseClass">
     <Position X="4.25" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAQAAAAEAAAAQQAAAAAAAAA=</HashCode>
       <FileName>BaseClass.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -16,11 +16,11 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="AjTalk.Compiler" Collapsed="true">
+  <Class Name="AjTalk.Parser" Collapsed="true">
     <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>RAIAAAAQAAgAAQgACoAAKAAAAIAgAACAQAICAAAQBAA=</HashCode>
-      <FileName>Compiler.cs</FileName>
+      <HashCode>RAIAAAAwAAgAAQgECoAAKAAAAIAgAACAQAICAAAQBAA=</HashCode>
+      <FileName>Parser.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.ExecutionBlock" Collapsed="true">
@@ -41,34 +41,34 @@
     <Position X="11.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
-      <FileName>Tokenizer.cs</FileName>
+      <FileName>Token.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.EndOfInputException" Collapsed="true">
     <Position X="9.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Tokenizer.cs</FileName>
+      <FileName>EndOfInputException.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="AjTalk.TokenizerException" Collapsed="true">
+  <Class Name="AjTalk.LexerException" Collapsed="true">
     <Position X="9.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Tokenizer.cs</FileName>
+      <FileName>LexerException.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="AjTalk.Tokenizer" Collapsed="true">
+  <Class Name="AjTalk.Lexer" Collapsed="true">
     <Position X="7.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AYIAAAAQFAgBIAABAAIAQDAQAIAABBAAAAAgEAIhBAA=</HashCode>
-      <FileName>Tokenizer.cs</FileName>
+      <HashCode>AQIAAEAQFAgAIAABEAIAQDAQAAAABBKAAAAAEAIhIBA=</HashCode>
+      <FileName>Lexer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.Block">
     <Position X="0.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAAAACAACAUQACAEAiSIBRAAAAEAAICAIAICAjAA=</HashCode>
+      <HashCode>AAEAAAAACAACAUQACAEAiSIBRAACQEAAICAIAICIjAA=</HashCode>
       <FileName>Block.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="1.3" />
@@ -119,7 +119,7 @@
   <Interface Name="AjTalk.IClassDescription">
     <Position X="0.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAAAAAAAAAAAAQAAAEAAIAAAAIAAAAAAAA=</HashCode>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAQAAAAAAIAAAAIAAAAAAAA=</HashCode>
       <FileName>IClassDescription.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -133,7 +133,7 @@
   <Enum Name="AjTalk.ByteCode" Collapsed="true">
     <Position X="7.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAJBIAQgARAIQIAAAEARAAQACiGIAQAAQAAAAIQAUAQ=</HashCode>
+      <HashCode>gAJBoAQgARAIQIABAEARgAwACiGIAQAAQAAgQIQAUAQ=</HashCode>
       <FileName>ByteCodes.cs</FileName>
     </TypeIdentifier>
   </Enum>
@@ -141,7 +141,7 @@
     <Position X="9.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAQAAAAAQAAAAAAgQAAAAAAAAAKAA=</HashCode>
-      <FileName>Tokenizer.cs</FileName>
+      <FileName>TokenType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Tahoma" Size="8.25" />

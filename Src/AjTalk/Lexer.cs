@@ -5,7 +5,7 @@ namespace AjTalk
     using System.IO;
     using System.Text;
 
-    public class Tokenizer
+    public class Lexer
     {
         public const char SpecialDotNetTypeMark = '@';
         public const char SpecialDotNetInvokeMark = '!';
@@ -24,12 +24,12 @@ namespace AjTalk
         private bool haschar;
         private Stack<Token> tokenstack = new Stack<Token>();
 
-        public Tokenizer(TextReader input)
+        public Lexer(TextReader input)
         {
             this.input = input;
         }
 
-        public Tokenizer(string text)
+        public Lexer(string text)
             : this(new StringReader(text))
         {
         }
@@ -92,7 +92,7 @@ namespace AjTalk
                     return this.NextPunctuation(ch);
                 }
 
-                throw new TokenizerException("Invalid Characater '" + ch + "'");
+                throw new LexerException("Invalid Characater '" + ch + "'");
             }
             catch (EndOfInputException)
             {
@@ -317,7 +317,7 @@ namespace AjTalk
             }
             catch (EndOfInputException)
             {
-                throw new TokenizerException("\"\'\" expected");
+                throw new LexerException("\"\'\" expected");
             }
 
             Token token = new Token();

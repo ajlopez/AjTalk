@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{232A3EF3-8392-409E-8D6B-961EFEE30347}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -101,11 +101,11 @@
     <Compile Include="ByteCodes.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Compiler.cs">
+    <Compile Include="Parser.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BaseClassDescription.cs" />
-    <Compile Include="CompilerException.cs" />
+    <Compile Include="ParserException.cs" />
     <Compile Include="IIndexedObject.cs" />
     <Compile Include="EndOfInputException.cs" />
     <Compile Include="IClassDescription.cs" />
@@ -135,10 +135,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Token.cs" />
-    <Compile Include="Tokenizer.cs">
+    <Compile Include="Lexer.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TokenizerException.cs" />
+    <Compile Include="LexerException.cs" />
     <Compile Include="TokenType.cs" />
   </ItemGroup>
   <ItemGroup>

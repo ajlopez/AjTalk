@@ -187,7 +187,7 @@ namespace AjTalk
 
         public void CompileSend(string msgname)
         {
-            if (msgname[0] == Tokenizer.SpecialDotNetInvokeMark)
+            if (msgname[0] == Lexer.SpecialDotNetInvokeMark)
             {
                 this.CompileInvokeDotNet(msgname);
                 return;

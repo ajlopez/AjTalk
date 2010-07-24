@@ -4,12 +4,11 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public class CompilerException : Exception
+    public class LexerException : Exception
     {
-        public CompilerException(string message)
-            : base(message)
+        public LexerException(string msg)
+            : base(msg)
         {
         }
     }
 }
-

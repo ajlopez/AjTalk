@@ -9,7 +9,7 @@ namespace AjTalk.Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class CompilerTests
+    public class ParserTests
     {
         public static IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
@@ -28,7 +28,7 @@ namespace AjTalk.Tests
             {
                 foreach (string method in methods)
                 {
-                    Compiler compiler = new Compiler(method);
+                    Parser compiler = new Parser(method);
                     compiler.CompileInstanceMethod(cls);
                 }
             }
@@ -39,7 +39,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void Create()
         {
-            Compiler compiler = new Compiler("x ^x");
+            Parser compiler = new Parser("x ^x");
 
             Assert.IsNotNull(compiler);
         }
@@ -50,7 +50,7 @@ namespace AjTalk.Tests
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
-            Compiler compiler = new Compiler("x ^x");
+            Parser compiler = new Parser("x ^x");
             compiler.CompileInstanceMethod(cls);
 
             Assert.IsNotNull(cls.GetInstanceMethod("x"));
@@ -62,7 +62,7 @@ namespace AjTalk.Tests
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
-            Compiler compiler = new Compiler("x | temp | temp := x. ^temp");
+            Parser compiler = new Parser("x | temp | temp := x. ^temp");
             compiler.CompileInstanceMethod(cls);
 
             Assert.IsNotNull(cls.GetInstanceMethod("x"));
@@ -74,7 +74,7 @@ namespace AjTalk.Tests
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
-            Compiler compiler = new Compiler("x: newX x := newX");
+            Parser compiler = new Parser("x: newX x := newX");
             compiler.CompileInstanceMethod(cls);
 
             Assert.IsNotNull(cls.GetInstanceMethod("x:"));
@@ -83,7 +83,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void CompileSimpleCommand()
         {
-            Compiler compiler = new Compiler("nil invokeWith: 10");
+            Parser compiler = new Parser("nil invokeWith: 10");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
             Assert.AreEqual(0, block.NoLocals);
@@ -94,7 +94,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void CompileSubClassDefinition()
         {
-            Compiler compiler = new Compiler("nil subclass: #Object");
+            Parser compiler = new Parser("nil subclass: #Object");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
             Assert.AreEqual(0, block.NoLocals);
@@ -105,7 +105,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void CompileSubClassDefinitionWithInstances()
         {
-            Compiler compiler = new Compiler("nil subclass: #Object instanceVariables: 'a b c'");
+            Parser compiler = new Parser("nil subclass: #Object instanceVariables: 'a b c'");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
             Assert.AreEqual(0, block.NoLocals);
@@ -116,7 +116,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void CompileTwoCommands()
         {
-            Compiler compiler = new Compiler("nil invokeWith: 10. Global := 20");
+            Parser compiler = new Parser("nil invokeWith: 10. Global := 20");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
             Assert.AreEqual(0, block.NoLocals);
@@ -127,7 +127,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void CompileBlock()
         {
-            Compiler compiler = new Compiler("nil ifFalse: [self halt]");
+            Parser compiler = new Parser("nil ifFalse: [self halt]");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);
@@ -154,7 +154,7 @@ namespace AjTalk.Tests
 
             ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
 
-            Compiler compiler = new Compiler("nil ifFalse: [GlobalName := 'foo']");
+            Parser compiler = new Parser("nil ifFalse: [GlobalName := 'foo']");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);
@@ -176,7 +176,7 @@ namespace AjTalk.Tests
 
             ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
 
-            Compiler compiler = new Compiler("^nil new instSize");
+            Parser compiler = new Parser("^nil new instSize");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);
@@ -203,7 +203,7 @@ namespace AjTalk.Tests
 
             machine.SetGlobalObject("aRectangle", cls.NewObject());
 
-            Compiler compiler = new Compiler("^aRectangle instSize");
+            Parser compiler = new Parser("^aRectangle instSize");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);
@@ -234,7 +234,7 @@ namespace AjTalk.Tests
 
             iobj[0] = 100;
 
-            Compiler compiler = new Compiler("^aRectangle instAt: 0");
+            Parser compiler = new Parser("^aRectangle instAt: 0");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);
@@ -263,7 +263,7 @@ namespace AjTalk.Tests
 
             machine.SetGlobalObject("aRectangle", iobj);
 
-            Compiler compiler = new Compiler("aRectangle instAt: 0 put: 200");
+            Parser compiler = new Parser("aRectangle instAt: 0 put: 200");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);
@@ -285,7 +285,7 @@ namespace AjTalk.Tests
 
             machine.SetGlobalObject("Rectangle", cls);
 
-            Compiler compiler = new Compiler("^Rectangle basicNew");
+            Parser compiler = new Parser("^Rectangle basicNew");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);

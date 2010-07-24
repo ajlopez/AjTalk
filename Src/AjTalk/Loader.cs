@@ -48,7 +48,7 @@ namespace AjTalk
 
             this.inmediateLine = "^" + this.inmediateLine.Substring(0, this.inmediateLine.Length - 8);
 
-            Compiler compiler = new Compiler(this.inmediateLine);
+            Parser compiler = new Parser(this.inmediateLine);
             Block block = compiler.CompileBlock();
             object value = block.Execute(machine, null);
 
@@ -102,7 +102,7 @@ namespace AjTalk
 
             while (blocktext != null)
             {
-                Compiler compiler = new Compiler(blocktext);
+                Parser compiler = new Parser(blocktext);
 
                 if (this.IsMethod())
                 {

@@ -9,47 +9,47 @@ namespace AjTalk.Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class TokenizerTests
+    public class LexerTests
     {
         [TestMethod]
         public void Create()
         {
-            Tokenizer tok = new Tokenizer("token");
+            Lexer tok = new Lexer("token");
             Assert.IsNotNull(tok);
         }
 
         [TestMethod]
         public void ProcessEmptyString()
         {
-            Tokenizer tokenizer = new Tokenizer(string.Empty);
+            Lexer tokenizer = new Lexer(string.Empty);
             Assert.IsNull(tokenizer.NextToken());
         }
 
         [TestMethod]
         public void ProcessBlank()
         {
-            Tokenizer tokenizer = new Tokenizer(" ");
+            Lexer tokenizer = new Lexer(" ");
             Assert.IsNull(tokenizer.NextToken());
         }
 
         [TestMethod]
         public void SkipComment()
         {
-            Tokenizer tokenizer = new Tokenizer("\"This is a comment\"");
+            Lexer tokenizer = new Lexer("\"This is a comment\"");
             Assert.IsNull(tokenizer.NextToken());
         }
 
         [TestMethod]
         public void SkipMultiLineComment()
         {
-            Tokenizer tokenizer = new Tokenizer("\"This is a \n a multi-line\ncomment\"");
+            Lexer tokenizer = new Lexer("\"This is a \n a multi-line\ncomment\"");
             Assert.IsNull(tokenizer.NextToken());
         }
 
         [TestMethod]
         public void ProcessOneToken()
         {
-            Tokenizer tokenizer = new Tokenizer("token");
+            Lexer tokenizer = new Lexer("token");
             Token token = tokenizer.NextToken();
             Assert.IsNotNull(token);
             Assert.AreEqual("token", token.Value);
@@ -62,7 +62,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessOneTokenWithSpacesAndComment()
         {
-            Tokenizer tokenizer = new Tokenizer(" \"This is a token \" token \"This another comment\"");
+            Lexer tokenizer = new Lexer(" \"This is a token \" token \"This another comment\"");
             Token token = tokenizer.NextToken();
             Assert.IsNotNull(token);
             Assert.AreEqual("token", token.Value);
@@ -75,7 +75,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessTwoTokens()
         {
-            Tokenizer tokenizer = new Tokenizer("token1 token2");
+            Lexer tokenizer = new Lexer("token1 token2");
             Token token;
 
             token = tokenizer.NextToken();
@@ -95,7 +95,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessString()
         {
-            Tokenizer tokenizer = new Tokenizer("'string'");
+            Lexer tokenizer = new Lexer("'string'");
             Token token;
 
             token = tokenizer.NextToken();
@@ -110,7 +110,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessSymbol()
         {
-            Tokenizer tokenizer = new Tokenizer("#aSymbol");
+            Lexer tokenizer = new Lexer("#aSymbol");
             Token token;
 
             token = tokenizer.NextToken();
@@ -125,7 +125,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessSpecialName()
         {
-            Tokenizer tokenizer = new Tokenizer("@System.IO.FileInfo");
+            Lexer tokenizer = new Lexer("@System.IO.FileInfo");
 
             Token token;
 
@@ -141,7 +141,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessComplexSymbol()
         {
-            Tokenizer tokenizer = new Tokenizer("#aSymbol:with:many>chars");
+            Lexer tokenizer = new Lexer("#aSymbol:with:many>chars");
             Token token;
 
             token = tokenizer.NextToken();
@@ -156,7 +156,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessTwoSymbols()
         {
-            Tokenizer tokenizer = new Tokenizer("#aSymbol #anotherSymbol");
+            Lexer tokenizer = new Lexer("#aSymbol #anotherSymbol");
             Token token;
 
             token = tokenizer.NextToken();
@@ -174,10 +174,10 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TokenizerException))]
+        [ExpectedException(typeof(LexerException))]
         public void ProcessNotClosedString()
         {
-            Tokenizer tokenizer = new Tokenizer("'string");
+            Lexer tokenizer = new Lexer("'string");
             Token token;
 
             token = tokenizer.NextToken();
@@ -186,7 +186,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessInteger()
         {
-            Tokenizer tokenizer = new Tokenizer("10");
+            Lexer tokenizer = new Lexer("10");
             Token token;
 
             token = tokenizer.NextToken();
@@ -198,7 +198,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessOperator()
         {
-            Tokenizer tokenizer = new Tokenizer("+");
+            Lexer tokenizer = new Lexer("+");
             Token token;
 
             token = tokenizer.NextToken();
@@ -210,7 +210,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessSetOperator()
         {
-            Tokenizer tokenizer = new Tokenizer(":=");
+            Lexer tokenizer = new Lexer(":=");
             Token token;
 
             token = tokenizer.NextToken();
@@ -232,7 +232,7 @@ namespace AjTalk.Tests
                 opers2 += ' ';
             }
 
-            Tokenizer tokenizer = new Tokenizer(opers2);
+            Lexer tokenizer = new Lexer(opers2);
             Token token;
 
             for (int k = 0; k < opers.Length; k++)
@@ -248,7 +248,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessPunctuation()
         {
-            Tokenizer tokenizer = new Tokenizer(".");
+            Lexer tokenizer = new Lexer(".");
             Token token;
 
             token = tokenizer.NextToken();
@@ -261,7 +261,7 @@ namespace AjTalk.Tests
         public void ProcessPunctuations()
         {
             string punct = "().|[]";
-            Tokenizer tokenizer = new Tokenizer(punct);
+            Lexer tokenizer = new Lexer(punct);
             Token token;
 
             for (int k = 0; k < punct.Length; k++) 
@@ -277,7 +277,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessTokenAndString()
         {
-            Tokenizer tokenizer = new Tokenizer("token 'string'");
+            Lexer tokenizer = new Lexer("token 'string'");
             Token token;
 
             token = tokenizer.NextToken();
@@ -294,7 +294,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ParseDotNetObjectAndMethod()
         {
-            Tokenizer tokenizer = new Tokenizer("@System.FileInfo !new: 'FooBar.txt'");
+            Lexer tokenizer = new Lexer("@System.FileInfo !new: 'FooBar.txt'");
             Token token;
 
             token = tokenizer.NextToken();

@@ -79,7 +79,7 @@ namespace AjTalk.Test02
                     line = reader.ReadLine();
                 }
 
-                Compiler compiler = new Compiler(body);
+                Parser compiler = new Parser(body);
                 compiler.CompileInstanceMethod(cls);
             }
             else

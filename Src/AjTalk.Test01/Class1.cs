@@ -65,19 +65,19 @@ namespace AjTalk.Test01
 			mth.Execute(obj.Behavior,obj,new object[] {10,20});
 			cls.DefineInstanceMethod(mth);
 
-			Compiler compiler = new Compiler("set2: newValue self x: newValue self y: newValue.");
+			Parser compiler = new Parser("set2: newValue self x: newValue self y: newValue.");
 			compiler.CompileInstanceMethod(cls);
 
-			compiler = new Compiler("x ^x.");
+			compiler = new Parser("x ^x.");
 			compiler.CompileInstanceMethod(cls);
 
-			compiler = new Compiler("y ^y.");
+			compiler = new Parser("y ^y.");
 			compiler.CompileInstanceMethod(cls);
 
-			compiler = new Compiler("x1 ^x+1.");
+			compiler = new Parser("x1 ^x+1.");
 			compiler.CompileInstanceMethod(cls);
 
-			compiler = new Compiler("y1 ^y+1.");
+			compiler = new Parser("y1 ^y+1.");
 			compiler.CompileInstanceMethod(cls);
 
 			obj.SendMessage("set2:", new object[] { 10 });

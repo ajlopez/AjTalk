@@ -3,21 +3,21 @@ namespace AjTalk
     using System;
     using System.Collections;
 
-    public class Compiler
+    public class Parser
     {
-        private Tokenizer tokenizer;
+        private Lexer tokenizer;
         private IList arguments = new ArrayList();
         private IList locals = new ArrayList();
         private string methodname;
         private Block block;
 
-        public Compiler(Tokenizer tok)
+        public Parser(Lexer tok)
         {
             this.tokenizer = tok;
         }
 
-        public Compiler(string text)
-            : this(new Tokenizer(text))
+        public Parser(string text)
+            : this(new Lexer(text))
         {
         }
 
@@ -80,7 +80,7 @@ namespace AjTalk
 
                 if (token == null || token.Type != TokenType.Name)
                 {
-                    throw new CompilerException("Argument expected");
+                    throw new ParserException("Argument expected");
                 }
 
                 this.arguments.Add(token.Value);
@@ -108,7 +108,7 @@ namespace AjTalk
             {
                 if (token.Type != TokenType.Name)
                 {
-                    throw new CompilerException("Local variable name expected");
+                    throw new ParserException("Local variable name expected");
                 }
 
                 this.locals.Add(token.Value);
@@ -118,7 +118,7 @@ namespace AjTalk
 
             if (token == null)
             {
-                throw new CompilerException("'|' expected");
+                throw new ParserException("'|' expected");
             }
         }
 
@@ -128,7 +128,7 @@ namespace AjTalk
 
             if (token == null)
             {
-                throw new CompilerException("Argument expected");
+                throw new ParserException("Argument expected");
             }
 
             // TODO Review if this code is needed
@@ -138,7 +138,7 @@ namespace AjTalk
                 token = this.NextToken();
                 if (token == null || token.Type != TokenType.Name)
                 {
-                    throw new CompilerException("Argument expected");
+                    throw new ParserException("Argument expected");
                 }
 
                 this.arguments.Add(token.Value);
@@ -148,7 +148,7 @@ namespace AjTalk
 
             if (token.Type != TokenType.Name)
             {
-                throw new CompilerException("Argument expected");
+                throw new ParserException("Argument expected");
             }
 
             if (token.Value.EndsWith(":"))
@@ -168,7 +168,7 @@ namespace AjTalk
             while (true)
             {
                 if (token == null)
-                    throw new CompilerException("Unexpected end of input");
+                    throw new ParserException("Unexpected end of input");
 
                 if (token.Value == "|")
                     return;
@@ -190,7 +190,7 @@ namespace AjTalk
             Token token = this.NextToken();
 
             if (token == null || token.Type != TokenType.Name)
-                throw new CompilerException("Name expected");
+                throw new ParserException("Name expected");
 
             return token.Value;
         }
@@ -210,7 +210,7 @@ namespace AjTalk
                 token = this.NextToken();
                 if (token == null || token.Value != ")")
                 {
-                    throw new CompilerException("')' expected");
+                    throw new ParserException("')' expected");
                 }
 
                 return;
@@ -218,7 +218,7 @@ namespace AjTalk
 
             if (token.Value == "[")
             {
-                Compiler newcompiler = new Compiler(this.tokenizer);
+                Parser newcompiler = new Parser(this.tokenizer);
                 newcompiler.arguments = this.arguments;
                 newcompiler.locals = this.locals;
 
@@ -249,7 +249,7 @@ namespace AjTalk
 
             if (token.Type == TokenType.Name)
             {
-                if (token.Value[0] == Tokenizer.SpecialDotNetTypeMark)
+                if (token.Value[0] == Lexer.SpecialDotNetTypeMark)
                 {
                     this.block.CompileGetDotNetType(token.Value.Substring(1));
                     return;
@@ -259,7 +259,7 @@ namespace AjTalk
                 return;
             }
 
-            throw new CompilerException("Name expected");
+            throw new ParserException("Name expected");
         }
 
         private void CompileUnaryExpression()

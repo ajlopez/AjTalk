@@ -4,11 +4,12 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public class TokenizerException : Exception
+    public class ParserException : Exception
     {
-        public TokenizerException(string msg)
-            : base(msg)
+        public ParserException(string message)
+            : base(message)
         {
         }
     }
 }
+
