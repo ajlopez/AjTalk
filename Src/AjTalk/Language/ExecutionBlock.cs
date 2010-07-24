@@ -305,7 +305,7 @@ namespace AjTalk.Language
                 this.ip++;
             }
 
-            if (this.self == null && this.stack.Count>0)
+            if (this.self == null && this.stack.Count > 0)
                 return this.Pop();
 
             return this.self;

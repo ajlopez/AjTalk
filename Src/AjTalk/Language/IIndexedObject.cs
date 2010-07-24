@@ -4,10 +4,10 @@ namespace AjTalk.Language
 
     public interface IIndexedObject : IObject
     {
+        int BasicSize { get; }
+
         void SetIndexedValue(int nposition, object value);
 
         object GetIndexedValue(int nposition);
-
-        int BasicSize { get; }
     }
 }

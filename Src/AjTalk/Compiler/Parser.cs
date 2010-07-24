@@ -177,7 +177,7 @@ namespace AjTalk.Compiler
 
                 if (token.Type != TokenType.Operator || token.Value != ":")
                 {
-                    PushToken(token);
+                    this.PushToken(token);
                     return;
                 }
 
@@ -393,7 +393,7 @@ namespace AjTalk.Compiler
             {
                 Token token2 = this.NextToken();
 
-                if (token2.Type == TokenType.Operator && token2.Value == ":=")
+                if (token2 != null && token2.Type == TokenType.Operator && token2.Value == ":=")
                 {
                     this.CompileExpression();
                     this.block.CompileSet(token.Value);

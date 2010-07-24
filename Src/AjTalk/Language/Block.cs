@@ -347,6 +347,17 @@ namespace AjTalk.Language
             return false;
         }
 
+        private static bool IsValueMessage(string msgname)
+        {
+            if (msgname == "value:")
+                return true;
+
+            if (msgname.StartsWith("value:"))
+                return IsValueMessage(msgname.Substring(6));
+
+            return false;
+        }
+
         private void CompileByte(byte b)
         {
             if (this.bytecodes == null)
@@ -364,17 +375,6 @@ namespace AjTalk.Language
             }
 
             this.bytecodes[this.nextbytecode++] = b;
-        }
-
-        private static bool IsValueMessage(string msgname)
-        {
-            if (msgname == "value:")
-                return true;
-
-            if (msgname.StartsWith("value:"))
-                return IsValueMessage(msgname.Substring(6));
-
-            return false;
         }
     }
 }

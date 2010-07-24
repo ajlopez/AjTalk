@@ -22,6 +22,17 @@
         {
         }
 
+        public int BasicSize
+        {
+            get
+            {
+                if (this.indexedValues == null)
+                    return 0;
+
+                return this.indexedValues.Length;
+            }
+        }
+
         public object GetIndexedValue(int nposition)
         {
             if (nposition < 0)
@@ -48,17 +59,6 @@
             }
 
             this.indexedValues[nposition] = value;
-        }
-
-        public int BasicSize
-        {
-            get
-            {
-                if (this.indexedValues == null)
-                    return 0;
-
-                return this.indexedValues.Length;
-            }
         }
     }
 }

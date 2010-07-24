@@ -24,8 +24,8 @@ namespace AjTalk.Language
 
             this.name = name;
 
-            this.isBehavior = (name == "Behavior");
-            this.isClassDescription = (name == "ClassDescription");
+            this.isBehavior = name == "Behavior";
+            this.isClassDescription = name == "ClassDescription";
         }
 
         public BaseClass(string name, IClass superclass, IClass objclass, Machine machine)

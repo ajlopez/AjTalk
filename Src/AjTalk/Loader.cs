@@ -105,15 +105,15 @@ namespace AjTalk
 
             while (blocktext != null)
             {
-                Parser compiler = new Parser(blocktext);
+                Parser parser = new Parser(blocktext);
 
                 if (this.IsMethod())
                 {
-                    compiler.CompileInstanceMethod(this.currentClass);
+                    parser.CompileInstanceMethod(this.currentClass);
                 }
                 else
                 {
-                    Block block = compiler.CompileBlock();
+                    Block block = parser.CompileBlock();
                     block.Execute(machine, null);
                 }
 
