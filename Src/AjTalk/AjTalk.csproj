@@ -101,11 +101,11 @@
     <Compile Include="ByteCodes.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Parser.cs">
+    <Compile Include="Compiler\Parser.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BaseClassDescription.cs" />
-    <Compile Include="ParserException.cs" />
+    <Compile Include="Compiler\ParserException.cs" />
     <Compile Include="IIndexedObject.cs" />
     <Compile Include="EndOfInputException.cs" />
     <Compile Include="IClassDescription.cs" />
@@ -134,12 +134,12 @@
     <Compile Include="Method.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Token.cs" />
-    <Compile Include="Lexer.cs">
+    <Compile Include="Compiler\Token.cs" />
+    <Compile Include="Compiler\Lexer.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LexerException.cs" />
-    <Compile Include="TokenType.cs" />
+    <Compile Include="Compiler\LexerException.cs" />
+    <Compile Include="Compiler\TokenType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

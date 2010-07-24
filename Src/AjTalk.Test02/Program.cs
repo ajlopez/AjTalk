@@ -1,10 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-
 namespace AjTalk.Test02
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.IO;
+
+    using AjTalk.Compiler;
+
     class Program
     {
         static Machine machine;

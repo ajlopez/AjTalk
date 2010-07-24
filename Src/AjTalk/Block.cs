@@ -4,6 +4,8 @@ namespace AjTalk
     using System.Collections.Generic;
     using System.Text;
 
+    using AjTalk.Compiler;
+
     public class Block : IBlock
     {
         private byte[] bytecodes;

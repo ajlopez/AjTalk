@@ -5,6 +5,8 @@ namespace AjTalk
     using System.IO;
     using System.Text;
 
+    using AjTalk.Compiler;
+
     public class Loader
     {
         private TextReader reader;

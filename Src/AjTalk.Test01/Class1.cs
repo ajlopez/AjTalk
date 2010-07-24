@@ -1,17 +1,12 @@
-using System;
-
-using AjTalk;
-
 namespace AjTalk.Test01
 {
-	/// <summary>
-	/// Summary description for Class1.
-	/// </summary>
+    using System;
+
+    using AjTalk;
+    using AjTalk.Compiler;
+
 	class Class1
 	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
 		[STAThread]
 		static void Main(string[] args)
 		{
