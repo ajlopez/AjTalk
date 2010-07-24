@@ -8,6 +8,8 @@ namespace AjTalk.Tests
     using AjTalk;
     using AjTalk.Language;
 
+    using AjTalk.Tests.Language;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

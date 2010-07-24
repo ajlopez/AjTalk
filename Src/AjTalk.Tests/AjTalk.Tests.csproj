@@ -40,19 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseObjectTests.cs" />
-    <Compile Include="BasicClassTests.cs" />
-    <Compile Include="BlockTests.cs" />
-    <Compile Include="ClassTests.cs" />
-    <Compile Include="ParserTests.cs" />
-    <Compile Include="DoesNotUnderstandMethod.cs" />
-    <Compile Include="DotNetObjectTest.cs" />
+    <Compile Include="Language\BaseObjectTests.cs" />
+    <Compile Include="Language\BasicClassTests.cs" />
+    <Compile Include="Language\BlockTests.cs" />
+    <Compile Include="Language\ClassTests.cs" />
+    <Compile Include="Compiler\ParserTests.cs" />
+    <Compile Include="Language\DoesNotUnderstandMethod.cs" />
+    <Compile Include="Language\DotNetObjectTest.cs" />
     <Compile Include="LoaderTests.cs" />
     <Compile Include="MachineTests.cs" />
-    <Compile Include="MethodTests.cs" />
-    <Compile Include="ObjectTests.cs" />
+    <Compile Include="Language\MethodTests.cs" />
+    <Compile Include="Language\ObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LexerTests.cs" />
+    <Compile Include="Compiler\LexerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AjTalk\AjTalk.csproj">

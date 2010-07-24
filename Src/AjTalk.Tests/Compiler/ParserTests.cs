@@ -1,4 +1,4 @@
-namespace AjTalk.Tests
+namespace AjTalk.Tests.Compiler
 {
     using System;
     using System.Collections.Generic;
@@ -7,6 +7,8 @@ namespace AjTalk.Tests
     using AjTalk;
     using AjTalk.Compiler;
     using AjTalk.Language;
+
+    using AjTalk.Tests.Language;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

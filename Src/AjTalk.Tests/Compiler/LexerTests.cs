@@ -1,4 +1,4 @@
-namespace AjTalk.Tests
+namespace AjTalk.Tests.Compiler
 {
     using System;
     using System.Collections.Generic;
