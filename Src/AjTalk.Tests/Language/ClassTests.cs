@@ -129,7 +129,7 @@ namespace AjTalk.Tests.Language
             IClass cls = machine.CreateClass("TestClass");
             cls.DefineInstanceVariable("x");
             cls.DefineInstanceVariable("y");
-            IObject obj = cls.NewObject();
+            IObject obj = (IObject) cls.NewObject();
             Assert.IsNotNull(obj);
             Assert.IsNull(obj[0]);
             Assert.IsNull(obj[1]);
@@ -140,7 +140,7 @@ namespace AjTalk.Tests.Language
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Behavior");
-            IObject obj = cls.NewObject();
+            IObject obj = (IObject) cls.NewObject();
             Assert.IsNotNull(obj);
             Assert.IsInstanceOfType(obj, typeof(BaseBehavior));
             Assert.IsNotInstanceOfType(obj, typeof(BaseClassDescription));
@@ -151,7 +151,7 @@ namespace AjTalk.Tests.Language
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("ClassDescription");
-            IObject obj = cls.NewObject();
+            IObject obj = (IObject) cls.NewObject();
             Assert.IsNotNull(obj);
             Assert.IsInstanceOfType(obj, typeof(BaseClassDescription));
             Assert.IsNotInstanceOfType(obj, typeof(BaseClass));

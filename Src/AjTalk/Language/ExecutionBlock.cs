@@ -11,33 +11,36 @@ namespace AjTalk.Language
         private IObject receiver;
         private object[] arguments;
         private object[] locals;
+        private object nativeSelf;
 
         private int ip;
         private IList stack;
 
         public ExecutionBlock(Machine machine, IObject receiver, Block block, object[] arguments)
+            : this(block, arguments)
         {
             this.self = null;
             this.machine = machine;
             this.receiver = receiver;
-            this.block = block;
-            this.arguments = arguments;
-            this.stack = new ArrayList(5);
-            if (this.block.NoLocals > 0)
-            {
-                this.locals = new object[this.block.NoLocals];
-            }
-            else
-            {
-                this.locals = null;
-            }
         }
 
         public ExecutionBlock(IObject self, IObject receiver, Block block, object[] arguments)
+            : this(block, arguments)
         {
             this.self = self;
             this.machine = self.Behavior.Machine;
             this.receiver = receiver;
+        }
+
+        public ExecutionBlock(Machine machine, object nativeself, Block block, object[] arguments)
+            : this(block, arguments)
+        {
+            this.machine = machine;
+            this.nativeSelf = nativeself;
+        }
+
+        private ExecutionBlock(Block block, object[] arguments)
+        {
             this.block = block;
             this.arguments = arguments;
             this.stack = new ArrayList(5);
@@ -132,7 +135,7 @@ namespace AjTalk.Language
                         this.Push(this.arguments[arg]);
                         break;
                     case ByteCode.GetClass:
-                        this.Push(((IObject) this.Pop()).Behavior);
+                        this.Push(((IObject)this.Pop()).Behavior);
                         break;
                     case ByteCode.BasicSize:
                         IIndexedObject indexedObj = (IIndexedObject)this.Pop();
@@ -156,7 +159,10 @@ namespace AjTalk.Language
                         this.Push(this.locals[arg]);
                         break;
                     case ByteCode.GetSelf:
-                        this.Push(this.self);
+                        if (this.nativeSelf != null)
+                            this.Push(this.nativeSelf);
+                        else
+                            this.Push(this.self);
                         break;
                     case ByteCode.GetSuperClass:
                         this.Push(this.receiver.Behavior.SuperClass);
@@ -238,7 +244,10 @@ namespace AjTalk.Language
 
                         iobj = obj as IObject;
 
-                        this.Push(iobj.SendMessage(mthname, args));
+                        if (iobj == null)
+                            this.Push(DotNetObject.SendMessage(this.machine, obj, mthname, args));
+                        else
+                            this.Push(iobj.SendMessage(mthname, args));
 
                         break;
                     case ByteCode.NewDotNetObject:
@@ -273,7 +282,12 @@ namespace AjTalk.Language
 
                         obj = this.Pop();
 
-                        this.Push(DotNetObject.SendMessage(obj, mthname, args));
+                        Type type = obj as Type;
+
+                        if (type != null)
+                            this.Push(DotNetObject.SendNativeStaticMessage(type, mthname, args));
+                        else
+                            this.Push(DotNetObject.SendNativeMessage(obj, mthname, args));
 
                         break;
                     case ByteCode.SetArgument:

@@ -147,6 +147,25 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileBlockWithParameter()
+        {
+            Parser compiler = new Parser(" :a | a doSomething");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(1, block.NoConstants);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(1, block.Arity);
+
+            object constant = block.GetConstant(0);
+
+            Assert.IsNotNull(constant);
+            Assert.IsInstanceOfType(constant, typeof(String));
+            Assert.AreEqual("doSomething", constant);
+        }
+
+        [TestMethod]
         public void ExecuteBlock()
         {
             Machine machine = new Machine();
@@ -232,7 +251,7 @@ namespace AjTalk.Tests.Compiler
                     "y: newY y := newY"
                 });
 
-            IObject iobj = cls.NewObject();
+            IObject iobj = (IObject) cls.NewObject();
 
             machine.SetGlobalObject("aRectangle", iobj);
 
@@ -263,7 +282,7 @@ namespace AjTalk.Tests.Compiler
                     "y: newY y := newY"
                 });
 
-            IObject iobj = cls.NewObject();
+            IObject iobj = (IObject) cls.NewObject();
 
             machine.SetGlobalObject("aRectangle", iobj);
 
@@ -339,7 +358,7 @@ namespace AjTalk.Tests.Compiler
 
             Assert.IsNotNull(cls);
 
-            IObject obj = cls.NewObject();
+            IObject obj = (IObject) cls.NewObject();
 
             cls.GetInstanceMethod("x:").Execute(obj, new object[] { 10 });
 
@@ -398,7 +417,7 @@ namespace AjTalk.Tests.Compiler
 
             Assert.IsNotNull(cls);
 
-            IObject obj = cls.NewObject();
+            IObject obj = (IObject) cls.NewObject();
 
             cls.GetInstanceMethod("side:").Execute(obj, new object[] { 10 });
 
@@ -419,7 +438,7 @@ namespace AjTalk.Tests.Compiler
 
             Assert.IsNotNull(cls);
 
-            IObject obj = cls.NewObject();
+            IObject obj = (IObject) cls.NewObject();
 
             cls.GetInstanceMethod("side:").Execute(obj, new object[] { 10 });
 

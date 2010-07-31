@@ -18,7 +18,7 @@
 
         void DefineInstanceMethod(IMethod method);
 
-        IObject NewObject();
+        object NewObject();
 
         IMethod GetClassMethod(string mthname);
 

@@ -127,6 +127,7 @@
     <Compile Include="Language\IObject.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Language\NativeBehavior.cs" />
     <Compile Include="Loader.cs" />
     <Compile Include="Machine.cs">
       <SubType>Code</SubType>

@@ -29,7 +29,19 @@
         {
             Machine machine = new Machine();
 
-            object obj = DotNetObject.SendMessage(new System.IO.FileInfo("NonexistentFile.txt"), "exists", null);
+            object obj = DotNetObject.SendNativeMessage(new System.IO.FileInfo("NonexistentFile.txt"), "exists", null);
+
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(bool));
+            Assert.IsFalse((bool)obj);
+        }
+
+        [TestMethod]
+        public void InvokeStaticMethod()
+        {
+            Machine machine = new Machine();
+
+            object obj = DotNetObject.SendNativeStaticMessage(typeof(System.IO.File), "exists", new object[] { "FooFile.txt" });
 
             Assert.IsNotNull(obj);
             Assert.IsInstanceOfType(obj, typeof(bool));

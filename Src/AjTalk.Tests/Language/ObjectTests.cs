@@ -18,7 +18,7 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void BeCreated() 
         {
-            IObject obj = this.GetRectangleClass().NewObject();
+            IObject obj = (IObject) this.GetRectangleClass().NewObject();
 
             Assert.IsNotNull(obj);
             Assert.IsNull(obj[0]);
@@ -30,7 +30,7 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void RunMethod()
         {
-            IObject obj = this.GetRectangleClass().NewObject();
+            IObject obj = (IObject) this.GetRectangleClass().NewObject();
 
             obj.SendMessage("side:", new object[] { 10 });
 

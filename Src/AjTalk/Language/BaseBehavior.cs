@@ -118,7 +118,7 @@
             return this.instancemethods[mthname];
         }
 
-        public virtual IObject NewObject()
+        public virtual object NewObject()
         {
             if (this.IsIndexed)
                 return new BaseIndexedObject(this, this.NoInstanceVariables);

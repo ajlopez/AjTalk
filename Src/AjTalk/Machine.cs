@@ -10,6 +10,7 @@ namespace AjTalk
         private BaseClass classclass;
 
         private Dictionary<string, object> globals = new Dictionary<string, object>();
+        private Dictionary<Type, NativeBehavior> nativeBehaviors = new Dictionary<Type, NativeBehavior>();
 
         public Machine()
         {
@@ -54,6 +55,19 @@ namespace AjTalk
         public void SetGlobalObject(string objname, object value)
         {
             this.globals[objname] = value;
+        }
+
+        internal void RegisterNativeBehavior(Type type, NativeBehavior behavior)
+        {
+            this.nativeBehaviors[type] = behavior;
+        }
+
+        internal NativeBehavior GetNativeBehavior(Type type)
+        {
+            if (this.nativeBehaviors.ContainsKey(type))
+                return this.nativeBehaviors[type];
+
+            return null;
         }
     }
 }

@@ -82,7 +82,7 @@ namespace AjTalk.Tests.Language
 
             cls.DefineInstanceMethod(mth);
 
-            IObject obj = cls.NewObject();
+            IObject obj = (IObject) cls.NewObject();
 
             mth.Execute(obj, new object[] { 10 });
 
@@ -108,7 +108,7 @@ namespace AjTalk.Tests.Language
 
             cls.DefineInstanceMethod(mth);
 
-            IObject obj = cls.NewObject();
+            IObject obj = (IObject) cls.NewObject();
 
             mth.Execute(obj, new object[] { 10 });
 

@@ -42,7 +42,7 @@ namespace AjTalk.Language
             }
         }
 
-        public override IObject NewObject()
+        public override object NewObject()
         {
             if (this.isBehavior)
             {

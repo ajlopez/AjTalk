@@ -71,6 +71,14 @@ New AjTalk.Language namespace
 New folders in tests
 First EvaluateTests
 
+2010-07-30
+NativeBehavior with tests
+IBehavior.NewObject returns object instead of IObject
+nativeSelf in ExecutionBlock
+DotNetObject.SendNativeMethod, .SendNativeStaticMethod with tests
+DotNetObject.SendMessage (WIP)
+bytecode .Send manage native object or IObject
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/
