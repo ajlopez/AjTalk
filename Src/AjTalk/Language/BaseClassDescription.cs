@@ -13,12 +13,12 @@ namespace AjTalk.Language
         {
         }
 
-        public BaseClassDescription(IClassDescription superclass, Machine machine)
+        public BaseClassDescription(IBehavior superclass, Machine machine)
             : base(superclass, machine)
         {
         }
 
-        public BaseClassDescription(IClassDescription superclass, IClass metaclass, Machine machine)
+        public BaseClassDescription(IBehavior superclass, IClass metaclass, Machine machine)
             : this(superclass, machine)
         {
             this.SetBehavior(metaclass);

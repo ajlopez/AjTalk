@@ -166,6 +166,19 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileBlockWithTwoParameters()
+        {
+            Parser compiler = new Parser(" :a :b | a+b");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(0, block.NoConstants);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(2, block.Arity);
+        }
+
+        [TestMethod]
         public void ExecuteBlock()
         {
             Machine machine = new Machine();
@@ -197,7 +210,7 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            ((IClass)nil).DefineClassMethod(new DoesNotUnderstandMethod(machine));
+            ((IClass)nil).DefineClassMethod(new BehaviorDoesNotUnderstandMethod(machine));
 
             Parser compiler = new Parser("^nil new instSize");
             Block block = compiler.CompileBlock();

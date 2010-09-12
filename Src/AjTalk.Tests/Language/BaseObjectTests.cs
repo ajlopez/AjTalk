@@ -19,5 +19,15 @@ namespace AjTalk.Tests.Language
 
             Assert.IsNull(bo.Behavior);
         }
+
+        [TestMethod]
+        public void CreateWithVariables()
+        {
+            BaseObject bo = new BaseObject(null, new object[] { 1, 2, 3 });
+
+            Assert.AreEqual(1, bo[0]);
+            Assert.AreEqual(2, bo[1]);
+            Assert.AreEqual(3, bo[2]);
+        }
     }
 }

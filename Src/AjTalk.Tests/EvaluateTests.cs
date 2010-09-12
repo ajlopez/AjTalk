@@ -42,6 +42,24 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void EvaluateIntegerAdd()
+        {
+            Assert.AreEqual(4, this.Evaluate("1+3"));
+        }
+
+        [TestMethod]
+        public void EvaluateBlockWithIntegerParameter()
+        {
+            Assert.AreEqual(2, this.Evaluate("[:x | x] value: 2"));
+        }
+
+        [TestMethod]
+        public void EvaluateBlockWithTwoIntegerParameters()
+        {
+            Assert.AreEqual(5, this.Evaluate("[:x :y | x + y] value: 2 value: 3"));
+        }
+
+        [TestMethod]
         public void EvaluateGlobalVariable()
         {
             this.machine.SetGlobalObject("One", 1);

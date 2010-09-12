@@ -7,7 +7,7 @@ Object subclass: #Collection
 Collection subclass: #List nativeType: @System.Collections.ArrayList
 !
 
-myList := List basicNew
+myList := List new
 !
 
 myList add: 1

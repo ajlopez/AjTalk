@@ -29,20 +29,18 @@ namespace AjTalk
 
         public IClass CreateClass(string clsname, bool isIndexed)
         {
-            // TODO Review Tricky fourth param
             BaseClass cls = new BaseClass(clsname, this.classclass, this);
             cls.IsIndexed = isIndexed;
             return cls;
         }
 
-        public IClass CreateClass(string clsname, IClass superclass)
+        public IClass CreateClass(string clsname, IBehavior superclass)
         {
-            // TODO Review Tricky fourth param
             BaseClass cls = new BaseClass(clsname, superclass, this);
             return cls;
         }
 
-        public IBehavior CreateNativeBehavior(IClass superclass, Type type)
+        public IBehavior CreateNativeBehavior(IBehavior superclass, Type type)
         {
             NativeBehavior behavior = new NativeBehavior(superclass, this, type);
             return behavior;

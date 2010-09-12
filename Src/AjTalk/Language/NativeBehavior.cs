@@ -8,7 +8,7 @@
     {
         private Type nativeType;
 
-        public NativeBehavior(IClass superclass, Machine machine, Type type)
+        public NativeBehavior(IBehavior superclass, Machine machine, Type type)
             : base(superclass, machine)
         {
             this.nativeType = type;

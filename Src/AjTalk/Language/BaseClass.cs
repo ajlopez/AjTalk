@@ -14,7 +14,7 @@ namespace AjTalk.Language
         {
         }
 
-        public BaseClass(string name, IClass superclass, Machine machine)
+        public BaseClass(string name, IBehavior superclass, Machine machine)
             : base(superclass, machine)
         {
             if (name == null)

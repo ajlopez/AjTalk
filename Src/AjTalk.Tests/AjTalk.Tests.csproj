@@ -42,11 +42,13 @@
   <ItemGroup>
     <Compile Include="EvaluateTests.cs" />
     <Compile Include="Language\BaseBehaviorTests.cs" />
+    <Compile Include="Language\BaseIndexedObjectTests.cs" />
     <Compile Include="Language\BaseObjectTests.cs" />
     <Compile Include="Language\BasicClassTests.cs" />
     <Compile Include="Language\BlockTests.cs" />
     <Compile Include="Language\ClassTests.cs" />
     <Compile Include="Compiler\ParserTests.cs" />
+    <Compile Include="Language\BehaviorDoesNotUnderstandMethod.cs" />
     <Compile Include="Language\DoesNotUnderstandMethod.cs" />
     <Compile Include="Language\DotNetObjectTest.cs" />
     <Compile Include="Language\NativeBehaviorTests.cs" />
@@ -87,6 +89,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CodeFiles\NativeFileInfo.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\NativeBehavior.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

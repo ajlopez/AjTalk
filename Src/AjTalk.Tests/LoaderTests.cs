@@ -330,6 +330,24 @@ namespace AjTalk.Tests
             Assert.AreEqual("foo", list[1]);
         }
 
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\NativeFileInfo.st")]
+        public void LoadNativeFileInfo()
+        {
+            Loader loader = new Loader(@"NativeFileInfo.st");
+
+            Machine machine = CreateMachine();
+
+            loader.LoadAndExecute(machine);
+
+            object result = machine.GetGlobalObject("myFileInfo");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(FileInfo));
+
+            Assert.IsFalse((bool)machine.GetGlobalObject("result"));
+        }
+
         internal static Machine CreateMachine()
         {
             Machine machine = new Machine();
@@ -340,7 +358,7 @@ namespace AjTalk.Tests
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
             ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
-            ((IClass)nil).DefineClassMethod(new DoesNotUnderstandMethod(machine));
+            ((IClass)nil).DefineClassMethod(new BehaviorDoesNotUnderstandMethod(machine));
 
             return machine;
         }

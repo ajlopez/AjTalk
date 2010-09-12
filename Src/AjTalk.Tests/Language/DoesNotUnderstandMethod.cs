@@ -29,7 +29,7 @@
             private set;
         }
 
-        private Machine Machine { get; set; }
+        public Machine Machine { get; private set; }
 
         public object Execute(IObject self, object[] args)
         {
@@ -51,20 +51,8 @@
             throw new NotImplementedException();
         }
 
-        private object DoesNotUnderstand(IObject self, IObject receiver, string msgname, object[] args)
+        protected virtual object DoesNotUnderstand(IObject self, IObject receiver, string msgname, object[] args)
         {
-            if (msgname.Equals("new"))
-            {
-                return ((IClass)self).NewObject();
-            }
-
-            if (msgname.Equals("subclass:"))
-            {
-                IClass newclass = this.Machine.CreateClass((string) args[0], (IClass)self);
-                this.Machine.SetGlobalObject(newclass.Name, newclass);
-                return newclass;
-            }
-
             if (msgname.Equals("ifFalse:"))
             {
                 Block block = (Block) args[0];
@@ -72,33 +60,6 @@
                 
                 // TODO return block value??
                 return this.Machine.GetGlobalObject("nil");
-            }
-
-            if (msgname.Equals("subclass:instanceVariableNames:") ||
-                msgname.Equals("subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:"))
-            {
-                IClass newclass = this.Machine.CreateClass((string)args[0], (IClass)self);
-
-                string[] varnames = ((string)args[1]).Split(' ');
-
-                foreach (string varname in varnames)
-                {
-                    if (!string.IsNullOrEmpty(varname))
-                    {
-                        newclass.DefineInstanceVariable(varname);
-                    }
-                }
-
-                this.Machine.SetGlobalObject(newclass.Name, newclass);
-                return newclass;
-            }
-
-            if (msgname.Equals("subclass:nativeType:"))
-            {
-                IBehavior newbehavior = this.Machine.CreateNativeBehavior((IClass) self, (Type)args[1]);
-
-                this.Machine.SetGlobalObject((string) args[0], newbehavior);
-                return newbehavior;
             }
 
             throw new InvalidOperationException(string.Format("Does not understand {0}", msgname));

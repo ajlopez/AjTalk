@@ -41,6 +41,9 @@
             if (mth != null)
                 return mth.ExecuteNative(obj, args);
 
+            if (obj is Type && (msgname == "new" || msgname.StartsWith("new:")))
+                return NewObject((Type)obj, args);
+
             // TODO how to use doesNotUnderstand in native behavior
             //mth = behavior.GetInstanceMethod("doesNotUnderstand:");
 
