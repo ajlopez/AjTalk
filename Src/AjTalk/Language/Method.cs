@@ -81,6 +81,11 @@ namespace AjTalk.Language
             return (new ExecutionBlock(self, receiver, this, args)).Execute();
         }
 
+        public object ExecuteNative(object self, object[] args)
+        {
+            throw new NotSupportedException();
+        }
+
         private bool TryCompileGetVariable(string name)
         {
             if (this.mthclass == null)

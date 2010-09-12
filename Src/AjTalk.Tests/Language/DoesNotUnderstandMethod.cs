@@ -46,6 +46,11 @@
             throw new NotImplementedException();
         }
 
+        public object ExecuteNative(object self, object[] args)
+        {
+            throw new NotImplementedException();
+        }
+
         private object DoesNotUnderstand(IObject self, IObject receiver, string msgname, object[] args)
         {
             if (msgname.Equals("new"))
@@ -86,6 +91,14 @@
 
                 this.Machine.SetGlobalObject(newclass.Name, newclass);
                 return newclass;
+            }
+
+            if (msgname.Equals("subclass:nativeType:"))
+            {
+                IBehavior newbehavior = this.Machine.CreateNativeBehavior((IClass) self, (Type)args[1]);
+
+                this.Machine.SetGlobalObject((string) args[0], newbehavior);
+                return newbehavior;
             }
 
             throw new InvalidOperationException(string.Format("Does not understand {0}", msgname));

@@ -79,6 +79,10 @@ DotNetObject.SendNativeMethod, .SendNativeStaticMethod with tests
 DotNetObject.SendMessage (WIP)
 bytecode .Send manage native object or IObject
 
+2010-08-12
+subclass:nativeType: support in test, DoesNotUnderstand
+new example NativeBahevior.st
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

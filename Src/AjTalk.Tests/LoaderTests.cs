@@ -1,6 +1,7 @@
 namespace AjTalk.Tests
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.IO;
     using System.Text;
@@ -263,7 +264,29 @@ namespace AjTalk.Tests
             Assert.IsNotNull(machine.GetGlobalObject("Metaclass"));
         }
 
-        private static Machine CreateMachine()
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\NativeBehavior.st")]
+        public void LoadNativeBehavior()
+        {
+            Loader loader = new Loader(@"NativeBehavior.st");
+
+            Machine machine = CreateMachine();
+
+            loader.LoadAndExecute(machine);
+
+            object result = machine.GetGlobalObject("myList");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ArrayList));
+
+            ArrayList list = (ArrayList)result;
+
+            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual(1, list[0]);
+            Assert.AreEqual("foo", list[1]);
+        }
+
+        internal static Machine CreateMachine()
         {
             Machine machine = new Machine();
 

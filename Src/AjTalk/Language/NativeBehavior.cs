@@ -15,9 +15,11 @@
             machine.RegisterNativeBehavior(type, this);
         }
 
+        public Type NativeType { get { return this.nativeType; } }
+
         public override object NewObject()
         {
-            return base.NewObject();
+            return this.CreateObject();
         }
 
         public object CreateObject(params object[] parameters)

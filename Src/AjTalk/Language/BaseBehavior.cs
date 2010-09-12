@@ -65,12 +65,7 @@
 
         public void DefineClassMethod(IMethod method)
         {
-            if (method == null)
-            {
-                throw new ArgumentNullException("method");
-            }
-
-            this.classmethods[method.Name] = method;
+            this.MetaClass.DefineInstanceMethod(method);
         }
 
         public void DefineInstanceMethod(IMethod method)
@@ -80,22 +75,7 @@
 
         public IMethod GetClassMethod(string mthname)
         {
-            if (mthname == null)
-            {
-                throw new ArgumentNullException("mthname");
-            }
-
-            if (!this.classmethods.ContainsKey(mthname))
-            {
-                if (this.superclass != null)
-                {
-                    return this.superclass.GetClassMethod(mthname);
-                }
-
-                return null;
-            }
-
-            return this.classmethods[mthname];
+            return this.MetaClass.GetInstanceMethod(mthname);
         }
 
         public IMethod GetInstanceMethod(string mthname)

@@ -11,5 +11,7 @@ namespace AjTalk.Language
         object Execute(IObject self, object[] args);
 
         object Execute(IObject self, IObject receiver, object[] args);
+
+        object ExecuteNative(object seft, object[] args);
     }
 }

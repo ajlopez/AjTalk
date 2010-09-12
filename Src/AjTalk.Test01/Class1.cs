@@ -15,7 +15,7 @@ namespace AjTalk.Test01
 			IClass cls = machine.CreateClass("Point");
 			cls.DefineInstanceVariable("x");
 			cls.DefineInstanceVariable("y");
-			IObject obj = cls.NewObject();
+			IObject obj = (IObject) cls.NewObject();
 			Console.WriteLine(obj[0]);
 			Console.WriteLine(obj[1]);
 			obj[0]=0;

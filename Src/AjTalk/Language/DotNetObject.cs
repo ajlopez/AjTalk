@@ -25,24 +25,29 @@
         {
             NativeBehavior behavior = machine.GetNativeBehavior(obj.GetType());
 
+            string mthname = msgname;
+            int p = msgname.IndexOf(":");
+
+            if (p > 0)
+                mthname = msgname.Substring(0, p);
+            else
+                mthname = msgname;
+
             if (behavior == null)
-                return SendNativeMessage(obj, msgname, args); // TODO get real method name from message
+                return SendNativeMessage(obj, mthname, args); 
 
             IMethod mth = behavior.GetInstanceMethod(msgname);
 
+            if (mth != null)
+                return mth.ExecuteNative(obj, args);
+
+            // TODO how to use doesNotUnderstand in native behavior
+            //mth = behavior.GetInstanceMethod("doesNotUnderstand:");
+
             //if (mth != null)
-            //{
-            //    return mth.Execute(this, this, args);
-            //}
+            //    return mth.ExecuteNative(obj, new object[] { msgname, args });
 
-            //mth = this.behavior.GetInstanceMethod("doesNotUnderstand:");
-
-            //if (mth != null)
-            //{
-            //    return mth.Execute(this, this, new object[] { msgname, args });
-            //}
-
-            throw new InvalidProgramException(string.Format("Does not understand {0}", msgname));
+            return SendNativeMessage(obj, mthname, args);
         }
     }
 }

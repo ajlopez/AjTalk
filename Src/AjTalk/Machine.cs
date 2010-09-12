@@ -42,6 +42,12 @@ namespace AjTalk
             return cls;
         }
 
+        public IBehavior CreateNativeBehavior(IClass superclass, Type type)
+        {
+            NativeBehavior behavior = new NativeBehavior(superclass, this, type);
+            return behavior;
+        }
+
         public object GetGlobalObject(string objname)
         {
             if (this.globals.ContainsKey(objname))

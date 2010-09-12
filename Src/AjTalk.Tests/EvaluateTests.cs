@@ -19,7 +19,8 @@ namespace AjTalk.Tests
         [TestInitialize]
         public void Setup()
         {
-            this.machine = new Machine();
+            // TODO refactor machine factory
+            this.machine = LoaderTests.CreateMachine();
         }
 
         [TestMethod]
@@ -110,6 +111,24 @@ namespace AjTalk.Tests
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(bool));
             Assert.IsFalse((bool) result);
+        }
+
+        [TestMethod]
+        public void DefineNativeBehavior()
+        {
+            object result = this.Evaluate("nil subclass: #List nativeType: @System.Collections.ArrayList");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(NativeBehavior));
+
+            NativeBehavior behavior = (NativeBehavior) result;
+
+            Assert.AreEqual(typeof(System.Collections.ArrayList), behavior.NativeType);
+
+            object newobj = behavior.CreateObject();
+
+            Assert.IsNotNull(newobj);
+            Assert.IsInstanceOfType(newobj, typeof(System.Collections.ArrayList));
         }
 
         private object Evaluate(string text)

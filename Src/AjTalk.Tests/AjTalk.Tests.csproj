@@ -86,6 +86,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CodeFiles\NativeBehavior.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\Library1.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
