@@ -106,6 +106,8 @@
     </Compile>
     <Compile Include="Language\BaseClassDescription.cs" />
     <Compile Include="Compiler\ParserException.cs" />
+    <Compile Include="Language\BaseMetaClass.cs" />
+    <Compile Include="Language\IMetaClass.cs" />
     <Compile Include="Language\IIndexedObject.cs" />
     <Compile Include="Compiler\EndOfInputException.cs" />
     <Compile Include="Language\IClassDescription.cs" />

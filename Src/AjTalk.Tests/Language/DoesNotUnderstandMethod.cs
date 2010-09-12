@@ -23,7 +23,7 @@
             private set;
         }
         
-        public IClass Class
+        public IClassDescription Class
         {
             get;
             private set;

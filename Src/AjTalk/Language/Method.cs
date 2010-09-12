@@ -7,20 +7,20 @@ namespace AjTalk.Language
     public class Method : Block, IMethod
     {
         private string name;
-        private IClass mthclass;
+        private IClassDescription mthclass;
 
         public Method(string name)
         {
             this.name = name;
         }
 
-        public Method(IClass cls, string name)
+        public Method(IClassDescription cls, string name)
             : this(name)
         {
             this.mthclass = cls;
         }
 
-        public IClass Class
+        public IClassDescription Class
         {
             get { return this.mthclass; }
         }

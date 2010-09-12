@@ -418,7 +418,7 @@ namespace AjTalk.Compiler
             }
         }
 
-        private void CompileMethod(IClass cls)
+        private void CompileMethod(IClassDescription cls)
         {
             this.CompileArguments();
             this.CompileLocals();

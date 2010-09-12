@@ -28,12 +28,6 @@ namespace AjTalk.Language
             this.isClassDescription = name == "ClassDescription";
         }
 
-        public BaseClass(string name, IClass superclass, IClass objclass, Machine machine)
-            : this(name, superclass, machine)
-        {
-            this.SetBehavior(objclass);
-        }
-
         public string Name
         {
             get

@@ -13,12 +13,12 @@ namespace AjTalk.Language
         {
         }
 
-        public BaseClassDescription(IClass superclass, Machine machine)
+        public BaseClassDescription(IClassDescription superclass, Machine machine)
             : base(superclass, machine)
         {
         }
 
-        public BaseClassDescription(IClass superclass, IClass metaclass, Machine machine)
+        public BaseClassDescription(IClassDescription superclass, IClass metaclass, Machine machine)
             : this(superclass, machine)
         {
             this.SetBehavior(metaclass);
@@ -76,9 +76,9 @@ namespace AjTalk.Language
         {
             int offset;
 
-            if (this.SuperClass != null)
+            if (this.SuperClass != null && this.SuperClass is IClassDescription)
             {
-                offset = this.SuperClass.GetInstanceVariableOffset(varname);
+                offset = ((IClassDescription) this.SuperClass).GetInstanceVariableOffset(varname);
 
                 if (offset >= 0)
                 {
@@ -88,9 +88,9 @@ namespace AjTalk.Language
                 
             offset = this.instancevariables.IndexOf(varname);
 
-            if (offset >= 0 && this.SuperClass != null)
+            if (offset >= 0 && this.SuperClass != null && this.SuperClass is IClassDescription)
             {
-                offset += this.SuperClass.NoInstanceVariables;
+                offset += ((IClassDescription) this.SuperClass).NoInstanceVariables;
             }
 
             return offset;

@@ -24,7 +24,8 @@ namespace AjTalk.Tests.Language
             Assert.IsNull(cls.GetInstanceMethod("x"));
             Assert.IsNull(cls.GetClassMethod("x"));
             Assert.IsNotNull(cls.SuperClass);
-            Assert.AreEqual("nil", cls.SuperClass.Name);
+            Assert.IsInstanceOfType(cls.SuperClass, typeof(IClass));
+            Assert.AreEqual("nil", ((IClass) cls.SuperClass).Name);
         }
 
         [TestMethod]
@@ -40,7 +41,8 @@ namespace AjTalk.Tests.Language
             Assert.IsNull(cls.GetInstanceMethod("x"));
             Assert.IsNull(cls.GetClassMethod("x"));
             Assert.IsNotNull(cls.SuperClass);
-            Assert.AreEqual("Figure", cls.SuperClass.Name);
+            Assert.IsInstanceOfType(cls.SuperClass, typeof(IClass));
+            Assert.AreEqual("Figure", ((IClass) cls.SuperClass).Name);
         }
 
         [TestMethod]

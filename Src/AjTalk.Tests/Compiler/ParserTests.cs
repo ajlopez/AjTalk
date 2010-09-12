@@ -175,7 +175,7 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
+            ((IClass)nil).DefineClassMethod(new DoesNotUnderstandMethod(machine));
 
             Parser compiler = new Parser("nil ifFalse: [GlobalName := 'foo']");
             Block block = compiler.CompileBlock();
@@ -197,7 +197,7 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            ((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
+            ((IClass)nil).DefineClassMethod(new DoesNotUnderstandMethod(machine));
 
             Parser compiler = new Parser("^nil new instSize");
             Block block = compiler.CompileBlock();

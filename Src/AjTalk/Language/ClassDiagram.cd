@@ -3,7 +3,7 @@
   <Class Name="AjTalk.Language.BaseClass">
     <Position X="4.25" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAAAAAAAAQAAAAEAAAAQQAAAAAAAAA=</HashCode>
+      <HashCode>AAkAAAAAAAAAAAAAAAAAAAQAAAAEAAAAQQAAAAAAAAA=</HashCode>
       <FileName>Language\BaseClass.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -26,14 +26,14 @@
   <Class Name="AjTalk.Language.ExecutionBlock" Collapsed="true">
     <Position X="11.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAUAAAAABAAAAACoAIAARAAgAAAADAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAEUAAAAABAAAAACoAIAARAAgAAAADAA=</HashCode>
       <FileName>Language\ExecutionBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.Machine" Collapsed="true">
     <Position X="7.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAgAAAAAACAAAAAAAAAAAAAAIAAiAAAAAAAA=</HashCode>
+      <HashCode>AAAIAAAAAgAAAIAACAAAAAAAIAAAAAAIAAiAQAAAAAA=</HashCode>
       <FileName>Machine.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -76,7 +76,7 @@
   <Class Name="AjTalk.Language.Method">
     <Position X="2.75" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAQAAAAAAAAQAAAIAAAQAAAAEAAAAJAAAEAAAgAA=</HashCode>
+      <HashCode>AAAAAQAAAAAAAAQAAAIAAAQAAAAEAAAAJAAAEAQAgAA=</HashCode>
       <FileName>Language\Method.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -112,7 +112,7 @@
   <Interface Name="AjTalk.Language.IMethod" Collapsed="true">
     <Position X="4.75" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAIAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAIAAAQAAAAAAAAAAAAAAAQAAAA=</HashCode>
       <FileName>Language\IMethod.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -123,11 +123,12 @@
       <FileName>Language\IClassDescription.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="AjTalk.Language.IBehavior">
+  <Interface Name="AjTalk.Language.IMetaClass">
     <Position X="5.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAEAAAAAAAAAAEAAAAAQACAAAEAACg=</HashCode>
-      <FileName>Language\IBehavior.cs</FileName>
+      <FileName>Language\IMetaClass.cs</FileName>
+      <NewMemberFileName>Language\IBehavior.cs</NewMemberFileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="AjTalk.Language.ByteCode" Collapsed="true">

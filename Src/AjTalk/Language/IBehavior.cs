@@ -6,13 +6,13 @@
 
     public interface IBehavior : IObject
     {
-        IClass SuperClass { get; }
+        IBehavior SuperClass { get; }
 
         Machine Machine { get; }
 
         int NoInstanceVariables { get; }
 
-        IClass MetaClass { get; }
+        IMetaClass MetaClass { get; }
 
         void DefineClassMethod(IMethod method);
 

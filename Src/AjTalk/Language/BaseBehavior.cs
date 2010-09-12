@@ -6,14 +6,19 @@
 
     public class BaseBehavior : BaseObject, IBehavior
     {
-        private IClass superclass;
+        private IBehavior superclass;
         private Machine machine;
         private int noinstancevariables;
 
         private Dictionary<string, IMethod> classmethods = new Dictionary<string, IMethod>();
         private Dictionary<string, IMethod> instancemethods = new Dictionary<string, IMethod>();
 
-        public BaseBehavior(IClass superclass, Machine machine) 
+        private BaseBehavior(Machine machine)
+        {
+            this.machine = machine;
+        }
+
+        public BaseBehavior(IBehavior superclass, Machine machine) 
         {
             if (machine == null)
             {
@@ -22,9 +27,14 @@
 
             this.superclass = superclass;
             this.machine = machine;
+
+            if (this is IMetaClass)
+                ; // TODO implements metaclass for metaclass
+            else
+                this.SetBehavior(BaseMetaClass.CreateMetaClass(superclass, machine));
         }
 
-        public IClass SuperClass
+        public IBehavior SuperClass
         {
             get
             {
@@ -32,11 +42,11 @@
             }
         }
 
-        public IClass MetaClass
+        public IMetaClass MetaClass
         {
             get
             {
-                return (IClass)this.Behavior;
+                return (IMetaClass) this.Behavior;
             }
         }
 

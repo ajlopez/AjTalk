@@ -39,7 +39,8 @@ namespace AjTalk.Tests
             Assert.AreEqual(-1, cls.GetInstanceVariableOffset("x"));
             Assert.IsNull(cls.GetInstanceMethod("x"));
             Assert.IsNotNull(cls.SuperClass);
-            Assert.AreEqual("nil", cls.SuperClass.Name);
+            Assert.IsInstanceOfType(cls.SuperClass, typeof(IClass));
+            Assert.AreEqual("nil", ((IClass) cls.SuperClass).Name);
         }
 
         [TestMethod]

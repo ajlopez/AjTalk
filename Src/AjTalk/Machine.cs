@@ -17,7 +17,7 @@ namespace AjTalk
             this.classclass = new BaseClass("nil", null, this);
 
             // TODO Review this tricky autoreference
-            this.classclass.SetBehavior(this.classclass);
+            //this.classclass.SetBehavior(this.classclass);
 
             this.globals["nil"] = this.classclass;
         }
@@ -30,7 +30,7 @@ namespace AjTalk
         public IClass CreateClass(string clsname, bool isIndexed)
         {
             // TODO Review Tricky fourth param
-            BaseClass cls = new BaseClass(clsname, this.classclass, this.classclass, this);
+            BaseClass cls = new BaseClass(clsname, this.classclass, this);
             cls.IsIndexed = isIndexed;
             return cls;
         }
@@ -38,7 +38,7 @@ namespace AjTalk
         public IClass CreateClass(string clsname, IClass superclass)
         {
             // TODO Review Tricky fourth param
-            BaseClass cls = new BaseClass(clsname, superclass, this.classclass, this);
+            BaseClass cls = new BaseClass(clsname, superclass, this);
             return cls;
         }
 
