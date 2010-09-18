@@ -96,6 +96,7 @@ new and class in DoesNotUnderstandMethod
 new example DefineRectangleWithNewAndInitialize.st
 DoesNotUnderstandMethod and BehaviorDoesNotUnderstandMethod now in core, and in Machine
 AjTalk.Gui with first Transcript
+Refactor of ByteCode processing (WIP)
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

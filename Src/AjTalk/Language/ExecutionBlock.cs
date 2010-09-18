@@ -2,6 +2,7 @@ namespace AjTalk.Language
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
 
     public class ExecutionBlock
     {
@@ -12,9 +13,24 @@ namespace AjTalk.Language
         private object[] arguments;
         private object[] locals;
         private object nativeSelf;
+        private static Action<ExecutionBlock>[] codes;
 
         private int ip;
         private IList stack;
+
+        static ExecutionBlock()
+        {
+            codes = new Action<ExecutionBlock>[256];
+            codes[(int)ByteCode.GetConstant] = DoGetConstant;
+            codes[(int)ByteCode.GetBlock] = DoGetBlock;
+            codes[(int)ByteCode.Value] = DoValue;
+            codes[(int)ByteCode.MultiValue] = DoMultiValue;
+            codes[(int)ByteCode.GetArgument] = DoGetArgument;
+            codes[(int)ByteCode.GetClass] = DoGetClass;
+            codes[(int)ByteCode.BasicSize] = DoBasicSize;
+            codes[(int)ByteCode.GetGlobalVariable] = DoGetGlobalVariable;
+            codes[(int)ByteCode.GetDotNetType] = DoGetDotNetType;
+        }
 
         public ExecutionBlock(Machine machine, IObject receiver, Block block, object[] arguments)
             : this(block, arguments)
@@ -73,86 +89,21 @@ namespace AjTalk.Language
                 ByteCode bc = (ByteCode)this.block.ByteCodes[this.ip];
                 byte arg;
 
+                if (codes[(int)bc] != null)
+                {
+                    codes[(int)bc](this);
+                    this.ip++;
+                    continue;
+                }
+
                 switch (bc)
                 {
                     case ByteCode.ReturnSub:
                         return null;
                     case ByteCode.ReturnPop:
                         return this.Top;
-                    case ByteCode.GetConstant:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        this.Push(this.block.GetConstant(arg));
-                        break;
-                    case ByteCode.GetBlock:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-
-                        Block newblock = (Block)this.block.GetConstant(arg);
-
-                        this.Push(newblock);
-
-                        break;
-                    case ByteCode.Value:
-                        newblock = (Block)this.Pop();
-
-                        if (this.self == null)
-                        {
-                            this.Push(new ExecutionBlock(this.machine, this.receiver, newblock, null).Execute());
-                        }
-                        else
-                        {
-                            this.Push(new ExecutionBlock(this.self, this.receiver, newblock, null).Execute());
-                        }
-
-                        break;
-                    case ByteCode.MultiValue:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-
-                        args = new object[arg];
-
-                        for (int k = arg - 1; k >= 0; k--)
-                        {
-                            args[k] = this.Pop();
-                        }
-
-                        newblock = (Block)this.Pop();
-
-                        if (this.self == null)
-                        {
-                            this.Push(new ExecutionBlock(this.machine, this.receiver, newblock, args).Execute());
-                        }
-                        else
-                        {
-                            this.Push(new ExecutionBlock(this.self, this.receiver, newblock, args).Execute());
-                        }
-
-                        break;
-                    case ByteCode.GetArgument:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        this.Push(this.arguments[arg]);
-                        break;
-                    case ByteCode.GetClass:
-                        this.Push(((IObject)this.Pop()).Behavior);
-                        break;
-                    case ByteCode.BasicSize:
-                        IIndexedObject indexedObj = (IIndexedObject)this.Pop();
-                        this.Push(indexedObj.BasicSize);
-                        break;
                     case ByteCode.GetClassVariable:
                         throw new Exception("Not implemented");
-                    case ByteCode.GetGlobalVariable:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        this.Push(this.machine.GetGlobalObject(this.block.GetGlobalName(arg)));
-                        break;
-                    case ByteCode.GetDotNetType:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        this.Push(Type.GetType(this.block.GetGlobalName(arg)));
-                        break;
                     case ByteCode.GetLocal:
                         this.ip++;
                         arg = this.block.ByteCodes[this.ip];
@@ -217,7 +168,7 @@ namespace AjTalk.Language
                         break;
                     case ByteCode.BasicAt:
                         pos = (int)this.Pop();
-                        indexedObj = (IIndexedObject)this.Pop();
+                        IIndexedObject indexedObj = (IIndexedObject)this.Pop();
                         this.Push(indexedObj.GetIndexedValue(pos));
                         break;
                     case ByteCode.BasicAtPut:
@@ -335,6 +286,83 @@ namespace AjTalk.Language
             object obj = this.stack[this.stack.Count - 1];
             this.stack.RemoveAt(this.stack.Count - 1);
             return obj;
+        }
+
+        private static void DoGetConstant(ExecutionBlock execblock)
+        {
+            execblock.ip++;
+            byte arg = execblock.block.ByteCodes[execblock.ip];
+            execblock.Push(execblock.block.GetConstant(arg));
+        }
+
+        private static void DoGetBlock(ExecutionBlock execblock)
+        {
+            execblock.ip++;
+            byte arg = execblock.block.ByteCodes[execblock.ip];
+
+            Block newblock = (Block)execblock.block.GetConstant(arg);
+
+            execblock.Push(newblock);
+        }
+
+        private static void DoValue(ExecutionBlock execblock)
+        {
+            Block newblock = (Block)execblock.Pop();
+
+            if (execblock.self == null)
+                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, null).Execute());
+            else
+                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, newblock, null).Execute());
+        }
+
+        private static void DoMultiValue(ExecutionBlock execblock)
+        {
+            execblock.ip++;
+            byte arg = execblock.block.ByteCodes[execblock.ip];
+
+            object[] args = new object[arg];
+
+            for (int k = arg - 1; k >= 0; k--)
+                args[k] = execblock.Pop();
+
+            Block newblock = (Block)execblock.Pop();
+
+            if (execblock.self == null)
+                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, args).Execute());
+            else
+                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, newblock, args).Execute());
+        }
+
+        private static void DoGetArgument(ExecutionBlock execblock)
+        {
+            execblock.ip++;
+            byte arg = execblock.block.ByteCodes[execblock.ip];
+            execblock.Push(execblock.arguments[arg]);
+        }
+
+        private static void DoGetClass(ExecutionBlock execblock)
+        {
+            execblock.Push(((IObject)execblock.Pop()).Behavior);
+        }
+
+        private static void DoBasicSize(ExecutionBlock execblock)
+        {
+            IIndexedObject indexedObj = (IIndexedObject)execblock.Pop();
+            execblock.Push(indexedObj.BasicSize);
+        }
+
+        private static void DoGetGlobalVariable(ExecutionBlock execblock)
+        {
+            execblock.ip++;
+            byte arg = execblock.block.ByteCodes[execblock.ip];
+            execblock.Push(execblock.machine.GetGlobalObject(execblock.block.GetGlobalName(arg)));
+        }
+
+        private static void DoGetDotNetType(ExecutionBlock execblock)
+        {
+            execblock.ip++;
+            byte arg = execblock.block.ByteCodes[execblock.ip];
+            execblock.Push(Type.GetType(execblock.block.GetGlobalName(arg)));
         }
     }
 }
