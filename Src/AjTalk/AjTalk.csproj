@@ -97,6 +97,7 @@
     <Compile Include="Language\BaseObject.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Language\BehaviorDoesNotUnderstandMethod.cs" />
     <Compile Include="Language\Block.cs" />
     <Compile Include="Language\ByteCodes.cs">
       <SubType>Code</SubType>
@@ -107,6 +108,7 @@
     <Compile Include="Language\BaseClassDescription.cs" />
     <Compile Include="Compiler\ParserException.cs" />
     <Compile Include="Language\BaseMetaClass.cs" />
+    <Compile Include="Language\DoesNotUnderstandMethod.cs" />
     <Compile Include="Language\IMetaClass.cs" />
     <Compile Include="Language\IIndexedObject.cs" />
     <Compile Include="Compiler\EndOfInputException.cs" />

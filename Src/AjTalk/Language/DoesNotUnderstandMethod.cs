@@ -1,8 +1,7 @@
-﻿namespace AjTalk.Tests.Language
+﻿namespace AjTalk.Language
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
 
     using AjTalk;

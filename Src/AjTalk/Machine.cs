@@ -20,6 +20,8 @@ namespace AjTalk
             //this.classclass.SetBehavior(this.classclass);
 
             this.globals["nil"] = this.classclass;
+            this.classclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this));
+            this.classclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this));
         }
 
         public IClass CreateClass(string clsname)

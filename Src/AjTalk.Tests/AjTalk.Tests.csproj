@@ -48,8 +48,6 @@
     <Compile Include="Language\BlockTests.cs" />
     <Compile Include="Language\ClassTests.cs" />
     <Compile Include="Compiler\ParserTests.cs" />
-    <Compile Include="Language\BehaviorDoesNotUnderstandMethod.cs" />
-    <Compile Include="Language\DoesNotUnderstandMethod.cs" />
     <Compile Include="Language\DotNetObjectTest.cs" />
     <Compile Include="Language\NativeBehaviorTests.cs" />
     <Compile Include="LoaderTests.cs" />
