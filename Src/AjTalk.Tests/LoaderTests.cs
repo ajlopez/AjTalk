@@ -210,6 +210,29 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\DefineRectangleWithNewAndInitialize.st")]
+        public void ExecuteDefineRectangleWithNewAndInitializeFile()
+        {
+            Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st");
+
+            Machine machine = CreateMachine();
+
+            Assert.IsNull(machine.GetGlobalObject("Rectangle"));
+
+            loader.LoadAndExecute(machine);
+
+            object obj = machine.GetGlobalObject("result");
+
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(IObject));
+
+            IObject iobj = (IObject)obj;
+
+            Assert.AreEqual(10, iobj[0]);
+            Assert.AreEqual(20, iobj[1]);
+        }
+
+        [TestMethod]
         [DeploymentItem(@"CodeFiles\DefineClassSubclass.st")]
         public void ExecuteDefineClassSubclassFile()
         {

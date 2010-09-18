@@ -15,7 +15,12 @@ namespace AjTalk.Tests.Compiler
     [TestClass]
     public class ParserTests
     {
-        public static IClass CompileClass(string clsname, string[] varnames, string[] methods)
+        internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
+        {
+            return CompileClass(clsname, varnames, methods, null);
+        }
+
+        internal static IClass CompileClass(string clsname, string[] varnames, string[] methods, string[] clsmethods)
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass(clsname);
@@ -34,6 +39,15 @@ namespace AjTalk.Tests.Compiler
                 {
                     Parser compiler = new Parser(method);
                     compiler.CompileInstanceMethod(cls);
+                }
+            }
+
+            if (clsmethods != null)
+            {
+                foreach (string method in clsmethods)
+                {
+                    Parser compiler = new Parser(method);
+                    compiler.CompileClassMethod(cls);
                 }
             }
 
@@ -308,6 +322,63 @@ namespace AjTalk.Tests.Compiler
 
             Assert.AreEqual(200, iobj[0]);
             Assert.IsNull(iobj[1]);
+        }
+
+        [TestMethod]
+        public void ExecuteNew()
+        {
+            Machine machine = new Machine();
+
+            IClass cls = CompileClass(
+                "Rectangle",
+                new string[] { "x", "y" },
+                null);
+
+            cls.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(machine));
+
+            machine.SetGlobalObject("Rectangle", cls);
+
+            Parser compiler = new Parser("^Rectangle new");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+
+            object obj = block.Execute(machine, null);
+
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(IObject));
+            Assert.AreEqual(cls, ((IObject)obj).Behavior);
+        }
+
+        [TestMethod]
+        public void ExecuteRedefinedNew()
+        {
+            Machine machine = new Machine();
+
+            IClass cls = CompileClass(
+                "Rectangle",
+                new string[] { "x", "y" },
+                new string[] { "initialize x := 10. y := 20" },
+                new string[] { "new ^self basicNew initialize" });
+
+            machine.SetGlobalObject("Rectangle", cls);
+
+            Parser compiler = new Parser("^Rectangle new");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+
+            object obj = block.Execute(machine, null);
+
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(IObject));
+            Assert.AreEqual(cls, ((IObject)obj).Behavior);
+
+            IObject iobj = (IObject)obj;
+
+            Assert.AreEqual(2, iobj.Behavior.NoInstanceVariables);
+            Assert.AreEqual(10, iobj[0]);
+            Assert.AreEqual(20, iobj[1]);
         }
 
         [TestMethod]

@@ -132,6 +132,35 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void DefineClass()
+        {
+            object result = this.Evaluate("nil subclass: #Object");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IClass));
+
+            IClass clss = (IClass)result;
+
+            Assert.IsNotNull(clss.Behavior);
+            Assert.IsNotNull(clss.MetaClass);
+            Assert.AreEqual("Object", clss.Name);
+            Assert.AreEqual(0, clss.NoInstanceVariables);
+        }
+
+        [TestMethod]
+        public void BasicNewObject()
+        {
+            IClass clss = (IClass) this.Evaluate("nil subclass: #Object");
+            object result = this.Evaluate("Object new");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IObject));
+
+            IObject obj = (IObject) result;
+            Assert.AreEqual(clss, obj.Behavior);
+        }
+
+        [TestMethod]
         public void DefineNativeBehavior()
         {
             object result = this.Evaluate("nil subclass: #List nativeType: @System.Collections.ArrayList");

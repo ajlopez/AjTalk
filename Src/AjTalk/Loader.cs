@@ -11,7 +11,7 @@ namespace AjTalk
     public class Loader
     {
         private TextReader reader;
-        private IClass currentClass;
+        private IClassDescription currentClass;
         private string inmediateLine;
 
         public Loader(TextReader reader)
@@ -55,7 +55,7 @@ namespace AjTalk
             Block block = compiler.CompileBlock();
             object value = block.Execute(machine, null);
 
-            this.currentClass = (IClass)value;
+            this.currentClass = (IClassDescription)value;
         }
 
         public string GetInmediateText()

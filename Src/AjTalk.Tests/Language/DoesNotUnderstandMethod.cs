@@ -62,6 +62,11 @@
                 return this.Machine.GetGlobalObject("nil");
             }
 
+            if (msgname.Equals("class"))
+            {
+                return self.Behavior;
+            }
+
             throw new InvalidOperationException(string.Format("Does not understand {0}", msgname));
         }
     }

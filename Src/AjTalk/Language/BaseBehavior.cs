@@ -13,11 +13,6 @@
         private Dictionary<string, IMethod> classmethods = new Dictionary<string, IMethod>();
         private Dictionary<string, IMethod> instancemethods = new Dictionary<string, IMethod>();
 
-        private BaseBehavior(Machine machine)
-        {
-            this.machine = machine;
-        }
-
         public BaseBehavior(IBehavior superclass, Machine machine) 
         {
             if (machine == null)

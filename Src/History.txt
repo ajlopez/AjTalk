@@ -90,6 +90,11 @@ BaseIndexedObjectTests
 BehabiorDoesNotUnderstandMethod
 .Superclass as IBehavior
 
+2010-08-18
+class methods support in Loader
+new and class in DoesNotUnderstandMethod
+new example DefineRectangleWithNewAndInitialize.st
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

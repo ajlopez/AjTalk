@@ -89,6 +89,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CodeFiles\DefineRectangleWithNewAndInitialize.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\NativeFileInfo.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
