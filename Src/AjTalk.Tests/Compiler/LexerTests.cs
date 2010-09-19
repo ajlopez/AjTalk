@@ -261,7 +261,7 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void ProcessPunctuations()
         {
-            string punct = "().|[]";
+            string punct = "().|[];";
             Lexer tokenizer = new Lexer(punct);
             Token token;
 

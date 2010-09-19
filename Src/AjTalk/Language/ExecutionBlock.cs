@@ -13,6 +13,7 @@ namespace AjTalk.Language
         private object[] arguments;
         private object[] locals;
         private object nativeSelf;
+        private object lastreceiver = null;
         private static Action<ExecutionBlock>[] codes;
 
         private int ip;
@@ -84,6 +85,8 @@ namespace AjTalk.Language
             string mthname;
             object[] args;
 
+            // TODO refactor lastreceiver process
+            // TODO refactor switch
             while (this.ip < this.block.ByteCodes.Length)
             {
                 ByteCode bc = (ByteCode)this.block.ByteCodes[this.ip];
@@ -124,26 +127,32 @@ namespace AjTalk.Language
                         this.Push(this.receiver[arg]);
                         break;
                     case ByteCode.NewObject:
-                        this.Push(((IBehavior)this.Pop()).NewObject());
+                        IBehavior ibeh = (IBehavior) this.Pop();
+                        this.lastreceiver = ibeh;
+                        this.Push(ibeh.NewObject());
                         break;
                     case ByteCode.Add:
                         int y = (int)this.Pop();
                         int x = (int)this.Pop();
+                        this.lastreceiver = x;
                         this.Push(x + y);
                         break;
                     case ByteCode.Substract:
                         y = (int)this.Pop();
                         x = (int)this.Pop();
+                        this.lastreceiver = x;
                         this.Push(x - y);
                         break;
                     case ByteCode.Multiply:
                         y = (int)this.Pop();
                         x = (int)this.Pop();
+                        this.lastreceiver = x;
                         this.Push(x * y);
                         break;
                     case ByteCode.Divide:
                         y = (int)this.Pop();
                         x = (int)this.Pop();
+                        this.lastreceiver = x;
                         this.Push(x / y);
                         break;
                     case ByteCode.Nop:
@@ -153,29 +162,37 @@ namespace AjTalk.Language
                         break;
                     case ByteCode.InstSize:
                         IObject iobj = (IObject)this.Pop();
+                        this.lastreceiver = iobj;
                         this.Push(iobj.Behavior.NoInstanceVariables);
                         break;
                     case ByteCode.InstAt:
                         int pos = (int)this.Pop();
                         iobj = (IObject)this.Pop();
+                        this.lastreceiver = iobj;
                         this.Push(iobj[pos]);
                         break;
                     case ByteCode.InstAtPut:
                         object par = this.Pop();
                         pos = (int)this.Pop();
                         iobj = (IObject)this.Pop();
+                        this.lastreceiver = iobj;
                         iobj[pos] = par;
                         break;
                     case ByteCode.BasicAt:
                         pos = (int)this.Pop();
                         IIndexedObject indexedObj = (IIndexedObject)this.Pop();
+                        this.lastreceiver = indexedObj;
                         this.Push(indexedObj.GetIndexedValue(pos));
                         break;
                     case ByteCode.BasicAtPut:
                         par = this.Pop();
                         pos = (int)this.Pop();
                         indexedObj = (IIndexedObject)this.Pop();
+                        this.lastreceiver = indexedObj;
                         indexedObj.SetIndexedValue(pos, par);
+                        break;
+                    case ByteCode.ChainedSend:
+                        this.Push(this.lastreceiver);
                         break;
                     case ByteCode.Send:
                         this.ip++;
@@ -192,6 +209,7 @@ namespace AjTalk.Language
                         }
 
                         object obj = this.Pop();
+                        this.lastreceiver = obj;
 
                         iobj = obj as IObject;
 
@@ -213,6 +231,7 @@ namespace AjTalk.Language
                         }
 
                         obj = this.Pop();
+                        this.lastreceiver = obj;
 
                         this.Push(DotNetObject.NewObject((Type)obj, args));
 
@@ -232,6 +251,7 @@ namespace AjTalk.Language
                         }
 
                         obj = this.Pop();
+                        this.lastreceiver = obj;
 
                         Type type = obj as Type;
 
@@ -245,6 +265,7 @@ namespace AjTalk.Language
                         this.ip++;
                         arg = this.block.ByteCodes[this.ip];
                         this.arguments[arg] = this.Pop();
+                        this.lastreceiver = null;
                         break;
                     case ByteCode.SetClassVariable:
                         throw new Exception("Not implemented");
@@ -252,16 +273,19 @@ namespace AjTalk.Language
                         this.ip++;
                         arg = this.block.ByteCodes[this.ip];
                         this.locals[arg] = this.Pop();
+                        this.lastreceiver = null;
                         break;
                     case ByteCode.SetVariable:
                         this.ip++;
                         arg = this.block.ByteCodes[this.ip];
                         this.receiver[arg] = this.Pop();
+                        this.lastreceiver = receiver;
                         break;
                     case ByteCode.SetGlobalVariable:
                         this.ip++;
                         arg = this.block.ByteCodes[this.ip];
                         this.machine.SetGlobalObject(this.block.GetGlobalName(arg), this.Pop());
+                        this.lastreceiver = this.machine.GetGlobalObject(this.block.GetGlobalName(arg));
                         break;
                     default:
                         throw new Exception("Not implemented");
@@ -307,7 +331,8 @@ namespace AjTalk.Language
 
         private static void DoValue(ExecutionBlock execblock)
         {
-            Block newblock = (Block)execblock.Pop();
+            Block newblock = (Block)execblock.Pop();            
+            execblock.lastreceiver = newblock;
 
             if (execblock.self == null)
                 execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, null).Execute());
@@ -326,6 +351,7 @@ namespace AjTalk.Language
                 args[k] = execblock.Pop();
 
             Block newblock = (Block)execblock.Pop();
+            execblock.lastreceiver = newblock;
 
             if (execblock.self == null)
                 execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, args).Execute());
@@ -342,12 +368,15 @@ namespace AjTalk.Language
 
         private static void DoGetClass(ExecutionBlock execblock)
         {
-            execblock.Push(((IObject)execblock.Pop()).Behavior);
+            IObject iobj = (IObject) execblock.Pop();
+            execblock.lastreceiver = iobj;
+            execblock.Push(iobj.Behavior);
         }
 
         private static void DoBasicSize(ExecutionBlock execblock)
         {
             IIndexedObject indexedObj = (IIndexedObject)execblock.Pop();
+            execblock.lastreceiver = indexedObj;
             execblock.Push(indexedObj.BasicSize);
         }
 

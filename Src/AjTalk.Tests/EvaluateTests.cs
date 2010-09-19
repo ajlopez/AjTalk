@@ -148,6 +148,28 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void DefineClassesUsingSemicolon()
+        {
+            Assert.IsNull(this.machine.GetGlobalObject("Class1"));
+            Assert.IsNull(this.machine.GetGlobalObject("Class2"));
+
+            object result = this.Evaluate("nil subclass: #Class1; subclass: #Class2");
+
+            Assert.IsNotNull(this.machine.GetGlobalObject("Class1"));
+            Assert.IsNotNull(this.machine.GetGlobalObject("Class2"));
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IClass));
+
+            IClass clss = (IClass)result;
+
+            Assert.IsNotNull(clss.Behavior);
+            Assert.IsNotNull(clss.MetaClass);
+            Assert.AreEqual("Class2", clss.Name);
+            Assert.AreEqual(0, clss.NoInstanceVariables);
+        }
+
+        [TestMethod]
         public void BasicNewObject()
         {
             IClass clss = (IClass) this.Evaluate("nil subclass: #Object");

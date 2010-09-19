@@ -98,6 +98,9 @@ DoesNotUnderstandMethod and BehaviorDoesNotUnderstandMethod now in core, and in 
 AjTalk.Gui with first Transcript
 Refactor of ByteCode processing (WIP)
 
+2010-08-19
+Add ; (semicolon) support in lexer, parser, with tests
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

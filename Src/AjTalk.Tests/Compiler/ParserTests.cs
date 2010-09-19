@@ -143,6 +143,17 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileTwoCommandsUsingSemicolon()
+        {
+            Parser compiler = new Parser("nil invokeWith: 10; invokeWith: 20");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
         public void CompileBlock()
         {
             Parser compiler = new Parser("nil ifFalse: [self halt]");

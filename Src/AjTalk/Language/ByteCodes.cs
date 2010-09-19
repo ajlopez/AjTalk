@@ -32,6 +32,7 @@ namespace AjTalk.Language
         Divide = 43,
 
         Send = 50,
+        ChainedSend = 51,
 
         InstAt = 60,
         InstAtPut = 61,

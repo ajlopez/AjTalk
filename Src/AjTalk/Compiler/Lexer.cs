@@ -11,7 +11,7 @@ namespace AjTalk.Compiler
         public const char SpecialDotNetInvokeMark = '!';
 
         private const string Operators = "^<>:=-+*/&";
-        private const string Separators = "().|[]";
+        private const string Separators = "().|[];";
 
         private const char StringDelimiter = '\'';
 
@@ -220,7 +220,7 @@ namespace AjTalk.Compiler
 
                 ch = this.NextChar();
 
-                while (!Char.IsWhiteSpace(ch))
+                while (!Char.IsWhiteSpace(ch) && Separators.IndexOf(ch)<0)
                 {
                     sb.Append(ch);
                     ch = this.NextChar();

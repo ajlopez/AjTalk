@@ -206,7 +206,13 @@ namespace AjTalk.Compiler
                 return;
             }
 
-            if (token.Value == "(")
+            if (token.Type == TokenType.Punctuation && token.Value == ";")
+            {
+                this.block.CompileByteCode(ByteCode.ChainedSend);
+                return;
+            }
+
+            if (token.Type == TokenType.Punctuation && token.Value == "(")
             {
                 this.CompileExpression();
                 token = this.NextToken();
@@ -218,7 +224,7 @@ namespace AjTalk.Compiler
                 return;
             }
 
-            if (token.Value == "[")
+            if (token.Type == TokenType.Punctuation && token.Value == "[")
             {
                 Parser newcompiler = new Parser(this.tokenizer);
                 newcompiler.arguments = this.arguments;
