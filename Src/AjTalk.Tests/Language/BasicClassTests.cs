@@ -26,6 +26,21 @@
         }
 
         [TestMethod]
+        public void DefineAndCreateAgent()
+        {
+            Machine machine = new Machine();
+            BaseClass bclass = new BaseClass("Agent", machine);
+            bclass.IsAgentClass = true;
+
+            object result = bclass.NewObject();
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(AgentObject));
+
+            AgentObject agent = (AgentObject) result;
+            Assert.AreEqual(bclass, agent.Behavior);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void RaiseIfNameIsNull()
         {

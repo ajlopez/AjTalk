@@ -100,6 +100,12 @@ Refactor of ByteCode processing (WIP)
 
 2010-08-19
 Add ; (semicolon) support in lexer, parser, with tests
+Message
+MessageQueue with tests
+AgentObject with tests
+agent: support in nil, BehaviorDoesNotUnderstand
+
+AgentObj
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

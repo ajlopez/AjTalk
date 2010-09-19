@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EvaluateTests.cs" />
+    <Compile Include="Language\AgentObjectTests.cs" />
     <Compile Include="Language\BaseBehaviorTests.cs" />
     <Compile Include="Language\BaseIndexedObjectTests.cs" />
     <Compile Include="Language\BaseObjectTests.cs" />
@@ -49,7 +50,9 @@
     <Compile Include="Language\ClassTests.cs" />
     <Compile Include="Compiler\ParserTests.cs" />
     <Compile Include="Language\DotNetObjectTest.cs" />
+    <Compile Include="Language\FunctionalMethodTests.cs" />
     <Compile Include="Language\NativeBehaviorTests.cs" />
+    <Compile Include="Language\MessageQueueTests.cs" />
     <Compile Include="LoaderTests.cs" />
     <Compile Include="MachineTests.cs" />
     <Compile Include="Language\MethodTests.cs" />

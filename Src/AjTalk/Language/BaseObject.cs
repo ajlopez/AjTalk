@@ -53,18 +53,19 @@ namespace AjTalk.Language
             IMethod mth = this.behavior.GetInstanceMethod(msgname);
 
             if (mth != null)
-            {
-                return mth.Execute(this, this, args);
-            }
+                return this.ExecuteMethod(mth, args);
 
             mth = this.behavior.GetInstanceMethod("doesNotUnderstand:");
 
             if (mth != null)
-            {
-                return mth.Execute(this, this, new object[] { msgname, args });
-            }
+                return this.ExecuteMethod(mth, new object[] { msgname, args });
 
             throw new InvalidProgramException(string.Format("Does not understand {0}", msgname));
+        }
+
+        public virtual object ExecuteMethod(IMethod method, object[] arguments)
+        {
+            return method.Execute(this, this, arguments);
         }
 
         internal void SetBehavior(IBehavior behavior)

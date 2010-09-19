@@ -380,9 +380,6 @@ namespace AjTalk.Tests
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            //((IClass)nil).DefineInstanceMethod(new DoesNotUnderstandMethod(machine));
-            //((IClass)nil).DefineClassMethod(new BehaviorDoesNotUnderstandMethod(machine));
-
             return machine;
         }
     }

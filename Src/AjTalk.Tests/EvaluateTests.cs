@@ -8,6 +8,7 @@ using AjTalk.Language;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
+using System.Threading;
 
 namespace AjTalk.Tests
 {
@@ -198,6 +199,100 @@ namespace AjTalk.Tests
 
             Assert.IsNotNull(newobj);
             Assert.IsInstanceOfType(newobj, typeof(System.Collections.ArrayList));
+        }
+
+        [TestMethod]
+        public void DefineAgent()
+        {
+            object result = this.Evaluate("nil agent: #Agent");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IClass));
+
+            IClass clss = (IClass)result;
+
+            Assert.IsNotNull(clss.Behavior);
+            Assert.IsNotNull(clss.MetaClass);
+            Assert.AreEqual("Agent", clss.Name);
+            Assert.AreEqual(0, clss.NoInstanceVariables);
+            Assert.IsInstanceOfType(clss, typeof(BaseClass));
+
+            BaseClass baseclass = (BaseClass) clss;
+
+            Assert.IsTrue(baseclass.IsAgentClass);
+        }
+
+        [TestMethod]
+        public void CreateAgent()
+        {
+            object result = this.Evaluate("nil agent: #Agent. Agent new");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(AgentObject));
+
+            AgentObject agent = (AgentObject)result;
+
+            Assert.IsInstanceOfType(agent.Behavior, typeof(IClass));
+
+            IClass clss = (IClass) agent.Behavior;
+
+            Assert.IsNotNull(clss.Behavior);
+            Assert.IsNotNull(clss.MetaClass);
+            Assert.AreEqual("Agent", clss.Name);
+            Assert.AreEqual(0, clss.NoInstanceVariables);
+            Assert.IsInstanceOfType(clss, typeof(BaseClass));
+
+            BaseClass baseclass = (BaseClass)clss;
+
+            Assert.IsTrue(baseclass.IsAgentClass);
+        }
+
+        [TestMethod]
+        public void CreateAndInvokeAgent()
+        {
+            ManualResetEvent handle = new ManualResetEvent(false);
+            Thread thread = null;
+
+            object aclass = this.Evaluate("nil agent: #Agent");
+
+            Assert.IsNotNull(aclass);
+            Assert.IsInstanceOfType(aclass, typeof(IBehavior));
+
+            IBehavior behavior = (IBehavior)aclass;
+
+            behavior.DefineInstanceMethod(new FunctionalMethod("sethandle", null, (self, receiver, args) => { thread = Thread.CurrentThread;  return handle.Set(); }));
+
+            object result = this.Evaluate("Agent new sethandle");
+
+            handle.WaitOne();
+            Assert.IsNull(result);
+            Assert.IsNotNull(thread);
+            Assert.AreNotSame(Thread.CurrentThread, thread);
+        }
+
+        [TestMethod]
+        public void EvaluateFalseAsFalse()
+        {
+            object result = this.Evaluate("false");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(bool));
+            Assert.IsFalse((bool)result);
+        }
+
+        [TestMethod]
+        public void EvaluateTrueAsTrue()
+        {
+            object result = this.Evaluate("true");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(bool));
+            Assert.IsTrue((bool)result);
+        }
+
+        [TestMethod]
+        public void GetSystemConsole()
+        {
+            object result = this.Evaluate("@System.Console");
+            Assert.AreEqual(result, typeof(System.Console));
         }
 
         private object Evaluate(string text)

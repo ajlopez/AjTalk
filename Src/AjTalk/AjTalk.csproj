@@ -93,6 +93,7 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Language\AgentObject.cs" />
     <Compile Include="Language\BaseBehavior.cs" />
     <Compile Include="Language\BaseClass.cs">
       <SubType>Code</SubType>
@@ -113,6 +114,7 @@
     <Compile Include="Compiler\ParserException.cs" />
     <Compile Include="Language\BaseMetaClass.cs" />
     <Compile Include="Language\DoesNotUnderstandMethod.cs" />
+    <Compile Include="Language\FunctionalMethod.cs" />
     <Compile Include="Language\IMetaClass.cs" />
     <Compile Include="Language\IIndexedObject.cs" />
     <Compile Include="Compiler\EndOfInputException.cs" />
@@ -135,7 +137,9 @@
     <Compile Include="Language\IObject.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Language\Message.cs" />
     <Compile Include="Language\NativeBehavior.cs" />
+    <Compile Include="Language\MessageQueue.cs" />
     <Compile Include="Loader.cs" />
     <Compile Include="Machine.cs">
       <SubType>Code</SubType>

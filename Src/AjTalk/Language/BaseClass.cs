@@ -36,17 +36,18 @@ namespace AjTalk.Language
             }
         }
 
+        public bool IsAgentClass { get; set; }
+
         public override object NewObject()
         {
             if (this.isBehavior)
-            {
                 return new BaseBehavior(this, this.Machine);
-            }
 
             if (this.isClassDescription)
-            {
                 return new BaseClassDescription(this, this.Machine);
-            }
+
+            if (this.IsAgentClass)
+                return new AgentObject(this, this.NoInstanceVariables);
 
             return base.NewObject();
         }
