@@ -139,6 +139,18 @@ namespace AjTalk.Tests.Language
 
             method.Execute(machine, new object[] { 10 });
         }
+
+        [TestMethod]
+        public void NullSourceCode()
+        {
+            Machine machine = new Machine();
+
+            Method method;
+
+            method = new Method("anyMethod");
+
+            Assert.IsNull(method.SourceCode);
+        }
     }
 }
 

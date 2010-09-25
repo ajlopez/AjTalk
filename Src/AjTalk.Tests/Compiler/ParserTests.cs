@@ -154,6 +154,15 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileBlockWithSourceCode()
+        {
+            string source = "nil invokeWith: 10; invokeWith: 20";
+            Parser compiler = new Parser(source);
+            Block block = compiler.CompileBlock();
+            Assert.AreEqual(source, block.SourceCode);
+        }
+
+        [TestMethod]
         public void CompileBlock()
         {
             Parser compiler = new Parser("nil ifFalse: [self halt]");

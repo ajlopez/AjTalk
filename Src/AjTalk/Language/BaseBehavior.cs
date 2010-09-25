@@ -10,8 +10,7 @@
         private Machine machine;
         private int noinstancevariables;
 
-        private Dictionary<string, IMethod> classmethods = new Dictionary<string, IMethod>();
-        private Dictionary<string, IMethod> instancemethods = new Dictionary<string, IMethod>();
+        private Dictionary<string, IMethod> methods = new Dictionary<string, IMethod>();
 
         public BaseBehavior(IBehavior superclass, Machine machine) 
         {
@@ -75,7 +74,7 @@
 
         public void DefineInstanceMethod(IMethod method)
         {
-            this.instancemethods[method.Name] = method;
+            this.methods[method.Name] = method;
         }
 
         public IMethod GetClassMethod(string mthname)
@@ -90,7 +89,7 @@
                 throw new ArgumentNullException("mthname");
             }
 
-            if (!this.instancemethods.ContainsKey(mthname))
+            if (!this.methods.ContainsKey(mthname))
             {
                 if (this.superclass != null)
                 {
@@ -100,7 +99,7 @@
                 return null;
             }
 
-            return this.instancemethods[mthname];
+            return this.methods[mthname];
         }
 
         public virtual object NewObject()
@@ -109,6 +108,17 @@
                 return new BaseIndexedObject(this, this.NoInstanceVariables);
 
             return new BaseObject(this, this.NoInstanceVariables);
+        }
+
+        public ICollection<IMethod> GetInstanceMethods()
+        {
+            List<IMethod> methods = new List<IMethod>(this.methods.Values);
+            return methods;
+        }
+
+        public ICollection<IMethod> GetClassMethods()
+        {
+            return this.MetaClass.GetInstanceMethods();
         }
     }
 }

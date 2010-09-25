@@ -7,6 +7,8 @@ namespace AjTalk.Language
     public interface IClass : IClassDescription
     {
         string Name { get; }
+
+        string Category { get; set; }
     }
 }
 

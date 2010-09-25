@@ -7,5 +7,7 @@ namespace AjTalk.Language
     public interface IBlock
     {
         object Execute(Machine machine, object[] args);
+
+        string SourceCode { get; }
     }
 }

@@ -41,6 +41,21 @@ namespace AjTalk.Tests.Language
         }
 
         [TestMethod]
+        public void GetInstanceMethods()
+        {
+            BaseBehavior behavior = new BaseBehavior(null, this.machine);
+            IMethod method = new Method("method");
+
+            behavior.DefineInstanceMethod(new Method("method1"));
+            behavior.DefineInstanceMethod(new Method("method2"));
+
+            ICollection<IMethod> methods = behavior.GetInstanceMethods();
+
+            Assert.IsNotNull(methods);
+            Assert.AreEqual(2, methods.Count);
+        }
+
+        [TestMethod]
         public void DefineClassMethod()
         {
             BaseBehavior behavior = new BaseBehavior(null, this.machine);
@@ -55,6 +70,21 @@ namespace AjTalk.Tests.Language
             IMethod result2 = behavior.MetaClass.GetInstanceMethod("method");
 
             Assert.AreEqual(result, result2);
+        }
+
+        [TestMethod]
+        public void GetClassMethods()
+        {
+            BaseBehavior behavior = new BaseBehavior(null, this.machine);
+            IMethod method = new Method("method");
+
+            behavior.DefineClassMethod(new Method("method1"));
+            behavior.DefineClassMethod(new Method("method2"));
+
+            ICollection<IMethod> methods = behavior.GetClassMethods();
+
+            Assert.IsNotNull(methods);
+            Assert.AreEqual(2, methods.Count);
         }
     }
 }

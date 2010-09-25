@@ -14,6 +14,18 @@ namespace AjTalk.Language
         private List<string> argnames = new List<string>();
         private List<string> localnames = new List<string>();
         private List<string> globalnames = new List<string>();
+        private string sourcecode;
+
+        public Block()
+        {
+        }
+
+        public Block(string sourcecode)
+        {
+            this.sourcecode = sourcecode;
+        }
+
+        public string SourceCode { get { return this.sourcecode; } }
 
         public int Arity
         {

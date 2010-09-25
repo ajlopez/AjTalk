@@ -21,7 +21,7 @@ namespace AjTalk.Gui
             this.machine = machine;
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
         {
             if (keyData == (Keys.Control | Keys.D))
             {

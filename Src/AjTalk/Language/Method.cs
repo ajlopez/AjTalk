@@ -10,13 +10,19 @@ namespace AjTalk.Language
         private IClassDescription mthclass;
 
         public Method(string name)
+            : this(null, name, null)
         {
-            this.name = name;
         }
 
         public Method(IClassDescription cls, string name)
-            : this(name)
+            : this(cls, name, null)
         {
+        }
+
+        public Method(IClassDescription cls, string name, string source)
+            : base(source)
+        {
+            this.name = name;
             this.mthclass = cls;
         }
 

@@ -12,6 +12,7 @@ namespace AjTalk.Compiler
         private IList locals = new ArrayList();
         private string methodname;
         private Block block;
+        private string source;
 
         public Parser(Lexer tok)
         {
@@ -21,11 +22,12 @@ namespace AjTalk.Compiler
         public Parser(string text)
             : this(new Lexer(text))
         {
+            this.source = text;
         }
 
         public Block CompileBlock()
         {
-            this.block = new Block();
+            this.block = new Block(this.source);
             this.CompileBlockArguments();
             this.CompileBody();
 
@@ -441,7 +443,7 @@ namespace AjTalk.Compiler
             this.CompileArguments();
             this.CompileLocals();
 
-            this.block = new Method(cls, this.methodname);
+            this.block = new Method(cls, this.methodname, this.source);
 
             foreach (string argname in this.arguments)
             {

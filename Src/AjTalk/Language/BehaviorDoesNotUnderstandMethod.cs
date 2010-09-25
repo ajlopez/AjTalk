@@ -45,12 +45,23 @@
 
                 if (msgname.StartsWith("agent:"))
                     ((BaseClass)newclass).IsAgentClass = true;
+                if (args.Length >= 5)
+                    ((BaseClass)newclass).Category = (string) args[4];
 
                 string[] varnames = ((string)args[1]).Split(' ');
 
                 foreach (string varname in varnames)
                     if (!string.IsNullOrEmpty(varname))
                         newclass.DefineInstanceVariable(varname);
+
+                if (args.Length >= 3)
+                {
+                    string[] clsvarnames = ((string)args[2]).Split(' ');
+
+                    foreach (string varname in clsvarnames)
+                        if (!string.IsNullOrEmpty(varname))
+                            newclass.DefineClassVariable(varname);
+                }
 
                 this.Machine.SetGlobalObject(newclass.Name, newclass);
 

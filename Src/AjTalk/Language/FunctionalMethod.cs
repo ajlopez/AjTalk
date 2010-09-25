@@ -38,6 +38,8 @@ namespace AjTalk.Language
 
         public string Name { get { return this.name; } }
 
+        public string SourceCode { get { return null; } }
+
         public IClassDescription Class { get { return this.classDescription; } }
 
         public object Execute(IObject self, object[] args)

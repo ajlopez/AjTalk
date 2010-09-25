@@ -105,6 +105,15 @@ MessageQueue with tests
 AgentObject with tests
 agent: support in nil, BehaviorDoesNotUnderstand
 
+2010-08-25
+minimal Browser in AjTalk.Gui (WIP)
+Boot.st in AjTalk.Gui
+ClassDescriptor.ToDefineString
+IClass.Category
+IClassDescription.GetInstanceVariableNames
+IClassDescription.GetClassVariableNames
+Move BaseClassDescription.classvariablenames to MetaClass
+
 AgentObj
 
 Angel "Java" Lopez

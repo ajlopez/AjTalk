@@ -79,7 +79,7 @@ namespace AjTalk
                 }
 
                 sb.Append(line);
-                sb.Append("\n");
+                sb.Append("\r\n");
 
                 line = this.reader.ReadLine();
             }

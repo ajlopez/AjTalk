@@ -30,7 +30,7 @@ namespace AjTalk.Tests
             Loader loader = new Loader(new StringReader("\n"));
 
             Assert.IsNotNull(loader);
-            Assert.AreEqual("\n", loader.GetBlockText());
+            Assert.AreEqual("\r\n", loader.GetBlockText());
             Assert.IsNull(loader.GetBlockText());
         }
 
@@ -40,7 +40,7 @@ namespace AjTalk.Tests
             Loader loader = new Loader(new StringReader("line 1\nline 2\n!"));
 
             Assert.IsNotNull(loader);
-            Assert.AreEqual("line 1\nline 2\n", loader.GetBlockText());
+            Assert.AreEqual("line 1\r\nline 2\r\n", loader.GetBlockText());
             Assert.IsNull(loader.GetBlockText());
         }
 
@@ -50,8 +50,8 @@ namespace AjTalk.Tests
             Loader loader = new Loader(new StringReader("line 1\nline 2\n!\nline 3\nline 4\n!\n"));
 
             Assert.IsNotNull(loader);
-            Assert.AreEqual("line 1\nline 2\n", loader.GetBlockText());
-            Assert.AreEqual("line 3\nline 4\n", loader.GetBlockText());
+            Assert.AreEqual("line 1\r\nline 2\r\n", loader.GetBlockText());
+            Assert.AreEqual("line 3\r\nline 4\r\n", loader.GetBlockText());
             Assert.IsNull(loader.GetBlockText());
         }
 
@@ -61,7 +61,7 @@ namespace AjTalk.Tests
             Loader loader = new Loader(new StringReader("line 1\nline 2\n!inmediate!\n"));
 
             Assert.IsNotNull(loader);
-            Assert.AreEqual("line 1\nline 2\n", loader.GetBlockText());
+            Assert.AreEqual("line 1\r\nline 2\r\n", loader.GetBlockText());
             Assert.AreEqual("inmediate", loader.GetInmediateText());
             Assert.IsNull(loader.GetBlockText());
         }

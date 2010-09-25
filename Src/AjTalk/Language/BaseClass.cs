@@ -3,6 +3,7 @@ namespace AjTalk.Language
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Text;
 
     public class BaseClass : BaseClassDescription, IClass
     {
@@ -36,6 +37,8 @@ namespace AjTalk.Language
             }
         }
 
+        public string Category { get; set; }
+
         public bool IsAgentClass { get; set; }
 
         public override object NewObject()
@@ -50,6 +53,37 @@ namespace AjTalk.Language
                 return new AgentObject(this, this.NoInstanceVariables);
 
             return base.NewObject();
+        }
+
+        public string ToDefineString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (this.Behavior is IClass)
+                sb.Append(((IClass) this.Behavior).Name);
+            else
+                sb.Append("nil");
+
+            if (this.IsAgentClass)
+                sb.Append(" agent: #");
+            else
+                sb.Append(" subclass: #");
+
+            sb.Append(this.Name);
+            sb.Append("\r\n");
+            sb.Append("    instanceVariableNames: '");
+            sb.Append(this.GetInstanceVariableNames());
+            sb.Append("'\r\n");
+            sb.Append("    classVariableNames: '");
+            sb.Append(this.GetClassVariableNames());
+            sb.Append("'\r\n");
+            sb.Append("    poolDictionaries: ''\r\n");
+            sb.Append("    category: '");
+            if (this.Category != null)
+                sb.Append(this.Category);
+            sb.Append("'\r\n");
+
+            return sb.ToString();
         }
     }
 }

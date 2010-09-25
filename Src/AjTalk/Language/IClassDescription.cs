@@ -13,6 +13,10 @@ namespace AjTalk.Language
         int GetClassVariableOffset(string varname);
 
         int GetInstanceVariableOffset(string varname);
+
+        string GetInstanceVariableNames();
+
+        string GetClassVariableNames();
     }
 }
 

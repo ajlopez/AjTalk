@@ -23,5 +23,9 @@
         IMethod GetClassMethod(string mthname);
 
         IMethod GetInstanceMethod(string mthname);
+
+        ICollection<IMethod> GetInstanceMethods();
+
+        ICollection<IMethod> GetClassMethods();
     }
 }

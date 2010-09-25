@@ -149,6 +149,24 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void DefineClassWithInstanceClassVariablesAndCategory()
+        {
+            object result = this.Evaluate("nil subclass: #MyClass instanceVariableNames: 'x y' classVariableNames: 'z' poolDictionaries: '' category:'MyCategory'");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IClass));
+
+            IClass clss = (IClass)result;
+
+            Assert.IsNotNull(clss.Behavior);
+            Assert.IsNotNull(clss.MetaClass);
+            Assert.AreEqual("MyClass", clss.Name);
+            Assert.AreEqual(2, clss.NoInstanceVariables);
+            Assert.AreEqual(1, clss.MetaClass.NoInstanceVariables);
+            Assert.AreEqual("MyCategory", clss.Category);
+        }
+
+        [TestMethod]
         public void DefineClassesUsingSemicolon()
         {
             Assert.IsNull(this.machine.GetGlobalObject("Class1"));

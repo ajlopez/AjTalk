@@ -21,6 +21,8 @@
             get;
             private set;
         }
+
+        public string SourceCode { get { return null; } }
         
         public IClassDescription Class
         {

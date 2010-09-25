@@ -3,13 +3,14 @@ namespace AjTalk.Language
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Text;
 
     public class BaseClassDescription : BaseBehavior, IClassDescription
     {
-        private List<string> classvariables = new List<string>();
         private List<string> instancevariables = new List<string>();
-        
-        public BaseClassDescription(Machine machine) : this(null, machine)
+
+        public BaseClassDescription(Machine machine)
+            : this(null, machine)
         {
         }
 
@@ -44,12 +45,8 @@ namespace AjTalk.Language
                 throw new ArgumentNullException("varname");
             }
 
-            if (this.classvariables.Contains(varname))
-            {
-                throw new InvalidOperationException(String.Format("Instance Variable {0} already defined", varname));
-            }
-
-            this.classvariables.Add(varname);
+            this.MetaClass.DefineInstanceVariable(varname);
+            return;
         }
 
         public void DefineInstanceVariable(string varname)
@@ -69,7 +66,7 @@ namespace AjTalk.Language
 
         public int GetClassVariableOffset(string varname)
         {
-            return this.classvariables.IndexOf(varname);
+            return this.MetaClass.GetInstanceVariableOffset(varname);
         }
 
         public int GetInstanceVariableOffset(string varname)
@@ -78,22 +75,43 @@ namespace AjTalk.Language
 
             if (this.SuperClass != null && this.SuperClass is IClassDescription)
             {
-                offset = ((IClassDescription) this.SuperClass).GetInstanceVariableOffset(varname);
+                offset = ((IClassDescription)this.SuperClass).GetInstanceVariableOffset(varname);
 
                 if (offset >= 0)
                 {
                     return offset;
                 }
             }
-                
+
             offset = this.instancevariables.IndexOf(varname);
 
             if (offset >= 0 && this.SuperClass != null && this.SuperClass is IClassDescription)
             {
-                offset += ((IClassDescription) this.SuperClass).NoInstanceVariables;
+                offset += ((IClassDescription)this.SuperClass).NoInstanceVariables;
             }
 
             return offset;
+        }
+
+        public string GetInstanceVariableNames()
+        {
+            int nv = 0;
+            StringBuilder sb = new StringBuilder();
+
+            foreach (string varname in this.instancevariables)
+            {
+                if (nv > 0)
+                    sb.Append(" ");
+                sb.Append(varname);
+                nv++;
+            }
+
+            return sb.ToString();
+        }
+
+        public string GetClassVariableNames()
+        {
+            return this.MetaClass.GetInstanceVariableNames();
         }
     }
 }

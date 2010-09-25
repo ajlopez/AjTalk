@@ -69,5 +69,24 @@
             Assert.AreEqual(1, bclass.GetInstanceVariableOffset("y"));
             Assert.AreEqual(-1, bclass.GetInstanceVariableOffset("z"));
         }
+
+        [TestMethod]
+        public void GetDefineString()
+        {
+            Machine machine = new Machine();
+            BaseClass bclass = new BaseClass("Class", machine);
+
+            bclass.DefineInstanceVariable("x");
+            bclass.DefineInstanceVariable("y");
+
+            string definition = bclass.ToDefineString();
+
+            Assert.IsNotNull(definition);
+            Assert.IsTrue(definition.Contains("subclass: #Class"));
+            Assert.IsTrue(definition.Contains("instanceVariableNames: 'x y'"));
+            Assert.IsTrue(definition.Contains("classVariableNames: ''"));
+            Assert.IsTrue(definition.Contains("poolDictionaries: ''"));
+            Assert.IsTrue(definition.Contains("category: ''"));
+        }
     }
 }

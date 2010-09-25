@@ -63,6 +63,17 @@ namespace AjTalk
             this.globals[objname] = value;
         }
 
+        public ICollection<IClass> GetClasses()
+        {
+            List<IClass> classes = new List<IClass>();
+
+            foreach (object value in this.globals.Values)
+                if (value is IClass)
+                    classes.Add((IClass) value);
+
+            return classes;
+        }
+
         internal void RegisterNativeBehavior(Type type, NativeBehavior behavior)
         {
             this.nativeBehaviors[type] = behavior;
