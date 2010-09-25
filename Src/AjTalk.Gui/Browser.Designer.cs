@@ -30,12 +30,12 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.lstClasses = new System.Windows.Forms.ListBox();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.lstMethods = new System.Windows.Forms.ListBox();
+            this.panButtons = new System.Windows.Forms.Panel();
             this.txtText = new System.Windows.Forms.TextBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.panButtons = new System.Windows.Forms.Panel();
-            this.lstMethods = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,6 +70,17 @@
             this.splitContainer1.SplitterDistance = 206;
             this.splitContainer1.TabIndex = 0;
             // 
+            // lstClasses
+            // 
+            this.lstClasses.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstClasses.FormattingEnabled = true;
+            this.lstClasses.Location = new System.Drawing.Point(0, 0);
+            this.lstClasses.Name = "lstClasses";
+            this.lstClasses.Size = new System.Drawing.Size(206, 95);
+            this.lstClasses.Sorted = true;
+            this.lstClasses.TabIndex = 0;
+            this.lstClasses.SelectedIndexChanged += new System.EventHandler(this.lstClasses_SelectedIndexChanged);
+            // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -84,16 +95,24 @@
             this.splitContainer2.SplitterDistance = 200;
             this.splitContainer2.TabIndex = 0;
             // 
-            // lstClasses
+            // lstMethods
             // 
-            this.lstClasses.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstClasses.FormattingEnabled = true;
-            this.lstClasses.Location = new System.Drawing.Point(0, 0);
-            this.lstClasses.Name = "lstClasses";
-            this.lstClasses.Size = new System.Drawing.Size(206, 95);
-            this.lstClasses.Sorted = true;
-            this.lstClasses.TabIndex = 0;
-            this.lstClasses.SelectedIndexChanged += new System.EventHandler(this.lstClasses_SelectedIndexChanged);
+            this.lstMethods.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstMethods.FormattingEnabled = true;
+            this.lstMethods.Location = new System.Drawing.Point(0, 0);
+            this.lstMethods.Name = "lstMethods";
+            this.lstMethods.Size = new System.Drawing.Size(200, 69);
+            this.lstMethods.Sorted = true;
+            this.lstMethods.TabIndex = 1;
+            this.lstMethods.SelectedIndexChanged += new System.EventHandler(this.lstMethods_SelectedIndexChanged);
+            // 
+            // panButtons
+            // 
+            this.panButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panButtons.Location = new System.Drawing.Point(0, 77);
+            this.panButtons.Name = "panButtons";
+            this.panButtons.Size = new System.Drawing.Size(200, 23);
+            this.panButtons.TabIndex = 0;
             // 
             // txtText
             // 
@@ -113,25 +132,6 @@
             this.splitter1.Size = new System.Drawing.Size(628, 3);
             this.splitter1.TabIndex = 2;
             this.splitter1.TabStop = false;
-            // 
-            // panButtons
-            // 
-            this.panButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panButtons.Location = new System.Drawing.Point(0, 77);
-            this.panButtons.Name = "panButtons";
-            this.panButtons.Size = new System.Drawing.Size(200, 23);
-            this.panButtons.TabIndex = 0;
-            // 
-            // lstMethods
-            // 
-            this.lstMethods.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstMethods.FormattingEnabled = true;
-            this.lstMethods.Location = new System.Drawing.Point(0, 0);
-            this.lstMethods.Name = "lstMethods";
-            this.lstMethods.Size = new System.Drawing.Size(200, 69);
-            this.lstMethods.Sorted = true;
-            this.lstMethods.TabIndex = 1;
-            this.lstMethods.SelectedIndexChanged += new System.EventHandler(this.lstMethods_SelectedIndexChanged);
             // 
             // Browser
             // 
