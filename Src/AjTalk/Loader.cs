@@ -12,7 +12,6 @@ namespace AjTalk
     {
         private TextReader reader;
         private IClassDescription currentClass;
-        private string inmediateLine;
 
         public Loader(TextReader reader)
         {
@@ -24,77 +23,54 @@ namespace AjTalk
             this.reader = new StreamReader(filename);
         }
 
-        public bool IsInmediate()
-        {
-            return this.inmediateLine != null;
-        }
-
         public bool IsMethod()
         {
             return this.currentClass != null;
         }
 
-        public void ExecuteInmediate(Machine machine)
-        {
-            this.inmediateLine = this.inmediateLine.Trim();
-
-            if (this.inmediateLine.Length == 0)
-            {
-                this.currentClass = null;
-                return;
-            }
-
-            if (!this.inmediateLine.EndsWith(" methods"))
-            {
-                throw new InvalidOperationException(string.Format("Unknown inmediate line '{0}'", this.inmediateLine));
-            }
-
-            this.inmediateLine = "^" + this.inmediateLine.Substring(0, this.inmediateLine.Length - 8);
-
-            Parser compiler = new Parser(this.inmediateLine);
-            Block block = compiler.CompileBlock();
-            object value = block.Execute(machine, null);
-
-            this.currentClass = (IClassDescription)value;
-        }
-
-        public string GetInmediateText()
-        {
-            return this.inmediateLine;
-        }
-
         public string GetBlockText()
         {
-            this.inmediateLine = null;
+            TextWriter writer = new StringWriter();
 
-            StringBuilder sb = new StringBuilder();
+            char lastch = (char) 0;
+            int ch = this.reader.Read();
 
-            string line = this.reader.ReadLine();
+            if (ch == -1)
+                return null;
 
-            while (line != null)
+            while (ch != -1)
             {
-                if (line.Length > 0 && line[0] == '!')
+                if (ch == '!')
                 {
-                    break;
+                    if (this.reader.Peek() != '!')
+                        break;
+                    this.reader.Read();
+                    writer.Write('!');
+                    lastch = (char)ch;
+                    ch = this.reader.Read();
+                    continue;
                 }
 
-                sb.Append(line);
-                sb.Append("\r\n");
+                if (ch == '\n' && lastch != '\r')
+                    writer.Write('\r');
 
-                line = this.reader.ReadLine();
+                writer.Write((char)ch);
+                lastch = (char)ch;
+                ch = this.reader.Read();
             }
 
-            if (line != null && line.Length > 1 && line.EndsWith("!"))
-            {
-                this.inmediateLine = line.Substring(1, line.Length - 2);
-            }
+            if (ch != -1)
+                if (this.reader.Peek() == '\r')
+                {
+                    this.reader.Read();
+                    if (this.reader.Peek() == '\n')
+                        this.reader.Read();
+                }
+                else if (this.reader.Peek() == '\n')
+                    this.reader.Read();
 
-            if (sb.Length == 0)
-            {
-                return null;
-            }
-
-            return sb.ToString();
+            writer.Close();
+            return writer.ToString();
         }
 
         public void LoadAndExecute(Machine machine)
@@ -105,6 +81,28 @@ namespace AjTalk
 
             while (blocktext != null)
             {
+                string trimmed = blocktext.Trim();
+
+                if (String.IsNullOrEmpty(trimmed))
+                {
+                    this.currentClass = null;
+                    blocktext = this.GetBlockText();
+                    continue;
+                }
+
+                if (trimmed.EndsWith(" methods"))
+                {
+                    blocktext = "^" + trimmed.Substring(0, trimmed.Length - 8);
+                    Parser compiler = new Parser(blocktext);
+                    Block block = compiler.CompileBlock();
+                    object value = block.Execute(machine, null);
+
+                    this.currentClass = (IClassDescription)value;
+
+                    blocktext = this.GetBlockText();
+                    continue;
+                }
+
                 Parser parser = new Parser(blocktext);
 
                 if (this.IsMethod())
@@ -115,11 +113,6 @@ namespace AjTalk
                 {
                     Block block = parser.CompileBlock();
                     block.Execute(machine, null);
-                }
-
-                if (this.IsInmediate())
-                {
-                    this.ExecuteInmediate(machine);
                 }
 
                 blocktext = this.GetBlockText();

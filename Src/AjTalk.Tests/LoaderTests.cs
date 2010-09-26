@@ -37,7 +37,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void GetTwoLinesBlock()
         {
-            Loader loader = new Loader(new StringReader("line 1\nline 2\n!"));
+            Loader loader = new Loader(new StringReader("line 1\r\nline 2\r\n!"));
 
             Assert.IsNotNull(loader);
             Assert.AreEqual("line 1\r\nline 2\r\n", loader.GetBlockText());
@@ -45,9 +45,19 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void ProcessDoubleBang()
+        {
+            Loader loader = new Loader(new StringReader("!!new! !!new"));
+
+            Assert.AreEqual("!new", loader.GetBlockText());
+            Assert.AreEqual(" !new", loader.GetBlockText());
+            Assert.IsNull(loader.GetBlockText());
+        }
+
+        [TestMethod]
         public void GetTwoBlocks()
         {
-            Loader loader = new Loader(new StringReader("line 1\nline 2\n!\nline 3\nline 4\n!\n"));
+            Loader loader = new Loader(new StringReader("line 1\r\nline 2\r\n!\r\nline 3\r\nline 4\r\n!\r\n"));
 
             Assert.IsNotNull(loader);
             Assert.AreEqual("line 1\r\nline 2\r\n", loader.GetBlockText());
@@ -62,7 +72,7 @@ namespace AjTalk.Tests
 
             Assert.IsNotNull(loader);
             Assert.AreEqual("line 1\r\nline 2\r\n", loader.GetBlockText());
-            Assert.AreEqual("inmediate", loader.GetInmediateText());
+            Assert.AreEqual("inmediate", loader.GetBlockText());
             Assert.IsNull(loader.GetBlockText());
         }
 
