@@ -88,5 +88,25 @@
             Assert.IsTrue(definition.Contains("poolDictionaries: ''"));
             Assert.IsTrue(definition.Contains("category: ''"));
         }
+
+        [TestMethod]
+        public void DefineSubclassAndGetDefineString()
+        {
+            Machine machine = new Machine();
+            BaseClass oclass = new BaseClass("Object", machine);
+            BaseClass bclass = new BaseClass("Class", oclass, machine);
+
+            bclass.DefineInstanceVariable("x");
+            bclass.DefineInstanceVariable("y");
+
+            string definition = bclass.ToDefineString();
+
+            Assert.IsNotNull(definition);
+            Assert.IsTrue(definition.Contains("Object subclass: #Class"));
+            Assert.IsTrue(definition.Contains("instanceVariableNames: 'x y'"));
+            Assert.IsTrue(definition.Contains("classVariableNames: ''"));
+            Assert.IsTrue(definition.Contains("poolDictionaries: ''"));
+            Assert.IsTrue(definition.Contains("category: ''"));
+        }
     }
 }

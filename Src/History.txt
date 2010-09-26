@@ -79,7 +79,7 @@ DotNetObject.SendNativeMethod, .SendNativeStaticMethod with tests
 DotNetObject.SendMessage (WIP)
 bytecode .Send manage native object or IObject
 
-2010-08-12
+2010-09-12
 subclass:nativeType: support in test, DoesNotUnderstand
 new example test NativeBahevior.st
 IMetaClass
@@ -90,7 +90,7 @@ BaseIndexedObjectTests
 BehabiorDoesNotUnderstandMethod
 .Superclass as IBehavior
 
-2010-08-18
+2010-09-18
 class methods support in Loader
 new and class in DoesNotUnderstandMethod
 new example DefineRectangleWithNewAndInitialize.st
@@ -98,14 +98,14 @@ DoesNotUnderstandMethod and BehaviorDoesNotUnderstandMethod now in core, and in 
 AjTalk.Gui with first Transcript
 Refactor of ByteCode processing (WIP)
 
-2010-08-19
+2010-09-19
 Add ; (semicolon) support in lexer, parser, with tests
 Message
 MessageQueue with tests
 AgentObject with tests
 agent: support in nil, BehaviorDoesNotUnderstand
 
-2010-08-25
+2010-09-25
 minimal Browser in AjTalk.Gui (WIP)
 Boot.st in AjTalk.Gui
 ClassDescriptor.ToDefineString
@@ -113,6 +113,10 @@ IClass.Category
 IClassDescription.GetInstanceVariableNames
 IClassDescription.GetClassVariableNames
 Move BaseClassDescription.classvariablenames to MetaClass
+
+2010-08-26
+Fix BaseClass.ToDefineString
+Show class define in Browser
 
 AgentObj
 

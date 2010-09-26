@@ -59,8 +59,8 @@ namespace AjTalk.Language
         {
             StringBuilder sb = new StringBuilder();
 
-            if (this.Behavior is IClass)
-                sb.Append(((IClass) this.Behavior).Name);
+            if (this.SuperClass is IClass)
+                sb.Append(((IClass) this.SuperClass).Name);
             else
                 sb.Append("nil");
 

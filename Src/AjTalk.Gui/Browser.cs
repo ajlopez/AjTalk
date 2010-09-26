@@ -38,6 +38,9 @@ namespace AjTalk.Gui
 
             foreach (IMethod method in this.currentClass.GetInstanceMethods())
                 this.lstMethods.Items.Add(method.Name);
+
+            if (this.currentClass is BaseClass)
+                this.txtText.Text = ((BaseClass)this.currentClass).ToDefineString();
         }
 
         private void lstMethods_SelectedIndexChanged(object sender, EventArgs e)
