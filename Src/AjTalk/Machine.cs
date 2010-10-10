@@ -4,6 +4,7 @@ namespace AjTalk
     using System.Collections.Generic;
 
     using AjTalk.Language;
+    using AjTalk.Hosting;
 
     public class Machine
     {
@@ -11,6 +12,9 @@ namespace AjTalk
 
         private Dictionary<string, object> globals = new Dictionary<string, object>();
         private Dictionary<Type, NativeBehavior> nativeBehaviors = new Dictionary<Type, NativeBehavior>();
+
+        private Dictionary<Guid, IHost> localhosts = new Dictionary<Guid, IHost>();
+        private Dictionary<Guid, IHost> remotehosts = new Dictionary<Guid, IHost>();
 
         [ThreadStatic]
         private static Machine current;
@@ -23,7 +27,7 @@ namespace AjTalk
         public Machine(bool iscurrent)
         {
             if (iscurrent)
-                current = this;
+                this.SetCurrent();
 
             this.classclass = new BaseClass("nil", null, this);
 
@@ -36,6 +40,8 @@ namespace AjTalk
         }
 
         public static Machine Current { get { return current; } }
+
+        public IHost Host { get; set; }
 
         public IClass CreateClass(string clsname)
         {
@@ -76,6 +82,16 @@ namespace AjTalk
             this.globals[objname] = value;
         }
 
+        public void SetCurrent()
+        {
+            current = this;
+        }
+
+        public static void SetCurrent(Machine machine)
+        {
+            current = machine;
+        }
+
         public ICollection<IClass> GetClasses()
         {
             List<IClass> classes = new List<IClass>();
@@ -85,6 +101,35 @@ namespace AjTalk
                     classes.Add((IClass) value);
 
             return classes;
+        }
+
+        public void RegisterHost(IHost host)
+        {
+            if (host.IsLocal)
+                this.localhosts[host.Id] = host;
+            else
+                this.remotehosts[host.Id] = host;
+        }
+
+        public IHost GetHost(Guid id)
+        {
+            //if (this.Host != null && this.Host.Id == id)
+            //    return this.Host;
+
+            if (this.localhosts.ContainsKey(id))
+                return this.localhosts[id];
+
+            return this.remotehosts[id];
+        }
+
+        public ICollection<IHost> GetLocalHosts()
+        {
+            return this.localhosts.Values;
+        }
+
+        public ICollection<IHost> GetRemoteHosts()
+        {
+            return this.remotehosts.Values;
         }
 
         internal void RegisterNativeBehavior(Type type, NativeBehavior behavior)

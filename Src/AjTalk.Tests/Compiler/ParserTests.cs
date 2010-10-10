@@ -110,6 +110,17 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileGlobalVariable()
+        {
+            Parser compiler = new Parser("AClass");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
         public void CompileSubClassDefinition()
         {
             Parser compiler = new Parser("nil subclass: #Object");

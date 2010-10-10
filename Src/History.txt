@@ -123,6 +123,10 @@ Todo.txt
 2010-10-10
 BaseClass.ToOutputString() with tests
 BaseObject Serializable, ISerialize implements, with tests
+Hosting namespace
+IHost interface
+Host with first tests
+ObjectProxy WIP
 
 AgentObj
 
