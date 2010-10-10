@@ -1,7 +1,7 @@
 ﻿nil subclass: #Rectangle instanceVariableNames: 'x y width height'
 !Rectangle class methods!
 new
-	^self basicNew initialize
+	^self basicNew initialize! !
 !Rectangle methods!
 x
 	^x

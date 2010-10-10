@@ -114,12 +114,14 @@ IClassDescription.GetInstanceVariableNames
 IClassDescription.GetClassVariableNames
 Move BaseClassDescription.classvariablenames to MetaClass
 
-2010-08-26
+2010-09-26
 Fix BaseClass.ToDefineString
 Show class define in Browser
 Refactoring Loader
 Todo.txt
 
+2010-10-10
+BaseClass.ToOutputString() with tests
 
 AgentObj
 

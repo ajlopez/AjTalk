@@ -59,8 +59,59 @@ namespace AjTalk.Language
         {
             StringBuilder sb = new StringBuilder();
 
+            this.BuildDefineString(sb);
+
+            return sb.ToString();
+        }
+
+        public string ToOutputString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            this.BuildDefineString(sb);
+
+            sb.Append(string.Format("\r\n!{0} class methods!", this.Name));
+
+            foreach (IMethod method in this.GetClassMethods()) 
+            {
+                sb.Append("\r\n");
+                String source = method.SourceCode;
+
+                if (String.IsNullOrEmpty(source))
+                    continue;
+
+                source = source.Replace("!", "!!");
+
+                sb.Append(source);
+                sb.Append("\r\n!");
+            }
+
+            sb.Append(" !\r\n\r\n");
+            sb.Append(string.Format("!{0} methods!", this.Name));
+
+            foreach (IMethod method in this.GetInstanceMethods())
+            {
+                sb.Append("\r\n");
+                String source = method.SourceCode;
+
+                if (String.IsNullOrEmpty(source))
+                    continue;
+
+                source = source.Replace("!", "!!");
+
+                sb.Append(source);
+                sb.Append("\r\n!");
+            }
+
+            sb.Append(" !\r\n\r\n");
+
+            return sb.ToString();
+        }
+
+        private void BuildDefineString(StringBuilder sb)
+        {
             if (this.SuperClass is IClass)
-                sb.Append(((IClass) this.SuperClass).Name);
+                sb.Append(((IClass)this.SuperClass).Name);
             else
                 sb.Append("nil");
 
@@ -82,8 +133,6 @@ namespace AjTalk.Language
             if (this.Category != null)
                 sb.Append(this.Category);
             sb.Append("'\r\n");
-
-            return sb.ToString();
         }
     }
 }

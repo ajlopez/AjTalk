@@ -9,6 +9,8 @@
     using AjTalk.Language;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using AjTalk.Compiler;
+    using System.IO;
 
     [TestClass]
     public class BasicClassTest 
@@ -107,6 +109,68 @@
             Assert.IsTrue(definition.Contains("classVariableNames: ''"));
             Assert.IsTrue(definition.Contains("poolDictionaries: ''"));
             Assert.IsTrue(definition.Contains("category: ''"));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\DefineRectangleWithNewAndInitialize.st")]
+        public void DefineClassAndGetItsOutputString()
+        {
+            Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st");
+            Machine machine = new Machine();
+            loader.LoadAndExecute(machine);
+
+            BaseClass rectangle = (BaseClass) machine.GetGlobalObject("Rectangle");
+
+            string output = rectangle.ToOutputString();
+
+            Assert.IsNotNull(output);
+            Assert.IsTrue(output.Contains("nil subclass:"));
+            Assert.IsTrue(output.Contains("Rectangle class methods!"));
+            Assert.IsTrue(output.Contains("Rectangle methods!"));
+            Assert.IsTrue(output.Contains("^x"));
+            Assert.IsTrue(output.Contains("^y"));
+            Assert.IsTrue(output.Contains("x := 10"));
+            Assert.IsTrue(output.Contains("y := 20"));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\DefineRectangleWithNewAndInitialize.st")]
+        public void DuplicateClassInOtherMachine()
+        {
+            Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st");
+            Machine machine = new Machine();
+            loader.LoadAndExecute(machine);
+
+            BaseClass rectangle = (BaseClass)machine.GetGlobalObject("Rectangle");
+
+            string output = rectangle.ToOutputString();
+
+            Loader loader2 = new Loader(new StringReader(output));
+            Machine machine2 = new Machine();
+            loader2.LoadAndExecute(machine2);
+
+            BaseClass rectangle2 = (BaseClass)machine2.GetGlobalObject("Rectangle");
+
+            Assert.IsNotNull(rectangle2);
+            Assert.IsNotNull(rectangle2.GetClassMethod("new"));
+            Assert.IsNotNull(rectangle2.GetInstanceMethod("x"));
+            Assert.IsNotNull(rectangle2.GetInstanceMethod("y"));
+            Assert.IsNotNull(rectangle2.GetInstanceMethod("x:"));
+            Assert.IsNotNull(rectangle2.GetInstanceMethod("y:"));
+            Assert.IsNotNull(rectangle2.GetInstanceMethod("initialize"));
+
+            Parser parser = new Parser("Rectangle new");
+            Block block = parser.CompileBlock();
+            object result = block.Execute(machine2, null);
+
+            Assert.IsNotNull(result);
+
+            Assert.IsInstanceOfType(result, typeof(IObject));
+
+            IObject iobj = (IObject)result;
+
+            Assert.AreEqual(10, iobj[0]);
+            Assert.AreEqual(20, iobj[1]);
         }
     }
 }
