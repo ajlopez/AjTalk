@@ -12,8 +12,19 @@ namespace AjTalk
         private Dictionary<string, object> globals = new Dictionary<string, object>();
         private Dictionary<Type, NativeBehavior> nativeBehaviors = new Dictionary<Type, NativeBehavior>();
 
+        [ThreadStatic]
+        private static Machine current;
+
         public Machine()
+            : this(true)
         {
+        }
+
+        public Machine(bool iscurrent)
+        {
+            if (iscurrent)
+                current = this;
+
             this.classclass = new BaseClass("nil", null, this);
 
             // TODO Review this tricky autoreference
@@ -23,6 +34,8 @@ namespace AjTalk
             this.classclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this));
             this.classclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this));
         }
+
+        public static Machine Current { get { return current; } }
 
         public IClass CreateClass(string clsname)
         {

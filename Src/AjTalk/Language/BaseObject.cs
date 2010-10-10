@@ -1,8 +1,10 @@
 namespace AjTalk.Language
 {
     using System;
+    using System.Runtime.Serialization;
 
-    public class BaseObject : IObject
+    [Serializable]
+    public class BaseObject : IObject, ISerializable
     {
         private IBehavior behavior;
         private object[] variables;
@@ -23,6 +25,13 @@ namespace AjTalk.Language
         {
             this.behavior = behavior;
             this.variables = vars;
+        }
+
+        protected BaseObject(SerializationInfo info, StreamingContext context)
+        {
+            this.variables = (object[]) info.GetValue("Variables", typeof(object[]));
+            string classname = info.GetString("ClassName");
+            this.behavior = (IBehavior)Machine.Current.GetGlobalObject(classname);
         }
 
         public IBehavior Behavior
@@ -71,6 +80,13 @@ namespace AjTalk.Language
         internal void SetBehavior(IBehavior behavior)
         {
             this.behavior = behavior;
+        }
+
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Variables", this.variables);
+            // TODO review IClass cast
+            info.AddValue("ClassName", ((IClass)this.Behavior).Name);
         }
     }
 }

@@ -80,6 +80,23 @@ namespace AjTalk.Tests
 
             Assert.IsNull(machine.GetGlobalObject("InexistenteGlobal"));
         }
+
+        [TestMethod]
+        public void CreateAsCurrent()
+        {
+            Machine machine = new Machine();
+
+            Assert.IsNotNull(Machine.Current);
+            Assert.AreSame(Machine.Current, machine);
+        }
+
+        [TestMethod]
+        public void CreateNotAsCurrent()
+        {
+            Machine machine = new Machine(false);
+
+            Assert.AreNotSame(Machine.Current, machine);
+        }
     }
 }
 

@@ -122,6 +122,7 @@ Todo.txt
 
 2010-10-10
 BaseClass.ToOutputString() with tests
+BaseObject Serializable, ISerialize implements, with tests
 
 AgentObj
 
