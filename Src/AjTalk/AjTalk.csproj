@@ -85,6 +85,7 @@
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
@@ -93,9 +94,12 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Hosting\ClientObject.cs" />
     <Compile Include="Hosting\Host.cs" />
     <Compile Include="Hosting\IHost.cs" />
     <Compile Include="Hosting\ObjectProxy.cs" />
+    <Compile Include="Hosting\RemotingHostClient.cs" />
+    <Compile Include="Hosting\RemotingHostServer.cs" />
     <Compile Include="Language\AgentObject.cs" />
     <Compile Include="Language\BaseBehavior.cs" />
     <Compile Include="Language\BaseClass.cs">

@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="EvaluateTests.cs" />
     <Compile Include="Hosting\HostTests.cs" />
+    <Compile Include="Hosting\ObjectProxyTests.cs" />
+    <Compile Include="Hosting\RemotingTests.cs" />
     <Compile Include="Language\AgentObjectTests.cs" />
     <Compile Include="Language\BaseBehaviorTests.cs" />
     <Compile Include="Language\BaseIndexedObjectTests.cs" />

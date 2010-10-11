@@ -127,6 +127,7 @@ Hosting namespace
 IHost interface
 Host with first tests
 ObjectProxy WIP
+RemotingHostServer, RemotingHostClient, ClientObject, with tests
 
 AgentObj
 

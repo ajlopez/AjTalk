@@ -110,6 +110,28 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileTwoSimpleCommand()
+        {
+            Parser compiler = new Parser("a := 1. b := 2");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
+        public void CompileAndExecuteTwoSimpleCommand()
+        {
+            Parser compiler = new Parser("a := 1. b := 2");
+            Block block = compiler.CompileBlock();
+            Machine machine = new Machine();
+            block.Execute(machine, null);
+            Assert.AreEqual(1, machine.GetGlobalObject("a"));
+            Assert.AreEqual(2, machine.GetGlobalObject("b"));
+        }
+
+        [TestMethod]
         public void CompileGlobalVariable()
         {
             Parser compiler = new Parser("AClass");

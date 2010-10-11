@@ -381,6 +381,17 @@ namespace AjTalk.Tests
             Assert.IsFalse((bool)machine.GetGlobalObject("result"));
         }
 
+        [TestMethod]
+        public void ExecuteTwoCommands()
+        {
+            Loader loader = new Loader(new StringReader("a := 1. b := 2"));
+            Machine machine = CreateMachine();
+            loader.LoadAndExecute(machine);
+
+            Assert.AreEqual(1, machine.GetGlobalObject("a"));
+            Assert.AreEqual(2, machine.GetGlobalObject("b"));
+        }
+
         internal static Machine CreateMachine()
         {
             Machine machine = new Machine();

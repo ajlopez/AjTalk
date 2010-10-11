@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AjTalk.Language;
 using AjTalk.Compiler;
+using System.IO;
 
 namespace AjTalk.Hosting
 {
@@ -41,15 +42,12 @@ namespace AjTalk.Hosting
         public void Execute(string command)
         {
             Machine current = Machine.Current;
+            Loader loader = new Loader(new StringReader(command));
+
             try
             {
                 this.machine.SetCurrent();
-                Parser parser = new Parser(command);
-
-                Block block = parser.CompileBlock();
-
-                if (block != null)
-                    block.Execute(machine, null);
+                loader.LoadAndExecute(this.machine);
             }
             finally
             {

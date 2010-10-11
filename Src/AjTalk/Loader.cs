@@ -32,7 +32,7 @@ namespace AjTalk
         {
             TextWriter writer = new StringWriter();
 
-            char lastch = (char) 0;
+            char lastch = (char)0;
             int ch = this.reader.Read();
 
             if (ch == -1)
