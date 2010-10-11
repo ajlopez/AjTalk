@@ -12,6 +12,7 @@ namespace AjTalk.Tests
     using AjTalk.Tests.Language;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using AjTalk.Tests.NativeObjects;
 
     [TestClass]
     public class LoaderTests
@@ -361,6 +362,33 @@ namespace AjTalk.Tests
             Assert.AreEqual(2, list.Count);
             Assert.AreEqual(1, list[0]);
             Assert.AreEqual("foo", list[1]);
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\NativeRectangle.st")]
+        public void LoadNativeRectangle()
+        {
+            Type type = Type.GetType("AjTalk.Tests.NativeObjects.Rectangle");
+            Assert.IsNotNull(type);
+            Loader loader = new Loader(@"NativeRectangle.st");
+
+            Machine machine = CreateMachine();
+
+            loader.LoadAndExecute(machine);
+
+            object result1 = machine.GetGlobalObject("Rectangle");
+
+            Assert.IsNotNull(result1);
+            Assert.IsInstanceOfType(result1, typeof(NativeBehavior));
+
+            object result2 = machine.GetGlobalObject("rect");
+
+            Assert.IsNotNull(result2);
+            Assert.IsInstanceOfType(result2, typeof(Rectangle));
+
+            object result = machine.GetGlobalObject("result");
+
+            Assert.AreEqual(200, result);
         }
 
         [TestMethod]

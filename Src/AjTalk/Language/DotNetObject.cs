@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using System.Reflection;
 
     public class DotNetObject
     {
@@ -13,6 +14,16 @@
 
         public static object SendNativeMessage(object obj, string mthname, object[] args)
         {
+            // TODO support for indexed properties
+            Type type = obj.GetType();
+
+            if (args != null && args.Length > 0)
+            {
+                PropertyInfo prop = type.GetProperty(mthname, System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.IgnoreCase | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+                if (prop != null)
+                    return type.InvokeMember(mthname, System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.IgnoreCase | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, null, obj, args);
+            }
+
             return obj.GetType().InvokeMember(mthname, System.Reflection.BindingFlags.GetProperty | System.Reflection.BindingFlags.GetField | System.Reflection.BindingFlags.InvokeMethod | System.Reflection.BindingFlags.IgnoreCase | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, null, obj, args);
         }
 

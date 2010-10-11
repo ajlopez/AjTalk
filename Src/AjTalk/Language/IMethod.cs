@@ -6,7 +6,7 @@ namespace AjTalk.Language
     {
         string Name { get; }
 
-        IClassDescription Class { get; }
+        IBehavior Class { get; }
 
         object Execute(IObject self, object[] args);
 

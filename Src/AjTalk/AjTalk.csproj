@@ -160,6 +160,7 @@
     </Compile>
     <Compile Include="Compiler\LexerException.cs" />
     <Compile Include="Compiler\TokenType.cs" />
+    <Compile Include="TypeUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Language\ClassDiagram.cd" />

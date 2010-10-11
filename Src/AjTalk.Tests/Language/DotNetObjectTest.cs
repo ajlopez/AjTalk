@@ -9,6 +9,7 @@
     using AjTalk.Language;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using AjTalk.Tests.NativeObjects;
 
     [TestClass]
     public class DotNetObjectTest
@@ -46,6 +47,23 @@
             Assert.IsNotNull(obj);
             Assert.IsInstanceOfType(obj, typeof(bool));
             Assert.IsFalse((bool)obj);
+        }
+
+        [TestMethod]
+        public void InvokeGetProperty()
+        {
+            Rectangle rectangle = new Rectangle() { Width = 10, Height = 20 };
+            object obj = DotNetObject.SendNativeMessage(rectangle, "width", null);
+            Assert.AreEqual(10, obj);
+        }
+
+        [TestMethod]
+        public void InvokeSetProperty()
+        {
+            Rectangle rectangle = new Rectangle() { Width = 10, Height = 20 };
+            DotNetObject.SendNativeMessage(rectangle, "width", new object[] { 15 });
+            object obj = DotNetObject.SendNativeMessage(rectangle, "width", null);
+            Assert.AreEqual(15, obj);
         }
     }
 }

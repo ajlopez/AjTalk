@@ -8,7 +8,7 @@ namespace AjTalk.Language
     public class FunctionalMethod : IMethod
     {
         private string name;
-        private IClassDescription classDescription;
+        private IBehavior classDescription;
         private Func<IObject, IObject, object[], object> function;
         private Func<object, object[], object> nativeFunction;
 
@@ -22,14 +22,14 @@ namespace AjTalk.Language
         {
         }
 
-        public FunctionalMethod(string name, IClassDescription classDescription, Func<IObject, IObject, object[], object> function)
+        public FunctionalMethod(string name, IBehavior classDescription, Func<IObject, IObject, object[], object> function)
         {
             this.name = name;
             this.classDescription = classDescription;
             this.function = function;
         }
 
-        public FunctionalMethod(string name, IClassDescription classDescription, Func<object, object[], object> nativeFunction)
+        public FunctionalMethod(string name, IBehavior classDescription, Func<object, object[], object> nativeFunction)
         {
             this.name = name;
             this.classDescription = classDescription;
@@ -40,7 +40,7 @@ namespace AjTalk.Language
 
         public string SourceCode { get { return null; } }
 
-        public IClassDescription Class { get { return this.classDescription; } }
+        public IBehavior Class { get { return this.classDescription; } }
 
         public object Execute(IObject self, object[] args)
         {

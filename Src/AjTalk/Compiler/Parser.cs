@@ -34,14 +34,14 @@ namespace AjTalk.Compiler
             return this.block;
         }
 
-        public void CompileInstanceMethod(IClassDescription cls)
+        public void CompileInstanceMethod(IBehavior cls)
         {
             this.CompileMethod(cls);
             cls.DefineInstanceMethod((IMethod)this.block);
         }
 
         // TODO Review implementation, use DefineClassMethod instead
-        public void CompileClassMethod(IClassDescription cls)
+        public void CompileClassMethod(IBehavior cls)
         {
             this.CompileMethod(cls.MetaClass); // use metaclass
             cls.DefineClassMethod((IMethod)this.block);
@@ -438,7 +438,7 @@ namespace AjTalk.Compiler
             }
         }
 
-        private void CompileMethod(IClassDescription cls)
+        private void CompileMethod(IBehavior cls)
         {
             this.CompileArguments();
             this.CompileLocals();

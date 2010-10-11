@@ -18,4 +18,11 @@
 - Initial class library
 - Bootstrap
 
+- Resolve height instead seft height
+	in native objects and IObject (.CompileSet I guess in Block)
+!Rectangle methods!
+area
+	^self height * self width
+! !
+
 

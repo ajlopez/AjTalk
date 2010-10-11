@@ -11,7 +11,7 @@ namespace AjTalk
     public class Loader
     {
         private TextReader reader;
-        private IClassDescription currentClass;
+        private IBehavior currentClass;
 
         public Loader(TextReader reader)
         {
@@ -97,7 +97,7 @@ namespace AjTalk
                     Block block = compiler.CompileBlock();
                     object value = block.Execute(machine, null);
 
-                    this.currentClass = (IClassDescription)value;
+                    this.currentClass = (IBehavior)value;
 
                     blocktext = this.GetBlockText();
                     continue;

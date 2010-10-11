@@ -7,26 +7,26 @@ namespace AjTalk.Language
     public class Method : Block, IMethod
     {
         private string name;
-        private IClassDescription mthclass;
+        private IBehavior mthclass;
 
         public Method(string name)
             : this(null, name, null)
         {
         }
 
-        public Method(IClassDescription cls, string name)
+        public Method(IBehavior cls, string name)
             : this(cls, name, null)
         {
         }
 
-        public Method(IClassDescription cls, string name, string source)
+        public Method(IBehavior cls, string name, string source)
             : base(source)
         {
             this.name = name;
             this.mthclass = cls;
         }
 
-        public IClassDescription Class
+        public IBehavior Class
         {
             get { return this.mthclass; }
         }
@@ -89,7 +89,7 @@ namespace AjTalk.Language
 
         public object ExecuteNative(object self, object[] args)
         {
-            throw new NotSupportedException();
+            return (new ExecutionBlock(Machine.Current, self, this, args).Execute());
         }
 
         private bool TryCompileGetVariable(string name)
@@ -99,7 +99,12 @@ namespace AjTalk.Language
                 return false;
             }
 
-            int p = this.mthclass.GetInstanceVariableOffset(name);
+            IClassDescription cls = this.mthclass as IClassDescription;
+
+            if (cls == null)
+                return false;
+
+            int p = cls.GetInstanceVariableOffset(name);
 
             if (p >= 0)
             {
@@ -108,7 +113,7 @@ namespace AjTalk.Language
             }
 
             // TODO Review if a class variable can be used in an instance method
-            p = this.mthclass.GetClassVariableOffset(name);
+            p = cls.GetClassVariableOffset(name);
 
             if (p >= 0)
             {
@@ -126,7 +131,12 @@ namespace AjTalk.Language
                 return false;
             }
 
-            int p = this.mthclass.GetInstanceVariableOffset(name);
+            IClassDescription cls = this.mthclass as IClassDescription;
+
+            if (cls == null)
+                return false;
+
+            int p = cls.GetInstanceVariableOffset(name);
 
             if (p >= 0)
             {
@@ -135,7 +145,7 @@ namespace AjTalk.Language
             }
 
             // TODO Is this code needed?
-            p = this.mthclass.GetClassVariableOffset(name);
+            p = cls.GetClassVariableOffset(name);
 
             if (p >= 0)
             {

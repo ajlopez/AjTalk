@@ -391,7 +391,7 @@ namespace AjTalk.Language
         {
             execblock.ip++;
             byte arg = execblock.block.ByteCodes[execblock.ip];
-            execblock.Push(Type.GetType(execblock.block.GetGlobalName(arg)));
+            execblock.Push(TypeUtilities.AsType(execblock.block.GetGlobalName(arg)));
         }
     }
 }

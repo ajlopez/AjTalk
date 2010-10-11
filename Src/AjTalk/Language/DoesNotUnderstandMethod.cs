@@ -24,7 +24,7 @@
 
         public string SourceCode { get { return null; } }
         
-        public IClassDescription Class
+        public IBehavior Class
         {
             get;
             private set;
