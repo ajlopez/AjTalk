@@ -280,13 +280,16 @@ namespace AjTalk.Compiler
 
                 ch = this.NextChar();
 
-                while (!Char.IsWhiteSpace(ch))
+                while (Char.IsLetterOrDigit(ch) || ch=='_' || ch==':')
                 {
                     sb.Append(ch);
+                    if (ch == ':')
+                        break;
                     ch = this.NextChar();
                 }
 
-                this.PushChar(ch);
+                if (ch != ':')
+                    this.PushChar(ch);
             }
             catch (EndOfInputException)
             {

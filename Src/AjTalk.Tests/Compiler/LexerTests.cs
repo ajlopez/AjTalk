@@ -313,6 +313,56 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual("FooBar.txt", token.Value);
             Assert.AreEqual(TokenType.String, token.Type);
         }
+
+        [TestMethod]
+        public void ParseDotNetMethodMethod()
+        {
+            Lexer tokenizer = new Lexer("anObject !nativeMethod");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("anObject", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("!nativeMethod", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
+
+        [TestMethod]
+        public void ParseDotNetMethodMethodWithParenthesis()
+        {
+            Lexer tokenizer = new Lexer("(anObject !nativeMethod)");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("(", token.Value);
+            Assert.AreEqual(TokenType.Punctuation, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("anObject", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("!nativeMethod", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual(")", token.Value);
+            Assert.AreEqual(TokenType.Punctuation, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
     }
 }
 

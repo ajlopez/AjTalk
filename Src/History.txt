@@ -134,6 +134,9 @@ Support in DotNativeObject for set properties, with tests
 Now, Method accepts IBehavior instead IClassDescription in constructor
 New example NativeRectangle.st with tests
 TypeUtilities for resolve types using .AsType(string). Type.GetType() only works in the calling assembly
+Fixing lexer bug: !new) now is two tokens !new and )
+RemotingHostServer.st example with tests
+RemotingHostClient.st example with tests
 
 AgentObj
 

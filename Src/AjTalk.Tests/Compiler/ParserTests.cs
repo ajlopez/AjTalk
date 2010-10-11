@@ -110,9 +110,53 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileSimpleSum()
+        {
+            Parser compiler = new Parser("1 + 2");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
+        public void CompileSimpleArithmeticWithParenthesis()
+        {
+            Parser compiler = new Parser("1 * (2 + 3)");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
         public void CompileTwoSimpleCommand()
         {
             Parser compiler = new Parser("a := 1. b := 2");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
+        public void CompileSimpleCommandWithParenthesis()
+        {
+            Parser compiler = new Parser("a := b with: (anObject class)");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
+        public void CompileSimpleCommandWithParenthesisAndBang()
+        {
+            Parser compiler = new Parser("a := b with: (anObject !nativeMethod)");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
             Assert.AreEqual(0, block.NoLocals);

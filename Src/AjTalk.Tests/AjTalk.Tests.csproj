@@ -94,6 +94,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CodeFiles\RemotingHostClient.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CodeFiles\RemotingHostServer.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\NativeRectangle.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

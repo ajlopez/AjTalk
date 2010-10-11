@@ -13,6 +13,7 @@ namespace AjTalk.Tests
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using AjTalk.Tests.NativeObjects;
+    using AjTalk.Hosting;
 
     [TestClass]
     public class LoaderTests
@@ -368,8 +369,6 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\NativeRectangle.st")]
         public void LoadNativeRectangle()
         {
-            Type type = Type.GetType("AjTalk.Tests.NativeObjects.Rectangle");
-            Assert.IsNotNull(type);
             Loader loader = new Loader(@"NativeRectangle.st");
 
             Machine machine = CreateMachine();
@@ -418,6 +417,48 @@ namespace AjTalk.Tests
 
             Assert.AreEqual(1, machine.GetGlobalObject("a"));
             Assert.AreEqual(2, machine.GetGlobalObject("b"));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\RemotingHostServer.st")]
+        [DeploymentItem(@"CodeFiles\RemotingHostClient.st")]
+        public void LoadRemotingHostServer()
+        {
+            Loader loader = new Loader(@"RemotingHostServer.st");
+            Machine machine = CreateMachine();
+            loader.LoadAndExecute(machine);
+
+            object result = machine.GetGlobalObject("host");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RemotingHostServer));
+
+            RemotingHostServer host = (RemotingHostServer)result;
+
+            Loader loader2 = new Loader(@"RemotingHostClient.st");
+            Machine machine2 = CreateMachine();
+            loader2.LoadAndExecute(machine2);
+
+            Assert.IsNotNull(machine2.GetGlobalObject("Rectangle"));
+            Assert.IsNotNull(host.Machine.GetGlobalObject("Rectangle"));
+
+            object obj1 = machine2.GetGlobalObject("rect");
+            object obj2 = host.Machine.GetGlobalObject("rect");
+
+            Assert.IsNotNull(obj1);
+            Assert.IsNotNull(obj2);
+            Assert.IsInstanceOfType(obj1, typeof(IObject));
+            Assert.IsInstanceOfType(obj2, typeof(IObject));
+
+            IObject rect1 = (IObject)obj1;
+            IObject rect2 = (IObject)obj2;
+
+            Assert.AreEqual(200, rect1[0]);
+            Assert.AreEqual(30, rect1[1]);
+
+            Assert.AreEqual(100, rect2[0]);
+            Assert.AreEqual(20, rect2[1]);
+
+            host.Stop();
         }
 
         internal static Machine CreateMachine()
