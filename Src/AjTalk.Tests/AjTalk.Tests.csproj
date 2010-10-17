@@ -63,6 +63,7 @@
     <Compile Include="NativeObjects\Rectangle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Compiler\LexerTests.cs" />
+    <Compile Include="Transactions\TransactionalValueTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AjTalk\AjTalk.csproj">

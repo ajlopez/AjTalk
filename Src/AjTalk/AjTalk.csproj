@@ -159,6 +159,8 @@
     </Compile>
     <Compile Include="Compiler\LexerException.cs" />
     <Compile Include="Compiler\TokenType.cs" />
+    <Compile Include="Transactions\Transaction.cs" />
+    <Compile Include="Transactions\TransactionalValue.cs" />
     <Compile Include="TypeUtilities.cs" />
   </ItemGroup>
   <ItemGroup>

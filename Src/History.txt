@@ -142,6 +142,8 @@ RemotingHostClient.st example with tests
 RemoteObject with tests
 RemotingHostServer.st example with remote object
 RemotingHostClient.st example with remote object
+Transaction (WIP)
+TransactionalValue (WIP) with tests
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en
