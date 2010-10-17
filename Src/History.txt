@@ -138,7 +138,10 @@ Fixing lexer bug: !new) now is two tokens !new and )
 RemotingHostServer.st example with tests
 RemotingHostClient.st example with tests
 
-AgentObj
+2010-10-17
+RemoteObject with tests
+RemotingHostServer.st example with remote object
+RemotingHostClient.st example with remote object
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

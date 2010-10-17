@@ -420,6 +420,23 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\AsRemote.st")]
+        public void DefineAsRemote()
+        {
+            Loader loader = new Loader(@"AsRemote.st");
+            Machine machine = CreateMachine();
+            loader.LoadAndExecute(machine);
+
+            object result = machine.GetGlobalObject("Object");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IClass));
+
+            IClass cls = (IClass)result;
+            IMethod mth = cls.GetInstanceMethod("asRemote");
+            Assert.IsNotNull(mth);
+        }
+
+        [TestMethod]
         [DeploymentItem(@"CodeFiles\RemotingHostServer.st")]
         [DeploymentItem(@"CodeFiles\RemotingHostClient.st")]
         public void LoadRemotingHostServer()
@@ -455,8 +472,8 @@ namespace AjTalk.Tests
             Assert.AreEqual(200, rect1[0]);
             Assert.AreEqual(30, rect1[1]);
 
-            Assert.AreEqual(100, rect2[0]);
-            Assert.AreEqual(20, rect2[1]);
+            Assert.AreEqual(300, rect2[0]);
+            Assert.AreEqual(40, rect2[1]);
 
             host.Stop();
         }

@@ -94,10 +94,9 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Hosting\ClientObject.cs" />
     <Compile Include="Hosting\Host.cs" />
     <Compile Include="Hosting\IHost.cs" />
-    <Compile Include="Hosting\ObjectProxy.cs" />
+    <Compile Include="Hosting\RemoteObject.cs" />
     <Compile Include="Hosting\RemotingHostClient.cs" />
     <Compile Include="Hosting\RemotingHostServer.cs" />
     <Compile Include="Language\AgentObject.cs" />

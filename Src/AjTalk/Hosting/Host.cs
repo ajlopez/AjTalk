@@ -13,7 +13,6 @@ namespace AjTalk.Hosting
         private Guid id = Guid.NewGuid();
         private Machine machine;
         private Dictionary<IObject, Guid> objectids = new Dictionary<IObject, Guid>();
-        private Dictionary<Guid, ObjectProxy> proxies = new Dictionary<Guid, ObjectProxy>();
 
         public Host()
         {
@@ -86,53 +85,12 @@ namespace AjTalk.Hosting
             {
                 this.machine.SetCurrent();
 
-                if (obj is ObjectProxy)
-                {
-                    ObjectProxy proxy = (ObjectProxy)obj;
-
-                    if (proxy.HostId != this.Id)
-                        throw new NotSupportedException();
-
-                    return this.Invoke(proxy.ObjectId, msgname, args);
-                }
-
                 return obj.SendMessage(msgname, args);
             }
             finally
             {
                 Machine.SetCurrent(current);
             }
-        }
-
-        private object Invoke(Guid objid, string msgname, params object[] arguments)
-        {
-            IObject receiver = (IObject)this.GetObject(objid);
-
-            return receiver.SendMessage(msgname, arguments);
-        }
-
-        public object GetObject(Guid objid)
-        {
-            return this.proxies[objid].Object;
-        }
-
-        public object ResultToObject(IObject result)
-        {
-            if (result == null)
-                return null;
-
-            if (!(result is IObject))
-                return result;
-
-            if (this.objectids.ContainsKey(result))
-                return this.objectids[result];
-
-            ObjectProxy proxy = new ObjectProxy(result, this);
-
-            this.objectids[result] = proxy.ObjectId;
-            this.proxies[proxy.ObjectId] = proxy;
-
-            return proxy;
         }
     }
 }

@@ -44,13 +44,13 @@
             else
                 mthname = msgname;
 
-            if (behavior == null)
-                return SendNativeMessage(obj, mthname, args); 
+            if (behavior != null)
+            {
+                IMethod mth = behavior.GetInstanceMethod(msgname);
 
-            IMethod mth = behavior.GetInstanceMethod(msgname);
-
-            if (mth != null)
-                return mth.ExecuteNative(obj, args);
+                if (mth != null)
+                    return mth.ExecuteNative(obj, args);
+            }
 
             if (obj is Type && (msgname == "new" || msgname.StartsWith("new:")))
                 return NewObject((Type)obj, args);

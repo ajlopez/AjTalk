@@ -7,6 +7,6 @@ asRemote
 Object subclass: #Host nativeType: @AjTalk.Hosting.RemotingHostServer
 !
 
-host := Host new: @AjTalk.Machine !!current with: 20000 with: 'Server2000'
+host := Host new: 20001 with: 'Server2001'
 !
 

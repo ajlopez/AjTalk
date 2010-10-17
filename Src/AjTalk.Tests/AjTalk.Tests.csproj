@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="EvaluateTests.cs" />
     <Compile Include="Hosting\HostTests.cs" />
-    <Compile Include="Hosting\ObjectProxyTests.cs" />
+    <Compile Include="Hosting\RemoteObjectTests.cs" />
     <Compile Include="Hosting\RemotingTests.cs" />
     <Compile Include="Language\AgentObjectTests.cs" />
     <Compile Include="Language\BaseBehaviorTests.cs" />
@@ -94,6 +94,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CodeFiles\AsRemote.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\RemotingHostClient.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

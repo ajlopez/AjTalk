@@ -41,34 +41,17 @@ namespace AjTalk.Hosting
 
         public object Evaluate(string expression)
         {
-            return this.ClientMarshalling(this.host.Evaluate(expression));
+            return this.host.Evaluate(expression);
         }
 
         public object Invoke(IObject obj, string msgname, params object[] arguments)
         {
-            return this.ClientMarshalling(this.host.Invoke(obj, msgname, arguments));
+            return this.host.Invoke(obj, msgname, arguments);
         }
 
         public object ResultToObject(object result)
         {
             throw new NotImplementedException();
-        }
-
-        private object ClientMarshalling(object result)
-        {
-            if (result == null)
-                return null;
-
-            if (!(result is IObject))
-                return result;
-
-            if (result is ObjectProxy)
-                return result;
-
-            if (!System.Runtime.Remoting.RemotingServices.IsTransparentProxy(result))
-                return result;
-
-            return new ClientObject(this.host, (IObject)result);
         }
 
         internal static string MakeAddress(string hostname, int port, string name)

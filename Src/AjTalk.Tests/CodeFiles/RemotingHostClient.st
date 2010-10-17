@@ -10,7 +10,7 @@ export: aClass
 remote := RemoteHost new: 'localhost' with: 20000 with: 'Server2000'
 !
 
-nil subclass: #Rectangle instanceVariableNames: 'width height'
+Object subclass: #Rectangle instanceVariableNames: 'width height'
 !Rectangle methods!
 width
 	^width
@@ -32,4 +32,8 @@ remote execute: 'rect := Rectangle new. rect width: 100. rect height: 20'
 rect := remote evaluate: 'rect'.
 rect width: 200.
 rect height: 30
+!
+rect2 := remote evaluate: 'rect asRemote'.
+rect2 width: 300.
+rect2 height: 40
 !
