@@ -145,6 +145,9 @@ RemotingHostClient.st example with remote object
 Transaction (WIP)
 TransactionalValue (WIP) with tests
 
+2010-10-20
+New Class Diagrams
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

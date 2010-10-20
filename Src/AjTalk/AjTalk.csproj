@@ -164,7 +164,9 @@
     <Compile Include="TypeUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Language\BehaviorsDiagram.cd" />
     <None Include="Language\ClassDiagram.cd" />
+    <None Include="Language\ObjectsDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
