@@ -295,12 +295,12 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void ParseDotNetObjectAndMethod()
         {
-            Lexer tokenizer = new Lexer("@System.FileInfo !new: 'FooBar.txt'");
+            Lexer tokenizer = new Lexer("@System.IO.FileInfo !new: 'FooBar.txt'");
             Token token;
 
             token = tokenizer.NextToken();
             Assert.IsNotNull(token);
-            Assert.AreEqual("@System.FileInfo", token.Value);
+            Assert.AreEqual("@System.IO.FileInfo", token.Value);
             Assert.AreEqual(TokenType.Name, token.Type);
 
             token = tokenizer.NextToken();

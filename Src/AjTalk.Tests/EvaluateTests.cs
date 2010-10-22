@@ -49,6 +49,18 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void EvaluateIntegerToString()
+        {
+            Assert.AreEqual("1", this.Evaluate("1 toString"));
+        }
+
+        [TestMethod]
+        public void EvaluateIntegerSubstring()
+        {
+            Assert.AreEqual("23", this.Evaluate("1234 toString substring: 1 with: 2"));
+        }
+
+        [TestMethod]
         public void EvaluateBlockWithIntegerParameter()
         {
             Assert.AreEqual(2, this.Evaluate("[:x | x] value: 2"));
@@ -103,6 +115,19 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void CreateDotNetObjectUsingNew()
+        {
+            object result = this.Evaluate("@System.IO.FileInfo new: 'afile.txt'");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(System.IO.FileInfo));
+
+            FileInfo fileinfo = (FileInfo)result;
+
+            Assert.AreEqual("afile.txt", fileinfo.Name);
+        }
+
+        [TestMethod]
         public void InvokeDotNetMethod()
         {
             object result = this.Evaluate("2 !toString");
@@ -130,6 +155,16 @@ namespace AjTalk.Tests
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(bool));
             Assert.IsFalse((bool) result);
+        }
+
+        [TestMethod]
+        public void InvokeStaticDotNetMethodUsingMessage()
+        {
+            object result = this.Evaluate("@System.IO.File exists: 'foobar'");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(bool));
+            Assert.IsFalse((bool)result);
         }
 
         [TestMethod]

@@ -148,6 +148,10 @@ TransactionalValue (WIP) with tests
 2010-10-20
 New Class Diagrams
 
+2010-10-22
+static methods in .NET invoked without !
+Few tests added for .NET method invocation
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/
