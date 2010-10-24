@@ -7,17 +7,17 @@ namespace AjTalk.Transactions
 {
     public class Transaction
     {
-        private Machine machine;
+        private TransactionManager manager;
         private long start;
         private long end;
 
-        public Transaction(Machine machine, long start)
+        public Transaction(TransactionManager manager, long start)
         {
-            this.machine = machine;
+            this.manager = manager;
             this.start = start;
         }
 
-        public Machine Machine { get { return this.machine; } }
+        public TransactionManager TransactionManager { get { return this.manager; } }
 
         public long Start { get { return this.start; } }
 

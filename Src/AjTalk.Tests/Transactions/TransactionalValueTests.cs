@@ -11,13 +11,14 @@ namespace AjTalk.Tests.Transactions
     [TestClass]
     public class TransactionalValueTests
     {
-        private static long counter=0;
         private Machine machine;
+        private TransactionManager manager;
 
         [TestInitialize]
         public void Setup()
         {
             this.machine = new Machine();
+            this.manager = new TransactionManager(this.machine);
         }
 
         [TestMethod]
@@ -56,7 +57,7 @@ namespace AjTalk.Tests.Transactions
 
         private Transaction CreateTransaction()
         {
-            return new Transaction(this.machine, Interlocked.Increment(ref counter));
+            return this.manager.CreateTransaction();
         }
     }
 }

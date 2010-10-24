@@ -143,6 +143,7 @@
     <Compile Include="Language\IObject.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Language\IObjectDecorator.cs" />
     <Compile Include="Language\Message.cs" />
     <Compile Include="Language\NativeBehavior.cs" />
     <Compile Include="Language\MessageQueue.cs" />
@@ -160,7 +161,9 @@
     <Compile Include="Compiler\LexerException.cs" />
     <Compile Include="Compiler\TokenType.cs" />
     <Compile Include="Transactions\Transaction.cs" />
+    <Compile Include="Transactions\TransactionalObject.cs" />
     <Compile Include="Transactions\TransactionalValue.cs" />
+    <Compile Include="Transactions\TransactionManager.cs" />
     <Compile Include="TypeUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
