@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AjTalk.Transactions;
 using System.Threading;
+using AjTalk.Language;
 
 namespace AjTalk.Tests.Transactions
 {
@@ -13,46 +14,82 @@ namespace AjTalk.Tests.Transactions
     {
         private Machine machine;
         private TransactionManager manager;
+        private IObject obj;
+        private TransactionalObject trobj;
 
         [TestInitialize]
         public void Setup()
         {
             this.machine = new Machine();
             this.manager = new TransactionManager(this.machine);
+            this.obj = new BaseObject(null, new object[] { 1, 2, 3 });
+            this.trobj = new TransactionalObject(this.obj, new TransactionManager(this.machine));
         }
 
         [TestMethod]
         public void SetAndGetOriginalValue()
         {
-            TransactionalValue tvalue = new TransactionalValue();
-            tvalue.SetValue(0, 1);
-            Assert.AreEqual(1, tvalue.GetValue(CreateTransaction()));
-            Assert.AreEqual(1, tvalue.GetValue(0));
+            IObject obj = new BaseObject(null, new object[] { 1, 2, 3 });
+            TransactionalValue tvalue = new TransactionalValue(trobj, 2);
+            Assert.AreEqual(3, tvalue.GetValue(CreateTransaction()));
+            Assert.AreEqual(3, tvalue.GetValue(0));
         }
 
         [TestMethod]
         public void SetAndGetValueInTransaction()
         {
-            TransactionalValue tvalue = new TransactionalValue();
-            tvalue.SetValue(0, 1);
+            IObject obj = new BaseObject(null, new object[] { 1, 2, 3 });
+            TransactionalValue tvalue = new TransactionalValue(trobj, 2);
             Transaction transaction = CreateTransaction();
             tvalue.SetValue(transaction, 2);
             Assert.AreEqual(2, tvalue.GetValue(transaction));
-            Assert.AreEqual(1, tvalue.GetValue(0));
+            Assert.AreEqual(3, tvalue.GetValue(0));
         }
 
         [TestMethod]
-        public void SetAndGetValuesInTwoTransactions()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RaiseIfTwoTransactionChangeTheSameSlot()
         {
-            TransactionalValue tvalue = new TransactionalValue();
-            tvalue.SetValue(0, 1);
+            IObject obj = new BaseObject(null, new object[] { 1, 2, 3 });
+            TransactionalValue tvalue = new TransactionalValue(trobj, 0);
             Transaction transaction1 = CreateTransaction();
             tvalue.SetValue(transaction1, 2);
             Transaction transaction2 = CreateTransaction();
             tvalue.SetValue(transaction2, 3);
-            Assert.AreEqual(2, tvalue.GetValue(transaction1));
-            Assert.AreEqual(3, tvalue.GetValue(transaction2));
-            Assert.AreEqual(1, tvalue.GetValue(0));
+        }
+
+        [TestMethod]
+        public void TwoSerializedTransactions()
+        {
+            IObject obj = new BaseObject(null, new object[] { 1, 2, 3 });
+            TransactionalValue tvalue = new TransactionalValue(trobj, 0);
+            Transaction transaction1 = CreateTransaction();
+            tvalue.SetValue(transaction1, 2);
+            tvalue.CommitValue(transaction1);
+
+            Assert.AreEqual(2, tvalue.GetValue(0));
+
+            Transaction transaction2 = CreateTransaction();
+            tvalue.SetValue(transaction2, 3);
+            tvalue.CommitValue(transaction2);
+
+            Assert.AreEqual(3, tvalue.GetValue(0));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void RaiseIfTransactionChangeACommittedSlot()
+        {
+            IObject obj = new BaseObject(null, new object[] { 1, 2, 3 });
+            TransactionalValue tvalue = new TransactionalValue(trobj, 0);
+            Transaction transaction1 = CreateTransaction();
+
+            Transaction transaction2 = CreateTransaction();
+            tvalue.SetValue(transaction2, 3);
+            transaction2.Commit(this.manager.Time + 1);
+            //tvalue.CommitValue(transaction2);
+
+            tvalue.SetValue(transaction1, 2);
         }
 
         private Transaction CreateTransaction()

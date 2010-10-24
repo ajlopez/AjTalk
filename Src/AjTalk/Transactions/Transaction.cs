@@ -10,6 +10,7 @@ namespace AjTalk.Transactions
         private TransactionManager manager;
         private long start;
         private long end;
+        private List<TransactionalValue> values = new List<TransactionalValue>();
 
         public Transaction(TransactionManager manager, long start)
         {
@@ -28,6 +29,32 @@ namespace AjTalk.Transactions
         public bool WasOpenedAfter(long time)
         {
             return time < this.Start; // TODO review Start negative
+        }
+
+        // TODO Review: it's only called with thread local TransactionManager.Current, no lock is needed
+        public void Commit(long attime)
+        {
+            this.end = attime;
+            foreach (TransactionalValue value in this.values)
+                value.CommitValue(this);
+            values = null;
+        }
+
+        // TODO Review: it's only called with thread local TransactionManager.Current, no lock is needed
+        public void Rollback(long attime)
+        {
+            this.end = attime;
+            foreach (TransactionalValue value in this.values)
+                value.RollbackValue(this);
+            values = null;
+        }
+
+        // TODO Review: it's only called with thread local TransactionManager.Current, no lock is needed
+        public void RegisterValue(TransactionalValue value)
+        {
+            if (this.values.Contains(value))
+                return;
+            this.values.Add(value);
         }
     }
 }

@@ -23,18 +23,30 @@ namespace AjTalk.Transactions
             get { return this.inner.Behavior; }
         }
 
+        public TransactionManager TransactionManager { get { return this.manager; } }
+
         public object this[int n]
         {
             get
             {
                 lock (this)
                 {
-                    if (this.values.ContainsKey(n)) {
+                    if (TransactionManager.CurrentTransaction == null && !this.manager.HasTransactions())
+                    {
+                        if (this.values.Count > 0)
+                            this.ReleaseValues();
+
+                        return this.inner[n];
+                    }
+
+                    if (this.values.ContainsKey(n))
+                    {
                         if (TransactionManager.CurrentTransaction == null)
                             return this.values[n].GetValue(this.manager.Time);
                         else
                             return this.values[n].GetValue(TransactionManager.CurrentTransaction);
                     }
+
                     return this.inner[n];
                 }
             }
@@ -42,11 +54,18 @@ namespace AjTalk.Transactions
             {
                 lock (this)
                 {
+                    if (TransactionManager.CurrentTransaction == null && !this.manager.HasTransactions())
+                    {
+                        if (this.values.Count > 0)
+                            this.ReleaseValues();
+
+                        this.inner[n] = value;
+                        return;
+                    }
+                       
                     if (!this.values.ContainsKey(n))
                     {
-                        TransactionalValue tv = new TransactionalValue();
-                        // TODO review, time 0 value should be retrieved from inner object
-                        tv.SetValue(0, this.inner[n]);
+                        TransactionalValue tv = new TransactionalValue(this, n);
                         this.values[n] = tv;
                     }
 
@@ -84,6 +103,16 @@ namespace AjTalk.Transactions
         public IObject InnerObject
         {
             get { return this.inner; }
+        }
+
+        internal void ReleaseValues()
+        {
+            long time = this.manager.MinimalTransactionalTime;
+
+            foreach (TransactionalValue val in this.values.Values)
+                val.ReleaseValues(time);
+
+            this.values = new Dictionary<int, TransactionalValue>();
         }
     }
 }

@@ -17,6 +17,7 @@
 - Post about agents
 - Initial class library
 - Bootstrap
+- Review time1 > time2 in transaction management
 
 - Resolve height instead seft height
 	in native objects and IObject (.CompileSet I guess in Block)

@@ -155,7 +155,8 @@ Few tests added for .NET method invocation
 2010-10-24
 IObjectDecorator
 TransactionManager
-TransactionalObject WIP
+TransactionalObject with tests
+More tests for TransactionalValue
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

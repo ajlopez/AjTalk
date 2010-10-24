@@ -64,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Compiler\LexerTests.cs" />
     <Compile Include="Transactions\TransactionalValueTests.cs" />
+    <Compile Include="Transactions\TransactionObjectTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AjTalk\AjTalk.csproj">
