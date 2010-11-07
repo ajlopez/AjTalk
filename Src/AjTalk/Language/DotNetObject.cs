@@ -4,9 +4,25 @@
     using System.Collections.Generic;
     using System.Text;
     using System.Reflection;
+    using System.Collections;
 
     public class DotNetObject
     {
+        private static Dictionary<string, IMethod> binaryMethods = new Dictionary<string, IMethod>();
+
+        static DotNetObject()
+        {
+            binaryMethods["+"] = new FunctionalMethod((obj, args) => ObjectOperators.Add(obj, args[0]));
+            binaryMethods["-"] = new FunctionalMethod((obj, args) => ObjectOperators.Substract(obj, args[0]));
+            binaryMethods["*"] = new FunctionalMethod((obj, args) => ObjectOperators.Multiply(obj, args[0]));
+            binaryMethods["/"] = new FunctionalMethod((obj, args) => ObjectOperators.Divide(obj, args[0]));
+            binaryMethods["<"] = new FunctionalMethod((obj, args) => ObjectOperators.Less(obj, args[0]));
+            binaryMethods[">"] = new FunctionalMethod((obj, args) => ObjectOperators.Greater(obj, args[0]));
+            binaryMethods["<="] = new FunctionalMethod((obj, args) => ObjectOperators.LessEqual(obj, args[0]));
+            binaryMethods[">="] = new FunctionalMethod((obj, args) => ObjectOperators.GreaterEqual(obj, args[0]));
+            binaryMethods["=="] = new FunctionalMethod((obj, args) => ObjectOperators.Equals(obj, args[0]));
+        }
+
         public static object NewObject(Type type, object[] args)
         {
             return Activator.CreateInstance(type, args);
@@ -14,6 +30,12 @@
 
         public static object SendNativeMessage(object obj, string mthname, object[] args)
         {
+            if (args != null && args.Length == 1 && binaryMethods.ContainsKey(mthname))
+            {
+                IMethod binmethod = binaryMethods[mthname];
+                return binmethod.ExecuteNative(obj, args);
+            }
+
             // TODO support for indexed properties
             Type type = obj.GetType();
 
@@ -46,6 +68,15 @@
 
             if (behavior != null)
             {
+                IMethod mth = behavior.GetInstanceMethod(msgname);
+
+                if (mth != null)
+                    return mth.ExecuteNative(obj, args);
+            }
+
+            if (obj is IEnumerable)
+            {
+                behavior = machine.GetNativeBehavior(typeof(IEnumerable));
                 IMethod mth = behavior.GetInstanceMethod(msgname);
 
                 if (mth != null)

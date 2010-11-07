@@ -9,6 +9,7 @@ using AjTalk.Language;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Threading;
+using System.Collections;
 
 namespace AjTalk.Tests
 {
@@ -46,6 +47,23 @@ namespace AjTalk.Tests
         public void EvaluateIntegerAdd()
         {
             Assert.AreEqual(4, this.Evaluate("1+3"));
+        }
+
+        [TestMethod]
+        public void EvaluateIntegerLess()
+        {
+            Assert.AreEqual(true, this.Evaluate("1<3"));
+        }
+
+        [TestMethod]
+        public void EvaluateIntegerOperators()
+        {
+            Assert.AreEqual(3.0, this.Evaluate("6/2"));
+            Assert.AreEqual(6, this.Evaluate("2*3"));
+            Assert.AreEqual(false, this.Evaluate("2>3"));
+            Assert.AreEqual(false, this.Evaluate("2>=3"));
+            Assert.AreEqual(true, this.Evaluate("3<=3"));
+            Assert.AreEqual(true, this.Evaluate("2<3"));
         }
 
         [TestMethod]
@@ -346,6 +364,105 @@ namespace AjTalk.Tests
         {
             object result = this.Evaluate("@System.Console");
             Assert.AreEqual(result, typeof(System.Console));
+        }
+
+        [TestMethod]
+        public void EvaluateCollection()
+        {
+            object result = this.Evaluate("#(1 2 3)");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IEnumerable));
+            
+            int k=0;
+
+            foreach (object v in (IEnumerable)result)
+            {
+                k++;
+                Assert.AreEqual(k, v);
+            }
+
+            Assert.AreEqual(3, k);
+        }
+
+        [TestMethod]
+        public void EvaluateHeterogeneousCollection()
+        {
+            object result = this.Evaluate("#(1 #Symbol 'string')");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IEnumerable));
+
+            int k = 0;
+            object []values = new object[] { 1, "Symbol", "string" };
+
+            foreach (object v in (IEnumerable)result)
+            {
+                Assert.AreEqual(values[k], v);
+                k++;
+            }
+
+            Assert.AreEqual(3, k);
+        }
+
+        [TestMethod]
+        public void EvaluateCompositeCollection()
+        {
+            object result = this.Evaluate("#(1 (1 2 3) 'string')");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IEnumerable));
+
+            int k = 0;
+            object[] values = new object[] { 1, new ArrayList() { 1, 2, 3 }, "string" };
+
+            foreach (object v in (IEnumerable)result)
+            {
+                if (v is ArrayList && values[k] is ArrayList)
+                {
+                    ArrayList a1 = (ArrayList)v;
+                    ArrayList a2 = (ArrayList)values[k];
+
+                    Assert.AreEqual(a1.Count, a2.Count);
+                    for (int j = 0; j < a1.Count; j++)
+                        Assert.AreEqual(a1[j], a2[j]);
+                }
+                else
+                    Assert.AreEqual(values[k], v);
+
+                k++;
+            }
+
+            Assert.AreEqual(3, k);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void RaiseIfNameInCollection()
+        {
+            object result = this.Evaluate("#(1 Name 'string')");
+        }
+
+        [TestMethod]
+        public void EvaluateSimpleDo()
+        {
+            object result = this.Evaluate("sum := 0. #(1 2 3) do: [ :x | sum := x + sum ]. sum");
+            Assert.AreEqual(6, result);
+        }
+
+        [TestMethod]
+        public void EvaluateSimpleSelect()
+        {
+            object result = this.Evaluate("#(1 2 3) select: [ :x | x > 1 ]");
+            Assert.IsInstanceOfType(result, typeof(IEnumerable));
+            IEnumerable elements = (IEnumerable)result;
+
+            int k = 0;
+
+            foreach (object element in elements)
+            {
+                Assert.AreEqual(k + 2, element);
+                k++;
+            }
+
+            Assert.AreEqual(2, k);
         }
 
         private object Evaluate(string text)

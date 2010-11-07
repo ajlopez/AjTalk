@@ -25,14 +25,15 @@ namespace AjTalk.Language
         Pop = 24,
         ReturnSub = 25,
         ReturnPop = 26,
-
+/*
         Add = 40,
         Substract = 41,
         Multiply = 42,
         Divide = 43,
-
+*/
         Send = 50,
         ChainedSend = 51,
+        MakeCollection = 52,
 
         InstAt = 60,
         InstAtPut = 61,
@@ -46,6 +47,6 @@ namespace AjTalk.Language
 
         GetDotNetType = 80,
         NewDotNetObject = 81,
-        InvokeDotNetMethod = 82
+        InvokeDotNetMethod = 82, 
     }
 }

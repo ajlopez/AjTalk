@@ -56,6 +56,7 @@
     <Compile Include="Language\FunctionalMethodTests.cs" />
     <Compile Include="Language\NativeBehaviorTests.cs" />
     <Compile Include="Language\MessageQueueTests.cs" />
+    <Compile Include="Language\ObjectOperatorsTests.cs" />
     <Compile Include="LoaderTests.cs" />
     <Compile Include="MachineTests.cs" />
     <Compile Include="Language\MethodTests.cs" />

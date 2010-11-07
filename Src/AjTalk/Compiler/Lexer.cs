@@ -69,6 +69,13 @@ namespace AjTalk.Compiler
 
                 if (ch == SymbolMark)
                 {
+                    char ch2 = this.NextChar();
+
+                    if (ch2 == '(')
+                        return new Token() { Type = TokenType.Punctuation, Value = "#(" };
+
+                    this.PushChar(ch2);
+
                     return this.NextSymbol();
                 }
 

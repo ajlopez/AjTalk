@@ -284,7 +284,7 @@ namespace AjTalk.Tests.Compiler
 
             Assert.IsNotNull(block);
             Assert.AreEqual(0, block.NoLocals);
-            Assert.AreEqual(0, block.NoConstants);
+            Assert.AreEqual(1, block.NoConstants);
             Assert.IsNotNull(block.ByteCodes);
             Assert.AreEqual(2, block.Arity);
         }

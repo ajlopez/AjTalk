@@ -2,11 +2,13 @@ namespace AjTalk.Compiler
 {
     using System;
     using System.Collections;
+    using System.Linq;
 
     using AjTalk.Language;
 
     public class Parser
     {
+        private static string[] binaryOperators = new string[] { "+", "-", "*", "/", "<", ">", "==", "<=", ">=" };
         private Lexer tokenizer;
         private IList arguments = new ArrayList();
         private IList locals = new ArrayList();
@@ -226,6 +228,13 @@ namespace AjTalk.Compiler
                 return;
             }
 
+            if (token.Type == TokenType.Punctuation && token.Value == "#(")
+            {
+                this.CompileCollection();
+
+                return;
+            }
+
             if (token.Type == TokenType.Punctuation && token.Value == "[")
             {
                 Parser newcompiler = new Parser(this.tokenizer);
@@ -284,6 +293,49 @@ namespace AjTalk.Compiler
             throw new ParserException("Name expected");
         }
 
+        private void CompileCollection()
+        {
+            int nelements = 0;
+            Token token = this.NextToken();
+
+            while (token != null)
+            {
+                switch (token.Type) {
+                    case TokenType.Integer:
+                        this.block.CompileGetConstant(Convert.ToInt32(token.Value));
+                        nelements++;
+                        break;
+                    case TokenType.String:
+                        this.block.CompileGetConstant(token.Value);
+                        nelements++;
+                        break;
+                    // TODO Review compile of Symbol
+                    case TokenType.Symbol:
+                        this.block.CompileGetConstant(token.Value);
+                        nelements++;
+                        break;
+                    case TokenType.Punctuation:
+                        if (token.Value == ")")
+                        {
+                            this.block.CompileByteCode(ByteCode.MakeCollection, (byte) nelements);
+                            return;
+                        }
+                        if (token.Value == "(")
+                        {
+                            this.CompileCollection();
+                            nelements++;
+                        }
+                        else
+                            throw new ParserException("Expected ')'");
+                        break;
+                    default:
+                        throw new ParserException("Expected ')'");
+                }
+
+                token = this.NextToken();
+            }
+        }
+
         private void CompileUnaryExpression()
         {
             this.CompileTerm();
@@ -318,21 +370,10 @@ namespace AjTalk.Compiler
                 mthname = token.Value;
                 this.CompileUnaryExpression();
 
-                if (mthname == "+")
+                // TODO Refactor multiple if
+                if (binaryOperators.Contains(mthname))
                 {
-                    this.block.CompileByteCode(ByteCode.Add);
-                }
-                else if (mthname == "-")
-                {
-                    this.block.CompileByteCode(ByteCode.Substract);
-                }
-                else if (mthname == "*")
-                {
-                    this.block.CompileByteCode(ByteCode.Multiply);
-                }
-                else if (mthname == "/")
-                {
-                    this.block.CompileByteCode(ByteCode.Divide);
+                    this.block.CompileBinarySend(mthname);
                 }
                 else
                 {

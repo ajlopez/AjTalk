@@ -76,6 +76,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -121,6 +122,7 @@
     <Compile Include="Language\BaseMetaClass.cs" />
     <Compile Include="Language\DoesNotUnderstandMethod.cs" />
     <Compile Include="Language\FunctionalMethod.cs" />
+    <Compile Include="Language\EnumerableBehavior.cs" />
     <Compile Include="Language\IMetaClass.cs" />
     <Compile Include="Language\IIndexedObject.cs" />
     <Compile Include="Compiler\EndOfInputException.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="Language\Message.cs" />
     <Compile Include="Language\NativeBehavior.cs" />
     <Compile Include="Language\MessageQueue.cs" />
+    <Compile Include="Language\ObjectOperators.cs" />
     <Compile Include="Loader.cs" />
     <Compile Include="Machine.cs">
       <SubType>Code</SubType>

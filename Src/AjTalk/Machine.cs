@@ -5,6 +5,7 @@ namespace AjTalk
 
     using AjTalk.Language;
     using AjTalk.Hosting;
+    using System.Collections;
 
     public class Machine
     {
@@ -37,6 +38,8 @@ namespace AjTalk
             this.globals["nil"] = this.classclass;
             this.classclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this));
             this.classclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this));
+
+            this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(this.classclass, this));
         }
 
         public static Machine Current { get { return current; } }

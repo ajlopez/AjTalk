@@ -131,6 +131,8 @@ namespace AjTalk.Language
                         this.lastreceiver = ibeh;
                         this.Push(ibeh.NewObject());
                         break;
+                        // TODO remove, no primitive methods
+/*
                     case ByteCode.Add:
                         int y = (int)this.Pop();
                         int x = (int)this.Pop();
@@ -155,6 +157,7 @@ namespace AjTalk.Language
                         this.lastreceiver = x;
                         this.Push(x / y);
                         break;
+ */
                     case ByteCode.Nop:
                         break;
                     case ByteCode.Pop:
@@ -217,6 +220,19 @@ namespace AjTalk.Language
                             this.Push(DotNetObject.SendMessage(this.machine, obj, mthname, args));
                         else
                             this.Push(iobj.SendMessage(mthname, args));
+
+                        break;
+                    case ByteCode.MakeCollection:
+                        this.ip++;
+                        arg = this.block.ByteCodes[this.ip];
+                        args = new object[arg];
+
+                        for (int k = arg - 1; k >= 0; k--)
+                        {
+                            args[k] = this.Pop();
+                        }
+
+                        this.Push(new ArrayList(args));
 
                         break;
                     case ByteCode.NewDotNetObject:

@@ -158,6 +158,16 @@ TransactionManager
 TransactionalObject with tests
 More tests for TransactionalValue
 
+2010-11-07
+CollectionBehavior, .Do and .Select
+binaryMethods in DotNetObject
+binaryOperators in Parser
+Drop Add, Substract... bytecodes
+Block.CompileBinarySend
+do: for IEnumerable with tests
+select: for IEnumerable with tests
+ObjectOperators with tests
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

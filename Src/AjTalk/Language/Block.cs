@@ -253,6 +253,11 @@ namespace AjTalk.Language
             }
         }
 
+        public void CompileBinarySend(string msgname)
+        {
+            this.CompileByteCode(ByteCode.Send, this.CompileConstant(msgname), 1);
+        }
+
         // TODO how to implements super, sender
         public virtual object Execute(Machine machine, object[] args)
         {

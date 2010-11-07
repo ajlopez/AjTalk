@@ -223,27 +223,22 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void ProcessOperators()
         {
-            string opers = "^<>:=-+*/&";
+            string opers = "== <> >= <= := ^ < > : = - + * / &";
 
-            string opers2 = string.Empty;
+            string[] opers2 = opers.Split(' ');
 
-            foreach (char ch in opers)
-            {
-                opers2 += ch;
-                opers2 += ' ';
-            }
-
-            Lexer tokenizer = new Lexer(opers2);
+            Lexer tokenizer = new Lexer(opers);
             Token token;
 
-            for (int k = 0; k < opers.Length; k++)
+            for (int k = 0; k < opers2.Length; k++)
             {
                 token = tokenizer.NextToken();
                 Assert.IsNotNull(token);
-                Assert.AreEqual(opers[k], token.Value[0]);
-                Assert.AreEqual(1, token.Value.Length);
+                Assert.AreEqual(opers2[k], token.Value);
                 Assert.AreEqual(TokenType.Operator, token.Type);
             }
+
+            Assert.IsNull(tokenizer.NextToken());
         }
 
         [TestMethod]
@@ -273,6 +268,18 @@ namespace AjTalk.Tests.Compiler
                 Assert.AreEqual(1, token.Value.Length);
                 Assert.AreEqual(TokenType.Punctuation, token.Type);
             }
+        }
+
+        [TestMethod]
+        public void ProcessCollectionStart()
+        {
+            string punct = "#(";
+            Lexer tokenizer = new Lexer(punct);
+            Token token;
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Punctuation, token.Type);
+            Assert.AreEqual("#(", token.Value);
         }
 
         [TestMethod]
