@@ -40,6 +40,7 @@ namespace AjTalk
             this.classclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this));
 
             this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(this.classclass, this));
+            this.RegisterNativeBehavior(typeof(Boolean), new BooleanBehavior(this.classclass, this));
         }
 
         public static Machine Current { get { return current; } }

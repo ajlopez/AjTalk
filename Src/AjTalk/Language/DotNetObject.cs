@@ -83,6 +83,15 @@
                     return mth.ExecuteNative(obj, args);
             }
 
+            if (obj is Boolean)
+            {
+                behavior = machine.GetNativeBehavior(typeof(Boolean));
+                IMethod mth = behavior.GetInstanceMethod(msgname);
+
+                if (mth != null)
+                    return mth.ExecuteNative(obj, args);
+            }
+
             if (obj is Type)
             {
                 if (msgname == "new" || msgname.StartsWith("new:"))

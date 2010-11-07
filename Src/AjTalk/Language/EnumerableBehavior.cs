@@ -24,9 +24,8 @@ namespace AjTalk.Language
             IBlock block = (IBlock) arguments[0];
             IEnumerable elements = (IEnumerable)obj;
             object result = null;
-            Machine machine = Machine.Current;
             foreach (object element in elements)
-                result = block.Execute(machine, new object[] { element });
+                result = block.Execute(this.Machine, new object[] { element });
             return result;
         }
 
@@ -39,10 +38,9 @@ namespace AjTalk.Language
             IBlock block = (IBlock)arguments[0];
             IEnumerable elements = (IEnumerable)obj;
             ArrayList result = new ArrayList();
-            Machine machine = Machine.Current;
 
             foreach (object element in elements)
-                if ((bool) block.Execute(machine, new object[] { element }))
+                if ((bool) block.Execute(this.Machine, new object[] { element }))
                     result.Add(element);
 
             return result;

@@ -167,6 +167,7 @@ Block.CompileBinarySend
 do: for IEnumerable with tests
 select: for IEnumerable with tests
 ObjectOperators with tests
+BooleanBehavior, used in Machine and DotNetObject, with Tests
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

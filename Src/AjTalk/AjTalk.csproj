@@ -120,6 +120,7 @@
     <Compile Include="Language\BaseClassDescription.cs" />
     <Compile Include="Compiler\ParserException.cs" />
     <Compile Include="Language\BaseMetaClass.cs" />
+    <Compile Include="Language\BooleanBehavior.cs" />
     <Compile Include="Language\DoesNotUnderstandMethod.cs" />
     <Compile Include="Language\FunctionalMethod.cs" />
     <Compile Include="Language\EnumerableBehavior.cs" />

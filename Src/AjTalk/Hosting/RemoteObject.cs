@@ -6,7 +6,7 @@ using AjTalk.Language;
 
 namespace AjTalk.Hosting
 {
-    public class RemoteObject : MarshalByRefObject, IObject
+    public class RemoteObject : MarshalByRefObject, IObject, IObjectDecorator
     {
         private IObject obj;
         private Machine machine;
@@ -20,6 +20,11 @@ namespace AjTalk.Hosting
         public IBehavior Behavior
         {
             get { return this.obj.Behavior; }
+        }
+
+        public IObject InnerObject
+        {
+            get { return this.obj; }
         }
 
         public object this[int n]

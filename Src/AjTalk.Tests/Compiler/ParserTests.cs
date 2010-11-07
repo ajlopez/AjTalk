@@ -299,8 +299,6 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            //((IClass)nil).DefineClassMethod(new DoesNotUnderstandMethod(machine));
-
             Parser compiler = new Parser("nil ifFalse: [GlobalName := 'foo']");
             Block block = compiler.CompileBlock();
 
@@ -309,6 +307,36 @@ namespace AjTalk.Tests.Compiler
             block.Execute(machine, null);
 
             Assert.IsNotNull(machine.GetGlobalObject("GlobalName"));
+        }
+
+        [TestMethod]
+        public void ExecuteTrueIfFalse()
+        {
+            Machine machine = new Machine();
+
+            Parser compiler = new Parser("true ifFalse: [GlobalName := 'foo']");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+
+            block.Execute(machine, null);
+
+            Assert.IsNull(machine.GetGlobalObject("GlobalName"));
+        }
+
+        [TestMethod]
+        public void ExecuteTrueIfTrueIfFalse()
+        {
+            Machine machine = new Machine();
+
+            Parser compiler = new Parser("true ifTrue: [GlobalName := 'bar'] ifFalse: [GlobalName := 'foo']");
+            Block block = compiler.CompileBlock();
+
+            Assert.IsNotNull(block);
+
+            block.Execute(machine, null);
+
+            Assert.AreEqual("bar", machine.GetGlobalObject("GlobalName"));
         }
 
         [TestMethod]

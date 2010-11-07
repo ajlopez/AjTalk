@@ -18,7 +18,9 @@
 - Initial class library
 - Bootstrap
 - Review time1 > time2 in transaction management
-- Parse #(1 2 3)
++ Parse #(1 2 3)
++ do: with IEnumerable
++ select: with IEnumerable
 
 - Resolve height instead seft height
 	in native objects and IObject (.CompileSet I guess in Block)

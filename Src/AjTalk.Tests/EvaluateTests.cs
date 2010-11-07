@@ -367,6 +367,14 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void GetSystemDataDataSet()
+        {
+            object result = this.Evaluate("@System.Data.DataSet");
+            Assert.IsInstanceOfType(result, typeof(Type));
+            Assert.AreEqual("System.Data.DataSet", ((Type)result).FullName);
+        }
+
+        [TestMethod]
         public void EvaluateCollection()
         {
             object result = this.Evaluate("#(1 2 3)");
