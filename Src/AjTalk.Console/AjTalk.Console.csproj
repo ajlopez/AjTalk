@@ -56,6 +56,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Programs\WebCrawler.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="RunClient.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

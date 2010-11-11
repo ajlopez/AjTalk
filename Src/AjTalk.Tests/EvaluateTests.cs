@@ -473,6 +473,22 @@ namespace AjTalk.Tests
             Assert.AreEqual(2, k);
         }
 
+        [TestMethod]
+        public void EvaluateAddTwoStrings()
+        {
+            object result = this.Evaluate("'foo' + 'bar'");
+            Assert.IsInstanceOfType(result, typeof(String));
+            Assert.AreEqual("foobar", result);
+        }
+
+        [TestMethod]
+        public void EvaluateAddStringToInteger()
+        {
+            object result = this.Evaluate("'foo' + 1");
+            Assert.IsInstanceOfType(result, typeof(String));
+            Assert.AreEqual("foo1", result);
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);

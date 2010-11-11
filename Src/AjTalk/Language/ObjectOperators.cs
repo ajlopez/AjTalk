@@ -10,6 +10,9 @@ namespace AjTalk.Language
     {
         public static object Add(object obj1, object obj2)
         {
+            if (!IsNumber(obj1) || !IsNumber(obj2))
+                return Operators.ConcatenateObject(obj1, obj2);
+
             return Operators.AddObject(obj1, obj2);
         }
 
@@ -61,6 +64,15 @@ namespace AjTalk.Language
         public static object Mod(object obj1, object obj2)
         {
             return Operators.ModObject(obj1, obj2);
+        }
+
+        public static bool IsNumber(object obj)
+        {
+            if (obj == null)
+                return false;
+            if (obj is short || obj is int || obj is long || obj is float || obj is double || obj is decimal)
+                return true;
+            return false;
         }
     }
 }

@@ -22,5 +22,13 @@ namespace AjTalk.Tests.Language
             Assert.AreEqual(true, ObjectOperators.Equals(3, 3));
             Assert.AreEqual(false, ObjectOperators.Equals(2, 3));
         }
+
+        [TestMethod]
+        public void AddOperatorWithString()
+        {
+            Assert.AreEqual("foobar", ObjectOperators.Add("foo", "bar"));
+            Assert.AreEqual("foo1", ObjectOperators.Add("foo", 1));
+            Assert.AreEqual("1foo", ObjectOperators.Add(1 ,"foo"));
+        }
     }
 }

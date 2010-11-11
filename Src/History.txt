@@ -173,6 +173,7 @@ BooleanBehavior, used in Machine and DotNetObject, with Tests
 AjTalk.Console
 Remoting modification (ChannelServices.RegisterChannel once)
 Programs examples in AjTalk.Console
+Downloader.st
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en
