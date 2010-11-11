@@ -11,6 +11,7 @@ namespace AjTalk.Hosting
 {
     public class RemotingHostServer : Host
     {
+        private static bool registered = false;
         private int port;
         private string name;
         private string hostname;
@@ -39,6 +40,12 @@ namespace AjTalk.Hosting
             props["port"] = port;
 
             TcpChannel channel = new TcpChannel(props, clientProv, serverProv);
+
+            if (!registered)
+            {
+                ChannelServices.RegisterChannel(channel, false);
+                registered = true;
+            }
             // end of "according"
 
             // TODO review other options to publish an object

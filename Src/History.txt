@@ -169,6 +169,11 @@ select: for IEnumerable with tests
 ObjectOperators with tests
 BooleanBehavior, used in Machine and DotNetObject, with Tests
 
+2010-11-11
+AjTalk.Console
+Remoting modification (ChannelServices.RegisterChannel once)
+Programs examples in AjTalk.Console
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

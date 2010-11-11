@@ -25,6 +25,7 @@ namespace AjTalk.Language
         Pop = 24,
         ReturnSub = 25,
         ReturnPop = 26,
+        GetSuper = 27,
 /*
         Add = 40,
         Substract = 41,

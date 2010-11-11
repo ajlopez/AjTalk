@@ -20,6 +20,7 @@ namespace AjTalk.Gui
             InitializeComponent();
 
             this.machine = machine;
+            //panel1.Dock = DockStyle.Fill;
 
             foreach (IClass cls in machine.GetClasses())
                 this.lstClasses.Items.Add(cls.Name);

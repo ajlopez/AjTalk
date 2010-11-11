@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjTalk.Tests", "AjTalk.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjTalk.Gui", "AjTalk.Gui\AjTalk.Gui.csproj", "{0EA38DC8-8565-43C6-9077-F6BE28EDAA34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjTalk.Console", "AjTalk.Console\AjTalk.Console.csproj", "{3C192CB8-AE4E-4FCD-8EA5-D8784B0D031D}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = AjTalk.vsmdi
@@ -34,6 +36,10 @@ Global
 		{0EA38DC8-8565-43C6-9077-F6BE28EDAA34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EA38DC8-8565-43C6-9077-F6BE28EDAA34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EA38DC8-8565-43C6-9077-F6BE28EDAA34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C192CB8-AE4E-4FCD-8EA5-D8784B0D031D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C192CB8-AE4E-4FCD-8EA5-D8784B0D031D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C192CB8-AE4E-4FCD-8EA5-D8784B0D031D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C192CB8-AE4E-4FCD-8EA5-D8784B0D031D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

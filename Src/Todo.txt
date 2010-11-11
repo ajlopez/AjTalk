@@ -1,10 +1,10 @@
 
 - Refactor ExecutionBlock: bytecode processing
-- Add method support to native types
-- do: over ICollection, IEnumerable
-- Boolean: true, false as native, but with Boolean methods
+= Add method support to native types
+= do: over ICollection, IEnumerable
+= Boolean: true, false as native, but with Boolean methods
 - Real number support
-- Chunk Reader and processing
+= Chunk Reader and processing
 - Get Categories for classes
 - Categories for methods
 - Image serialization
@@ -13,8 +13,9 @@
 - Transcript
 - Workspace
 - Console app (reading console as chunks)
-- Post about native objects and types
-- Post about agents
++ Post about native objects and types
++ Post about agents
+- agents example
 - Initial class library
 - Bootstrap
 - Review time1 > time2 in transaction management

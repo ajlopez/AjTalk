@@ -65,5 +65,12 @@
             object obj = DotNetObject.SendNativeMessage(rectangle, "width", null);
             Assert.AreEqual(15, obj);
         }
+
+        [TestMethod]
+        public void GetEnum()
+        {
+            object result = DotNetObject.SendNativeStaticMessage(typeof(ByteCode), "Send", null);
+            Assert.IsNotNull(result);
+        }
     }
 }
