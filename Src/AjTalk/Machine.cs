@@ -6,6 +6,7 @@ namespace AjTalk
     using AjTalk.Language;
     using AjTalk.Hosting;
     using System.Collections;
+    using AjTalk.Transactions;
 
     public class Machine
     {
@@ -16,6 +17,8 @@ namespace AjTalk
 
         private Dictionary<Guid, IHost> localhosts = new Dictionary<Guid, IHost>();
         private Dictionary<Guid, IHost> remotehosts = new Dictionary<Guid, IHost>();
+
+        private TransactionManager transactionManager;
 
         [ThreadStatic]
         private static Machine current;
@@ -46,6 +49,17 @@ namespace AjTalk
         public static Machine Current { get { return current; } }
 
         public IHost Host { get; set; }
+
+        public TransactionManager TransactionManager
+        {
+            get
+            {
+                if (this.transactionManager == null)
+                    this.transactionManager = new TransactionManager(this);
+
+                return this.transactionManager;
+            }
+        }
 
         public IClass CreateClass(string clsname)
         {

@@ -56,6 +56,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Programs\TransactionExample.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Programs\Transactions.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Programs\WebCrawler.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

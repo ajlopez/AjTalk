@@ -175,6 +175,11 @@ Remoting modification (ChannelServices.RegisterChannel once)
 Programs examples in AjTalk.Console
 Downloader.st
 
+2010-11-12
+TransactionManager as property in Machine
+Programs\Transactions.st
+Programs\TransactionExample.st
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/
