@@ -15,6 +15,7 @@ height: newHeight
 ! !
 
 rect := Rectangle new.
+rect width: 500!
 rect := rect asTransactional
 !
 
@@ -22,9 +23,7 @@ tm := @AjTalk.Machine current transactionManager.
 console := @System.Console out
 !
 
-rect width: 500!
-
-tm.beginTransaction!
+tm beginTransaction!
 
 console write: 'rect width is '.
 console writeLine: rect width!
@@ -40,7 +39,7 @@ console writeLine: rect width!
 console write: 'inner rect width now is '.
 console writeLine: rect innerObject width!
 
-tm.rollbackTransaction!
+tm rollbackTransaction!
 
 console write: 'rect width now is '.
 console writeLine: rect width!
