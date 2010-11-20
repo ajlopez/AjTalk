@@ -294,7 +294,7 @@ namespace AjTalk.Tests.Compiler
         {
             Machine machine = new Machine();
 
-            object nil = machine.GetGlobalObject("nil");
+            object nil = machine.UndefinedObjectClass;
 
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
@@ -344,12 +344,10 @@ namespace AjTalk.Tests.Compiler
         {
             Machine machine = new Machine();
 
-            object nil = machine.GetGlobalObject("nil");
+            object nil = machine.UndefinedObjectClass;
 
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
-
-            //((IClass)nil).DefineClassMethod(new BehaviorDoesNotUnderstandMethod(machine));
 
             Parser compiler = new Parser("^nil new instSize");
             Block block = compiler.CompileBlock();

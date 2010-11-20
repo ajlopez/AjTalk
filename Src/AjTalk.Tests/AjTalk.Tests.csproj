@@ -101,6 +101,9 @@
     <None Include="CodeFiles\AsRemote.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="CodeFiles\Object.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\RemotingHostClient.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

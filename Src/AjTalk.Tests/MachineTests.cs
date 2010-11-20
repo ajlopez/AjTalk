@@ -25,7 +25,7 @@ namespace AjTalk.Tests
         {
             Machine machine = new Machine();
 
-            Assert.IsNotNull(machine.GetGlobalObject("nil"));
+            Assert.IsNotNull(machine.UndefinedObjectClass);
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace AjTalk.Tests
             Assert.IsNull(cls.GetInstanceMethod("x"));
             Assert.IsNotNull(cls.SuperClass);
             Assert.IsInstanceOfType(cls.SuperClass, typeof(IClass));
-            Assert.AreEqual("nil", ((IClass) cls.SuperClass).Name);
+            Assert.AreEqual("UndefinedObject", ((IClass) cls.SuperClass).Name);
         }
 
         [TestMethod]
@@ -55,7 +55,7 @@ namespace AjTalk.Tests
             Assert.IsNull(cls.GetInstanceMethod("x"));
             Assert.IsNotNull(cls.SuperClass);
             Assert.IsInstanceOfType(cls.SuperClass, typeof(IClass));
-            Assert.AreEqual("nil", ((IClass)cls.SuperClass).Name);
+            Assert.AreEqual("UndefinedObject", ((IClass)cls.SuperClass).Name);
 
             object obj = cls.NewObject();
 

@@ -216,7 +216,9 @@ namespace AjTalk.Language
 
                         iobj = obj as IObject;
 
-                        if (iobj == null)
+                        if (obj == null)
+                            this.Push(this.machine.UndefinedObjectClass.SendMessage(mthname, args));
+                        else if (iobj == null)
                             this.Push(DotNetObject.SendMessage(this.machine, obj, mthname, args));
                         else
                             this.Push(iobj.SendMessage(mthname, args));

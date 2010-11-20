@@ -344,6 +344,35 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\Object.st")]
+        public void LoadObject()
+        {
+            Loader loader = new Loader(@"Object.st");
+
+            Machine machine = CreateMachine();
+            loader.LoadAndExecute(machine);
+
+            object obj = machine.GetGlobalObject("Object");
+
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(IClass));
+
+            IClass cls = (IClass)obj;
+
+            Assert.IsNotNull(cls.GetClassMethod("new"));
+            Assert.IsNotNull(cls.GetClassMethod("basicNew"));
+
+            object result = machine.GetGlobalObject("result");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IObject));
+            Assert.AreEqual(cls, ((IObject)result).Behavior);
+
+            object rcls = machine.GetGlobalObject("resultclass");
+            Assert.AreEqual(cls, rcls);
+        }
+
+        [TestMethod]
         [DeploymentItem(@"CodeFiles\Library1.st")]
         public void ReviewClassGraph()
         {
@@ -526,7 +555,7 @@ namespace AjTalk.Tests
         {
             Machine machine = new Machine();
 
-            object nil = machine.GetGlobalObject("nil");
+            object nil = machine.UndefinedObjectClass;
 
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));

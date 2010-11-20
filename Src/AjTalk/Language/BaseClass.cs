@@ -44,12 +44,12 @@ namespace AjTalk.Language
         public override object NewObject()
         {
             // TODO review first parameter
-            if (this.isBehavior)
-                return new BaseBehavior(null, this, this.Machine);
+            //if (this.isBehavior)
+            //    return new BaseBehavior(null, this, this.Machine);
 
             // TODO review first parameter
-            if (this.isClassDescription)
-                return new BaseClassDescription(null, this, this.Machine, string.Empty);
+            //if (this.isClassDescription)
+            //    return new BaseClassDescription(null, this, this.Machine, string.Empty);
 
             if (this.IsAgentClass)
                 return new AgentObject(this, this.NoInstanceVariables);
@@ -112,7 +112,7 @@ namespace AjTalk.Language
 
         private void BuildDefineString(StringBuilder sb)
         {
-            if (this.SuperClass is IClass)
+            if (this.SuperClass is IClass && ((IClass)this.SuperClass).Name!="UndefinedObject")
                 sb.Append(((IClass)this.SuperClass).Name);
             else
                 sb.Append("nil");

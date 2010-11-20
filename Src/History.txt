@@ -192,6 +192,12 @@ BehaviorDoesNotUnderstand using the new Machine.CreateClass methods
 IBehavior in constructors
 BaseBehavior now receives an IBehavior as first parameter in constructor
 NativeBehavior now receives an IBehavior as first constructor parameter
+nil removed as GlobalObject in Machine
+Machine.UndefinedObjectClass
+Machine.ClassClass
+Machine.MetaClassClass
+Send bytecode use Machine.UndefinedObjectClass if receiver is null
+Object.st new test
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

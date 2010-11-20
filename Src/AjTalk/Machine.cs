@@ -10,6 +10,7 @@ namespace AjTalk
 
     public class Machine
     {
+        private IClass nilclass;
         private IClass classclass;
         private IClass metaclassclass;
 
@@ -35,18 +36,13 @@ namespace AjTalk
                 this.SetCurrent();
 
             IMetaClass meta = new BaseMetaClass(null, null, this, "");
-            this.classclass = meta.CreateClass("nil", "");
-            //this.classclass = new BaseClass("nil", null, this, "");
+            this.nilclass = meta.CreateClass("UndefinedObject", "");
 
-            // TODO Review this tricky autoreference
-            //this.classclass.SetBehavior(this.classclass);
+            this.nilclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this));
+            this.nilclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this));
 
-            this.globals["nil"] = this.classclass;
-            this.classclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this));
-            this.classclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this));
-
-            this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(meta, this.classclass, this));
-            this.RegisterNativeBehavior(typeof(Boolean), new BooleanBehavior(meta, this.classclass, this));
+            this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(meta, this.nilclass, this));
+            this.RegisterNativeBehavior(typeof(Boolean), new BooleanBehavior(meta, this.nilclass, this));
         }
 
         public static Machine Current { get { return current; } }
@@ -54,6 +50,10 @@ namespace AjTalk
         public IHost Host { get; set; }
 
         public IClass MetaClassClass { get { return this.metaclassclass; } }
+
+        public IClass UndefinedObjectClass { get { return this.nilclass; } }
+
+        public IClass ClassClass { get { return this.classclass; } }
 
         public TransactionManager TransactionManager
         {
@@ -68,7 +68,7 @@ namespace AjTalk
 
         public IClass CreateClass(string clsname)
         {
-            return this.CreateClass(clsname, this.classclass);
+            return this.CreateClass(clsname, (this.classclass == null ? this.nilclass : this.classclass));
         }
 
         public IClass CreateClass(string clsname, bool isIndexed)
@@ -123,7 +123,7 @@ namespace AjTalk
 
             if (this.metaclassclass == null && objname == "Metaclass" && value is IClass)
                 this.DefineMetaclass((IClass)value);
-            else if (objname == "Class" && value is IClass)
+            else if (this.classclass == null && objname == "Class" && value is IClass)
                 this.DefineClass((IClass)value);
         }
 
@@ -200,9 +200,9 @@ namespace AjTalk
 
         private void DefineClass(IClass cls)
         {
-            IClass objclass = (IClass)this.GetGlobalObject("Object");
-            ((BaseBehavior)objclass.MetaClass).SetSuperClass(cls);
-            cls.DefineInstanceMethod(new BehaviorDoesNotUnderstandMethod(this));
+            this.classclass = (IClass)this.GetGlobalObject("Object");
+            ((BaseBehavior)this.classclass.MetaClass).SetSuperClass(cls);
+            this.classclass.DefineInstanceMethod(new BehaviorDoesNotUnderstandMethod(this));
         }
     }
 }

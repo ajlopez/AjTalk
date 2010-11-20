@@ -25,7 +25,7 @@ namespace AjTalk.Tests.Language
             Assert.IsNull(cls.GetClassMethod("x"));
             Assert.IsNotNull(cls.SuperClass);
             Assert.IsInstanceOfType(cls.SuperClass, typeof(IClass));
-            Assert.AreEqual("nil", ((IClass) cls.SuperClass).Name);
+            Assert.AreEqual("UndefinedObject", ((IClass) cls.SuperClass).Name);
         }
 
         [TestMethod]
@@ -138,27 +138,29 @@ namespace AjTalk.Tests.Language
             Assert.IsNull(obj[1]);
         }
 
-        [TestMethod]
-        public void CreateBehavior()
-        {
-            Machine machine = new Machine();
-            IClass cls = machine.CreateClass("Behavior");
-            IObject obj = (IObject) cls.NewObject();
-            Assert.IsNotNull(obj);
-            Assert.IsInstanceOfType(obj, typeof(BaseBehavior));
-            Assert.IsNotInstanceOfType(obj, typeof(BaseClassDescription));
-        }
+        // TODO No Behavior is needed with .isBehavior test in NewObject
+        //[TestMethod]
+        //public void CreateBehavior()
+        //{
+        //    Machine machine = new Machine();
+        //    IClass cls = machine.CreateClass("Behavior");
+        //    IObject obj = (IObject) cls.NewObject();
+        //    Assert.IsNotNull(obj);
+        //    Assert.IsInstanceOfType(obj, typeof(BaseBehavior));
+        //    Assert.IsNotInstanceOfType(obj, typeof(BaseClassDescription));
+        //}
 
-        [TestMethod]
-        public void CreateClassDescription()
-        {
-            Machine machine = new Machine();
-            IClass cls = machine.CreateClass("ClassDescription");
-            IObject obj = (IObject) cls.NewObject();
-            Assert.IsNotNull(obj);
-            Assert.IsInstanceOfType(obj, typeof(BaseClassDescription));
-            Assert.IsNotInstanceOfType(obj, typeof(BaseClass));
-        }
+        // TODO No ClassDescription is needed with .isClassDescription test in NewObject
+        //[TestMethod]
+        //public void CreateClassDescription()
+        //{
+        //    Machine machine = new Machine();
+        //    IClass cls = machine.CreateClass("ClassDescription");
+        //    IObject obj = (IObject) cls.NewObject();
+        //    Assert.IsNotNull(obj);
+        //    Assert.IsInstanceOfType(obj, typeof(BaseClassDescription));
+        //    Assert.IsNotInstanceOfType(obj, typeof(BaseClass));
+        //}
     }
 }
 
