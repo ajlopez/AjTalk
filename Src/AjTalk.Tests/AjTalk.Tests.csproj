@@ -104,6 +104,9 @@
     <None Include="CodeFiles\Class.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="CodeFiles\Behavior.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\Object.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

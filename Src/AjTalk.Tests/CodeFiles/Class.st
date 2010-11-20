@@ -1,4 +1,4 @@
-﻿"First definition for Object"
+﻿"First definition for Class"
 
 nil subclass:#Object
 	instanceVariableNames:''
@@ -43,6 +43,12 @@ ClassDescription subclass:#Class
 	classVariableNames:''
 	poolDictionaries:''
 	category:'Kernel-Classes'
+!
+
+"Tricky code: first knot in class hierarchy"
+Object !!metaclass !!setSuperClass: Class.
+Class !!defineInstanceMethod: (@AjTalk.Language.BehaviorDoesNotUnderstandMethod new: (Class !!machine)).
+Class !!machine !!classClass: Class.
 !
 
 ClassDescription subclass:#Metaclass
@@ -103,3 +109,4 @@ height: newValue
 
 rect := Rectangle new width: 100; height: 50.
 
+!

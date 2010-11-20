@@ -117,7 +117,7 @@
         }
 
 
-        internal void SetSuperClass(IBehavior superclass)
+        public void SetSuperClass(IBehavior superclass)
         {
             this.superclass = superclass;
         }

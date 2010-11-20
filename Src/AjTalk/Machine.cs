@@ -53,7 +53,11 @@ namespace AjTalk
 
         public IClass UndefinedObjectClass { get { return this.nilclass; } }
 
-        public IClass ClassClass { get { return this.classclass; } }
+        public IClass ClassClass 
+        {
+            get { return this.classclass; }
+            set { this.classclass = value; }
+        }
 
         public TransactionManager TransactionManager
         {
@@ -123,8 +127,6 @@ namespace AjTalk
 
             if (this.metaclassclass == null && objname == "Metaclass" && value is IClass)
                 this.DefineMetaclass((IClass)value);
-            else if (this.classclass == null && objname == "Class" && value is IClass)
-                this.DefineClass((IClass)value);
         }
 
         public void SetCurrent()
@@ -196,13 +198,6 @@ namespace AjTalk
 
             foreach (IClass cls in this.GetClasses())
                 ((BaseBehavior)cls.Behavior).SetBehavior(this.metaclassclass);
-        }
-
-        private void DefineClass(IClass cls)
-        {
-            this.classclass = (IClass)this.GetGlobalObject("Object");
-            ((BaseBehavior)this.classclass.MetaClass).SetSuperClass(cls);
-            this.classclass.DefineInstanceMethod(new BehaviorDoesNotUnderstandMethod(this));
         }
     }
 }

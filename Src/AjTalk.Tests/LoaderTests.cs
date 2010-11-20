@@ -373,6 +373,26 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\Behavior.st")]
+        public void LoadBehavior()
+        {
+            Loader loader = new Loader(@"Behavior.st");
+
+            Machine machine = CreateMachine();
+            loader.LoadAndExecute(machine);
+
+            object obj = machine.GetGlobalObject("NewBehavior");
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(IClass));
+
+            IClass cls = (IClass)obj;
+
+            Assert.AreEqual("Behavior", ((IClass)cls.SuperClass).Name);
+
+            Assert.IsNotNull(cls.Behavior.GetInstanceMethod("compile:"));
+        }
+
+        [TestMethod]
         [DeploymentItem(@"CodeFiles\Class.st")]
         public void LoadClass()
         {
