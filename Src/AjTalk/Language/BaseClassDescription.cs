@@ -10,19 +10,39 @@ namespace AjTalk.Language
         private List<string> instancevariables = new List<string>();
 
         public BaseClassDescription(Machine machine)
-            : this(null, machine)
+            : this(null, machine, "")
         {
         }
 
-        public BaseClassDescription(IBehavior superclass, Machine machine)
+        public BaseClassDescription(IBehavior superclass, Machine machine, string varnames)
             : base(superclass, machine)
         {
+            IEnumerable<string> names = AsNames(varnames);
+
+            foreach (string name in names)
+                this.DefineInstanceVariable(name);
         }
 
-        public BaseClassDescription(IBehavior superclass, IClass metaclass, Machine machine)
-            : this(superclass, machine)
+        public BaseClassDescription(IBehavior superclass, IClass metaclass, Machine machine, string varnames)
+            : this(superclass, machine, varnames)
         {
             this.SetBehavior(metaclass);
+        }
+
+        private static IEnumerable<string> AsNames(string varnames)
+        {
+            if (string.IsNullOrEmpty(varnames))
+                return new string[] { };
+
+            string[] splits = varnames.Split(' ');
+
+            IList<string> names = new List<String>();
+
+            foreach (string split in splits)
+                if (!string.IsNullOrEmpty(split))
+                    names.Add(split);
+
+            return names;
         }
 
         public override int NoInstanceVariables

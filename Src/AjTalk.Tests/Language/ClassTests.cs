@@ -55,6 +55,7 @@ namespace AjTalk.Tests.Language
             supercls.DefineInstanceVariable("y");
 
             IClass cls = machine.CreateClass("Rectangle", supercls);
+            Assert.AreEqual(supercls, cls.SuperClass);
             cls.DefineInstanceVariable("width");
             cls.DefineInstanceVariable("height");
 

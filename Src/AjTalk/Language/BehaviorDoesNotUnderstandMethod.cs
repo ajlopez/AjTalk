@@ -27,7 +27,7 @@
 
             if (msgname.Equals("subclass:") || msgname.Equals("agent:"))
             {
-                IClass newclass = this.Machine.CreateClass((string)args[0], (IClassDescription)self);
+                IClass newclass = this.Machine.CreateClass((string)args[0], (IClass)self);
                 this.Machine.SetGlobalObject(newclass.Name, newclass);
 
                 if (msgname.Equals("agent:"))
@@ -41,27 +41,16 @@
                 msgname.Equals("agent:instanceVariableNames:") ||
                 msgname.Equals("agent:instanceVariableNames:classVariableNames:poolDictionaries:category:"))
             {
-                IClass newclass = this.Machine.CreateClass((string)args[0], (IClassDescription)self);
+                string clsname = (string)args[0];
+                string instancevarnames = (string)args[1];
+                string classvarnames = (args.Length > 2 ? (string)args[2] : string.Empty);
+
+                IClass newclass = this.Machine.CreateClass((string)args[0], (IClass)self, instancevarnames, classvarnames);
 
                 if (msgname.StartsWith("agent:"))
                     ((BaseClass)newclass).IsAgentClass = true;
                 if (args.Length >= 5)
                     ((BaseClass)newclass).Category = (string) args[4];
-
-                string[] varnames = ((string)args[1]).Split(' ');
-
-                foreach (string varname in varnames)
-                    if (!string.IsNullOrEmpty(varname))
-                        newclass.DefineInstanceVariable(varname);
-
-                if (args.Length >= 3)
-                {
-                    string[] clsvarnames = ((string)args[2]).Split(' ');
-
-                    foreach (string varname in clsvarnames)
-                        if (!string.IsNullOrEmpty(varname))
-                            newclass.DefineClassVariable(varname);
-                }
 
                 this.Machine.SetGlobalObject(newclass.Name, newclass);
 

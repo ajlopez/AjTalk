@@ -184,6 +184,12 @@ Programs\TransactionExample.st
 TransactionExample.st fixed
 RunAll.cmd, RunTransaction.cmd in AjTalk.Console
 
+2010-11-20
+BaseMetaClassTests
+BaseMetaClass.CreateClass with tests
+Machine.CreateClass to use BaseMetaClass
+BehaviorDoesNotUnderstand using the new Machine.CreateClass methods
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

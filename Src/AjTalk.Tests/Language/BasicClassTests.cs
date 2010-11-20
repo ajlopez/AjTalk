@@ -96,7 +96,7 @@
         {
             Machine machine = new Machine();
             BaseClass oclass = new BaseClass("Object", machine);
-            BaseClass bclass = new BaseClass("Class", oclass, machine);
+            BaseClass bclass = new BaseClass("Class", oclass, machine, string.Empty);
 
             bclass.DefineInstanceVariable("x");
             bclass.DefineInstanceVariable("y");

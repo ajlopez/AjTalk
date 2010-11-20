@@ -11,12 +11,12 @@ namespace AjTalk.Language
         private bool isBehavior;
         private bool isClassDescription;
         
-        public BaseClass(string name, Machine machine) : this(name, null, machine)
+        public BaseClass(string name, Machine machine) : this(name, null, machine, "")
         {
         }
 
-        public BaseClass(string name, IBehavior superclass, Machine machine)
-            : base(superclass, machine)
+        public BaseClass(string name, IBehavior superclass, Machine machine, string varnames)
+            : base(superclass, machine, varnames)
         {
             if (name == null)
             {
@@ -47,7 +47,7 @@ namespace AjTalk.Language
                 return new BaseBehavior(this, this.Machine);
 
             if (this.isClassDescription)
-                return new BaseClassDescription(this, this.Machine);
+                return new BaseClassDescription(this, this.Machine, string.Empty);
 
             if (this.IsAgentClass)
                 return new AgentObject(this, this.NoInstanceVariables);

@@ -6,5 +6,8 @@
 
     public interface IMetaClass : IClassDescription
     {
+        IClass ClassInstance { get; }
+
+        IClass CreateClass(string name, string varnames);
     }
 }

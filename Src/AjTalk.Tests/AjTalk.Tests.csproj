@@ -47,6 +47,7 @@
     <Compile Include="Language\AgentObjectTests.cs" />
     <Compile Include="Language\BaseBehaviorTests.cs" />
     <Compile Include="Language\BaseIndexedObjectTests.cs" />
+    <Compile Include="Language\BaseMetaClassTests.cs" />
     <Compile Include="Language\BaseObjectTests.cs" />
     <Compile Include="Language\BasicClassTests.cs" />
     <Compile Include="Language\BlockTests.cs" />

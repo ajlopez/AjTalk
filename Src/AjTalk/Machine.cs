@@ -10,7 +10,7 @@ namespace AjTalk
 
     public class Machine
     {
-        private BaseClass classclass;
+        private IClass classclass;
 
         private Dictionary<string, object> globals = new Dictionary<string, object>();
         private Dictionary<Type, NativeBehavior> nativeBehaviors = new Dictionary<Type, NativeBehavior>();
@@ -33,7 +33,9 @@ namespace AjTalk
             if (iscurrent)
                 this.SetCurrent();
 
-            this.classclass = new BaseClass("nil", null, this);
+            IMetaClass meta = new BaseMetaClass(null, this, "");
+            this.classclass = meta.CreateClass("nil", "");
+            //this.classclass = new BaseClass("nil", null, this, "");
 
             // TODO Review this tricky autoreference
             //this.classclass.SetBehavior(this.classclass);
@@ -63,19 +65,30 @@ namespace AjTalk
 
         public IClass CreateClass(string clsname)
         {
-            return this.CreateClass(clsname, false);
+            return this.CreateClass(clsname, this.classclass);
         }
 
         public IClass CreateClass(string clsname, bool isIndexed)
         {
-            BaseClass cls = new BaseClass(clsname, this.classclass, this);
+            BaseClass cls = (BaseClass)this.CreateClass(clsname);
             cls.IsIndexed = isIndexed;
             return cls;
         }
 
-        public IClass CreateClass(string clsname, IBehavior superclass)
+        public IClass CreateClass(string clsname, IClass superclass)
         {
-            BaseClass cls = new BaseClass(clsname, superclass, this);
+            return this.CreateClass(clsname, superclass, "", "");
+        }
+
+        public IClass CreateClass(string clsname, IClass superclass, string instancevarnames, string classvarnames)
+        {
+            IMetaClass supermeta = null;
+
+            if (superclass != null)
+                supermeta = superclass.MetaClass;
+
+            IMetaClass meta = new BaseMetaClass(supermeta, this, classvarnames);
+            IClass cls = meta.CreateClass(clsname, instancevarnames);
             return cls;
         }
 

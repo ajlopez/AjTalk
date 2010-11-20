@@ -8,7 +8,6 @@
     {
         private IBehavior superclass;
         private Machine machine;
-        private int noinstancevariables;
 
         private Dictionary<string, IMethod> methods = new Dictionary<string, IMethod>();
 
@@ -23,8 +22,9 @@
             this.machine = machine;
 
             if (this is IMetaClass)
-                ; // TODO implements metaclass for metaclass
+                ; // TODO implements metaclass for metaclass            
             else
+                // TODO remove this, it should be set as parameter or in BaseMetaClass.CreateClass
                 this.SetBehavior(BaseMetaClass.CreateMetaClass(superclass, machine));
         }
 
@@ -60,10 +60,10 @@
             {
                 if (this.superclass != null)
                 {
-                    return this.noinstancevariables + this.superclass.NoInstanceVariables;
+                    return this.superclass.NoInstanceVariables;
                 }
 
-                return this.noinstancevariables;
+                return 0;
             }
         }
 
