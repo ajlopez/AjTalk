@@ -301,6 +301,50 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem(@"CodeFiles\Library1.st")]
+        public void LoadLibraryWithBootstrap()
+        {
+            Loader loader = new Loader(@"Library1.st");
+            Machine machine = CreateMachine();
+
+            loader.LoadAndExecute(machine);
+
+            IClass objclass = (IClass)machine.GetGlobalObject("Object");
+            IClass behaviorclass = (IClass)machine.GetGlobalObject("Behavior");
+            IClass classdescriptionclass = (IClass)machine.GetGlobalObject("ClassDescription");
+            IClass classclass = (IClass)machine.GetGlobalObject("Class");
+            IClass metaclassclass = (IClass)machine.GetGlobalObject("Metaclass");
+
+            Assert.AreEqual(objclass, behaviorclass.SuperClass);
+            Assert.AreEqual(behaviorclass, classdescriptionclass.SuperClass);
+            Assert.AreEqual(classdescriptionclass, classclass.SuperClass);
+            Assert.AreEqual(classdescriptionclass, metaclassclass.SuperClass);
+
+            Assert.IsNotNull(objclass.MetaClass);
+            Assert.IsNotNull(behaviorclass.MetaClass);
+            Assert.IsNotNull(classdescriptionclass.MetaClass);
+            Assert.IsNotNull(classclass.MetaClass);
+            Assert.IsNotNull(metaclassclass.MetaClass);
+
+            Assert.AreEqual(objclass.MetaClass, behaviorclass.MetaClass.SuperClass);
+            Assert.AreEqual(behaviorclass.MetaClass, classdescriptionclass.MetaClass.SuperClass);
+            Assert.AreEqual(classdescriptionclass.MetaClass, classclass.MetaClass.SuperClass);
+            Assert.AreEqual(classdescriptionclass.MetaClass, metaclassclass.MetaClass.SuperClass);
+
+            Assert.AreEqual(metaclassclass, objclass.MetaClass.Behavior);
+            Assert.AreEqual(metaclassclass, behaviorclass.MetaClass.Behavior);
+            Assert.AreEqual(metaclassclass, classdescriptionclass.MetaClass.Behavior);
+            Assert.AreEqual(metaclassclass, classclass.MetaClass.Behavior);
+            Assert.AreEqual(metaclassclass, metaclassclass.MetaClass.Behavior);
+
+            // TODO objclass super should be nil == null, now is object nil
+            //Assert.IsNull(objclass.SuperClass);
+
+            Assert.IsNotNull(objclass.MetaClass.SuperClass);
+            Assert.AreEqual(classclass, objclass.MetaClass.SuperClass);
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Library1.st")]
         public void ReviewClassGraph()
         {
             Loader loader = new Loader(@"Library1.st");

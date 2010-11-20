@@ -76,7 +76,8 @@
         public void GetDefineString()
         {
             Machine machine = new Machine();
-            BaseClass bclass = new BaseClass("Class", machine);
+            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, machine);
+            BaseClass bclass = new BaseClass(meta, "Class", null, machine, string.Empty);
 
             bclass.DefineInstanceVariable("x");
             bclass.DefineInstanceVariable("y");
@@ -95,8 +96,9 @@
         public void DefineSubclassAndGetDefineString()
         {
             Machine machine = new Machine();
-            BaseClass oclass = new BaseClass("Object", machine);
-            BaseClass bclass = new BaseClass("Class", oclass, machine, string.Empty);
+            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, machine);
+            BaseClass oclass = new BaseClass(meta, "Object", null, machine, string.Empty);
+            BaseClass bclass = new BaseClass(meta, "Class", oclass, machine, string.Empty);
 
             bclass.DefineInstanceVariable("x");
             bclass.DefineInstanceVariable("y");

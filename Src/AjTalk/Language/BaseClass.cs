@@ -11,12 +11,12 @@ namespace AjTalk.Language
         private bool isBehavior;
         private bool isClassDescription;
         
-        public BaseClass(string name, Machine machine) : this(name, null, machine, "")
+        public BaseClass(string name, Machine machine) : this(null, name, null, machine, "")
         {
         }
 
-        public BaseClass(string name, IBehavior superclass, Machine machine, string varnames)
-            : base(superclass, machine, varnames)
+        public BaseClass(IBehavior behavior, string name, IBehavior superclass, Machine machine, string varnames)
+            : base(behavior, superclass, machine, varnames)
         {
             if (name == null)
             {
@@ -43,11 +43,13 @@ namespace AjTalk.Language
 
         public override object NewObject()
         {
+            // TODO review first parameter
             if (this.isBehavior)
-                return new BaseBehavior(this, this.Machine);
+                return new BaseBehavior(null, this, this.Machine);
 
+            // TODO review first parameter
             if (this.isClassDescription)
-                return new BaseClassDescription(this, this.Machine, string.Empty);
+                return new BaseClassDescription(null, this, this.Machine, string.Empty);
 
             if (this.IsAgentClass)
                 return new AgentObject(this, this.NoInstanceVariables);

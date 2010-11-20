@@ -11,6 +11,7 @@ namespace AjTalk
     public class Machine
     {
         private IClass classclass;
+        private IClass metaclassclass;
 
         private Dictionary<string, object> globals = new Dictionary<string, object>();
         private Dictionary<Type, NativeBehavior> nativeBehaviors = new Dictionary<Type, NativeBehavior>();
@@ -33,7 +34,7 @@ namespace AjTalk
             if (iscurrent)
                 this.SetCurrent();
 
-            IMetaClass meta = new BaseMetaClass(null, this, "");
+            IMetaClass meta = new BaseMetaClass(null, null, this, "");
             this.classclass = meta.CreateClass("nil", "");
             //this.classclass = new BaseClass("nil", null, this, "");
 
@@ -44,13 +45,15 @@ namespace AjTalk
             this.classclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this));
             this.classclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this));
 
-            this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(this.classclass, this));
-            this.RegisterNativeBehavior(typeof(Boolean), new BooleanBehavior(this.classclass, this));
+            this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(meta, this.classclass, this));
+            this.RegisterNativeBehavior(typeof(Boolean), new BooleanBehavior(meta, this.classclass, this));
         }
 
         public static Machine Current { get { return current; } }
 
         public IHost Host { get; set; }
+
+        public IClass MetaClassClass { get { return this.metaclassclass; } }
 
         public TransactionManager TransactionManager
         {
@@ -87,14 +90,20 @@ namespace AjTalk
             if (superclass != null)
                 supermeta = superclass.MetaClass;
 
-            IMetaClass meta = new BaseMetaClass(supermeta, this, classvarnames);
+            IMetaClass meta = new BaseMetaClass(this.metaclassclass, supermeta, this, classvarnames);
             IClass cls = meta.CreateClass(clsname, instancevarnames);
             return cls;
         }
 
         public IBehavior CreateNativeBehavior(IBehavior superclass, Type type)
         {
-            NativeBehavior behavior = new NativeBehavior(superclass, this, type);
+            IMetaClass supermeta = null;
+
+            if (superclass != null)
+                supermeta = superclass.MetaClass;
+
+            IMetaClass meta = new BaseMetaClass(this.metaclassclass, supermeta, this, string.Empty);
+            NativeBehavior behavior = new NativeBehavior(meta, superclass, this, type);
             return behavior;
         }
 
@@ -111,6 +120,11 @@ namespace AjTalk
         public void SetGlobalObject(string objname, object value)
         {
             this.globals[objname] = value;
+
+            if (this.metaclassclass == null && objname == "Metaclass" && value is IClass)
+                this.DefineMetaclass((IClass)value);
+            else if (objname == "Class" && value is IClass)
+                this.DefineClass((IClass)value);
         }
 
         public void SetCurrent()
@@ -174,6 +188,21 @@ namespace AjTalk
                 return this.nativeBehaviors[type];
 
             return null;
+        }
+
+        private void DefineMetaclass(IClass metaclass)
+        {
+            this.metaclassclass = metaclass;
+
+            foreach (IClass cls in this.GetClasses())
+                ((BaseBehavior)cls.Behavior).SetBehavior(this.metaclassclass);
+        }
+
+        private void DefineClass(IClass cls)
+        {
+            IClass objclass = (IClass)this.GetGlobalObject("Object");
+            ((BaseBehavior)objclass.MetaClass).SetSuperClass(cls);
+            cls.DefineInstanceMethod(new BehaviorDoesNotUnderstandMethod(this));
         }
     }
 }

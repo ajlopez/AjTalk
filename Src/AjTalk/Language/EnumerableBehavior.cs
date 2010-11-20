@@ -8,8 +8,8 @@ namespace AjTalk.Language
 {
     public class EnumerableBehavior : NativeBehavior
     {
-        public EnumerableBehavior(IBehavior superclass, Machine machine)
-            : base(superclass, machine, typeof(IEnumerable))
+        public EnumerableBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
+            : base(behavior, superclass, machine, typeof(IEnumerable))
         {
             this.DefineInstanceMethod(new FunctionalMethod("do:", this, this.DoMethod));
             this.DefineInstanceMethod(new FunctionalMethod("select:", this, this.SelectMethod));

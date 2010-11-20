@@ -8,28 +8,18 @@ namespace AjTalk.Language
     {
         private IClass classInstance;
 
-        internal static IMetaClass CreateMetaClass(IBehavior superclass, Machine machine)
+        public static IMetaClass CreateMetaClass(IBehavior superclass, Machine machine)
         {
             IMetaClass metasuperclass = null;
 
             if (superclass != null)
                 metasuperclass = superclass.MetaClass;
 
-            return new BaseMetaClass(metasuperclass, machine, "");
+            return new BaseMetaClass(machine.MetaClassClass, metasuperclass, machine, "");
         }
 
-        internal static IMetaClass CreateMetaClass(IBehavior superclass, Machine machine, string varnames)
-        {
-            IMetaClass metasuperclass = null;
-
-            if (superclass != null)
-                metasuperclass = superclass.MetaClass;
-
-            return new BaseMetaClass(metasuperclass, machine, varnames);
-        }
-
-        public BaseMetaClass(IMetaClass superclass, Machine machine, string varnames)
-            : base(superclass, machine, varnames)
+        public BaseMetaClass(IBehavior behavior, IMetaClass superclass, Machine machine, string varnames)
+            : base(behavior, superclass, machine, varnames)
         {
         }
 
@@ -55,9 +45,7 @@ namespace AjTalk.Language
                     super = meta.ClassInstance;
             }
 
-            BaseClass cls = new BaseClass(name, super, this.Machine, varnames);
-            // TODO move to BaseClass constructor
-            cls.SetBehavior(this);
+            BaseClass cls = new BaseClass(this, name, super, this.Machine, varnames);
             this.classInstance = cls;
             return cls;
         }

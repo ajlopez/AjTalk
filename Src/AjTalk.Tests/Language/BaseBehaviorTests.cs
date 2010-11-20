@@ -21,16 +21,17 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void CreateBaseBehaviorWithoutSuperclass()
         {
-            BaseBehavior behavior = new BaseBehavior(null, this.machine);
+            BaseBehavior behavior = new BaseBehavior(null, null, this.machine);
 
             Assert.IsNull(behavior.SuperClass);
-            Assert.IsNotNull(behavior.MetaClass);
+            Assert.IsNull(behavior.MetaClass);
         }
 
         [TestMethod]
         public void DefineInstanceMethod()
         {
-            BaseBehavior behavior = new BaseBehavior(null, this.machine);
+            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, machine);
+            BaseBehavior behavior = new BaseBehavior(meta, null, this.machine);
             IMethod method = new Method("method");
 
             behavior.DefineInstanceMethod(new Method("method"));
@@ -43,7 +44,7 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void GetInstanceMethods()
         {
-            BaseBehavior behavior = new BaseBehavior(null, this.machine);
+            BaseBehavior behavior = new BaseBehavior(null, null, this.machine);
             IMethod method = new Method("method");
 
             behavior.DefineInstanceMethod(new Method("method1"));
@@ -58,7 +59,8 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void DefineClassMethod()
         {
-            BaseBehavior behavior = new BaseBehavior(null, this.machine);
+            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, machine);
+            BaseBehavior behavior = new BaseBehavior(meta, null, this.machine);
             IMethod method = new Method("method");
 
             behavior.DefineClassMethod(new Method("method"));
@@ -75,7 +77,8 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void GetClassMethods()
         {
-            BaseBehavior behavior = new BaseBehavior(null, this.machine);
+            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, machine);
+            BaseBehavior behavior = new BaseBehavior(meta, null, this.machine);
             IMethod method = new Method("method");
 
             behavior.DefineClassMethod(new Method("method1"));

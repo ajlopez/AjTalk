@@ -10,12 +10,12 @@ namespace AjTalk.Language
         private List<string> instancevariables = new List<string>();
 
         public BaseClassDescription(Machine machine)
-            : this(null, machine, "")
+            : this(null, null, machine, "")
         {
         }
 
-        public BaseClassDescription(IBehavior superclass, Machine machine, string varnames)
-            : base(superclass, machine)
+        public BaseClassDescription(IBehavior behavior, IBehavior superclass, Machine machine, string varnames)
+            : base(behavior, superclass, machine)
         {
             IEnumerable<string> names = AsNames(varnames);
 
@@ -23,8 +23,8 @@ namespace AjTalk.Language
                 this.DefineInstanceVariable(name);
         }
 
-        public BaseClassDescription(IBehavior superclass, IClass metaclass, Machine machine, string varnames)
-            : this(superclass, machine, varnames)
+        public BaseClassDescription(IBehavior behavior, IBehavior superclass, IClass metaclass, Machine machine, string varnames)
+            : this(behavior, superclass, machine, varnames)
         {
             this.SetBehavior(metaclass);
         }

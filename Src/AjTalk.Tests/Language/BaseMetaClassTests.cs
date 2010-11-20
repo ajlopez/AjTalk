@@ -21,14 +21,14 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void CreateMetaClass()
         {
-            IMetaClass metaclass = new BaseMetaClass(null, this.machine, "");
+            IMetaClass metaclass = new BaseMetaClass(null, null, this.machine, "");
             Assert.IsNull(metaclass.Behavior);
         }
 
         [TestMethod]
         public void CreateMetaClassWithVariables()
         {
-            IMetaClass metaclass = new BaseMetaClass(null, this.machine, "x y");
+            IMetaClass metaclass = new BaseMetaClass(null, null, this.machine, "x y");
             Assert.AreEqual(0, metaclass.GetInstanceVariableOffset("x"));
             Assert.AreEqual(1, metaclass.GetInstanceVariableOffset("y"));
             Assert.AreEqual("x y", metaclass.GetInstanceVariableNames());
@@ -37,7 +37,7 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void CreateMetaClassWithVariablesAndSpaces()
         {
-            IMetaClass metaclass = new BaseMetaClass(null, this.machine, " x   y ");
+            IMetaClass metaclass = new BaseMetaClass(null, null, this.machine, " x   y ");
             Assert.AreEqual(0, metaclass.GetInstanceVariableOffset("x"));
             Assert.AreEqual(1, metaclass.GetInstanceVariableOffset("y"));
             Assert.AreEqual("x y", metaclass.GetInstanceVariableNames());
@@ -46,7 +46,7 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void CreateClass()
         {
-            IMetaClass metaclass = new BaseMetaClass(null, this.machine, "x y");
+            IMetaClass metaclass = new BaseMetaClass(null, null, this.machine, "x y");
             IClass cls = metaclass.CreateClass("MyClass", "a b");
             Assert.AreEqual(cls.Behavior, metaclass);
             Assert.AreEqual("MyClass", cls.Name);

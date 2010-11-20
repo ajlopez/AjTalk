@@ -16,7 +16,9 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void CreateObjectWithParameters()
         {
-            NativeBehavior behavior = new NativeBehavior(null, new Machine(), typeof(FileInfo));
+            Machine machine = new Machine();
+            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, machine);
+            NativeBehavior behavior = new NativeBehavior(meta, null, machine, typeof(FileInfo));
 
             object result = behavior.CreateObject(new object[] { "File.txt" });
 

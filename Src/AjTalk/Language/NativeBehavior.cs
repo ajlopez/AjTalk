@@ -8,8 +8,8 @@
     {
         private Type nativeType;
 
-        public NativeBehavior(IBehavior superclass, Machine machine, Type type)
-            : base(superclass, machine)
+        public NativeBehavior(IBehavior behavior, IBehavior superclass, Machine machine, Type type)
+            : base(behavior, superclass, machine)
         {
             this.nativeType = type;
             machine.RegisterNativeBehavior(type, this);

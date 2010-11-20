@@ -189,6 +189,9 @@ BaseMetaClassTests
 BaseMetaClass.CreateClass with tests
 Machine.CreateClass to use BaseMetaClass
 BehaviorDoesNotUnderstand using the new Machine.CreateClass methods
+IBehavior in constructors
+BaseBehavior now receives an IBehavior as first parameter in constructor
+NativeBehavior now receives an IBehavior as first constructor parameter
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

@@ -11,7 +11,8 @@
 
         private Dictionary<string, IMethod> methods = new Dictionary<string, IMethod>();
 
-        public BaseBehavior(IBehavior superclass, Machine machine) 
+        public BaseBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
+            : base(behavior, 0) // TODO review no of instvars
         {
             if (machine == null)
             {
@@ -20,12 +21,6 @@
 
             this.superclass = superclass;
             this.machine = machine;
-
-            if (this is IMetaClass)
-                ; // TODO implements metaclass for metaclass            
-            else
-                // TODO remove this, it should be set as parameter or in BaseMetaClass.CreateClass
-                this.SetBehavior(BaseMetaClass.CreateMetaClass(superclass, machine));
         }
 
         public IBehavior SuperClass
@@ -40,7 +35,7 @@
         {
             get
             {
-                return (IMetaClass) this.Behavior;
+                return (IMetaClass)this.Behavior;
             }
         }
 
@@ -119,6 +114,12 @@
         public ICollection<IMethod> GetClassMethods()
         {
             return this.MetaClass.GetInstanceMethods();
+        }
+
+
+        internal void SetSuperClass(IBehavior superclass)
+        {
+            this.superclass = superclass;
         }
     }
 }

@@ -8,8 +8,8 @@ namespace AjTalk.Language
 {
     public class BooleanBehavior : NativeBehavior
     {
-        public BooleanBehavior(IBehavior superclass, Machine machine)
-            : base(superclass, machine, typeof(Boolean))
+        public BooleanBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
+            : base(behavior, superclass, machine, typeof(Boolean))
         {
             this.DefineInstanceMethod(new FunctionalMethod("ifFalse:", this, this.IfFalseMethod));
             this.DefineInstanceMethod(new FunctionalMethod("ifTrue:", this, this.IfTrueMethod));
