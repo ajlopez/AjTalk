@@ -373,6 +373,51 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\Class.st")]
+        public void LoadClass()
+        {
+            Loader loader = new Loader(@"Class.st");
+
+            Machine machine = CreateMachine();
+            loader.LoadAndExecute(machine);
+
+            object obj = machine.GetGlobalObject("MyClass");
+
+            Assert.IsNotNull(obj);
+            Assert.IsInstanceOfType(obj, typeof(IClass));
+
+            IClass cls = (IClass)obj;
+
+            Assert.AreEqual("MyClass", cls.Name);
+            Assert.AreEqual("Object", ((IClass)cls.SuperClass).Name);
+
+            object obj2 = machine.GetGlobalObject("Rectangle");
+
+            Assert.IsNotNull(obj2);
+            Assert.IsInstanceOfType(obj2, typeof(IClass));
+
+            IClass cls2 = (IClass)obj2;
+
+            Assert.AreEqual("Rectangle", cls2.Name);
+            Assert.AreEqual("Object", ((IClass)cls2.SuperClass).Name);
+            Assert.AreEqual(2, cls2.NoInstanceVariables);
+            Assert.AreEqual(1, cls2.Behavior.NoInstanceVariables);
+            Assert.AreEqual("width height", cls2.GetInstanceVariableNames());
+            Assert.AreEqual("number", cls2.GetClassVariableNames());
+
+            object obj3 = machine.GetGlobalObject("rect");
+
+            Assert.IsNotNull(obj3);
+            Assert.IsInstanceOfType(obj3, typeof(IObject));
+
+            IObject rect = (IObject)obj3;
+
+            Assert.AreEqual(cls2, rect.Behavior);
+            Assert.AreEqual(100, rect[0]);
+            Assert.AreEqual(50, rect[1]);
+        }
+
+        [TestMethod]
         [DeploymentItem(@"CodeFiles\Library1.st")]
         public void ReviewClassGraph()
         {

@@ -198,6 +198,7 @@ Machine.ClassClass
 Machine.MetaClassClass
 Send bytecode use Machine.UndefinedObjectClass if receiver is null
 Object.st new test
+Class.st new test, defining Class protocol
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

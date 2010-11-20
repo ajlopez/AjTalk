@@ -1,4 +1,4 @@
-﻿"This is a first test for core library"
+﻿"First definition for Object"
 
 nil subclass:#Object
 	instanceVariableNames:''
@@ -10,7 +10,7 @@ nil subclass:#Object
 Object class methods!
 
 basicNew
-	^self !newObject.
+	^self !!newObject.
 !
 
 new
@@ -20,7 +20,7 @@ new
 Object methods!
 
 class
-	^self !behavior.
+	^self !!behavior.
 ! !	
 
 result := Object new.
