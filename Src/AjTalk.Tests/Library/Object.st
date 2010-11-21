@@ -25,6 +25,18 @@ Object methods!
 	^@AjTalk.Language.ObjectOperators negate: self == anObject.
 !
 
+error: aMessage
+	@AjTalk.Language.Primitives raiseException: (@AjTalk.Language.ErrorException new: aMessage).
+!
+
+isNil
+	^false.
+!
+
+isNotNil
+	^true.
+!
+
 class
 	^self !!behavior.
 ! !	

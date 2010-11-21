@@ -208,6 +208,12 @@ New parsing of binary operators
 Define = == methods in Object.st with Tests in ObjectTest.st
 Define ~= ~~ methods in Object.st with Tests in ObjectTest.st
 ObjectOperators.Same, .Negate, .IsNull
+Fixing bug: aBoolean ifTrue: [self ... ] <-- self was null. Now, using LocalBlock, quick hack
+Tests: new folders Library, LibraryTests
+Test.st for testing
+Object>>error:
+Primitives.RaiseException
+ErrorException
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

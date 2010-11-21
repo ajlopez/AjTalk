@@ -36,7 +36,7 @@ namespace AjTalk.Language
         public ExecutionBlock(Machine machine, IObject receiver, Block block, object[] arguments)
             : this(block, arguments)
         {
-            this.self = null;
+            this.self = receiver; // TODO review
             this.machine = machine;
             this.receiver = receiver;
         }
@@ -346,19 +346,30 @@ namespace AjTalk.Language
             byte arg = execblock.block.ByteCodes[execblock.ip];
 
             Block newblock = (Block)execblock.block.GetConstant(arg);
+            LocalBlock local = null;
 
-            execblock.Push(newblock);
+            if (execblock.self != null)
+                local = new LocalBlock(newblock, execblock.block, execblock.self);
+            else
+                local = new LocalBlock(newblock, execblock.block, execblock.nativeSelf);
+
+            execblock.Push(local);
         }
 
         private static void DoValue(ExecutionBlock execblock)
         {
-            Block newblock = (Block)execblock.Pop();            
+            IBlock newblock = (IBlock)execblock.Pop();
+            Block blk = newblock as Block;
+
+            if (blk == null)
+                blk = ((LocalBlock)newblock).Block;
+
             execblock.lastreceiver = newblock;
 
             if (execblock.self == null)
-                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, null).Execute());
+                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, blk, null).Execute());
             else
-                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, newblock, null).Execute());
+                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, blk, null).Execute());
         }
 
         private static void DoMultiValue(ExecutionBlock execblock)
@@ -371,13 +382,18 @@ namespace AjTalk.Language
             for (int k = arg - 1; k >= 0; k--)
                 args[k] = execblock.Pop();
 
-            Block newblock = (Block)execblock.Pop();
+            IBlock newblock = (IBlock)execblock.Pop();
             execblock.lastreceiver = newblock;
 
+            Block blk = newblock as Block;
+
+            if (blk == null)
+                blk = ((LocalBlock)newblock).Block;
+
             if (execblock.self == null)
-                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, args).Execute());
+                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, blk, args).Execute());
             else
-                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, newblock, args).Execute());
+                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, blk, args).Execute());
         }
 
         private static void DoGetArgument(ExecutionBlock execblock)

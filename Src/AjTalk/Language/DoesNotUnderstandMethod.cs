@@ -56,7 +56,7 @@
         {
             if (msgname.Equals("ifFalse:"))
             {
-                Block block = (Block) args[0];
+                IBlock block = (IBlock) args[0];
                 block.Execute(this.Machine, null);
                 
                 // TODO return block value??

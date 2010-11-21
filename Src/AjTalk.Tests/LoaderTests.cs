@@ -344,7 +344,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(@"CodeFiles\Object.st")]
+        [DeploymentItem(@"Library\Object.st")]
         [DeploymentItem(@"CodeFiles\ObjectTest.st")]
         public void LoadObject()
         {
@@ -386,8 +386,8 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(@"CodeFiles\Object.st")]
-        [DeploymentItem(@"CodeFiles\Behavior.st")]
+        [DeploymentItem(@"Library\Object.st")]
+        [DeploymentItem(@"Library\Behavior.st")]
         [DeploymentItem(@"CodeFiles\BehaviorTest.st")]
         public void LoadBehavior()
         {
@@ -412,9 +412,9 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(@"CodeFiles\Object.st")]
-        [DeploymentItem(@"CodeFiles\Behavior.st")]
-        [DeploymentItem(@"CodeFiles\Class.st")]
+        [DeploymentItem(@"Library\Object.st")]
+        [DeploymentItem(@"Library\Behavior.st")]
+        [DeploymentItem(@"Library\Class.st")]
         [DeploymentItem(@"CodeFiles\ClassTest.st")]
         public void LoadClass()
         {
