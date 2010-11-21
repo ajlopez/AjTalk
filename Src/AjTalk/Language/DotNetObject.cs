@@ -20,7 +20,10 @@
             binaryMethods[">"] = new FunctionalMethod((obj, args) => ObjectOperators.Greater(obj, args[0]));
             binaryMethods["<="] = new FunctionalMethod((obj, args) => ObjectOperators.LessEqual(obj, args[0]));
             binaryMethods[">="] = new FunctionalMethod((obj, args) => ObjectOperators.GreaterEqual(obj, args[0]));
-            binaryMethods["=="] = new FunctionalMethod((obj, args) => ObjectOperators.Equals(obj, args[0]));
+            binaryMethods["="] = new FunctionalMethod((obj, args) => ObjectOperators.Equals(obj, args[0]));
+            binaryMethods["~="] = new FunctionalMethod((obj, args) => !ObjectOperators.Equals(obj, args[0]));
+            binaryMethods["=="] = new FunctionalMethod((obj, args) => ObjectOperators.Same(obj, args[0]));
+            binaryMethods["~~"] = new FunctionalMethod((obj, args) => !ObjectOperators.Same(obj, args[0]));
         }
 
         public static object NewObject(Type type, object[] args)

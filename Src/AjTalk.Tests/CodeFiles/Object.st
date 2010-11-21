@@ -7,22 +7,25 @@ nil subclass:#Object
 	category:'Kernel-Objects'
 !
 
-Object class methods!
+Object methods!
 
-basicNew
-	^self !!newObject.
+= anObject
+	^@AjTalk.Language.ObjectOperators equals: self with: anObject.
 !
 
-new
-	^self basicNew.
-! !	
+== anObject
+	^@AjTalk.Language.ObjectOperators same: self with: anObject.
+!
 
-Object methods!
+~= anObject
+	^@AjTalk.Language.ObjectOperators negate: self = anObject.
+!
+
+~~ anObject
+	^@AjTalk.Language.ObjectOperators negate: self == anObject.
+!
 
 class
 	^self !!behavior.
 ! !	
 
-result := Object new.
-resultclass := result class.
-!

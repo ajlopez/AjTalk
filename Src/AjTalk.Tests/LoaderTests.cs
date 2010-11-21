@@ -345,11 +345,14 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem(@"CodeFiles\Object.st")]
+        [DeploymentItem(@"CodeFiles\ObjectTest.st")]
         public void LoadObject()
         {
-            Loader loader = new Loader(@"Object.st");
 
             Machine machine = CreateMachine();
+            Loader loader = new Loader(@"Object.st");
+            loader.LoadAndExecute(machine);
+            loader = new Loader(@"ObjectTest.st");
             loader.LoadAndExecute(machine);
 
             object obj = machine.GetGlobalObject("Object");
@@ -370,15 +373,31 @@ namespace AjTalk.Tests
 
             object rcls = machine.GetGlobalObject("resultclass");
             Assert.AreEqual(cls, rcls);
+
+            Assert.AreEqual(true, machine.GetGlobalObject("aresame"));
+            Assert.AreEqual(false, machine.GetGlobalObject("arenotsame"));
+            Assert.AreEqual(true, machine.GetGlobalObject("areequal"));
+            Assert.AreEqual(false, machine.GetGlobalObject("arenotequal"));
+
+            Assert.AreEqual(false, machine.GetGlobalObject("notaresame"));
+            Assert.AreEqual(true, machine.GetGlobalObject("notarenotsame"));
+            Assert.AreEqual(false, machine.GetGlobalObject("notareequal"));
+            Assert.AreEqual(true, machine.GetGlobalObject("notarenotequal"));
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\Object.st")]
         [DeploymentItem(@"CodeFiles\Behavior.st")]
+        [DeploymentItem(@"CodeFiles\BehaviorTest.st")]
         public void LoadBehavior()
         {
-            Loader loader = new Loader(@"Behavior.st");
-
             Machine machine = CreateMachine();
+
+            Loader loader = new Loader(@"Object.st");
+            loader.LoadAndExecute(machine);
+            loader = new Loader(@"Behavior.st");
+            loader.LoadAndExecute(machine);
+            loader = new Loader(@"BehaviorTest.st");
             loader.LoadAndExecute(machine);
 
             object obj = machine.GetGlobalObject("NewBehavior");
@@ -393,12 +412,21 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\Object.st")]
+        [DeploymentItem(@"CodeFiles\Behavior.st")]
         [DeploymentItem(@"CodeFiles\Class.st")]
+        [DeploymentItem(@"CodeFiles\ClassTest.st")]
         public void LoadClass()
         {
-            Loader loader = new Loader(@"Class.st");
-
             Machine machine = CreateMachine();
+
+            Loader loader = new Loader(@"Object.st");
+            loader.LoadAndExecute(machine);
+            loader = new Loader(@"Behavior.st");
+            loader.LoadAndExecute(machine);
+            loader = new Loader(@"Class.st");
+            loader.LoadAndExecute(machine);
+            loader = new Loader(@"ClassTest.st");
             loader.LoadAndExecute(machine);
 
             object obj = machine.GetGlobalObject("MyClass");

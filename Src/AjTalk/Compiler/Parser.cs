@@ -8,7 +8,6 @@ namespace AjTalk.Compiler
 
     public class Parser
     {
-        private static string[] binaryOperators = new string[] { "+", "-", "*", "/", "<", ">", "==", "<=", ">=" };
         private Lexer tokenizer;
         private IList arguments = new ArrayList();
         private IList locals = new ArrayList();
@@ -370,15 +369,10 @@ namespace AjTalk.Compiler
                 mthname = token.Value;
                 this.CompileUnaryExpression();
 
-                // TODO Refactor multiple if
-                if (binaryOperators.Contains(mthname))
-                {
+                if (token.Type == TokenType.Operator)
                     this.block.CompileBinarySend(mthname);
-                }
                 else
-                {
                     this.block.CompileSend(mthname);
-                }
 
                 token = this.NextToken();
             }

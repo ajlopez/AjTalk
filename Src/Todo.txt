@@ -1,5 +1,32 @@
 
 - Refactor ExecutionBlock: bytecode processing
+
+- Methods for Object
+	==, ~=, ~~, =
+	at:, at:put:, size, basicSize, ...
+	isKindOf:
+	class
+	isMemberOf:
+	error:
+	isNil, isNotNil...
+	ifTrue:, ifTrue:ifFalse, ... (or in Boolean??)
+	subclassResponsability
+	yourself
+	asRemote, asTransactional, asAgent
+	
+- Methods for Behavior
+	compile:
+	new
+	new:
+	basicNew
+	basicNew:
+	
+- Class and instances variables mapped to properties, variables in existing classes
+	BaseObject, BaseBehavior, BaseClassDescription, BaseClass, BaseMetaClass
+	
+- Predicates for native objects
+	==, ~=, ~~, =
+
 = Add method support to native types
 = do: over ICollection, IEnumerable
 = Boolean: true, false as native, but with Boolean methods

@@ -612,6 +612,22 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileSameOperator()
+        {
+            IClass cls = CompileClass(
+                "Rectangle",
+                new string[] { "x", "y" },
+                new string[] 
+                {
+                    "== aRect ^x == aRect x ifTrue: [^y == aRect y] ifFalse: [^false]"
+                });
+
+            Assert.IsNotNull(cls);
+
+            Assert.IsNotNull(cls.GetInstanceMethod("=="));
+        }
+
+        [TestMethod]
         public void RunMultiCommandMethod()
         {
             IClass cls = CompileClass(

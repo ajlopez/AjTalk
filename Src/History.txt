@@ -202,6 +202,13 @@ Class.st new test, defining Class protocol
 Behavior.st new test, defining compile: in Behavior. Knot: Behavior is Object class superclass.
 Class.st, Library.st: Knot added: Class is Object class superclass. Removed from Machine source code.
 
+2010-11-21
+Test splited: Object.st + ObjectTest.st, Behavior.st + BehaviorTest.st, Class.st + ClassTest.st
+New parsing of binary operators
+Define = == methods in Object.st with Tests in ObjectTest.st
+Define ~= ~~ methods in Object.st with Tests in ObjectTest.st
+ObjectOperators.Same, .Negate, .IsNull
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

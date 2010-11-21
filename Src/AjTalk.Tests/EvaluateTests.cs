@@ -32,6 +32,18 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void EvaluateNilAsNull()
+        {
+            Assert.IsNull(this.Evaluate("nil"));
+        }
+
+        [TestMethod]
+        public void EvaluateNullAsNull()
+        {
+            Assert.IsNull(this.Evaluate("null"));
+        }
+
+        [TestMethod]
         public void EvaluateString()
         {
             Assert.AreEqual("foo", this.Evaluate("'foo'"));

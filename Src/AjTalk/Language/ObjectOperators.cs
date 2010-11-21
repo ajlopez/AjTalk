@@ -51,9 +51,24 @@ namespace AjTalk.Language
             return Operators.CompareObjectGreaterEqual(obj1, obj2, false);
         }
 
-        public static object Equals(object obj1, object obj2)
+        public static bool Equals(object obj1, object obj2)
         {
             return Operators.Equals(obj1, obj2);
+        }
+
+        public static bool Same(object obj1, object obj2)
+        {
+            return obj1 == obj2;
+        }
+
+        public static bool Negate(bool value)
+        {
+            return !value;
+        }
+
+        public static bool IsNull(object value)
+        {
+            return value == null;
         }
 
         public static object IntDivide(object obj1, object obj2)

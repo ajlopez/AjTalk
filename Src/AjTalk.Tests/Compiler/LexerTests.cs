@@ -223,7 +223,7 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void ProcessOperators()
         {
-            string opers = "== <> >= <= := ^ < > : = - + * / &";
+            string opers = "== ~= ~~ >= <= := ^ < > : = - + * / &";
 
             string[] opers2 = opers.Split(' ');
 

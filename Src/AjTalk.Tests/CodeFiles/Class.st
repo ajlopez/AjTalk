@@ -1,36 +1,5 @@
 ﻿"First definition for Class"
 
-nil subclass:#Object
-	instanceVariableNames:''
-	classVariableNames:''
-	poolDictionaries:''
-	category:'Kernel-Objects'
-!
-
-Object class methods!
-
-basicNew
-	^self !!newObject.
-!
-
-new
-	^self basicNew.
-! !	
-
-Object methods!
-
-class
-	^self !!behavior.
-! !	
-
-
-Object subclass:#Behavior
-	instanceVariableNames:''
-	classVariableNames:''
-	poolDictionaries:''
-	category:'Kernel-Classes'
-!
-
 Behavior subclass:#ClassDescription
 	instanceVariableNames:''
 	classVariableNames:''
@@ -47,7 +16,6 @@ ClassDescription subclass:#Class
 
 "Tricky code: first knot in class hierarchy"
 Object !!metaclass !!setSuperClass: Class.
-Class !!defineInstanceMethod: (@AjTalk.Language.BehaviorDoesNotUnderstandMethod new: (Class !!machine)).
 Class !!machine !!classClass: Class.
 !
 
@@ -78,35 +46,3 @@ subclass: aSymbol
 	^newcls.
 ! !
 
-Object subclass: #MyClass.
-!
-
-Object subclass: #Rectangle
-	instanceVariableNames: 'width height'
-	classVariableNames: 'number'
-	poolDictionaries: ''
-	category: 'Test'.
-!
-
-Rectangle methods!
-
-width
-	^width.
-!
-
-width: newValue
-	width := newValue.
-!
-
-height
-	^height.
-!
-
-height: newValue
-	height := newValue.
-
-! !
-
-rect := Rectangle new width: 100; height: 50.
-
-!

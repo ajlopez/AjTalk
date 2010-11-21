@@ -121,6 +121,9 @@ namespace AjTalk.Language
                     case ByteCode.GetSuperClass:
                         this.Push(this.receiver.Behavior.SuperClass);
                         break;
+                    case ByteCode.GetNil:
+                        this.Push(null);
+                        break;
                     case ByteCode.GetVariable:
                         this.ip++;
                         arg = this.block.ByteCodes[this.ip];

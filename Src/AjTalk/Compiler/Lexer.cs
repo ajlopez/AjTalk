@@ -10,7 +10,7 @@ namespace AjTalk.Compiler
         public const char SpecialDotNetTypeMark = '@';
         public const char SpecialDotNetInvokeMark = '!';
 
-        private const string Operators = "^<>:=-+*/&";
+        private const string Operators = "^<>:=-+*/&~";
         private const string Separators = "().|[];";
 
         private const char StringDelimiter = '\'';

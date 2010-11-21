@@ -1,29 +1,5 @@
 ﻿"First definition for Behavior"
 
-nil subclass:#Object
-	instanceVariableNames:''
-	classVariableNames:''
-	poolDictionaries:''
-	category:'Kernel-Objects'
-!
-
-Object class methods!
-
-basicNew
-	^self !!newObject.
-!
-
-new
-	^self basicNew.
-! !	
-
-Object methods!
-
-class
-	^self !!behavior.
-! !	
-
-
 Object subclass:#Behavior
 	instanceVariableNames:''
 	classVariableNames:''
@@ -37,6 +13,16 @@ Behavior subclass:#ClassDescription
 	poolDictionaries:''
 	category:'Kernel-Classes'
 !
+
+Behavior class methods!
+
+basicNew
+	^self !!newObject.
+!
+
+new
+	^self basicNew.
+! !	
 
 Behavior methods!
 
@@ -56,11 +42,7 @@ compile: aMethodSource
 
 "Tricky code to access compile: method as instance method"
 Object !!metaclass !!setSuperClass: Behavior.
-!
-
-Behavior subclass: #NewBehavior.
-!
-
-NewBehavior compile: 'myself ^self.'.
+Object !!setSuperClass: nil.
+Behavior !!defineInstanceMethod: (@AjTalk.Language.BehaviorDoesNotUnderstandMethod new: (Behavior !!machine)).
 !
 

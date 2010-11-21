@@ -307,6 +307,12 @@ namespace AjTalk.Language
                 return true;
             }
 
+            if (name == "nil" || name == "null")
+            {
+                this.CompileByteCode(ByteCode.GetNil);
+                return true;
+            }
+
             int p;
 
             if (this.localnames != null)
