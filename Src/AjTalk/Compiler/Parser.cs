@@ -30,6 +30,7 @@ namespace AjTalk.Compiler
         {
             this.block = new Block(this.source);
             this.CompileBlockArguments();
+            this.CompileBlockLocals();
             this.CompileBody();
 
             return this.block;
@@ -176,18 +177,21 @@ namespace AjTalk.Compiler
                     throw new ParserException("Unexpected end of input");
 
                 if (token.Value == "|")
-                    return;
+                    break;
 
                 if (token.Type != TokenType.Operator || token.Value != ":")
                 {
                     this.PushToken(token);
-                    return;
+                    break;
                 }
 
-                this.block.CompileArgument(this.CompileName());
+                this.arguments.Add(this.CompileName());
 
                 token = this.NextToken();
             }
+
+            foreach (string argname in this.arguments)
+                this.block.CompileArgument(argname);
         }
 
         private string CompileName()
@@ -237,8 +241,8 @@ namespace AjTalk.Compiler
             if (token.Type == TokenType.Punctuation && token.Value == "[")
             {
                 Parser newcompiler = new Parser(this.tokenizer);
-                newcompiler.arguments = this.arguments;
-                newcompiler.locals = this.locals;
+                newcompiler.arguments = new ArrayList(this.arguments);
+                newcompiler.locals = new ArrayList(this.locals);
 
                 Block newblock = newcompiler.CompileBlock();
 
@@ -491,6 +495,12 @@ namespace AjTalk.Compiler
             }
 
             this.CompileBody();
+        }
+
+        private void CompileBlockLocals()
+        {
+            foreach (string locname in this.locals)
+                this.block.CompileLocal(locname);
         }
     }
 }

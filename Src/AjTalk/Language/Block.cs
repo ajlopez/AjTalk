@@ -15,6 +15,7 @@ namespace AjTalk.Language
         private List<string> localnames = new List<string>();
         private List<string> globalnames = new List<string>();
         private string sourcecode;
+        private ExecutionBlock closure;
 
         public Block()
         {
@@ -23,6 +24,22 @@ namespace AjTalk.Language
         public Block(string sourcecode)
         {
             this.sourcecode = sourcecode;
+        }
+
+        public Block(ExecutionBlock closure)
+        {
+            this.closure = closure;
+        }
+
+        public Block(Block original, ExecutionBlock closure)
+        {
+            this.bytecodes = original.bytecodes;
+            this.constants = original.constants;
+            this.argnames = original.argnames;
+            this.localnames = original.localnames;
+            this.globalnames = original.globalnames;
+            this.sourcecode = original.sourcecode;
+            this.closure = closure;
         }
 
         public string SourceCode { get { return this.sourcecode; } }
@@ -34,6 +51,8 @@ namespace AjTalk.Language
                 return this.argnames.Count;
             }
         }
+
+        public ExecutionBlock Closure { get { return this.closure; } }
 
         public byte[] ByteCodes
         {
@@ -356,16 +375,17 @@ namespace AjTalk.Language
                 }
             }
 
-            if (this.argnames != null)
-            {
-                p = this.argnames.IndexOf(name);
+            // TODO Review: arguments cannot be set
+            //if (this.argnames != null)
+            //{
+            //    p = this.argnames.IndexOf(name);
 
-                if (p >= 0)
-                {
-                    this.CompileByteCode(ByteCode.SetArgument, (byte)p);
-                    return true;
-                }
-            }
+            //    if (p >= 0)
+            //    {
+            //        this.CompileByteCode(ByteCode.SetArgument, (byte)p);
+            //        return true;
+            //    }
+            //}
 
             return false;
         }

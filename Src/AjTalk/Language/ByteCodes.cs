@@ -8,7 +8,7 @@ namespace AjTalk.Language
         GetVariable = 1,
         SetVariable = 2,
         GetArgument = 3,
-        SetArgument = 4,
+        //SetArgument = 4,
         GetConstant = 5,
         GetLocal = 6,
         SetLocal = 7,

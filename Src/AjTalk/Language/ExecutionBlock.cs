@@ -36,7 +36,7 @@ namespace AjTalk.Language
         public ExecutionBlock(Machine machine, IObject receiver, Block block, object[] arguments)
             : this(block, arguments)
         {
-            this.self = receiver; // TODO review
+            // this.self = receiver; // TODO review
             this.machine = machine;
             this.receiver = receiver;
         }
@@ -59,15 +59,35 @@ namespace AjTalk.Language
         private ExecutionBlock(Block block, object[] arguments)
         {
             this.block = block;
-            this.arguments = arguments;
             this.stack = new ArrayList(5);
+
+            this.arguments = arguments;
             if (this.block.NoLocals > 0)
-            {
                 this.locals = new object[this.block.NoLocals];
+            else
+                this.locals = null;
+
+            // TODO refactor to no copy of arguments and locals
+            this.arguments = arguments;
+
+            if (block.Closure != null)
+            {
+                this.self = block.Closure.Self;
+                this.nativeSelf = block.Closure.NativeSelf;
+
+                int nlocs = block.NoLocals - block.Closure.NoLocals;
+
+                if (nlocs>0)
+                    this.locals = new object[nlocs];
+                else
+                    this.locals = null;
             }
             else
             {
-                this.locals = null;
+                if (this.block.NoLocals > 0)
+                    this.locals = new object[this.block.NoLocals];
+                else
+                    this.locals = null;
             }
         }
 
@@ -78,6 +98,18 @@ namespace AjTalk.Language
                 return this.stack[this.stack.Count - 1];
             }
         }
+
+        public IObject Self { get { return this.self; } }
+
+        public object NativeSelf { get { return this.nativeSelf; } }
+
+        public int NoLocals { get { return this.NoParentLocals + (this.locals == null ? 0 : this.locals.Length); } }
+
+        public int NoParentLocals { get { return (this.block.Closure == null ? 0 : this.block.Closure.NoLocals); } }
+
+        public int NoArguments { get { return this.NoParentArguments + (this.arguments == null ? 0 : this.arguments.Length); } }
+
+        public int NoParentArguments { get { return (this.block.Closure == null ? 0 : this.block.Closure.NoArguments); } }
 
         public object Execute()
         {
@@ -110,7 +142,7 @@ namespace AjTalk.Language
                     case ByteCode.GetLocal:
                         this.ip++;
                         arg = this.block.ByteCodes[this.ip];
-                        this.Push(this.locals[arg]);
+                        this.Push(this.GetLocal(arg));
                         break;
                     case ByteCode.GetSelf:
                         if (this.nativeSelf != null)
@@ -282,18 +314,19 @@ namespace AjTalk.Language
                             this.Push(DotNetObject.SendNativeMessage(obj, mthname, args));
 
                         break;
-                    case ByteCode.SetArgument:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        this.arguments[arg] = this.Pop();
-                        this.lastreceiver = null;
-                        break;
+                    // TODO review argument has no set
+                    //case ByteCode.SetArgument:
+                    //    this.ip++;
+                    //    arg = this.block.ByteCodes[this.ip];
+                    //    this.arguments[arg] = this.Pop();
+                    //    this.lastreceiver = null;
+                    //    break;
                     case ByteCode.SetClassVariable:
                         throw new Exception("Not implemented");
                     case ByteCode.SetLocal:
                         this.ip++;
                         arg = this.block.ByteCodes[this.ip];
-                        this.locals[arg] = this.Pop();
+                        this.SetLocal(arg, this.Pop());
                         this.lastreceiver = null;
                         break;
                     case ByteCode.SetVariable:
@@ -321,6 +354,43 @@ namespace AjTalk.Language
             return this.self;
         }
 
+        internal object GetLocal(int nlocal)
+        {
+            if (nlocal < this.NoParentLocals)
+                return this.GetParentLocal(nlocal);
+            return this.locals[nlocal - this.NoParentLocals];
+        }
+
+        internal object GetParentLocal(int nlocal)
+        {
+            return this.block.Closure.GetLocal(nlocal);
+        }
+
+        internal void SetLocal(int nlocal, object value)
+        {
+            if (nlocal < this.NoParentLocals)
+                this.SetParentLocal(nlocal, value);
+            else
+                this.locals[nlocal - this.NoParentLocals] = value;
+        }
+
+        internal void SetParentLocal(int nlocal, object value)
+        {
+            this.block.Closure.SetLocal(nlocal, value);
+        }
+
+        internal object GetArgument(int nargument)
+        {
+            if (nargument < this.NoParentArguments)
+                return this.GetParentArgument(nargument);
+            return this.arguments[nargument - this.NoParentArguments];
+        }
+
+        internal object GetParentArgument(int nargument)
+        {
+            return this.block.Closure.GetArgument(nargument);
+        }
+
         private void Push(object obj)
         {
             this.stack.Add(obj);
@@ -346,30 +416,21 @@ namespace AjTalk.Language
             byte arg = execblock.block.ByteCodes[execblock.ip];
 
             Block newblock = (Block)execblock.block.GetConstant(arg);
-            LocalBlock local = null;
+            newblock = new Block(newblock, execblock);
 
-            if (execblock.self != null)
-                local = new LocalBlock(newblock, execblock.block, execblock.self);
-            else
-                local = new LocalBlock(newblock, execblock.block, execblock.nativeSelf);
-
-            execblock.Push(local);
+            execblock.Push(newblock);
         }
 
         private static void DoValue(ExecutionBlock execblock)
         {
-            IBlock newblock = (IBlock)execblock.Pop();
-            Block blk = newblock as Block;
-
-            if (blk == null)
-                blk = ((LocalBlock)newblock).Block;
+            Block newblock = (Block)execblock.Pop();
 
             execblock.lastreceiver = newblock;
 
-            if (execblock.self == null)
-                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, blk, null).Execute());
+            if (newblock.Closure != null || execblock.self == null)
+                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, null).Execute());
             else
-                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, blk, null).Execute());
+                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, newblock, null).Execute());
         }
 
         private static void DoMultiValue(ExecutionBlock execblock)
@@ -382,25 +443,20 @@ namespace AjTalk.Language
             for (int k = arg - 1; k >= 0; k--)
                 args[k] = execblock.Pop();
 
-            IBlock newblock = (IBlock)execblock.Pop();
+            Block newblock = (Block)execblock.Pop();
             execblock.lastreceiver = newblock;
 
-            Block blk = newblock as Block;
-
-            if (blk == null)
-                blk = ((LocalBlock)newblock).Block;
-
-            if (execblock.self == null)
-                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, blk, args).Execute());
+            if (newblock.Closure != null || execblock.self == null)
+                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, args).Execute());
             else
-                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, blk, args).Execute());
+                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, newblock, args).Execute());
         }
 
         private static void DoGetArgument(ExecutionBlock execblock)
         {
             execblock.ip++;
             byte arg = execblock.block.ByteCodes[execblock.ip];
-            execblock.Push(execblock.arguments[arg]);
+            execblock.Push(execblock.GetArgument(arg));
         }
 
         private static void DoGetClass(ExecutionBlock execblock)

@@ -628,6 +628,44 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileAndEvaluateInnerBlockWithClosure()
+        {
+            IClass cls = CompileClass(
+                "Adder",
+                new string[] { },
+                new string[] 
+                {
+                    "add: aVector | sum | sum := 0. aVector do: [ :x | sum := sum + x ]. ^sum"
+                });
+
+            Assert.IsNotNull(cls);
+
+            IMethod method = cls.GetInstanceMethod("add:");
+            Assert.IsNotNull(method);
+            IObject obj = (IObject) cls.NewObject();
+            Assert.AreEqual(6, method.Execute(obj, new object[] { new int[] { 1, 2, 3 } }));
+        }
+
+        [TestMethod]
+        public void CompileAndEvaluateInnerBlockWithClosureUsingExternalArgument()
+        {
+            IClass cls = CompileClass(
+                "Adder",
+                new string[] { },
+                new string[] 
+                {
+                    "add: aVector with: aNumber | sum | sum := 0. aVector do: [ :x | sum := sum + x + aNumber ]. ^sum"
+                });
+
+            Assert.IsNotNull(cls);
+
+            IMethod method = cls.GetInstanceMethod("add:with:");
+            Assert.IsNotNull(method);
+            IObject obj = (IObject)cls.NewObject();
+            Assert.AreEqual(9, method.Execute(obj, new object[] { new int[] { 1, 2, 3 }, 1 }));
+        }
+
+        [TestMethod]
         public void RunMultiCommandMethod()
         {
             IClass cls = CompileClass(

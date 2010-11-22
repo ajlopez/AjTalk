@@ -215,6 +215,14 @@ Object>>error:
 Primitives.RaiseException
 ErrorException
 
+2010-11-22
+LocalBlock deleted
+block.Closure points to external ExecutionBlock
+new Block(block, executionclosure)
+New ExecutionBlock constructor using block.Closure
+ExecutionBlock.NoLocals, .NoParentLocals, .NoArguments, .NoParentArguments
+All this to implement closure in blocks
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/
