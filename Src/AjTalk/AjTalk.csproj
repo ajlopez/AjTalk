@@ -148,7 +148,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Language\IObjectDecorator.cs" />
-    <Compile Include="Language\LocalBlock.cs" />
     <Compile Include="Language\Message.cs" />
     <Compile Include="Language\NativeBehavior.cs" />
     <Compile Include="Language\MessageQueue.cs" />
