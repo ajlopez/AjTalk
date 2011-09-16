@@ -95,6 +95,10 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Ast\InstanceVariableNode.cs" />
+    <Compile Include="Ast\INode.cs" />
+    <Compile Include="Ast\SelfNode.cs" />
+    <Compile Include="Ast\TreeParser.cs" />
     <Compile Include="Hosting\Host.cs" />
     <Compile Include="Hosting\IHost.cs" />
     <Compile Include="Hosting\RemoteObject.cs" />
