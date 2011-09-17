@@ -227,7 +227,7 @@ namespace AjTalk.Compiler
 
                 ch = this.NextChar();
 
-                while (!Char.IsWhiteSpace(ch) && Separators.IndexOf(ch)<0)
+                while (!Char.IsWhiteSpace(ch) && Separators.IndexOf(ch) < 0)
                 {
                     sb.Append(ch);
                     ch = this.NextChar();
@@ -287,7 +287,7 @@ namespace AjTalk.Compiler
 
                 ch = this.NextChar();
 
-                while (Char.IsLetterOrDigit(ch) || ch=='_' || ch==':')
+                while (Char.IsLetterOrDigit(ch) || ch == '_' || ch == ':')
                 {
                     sb.Append(ch);
                     if (ch == ':')

@@ -26,8 +26,8 @@ namespace AjTalk.Transactions
 
         public Transaction CreateTransaction()
         {
-            long trtime = Interlocked.Increment(ref time);
-            Interlocked.Increment(ref time);
+            long trtime = Interlocked.Increment(ref this.time);
+            Interlocked.Increment(ref this.time);
 
             return new Transaction(this, trtime);
         }
@@ -49,8 +49,8 @@ namespace AjTalk.Transactions
             lock (this)
                 this.transactions.Remove(current);
 
-            long trtime = Interlocked.Increment(ref time);
-            Interlocked.Increment(ref time);
+            long trtime = Interlocked.Increment(ref this.time);
+            Interlocked.Increment(ref this.time);
             current.Commit(trtime);
             
             current = null;
@@ -61,8 +61,8 @@ namespace AjTalk.Transactions
             lock (this)
                 this.transactions.Remove(current);
 
-            long trtime = Interlocked.Increment(ref time);
-            Interlocked.Increment(ref time);
+            long trtime = Interlocked.Increment(ref this.time);
+            Interlocked.Increment(ref this.time);
             current.Rollback(trtime);
 
             current = null;

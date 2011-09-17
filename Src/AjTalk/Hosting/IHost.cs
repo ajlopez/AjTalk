@@ -17,7 +17,9 @@ namespace AjTalk.Hosting
 
         // Host Invocation
         void Execute(string command);
+
         object Evaluate(string expression);
+
         object Invoke(IObject receiver, string msgname, object[] args);
     }
 }

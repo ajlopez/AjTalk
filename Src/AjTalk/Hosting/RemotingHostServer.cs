@@ -27,8 +27,10 @@ namespace AjTalk.Hosting
         {
             this.port = port;
             this.name = name;
+
             // TODO review this name, get machine name
             this.hostname = "localhost";
+
             // According to http://www.thinktecture.com/resourcearchive/net-remoting-faq/changes2003
             // in order to have ObjRef accessible from client code
             BinaryServerFormatterSinkProvider serverProv = new BinaryServerFormatterSinkProvider();

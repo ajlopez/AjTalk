@@ -303,7 +303,8 @@ namespace AjTalk.Compiler
 
             while (token != null)
             {
-                switch (token.Type) {
+                switch (token.Type) 
+                {
                     case TokenType.Integer:
                         this.block.CompileGetConstant(Convert.ToInt32(token.Value));
                         nelements++;
@@ -312,6 +313,7 @@ namespace AjTalk.Compiler
                         this.block.CompileGetConstant(token.Value);
                         nelements++;
                         break;
+
                     // TODO Review compile of Symbol
                     case TokenType.Symbol:
                         this.block.CompileGetConstant(token.Value);

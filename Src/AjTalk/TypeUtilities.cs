@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-
-namespace AjTalk
+﻿namespace AjTalk
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Reflection;
+
     public class TypeUtilities
     {
         private static bool referencedAssembliesLoaded = false;

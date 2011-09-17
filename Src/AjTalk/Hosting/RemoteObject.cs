@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AjTalk.Language;
-
-namespace AjTalk.Hosting
+﻿namespace AjTalk.Hosting
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Language;
+
     public class RemoteObject : MarshalByRefObject, IObject, IObjectDecorator
     {
         private IObject obj;

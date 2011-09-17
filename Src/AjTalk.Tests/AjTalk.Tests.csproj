@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ast\TreeParserTests.cs" />
+    <Compile Include="Model\ModelParserTests.cs" />
     <Compile Include="EvaluateTests.cs" />
     <Compile Include="Hosting\HostTests.cs" />
     <Compile Include="Hosting\RemoteObjectTests.cs" />

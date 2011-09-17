@@ -1,11 +1,11 @@
-﻿namespace AjTalk.Ast
+﻿namespace AjTalk.Model
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    public class SelfNode : INode
+    public interface IExpression
     {
     }
 }

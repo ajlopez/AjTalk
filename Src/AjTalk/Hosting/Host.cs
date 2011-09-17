@@ -67,7 +67,7 @@ namespace AjTalk.Hosting
                 Block block = parser.CompileBlock();
                 
                 if (block != null)
-                    result = block.Execute(machine, null);
+                    result = block.Execute(this.machine, null);
 
                 return result;
             }
