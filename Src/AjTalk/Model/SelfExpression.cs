@@ -7,5 +7,9 @@
 
     public class SelfExpression : IExpression
     {
+        public string AsString()
+        {
+            return "self";
+        }
     }
 }

@@ -5,15 +5,20 @@
     using System.Linq;
     using System.Text;
 
-    public class InstanceVariableExpression : IExpression
+    public class VariableExpression : IExpression
     {
         private string name;
 
-        public InstanceVariableExpression(string name)
+        public VariableExpression(string name)
         {
             this.name = name;
         }
 
         public string Name { get { return this.name; } }
+
+        public string AsString()
+        {
+            return this.name;
+        }
     }
 }

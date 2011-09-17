@@ -23,10 +23,39 @@
             this.source = text;
         }
 
+        public IExpression ParseExpressions()
+        {
+            IExpression expression = this.ParseExpression();
+
+            if (expression == null)
+                return null;
+
+            if (this.TryParseDot())
+            {
+                List<IExpression> expressions = new List<IExpression>();
+                expressions.Add(expression);
+                expressions.Add(this.ParseExpression());
+
+                while (this.TryParseDot())
+                {
+                    expressions.Add(this.ParseExpression());
+                }
+
+                expression = new CompositeExpression(expressions);
+            }
+
+            Token token = this.NextToken();
+
+            if (token != null)
+                throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+
+            return expression;
+        }
+
         public IExpression ParseExpression()
         {
-            IExpression model = this.ParseMultipleExpression();
-            return model;
+            IExpression expression = this.ParseMultipleExpression();
+            return expression;
         }
 
         private static bool IsUnarySelector(string name)
@@ -34,9 +63,15 @@
             return !name.EndsWith(":");
         }
 
+        private static bool IsBinarySelector(string name)
+        {
+            // TODO Review which selectors are binary operators
+            return true;
+        }
+
         private IExpression ParseMultipleExpression()
         {
-            IExpression model = this.ParseSimpleExpression();
+            IExpression model = this.ParseBinaryExpression();
 
             if (model == null)
                 return model;
@@ -51,7 +86,7 @@
 
             while (selector != null)
             {
-                arguments.Add(this.ParseSimpleExpression());
+                arguments.Add(this.ParseBinaryExpression());
                 selector = this.TryParseMultipleSelector();
                 if (selector != null)
                     name += selector;
@@ -60,22 +95,42 @@
             return new MessageExpression(model, name, arguments);
         }
 
+        private IExpression ParseBinaryExpression()
+        {
+            IExpression expression = this.ParseSimpleExpression();
+
+            if (expression == null)
+                return expression;
+
+            string selector = this.TryParseBinarySelector();
+
+            while (selector != null)
+            {
+                List<IExpression> arguments = new List<IExpression>();
+                arguments.Add(this.ParseSimpleExpression());
+                expression = new MessageExpression(expression, selector, arguments);
+                selector = this.TryParseBinarySelector();
+            }
+
+            return expression;
+        }
+
         private IExpression ParseSimpleExpression()
         {
-            IExpression model = this.ParseHeadExpression();
+            IExpression expression = this.ParseHeadExpression();
 
-            if (model == null)
-                return model;
+            if (expression == null)
+                return expression;
 
             string selector = this.TryParseUnarySelector();
 
             while (selector != null)
             {
-                model = new MessageExpression(model, selector, null);
+                expression = new MessageExpression(expression, selector, null);
                 selector = this.TryParseUnarySelector();
             }
 
-            return model;
+            return expression;
         }
 
         private IExpression ParseHeadExpression()
@@ -90,8 +145,12 @@
                 case TokenType.Name:
                     if (token.Value == "self")
                         return new SelfExpression();
+                    if (token.Value == "true")
+                        return new ConstantExpression(true);
+                    if (token.Value == "false")
+                        return new ConstantExpression(false);
 
-                    return new InstanceVariableExpression(token.Value);
+                    return new VariableExpression(token.Value);
 
                 case TokenType.String:
                     return new ConstantExpression(token.Value);
@@ -126,6 +185,36 @@
             this.PushToken(token);
 
             return null;
+        }
+
+        private string TryParseBinarySelector()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                return null;
+
+            if (token.Type == TokenType.Operator && IsBinarySelector(token.Value))
+                return token.Value;
+
+            this.PushToken(token);
+
+            return null;
+        }
+
+        private bool TryParseDot()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                return false;
+
+            if (token.Type == TokenType.Punctuation && token.Value == ".")
+                return true;
+
+            this.PushToken(token);
+
+            return false;
         }
 
         private string TryParseMultipleSelector()

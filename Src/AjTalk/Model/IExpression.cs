@@ -7,5 +7,6 @@
 
     public interface IExpression
     {
+        string AsString();
     }
 }

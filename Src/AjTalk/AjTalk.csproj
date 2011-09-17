@@ -95,9 +95,10 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\CompositeExpression.cs" />
     <Compile Include="Model\ConstantExpression.cs" />
     <Compile Include="Model\MessageExpression.cs" />
-    <Compile Include="Model\InstanceVariableExpression.cs" />
+    <Compile Include="Model\VariableExpression.cs" />
     <Compile Include="Model\IExpression.cs" />
     <Compile Include="Model\SelfExpression.cs" />
     <Compile Include="Model\ModelParser.cs" />
