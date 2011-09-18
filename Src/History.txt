@@ -233,6 +233,7 @@ and MessageExpresion
 ModelParse with tests
 IExpression.AsString with tests
 CompositeExpression with tests
+MethodModel with parse and initial tests
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

@@ -23,6 +23,36 @@
             this.source = text;
         }
 
+        public MethodModel ParseMethod()
+        {
+            string name = this.ParseName();
+            string selector;
+            IList<string> parameterNames = new List<string>();
+            IList<string> localVariables = new List<string>();
+
+            if (IsUnarySelector(name))
+                selector = name;
+            else
+            {
+                selector = name;
+
+                parameterNames.Add(this.ParseName());
+
+                name = this.TryParseMultipleSelector();
+
+                while (name != null) 
+                {
+                    selector += name;
+                    parameterNames.Add(this.ParseName());
+                    name = this.TryParseMultipleSelector();
+                }
+            }
+
+            IExpression body = this.ParseExpressions();
+
+            return new MethodModel(selector, parameterNames, localVariables, body);
+        }
+
         public IExpression ParseExpressions()
         {
             IExpression expression = this.ParseExpression();
@@ -159,7 +189,9 @@
                     return new ConstantExpression(Convert.ToInt32(token.Value, CultureInfo.InvariantCulture));
             }
 
-            throw new ParserException(string.Format("Unknown '{0}'", token.Value));
+            this.PushToken(token);
+
+            return null;
         }
 
         private Token NextToken()
@@ -215,6 +247,19 @@
             this.PushToken(token);
 
             return false;
+        }
+
+        private string ParseName()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                throw new ParserException("Expected name");
+
+            if (token.Type != TokenType.Name)
+                throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+
+            return token.Value;
         }
 
         private string TryParseMultipleSelector()

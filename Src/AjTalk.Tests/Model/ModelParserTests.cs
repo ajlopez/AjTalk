@@ -224,5 +224,18 @@
 
             Assert.AreEqual("x do. y do", expression.AsString());
         }
+
+        [TestMethod]
+        public void ParseSimpleMethod()
+        {
+            ModelParser parser = new ModelParser("width: aWidth height: aHeight width do. heigth do");
+            MethodModel method = parser.ParseMethod();
+
+            Assert.IsNotNull(method);
+            Assert.AreEqual("width:height:", method.Selector);
+            Assert.AreEqual(2, method.ParameterNames.Count);
+            Assert.AreEqual("aWidth", method.ParameterNames[0]);
+            Assert.AreEqual("aHeight", method.ParameterNames[1]);
+        }
     }
 }
