@@ -25,27 +25,44 @@
 
         public MethodModel ParseMethod()
         {
-            string name = this.ParseName();
+            string name = this.ParseNameOrOperator();
             string selector;
             IList<string> parameterNames = new List<string>();
             IList<string> localVariables = new List<string>();
 
             if (IsUnarySelector(name))
                 selector = name;
+            else if (IsBinarySelector(name)) 
+            {
+                selector = name;
+                parameterNames.Add(this.ParseSimpleName());
+            }
             else
             {
                 selector = name;
 
-                parameterNames.Add(this.ParseName());
+                parameterNames.Add(this.ParseSimpleName());
 
-                name = this.TryParseMultipleSelector();
+                name = this.TryParseMultipleKeywordSelector();
 
                 while (name != null) 
                 {
                     selector += name;
-                    parameterNames.Add(this.ParseName());
-                    name = this.TryParseMultipleSelector();
+                    parameterNames.Add(this.ParseSimpleName());
+                    name = this.TryParseMultipleKeywordSelector();
                 }
+            }
+
+            if (this.TryParseBar())
+            {
+                string varname;
+
+                while ((varname = this.TryParseSimpleName()) != null)
+                {
+                    localVariables.Add(varname);
+                }
+
+                this.ParseBar();
             }
 
             IExpression body = this.ParseExpressions();
@@ -84,29 +101,44 @@
 
         public IExpression ParseExpression()
         {
-            IExpression expression = this.ParseMultipleExpression();
+            Token token = this.NextToken();
+
+            if (token == null)
+                return null;
+
+            if (token.Type == TokenType.Operator && token.Value == "^")
+                return new ReturnExpression(this.ParseMultipleKeywordExpression());
+
+            this.PushToken(token);
+
+            IExpression expression = this.ParseMultipleKeywordExpression();
             return expression;
         }
 
         private static bool IsUnarySelector(string name)
         {
-            return !name.EndsWith(":");
+            return char.IsLetter(name[0]) && !name.EndsWith(":");
         }
 
         private static bool IsBinarySelector(string name)
         {
             // TODO Review which selectors are binary operators
-            return true;
+            return !char.IsLetter(name[0]);
         }
 
-        private IExpression ParseMultipleExpression()
+        private static bool IsMultipleKeywordSelector(string name)
+        {
+            return name.EndsWith(":");
+        }
+
+        private IExpression ParseMultipleKeywordExpression()
         {
             IExpression model = this.ParseBinaryExpression();
 
             if (model == null)
                 return model;
 
-            string selector = this.TryParseMultipleSelector();
+            string selector = this.TryParseMultipleKeywordSelector();
 
             if (selector == null)
                 return model;
@@ -117,7 +149,7 @@
             while (selector != null)
             {
                 arguments.Add(this.ParseBinaryExpression());
-                selector = this.TryParseMultipleSelector();
+                selector = this.TryParseMultipleKeywordSelector();
                 if (selector != null)
                     name += selector;
             }
@@ -151,6 +183,11 @@
 
             if (expression == null)
                 return expression;
+
+            if (expression is VariableExpression && this.TryParseSet())
+            {
+                return new SetExpression((VariableExpression) expression, this.ParseExpression());
+            }
 
             string selector = this.TryParseUnarySelector();
 
@@ -262,19 +299,104 @@
             return token.Value;
         }
 
-        private string TryParseMultipleSelector()
+        private string ParseSimpleName()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                throw new ParserException("Expected name");
+
+            if (token.Type != TokenType.Name || IsMultipleKeywordSelector(token.Value))
+                throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+
+            return token.Value;
+        }
+
+        private string ParseNameOrOperator()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                throw new ParserException("Expected name or operator");
+
+            if (token.Type != TokenType.Name && token.Type != TokenType.Operator)
+                throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+
+            return token.Value;
+        }
+
+        private void ParseBar()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                throw new ParserException("Expected '|'");
+
+            if (token.Type != TokenType.Punctuation || token.Value != "|")
+                throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+        }
+
+        private string TryParseMultipleKeywordSelector()
         {
             Token token = this.NextToken();
 
             if (token == null)
                 return null;
 
-            if (token.Type == TokenType.Name && !IsUnarySelector(token.Value))
+            if (token.Type == TokenType.Name && IsMultipleKeywordSelector(token.Value))
                 return token.Value;
 
             this.PushToken(token);
 
             return null;
+        }
+
+        private string TryParseSimpleName()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                return null;
+
+            if (token.Type != TokenType.Name || IsMultipleKeywordSelector(token.Value))
+            {
+                this.PushToken(token);
+                return null;
+            }
+
+            return token.Value;
+        }
+
+        private bool TryParseBar()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                return false;
+
+            if (token.Type != TokenType.Punctuation || token.Value != "|")
+            {
+                this.PushToken(token);
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool TryParseSet()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                return false;
+
+            if (token.Type != TokenType.Operator || token.Value != ":=")
+            {
+                this.PushToken(token);
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -132,6 +132,21 @@
         }
 
         [TestMethod]
+        public void ParseReturn()
+        {
+            ModelParser parser = new ModelParser("^10");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(ReturnExpression));
+
+            ReturnExpression rexpression = (ReturnExpression)expression;
+
+            Assert.IsInstanceOfType(rexpression.Expression, typeof(ConstantExpression));
+            Assert.AreEqual(10, ((ConstantExpression)rexpression.Expression).Value);
+        }
+
+        [TestMethod]
         public void ParseMessageWithOneArgument()
         {
             ModelParser parser = new ModelParser("r width: 100");
@@ -188,6 +203,19 @@
         }
 
         [TestMethod]
+        public void ParseSet()
+        {
+            ModelParser parser = new ModelParser("a := b + c");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(SetExpression));
+
+            SetExpression sexpression = (SetExpression)expression;
+            Assert.AreEqual("a", sexpression.LeftValue.Name);
+        }
+
+        [TestMethod]
         public void ParseAddMessage()
         {
             ModelParser parser = new ModelParser("10 + 20");
@@ -236,6 +264,37 @@
             Assert.AreEqual(2, method.ParameterNames.Count);
             Assert.AreEqual("aWidth", method.ParameterNames[0]);
             Assert.AreEqual("aHeight", method.ParameterNames[1]);
+            Assert.AreEqual(0, method.LocalVariables.Count);
+        }
+
+        [TestMethod]
+        public void ParseMethodWithBinaryOperator()
+        {
+            ModelParser parser = new ModelParser("+ aNumber aNumber do. ^aNumber");
+            MethodModel method = parser.ParseMethod();
+
+            Assert.IsNotNull(method);
+            Assert.AreEqual("+", method.Selector);
+            Assert.AreEqual(1, method.ParameterNames.Count);
+            Assert.AreEqual("aNumber", method.ParameterNames[0]);
+            Assert.AreEqual(0, method.LocalVariables.Count);
+            Assert.IsInstanceOfType(method.Body, typeof(CompositeExpression));
+        }
+
+        [TestMethod]
+        public void ParseMethodWithLocalVariables()
+        {
+            ModelParser parser = new ModelParser("doSomething | a b c | ^10");
+            MethodModel method = parser.ParseMethod();
+
+            Assert.IsNotNull(method);
+            Assert.AreEqual("doSomething", method.Selector);
+            Assert.AreEqual(0, method.ParameterNames.Count);
+            Assert.AreEqual(3, method.LocalVariables.Count);
+            Assert.AreEqual("a", method.LocalVariables[0]);
+            Assert.AreEqual("b", method.LocalVariables[1]);
+            Assert.AreEqual("c", method.LocalVariables[2]);
+            Assert.IsInstanceOfType(method.Body, typeof(ReturnExpression));
         }
     }
 }

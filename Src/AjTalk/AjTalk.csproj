@@ -97,8 +97,10 @@
     </Compile>
     <Compile Include="Model\CompositeExpression.cs" />
     <Compile Include="Model\ConstantExpression.cs" />
+    <Compile Include="Model\ReturnExpression.cs" />
     <Compile Include="Model\MessageExpression.cs" />
     <Compile Include="Model\MethodModel.cs" />
+    <Compile Include="Model\SetExpression.cs" />
     <Compile Include="Model\VariableExpression.cs" />
     <Compile Include="Model\IExpression.cs" />
     <Compile Include="Model\SelfExpression.cs" />
