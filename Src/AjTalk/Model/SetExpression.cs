@@ -24,5 +24,10 @@
         {
             return this.leftValue.AsString() + " := " + this.expression.AsString();
         }
+
+        public void Visit(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

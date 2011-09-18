@@ -20,5 +20,10 @@
         {
             return "^" + this.expression.AsString();
         }
+
+        public void Visit(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

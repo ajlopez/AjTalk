@@ -22,7 +22,7 @@
                 this.arguments = arguments;
         }
 
-        public object Target { get { return this.target; } }
+        public IExpression Target { get { return this.target; } }
 
         public string Selector { get { return this.selector; } }
 
@@ -51,6 +51,11 @@
             }
 
             return result;
+        }
+
+        public void Visit(IVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

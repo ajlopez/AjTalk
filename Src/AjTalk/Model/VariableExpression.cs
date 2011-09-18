@@ -20,5 +20,10 @@
         {
             return this.name;
         }
+
+        public void Visit(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

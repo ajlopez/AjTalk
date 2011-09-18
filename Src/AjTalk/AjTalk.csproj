@@ -95,8 +95,13 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Compilers\AbstractCompiler.cs" />
+    <Compile Include="Compilers\ICompiler.cs" />
+    <Compile Include="Compilers\Javascript\Compiler.cs" />
     <Compile Include="Model\CompositeExpression.cs" />
     <Compile Include="Model\ConstantExpression.cs" />
+    <Compile Include="Model\IVisitable.cs" />
+    <Compile Include="Model\IVisitor.cs" />
     <Compile Include="Model\ReturnExpression.cs" />
     <Compile Include="Model\MessageExpression.cs" />
     <Compile Include="Model\MethodModel.cs" />

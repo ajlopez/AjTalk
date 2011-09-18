@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
 
-    public interface IExpression
+    public interface IExpression : IVisitable
     {
         string AsString();
     }

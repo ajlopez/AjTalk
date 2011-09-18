@@ -1,0 +1,27 @@
+﻿namespace AjTalk.Model
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    public interface IVisitor
+    {
+        void Visit(MethodModel method);
+
+        void Visit(CompositeExpression expression);
+
+        void Visit(ConstantExpression expression);
+
+        void Visit(MessageExpression expression);
+
+        void Visit(ReturnExpression expression);
+
+        void Visit(SelfExpression expression);
+
+        void Visit(SetExpression expression);
+
+        void Visit(VariableExpression expression);
+    }
+}
+

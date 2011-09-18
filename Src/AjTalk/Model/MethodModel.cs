@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
 
-    public class MethodModel
+    public class MethodModel : IVisitable
     {
         private string selector;
         private IList<string> parameterNames;
@@ -27,6 +27,11 @@
         public IList<string> LocalVariables { get { return this.localVariables; } }
 
         public IExpression Body { get { return this.body; } }
+
+        public void Visit(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
 

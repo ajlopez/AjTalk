@@ -239,6 +239,9 @@ MethodModel with parse and initial tests
 SetExpression with parse support and tests
 Local variables in method parse with tests
 ReturnExpression with parse support and tests
+IVisitor, IVisitable in MethodModel, IExpression, expressions
+ICompiler, AbstractCompiler
+Compilers/Javascript/Compiler with first tests
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

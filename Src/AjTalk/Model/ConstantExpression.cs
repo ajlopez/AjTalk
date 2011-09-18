@@ -28,5 +28,10 @@
 
             return this.value.ToString();
         }
+
+        public void Visit(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
