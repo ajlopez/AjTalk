@@ -98,8 +98,12 @@
     <Compile Include="Compilers\AbstractCompiler.cs" />
     <Compile Include="Compilers\ICompiler.cs" />
     <Compile Include="Compilers\Javascript\Compiler.cs" />
+    <Compile Include="Model\ClassModel.cs" />
     <Compile Include="Model\CompositeExpression.cs" />
     <Compile Include="Model\ConstantExpression.cs" />
+    <Compile Include="Model\ClassVariableExpression.cs" />
+    <Compile Include="Model\ILeftValue.cs" />
+    <Compile Include="Model\InstanceVariableExpression.cs" />
     <Compile Include="Model\IVisitable.cs" />
     <Compile Include="Model\IVisitor.cs" />
     <Compile Include="Model\ReturnExpression.cs" />

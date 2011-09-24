@@ -7,16 +7,16 @@
 
     public class SetExpression : IExpression
     {
-        private VariableExpression leftValue;
+        private ILeftValue leftValue;
         private IExpression expression;
 
-        public SetExpression(VariableExpression leftValue, IExpression expression)
+        public SetExpression(ILeftValue leftValue, IExpression expression)
         {
             this.leftValue = leftValue;
             this.expression = expression;
         }
 
-        public VariableExpression LeftValue { get { return this.leftValue; } }
+        public ILeftValue LeftValue { get { return this.leftValue; } }
 
         public IExpression Expression { get { return this.expression; } }
 

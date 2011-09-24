@@ -11,6 +11,8 @@
     {
         private Lexer tokenizer;
         private string source;
+        private ClassModel @class;
+        private bool isClassMethod;
 
         public ModelParser(Lexer tok)
         {
@@ -21,6 +23,13 @@
             : this(new Lexer(text))
         {
             this.source = text;
+        }
+
+        public MethodModel ParseMethod(ClassModel @class, bool isClassMethod)
+        {
+            this.@class = @class;
+            this.isClassMethod = isClassMethod;
+            return this.ParseMethod();
         }
 
         public MethodModel ParseMethod()
@@ -67,7 +76,7 @@
 
             IExpression body = this.ParseExpressions();
 
-            return new MethodModel(selector, parameterNames, localVariables, body);
+            return new MethodModel(selector, parameterNames, localVariables, body, this.@class, this.isClassMethod);
         }
 
         public IExpression ParseExpressions()
@@ -184,9 +193,9 @@
             if (expression == null)
                 return expression;
 
-            if (expression is VariableExpression && this.TryParseSet())
+            if (expression is ILeftValue && this.TryParseSet())
             {
-                return new SetExpression((VariableExpression) expression, this.ParseExpression());
+                return new SetExpression((ILeftValue) expression, this.ParseExpression());
             }
 
             string selector = this.TryParseUnarySelector();
@@ -216,6 +225,12 @@
                         return new ConstantExpression(true);
                     if (token.Value == "false")
                         return new ConstantExpression(false);
+
+                    if (this.@class != null && this.isClassMethod == false && this.@class.InstanceVariableNames.Contains(token.Value))
+                        return new InstanceVariableExpression(token.Value);
+
+                    if (this.@class != null && this.isClassMethod == true && this.@class.ClassVariableNames.Contains(token.Value))
+                        return new ClassVariableExpression(token.Value, this.@class);
 
                     return new VariableExpression(token.Value);
 

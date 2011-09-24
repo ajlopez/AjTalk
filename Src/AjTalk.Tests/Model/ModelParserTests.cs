@@ -296,5 +296,39 @@
             Assert.AreEqual("c", method.LocalVariables[2]);
             Assert.IsInstanceOfType(method.Body, typeof(ReturnExpression));
         }
+
+        [TestMethod]
+        public void ParseInstanceMethodReturningInstanceVariable()
+        {
+            ClassModel @class = new ClassModel("AClass", null, new List<string>() { "x", "y" }, new List<string>());
+            ModelParser parser = new ModelParser("x ^x");
+            MethodModel method = parser.ParseMethod(@class, false);
+
+            Assert.IsNotNull(method);
+            Assert.AreEqual("x", method.Selector);
+            Assert.AreEqual(0, method.ParameterNames.Count);
+            Assert.AreEqual(0, method.LocalVariables.Count);
+            Assert.IsInstanceOfType(method.Body, typeof(ReturnExpression));
+
+            ReturnExpression rexpression = (ReturnExpression)method.Body;
+            Assert.IsInstanceOfType(rexpression.Expression, typeof(InstanceVariableExpression));
+        }
+
+        [TestMethod]
+        public void ParseClassMethodReturningClassVariable()
+        {
+            ClassModel @class = new ClassModel("AClass", null, new List<string>(), new List<string>() { "x", "y" });
+            ModelParser parser = new ModelParser("x ^x");
+            MethodModel method = parser.ParseMethod(@class, true);
+
+            Assert.IsNotNull(method);
+            Assert.AreEqual("x", method.Selector);
+            Assert.AreEqual(0, method.ParameterNames.Count);
+            Assert.AreEqual(0, method.LocalVariables.Count);
+            Assert.IsInstanceOfType(method.Body, typeof(ReturnExpression));
+
+            ReturnExpression rexpression = (ReturnExpression)method.Body;
+            Assert.IsInstanceOfType(rexpression.Expression, typeof(ClassVariableExpression));
+        }
     }
 }

@@ -7,6 +7,8 @@
 
     public interface IVisitor
     {
+        void Visit(ClassModel @class);
+
         void Visit(MethodModel method);
 
         void Visit(CompositeExpression expression);
@@ -22,6 +24,10 @@
         void Visit(SetExpression expression);
 
         void Visit(VariableExpression expression);
+
+        void Visit(InstanceVariableExpression expression);
+
+        void Visit(ClassVariableExpression expression);
     }
 }
 

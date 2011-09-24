@@ -8,6 +8,11 @@
 
     public abstract class AbstractCompiler : ICompiler, IVisitor
     {
+        public void CompileClass(ClassModel @class)
+        {
+            @class.Visit(this);
+        }
+
         public void CompileMethod(MethodModel method)
         {
             method.Visit(this);
@@ -17,6 +22,8 @@
         {
             expression.Visit(this);
         }
+
+        public abstract void Visit(ClassModel @class);
 
         public abstract void Visit(MethodModel method);
 
@@ -33,5 +40,9 @@
         public abstract void Visit(SetExpression expression);
 
         public abstract void Visit(VariableExpression expression);
+
+        public abstract void Visit(InstanceVariableExpression expression);
+
+        public abstract void Visit(ClassVariableExpression expression);
     }
 }

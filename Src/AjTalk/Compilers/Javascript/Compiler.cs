@@ -16,9 +16,32 @@
             this.writer = writer;
         }
 
+        public override void Visit(ClassModel @class)
+        {
+            this.writer.WriteLine(string.Format("function {0}()", @class.Name));
+            this.writer.WriteLine("{");
+            this.writer.WriteLine("}");
+
+            foreach (string name in @class.InstanceVariableNames)
+                this.writer.WriteLine(string.Format("{0}.prototype.{1} = null;", @class.Name, name));
+
+            foreach (string name in @class.ClassVariableNames)
+                this.writer.WriteLine(string.Format("{0}.{1} = null;", @class.Name, name));
+
+            foreach (MethodModel method in @class.InstanceMethods)
+                method.Visit(this);
+        }
+
         public override void Visit(MethodModel method)
         {
-            this.writer.Write(string.Format("function {0}(", ToMethodName(method.Selector)));
+            if (method.Class != null)
+            {
+                this.writer.Write(string.Format("{0}.prototype.{1} = function(", method.Class.Name, ToMethodName(method.Selector)));
+            }
+            else
+            {
+                this.writer.Write(string.Format("function {0}(", ToMethodName(method.Selector)));
+            }
 
             int nparameters = 0;
 
@@ -33,7 +56,11 @@
             this.writer.WriteLine(")");
             this.writer.WriteLine("{");
             method.Body.Visit(this);
-            this.writer.WriteLine("}");
+
+            if (method.Class != null)
+                this.writer.WriteLine("};");
+            else
+                this.writer.WriteLine("}");
         }
 
         public override void Visit(CompositeExpression expression)
@@ -70,7 +97,7 @@
 
         public override void Visit(SelfExpression expression)
         {
-            throw new NotImplementedException();
+            this.writer.Write("self");
         }
 
         public override void Visit(SetExpression expression)
@@ -86,13 +113,20 @@
             this.writer.Write(expression.Name);
         }
 
+        public override void Visit(InstanceVariableExpression expression)
+        {
+            this.writer.Write(string.Format("this.{0}", expression.Name));
+        }
+
+        public override void Visit(ClassVariableExpression expression)
+        {
+            this.writer.Write(string.Format("{0}.{1}", expression.Class.Name, expression.Name));
+        }
+
         private static string ToMethodName(string name)
         {
             name = name.Replace(":", "_");
             name = "$" + name;
-
-            if (name.EndsWith("_"))
-                name = name.Substring(0, name.Length - 1);
 
             return name;
         }
@@ -103,3 +137,4 @@
         }
     }
 }
+
