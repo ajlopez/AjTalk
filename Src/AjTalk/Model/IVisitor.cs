@@ -32,6 +32,10 @@
         void Visit(InstanceVariableExpression expression);
 
         void Visit(ClassVariableExpression expression);
+
+        void Visit(PrimitiveExpression expression);
+
+        void Visit(CodeModel code);
     }
 }
 

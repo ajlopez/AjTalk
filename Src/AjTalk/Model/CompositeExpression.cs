@@ -14,6 +14,8 @@
             this.expressions = expressions;
         }
 
+        public IEnumerable<IExpression> Expressions { get { return this.expressions; } }
+
         public string AsString()
         {
             string result = "";

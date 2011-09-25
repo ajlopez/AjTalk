@@ -112,6 +112,9 @@
     <None Include="CodeFiles\ClassTest.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="CodeFiles\FileOut02.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\ProtoObject.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

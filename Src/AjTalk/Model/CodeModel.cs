@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
 
-    public class CodeModel
+    public class CodeModel : IVisitable
     {
         private IDictionary<string, ClassModel> classes = new Dictionary<string, ClassModel>();
         private IList<IVisitable> codeElements = new List<IVisitable>();
@@ -29,6 +29,11 @@
         public ClassModel GetClass(string name)
         {
             return this.classes[name];
+        }
+
+        public void Visit(IVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

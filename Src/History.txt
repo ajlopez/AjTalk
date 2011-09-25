@@ -254,6 +254,9 @@ CodeModel used in CodeReader
 CodeReader with tests
 BlockExpression used in ModelParser and CodeReader tests
 SymbolExpression used in ModelParser and CodeReader tests
+PrimitiveExpression usind in ModelParser tests
+FileOut01.st First compile to Javascript in test
+FileOut02.st First compile to Javascript in test
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

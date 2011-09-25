@@ -76,7 +76,14 @@
 
             IExpression body = this.ParseExpressions();
 
-            return new MethodModel(selector, parameterNames, localVariables, body, this.@class, this.isClassMethod);
+            MethodModel model = new MethodModel(selector, parameterNames, localVariables, body, this.@class, this.isClassMethod);
+
+            Token token = this.NextToken();
+
+            if (token != null)
+                throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+
+            return model;
         }
 
         public IExpression ParseExpressions()
@@ -105,7 +112,7 @@
             if (token != null) 
             {
                 // TODO refactor
-                if (token.Type != TokenType.Punctuation || token.Value != "]")
+                if (token.Type != TokenType.Punctuation || (token.Value != "]" && token.Value != ")"))
                     throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
 
                 this.PushToken(token);
@@ -246,9 +253,22 @@
                 case TokenType.Symbol:
                     return new SymbolExpression(token.Value);
 
+                case TokenType.Operator:
+                    if (token.Value == "<")
+                        return this.ParsePrimitive();
+                    break;
+
                 case TokenType.Punctuation:
                     if (token.Value == "[")
                         return this.ParseBlock();
+                    if (token.Value == "(")
+                    {
+                        IExpression expression = this.ParseExpression();
+                        Token lasttoken = this.NextToken();
+                        if (lasttoken == null || lasttoken.Type != TokenType.Punctuation || lasttoken.Value != ")")
+                            throw new ParserException("Expected ')'");
+                        return expression;
+                    }
                     break;
 
                 case TokenType.Integer:
@@ -279,6 +299,15 @@
                 throw new ParserException("Expected ']'");
 
             return new BlockExpression(body);
+        }
+
+        private IExpression ParsePrimitive()
+        {
+            this.ParseToken(TokenType.Name, "primitive:");
+            int primitive = this.ParseInteger();
+            this.ParseToken(TokenType.Operator, ">");
+
+            return new PrimitiveExpression(primitive);
         }
 
         private string TryParseUnarySelector()
@@ -437,6 +466,24 @@
             }
 
             return true;
+        }
+
+        private void ParseToken(TokenType type, string value)
+        {
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != type || token.Value != value)
+                throw new ParserException(string.Format("Expected '{0}'", value));
+        }
+
+        private int ParseInteger()
+        {
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != TokenType.Integer)
+                throw new ParserException("Integer Expected");
+
+            return Convert.ToInt32(token.Value, CultureInfo.InvariantCulture);
         }
     }
 }

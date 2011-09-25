@@ -118,6 +118,42 @@
             Assert.IsTrue(ContainsLine(output, "};"));
         }
 
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\FileOut01.st")]
+        public void CompileFileOut01()
+        {
+            ChunkReader chunkReader = new ChunkReader(@"FileOut01.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            reader.Process(model);
+
+            this.compiler.Visit(model);
+            this.writer.Close();
+            string output = this.writer.ToString();
+
+            // TODO more tests
+            Assert.IsTrue(ContainsLine(output, "function Object()"));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\FileOut02.st")]
+        public void CompileFileOut02()
+        {
+            ChunkReader chunkReader = new ChunkReader(@"FileOut02.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            reader.Process(model);
+
+            this.compiler.Visit(model);
+            this.writer.Close();
+            string output = this.writer.ToString();
+
+            // TODO more tests
+            Assert.IsTrue(ContainsLine(output, "function Object()"));
+        }
+
         private static MethodModel ParseMethod(string text)
         {
             ModelParser parser = new ModelParser(text);

@@ -70,6 +70,21 @@
         }
 
         [TestMethod]
+        public void ParsePrimitive()
+        {
+            ModelParser parser = new ModelParser("<primitive: 60>");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(PrimitiveExpression));
+
+            PrimitiveExpression pexpression = (PrimitiveExpression)expression;
+            Assert.AreEqual(60, pexpression.Primitive);
+
+            Assert.AreEqual("<primitive: 60>", expression.AsString());
+        }
+
+        [TestMethod]
         public void ParseFalse()
         {
             ModelParser parser = new ModelParser("false");

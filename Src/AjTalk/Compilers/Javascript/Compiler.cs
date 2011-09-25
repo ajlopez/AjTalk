@@ -65,17 +65,37 @@
 
         public override void Visit(CompositeExpression expression)
         {
-            throw new NotImplementedException();
+            foreach (var expr in expression.Expressions)
+            {
+                expr.Visit(this);
+                this.writer.WriteLine();
+            }
+        }
+
+        public override void Visit(CodeModel model)
+        {
+            foreach (var element in model.Elements)
+                element.Visit(this);
         }
 
         public override void Visit(ConstantExpression expression)
         {
-            throw new NotImplementedException();
+            this.writer.Write(expression.AsString());
         }
 
         public override void Visit(BlockExpression expression)
         {
-            throw new NotImplementedException();
+            // TODO block with parameters, return
+            this.writer.Write("function() {");
+            expression.Body.Visit(this);
+            this.writer.Write("}");
+        }
+
+        public override void Visit(PrimitiveExpression expression)
+        {
+            // TODO implement primitive
+            this.writer.WriteLine();
+            this.writer.WriteLine("// " + expression.AsString());
         }
 
         public override void Visit(MessageExpression expression)
@@ -90,7 +110,19 @@
                 return;
             }
 
-            throw new NotImplementedException();
+            expression.Target.Visit(this);
+            this.writer.Write(string.Format(".{0}(", ToMethodName(expression.Selector)));
+
+            int narg = 0;
+            foreach (var argument in expression.Arguments)
+            {
+                if (narg != 0)
+                    this.writer.Write(", ");
+                argument.Visit(this);
+                narg++;
+            }
+
+            this.writer.Write(")");
         }
 
         public override void Visit(ReturnExpression expression)

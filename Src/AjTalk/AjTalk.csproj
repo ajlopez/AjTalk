@@ -106,6 +106,7 @@
     <Compile Include="Model\ConstantExpression.cs" />
     <Compile Include="Model\ClassVariableExpression.cs" />
     <Compile Include="Model\BlockExpression.cs" />
+    <Compile Include="Model\PrimitiveExpression.cs" />
     <Compile Include="Model\SymbolExpression.cs" />
     <Compile Include="Model\ILeftValue.cs" />
     <Compile Include="Model\InstanceVariableExpression.cs" />

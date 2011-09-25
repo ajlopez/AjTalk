@@ -48,5 +48,9 @@
         public abstract void Visit(ClassVariableExpression expression);
 
         public abstract void Visit(BlockExpression expression);
+
+        public abstract void Visit(PrimitiveExpression expression);
+
+        public abstract void Visit(CodeModel expression);
     }
 }
