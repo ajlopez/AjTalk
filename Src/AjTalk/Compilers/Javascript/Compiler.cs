@@ -73,6 +73,11 @@
             throw new NotImplementedException();
         }
 
+        public override void Visit(BlockExpression expression)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Visit(MessageExpression expression)
         {
             string selector = expression.Selector;
@@ -106,6 +111,11 @@
             this.writer.Write(" = ");
             expression.Expression.Visit(this);
             this.writer.WriteLine(";");
+        }
+
+        public override void Visit(SymbolExpression expression)
+        {
+            throw new NotImplementedException();
         }
 
         public override void Visit(VariableExpression expression)

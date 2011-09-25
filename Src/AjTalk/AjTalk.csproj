@@ -95,13 +95,18 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ChunkReader.cs" />
     <Compile Include="Compilers\AbstractCompiler.cs" />
     <Compile Include="Compilers\ICompiler.cs" />
     <Compile Include="Compilers\Javascript\Compiler.cs" />
     <Compile Include="Model\ClassModel.cs" />
+    <Compile Include="Model\CodeModel.cs" />
+    <Compile Include="Model\CodeReader.cs" />
     <Compile Include="Model\CompositeExpression.cs" />
     <Compile Include="Model\ConstantExpression.cs" />
     <Compile Include="Model\ClassVariableExpression.cs" />
+    <Compile Include="Model\BlockExpression.cs" />
+    <Compile Include="Model\SymbolExpression.cs" />
     <Compile Include="Model\ILeftValue.cs" />
     <Compile Include="Model\InstanceVariableExpression.cs" />
     <Compile Include="Model\IVisitable.cs" />

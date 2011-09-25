@@ -41,8 +41,12 @@
 
         public abstract void Visit(VariableExpression expression);
 
+        public abstract void Visit(SymbolExpression expression);
+
         public abstract void Visit(InstanceVariableExpression expression);
 
         public abstract void Visit(ClassVariableExpression expression);
+
+        public abstract void Visit(BlockExpression expression);
     }
 }

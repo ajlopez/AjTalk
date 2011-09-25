@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChunkReaderTests.cs" />
     <Compile Include="Compilers\Javascript\CompilerTests.cs" />
+    <Compile Include="Model\CodeReaderTests.cs" />
     <Compile Include="Model\ModelParserTests.cs" />
     <Compile Include="EvaluateTests.cs" />
     <Compile Include="Hosting\HostTests.cs" />
@@ -108,6 +110,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="CodeFiles\ClassTest.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CodeFiles\ProtoObject.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CodeFiles\FileOut01.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="CodeFiles\ObjectTest.st">

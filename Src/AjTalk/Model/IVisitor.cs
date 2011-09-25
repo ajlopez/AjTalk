@@ -25,6 +25,10 @@
 
         void Visit(VariableExpression expression);
 
+        void Visit(SymbolExpression expression);
+
+        void Visit(BlockExpression expression);
+
         void Visit(InstanceVariableExpression expression);
 
         void Visit(ClassVariableExpression expression);

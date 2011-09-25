@@ -5,20 +5,20 @@
     using System.Linq;
     using System.Text;
 
-    public class VariableExpression : ILeftValue
+    public class SymbolExpression : IExpression
     {
-        private string name;
+        private string symbol;
 
-        public VariableExpression(string name)
+        public SymbolExpression(string symbol)
         {
-            this.name = name;
+            this.symbol = symbol;
         }
 
-        public string Name { get { return this.name; } }
+        public string Symbol { get { return this.symbol; } }
 
         public string AsString()
         {
-            return this.name;
+            return "#" +this.symbol;
         }
 
         public void Visit(IVisitor visitor)

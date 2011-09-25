@@ -247,6 +247,14 @@ Compilers/Javascript/Compiler with first tests
 ClassModel, in MethodModel and ModelParser, and compile support with tests
 ClassVariableExpression, InstanceVariableExpression, with ModelParser support and tests
 
+2011-09-25
+ChunkReader with tests
+FileOut01.st file for tests (taken from Squeak Object file out)
+CodeModel used in CodeReader
+CodeReader with tests
+BlockExpression used in ModelParser and CodeReader tests
+SymbolExpression used in ModelParser and CodeReader tests
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

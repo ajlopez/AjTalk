@@ -102,8 +102,14 @@
 
             Token token = this.NextToken();
 
-            if (token != null)
-                throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+            if (token != null) 
+            {
+                // TODO refactor
+                if (token.Type != TokenType.Punctuation || token.Value != "]")
+                    throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+
+                this.PushToken(token);
+            }
 
             return expression;
         }
@@ -237,6 +243,14 @@
                 case TokenType.String:
                     return new ConstantExpression(token.Value);
 
+                case TokenType.Symbol:
+                    return new SymbolExpression(token.Value);
+
+                case TokenType.Punctuation:
+                    if (token.Value == "[")
+                        return this.ParseBlock();
+                    break;
+
                 case TokenType.Integer:
                     return new ConstantExpression(Convert.ToInt32(token.Value, CultureInfo.InvariantCulture));
             }
@@ -254,6 +268,17 @@
         private void PushToken(Token token)
         {
             this.tokenizer.PushToken(token);
+        }
+
+        private IExpression ParseBlock()
+        {
+            IExpression body = this.ParseExpressions();
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != TokenType.Punctuation || token.Value != "]")
+                throw new ParserException("Expected ']'");
+
+            return new BlockExpression(body);
         }
 
         private string TryParseUnarySelector()

@@ -6,6 +6,8 @@
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using AjTalk.Model;
+    using AjTalk.Compiler;
+    using System.IO;
 
     [TestClass]
     public class ModelParserTests
@@ -23,7 +25,7 @@
         }
 
         [TestMethod]
-        public void ParseInstanceVariable()
+        public void ParseVariable()
         {
             ModelParser parser = new ModelParser("foo");
             IExpression expression = parser.ParseExpression();
@@ -35,6 +37,21 @@
             Assert.AreEqual("foo", vexpression.Name);
 
             Assert.AreEqual("foo", expression.AsString());
+        }
+
+        [TestMethod]
+        public void ParseSymbol()
+        {
+            ModelParser parser = new ModelParser("#foo");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(SymbolExpression));
+
+            SymbolExpression sexpression = (SymbolExpression)expression;
+            Assert.AreEqual("foo", sexpression.Symbol);
+
+            Assert.AreEqual("#foo", expression.AsString());
         }
 
         [TestMethod]
@@ -329,6 +346,22 @@
 
             ReturnExpression rexpression = (ReturnExpression)method.Body;
             Assert.IsInstanceOfType(rexpression.Expression, typeof(ClassVariableExpression));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\ProtoObject.st")]
+        public void ParseProtoObjectSubclassObject()
+        {
+            Lexer lexer = new Lexer(new StreamReader("ProtoObject.st"));
+            ModelParser parser = new ModelParser(lexer);
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(MessageExpression));
+
+            MessageExpression mexpression = (MessageExpression)expression;
+
+            Assert.AreEqual("subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:", mexpression.Selector);
         }
     }
 }

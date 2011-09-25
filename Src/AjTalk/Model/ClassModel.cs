@@ -18,8 +18,8 @@
         {
             this.name = name;
             this.superclass = superclass;
-            this.instanceVariableNames = instanceVariableNames;
-            this.classVariableNames = classVariableNames;
+            this.instanceVariableNames = instanceVariableNames ?? new List<string>();
+            this.classVariableNames = classVariableNames ?? new List<string>();
             this.classMethods = new List<MethodModel>();
             this.instanceMethods = new List<MethodModel>();
         }
