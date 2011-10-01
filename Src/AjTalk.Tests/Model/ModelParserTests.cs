@@ -330,6 +330,82 @@
         }
 
         [TestMethod]
+        public void ParseSimpleBlock()
+        {
+            ModelParser parser = new ModelParser("[ a := 1. b := 2]");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(BlockExpression));
+
+            BlockExpression bexpression = (BlockExpression)expression;
+
+            Assert.IsNotNull(bexpression.Body);
+            Assert.IsInstanceOfType(bexpression.Body, typeof(CompositeExpression));
+            Assert.AreEqual(0, bexpression.ParameterNames.Count);
+            Assert.AreEqual(0, bexpression.LocalVariables.Count);
+        }
+
+        [TestMethod]
+        public void ParseBlockWithParameters()
+        {
+            ModelParser parser = new ModelParser("[ :a :b | ^a + b]");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(BlockExpression));
+
+            BlockExpression bexpression = (BlockExpression)expression;
+
+            Assert.IsNotNull(bexpression.Body);
+            Assert.IsInstanceOfType(bexpression.Body, typeof(ReturnExpression));
+            Assert.AreEqual(2, bexpression.ParameterNames.Count);
+            Assert.AreEqual("a", bexpression.ParameterNames[0]);
+            Assert.AreEqual("b", bexpression.ParameterNames[1]);
+            Assert.AreEqual(0, bexpression.LocalVariables.Count);
+        }
+
+        [TestMethod]
+        public void ParseBlockWithParametersAndLocalVariables()
+        {
+            ModelParser parser = new ModelParser("[ :a :b | | x y | ^a + b]");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(BlockExpression));
+
+            BlockExpression bexpression = (BlockExpression)expression;
+
+            Assert.IsNotNull(bexpression.Body);
+            Assert.IsInstanceOfType(bexpression.Body, typeof(ReturnExpression));
+            Assert.AreEqual(2, bexpression.ParameterNames.Count);
+            Assert.AreEqual("a", bexpression.ParameterNames[0]);
+            Assert.AreEqual("b", bexpression.ParameterNames[1]);
+            Assert.AreEqual(2, bexpression.LocalVariables.Count);
+            Assert.AreEqual("x", bexpression.LocalVariables[0]);
+            Assert.AreEqual("y", bexpression.LocalVariables[1]);
+        }
+
+        [TestMethod]
+        public void ParseBlockWithLocalVariables()
+        {
+            ModelParser parser = new ModelParser("[ | x y | ^a + b]");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(BlockExpression));
+
+            BlockExpression bexpression = (BlockExpression)expression;
+
+            Assert.IsNotNull(bexpression.Body);
+            Assert.IsInstanceOfType(bexpression.Body, typeof(ReturnExpression));
+            Assert.AreEqual(0, bexpression.ParameterNames.Count);
+            Assert.AreEqual(2, bexpression.LocalVariables.Count);
+            Assert.AreEqual("x", bexpression.LocalVariables[0]);
+            Assert.AreEqual("y", bexpression.LocalVariables[1]);
+        }
+
+        [TestMethod]
         public void ParseInstanceMethodReturningInstanceVariable()
         {
             ClassModel @class = new ClassModel("AClass", null, new List<string>() { "x", "y" }, new List<string>());

@@ -124,6 +124,21 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void ProcessParameter()
+        {
+            Lexer tokenizer = new Lexer(":x");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Parameter, token.Type);
+            Assert.AreEqual("x", token.Value);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
+
+        [TestMethod]
         public void ProcessSpecialName()
         {
             Lexer tokenizer = new Lexer("@System.IO.FileInfo");
@@ -217,6 +232,18 @@ namespace AjTalk.Tests.Compiler
             token = tokenizer.NextToken();
             Assert.IsNotNull(token);
             Assert.AreEqual(":=", token.Value);
+            Assert.AreEqual(TokenType.Operator, token.Type);
+        }
+
+        [TestMethod]
+        public void ProcessCommaOperator()
+        {
+            Lexer tokenizer = new Lexer(",");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual(",", token.Value);
             Assert.AreEqual(TokenType.Operator, token.Type);
         }
 

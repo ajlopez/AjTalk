@@ -179,13 +179,13 @@ namespace AjTalk.Compiler
                 if (token.Value == "|")
                     break;
 
-                if (token.Type != TokenType.Operator || token.Value != ":")
+                if (token.Type != TokenType.Parameter)
                 {
                     this.PushToken(token);
                     break;
                 }
 
-                this.arguments.Add(this.CompileName());
+                this.arguments.Add(token.Value);
 
                 token = this.NextToken();
             }

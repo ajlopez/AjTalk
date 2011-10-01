@@ -9,9 +9,9 @@
 
     public class Compiler : AbstractCompiler
     {
-        private TextWriter writer;
+        private SourceWriter writer;
 
-        public Compiler(TextWriter writer)
+        public Compiler(SourceWriter writer)
         {
             this.writer = writer;
         }
@@ -54,13 +54,13 @@
             }
 
             this.writer.WriteLine(")");
-            this.writer.WriteLine("{");
+            this.writer.WriteLineStart("{");
             method.Body.Visit(this);
 
             if (method.Class != null)
-                this.writer.WriteLine("};");
+                this.writer.WriteLineEnd("};");
             else
-                this.writer.WriteLine("}");
+                this.writer.WriteLineEnd("}");
         }
 
         public override void Visit(CompositeExpression expression)
@@ -123,6 +123,11 @@
             }
 
             this.writer.Write(")");
+        }
+
+        public override void Visit(FluentMessageExpression expression)
+        {
+            throw new NotImplementedException();
         }
 
         public override void Visit(ReturnExpression expression)

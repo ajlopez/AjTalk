@@ -17,6 +17,8 @@
 
         void Visit(MessageExpression expression);
 
+        void Visit(FluentMessageExpression expression);
+
         void Visit(ReturnExpression expression);
 
         void Visit(SelfExpression expression);

@@ -292,13 +292,61 @@
 
         private IExpression ParseBlock()
         {
+            IList<string> parameterNames = this.ParseBlockParameters();
+            IList<string> localVariables = this.ParseBlockLocalVariables();
             IExpression body = this.ParseExpressions();
             Token token = this.NextToken();
 
             if (token == null || token.Type != TokenType.Punctuation || token.Value != "]")
                 throw new ParserException("Expected ']'");
 
-            return new BlockExpression(body);
+            return new BlockExpression(parameterNames, localVariables, body);
+        }
+
+        private IList<string> ParseBlockParameters()
+        {
+            IList<string> parameterNames = new List<string>();
+
+            Token token = this.NextToken();
+
+            while (token != null && token.Type == TokenType.Parameter)
+            {
+                parameterNames.Add(token.Value);
+                token = this.NextToken();
+            }
+
+            if (parameterNames.Count == 0)
+                this.PushToken(token);
+            else if (token == null || token.Type != TokenType.Punctuation || token.Value != "|")
+                throw new ParserException("Expected '|'");
+
+            return parameterNames;
+        }
+
+        private IList<string> ParseBlockLocalVariables()
+        {
+            IList<string> localVariables = new List<string>();
+
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != TokenType.Punctuation || token.Value != "|")
+            {
+                this.PushToken(token);
+                return localVariables;
+            }
+            
+            token = this.NextToken();
+
+            while (token != null && token.Type == TokenType.Name)
+            {
+                localVariables.Add(token.Value);
+                token = this.NextToken();
+            }
+
+            if (token == null || token.Type != TokenType.Punctuation || token.Value != "|")
+                throw new ParserException("Expected '|'");
+
+            return localVariables;
         }
 
         private IExpression ParsePrimitive()

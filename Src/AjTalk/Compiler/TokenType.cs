@@ -11,6 +11,7 @@
         String = 2,
         Punctuation = 3,
         Operator = 4,
-        Symbol
+        Symbol = 5,
+        Parameter = 6
     }
 }

@@ -33,6 +33,8 @@
 
         public abstract void Visit(MessageExpression expression);
 
+        public abstract void Visit(FluentMessageExpression expression);
+
         public abstract void Visit(ReturnExpression expression);
 
         public abstract void Visit(SelfExpression expression);

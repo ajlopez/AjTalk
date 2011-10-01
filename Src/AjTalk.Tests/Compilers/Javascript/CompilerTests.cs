@@ -2,12 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
-    using AjTalk.Model;
+    using AjTalk.Compilers;
     using AjTalk.Compilers.Javascript;
+    using AjTalk.Model;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.IO;
 
     [TestClass]
     public class CompilerTests
@@ -19,7 +20,7 @@
         public void Setup()
         {
             this.writer = new StringWriter();
-            this.compiler = new Compiler(this.writer);
+            this.compiler = new Compiler(new SourceWriter(this.writer));
         }
 
         [TestMethod]
@@ -141,6 +142,24 @@
         public void CompileFileOut02()
         {
             ChunkReader chunkReader = new ChunkReader(@"FileOut02.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            reader.Process(model);
+
+            this.compiler.Visit(model);
+            this.writer.Close();
+            string output = this.writer.ToString();
+
+            // TODO more tests
+            Assert.IsTrue(ContainsLine(output, "function Object()"));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\SqueakObject.st")]
+        public void CompileSqueakObject()
+        {
+            ChunkReader chunkReader = new ChunkReader(@"SqueakObject.st");
             CodeReader reader = new CodeReader(chunkReader);
             CodeModel model = new CodeModel();
 

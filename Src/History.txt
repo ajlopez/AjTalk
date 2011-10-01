@@ -258,6 +258,15 @@ PrimitiveExpression usind in ModelParser tests
 FileOut01.st First compile to Javascript in test
 FileOut02.st First compile to Javascript in test
 
+2011-10-01
+SourceWriter with tests
+SourceWriter used by Javascript Compiler
+TokenType.Parameter
+ModelParse support for: parameter in blocks, local variables in blocks
+BlockExpression with paramteres and local variables
+SqueakObject.st for parser tests
+Fluent Message
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

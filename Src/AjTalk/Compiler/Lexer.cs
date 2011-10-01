@@ -10,7 +10,7 @@ namespace AjTalk.Compiler
         public const char SpecialDotNetTypeMark = '@';
         public const char SpecialDotNetInvokeMark = '!';
 
-        private const string Operators = "^<>:=-+*/&~";
+        private const string Operators = "^<>:=-+*/&~,";
         private const string Separators = "().|[];";
 
         private const char StringDelimiter = '\'';
@@ -18,6 +18,7 @@ namespace AjTalk.Compiler
         private const char CommentDelimeter = '"';
 
         private const char SymbolMark = '#';
+        private const char ParameterMark = ':';
 
         private TextReader input;
         private char lastchar;
@@ -77,6 +78,19 @@ namespace AjTalk.Compiler
                     this.PushChar(ch2);
 
                     return this.NextSymbol();
+                }
+
+                if (ch == ParameterMark)
+                {
+                    char ch2 = this.NextChar();
+                    this.PushChar(ch2);
+
+                    if (!char.IsLetter(ch2))
+                    {
+                        return this.NextOperator(ch);
+                    }
+
+                    return this.NextParameter();
                 }
 
                 if (ch == SpecialDotNetTypeMark)
@@ -219,6 +233,24 @@ namespace AjTalk.Compiler
 
         private Token NextSymbol()
         {
+            Token token = new Token();
+            token.Type = TokenType.Symbol;
+            token.Value = this.NextNameAsString();
+
+            return token;
+        }
+
+        private Token NextParameter()
+        {
+            Token token = new Token();
+            token.Type = TokenType.Parameter;
+            token.Value = this.NextNameAsString();
+
+            return token;
+        }
+
+        private string NextNameAsString()
+        {
             StringBuilder sb = new StringBuilder();
 
             try
@@ -239,11 +271,7 @@ namespace AjTalk.Compiler
             {
             }
 
-            Token token = new Token();
-            token.Type = TokenType.Symbol;
-            token.Value = sb.ToString();
-
-            return token;
+            return sb.ToString();
         }
 
         private Token NextDotNetTypeName()
