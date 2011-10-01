@@ -72,6 +72,11 @@
             }
         }
 
+        public override void Visit(CollectionExpression expression)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Visit(CodeModel model)
         {
             foreach (var element in model.Elements)

@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Text;
 
-    public class CompositeExpression : IExpression
+    public class CollectionExpression : IExpression
     {
         private IEnumerable<IExpression> expressions;
 
-        public CompositeExpression(IEnumerable<IExpression> expressions)
+        public CollectionExpression(IEnumerable<IExpression> expressions)
         {
             this.expressions = expressions;
         }
@@ -19,17 +19,22 @@
         public string AsString()
         {
             // TODO Refactor to String Builder
-            string result = "";
+            string result = "#(";
 
             foreach (IExpression expression in this.expressions)
             {
-                if (result != "")
-                    result += ". ";
+                if (result != "#(")
+                    result += " ";
 
-                result += expression.AsString();
+                if (expression is SymbolExpression)
+                    result += ((SymbolExpression)expression).Symbol;
+                else if (expression is CollectionExpression)
+                    result += expression.AsString().Substring(1);
+                else
+                    result += expression.AsString();
             }
 
-            return result;
+            return result + ")";
         }
 
         public void Visit(IVisitor visitor)

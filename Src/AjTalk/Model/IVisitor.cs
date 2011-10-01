@@ -13,6 +13,8 @@
 
         void Visit(CompositeExpression expression);
 
+        void Visit(CollectionExpression expression);
+
         void Visit(ConstantExpression expression);
 
         void Visit(MessageExpression expression);

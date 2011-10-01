@@ -29,6 +29,8 @@
 
         public abstract void Visit(CompositeExpression expression);
 
+        public abstract void Visit(CollectionExpression expression);
+
         public abstract void Visit(ConstantExpression expression);
 
         public abstract void Visit(MessageExpression expression);

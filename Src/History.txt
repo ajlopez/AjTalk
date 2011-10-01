@@ -266,6 +266,8 @@ ModelParse support for: parameter in blocks, local variables in blocks
 BlockExpression with paramteres and local variables
 SqueakObject.st for parser tests
 Fluent Message
+CollectionExpression 
+ModelParser parse #(...) collections
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

@@ -248,6 +248,18 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void ProcessAtOperator()
+        {
+            Lexer tokenizer = new Lexer("@");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("@", token.Value);
+            Assert.AreEqual(TokenType.Operator, token.Type);
+        }
+
+        [TestMethod]
         public void ProcessOperators()
         {
             string opers = "== ~= ~~ >= <= := ^ < > : = - + * / &";

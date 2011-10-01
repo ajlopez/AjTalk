@@ -93,7 +93,7 @@
             if (expression == null)
                 return null;
 
-            if (this.TryParseDot())
+            if (this.TryParseDot() || (expression is PrimitiveExpression && this.IsNotEndOfInput()))
             {
                 List<IExpression> expressions = new List<IExpression>();
                 expressions.Add(expression);
@@ -123,18 +123,39 @@
 
         public IExpression ParseExpression()
         {
+            // TODO Refactor this flag
+            bool isReturn = false;
             Token token = this.NextToken();
 
             if (token == null)
                 return null;
 
             if (token.Type == TokenType.Operator && token.Value == "^")
-                return new ReturnExpression(this.ParseMultipleKeywordExpression());
+                isReturn = true;
+            else
+                this.PushToken(token);
+
+            IExpression expression = this.ParseMultipleKeywordExpression();
+
+            token = this.NextToken();
+
+            while (token != null && token.Type == TokenType.Punctuation && token.Value == ";")
+            {
+                expression = this.ParseFluentExpression(expression);
+                token = this.NextToken();
+            }
 
             this.PushToken(token);
 
-            IExpression expression = this.ParseMultipleKeywordExpression();
+            if (isReturn)
+                return new ReturnExpression(expression);
+
             return expression;
+        }
+
+        private IExpression ParseFluentExpression(IExpression target)
+        {
+            return this.ParseMultipleKeywordExpression(new FluentMessageExpression(target));
         }
 
         private static bool IsUnarySelector(string name)
@@ -261,6 +282,10 @@
                 case TokenType.Punctuation:
                     if (token.Value == "[")
                         return this.ParseBlock();
+
+                    if (token.Value == "#(")
+                        return this.ParseCollection();
+                        
                     if (token.Value == "(")
                     {
                         IExpression expression = this.ParseExpression();
@@ -278,6 +303,106 @@
             this.PushToken(token);
 
             return null;
+        }
+
+        private IExpression ParseCollection()
+        {
+            IList<IExpression> items = new List<IExpression>();
+
+            for (IExpression item = this.ParseCollectionItem(); item != null; item = this.ParseCollectionItem())
+                items.Add(item);
+
+            this.ParseToken(TokenType.Punctuation, ")");
+
+            return new CollectionExpression(items);
+        }
+
+        private IExpression ParseCollectionItem()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                return null;
+
+            if (token.Type == TokenType.Punctuation && token.Value == ")")
+            {
+                this.PushToken(token);
+                return null;
+            }
+
+            if (token.Type == TokenType.Punctuation && token.Value == "(")
+                return this.ParseCollection();
+
+            // TODO review if operators in collections are symbols or not
+            if (token.Type == TokenType.Name || token.Type == TokenType.Operator)
+                return new SymbolExpression(token.Value);
+
+            if (token.Type == TokenType.Symbol)
+                throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
+
+            if (token.Type == TokenType.Integer)
+                return new ConstantExpression(Convert.ToInt32(token.Value, CultureInfo.InvariantCulture));
+
+            return new ConstantExpression(token.Value);
+        }
+
+        private IExpression ParseMultipleKeywordExpression(IExpression target)
+        {
+            IExpression model = this.ParseBinaryExpression(target);
+
+            if (model == null)
+                return model;
+
+            string selector = this.TryParseMultipleKeywordSelector();
+
+            if (selector == null)
+                return model;
+
+            string name = selector;
+            List<IExpression> arguments = new List<IExpression>();
+
+            while (selector != null)
+            {
+                arguments.Add(this.ParseBinaryExpression());
+                selector = this.TryParseMultipleKeywordSelector();
+                if (selector != null)
+                    name += selector;
+            }
+
+            return new MessageExpression(model, name, arguments);
+        }
+
+        private IExpression ParseBinaryExpression(IExpression target)
+        {
+            IExpression expression = this.ParseSimpleExpression(target);
+
+            if (expression == null)
+                return expression;
+
+            string selector = this.TryParseBinarySelector();
+
+            while (selector != null)
+            {
+                List<IExpression> arguments = new List<IExpression>();
+                arguments.Add(this.ParseSimpleExpression());
+                expression = new MessageExpression(expression, selector, arguments);
+                selector = this.TryParseBinarySelector();
+            }
+
+            return expression;
+        }
+
+        private IExpression ParseSimpleExpression(IExpression expression)
+        {
+            string selector = this.TryParseUnarySelector();
+
+            while (selector != null)
+            {
+                expression = new MessageExpression(expression, selector, null);
+                selector = this.TryParseUnarySelector();
+            }
+
+            return expression;
         }
 
         private Token NextToken()
@@ -496,6 +621,18 @@
                 this.PushToken(token);
                 return false;
             }
+
+            return true;
+        }
+
+        private bool IsNotEndOfInput()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                return false;
+
+            this.PushToken(token);
 
             return true;
         }

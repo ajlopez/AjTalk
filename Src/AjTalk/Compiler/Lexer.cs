@@ -82,8 +82,7 @@ namespace AjTalk.Compiler
 
                 if (ch == ParameterMark)
                 {
-                    char ch2 = this.NextChar();
-                    this.PushChar(ch2);
+                    char ch2 = this.PeekChar();
 
                     if (!char.IsLetter(ch2))
                     {
@@ -95,6 +94,13 @@ namespace AjTalk.Compiler
 
                 if (ch == SpecialDotNetTypeMark)
                 {
+                    char ch2 = this.PeekChar();
+
+                    if (!char.IsLetter(ch2))
+                    {
+                        return this.NextOperator(ch);
+                    }
+
                     return this.NextDotNetTypeName();
                 }
 
@@ -141,6 +147,25 @@ namespace AjTalk.Compiler
             {
                 throw new EndOfInputException();
             }
+
+            return (char)ch;
+        }
+
+        private char PeekChar()
+        {
+            if (this.haschar)
+            {
+                return this.lastchar;
+            }
+
+            int ch = this.input.Read();
+
+            if (ch < 0)
+            {
+                return (char) 0;
+            }
+
+            this.PushChar((char)ch);
 
             return (char)ch;
         }
