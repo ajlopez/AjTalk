@@ -99,7 +99,7 @@
             ModelParser parser = new ModelParser("((elementType = #systemSlot) | (elementType == #userSlot))");
             IExpression expression = parser.ParseExpression();
             Assert.IsNotNull(expression);
-            Assert.AreEqual("elementType = #systemSlot | (element == #userSlot)", expression.AsString());
+            Assert.AreEqual("elementType = #systemSlot | (elementType == #userSlot)", expression.AsString());
         }
 
         [TestMethod]

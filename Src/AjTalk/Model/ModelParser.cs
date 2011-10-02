@@ -122,21 +122,26 @@
 
         public IExpression ParseExpression()
         {
-            // TODO Refactor this flag
-            bool isReturn = false;
             Token token = this.NextToken();
 
             if (token == null)
                 return null;
 
             if (token.Type == TokenType.Operator && token.Value == "^")
-                isReturn = true;
-            else
-                this.PushToken(token);
+                return new ReturnExpression(this.ParseExpression());
 
-            IExpression expression = this.ParseMultipleKeywordExpression();
+            this.PushToken(token);
 
-            token = this.NextToken();
+            IExpression expression = this.ParseHeadExpression();
+            
+            return this.ParseExpression(expression);
+        }
+
+        private IExpression ParseExpression(IExpression target)
+        {
+            IExpression expression = this.ParseMultipleKeywordExpression(target);
+
+            Token token = this.NextToken();
 
             while (token != null && token.Type == TokenType.Punctuation && token.Value == ";")
             {
@@ -145,9 +150,6 @@
             }
 
             this.PushToken(token);
-
-            if (isReturn)
-                return new ReturnExpression(expression);
 
             return expression;
         }
@@ -175,48 +177,18 @@
 
         private IExpression ParseMultipleKeywordExpression()
         {
-            IExpression model = this.ParseBinaryExpression();
-
-            if (model == null)
-                return model;
-
-            string selector = this.TryParseMultipleKeywordSelector();
-
-            if (selector == null)
-                return model;
-
-            string name = selector;
-            List<IExpression> arguments = new List<IExpression>();
-
-            while (selector != null)
-            {
-                arguments.Add(this.ParseBinaryExpression());
-                selector = this.TryParseMultipleKeywordSelector();
-                if (selector != null)
-                    name += selector;
-            }
-
-            return new MessageExpression(model, name, arguments);
+            IExpression expression = this.ParseHeadExpression();
+            return this.ParseMultipleKeywordExpression(expression);
         }
 
         private IExpression ParseBinaryExpression()
         {
-            IExpression expression = this.ParseSimpleExpression();
+            IExpression expression = this.ParseHeadExpression();
 
             if (expression == null)
-                return expression;
+                return null;
 
-            string selector = this.TryParseBinarySelector();
-
-            while (selector != null)
-            {
-                List<IExpression> arguments = new List<IExpression>();
-                arguments.Add(this.ParseSimpleExpression());
-                expression = new MessageExpression(expression, selector, arguments);
-                selector = this.TryParseBinarySelector();
-            }
-
-            return expression;
+            return this.ParseSimpleExpression(expression);
         }
 
         private IExpression ParseSimpleExpression()
@@ -226,20 +198,7 @@
             if (expression == null)
                 return expression;
 
-            if (expression is ILeftValue && this.TryParseSet())
-            {
-                return new SetExpression((ILeftValue) expression, this.ParseExpression());
-            }
-
-            string selector = this.TryParseUnarySelector();
-
-            while (selector != null)
-            {
-                expression = new MessageExpression(expression, selector, null);
-                selector = this.TryParseUnarySelector();
-            }
-
-            return expression;
+            return this.ParseSimpleExpression(expression);
         }
 
         private IExpression ParseHeadExpression()
@@ -296,7 +255,10 @@
                         IExpression expression = this.ParseExpression();
                         Token lasttoken = this.NextToken();
                         if (lasttoken == null || lasttoken.Type != TokenType.Punctuation || lasttoken.Value != ")")
-                            throw new ParserException("Expected ')'");
+                        {
+                            this.PushToken(lasttoken);
+                            return this.ParseExpression(expression);
+                        }
                         return expression;
                     }
                     break;
@@ -408,6 +370,11 @@
 
         private IExpression ParseSimpleExpression(IExpression expression)
         {
+            if (expression is ILeftValue && this.TryParseSet())
+            {
+                return new SetExpression((ILeftValue)expression, this.ParseExpression());
+            }
+
             string selector = this.TryParseUnarySelector();
 
             while (selector != null)
@@ -518,6 +485,9 @@
 
             if (token == null)
                 return null;
+
+            if (token.Type == TokenType.Punctuation && token.Value == "|")
+                return token.Value;
 
             if (token.Type == TokenType.Operator && IsBinarySelector(token.Value))
                 return token.Value;

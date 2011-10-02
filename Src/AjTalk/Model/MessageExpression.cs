@@ -28,21 +28,45 @@
 
         public IEnumerable<IExpression> Arguments { get { return this.arguments; } }
 
+        public bool IsUnaryMessage { get { return this.arguments.Count() == 0; } }
+
+        public bool IsBinaryMessage { get { return this.arguments.Count() == 1 && !char.IsLetter(this.selector[0]); } }
+
+        public bool IsKeywordMessage { get { return !this.IsUnaryMessage && !this.IsBinaryMessage; } }
+
         public string AsString()
         {
+            // TODO Use String Builder
+            string result = this.target.AsString();
+
+            if (this.target is MessageExpression)
+            {
+                MessageExpression mexpr = (MessageExpression)this.target;
+
+                if ((this.IsUnaryMessage && (mexpr.IsBinaryMessage || mexpr.IsKeywordMessage)) ||
+                    (this.IsBinaryMessage && mexpr.IsKeywordMessage) ||
+                    this.IsKeywordMessage)
+                    result = "(" + result + ")";
+            }
+
             // TODO Use string.Format
             if (this.arguments.Count() == 0)
-                return this.target.AsString() + " " + this.selector;
+                return result + " " + this.selector;
 
             if (this.arguments.Count() == 1)
-                return this.target.AsString() + " " + this.selector + " " + this.arguments.First().AsString();
+            {
+                IExpression arg = this.arguments.First();
+                string argresult = arg.AsString();
+
+                if (arg is MessageExpression && (((MessageExpression)arg).IsBinaryMessage || ((MessageExpression)arg).IsUnaryMessage))
+                    argresult = "(" + argresult + ")";
+
+                return result + " " + this.selector + " " + argresult;
+            }
 
             string []names = this.selector.Split(':');
 
             int k = 0;
-
-            // TODO Use String Builder
-            string result = this.target.AsString();
 
             foreach (IExpression expr in this.arguments)
             {
