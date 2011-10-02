@@ -103,11 +103,11 @@
     <Compile Include="Model\ClassModel.cs" />
     <Compile Include="Model\CodeModel.cs" />
     <Compile Include="Model\CodeReader.cs" />
-    <Compile Include="Model\CompositeExpression.cs" />
     <Compile Include="Model\ConstantExpression.cs" />
     <Compile Include="Model\ClassVariableExpression.cs" />
     <Compile Include="Model\BlockExpression.cs" />
-    <Compile Include="Model\CollectionExpression.cs" />
+    <Compile Include="Model\ArrayExpression.cs" />
+    <Compile Include="Model\DynamicArrayExpression.cs" />
     <Compile Include="Model\FluentMessageExpression.cs" />
     <Compile Include="Model\PrimitiveExpression.cs" />
     <Compile Include="Model\SymbolExpression.cs" />

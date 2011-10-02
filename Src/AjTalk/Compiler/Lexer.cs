@@ -9,9 +9,10 @@ namespace AjTalk.Compiler
     {
         public const char SpecialDotNetTypeMark = '@';
         public const char SpecialDotNetInvokeMark = '!';
+        public const char SpecialCharMark = '$';
 
         private const string Operators = "^<>:=-+*/&~,";
-        private const string Separators = "().|[];";
+        private const string Separators = "().|[];{}";
 
         private const char StringDelimiter = '\'';
 
@@ -66,6 +67,12 @@ namespace AjTalk.Compiler
                 if (ch == StringDelimiter)
                 {
                     return this.NextString();
+                }
+
+                if (ch == SpecialCharMark)
+                {
+                    char ch2 = this.NextChar();
+                    return new Token() { Type = TokenType.Character, Value = ch2.ToString() };
                 }
 
                 if (ch == SymbolMark)

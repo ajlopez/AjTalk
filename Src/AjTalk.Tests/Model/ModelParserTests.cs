@@ -70,6 +70,39 @@
         }
 
         [TestMethod]
+        public void ParseCharacter()
+        {
+            ModelParser parser = new ModelParser("$a");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(ConstantExpression));
+
+            ConstantExpression cexpression = (ConstantExpression)expression;
+            Assert.AreEqual('a', cexpression.Value);
+
+            Assert.AreEqual("$a", expression.AsString());
+        }
+
+        [TestMethod]
+        public void ParseNestedExpression()
+        {
+            ModelParser parser = new ModelParser("((elementType = #systemSlot))");
+            IExpression expression = parser.ParseExpression();
+            Assert.IsNotNull(expression);
+            Assert.AreEqual("elementType = #systemSlot", expression.AsString());
+        }
+
+        [TestMethod]
+        public void ParseNestedBinaryExpression()
+        {
+            ModelParser parser = new ModelParser("((elementType = #systemSlot) | (elementType == #userSlot))");
+            IExpression expression = parser.ParseExpression();
+            Assert.IsNotNull(expression);
+            Assert.AreEqual("elementType = #systemSlot | (element == #userSlot)", expression.AsString());
+        }
+
+        [TestMethod]
         public void ParsePrimitive()
         {
             ModelParser parser = new ModelParser("<primitive: 60>");
@@ -277,12 +310,13 @@
         public void ParseTwoExpressions()
         {
             ModelParser parser = new ModelParser("x do. y do");
-            IExpression expression = parser.ParseExpressions();
+            IEnumerable<IExpression> expressions = parser.ParseExpressions();
 
-            Assert.IsNotNull(expression);
-            Assert.IsInstanceOfType(expression, typeof(CompositeExpression));
+            Assert.IsNotNull(expressions);
 
-            Assert.AreEqual("x do. y do", expression.AsString());
+            Assert.AreEqual(2, expressions.Count());
+            Assert.AreEqual("x do", expressions.First().AsString());
+            Assert.AreEqual("y do", expressions.Skip(1).First().AsString());
         }
 
         [TestMethod]
@@ -310,7 +344,8 @@
             Assert.AreEqual(1, method.ParameterNames.Count);
             Assert.AreEqual("aNumber", method.ParameterNames[0]);
             Assert.AreEqual(0, method.LocalVariables.Count);
-            Assert.IsInstanceOfType(method.Body, typeof(CompositeExpression));
+            Assert.IsNotNull(method.Body);
+            Assert.AreEqual(2, method.Body.Count());
         }
 
         [TestMethod]
@@ -326,7 +361,7 @@
             Assert.AreEqual("a", method.LocalVariables[0]);
             Assert.AreEqual("b", method.LocalVariables[1]);
             Assert.AreEqual("c", method.LocalVariables[2]);
-            Assert.IsInstanceOfType(method.Body, typeof(ReturnExpression));
+            Assert.IsInstanceOfType(method.Body.First(), typeof(ReturnExpression));
         }
 
         [TestMethod]
@@ -341,7 +376,7 @@
             BlockExpression bexpression = (BlockExpression)expression;
 
             Assert.IsNotNull(bexpression.Body);
-            Assert.IsInstanceOfType(bexpression.Body, typeof(CompositeExpression));
+            Assert.AreEqual(2, bexpression.Body.Count());
             Assert.AreEqual(0, bexpression.ParameterNames.Count);
             Assert.AreEqual(0, bexpression.LocalVariables.Count);
         }
@@ -358,7 +393,7 @@
             BlockExpression bexpression = (BlockExpression)expression;
 
             Assert.IsNotNull(bexpression.Body);
-            Assert.IsInstanceOfType(bexpression.Body, typeof(ReturnExpression));
+            Assert.IsInstanceOfType(bexpression.Body.First(), typeof(ReturnExpression));
             Assert.AreEqual(2, bexpression.ParameterNames.Count);
             Assert.AreEqual("a", bexpression.ParameterNames[0]);
             Assert.AreEqual("b", bexpression.ParameterNames[1]);
@@ -426,7 +461,7 @@
             BlockExpression bexpression = (BlockExpression)expression;
 
             Assert.IsNotNull(bexpression.Body);
-            Assert.IsInstanceOfType(bexpression.Body, typeof(ReturnExpression));
+            Assert.IsInstanceOfType(bexpression.Body.First(), typeof(ReturnExpression));
             Assert.AreEqual(2, bexpression.ParameterNames.Count);
             Assert.AreEqual("a", bexpression.ParameterNames[0]);
             Assert.AreEqual("b", bexpression.ParameterNames[1]);
@@ -447,7 +482,7 @@
             BlockExpression bexpression = (BlockExpression)expression;
 
             Assert.IsNotNull(bexpression.Body);
-            Assert.IsInstanceOfType(bexpression.Body, typeof(ReturnExpression));
+            Assert.IsInstanceOfType(bexpression.Body.First(), typeof(ReturnExpression));
             Assert.AreEqual(0, bexpression.ParameterNames.Count);
             Assert.AreEqual(2, bexpression.LocalVariables.Count);
             Assert.AreEqual("x", bexpression.LocalVariables[0]);
@@ -465,9 +500,9 @@
             Assert.AreEqual("x", method.Selector);
             Assert.AreEqual(0, method.ParameterNames.Count);
             Assert.AreEqual(0, method.LocalVariables.Count);
-            Assert.IsInstanceOfType(method.Body, typeof(ReturnExpression));
+            Assert.IsInstanceOfType(method.Body.First(), typeof(ReturnExpression));
 
-            ReturnExpression rexpression = (ReturnExpression)method.Body;
+            ReturnExpression rexpression = (ReturnExpression)method.Body.First();
             Assert.IsInstanceOfType(rexpression.Expression, typeof(InstanceVariableExpression));
         }
 
@@ -482,22 +517,22 @@
             Assert.AreEqual("x", method.Selector);
             Assert.AreEqual(0, method.ParameterNames.Count);
             Assert.AreEqual(0, method.LocalVariables.Count);
-            Assert.IsInstanceOfType(method.Body, typeof(ReturnExpression));
+            Assert.IsInstanceOfType(method.Body.First(), typeof(ReturnExpression));
 
-            ReturnExpression rexpression = (ReturnExpression)method.Body;
+            ReturnExpression rexpression = (ReturnExpression)method.Body.First();
             Assert.IsInstanceOfType(rexpression.Expression, typeof(ClassVariableExpression));
         }
 
         [TestMethod]
-        public void ParseIntegerCollection()
+        public void ParseIntegerArray()
         {
             ModelParser parser = new ModelParser("#(1 2 3)");
             IExpression expression = parser.ParseExpression();
 
             Assert.IsNotNull(expression);
-            Assert.IsInstanceOfType(expression, typeof(CollectionExpression));
+            Assert.IsInstanceOfType(expression, typeof(ArrayExpression));
 
-            CollectionExpression cexpression = (CollectionExpression)expression;
+            ArrayExpression cexpression = (ArrayExpression)expression;
             Assert.AreEqual(3, cexpression.Expressions.Count());
 
             foreach (IExpression item in cexpression.Expressions)
@@ -507,15 +542,15 @@
         }
 
         [TestMethod]
-        public void ParseSymbolAndStringCollection()
+        public void ParseSymbolAndStringArray()
         {
             ModelParser parser = new ModelParser("#('option1' do1:)");
             IExpression expression = parser.ParseExpression();
 
             Assert.IsNotNull(expression);
-            Assert.IsInstanceOfType(expression, typeof(CollectionExpression));
+            Assert.IsInstanceOfType(expression, typeof(ArrayExpression));
 
-            CollectionExpression cexpression = (CollectionExpression)expression;
+            ArrayExpression cexpression = (ArrayExpression)expression;
             Assert.AreEqual(2, cexpression.Expressions.Count());
 
             Assert.IsInstanceOfType(cexpression.Expressions.First(), typeof(ConstantExpression));
@@ -525,15 +560,15 @@
         }
 
         [TestMethod]
-        public void ParseOperatorCollection()
+        public void ParseOperatorArray()
         {
             ModelParser parser = new ModelParser("#(- +)");
             IExpression expression = parser.ParseExpression();
 
             Assert.IsNotNull(expression);
-            Assert.IsInstanceOfType(expression, typeof(CollectionExpression));
+            Assert.IsInstanceOfType(expression, typeof(ArrayExpression));
 
-            CollectionExpression cexpression = (CollectionExpression)expression;
+            ArrayExpression cexpression = (ArrayExpression)expression;
             Assert.AreEqual(2, cexpression.Expressions.Count());
 
             Assert.IsInstanceOfType(cexpression.Expressions.First(), typeof(SymbolExpression));
@@ -543,21 +578,54 @@
         }
 
         [TestMethod]
-        public void ParseCollectionOfCollections()
+        public void ParseArrayOfArrays()
         {
             ModelParser parser = new ModelParser("#((1 2 3) (1 2 3) (1 2 3))");
             IExpression expression = parser.ParseExpression();
 
             Assert.IsNotNull(expression);
-            Assert.IsInstanceOfType(expression, typeof(CollectionExpression));
+            Assert.IsInstanceOfType(expression, typeof(ArrayExpression));
 
-            CollectionExpression cexpression = (CollectionExpression)expression;
+            ArrayExpression cexpression = (ArrayExpression)expression;
             Assert.AreEqual(3, cexpression.Expressions.Count());
 
             foreach (IExpression item in cexpression.Expressions)
-                Assert.IsInstanceOfType(item, typeof(CollectionExpression));
+                Assert.IsInstanceOfType(item, typeof(ArrayExpression));
 
             Assert.AreEqual("#((1 2 3) (1 2 3) (1 2 3))", expression.AsString());
+        }
+
+        [TestMethod]
+        public void ParseDynamicIntegerArray()
+        {
+            ModelParser parser = new ModelParser("{1. 2. 3}");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(DynamicArrayExpression));
+
+            DynamicArrayExpression cexpression = (DynamicArrayExpression)expression;
+            Assert.AreEqual(3, cexpression.Expressions.Count());
+
+            foreach (IExpression item in cexpression.Expressions)
+                Assert.IsInstanceOfType(item, typeof(ConstantExpression));
+
+            Assert.AreEqual("{1. 2. 3}", expression.AsString());
+        }
+
+        [TestMethod]
+        public void ParseDynamicArrayWithExpressions()
+        {
+            ModelParser parser = new ModelParser("{1+2. 2->5. a do: 1}");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(DynamicArrayExpression));
+
+            DynamicArrayExpression cexpression = (DynamicArrayExpression)expression;
+            Assert.AreEqual(3, cexpression.Expressions.Count());
+
+            Assert.AreEqual("{1 + 2. 2 -> 5. a do: 1}", expression.AsString());
         }
 
         [TestMethod]

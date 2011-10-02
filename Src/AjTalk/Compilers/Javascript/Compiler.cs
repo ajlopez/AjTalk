@@ -55,7 +55,7 @@
 
             this.writer.WriteLine(")");
             this.writer.WriteLineStart("{");
-            method.Body.Visit(this);
+            this.Visit(method.Body);
 
             if (method.Class != null)
                 this.writer.WriteLineEnd("};");
@@ -63,16 +63,21 @@
                 this.writer.WriteLineEnd("}");
         }
 
-        public override void Visit(CompositeExpression expression)
+        public override void Visit(IEnumerable<IExpression> expressions)
         {
-            foreach (var expr in expression.Expressions)
+            foreach (var expr in expressions)
             {
                 expr.Visit(this);
                 this.writer.WriteLine();
             }
         }
 
-        public override void Visit(CollectionExpression expression)
+        public override void Visit(ArrayExpression expression)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Visit(DynamicArrayExpression expression)
         {
             throw new NotImplementedException();
         }
@@ -92,7 +97,7 @@
         {
             // TODO block with parameters, return
             this.writer.Write("function() {");
-            expression.Body.Visit(this);
+            this.Visit(expression.Body);
             this.writer.Write("}");
         }
 

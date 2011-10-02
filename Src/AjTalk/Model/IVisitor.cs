@@ -11,9 +11,11 @@
 
         void Visit(MethodModel method);
 
-        void Visit(CompositeExpression expression);
+        void Visit(IEnumerable<IExpression> expressions);
 
-        void Visit(CollectionExpression expression);
+        void Visit(ArrayExpression expression);
+
+        void Visit(DynamicArrayExpression expression);
 
         void Visit(ConstantExpression expression);
 

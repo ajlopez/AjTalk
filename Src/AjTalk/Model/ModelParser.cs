@@ -74,7 +74,7 @@
                 this.ParseBar();
             }
 
-            IExpression body = this.ParseExpressions();
+            IEnumerable<IExpression> body = this.ParseExpressions();
 
             MethodModel model = new MethodModel(selector, parameterNames, localVariables, body, this.@class, this.isClassMethod);
 
@@ -86,25 +86,24 @@
             return model;
         }
 
-        public IExpression ParseExpressions()
+        public IEnumerable<IExpression> ParseExpressions()
         {
             IExpression expression = this.ParseExpression();
 
             if (expression == null)
                 return null;
 
+            List<IExpression> expressions = new List<IExpression>();
+            expressions.Add(expression);
+
             if (this.TryParseDot() || (expression is PrimitiveExpression && this.IsNotEndOfInput()))
             {
-                List<IExpression> expressions = new List<IExpression>();
-                expressions.Add(expression);
                 expressions.Add(this.ParseExpression());
 
                 while (this.TryParseDot())
                 {
                     expressions.Add(this.ParseExpression());
                 }
-
-                expression = new CompositeExpression(expressions);
             }
 
             Token token = this.NextToken();
@@ -112,13 +111,13 @@
             if (token != null) 
             {
                 // TODO refactor
-                if (token.Type != TokenType.Punctuation || (token.Value != "]" && token.Value != ")"))
+                if (token.Type != TokenType.Punctuation || (token.Value != "]" && token.Value != ")" && token.Value != "}"))
                     throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
 
                 this.PushToken(token);
             }
 
-            return expression;
+            return expressions;
         }
 
         public IExpression ParseExpression()
@@ -271,6 +270,9 @@
                 case TokenType.String:
                     return new ConstantExpression(token.Value);
 
+                case TokenType.Character:
+                    return new ConstantExpression(token.Value[0]);
+
                 case TokenType.Symbol:
                     return new SymbolExpression(token.Value);
 
@@ -284,7 +286,10 @@
                         return this.ParseBlock();
 
                     if (token.Value == "#(")
-                        return this.ParseCollection();
+                        return this.ParseArray();
+
+                    if (token.Value == "{")
+                        return this.ParseDynamicArray();
                         
                     if (token.Value == "(")
                     {
@@ -305,7 +310,7 @@
             return null;
         }
 
-        private IExpression ParseCollection()
+        private IExpression ParseArray()
         {
             IList<IExpression> items = new List<IExpression>();
 
@@ -314,7 +319,16 @@
 
             this.ParseToken(TokenType.Punctuation, ")");
 
-            return new CollectionExpression(items);
+            return new ArrayExpression(items);
+        }
+
+        private IExpression ParseDynamicArray()
+        {
+            IEnumerable<IExpression> items = this.ParseExpressions();
+
+            this.ParseToken(TokenType.Punctuation, "}");
+
+            return new DynamicArrayExpression(items);
         }
 
         private IExpression ParseCollectionItem()
@@ -331,7 +345,7 @@
             }
 
             if (token.Type == TokenType.Punctuation && token.Value == "(")
-                return this.ParseCollection();
+                return this.ParseArray();
 
             // TODO review if operators in collections are symbols or not
             if (token.Type == TokenType.Name || token.Type == TokenType.Operator)
@@ -419,7 +433,7 @@
         {
             IList<string> parameterNames = this.ParseBlockParameters();
             IList<string> localVariables = this.ParseBlockLocalVariables();
-            IExpression body = this.ParseExpressions();
+            IEnumerable<IExpression> body = this.ParseExpressions();
             Token token = this.NextToken();
 
             if (token == null || token.Type != TokenType.Punctuation || token.Value != "]")

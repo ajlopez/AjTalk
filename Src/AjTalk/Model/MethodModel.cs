@@ -10,17 +10,17 @@
         private string selector;
         private IList<string> parameterNames;
         private IList<string> localVariables;
-        private IExpression body;
+        private IEnumerable<IExpression> body;
         private ClassModel @class;
         private bool isClassMethod;
 
         // TODO Remove this constructor?
-        public MethodModel(string selector, IList<string> parameterNames, IList<string> localVariables, IExpression body)
+        public MethodModel(string selector, IList<string> parameterNames, IList<string> localVariables, IEnumerable<IExpression> body)
             : this(selector, parameterNames, localVariables, body, null, false)
         {
         }
 
-        public MethodModel(string selector, IList<string> parameterNames, IList<string> localVariables, IExpression body, ClassModel @class, bool isClassMethod)
+        public MethodModel(string selector, IList<string> parameterNames, IList<string> localVariables, IEnumerable<IExpression> body, ClassModel @class, bool isClassMethod)
         {
             this.selector = selector;
             this.parameterNames = parameterNames;
@@ -36,7 +36,7 @@
 
         public IList<string> LocalVariables { get { return this.localVariables; } }
 
-        public IExpression Body { get { return this.body; } }
+        public IEnumerable<IExpression> Body { get { return this.body; } }
 
         public ClassModel Class { get { return this.@class; } }
 

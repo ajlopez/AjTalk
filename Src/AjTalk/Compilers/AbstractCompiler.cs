@@ -27,9 +27,11 @@
 
         public abstract void Visit(MethodModel method);
 
-        public abstract void Visit(CompositeExpression expression);
+        public abstract void Visit(IEnumerable<IExpression> expressions);
 
-        public abstract void Visit(CollectionExpression expression);
+        public abstract void Visit(ArrayExpression expression);
+
+        public abstract void Visit(DynamicArrayExpression expression);
 
         public abstract void Visit(ConstantExpression expression);
 

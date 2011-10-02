@@ -12,6 +12,7 @@
         Punctuation = 3,
         Operator = 4,
         Symbol = 5,
-        Parameter = 6
+        Parameter = 6,
+        Character = 7
     }
 }

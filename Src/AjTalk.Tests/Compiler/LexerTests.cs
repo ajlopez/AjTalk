@@ -224,6 +224,18 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void ProcessCharacter()
+        {
+            Lexer tokenizer = new Lexer("$+");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("+", token.Value);
+            Assert.AreEqual(TokenType.Character, token.Type);
+        }
+
+        [TestMethod]
         public void ProcessSetOperator()
         {
             Lexer tokenizer = new Lexer(":=");
@@ -300,6 +312,23 @@ namespace AjTalk.Tests.Compiler
             Token token;
 
             for (int k = 0; k < punct.Length; k++) 
+            {
+                token = tokenizer.NextToken();
+                Assert.IsNotNull(token);
+                Assert.AreEqual(punct[k], token.Value[0]);
+                Assert.AreEqual(1, token.Value.Length);
+                Assert.AreEqual(TokenType.Punctuation, token.Type);
+            }
+        }
+
+        [TestMethod]
+        public void ProcessBracketsAsPunctuations()
+        {
+            string punct = "{}";
+            Lexer tokenizer = new Lexer(punct);
+            Token token;
+
+            for (int k = 0; k < punct.Length; k++)
             {
                 token = tokenizer.NextToken();
                 Assert.IsNotNull(token);

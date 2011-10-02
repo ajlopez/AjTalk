@@ -269,6 +269,11 @@ Fluent Message
 CollectionExpression 
 ModelParser parse #(...) collections
 
+2011-10-02
+CollectionExpression renamed to ArrayExpression
+DynamicArrayExpression and support for { ... } in ModelParser with tests
+Removing CompositeExpression
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

@@ -7,11 +7,11 @@
 
     public class BlockExpression : IExpression
     {
-        private IExpression body;
+        private IEnumerable<IExpression> body;
         private IList<string> parameterNames;
         private IList<string> localVariables;
 
-        public BlockExpression(IList<string> parameterNames, IList<string> localVariables, IExpression body)
+        public BlockExpression(IList<string> parameterNames, IList<string> localVariables, IEnumerable<IExpression> body)
         {
             this.parameterNames = parameterNames;
             this.localVariables = localVariables;
@@ -22,11 +22,23 @@
 
         public IList<string> LocalVariables { get { return this.localVariables; } }
 
-        public IExpression Body { get { return this.body; } }
+        public IEnumerable<IExpression> Body { get { return this.body; } }
 
+        // TODO use parameter names and local variables
         public string AsString()
         {
-            return "[" + this.body.AsString() + "]";
+            // TODO Refactor to String Builder
+            string result = "[";
+
+            foreach (IExpression expression in this.body)
+            {
+                if (result != "")
+                    result += ". ";
+
+                result += expression.AsString();
+            }
+
+            return result + "]";
         }
 
         public void Visit(IVisitor visitor)

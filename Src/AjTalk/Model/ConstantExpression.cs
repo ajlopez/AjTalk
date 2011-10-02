@@ -21,6 +21,8 @@
             // TODO Escape chars
             if (this.value is string)
                 return string.Format("'{0}'", this.value);
+            if (this.value is char)
+                return string.Format("${0}", this.value);
             if (this.value.Equals(false))
                 return "false";
             if (this.value.Equals(true))

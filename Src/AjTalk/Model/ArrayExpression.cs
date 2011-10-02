@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Text;
 
-    public class CollectionExpression : IExpression
+    public class ArrayExpression : IExpression
     {
         private IEnumerable<IExpression> expressions;
 
-        public CollectionExpression(IEnumerable<IExpression> expressions)
+        public ArrayExpression(IEnumerable<IExpression> expressions)
         {
             this.expressions = expressions;
         }
@@ -28,7 +28,7 @@
 
                 if (expression is SymbolExpression)
                     result += ((SymbolExpression)expression).Symbol;
-                else if (expression is CollectionExpression)
+                else if (expression is ArrayExpression)
                     result += expression.AsString().Substring(1);
                 else
                     result += expression.AsString();

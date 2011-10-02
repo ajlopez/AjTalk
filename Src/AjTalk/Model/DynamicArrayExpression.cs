@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Text;
 
-    public class CompositeExpression : IExpression
+    public class DynamicArrayExpression : IExpression
     {
         private IEnumerable<IExpression> expressions;
 
-        public CompositeExpression(IEnumerable<IExpression> expressions)
+        public DynamicArrayExpression(IEnumerable<IExpression> expressions)
         {
             this.expressions = expressions;
         }
@@ -19,17 +19,17 @@
         public string AsString()
         {
             // TODO Refactor to String Builder
-            string result = "";
+            string result = "{";
 
             foreach (IExpression expression in this.expressions)
             {
-                if (result != "")
+                if (result != "{")
                     result += ". ";
 
                 result += expression.AsString();
             }
 
-            return result;
+            return result + "}";
         }
 
         public void Visit(IVisitor visitor)
