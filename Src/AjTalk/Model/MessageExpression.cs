@@ -45,7 +45,7 @@
 
                 if ((this.IsUnaryMessage && (mexpr.IsBinaryMessage || mexpr.IsKeywordMessage)) ||
                     (this.IsBinaryMessage && mexpr.IsKeywordMessage) ||
-                    this.IsKeywordMessage)
+                    (this.IsKeywordMessage && mexpr.IsKeywordMessage))
                     result = "(" + result + ")";
             }
 
@@ -53,7 +53,7 @@
             if (this.arguments.Count() == 0)
                 return result + " " + this.selector;
 
-            if (this.arguments.Count() == 1)
+            if (this.IsBinaryMessage)
             {
                 IExpression arg = this.arguments.First();
                 string argresult = arg.AsString();

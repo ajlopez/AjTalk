@@ -10,6 +10,7 @@
     public class Compiler : AbstractCompiler
     {
         private SourceWriter writer;
+        private int naux;
 
         public Compiler(SourceWriter writer)
         {
@@ -55,7 +56,22 @@
 
             this.writer.WriteLine(")");
             this.writer.WriteLineStart("{");
-            this.Visit(method.Body);
+            this.writer.WriteLine("var self = this;");
+
+            foreach (string locname in method.LocalVariables)
+                this.writer.WriteLine(string.Format("var {0} = null", locname));
+
+            int nauxbackup = this.naux;
+
+            try
+            {
+                this.naux = 0;
+                this.Visit(method.Body);
+            }
+            finally
+            {
+                this.naux = nauxbackup;
+            }
 
             if (method.Class != null)
                 this.writer.WriteLineEnd("};");
@@ -65,21 +81,48 @@
 
         public override void Visit(IEnumerable<IExpression> expressions)
         {
+            if (expressions == null)
+                return;
+
             foreach (var expr in expressions)
             {
                 expr.Visit(this);
-                this.writer.WriteLine();
+                this.writer.WriteLine(";");
             }
         }
 
         public override void Visit(ArrayExpression expression)
         {
-            throw new NotImplementedException();
+            this.writer.Write("[");
+
+            int nexpr = 0;
+
+            foreach (IExpression expr in expression.Expressions)
+            {
+                if (nexpr != 0)
+                    this.writer.Write(", ");
+                expr.Visit(this);
+                nexpr++;
+            }
+
+            this.writer.Write("]");
         }
 
         public override void Visit(DynamicArrayExpression expression)
         {
-            throw new NotImplementedException();
+            this.writer.Write("[");
+
+            int nexpr = 0;
+
+            foreach (IExpression expr in expression.Expressions)
+            {
+                if (nexpr != 0)
+                    this.writer.Write(", ");
+                expr.Visit(this);
+                nexpr++;
+            }
+
+            this.writer.Write("]");
         }
 
         public override void Visit(CodeModel model)
@@ -96,9 +139,21 @@
         public override void Visit(BlockExpression expression)
         {
             // TODO block with parameters, return
-            this.writer.Write("function() {");
+            this.writer.Write("function(");
+            int npars = 0;
+            foreach (string parname in expression.ParameterNames)
+            {
+                if (npars > 0)
+                    this.writer.Write(", ");
+                this.writer.Write(parname);
+                npars++;
+            }
+            this.writer.WriteLineStart(") {");
+
+            foreach (string locname in expression.LocalVariables)
+                this.writer.WriteLine(string.Format("var {0} = null;", locname));
             this.Visit(expression.Body);
-            this.writer.Write("}");
+            this.writer.WriteLineEnd("}");
         }
 
         public override void Visit(PrimitiveExpression expression)
@@ -137,14 +192,15 @@
 
         public override void Visit(FluentMessageExpression expression)
         {
-            throw new NotImplementedException();
+            this.writer.Write(string.Format("var _aux{0} = ", this.naux++));
+            // TODO It's not implemented yet
+            expression.Target.Visit(this);
         }
 
         public override void Visit(ReturnExpression expression)
         {
             this.writer.Write("return ");
             expression.Expression.Visit(this);
-            this.writer.WriteLine(";");
         }
 
         public override void Visit(SelfExpression expression)
@@ -162,7 +218,8 @@
 
         public override void Visit(SymbolExpression expression)
         {
-            throw new NotImplementedException();
+            // TODO review symbol implementation in Javascript
+            this.writer.Write("'" + expression.Symbol + "'");
         }
 
         public override void Visit(VariableExpression expression)
@@ -183,9 +240,9 @@
         private static string ToMethodName(string name)
         {
             name = name.Replace(":", "_");
-            name = "$" + name;
 
-            return name;
+            // TODO review if needed $ at front
+            return "$" + name;
         }
 
         private static string ToVariableName(string name)

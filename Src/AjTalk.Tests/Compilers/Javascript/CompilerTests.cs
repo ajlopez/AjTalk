@@ -115,6 +115,7 @@
             Assert.IsTrue(ContainsLine(output, "AClass.prototype.y = null;"));
             Assert.IsTrue(ContainsLine(output, "AClass.prototype.$x_ = function(newX)"));
             Assert.IsTrue(ContainsLine(output, "{"));
+            Assert.IsTrue(ContainsLine(output, "var self = this;"));
             Assert.IsTrue(ContainsLine(output, "this.x = newX;"));
             Assert.IsTrue(ContainsLine(output, "};"));
         }

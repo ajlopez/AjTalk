@@ -96,13 +96,23 @@
             List<IExpression> expressions = new List<IExpression>();
             expressions.Add(expression);
 
-            if (this.TryParseDot() || (expression is PrimitiveExpression && this.IsNotEndOfInput()))
+            if ((this.TryParseDot() || expression is PrimitiveExpression) && this.IsNotEndOfInput())
             {
-                expressions.Add(this.ParseExpression());
+                IExpression expr = this.ParseExpression();
 
-                while (this.TryParseDot())
+                if (expr != null)
                 {
-                    expressions.Add(this.ParseExpression());
+                    expressions.Add(expr);
+
+                    while (this.TryParseDot() && this.IsNotEndOfInput())
+                    {
+                        expr = this.ParseExpression();
+
+                        if (expr == null)
+                            break;
+
+                        expressions.Add(expr);
+                    }
                 }
             }
 
@@ -133,6 +143,9 @@
             this.PushToken(token);
 
             IExpression expression = this.ParseHeadExpression();
+
+            if (expression is PrimitiveExpression)
+                return expression;
             
             return this.ParseExpression(expression);
         }
@@ -188,7 +201,7 @@
             if (expression == null)
                 return null;
 
-            return this.ParseSimpleExpression(expression);
+            return this.ParseBinaryExpression(expression);
         }
 
         private IExpression ParseSimpleExpression()

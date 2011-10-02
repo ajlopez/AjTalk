@@ -9,6 +9,7 @@
     {
         private string name;
         private ClassModel superclass;
+        private ClassModel metaclass;
         private IList<string> classVariableNames;
         private IList<string> instanceVariableNames;
         private IList<MethodModel> classMethods;
@@ -22,11 +23,15 @@
             this.classVariableNames = classVariableNames ?? new List<string>();
             this.classMethods = new List<MethodModel>();
             this.instanceMethods = new List<MethodModel>();
+            if (!name.EndsWith(" class"))
+                this.metaclass = new ClassModel(name + " class", superclass == null ? null : superclass.MetaClass, null, null);
         }
 
         public string Name { get { return this.name; } }
 
         public ClassModel SuperClass { get { return this.superclass; } }
+
+        public ClassModel MetaClass { get { return this.metaclass; } }
 
         public IList<string> ClassVariableNames { get { return this.classVariableNames; } }
 

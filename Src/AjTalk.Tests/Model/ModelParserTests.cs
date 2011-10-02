@@ -103,6 +103,15 @@
         }
 
         [TestMethod]
+        public void ParseExpressionWithPrecedences()
+        {
+            ModelParser parser = new ModelParser("self asString displayAt: 0@100");
+            IExpression expression = parser.ParseExpression();
+            Assert.IsNotNull(expression);
+            Assert.AreEqual("self asString displayAt: 0 @ 100", expression.AsString());
+        }
+
+        [TestMethod]
         public void ParsePrimitive()
         {
             ModelParser parser = new ModelParser("<primitive: 60>");
@@ -115,6 +124,20 @@
             Assert.AreEqual(60, pexpression.Primitive);
 
             Assert.AreEqual("<primitive: 60>", expression.AsString());
+        }
+
+        [TestMethod]
+        public void ParsePrimitiveWithExpression()
+        {
+            ModelParser parser = new ModelParser("<primitive: 60> a := 1");
+            IEnumerable<IExpression> expressions = parser.ParseExpressions();
+
+            Assert.IsNotNull(expressions);
+            Assert.AreEqual(2, expressions.Count());
+            Assert.IsInstanceOfType(expressions.First(), typeof(PrimitiveExpression));
+
+            Assert.AreEqual("<primitive: 60>", expressions.First().AsString());
+            Assert.AreEqual("a := 1", expressions.Skip(1).First().AsString());
         }
 
         [TestMethod]

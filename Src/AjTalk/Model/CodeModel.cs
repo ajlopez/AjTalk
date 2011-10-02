@@ -23,6 +23,7 @@
             {
                 ClassModel @class = (ClassModel)element;
                 classes[@class.Name] = @class;
+                classes[@class.MetaClass.Name] = @class.MetaClass;
             }
         }
 
