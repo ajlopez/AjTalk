@@ -275,6 +275,9 @@ DynamicArrayExpression and support for { ... } in ModelParser with tests
 Removing CompositeExpression
 ModelParser refactor to support nested expressions
 MessageExpression.AsString taking precedence into account
+Completing Javascript Compiler Visit methods
+Fixed Primitive parse as separate expression
+AjTalk.Compiler compiling Squeak Object.st to Program.js
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en
