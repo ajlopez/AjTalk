@@ -37,6 +37,45 @@
         }
 
         [TestMethod]
+        public void CompileAssocOperatorMethod()
+        {
+            MethodModel method = ParseMethod("-> a ^a");
+            this.compiler.CompileMethod(method);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "function $_assoc_(a)"));
+            Assert.IsTrue(ContainsLine(output, "{"));
+            Assert.IsTrue(ContainsLine(output, "return a;"));
+            Assert.IsTrue(ContainsLine(output, "}"));
+        }
+
+        [TestMethod]
+        public void CompileEqualOperatorMethod()
+        {
+            MethodModel method = ParseMethod("= a ^a");
+            this.compiler.CompileMethod(method);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "function $_equal_(a)"));
+            Assert.IsTrue(ContainsLine(output, "{"));
+            Assert.IsTrue(ContainsLine(output, "return a;"));
+            Assert.IsTrue(ContainsLine(output, "}"));
+        }
+
+        [TestMethod]
+        public void CompileNotEqualOperatorMethod()
+        {
+            MethodModel method = ParseMethod("~= a ^a");
+            this.compiler.CompileMethod(method);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "function $_notequal_(a)"));
+            Assert.IsTrue(ContainsLine(output, "{"));
+            Assert.IsTrue(ContainsLine(output, "return a;"));
+            Assert.IsTrue(ContainsLine(output, "}"));
+        }
+
+        [TestMethod]
         public void CompileSimpleSendMessageToInteger()
         {
             IExpression expression = ParseExpression("1 add: 2");
@@ -44,6 +83,26 @@
             this.writer.Close();
             string output = this.writer.ToString();
             Assert.IsTrue(ContainsLine(output, "Number(1).$add_(2)"));
+        }
+
+        [TestMethod]
+        public void CompileSimpleExpressionWithBinaryAndKeywordMessages()
+        {
+            IExpression expression = ParseExpression("index >= 1 and: 2");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "(index >= 1).$and_(2)"));
+        }
+
+        [TestMethod]
+        public void CompileSimpleExpressionWithTwoBinaryMessages()
+        {
+            IExpression expression = ParseExpression("index + 1 * 2");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "(index + 1) * 2"));
         }
 
         [TestMethod]

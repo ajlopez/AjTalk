@@ -9,6 +9,13 @@
 
     public class Compiler : AbstractCompiler
     {
+        private static IDictionary<string, string> operatorNames = new Dictionary<string, string>()
+        {
+            { "->", "assoc" },
+            { "=", "equal" },
+            { "~=", "notequal" }
+        };
+
         private SourceWriter writer;
         private int naux;
 
@@ -166,10 +173,18 @@
         public override void Visit(MessageExpression expression)
         {
             string selector = expression.Selector;
+            bool nested = false;
+
+            if (expression.Target is MessageExpression && ((MessageExpression)expression.Target).IsBinaryMessage)
+                nested = true;
 
             if (!char.IsLetter(selector[0]) && expression.Arguments.Count() == 1)
             {
+                if (nested)
+                    this.writer.Write("(");
                 expression.Target.Visit(this);
+                if (nested)
+                    this.writer.Write(")");
                 this.writer.Write(" " + selector + " ");
                 expression.Arguments.First().Visit(this);
                 return;
@@ -186,7 +201,13 @@
                     this.writer.Write(string.Format("Number({0})", cexpr.Value));
             }
             else
+            {
+                if (nested)
+                    this.writer.Write("(");
                 expression.Target.Visit(this);
+                if (nested)
+                    this.writer.Write(")");
+            }
 
             this.writer.Write(string.Format(".{0}(", ToMethodName(expression.Selector)));
 
@@ -251,10 +272,18 @@
 
         private static string ToMethodName(string name)
         {
+            if (!char.IsLetter(name[0]))
+                return OperatorToMethodName(name);
+
             name = name.Replace(":", "_");
 
             // TODO review if needed $ at front
             return "$" + name;
+        }
+
+        private static string OperatorToMethodName(string name)
+        {
+            return "$_" + operatorNames[name] + "_";
         }
 
         private static string ToVariableName(string name)
