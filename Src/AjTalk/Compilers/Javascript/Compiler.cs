@@ -175,7 +175,19 @@
                 return;
             }
 
-            expression.Target.Visit(this);
+            if (expression.Target is ConstantExpression)
+            {
+                ConstantExpression cexpr = (ConstantExpression)expression.Target;
+
+                // TODO other types, scape characters in string
+                if (cexpr.Value is String)
+                    this.writer.Write(string.Format("String('{0}')", cexpr.Value));
+                else if (cexpr.Value is int)
+                    this.writer.Write(string.Format("Number({0})", cexpr.Value));
+            }
+            else
+                expression.Target.Visit(this);
+
             this.writer.Write(string.Format(".{0}(", ToMethodName(expression.Selector)));
 
             int narg = 0;

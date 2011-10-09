@@ -37,6 +37,26 @@
         }
 
         [TestMethod]
+        public void CompileSimpleSendMessageToInteger()
+        {
+            IExpression expression = ParseExpression("1 add: 2");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "Number(1).$add_(2)"));
+        }
+
+        [TestMethod]
+        public void CompileSimpleSendMessageToString()
+        {
+            IExpression expression = ParseExpression("'foo' add: 2");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "String('foo').$add_(2)"));
+        }
+
+        [TestMethod]
         public void CompileSimpleMethodWithSet()
         {
             MethodModel method = ParseMethod("with: a with: b a := b");
@@ -178,6 +198,12 @@
         {
             ModelParser parser = new ModelParser(text);
             return parser.ParseMethod();
+        }
+
+        private static IExpression ParseExpression(string text)
+        {
+            ModelParser parser = new ModelParser(text);
+            return parser.ParseExpression();
         }
 
         private static bool ContainsLine(string text, string line)

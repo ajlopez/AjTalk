@@ -279,6 +279,10 @@ Completing Javascript Compiler Visit methods
 Fixed Primitive parse as separate expression
 AjTalk.Compiler compiling Squeak Object.st to Program.js
 
+2011-10-09
+1 add: 2 -> Number(1).$add_(2)  Same for Strings
+Fixed precedence in MessageExpression.AsString
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

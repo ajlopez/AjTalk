@@ -58,7 +58,7 @@
                 IExpression arg = this.arguments.First();
                 string argresult = arg.AsString();
 
-                if (arg is MessageExpression && (((MessageExpression)arg).IsBinaryMessage || ((MessageExpression)arg).IsUnaryMessage))
+                if (arg is MessageExpression && (((MessageExpression)arg).IsBinaryMessage || ((MessageExpression)arg).IsKeywordMessage))
                     argresult = "(" + argresult + ")";
 
                 return result + " " + this.selector + " " + argresult;
@@ -70,7 +70,12 @@
 
             foreach (IExpression expr in this.arguments)
             {
-                result += " " + names[k] + ": " + expr.AsString();
+                string exprresult = expr.AsString();
+
+                if (expr is MessageExpression && ((MessageExpression)expr).IsKeywordMessage)
+                    exprresult = "(" + exprresult + ")";
+
+                result += " " + names[k] + ": " + exprresult;
                 k++;
             }
 

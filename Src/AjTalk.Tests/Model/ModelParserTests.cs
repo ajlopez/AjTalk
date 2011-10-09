@@ -112,6 +112,33 @@
         }
 
         [TestMethod]
+        public void ParseExpressionWithBinaryAndUnaryMessage()
+        {
+            ModelParser parser = new ModelParser("index <= self size");
+            IExpression expression = parser.ParseExpression();
+            Assert.IsNotNull(expression);
+            Assert.AreEqual("index <= self size", expression.AsString());
+        }
+
+        [TestMethod]
+        public void ParseExpressionWithBinaryAndKeywordMessageWithBlock()
+        {
+            ModelParser parser = new ModelParser("index >= 1 and: [index <= self size]");
+            IExpression expression = parser.ParseExpression();
+            Assert.IsNotNull(expression);
+            Assert.AreEqual("index >= 1 and: [index <= self size]", expression.AsString());
+        }
+
+        [TestMethod]
+        public void ParseExpressionWithKeywordMessages()
+        {
+            ModelParser parser = new ModelParser("index and: (foo and: 2)");
+            IExpression expression = parser.ParseExpression();
+            Assert.IsNotNull(expression);
+            Assert.AreEqual("index and: (foo and: 2)", expression.AsString());
+        }
+
+        [TestMethod]
         public void ParsePrimitive()
         {
             ModelParser parser = new ModelParser("<primitive: 60>");
@@ -402,6 +429,8 @@
             Assert.AreEqual(2, bexpression.Body.Count());
             Assert.AreEqual(0, bexpression.ParameterNames.Count);
             Assert.AreEqual(0, bexpression.LocalVariables.Count);
+
+            Assert.AreEqual("[a := 1. b := 2]", expression.AsString());
         }
 
         [TestMethod]

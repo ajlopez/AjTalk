@@ -32,7 +32,7 @@
 
             foreach (IExpression expression in this.body)
             {
-                if (result != "")
+                if (result != "[")
                     result += ". ";
 
                 result += expression.AsString();
