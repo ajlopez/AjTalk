@@ -169,7 +169,12 @@
 
         private IExpression ParseFluentExpression(IExpression target)
         {
-            return this.ParseMultipleKeywordExpression(new FluentMessageExpression(target));
+            IExpression expr = target;
+
+            if (target is MessageExpression)
+                expr = new FluentMessageExpression((MessageExpression)target);
+
+            return this.ParseMultipleKeywordExpression(expr);
         }
 
         private static bool IsUnarySelector(string name)

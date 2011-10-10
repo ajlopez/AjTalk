@@ -20,7 +20,7 @@
         {
             // TODO Escape chars
             if (this.value is string)
-                return string.Format("'{0}'", this.value);
+                return string.Format("'{0}'", NormalizeString((string)this.value));
             if (this.value is char)
                 return string.Format("${0}", this.value);
             if (this.value.Equals(false))
@@ -34,6 +34,14 @@
         public void Visit(IVisitor visitor)
         {
             visitor.Visit(this);
+        }
+
+        private static string NormalizeString(string text)
+        {
+            text = text.Replace("\r", "\\r");
+            text = text.Replace("\n", "\\n");
+            text = text.Replace("'", "\\'");
+            return text;
         }
     }
 }

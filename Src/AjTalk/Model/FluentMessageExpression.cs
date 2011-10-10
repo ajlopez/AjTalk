@@ -7,14 +7,14 @@
 
     public class FluentMessageExpression : IExpression
     {
-        private IExpression target;
+        private MessageExpression target;
 
-        public FluentMessageExpression(IExpression target)
+        public FluentMessageExpression(MessageExpression target)
         {
             this.target = target;
         }
 
-        public IExpression Target { get { return this.target; } }
+        public MessageExpression Target { get { return this.target; } }
 
         public string AsString()
         {

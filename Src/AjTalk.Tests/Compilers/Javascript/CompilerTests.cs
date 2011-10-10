@@ -76,6 +76,66 @@
         }
 
         [TestMethod]
+        public void CompileVariableWithReservedWordClass()
+        {
+            IExpression expression = ParseExpression("class");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "__class__"));
+        }
+
+        [TestMethod]
+        public void CompileBlockAsTarget()
+        {
+            IExpression expression = ParseExpression("[a > 0] whileTrue: [b := b + 1]");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "(function() {"));
+        }
+
+        [TestMethod]
+        public void CompileNotEqualOperator()
+        {
+            IExpression expression = ParseExpression("a ~~ b");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "a !== b"));
+        }
+
+        [TestMethod]
+        public void CompileCharacter()
+        {
+            IExpression expression = ParseExpression("$@");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "'@'"));
+        }
+
+        [TestMethod]
+        public void CompileAtOperator()
+        {
+            IExpression expression = ParseExpression("a @ b");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "a.$_at_(b)"));
+        }
+
+        [TestMethod]
+        public void CompileAtOperatorInExpression()
+        {
+            IExpression expression = ParseExpression("self asString displayAt: 0@100");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "self.$asString().$displayAt_(Number(0).$_at_(100))"));
+        }
+
+        [TestMethod]
         public void CompileSimpleSendMessageToInteger()
         {
             IExpression expression = ParseExpression("1 add: 2");
@@ -83,6 +143,16 @@
             this.writer.Close();
             string output = this.writer.ToString();
             Assert.IsTrue(ContainsLine(output, "Number(1).$add_(2)"));
+        }
+
+        [TestMethod]
+        public void CompileSimpleSendMessageToBoolean()
+        {
+            IExpression expression = ParseExpression("false foo: 2");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "Boolean(false).$foo_(2)"));
         }
 
         [TestMethod]

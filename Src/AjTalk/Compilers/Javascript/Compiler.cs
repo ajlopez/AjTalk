@@ -13,7 +13,13 @@
         {
             { "->", "assoc" },
             { "=", "equal" },
-            { "~=", "notequal" }
+            { "~=", "notequal" },
+            { "@", "at" }
+        };
+
+        private static IDictionary<string, string> jsOperators = new Dictionary<string, string>()
+        {
+            { "~~", "!==" }
         };
 
         private SourceWriter writer;
@@ -44,7 +50,10 @@
         {
             if (method.Class != null)
             {
-                this.writer.Write(string.Format("{0}.prototype.{1} = function(", method.Class.Name, ToMethodName(method.Selector)));
+                if (method.Class.Name.EndsWith(" class"))
+                    this.writer.Write(string.Format("{0}.$class().prototype.{1} = function(", method.Class.Name.Substring(0, method.Class.Name.Length - " class".Length), ToMethodName(method.Selector)));
+                else
+                    this.writer.Write(string.Format("{0}.prototype.{1} = function(", method.Class.Name, ToMethodName(method.Selector)));
             }
             else
             {
@@ -66,7 +75,7 @@
             this.writer.WriteLine("var self = this;");
 
             foreach (string locname in method.LocalVariables)
-                this.writer.WriteLine(string.Format("var {0} = null", locname));
+                this.writer.WriteLine(string.Format("var {0} = null", ToVariableName(locname)));
 
             int nauxbackup = this.naux;
 
@@ -140,7 +149,10 @@
 
         public override void Visit(ConstantExpression expression)
         {
-            this.writer.Write(expression.AsString());
+            if (expression.Value is char)
+                this.writer.Write(string.Format("'{0}'", expression.Value));
+            else
+                this.writer.Write(expression.AsString());
         }
 
         public override void Visit(BlockExpression expression)
@@ -177,16 +189,47 @@
 
             if (expression.Target is MessageExpression && ((MessageExpression)expression.Target).IsBinaryMessage)
                 nested = true;
+            else if (expression.Target is SetExpression)
+                nested = true;
+            else if (expression.Target is BlockExpression)
+                nested = true;
 
             if (!char.IsLetter(selector[0]) && expression.Arguments.Count() == 1)
             {
                 if (nested)
                     this.writer.Write("(");
-                expression.Target.Visit(this);
+
+                // TODO Refactor: repeated code below
+                if (expression.Target is ConstantExpression)
+                {
+                    ConstantExpression cexpr = (ConstantExpression)expression.Target;
+
+                    // TODO other types, scape characters in string
+                    if (cexpr.Value is String)
+                        this.writer.Write(string.Format("String({0})", cexpr.AsString()));
+                    else if (cexpr.Value is int)
+                        this.writer.Write(string.Format("Number({0})", cexpr.Value));
+                    else if (cexpr.Value is bool)
+                        this.writer.Write(string.Format("Boolean({0})", cexpr.Value));
+                }
+                else
+                    expression.Target.Visit(this);
+
                 if (nested)
                     this.writer.Write(")");
-                this.writer.Write(" " + selector + " ");
-                expression.Arguments.First().Visit(this);
+
+                if (OperatorHasMethodName(selector))
+                {
+                    this.writer.Write("." + OperatorToMethodName(selector) + "(");
+                    expression.Arguments.First().Visit(this);
+                    this.writer.Write(")");
+                }
+                else
+                {
+                    this.writer.Write(" " + OperatorToJsOperator(selector) + " ");
+                    expression.Arguments.First().Visit(this);
+                }
+
                 return;
             }
 
@@ -196,9 +239,11 @@
 
                 // TODO other types, scape characters in string
                 if (cexpr.Value is String)
-                    this.writer.Write(string.Format("String('{0}')", cexpr.Value));
+                    this.writer.Write(string.Format("String({0})", cexpr.AsString()));
                 else if (cexpr.Value is int)
                     this.writer.Write(string.Format("Number({0})", cexpr.Value));
+                else if (cexpr.Value is bool)
+                    this.writer.Write(string.Format("Boolean({0})", cexpr.Value.ToString().ToLower()));
             }
             else
             {
@@ -225,9 +270,13 @@
 
         public override void Visit(FluentMessageExpression expression)
         {
-            this.writer.Write(string.Format("var _aux{0} = ", this.naux++));
+            this.writer.Write("(function () {");
+            this.writer.Write("var _aux = ");
             // TODO It's not implemented yet
             expression.Target.Visit(this);
+            this.writer.Write(";");
+            MessageExpression msg = new MessageExpression(new VariableExpression("_aux"), expression.Target.Selector, expression.Target.Arguments);
+            this.writer.Write("return _aux;})()");
         }
 
         public override void Visit(ReturnExpression expression)
@@ -246,7 +295,7 @@
             expression.LeftValue.Visit(this);
             this.writer.Write(" = ");
             expression.Expression.Visit(this);
-            this.writer.WriteLine(";");
+            //this.writer.WriteLine(";");
         }
 
         public override void Visit(SymbolExpression expression)
@@ -257,7 +306,7 @@
 
         public override void Visit(VariableExpression expression)
         {
-            this.writer.Write(expression.Name);
+            this.writer.Write(ToVariableName(expression.Name));
         }
 
         public override void Visit(InstanceVariableExpression expression)
@@ -286,9 +335,27 @@
             return "$_" + operatorNames[name] + "_";
         }
 
+        private static bool OperatorHasMethodName(string name)
+        {
+            return operatorNames.ContainsKey(name);
+        }
+
+        private static string OperatorToJsOperator(string name)
+        {
+            if (jsOperators.ContainsKey(name))
+                return jsOperators[name];
+
+            return name;
+        }
+
         private static string ToVariableName(string name)
         {
-            return "_" + name;
+            if (name == "class")
+                return "__class__";
+            if (name == "new")
+                return "__new__";
+
+            return name;
         }
     }
 }
