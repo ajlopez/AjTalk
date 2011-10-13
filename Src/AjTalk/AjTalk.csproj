@@ -204,6 +204,7 @@
     <None Include="Language\BehaviorsDiagram.cd" />
     <None Include="Language\ClassDiagram.cd" />
     <None Include="Language\ObjectsDiagram.cd" />
+    <None Include="Model\Model.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

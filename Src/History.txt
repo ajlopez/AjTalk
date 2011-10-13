@@ -288,6 +288,11 @@ new, class variable names as __new__, __class__
 false, true as target, compiled as Boolean(false), Boolean(true)
 Compile Object.st to javascript and run in node (no syntax error)
 
+2011-10-13
+Class Model for post
+Post http://ajlopez.wordpress.com/2011/10/13/ajtalk-and-javascript-part-1-abstract-model/
+
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

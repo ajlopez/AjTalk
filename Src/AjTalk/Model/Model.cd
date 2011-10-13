@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AjTalk.Model.CodeModel">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAQBAAQQAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CodeModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AjTalk.Model.ClassModel">
+    <Position X="2.25" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABCACAQQAAAEAAQAAIAAAASAAAEEAAAAAAAAAQAAgAg=</HashCode>
+      <FileName>Model\ClassModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AjTalk.Model.MethodModel">
+    <Position X="4.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIAAgACAAAAAAAQAAAIJAAAAAQAAAACAAAAABAgAAAQ=</HashCode>
+      <FileName>Model\MethodModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="AjTalk.Model.IExpression">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IExpression.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AjTalk.Model.IVisitor">
+    <Position X="3.75" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IVisitor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AjTalk.Model.IVisitable">
+    <Position X="3" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IVisitable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AjTalk.Model.ILeftValue" Collapsed="true">
+    <Position X="2.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\ILeftValue.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
