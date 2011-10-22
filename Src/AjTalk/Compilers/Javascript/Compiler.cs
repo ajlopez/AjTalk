@@ -32,15 +32,21 @@
 
         public override void Visit(ClassModel @class)
         {
+            this.writer.WriteLine(string.Format("function {0}Class()", @class.Name));
+            this.writer.WriteLineStart("{");
+            this.writer.WriteLineEnd("}");
+
             this.writer.WriteLine(string.Format("function {0}()", @class.Name));
-            this.writer.WriteLine("{");
-            this.writer.WriteLine("}");
+            this.writer.WriteLineStart("{");
+            this.writer.WriteLine(string.Format("this._class = new {0}Class();", @class.Name));
+            this.writer.WriteLineEnd("}");
 
             foreach (string name in @class.InstanceVariableNames)
                 this.writer.WriteLine(string.Format("{0}.prototype.{1} = null;", @class.Name, name));
 
+            // TODO Review class variables. Where? Now at Class function (not prototype)
             foreach (string name in @class.ClassVariableNames)
-                this.writer.WriteLine(string.Format("{0}.{1} = null;", @class.Name, name));
+                this.writer.WriteLine(string.Format("{0}Class.{1} = null;", @class.Name, name));
 
             foreach (MethodModel method in @class.InstanceMethods)
                 method.Visit(this);

@@ -199,6 +199,20 @@
         }
 
         [TestMethod]
+        public void CompileSimpleClass()
+        {
+            ClassModel @class = new ClassModel("AClass", null, null, null);
+            this.compiler.CompileClass(@class);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "function AClassClass()"));
+            Assert.IsTrue(ContainsLine(output, "function AClass()"));
+            Assert.IsTrue(ContainsLine(output, "{"));
+            Assert.IsTrue(ContainsLine(output, "this._class = new AClassClass();"));
+            Assert.IsTrue(ContainsLine(output, "}"));
+        }
+
+        [TestMethod]
         public void CompileSimpleClassWithInstanceVariables()
         {
             ClassModel @class = new ClassModel("AClass", null, new List<string>() { "x", "y" }, new List<string>());
@@ -222,8 +236,8 @@
             Assert.IsTrue(ContainsLine(output, "function AClass()"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "}"));
-            Assert.IsTrue(ContainsLine(output, "AClass.x = null;"));
-            Assert.IsTrue(ContainsLine(output, "AClass.y = null;"));
+            Assert.IsTrue(ContainsLine(output, "AClassClass.x = null;"));
+            Assert.IsTrue(ContainsLine(output, "AClassClass.y = null;"));
         }
 
         [TestMethod]

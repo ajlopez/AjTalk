@@ -292,6 +292,10 @@ Compile Object.st to javascript and run in node (no syntax error)
 Class Model for post
 Post http://ajlopez.wordpress.com/2011/10/13/ajtalk-and-javascript-part-1-abstract-model/
 
+2011-10-22
+Generate Class instance for each defined class
+
+
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en
