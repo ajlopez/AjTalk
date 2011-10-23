@@ -23,7 +23,7 @@
         };
 
         private SourceWriter writer;
-        private int naux;
+        private MethodModel currentMethod;
 
         public Compiler(SourceWriter writer)
         {
@@ -57,7 +57,7 @@
             if (method.Class != null)
             {
                 if (method.Class.Name.EndsWith(" class"))
-                    this.writer.Write(string.Format("{0}.$class().prototype.{1} = function(", method.Class.Name.Substring(0, method.Class.Name.Length - " class".Length), ToMethodName(method.Selector)));
+                    this.writer.Write(string.Format("{0}Class.prototype.{1} = function(", method.Class.Name.Substring(0, method.Class.Name.Length - " class".Length), ToMethodName(method.Selector)));
                 else
                     this.writer.Write(string.Format("{0}.prototype.{1} = function(", method.Class.Name, ToMethodName(method.Selector)));
             }
@@ -79,20 +79,21 @@
             this.writer.WriteLine(")");
             this.writer.WriteLineStart("{");
             this.writer.WriteLine("var self = this;");
+            this.writer.WriteLine(string.Format("console.log('{0}');", ToMethodName(method.Selector)));
 
             foreach (string locname in method.LocalVariables)
                 this.writer.WriteLine(string.Format("var {0} = null", ToVariableName(locname)));
 
-            int nauxbackup = this.naux;
+            MethodModel previousModel = this.currentMethod;
 
             try
             {
-                this.naux = 0;
+                this.currentMethod = method;
                 this.Visit(method.Body);
             }
             finally
             {
-                this.naux = nauxbackup;
+                this.currentMethod = previousModel;
             }
 
             if (method.Class != null)
@@ -151,6 +152,16 @@
         {
             foreach (var element in model.Elements)
                 element.Visit(this);
+
+            this.writer.WriteLine();
+
+            foreach (var element in model.Elements)
+            {
+                if (!(element is ClassModel))
+                    continue;
+
+                this.writer.WriteLine(string.Format("exports.{0} = {0};", ((ClassModel)element).Name));
+            }
         }
 
         public override void Visit(ConstantExpression expression)
@@ -183,9 +194,16 @@
 
         public override void Visit(PrimitiveExpression expression)
         {
-            // TODO implement primitive
-            this.writer.WriteLine();
-            this.writer.WriteLine("// " + expression.AsString());
+            this.writer.Write(string.Format("var _primitive = Primitive{0}(self", expression.Primitive));
+
+            foreach (var parameter in this.currentMethod.ParameterNames)
+            {
+                this.writer.Write(", ");
+                this.writer.Write(parameter);
+            }
+
+            this.writer.WriteLine(");");
+            this.writer.WriteLine("if (_primitive) return _primitive.value;");
         }
 
         public override void Visit(MessageExpression expression)

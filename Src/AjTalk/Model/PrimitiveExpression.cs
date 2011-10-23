@@ -14,7 +14,7 @@
             this.primitive = primitive;
         }
 
-        public object Primitive { get { return this.primitive; } }
+        public int Primitive { get { return this.primitive; } }
 
         public string AsString()
         {

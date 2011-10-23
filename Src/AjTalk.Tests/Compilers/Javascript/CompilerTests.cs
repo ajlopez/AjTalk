@@ -284,6 +284,17 @@
         }
 
         [TestMethod]
+        public void CompilePrimitiveInMethod()
+        {
+            MethodModel method = ParseMethod("= b <primitive: 60> ^self value equals: b");
+            this.compiler.CompileMethod(method);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "var _primitive = Primitive60(self, b);"));
+            Assert.IsTrue(ContainsLine(output, "if (_primitive) return _primitive.value;"));
+        }
+
+        [TestMethod]
         [DeploymentItem(@"CodeFiles\FileOut01.st")]
         public void CompileFileOut01()
         {
@@ -335,6 +346,7 @@
 
             // TODO more tests
             Assert.IsTrue(ContainsLine(output, "function Object()"));
+            Assert.IsTrue(ContainsLine(output, "exports.Object = Object;"));
         }
 
         private static MethodModel ParseMethod(string text)

@@ -15,7 +15,7 @@ namespace AjTalk.Compiler
         {
             StreamWriter swriter = new StreamWriter("Program.js");
             SourceWriter writer = new SourceWriter(swriter);
-            writer.WriteLineStart("AjTalk = function() {");
+//            writer.WriteLineStart("AjTalk = function() {");
             CodeModel model = new CodeModel();
             AjTalk.Compilers.Javascript.Compiler compiler = new AjTalk.Compilers.Javascript.Compiler(writer);
 
@@ -29,7 +29,7 @@ namespace AjTalk.Compiler
 
             compiler.Visit(model);
 
-            writer.WriteLineEnd("}");
+  //          writer.WriteLineEnd("}();");
             swriter.Close();
         }
     }
