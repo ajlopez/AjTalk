@@ -194,7 +194,7 @@
 
         public override void Visit(PrimitiveExpression expression)
         {
-            this.writer.Write(string.Format("var _primitive = Primitive{0}(self", expression.Primitive));
+            this.writer.Write(string.Format("var _primitive = Primitive{0}(self", expression.Number));
 
             foreach (var parameter in this.currentMethod.ParameterNames)
             {

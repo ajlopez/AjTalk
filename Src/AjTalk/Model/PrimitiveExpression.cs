@@ -7,18 +7,30 @@
 
     public class PrimitiveExpression : IExpression
     {
-        private int primitive;
+        private int number;
+        private string name;
+        private string module;
 
-        public PrimitiveExpression(int primitive)
+        public PrimitiveExpression(int number)
         {
-            this.primitive = primitive;
+            this.number = number;
         }
 
-        public int Primitive { get { return this.primitive; } }
+        public PrimitiveExpression(string name, string module)
+        {
+            this.name = name;
+            this.module = module;
+        }
+
+        public int Number { get { return this.number; } }
+
+        public string Name { get { return this.name; } }
+
+        public string Module { get { return this.module; } }
 
         public string AsString()
         {
-            return string.Format("<primitive: {0}>", this.primitive);
+            return string.Format("<primitive: {0}>", this.number);
         }
 
         public void Visit(IVisitor visitor)

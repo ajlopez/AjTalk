@@ -298,6 +298,8 @@ Generate Class instance for each defined class
 2011-10-23
 Primitive first implementation
 Compile to use exports to expose classes in NodeJs
+Compiling SqueakKernelObjects (WIP)
+Primitive with name and module (WIP)
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

@@ -116,6 +116,9 @@
     <None Include="CodeFiles\FileOut02.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="CodeFiles\SqueakKernelObjects.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\SqueakObject.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

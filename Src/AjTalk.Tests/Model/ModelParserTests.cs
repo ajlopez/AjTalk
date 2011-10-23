@@ -148,9 +148,24 @@
             Assert.IsInstanceOfType(expression, typeof(PrimitiveExpression));
 
             PrimitiveExpression pexpression = (PrimitiveExpression)expression;
-            Assert.AreEqual(60, pexpression.Primitive);
+            Assert.AreEqual(60, pexpression.Number);
 
             Assert.AreEqual("<primitive: 60>", expression.AsString());
+        }
+
+        [TestMethod]
+        public void ParseNamedPrimitive()
+        {
+            ModelParser parser = new ModelParser("<primitive: 'Prim' module: 'Module'>");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(PrimitiveExpression));
+
+            PrimitiveExpression pexpression = (PrimitiveExpression)expression;
+            Assert.AreEqual(60, pexpression.Number);
+
+            Assert.AreEqual("<primitive: 'Prim' module: 'Module'>", expression.AsString());
         }
 
         [TestMethod]

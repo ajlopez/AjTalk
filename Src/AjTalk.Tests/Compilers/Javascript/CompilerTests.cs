@@ -349,6 +349,27 @@
             Assert.IsTrue(ContainsLine(output, "exports.Object = Object;"));
         }
 
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\SqueakKernelObjects.st")]
+        public void CompileSqueakKernelObjects()
+        {
+            ChunkReader chunkReader = new ChunkReader(@"SqueakKernelObjects.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            reader.Process(model);
+
+            this.compiler.Visit(model);
+            this.writer.Close();
+            string output = this.writer.ToString();
+
+            // TODO more tests
+            Assert.IsTrue(ContainsLine(output, "function Object()"));
+            Assert.IsTrue(ContainsLine(output, "function Boolean()"));
+            Assert.IsTrue(ContainsLine(output, "exports.Object = Object;"));
+            Assert.IsTrue(ContainsLine(output, "exports.Boolean = Boolean;"));
+        }
+
         private static MethodModel ParseMethod(string text)
         {
             ModelParser parser = new ModelParser(text);
