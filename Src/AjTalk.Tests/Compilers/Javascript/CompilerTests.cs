@@ -24,7 +24,7 @@
         }
 
         [TestMethod]
-        public void CompileSimpleMethod()
+        public void CompileSimpleAddMethod()
         {
             MethodModel method = ParseMethod("with: a with: b ^a+b");
             this.compiler.CompileMethod(method);
@@ -33,6 +33,32 @@
             Assert.IsTrue(ContainsLine(output, "function $with_with_(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return a + b;"));
+            Assert.IsTrue(ContainsLine(output, "}"));
+        }
+
+        [TestMethod]
+        public void CompileSimpleSubtractMethod()
+        {
+            MethodModel method = ParseMethod("with: a with: b ^a-b");
+            this.compiler.CompileMethod(method);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "function $with_with_(a, b)"));
+            Assert.IsTrue(ContainsLine(output, "{"));
+            Assert.IsTrue(ContainsLine(output, "return a - b;"));
+            Assert.IsTrue(ContainsLine(output, "}"));
+        }
+
+        [TestMethod]
+        public void CompileSimpleMultiplyMethod()
+        {
+            MethodModel method = ParseMethod("with: a with: b ^a*b");
+            this.compiler.CompileMethod(method);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "function $with_with_(a, b)"));
+            Assert.IsTrue(ContainsLine(output, "{"));
+            Assert.IsTrue(ContainsLine(output, "return a * b;"));
             Assert.IsTrue(ContainsLine(output, "}"));
         }
 
@@ -368,6 +394,65 @@
             Assert.IsTrue(ContainsLine(output, "function Boolean()"));
             Assert.IsTrue(ContainsLine(output, "exports.Object = Object;"));
             Assert.IsTrue(ContainsLine(output, "exports.Boolean = Boolean;"));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
+        public void CompilePharoCoreKernelObjects()
+        {
+            ChunkReader chunkReader = new ChunkReader(@"PharoCoreKernelObjects.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            reader.Process(model);
+
+            this.compiler.Visit(model);
+            this.writer.Close();
+            string output = this.writer.ToString();
+
+            // TODO more tests
+            Assert.IsTrue(ContainsLine(output, "function Object()"));
+            Assert.IsTrue(ContainsLine(output, "function Boolean()"));
+            Assert.IsTrue(ContainsLine(output, "exports.Object = Object;"));
+            Assert.IsTrue(ContainsLine(output, "exports.Boolean = Boolean;"));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\PharoCorePoint.st")]
+        public void CompilePharoCorePoint()
+        {
+            ChunkReader chunkReader = new ChunkReader(@"PharoCorePoint.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            reader.Process(model);
+
+            this.compiler.Visit(model);
+            this.writer.Close();
+            string output = this.writer.ToString();
+
+            // TODO more tests
+            Assert.IsTrue(ContainsLine(output, "function Point()"));
+            Assert.IsTrue(ContainsLine(output, "exports.Point = Point;"));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\PharoCoreRectangle.st")]
+        public void CompilePharoCoreRectangle()
+        {
+            ChunkReader chunkReader = new ChunkReader(@"PharoCoreRectangle.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            reader.Process(model);
+
+            this.compiler.Visit(model);
+            this.writer.Close();
+            string output = this.writer.ToString();
+
+            // TODO more tests
+            Assert.IsTrue(ContainsLine(output, "function Rectangle()"));
+            Assert.IsTrue(ContainsLine(output, "exports.Rectangle = Rectangle;"));
         }
 
         private static MethodModel ParseMethod(string text)

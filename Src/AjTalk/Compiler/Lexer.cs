@@ -11,7 +11,7 @@ namespace AjTalk.Compiler
         public const char SpecialDotNetInvokeMark = '!';
         public const char SpecialCharMark = '$';
 
-        private const string Operators = "^<>:=-+*/&~,";
+        private const string Operators = "^<>:=-+*/&~,\\";
         private const string Separators = "().|[];{}";
 
         private const char StringDelimiter = '\'';
@@ -377,12 +377,24 @@ namespace AjTalk.Compiler
 
             try
             {
-                ch = this.NextChar();
-
-                while (ch != StringDelimiter)
+                while (true)
                 {
-                    value += ch;
                     ch = this.NextChar();
+
+                    while (ch != StringDelimiter)
+                    {
+                        value += ch;
+                        ch = this.NextChar();
+                    }
+
+                    char ch2 = this.PeekChar();
+
+                    if (ch2 != StringDelimiter)
+                        break;
+
+                    this.NextChar();
+
+                    value += ch;
                 }
             }
             catch (EndOfInputException)

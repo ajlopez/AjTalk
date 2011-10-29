@@ -75,10 +75,17 @@
 
         private void ProcessMessageExpression(CodeModel model, MessageExpression expression)
         {
-            if (expression.Selector.StartsWith("subclass:"))
+            // TODO implements weakSubclass
+            if (expression.Selector.StartsWith("subclass:") || expression.Selector.StartsWith("weakSubclass:"))
             {
                 SymbolExpression symbol = (SymbolExpression) expression.Arguments.First();
                 ClassModel @class = new ClassModel(symbol.Symbol, null, null, null);
+                model.AddElement(@class);
+            }
+            else if (expression.Selector.StartsWith("variableSubclass:"))
+            {
+                SymbolExpression symbol = (SymbolExpression)expression.Arguments.First();
+                ClassModel @class = new ClassModel(symbol.Symbol, null, null, null, true);
                 model.AddElement(@class);
             }
         }

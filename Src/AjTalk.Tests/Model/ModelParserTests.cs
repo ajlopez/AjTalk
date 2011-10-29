@@ -139,6 +139,20 @@
         }
 
         [TestMethod]
+        public void ParseUnaryMinusExpression()
+        {
+            ModelParser parser = new ModelParser("-3");
+            IExpression expression = parser.ParseExpression();
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(MessageExpression));
+
+            MessageExpression mexpression = (MessageExpression)expression;
+            Assert.IsTrue(mexpression.IsUnaryMessage);
+
+            Assert.AreEqual("-3", expression.AsString());
+        }
+
+        [TestMethod]
         public void ParsePrimitive()
         {
             ModelParser parser = new ModelParser("<primitive: 60>");
@@ -163,7 +177,9 @@
             Assert.IsInstanceOfType(expression, typeof(PrimitiveExpression));
 
             PrimitiveExpression pexpression = (PrimitiveExpression)expression;
-            Assert.AreEqual(60, pexpression.Number);
+            Assert.AreEqual(0, pexpression.Number);
+            Assert.AreEqual("Prim", pexpression.Name);
+            Assert.AreEqual("Module", pexpression.Module);
 
             Assert.AreEqual("<primitive: 'Prim' module: 'Module'>", expression.AsString());
         }

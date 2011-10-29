@@ -438,6 +438,21 @@ namespace AjTalk.Tests.Compiler
             token = tokenizer.NextToken();
             Assert.IsNull(token);
         }
+
+        [TestMethod]
+        public void ProcessStringWithEscapedDelimiters()
+        {            
+            Lexer tokenizer = new Lexer("'[''do nothing'']'");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("['do nothing']", token.Value);
+            Assert.AreEqual(TokenType.String, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
     }
 }
 

@@ -13,8 +13,17 @@
         {
             { "->", "assoc" },
             { "=", "equal" },
+            { "==", "equalequal" },
             { "~=", "notequal" },
-            { "@", "at" }
+//            { "~~", "notnot" },
+            { "&", "and" },
+            { "|", "or" },
+            { "==>", "implies" },
+            { "@", "at" } /*,
+            { "+", "add" },
+            { "-", "sub" },
+            { "*", "mult" },
+            { "/", "div" }*/
         };
 
         private static IDictionary<string, string> jsOperators = new Dictionary<string, string>()

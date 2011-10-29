@@ -14,8 +14,14 @@
         private IList<string> instanceVariableNames;
         private IList<MethodModel> classMethods;
         private IList<MethodModel> instanceMethods;
+        private bool isvariable;
 
         public ClassModel(string name, ClassModel superclass, IList<string> instanceVariableNames, IList<string> classVariableNames)
+            : this(name, superclass, instanceVariableNames, classVariableNames, false)
+        {
+        }
+
+        public ClassModel(string name, ClassModel superclass, IList<string> instanceVariableNames, IList<string> classVariableNames, bool isvariable)
         {
             this.name = name;
             this.superclass = superclass;
@@ -25,6 +31,7 @@
             this.instanceMethods = new List<MethodModel>();
             if (!name.EndsWith(" class"))
                 this.metaclass = new ClassModel(name + " class", superclass == null ? null : superclass.MetaClass, null, null);
+            this.isvariable = isvariable;
         }
 
         public string Name { get { return this.name; } }
@@ -40,6 +47,8 @@
         public IList<MethodModel> ClassMethods { get { return this.classMethods; } }
 
         public IList<MethodModel> InstanceMethods { get { return this.instanceMethods; } }
+
+        public bool IsVariable { get { return this.isvariable; } }
 
         public void Visit(IVisitor visitor)
         {

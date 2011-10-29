@@ -256,6 +256,8 @@
                 case TokenType.Operator:
                     if (token.Value == "<")
                         return this.ParsePrimitive();
+                    if (token.Value == "-")
+                        return new MessageExpression(this.ParseHeadExpression(), "-", null);
                     break;
 
                 case TokenType.Punctuation:
@@ -476,10 +478,31 @@
         private IExpression ParsePrimitive()
         {
             this.ParseToken(TokenType.Name, "primitive:");
-            int primitive = this.ParseInteger();
+            int number;
+            string name;
+            string module;
+            IExpression primitive = null;
+
+            Token token = this.NextToken();
+
+            if (token.Type == TokenType.Integer)
+            {
+                number = Convert.ToInt32(token.Value, CultureInfo.InvariantCulture);
+                primitive = new PrimitiveExpression(number);
+            }
+            else if (token.Type == TokenType.String)
+            {
+                name = token.Value;
+                this.ParseToken(TokenType.Name, "module:");
+                module = this.ParseString();
+                primitive = new PrimitiveExpression(name, module);
+            }
+            else
+                throw new ParserException("String or Number expected in Primitive");
+
             this.ParseToken(TokenType.Operator, ">");
 
-            return new PrimitiveExpression(primitive);
+            return primitive;
         }
 
         private string TryParseUnarySelector()
@@ -563,7 +586,7 @@
             if (token == null)
                 throw new ParserException("Expected name or operator");
 
-            if (token.Type != TokenType.Name && token.Type != TokenType.Operator)
+            if (!token.IsName() && !token.IsOperator())
                 throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
 
             return token.Value;
@@ -671,6 +694,16 @@
                 throw new ParserException("Integer Expected");
 
             return Convert.ToInt32(token.Value, CultureInfo.InvariantCulture);
+        }
+
+        private string ParseString()
+        {
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != TokenType.String)
+                throw new ParserException("String Expected");
+
+            return token.Value;
         }
     }
 }

@@ -6,13 +6,14 @@
 
     public enum TokenType : int
     {
-        Name = 0,
-        Integer = 1,
-        String = 2,
-        Punctuation = 3,
-        Operator = 4,
-        Symbol = 5,
-        Parameter = 6,
-        Character = 7
+        Name,
+        Integer,
+        Real,
+        String,
+        Character,
+        Punctuation,
+        Operator,
+        Symbol,
+        Parameter
     }
 }

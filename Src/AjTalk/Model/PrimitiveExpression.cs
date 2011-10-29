@@ -30,7 +30,10 @@
 
         public string AsString()
         {
-            return string.Format("<primitive: {0}>", this.number);
+            if (this.name != null)
+                return string.Format("<primitive: '{0}' module: '{1}'>", this.name, this.module);
+            else
+                return string.Format("<primitive: {0}>", this.number);
         }
 
         public void Visit(IVisitor visitor)

@@ -51,7 +51,10 @@
 
             // TODO Use string.Format
             if (this.arguments.Count() == 0)
-                return result + " " + this.selector;
+                if (this.selector == "-")
+                    return "-" + result;
+                else
+                    return result + " " + this.selector;
 
             if (this.IsBinaryMessage)
             {
