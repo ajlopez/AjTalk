@@ -66,9 +66,9 @@
             if (method.Class != null)
             {
                 if (method.Class.Name.EndsWith(" class"))
-                    this.writer.Write(string.Format("{0}Class.prototype.{1} = function(", method.Class.Name.Substring(0, method.Class.Name.Length - " class".Length), ToMethodName(method.Selector)));
+                    this.writer.Write(string.Format("{0}Class.prototype['{1}'] = function(", method.Class.Name.Substring(0, method.Class.Name.Length - " class".Length), ToMethodName(method.Selector)));
                 else
-                    this.writer.Write(string.Format("{0}.prototype.{1} = function(", method.Class.Name, ToMethodName(method.Selector)));
+                    this.writer.Write(string.Format("{0}.prototype['{1}'] = function(", method.Class.Name, ToMethodName(method.Selector)));
             }
             else
             {
@@ -217,6 +217,31 @@
 
         public override void Visit(MessageExpression expression)
         {
+            this.writer.Write("send(");
+            expression.Target.Visit(this);
+            this.writer.Write(string.Format(", '{0}'", ToMethodName(expression.Selector)));
+
+            if (expression.Arguments.Count() > 0) {
+                this.writer.Write(", [");
+                int narg = 0;
+                foreach (var argument in expression.Arguments)
+                {
+                    if (narg > 0)
+                        this.writer.Write(", ");
+
+                    argument.Visit(this);
+
+                    narg++;
+                }
+                this.writer.Write("]");
+            }
+
+            this.writer.Write(")");
+        }
+
+        // TODO Remove (only for demo purpose)
+        public void OldVisit(MessageExpression expression)
+        {
             string selector = expression.Selector;
             bool nested = false;
 
@@ -352,7 +377,8 @@
             this.writer.Write(string.Format("{0}.{1}", expression.Class.Name, expression.Name));
         }
 
-        private static string ToMethodName(string name)
+        // TODO Remove (only for demo purpose)
+        private static string OldToMethodName(string name)
         {
             if (!char.IsLetter(name[0]))
                 return OperatorToMethodName(name);
@@ -363,14 +389,27 @@
             return "$" + name;
         }
 
+        private static string ToMethodName(string name)
+        {
+            if (!char.IsLetter(name[0]))
+                return name;
+
+            name = name.Replace(":", "_");
+
+            // TODO review if needed $ at front
+            return "_" + name;
+        }
+
         private static string OperatorToMethodName(string name)
         {
-            return "$_" + operatorNames[name] + "_";
+            return name;
+            //return "$_" + operatorNames[name] + "_";
         }
 
         private static bool OperatorHasMethodName(string name)
         {
-            return operatorNames.ContainsKey(name);
+            return false;
+            //return operatorNames.ContainsKey(name);
         }
 
         private static string OperatorToJsOperator(string name)

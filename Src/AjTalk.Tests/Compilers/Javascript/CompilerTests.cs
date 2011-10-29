@@ -30,9 +30,9 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function $with_with_(a, b)"));
+            Assert.IsTrue(ContainsLine(output, "function _with_with_(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
-            Assert.IsTrue(ContainsLine(output, "return a + b;"));
+            Assert.IsTrue(ContainsLine(output, "return send(a, '+', [b]);"));
             Assert.IsTrue(ContainsLine(output, "}"));
         }
 
@@ -43,9 +43,9 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function $with_with_(a, b)"));
+            Assert.IsTrue(ContainsLine(output, "function _with_with_(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
-            Assert.IsTrue(ContainsLine(output, "return a - b;"));
+            Assert.IsTrue(ContainsLine(output, "return send(a, '-', [b]);"));
             Assert.IsTrue(ContainsLine(output, "}"));
         }
 
@@ -56,9 +56,9 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function $with_with_(a, b)"));
+            Assert.IsTrue(ContainsLine(output, "function _with_with_(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
-            Assert.IsTrue(ContainsLine(output, "return a * b;"));
+            Assert.IsTrue(ContainsLine(output, "return send(a, '*', [b]);"));
             Assert.IsTrue(ContainsLine(output, "}"));
         }
 
@@ -69,7 +69,7 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function $_assoc_(a)"));
+            Assert.IsTrue(ContainsLine(output, "function ->(a)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return a;"));
             Assert.IsTrue(ContainsLine(output, "}"));
@@ -82,7 +82,7 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function $_equal_(a)"));
+            Assert.IsTrue(ContainsLine(output, "function =(a)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return a;"));
             Assert.IsTrue(ContainsLine(output, "}"));
@@ -95,7 +95,7 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function $_notequal_(a)"));
+            Assert.IsTrue(ContainsLine(output, "function ~=(a)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return a;"));
             Assert.IsTrue(ContainsLine(output, "}"));
@@ -118,7 +118,7 @@
             expression.Visit(this.compiler);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "(function() {"));
+            Assert.IsTrue(ContainsLine(output, "send(function() {"));
         }
 
         [TestMethod]
@@ -128,7 +128,7 @@
             expression.Visit(this.compiler);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "a !== b"));
+            Assert.IsTrue(ContainsLine(output, "send(a, '~~', [b])"));
         }
 
         [TestMethod]
@@ -148,7 +148,7 @@
             expression.Visit(this.compiler);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "a.$_at_(b)"));
+            Assert.IsTrue(ContainsLine(output, "send(a, '@', [b])"));
         }
 
         [TestMethod]
@@ -158,7 +158,7 @@
             expression.Visit(this.compiler);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "self.$asString().$displayAt_(Number(0).$_at_(100))"));
+            Assert.IsTrue(ContainsLine(output, "send(send(self, '_asString'), '_displayAt_', [send(0, '@', [100])])"));
         }
 
         [TestMethod]
@@ -168,7 +168,7 @@
             expression.Visit(this.compiler);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "Number(1).$add_(2)"));
+            Assert.IsTrue(ContainsLine(output, "send(1, '_add_', [2])"));
         }
 
         [TestMethod]
@@ -178,7 +178,7 @@
             expression.Visit(this.compiler);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "Boolean(false).$foo_(2)"));
+            Assert.IsTrue(ContainsLine(output, "send(false, '_foo_', [2])"));
         }
 
         [TestMethod]
@@ -188,7 +188,7 @@
             expression.Visit(this.compiler);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "(index >= 1).$and_(2)"));
+            Assert.IsTrue(ContainsLine(output, "send(send(index, '>=', [1]), '_and_', [2])"));
         }
 
         [TestMethod]
@@ -198,7 +198,7 @@
             expression.Visit(this.compiler);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "(index + 1) * 2"));
+            Assert.IsTrue(ContainsLine(output, "send(send(index, '+', [1]), '*', [2])"));
         }
 
         [TestMethod]
@@ -208,7 +208,7 @@
             expression.Visit(this.compiler);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "String('foo').$add_(2)"));
+            Assert.IsTrue(ContainsLine(output, "send('foo', '_add_', [2])"));
         }
 
         [TestMethod]
@@ -218,7 +218,7 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function $with_with_(a, b)"));
+            Assert.IsTrue(ContainsLine(output, "function _with_with_(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "a = b;"));
             Assert.IsTrue(ContainsLine(output, "}"));
@@ -281,7 +281,7 @@
             Assert.IsTrue(ContainsLine(output, "}"));
             Assert.IsTrue(ContainsLine(output, "AClass.prototype.x = null;"));
             Assert.IsTrue(ContainsLine(output, "AClass.prototype.y = null;"));
-            Assert.IsTrue(ContainsLine(output, "AClass.prototype.$x = function()"));
+            Assert.IsTrue(ContainsLine(output, "AClass.prototype['_x'] = function()"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return this.x;"));
             Assert.IsTrue(ContainsLine(output, "};"));
@@ -302,7 +302,7 @@
             Assert.IsTrue(ContainsLine(output, "}"));
             Assert.IsTrue(ContainsLine(output, "AClass.prototype.x = null;"));
             Assert.IsTrue(ContainsLine(output, "AClass.prototype.y = null;"));
-            Assert.IsTrue(ContainsLine(output, "AClass.prototype.$x_ = function(newX)"));
+            Assert.IsTrue(ContainsLine(output, "AClass.prototype['_x_'] = function(newX)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "var self = this;"));
             Assert.IsTrue(ContainsLine(output, "this.x = newX;"));

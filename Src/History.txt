@@ -306,7 +306,7 @@ Compile SqueakKernelObjects
 Compile PharoCoreKernelObjects
 Compile PharoCorePoint
 Compile PharoCoreRectangle 
-WIP
+Use send(...) in Javascript
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en
