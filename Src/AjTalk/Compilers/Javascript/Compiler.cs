@@ -53,9 +53,9 @@
             foreach (string name in @class.InstanceVariableNames)
                 this.writer.WriteLine(string.Format("{0}.prototype.{1} = null;", @class.Name, name));
 
-            // TODO Review class variables. Where? Now at Class function (not prototype)
+            // TODO Review class variables. Where? at Class? at Class.prototype?
             foreach (string name in @class.ClassVariableNames)
-                this.writer.WriteLine(string.Format("{0}Class.{1} = null;", @class.Name, name));
+                this.writer.WriteLine(string.Format("{0}Class.prototype.{1} = null;", @class.Name, name));
 
             foreach (MethodModel method in @class.InstanceMethods)
                 method.Visit(this);

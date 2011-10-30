@@ -394,6 +394,9 @@
             Assert.IsTrue(ContainsLine(output, "function Boolean()"));
             Assert.IsTrue(ContainsLine(output, "exports.Object = Object;"));
             Assert.IsTrue(ContainsLine(output, "exports.Boolean = Boolean;"));
+
+            // Class variables in Object
+            Assert.IsTrue(ContainsLine(output, "ObjectClass.prototype.DependentsFields = null;"));
         }
 
         [TestMethod]
@@ -434,6 +437,8 @@
             // TODO more tests
             Assert.IsTrue(ContainsLine(output, "function Point()"));
             Assert.IsTrue(ContainsLine(output, "exports.Point = Point;"));
+            Assert.IsTrue(ContainsLine(output, "Point.prototype.x = null;"));
+            Assert.IsTrue(ContainsLine(output, "Point.prototype.y = null;"));
         }
 
         [TestMethod]
@@ -453,6 +458,8 @@
             // TODO more tests
             Assert.IsTrue(ContainsLine(output, "function Rectangle()"));
             Assert.IsTrue(ContainsLine(output, "exports.Rectangle = Rectangle;"));
+            Assert.IsTrue(ContainsLine(output, "Rectangle.prototype.origin = null;"));
+            Assert.IsTrue(ContainsLine(output, "Rectangle.prototype.corner = null;"));
         }
 
         private static MethodModel ParseMethod(string text)

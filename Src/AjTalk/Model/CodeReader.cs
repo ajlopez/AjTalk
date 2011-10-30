@@ -79,15 +79,46 @@
             if (expression.Selector.StartsWith("subclass:") || expression.Selector.StartsWith("weakSubclass:"))
             {
                 SymbolExpression symbol = (SymbolExpression) expression.Arguments.First();
-                ClassModel @class = new ClassModel(symbol.Symbol, null, null, null);
+                ClassModel @class = new ClassModel(symbol.Symbol, null, GetInstanceVariableNames(expression), GetClassVariableNames(expression));
                 model.AddElement(@class);
             }
             else if (expression.Selector.StartsWith("variableSubclass:"))
             {
                 SymbolExpression symbol = (SymbolExpression)expression.Arguments.First();
-                ClassModel @class = new ClassModel(symbol.Symbol, null, null, null, true);
+                ClassModel @class = new ClassModel(symbol.Symbol, null, GetInstanceVariableNames(expression), GetClassVariableNames(expression), true);
                 model.AddElement(@class);
             }
+        }
+
+        private static IList<string> GetInstanceVariableNames(MessageExpression expression)
+        {
+            return GetNamesFromArgument(expression, "instanceVariableNames");
+        }
+
+        private static IList<string> GetClassVariableNames(MessageExpression expression)
+        {
+            return GetNamesFromArgument(expression, "classVariableNames");
+        }
+
+        private static IList<string> GetNamesFromArgument(MessageExpression expression, string key)
+        {
+            string []keys = expression.Selector.Split(':');
+
+            for (int k=0; k<keys.Length; k++)
+                if (keys[k] == key)
+                    return GetNames((ConstantExpression) (expression.Arguments.ElementAt(k)));
+
+            return null;
+        }
+
+        private static IList<string> GetNames(ConstantExpression expression)
+        {
+            string names = (string)expression.Value;
+
+            if (string.IsNullOrEmpty(names))
+                return null;
+
+            return names.Split(' ');
         }
     }
 }

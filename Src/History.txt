@@ -313,6 +313,9 @@ Real numbers in Parser, ModelParser with tests
 Unary - as message
 Archive: old generated .js wo/send(..)
 NodeJs ajtalk.js review (not in trunk, yet)
+Real number in lexer, Parser, ModelParser, with tests
+Processing instance variables from subclass:.. message with tests
+Processing class variables from subclass:.. message with tests
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en
