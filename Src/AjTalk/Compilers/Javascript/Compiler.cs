@@ -52,6 +52,8 @@
             this.writer.WriteLine(string.Format("{0}.prototype.__class = {0}Class.prototype;", @class.Name));
             this.writer.WriteLine(string.Format("{0}.classPrototype = {0}Class.prototype;", @class.Name));
 
+            this.writer.WriteLine(string.Format("{0}Class.prototype['_basicNew'] = function() {{ return new {0}(); }};", @class.Name));
+
             if (@class.SuperClass != null && @class.SuperClass.Name != @class.Name)
             {
                 this.writer.WriteLine(string.Format("{0}Class.prototype.__proto__ = {1}Class.prototype;", @class.Name, @class.SuperClass.Name));
@@ -238,7 +240,12 @@
             else
             {
                 this.writer.Write("send(");
-                expression.Target.Visit(this);
+
+                // TODO Quick hack, if Uppercase name it's assume is a class
+                if (expression.Target is ILeftValue && char.IsUpper(((ILeftValue)expression.Target).Name[0]))
+                    this.writer.Write(string.Format("{0}.classPrototype", ((ILeftValue)expression.Target).Name));
+                else
+                    expression.Target.Visit(this);
             }
 
             this.writer.Write(string.Format(", '{0}'", ToMethodName(expression.Selector)));

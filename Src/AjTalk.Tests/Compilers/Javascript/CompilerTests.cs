@@ -205,6 +205,16 @@
         }
 
         [TestMethod]
+        public void CompileSimpleCallToClass()
+        {
+            MethodModel method = ParseMethod("create ^Point basicNew");
+            this.compiler.CompileMethod(method);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "return send(Point.classPrototype, '_basicNew');"));
+        }
+
+        [TestMethod]
         public void CompileSimpleExpressionWithTwoBinaryMessages()
         {
             IExpression expression = ParseExpression("index + 1 * 2");
@@ -250,6 +260,7 @@
             Assert.IsTrue(ContainsLine(output, "}"));
             Assert.IsTrue(ContainsLine(output, "AClass.prototype.__class = AClassClass.prototype;"));
             Assert.IsTrue(ContainsLine(output, "AClass.classPrototype = AClassClass.prototype;"));
+            Assert.IsTrue(ContainsLine(output, "AClassClass.prototype['_basicNew'] = function() { return new AClass(); };"));
         }
 
         [TestMethod]

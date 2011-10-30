@@ -319,6 +319,7 @@ Processing class variables from subclass:.. message with tests
 AClass.classPrototype = AClassClass.prototype;
 AClass.prototype.__class = AClassClass.prototype;
 sendSuper invocation
+send to Name (upperclass) is compiled as send(Name.classPrototype,...)
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en
