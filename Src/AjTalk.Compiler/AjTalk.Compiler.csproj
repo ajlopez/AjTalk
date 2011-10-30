@@ -55,6 +55,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CodeFiles\PharoCoreKernelObjects.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CodeFiles\PharoCorePoint.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CodeFiles\PharoCoreRectangle.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CodeFiles\SqueakKernelObjects.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\SqueakObject.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -32,6 +32,11 @@
             return this.classes[name];
         }
 
+        public bool HasClass(string name)
+        {
+            return this.classes.ContainsKey(name);
+        }
+
         public void Visit(IVisitor visitor)
         {
             visitor.Visit(this);

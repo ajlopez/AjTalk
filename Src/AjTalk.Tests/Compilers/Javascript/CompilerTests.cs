@@ -24,16 +24,29 @@
         }
 
         [TestMethod]
+        public void CompileSuperMethod()
+        {
+            MethodModel method = ParseMethod("with: a ^super with: a");
+            this.compiler.CompileMethod(method);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "MyClass.prototype['_with_'] = function(a)"));
+            Assert.IsTrue(ContainsLine(output, "{"));
+            Assert.IsTrue(ContainsLine(output, "return sendSuper(self, MyClass, '_with_', [a]);"));
+            Assert.IsTrue(ContainsLine(output, "};"));
+        }
+
+        [TestMethod]
         public void CompileSimpleAddMethod()
         {
             MethodModel method = ParseMethod("with: a with: b ^a+b");
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function _with_with_(a, b)"));
+            Assert.IsTrue(ContainsLine(output, "MyClass.prototype['_with_with_'] = function(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return send(a, '+', [b]);"));
-            Assert.IsTrue(ContainsLine(output, "}"));
+            Assert.IsTrue(ContainsLine(output, "};"));
         }
 
         [TestMethod]
@@ -43,10 +56,10 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function _with_with_(a, b)"));
+            Assert.IsTrue(ContainsLine(output, "MyClass.prototype['_with_with_'] = function(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return send(a, '-', [b]);"));
-            Assert.IsTrue(ContainsLine(output, "}"));
+            Assert.IsTrue(ContainsLine(output, "};"));
         }
 
         [TestMethod]
@@ -56,10 +69,10 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function _with_with_(a, b)"));
+            Assert.IsTrue(ContainsLine(output, "MyClass.prototype['_with_with_'] = function(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return send(a, '*', [b]);"));
-            Assert.IsTrue(ContainsLine(output, "}"));
+            Assert.IsTrue(ContainsLine(output, "};"));
         }
 
         [TestMethod]
@@ -69,10 +82,10 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function ->(a)"));
+            Assert.IsTrue(ContainsLine(output, "MyClass.prototype['->'] = function(a)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return a;"));
-            Assert.IsTrue(ContainsLine(output, "}"));
+            Assert.IsTrue(ContainsLine(output, "};"));
         }
 
         [TestMethod]
@@ -82,10 +95,10 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function =(a)"));
+            Assert.IsTrue(ContainsLine(output, "MyClass.prototype['='] = function(a)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return a;"));
-            Assert.IsTrue(ContainsLine(output, "}"));
+            Assert.IsTrue(ContainsLine(output, "};"));
         }
 
         [TestMethod]
@@ -95,10 +108,10 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function ~=(a)"));
+            Assert.IsTrue(ContainsLine(output, "MyClass.prototype['~='] = function(a)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return a;"));
-            Assert.IsTrue(ContainsLine(output, "}"));
+            Assert.IsTrue(ContainsLine(output, "};"));
         }
 
         [TestMethod]
@@ -218,10 +231,10 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "function _with_with_(a, b)"));
+            Assert.IsTrue(ContainsLine(output, "MyClass.prototype['_with_with_'] = function(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "a = b;"));
-            Assert.IsTrue(ContainsLine(output, "}"));
+            Assert.IsTrue(ContainsLine(output, "};"));
         }
 
         [TestMethod]
@@ -234,8 +247,9 @@
             Assert.IsTrue(ContainsLine(output, "function AClassClass()"));
             Assert.IsTrue(ContainsLine(output, "function AClass()"));
             Assert.IsTrue(ContainsLine(output, "{"));
-            Assert.IsTrue(ContainsLine(output, "this.__class = new AClassClass();"));
             Assert.IsTrue(ContainsLine(output, "}"));
+            Assert.IsTrue(ContainsLine(output, "AClass.prototype.__class = AClassClass.prototype;"));
+            Assert.IsTrue(ContainsLine(output, "AClass.classPrototype = AClassClass.prototype;"));
         }
 
         [TestMethod]
@@ -396,7 +410,7 @@
             Assert.IsTrue(ContainsLine(output, "exports.Boolean = Boolean;"));
 
             // Class variables in Object
-            Assert.IsTrue(ContainsLine(output, "ObjectClass.prototype.DependentsFields = null;"));
+            Assert.IsTrue(ContainsLine(output, "ObjectClass.DependentsFields = null;"));
         }
 
         [TestMethod]
@@ -415,19 +429,29 @@
 
             // TODO more tests
             Assert.IsTrue(ContainsLine(output, "function Object()"));
+            Assert.IsTrue(ContainsLine(output, "ObjectClass.__super = ProtoObjectClass;"));
+            Assert.IsTrue(ContainsLine(output, "Object.__super = ProtoObject;"));
+            Assert.IsTrue(ContainsLine(output, "ObjectClass.prototype.__proto__ = ProtoObjectClass.prototype;"));
+            Assert.IsTrue(ContainsLine(output, "Object.prototype.__proto__ = ProtoObject.prototype;"));
+            Assert.IsTrue(ContainsLine(output, "BooleanClass.prototype.__proto__ = ObjectClass.prototype;"));
+            Assert.IsTrue(ContainsLine(output, "Boolean.prototype.__proto__ = Object.prototype;"));
             Assert.IsTrue(ContainsLine(output, "function Boolean()"));
             Assert.IsTrue(ContainsLine(output, "exports.Object = Object;"));
             Assert.IsTrue(ContainsLine(output, "exports.Boolean = Boolean;"));
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
         [DeploymentItem(@"CodeFiles\PharoCorePoint.st")]
         public void CompilePharoCorePoint()
         {
+            ChunkReader chunkCoreReader = new ChunkReader(@"PharoCoreKernelObjects.st");
+            CodeReader coreReader = new CodeReader(chunkCoreReader);
             ChunkReader chunkReader = new ChunkReader(@"PharoCorePoint.st");
             CodeReader reader = new CodeReader(chunkReader);
             CodeModel model = new CodeModel();
 
+            coreReader.Process(model);
             reader.Process(model);
 
             this.compiler.Visit(model);
@@ -436,19 +460,27 @@
 
             // TODO more tests
             Assert.IsTrue(ContainsLine(output, "function Point()"));
+            Assert.IsTrue(ContainsLine(output, "PointClass.__super = ObjectClass;"));
+            Assert.IsTrue(ContainsLine(output, "Point.__super = Object;"));
+            Assert.IsTrue(ContainsLine(output, "PointClass.prototype.__proto__ = ObjectClass.prototype;"));
+            Assert.IsTrue(ContainsLine(output, "Point.prototype.__proto__ = Object.prototype;"));
             Assert.IsTrue(ContainsLine(output, "exports.Point = Point;"));
             Assert.IsTrue(ContainsLine(output, "Point.prototype.x = null;"));
             Assert.IsTrue(ContainsLine(output, "Point.prototype.y = null;"));
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
         [DeploymentItem(@"CodeFiles\PharoCoreRectangle.st")]
         public void CompilePharoCoreRectangle()
         {
+            ChunkReader chunkCoreReader = new ChunkReader(@"PharoCoreKernelObjects.st");
+            CodeReader coreReader = new CodeReader(chunkCoreReader);
             ChunkReader chunkReader = new ChunkReader(@"PharoCoreRectangle.st");
             CodeReader reader = new CodeReader(chunkReader);
             CodeModel model = new CodeModel();
 
+            coreReader.Process(model);
             reader.Process(model);
 
             this.compiler.Visit(model);
@@ -457,6 +489,10 @@
 
             // TODO more tests
             Assert.IsTrue(ContainsLine(output, "function Rectangle()"));
+            Assert.IsTrue(ContainsLine(output, "RectangleClass.__super = ObjectClass;"));
+            Assert.IsTrue(ContainsLine(output, "Rectangle.__super = Object;"));
+            Assert.IsTrue(ContainsLine(output, "RectangleClass.prototype.__proto__ = ObjectClass.prototype;"));
+            Assert.IsTrue(ContainsLine(output, "Rectangle.prototype.__proto__ = Object.prototype;"));
             Assert.IsTrue(ContainsLine(output, "exports.Rectangle = Rectangle;"));
             Assert.IsTrue(ContainsLine(output, "Rectangle.prototype.origin = null;"));
             Assert.IsTrue(ContainsLine(output, "Rectangle.prototype.corner = null;"));
@@ -465,7 +501,8 @@
         private static MethodModel ParseMethod(string text)
         {
             ModelParser parser = new ModelParser(text);
-            return parser.ParseMethod();
+            ClassModel classModel = new ClassModel("MyClass", null, null, null);
+            return parser.ParseMethod(classModel, false);
         }
 
         private static IExpression ParseExpression(string text)

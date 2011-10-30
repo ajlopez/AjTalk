@@ -47,15 +47,29 @@
 
             this.writer.WriteLine(string.Format("function {0}()", @class.Name));
             this.writer.WriteLineStart("{");
-            this.writer.WriteLine(string.Format("this.__class = new {0}Class();", @class.Name));
             this.writer.WriteLineEnd("}");
+
+            this.writer.WriteLine(string.Format("{0}.prototype.__class = {0}Class.prototype;", @class.Name));
+            this.writer.WriteLine(string.Format("{0}.classPrototype = {0}Class.prototype;", @class.Name));
+
+            if (@class.SuperClass != null && @class.SuperClass.Name != @class.Name)
+            {
+                this.writer.WriteLine(string.Format("{0}Class.prototype.__proto__ = {1}Class.prototype;", @class.Name, @class.SuperClass.Name));
+                this.writer.WriteLine(string.Format("{0}.prototype.__proto__ = {1}.prototype;", @class.Name, @class.SuperClass.Name));
+            }
 
             foreach (string name in @class.InstanceVariableNames)
                 this.writer.WriteLine(string.Format("{0}.prototype.{1} = null;", @class.Name, name));
 
+            if (@class.SuperClass != null && @class.SuperClass.Name != @class.Name)
+            {
+                this.writer.WriteLine(string.Format("{0}Class.__super = {1}Class;", @class.Name, @class.SuperClass.Name));
+                this.writer.WriteLine(string.Format("{0}.__super = {1};", @class.Name, @class.SuperClass.Name));
+            }
+
             // TODO Review class variables. Where? at Class? at Class.prototype?
             foreach (string name in @class.ClassVariableNames)
-                this.writer.WriteLine(string.Format("{0}Class.prototype.{1} = null;", @class.Name, name));
+                this.writer.WriteLine(string.Format("{0}Class.{1} = null;", @class.Name, name));
 
             foreach (MethodModel method in @class.InstanceMethods)
                 method.Visit(this);
@@ -217,8 +231,16 @@
 
         public override void Visit(MessageExpression expression)
         {
-            this.writer.Write("send(");
-            expression.Target.Visit(this);
+            if (this.currentMethod != null && expression.Target is ILeftValue && ((ILeftValue)expression.Target).Name == "super")
+            {
+                this.writer.Write(string.Format("sendSuper(self, {0}", this.currentMethod.Class.Name));
+            }
+            else
+            {
+                this.writer.Write("send(");
+                expression.Target.Visit(this);
+            }
+
             this.writer.Write(string.Format(", '{0}'", ToMethodName(expression.Selector)));
 
             if (expression.Arguments.Count() > 0) {
@@ -374,7 +396,7 @@
 
         public override void Visit(ClassVariableExpression expression)
         {
-            this.writer.Write(string.Format("{0}.{1}", expression.Class.Name, expression.Name));
+            this.writer.Write(string.Format("{0}Class.{1}", expression.Class.Name, expression.Name));
         }
 
         // TODO Remove (only for demo purpose)

@@ -316,7 +316,11 @@ NodeJs ajtalk.js review (not in trunk, yet)
 Real number in lexer, Parser, ModelParser, with tests
 Processing instance variables from subclass:.. message with tests
 Processing class variables from subclass:.. message with tests
+AClass.classPrototype = AClassClass.prototype;
+AClass.prototype.__class = AClassClass.prototype;
+sendSuper invocation
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/
+

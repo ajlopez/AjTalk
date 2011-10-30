@@ -76,16 +76,20 @@
         private void ProcessMessageExpression(CodeModel model, MessageExpression expression)
         {
             // TODO implements weakSubclass
-            if (expression.Selector.StartsWith("subclass:") || expression.Selector.StartsWith("weakSubclass:"))
+            if (expression.Selector.StartsWith("subclass:") || expression.Selector.StartsWith("weakSubclass:") || expression.Selector.StartsWith("variableSubclass:"))
             {
+                Boolean isvariable = expression.Selector.StartsWith("variableSubclass:");
                 SymbolExpression symbol = (SymbolExpression) expression.Arguments.First();
-                ClassModel @class = new ClassModel(symbol.Symbol, null, GetInstanceVariableNames(expression), GetClassVariableNames(expression));
-                model.AddElement(@class);
-            }
-            else if (expression.Selector.StartsWith("variableSubclass:"))
-            {
-                SymbolExpression symbol = (SymbolExpression)expression.Arguments.First();
-                ClassModel @class = new ClassModel(symbol.Symbol, null, GetInstanceVariableNames(expression), GetClassVariableNames(expression), true);
+                VariableExpression variable = (VariableExpression)expression.Target;
+
+                ClassModel super = null;
+
+                if (variable.Name != null && variable.Name != symbol.Symbol)
+                    // TODO review quick hack if class is not defined yet
+                    if (model.HasClass(variable.Name))
+                        super = model.GetClass(variable.Name);
+
+                ClassModel @class = new ClassModel(symbol.Symbol, super, GetInstanceVariableNames(expression), GetClassVariableNames(expression), isvariable);
                 model.AddElement(@class);
             }
         }
