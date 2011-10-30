@@ -70,6 +70,21 @@
         }
 
         [TestMethod]
+        public void ParseReal()
+        {
+            ModelParser parser = new ModelParser("12.34");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(ConstantExpression));
+
+            ConstantExpression cexpression = (ConstantExpression)expression;
+            Assert.AreEqual(12.34, cexpression.Value);
+
+            Assert.AreEqual("12.34", expression.AsString());
+        }
+
+        [TestMethod]
         public void ParseCharacter()
         {
             ModelParser parser = new ModelParser("$a");

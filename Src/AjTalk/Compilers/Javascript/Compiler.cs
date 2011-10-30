@@ -47,7 +47,7 @@
 
             this.writer.WriteLine(string.Format("function {0}()", @class.Name));
             this.writer.WriteLineStart("{");
-            this.writer.WriteLine(string.Format("this._class = new {0}Class();", @class.Name));
+            this.writer.WriteLine(string.Format("this.__class = new {0}Class();", @class.Name));
             this.writer.WriteLineEnd("}");
 
             foreach (string name in @class.InstanceVariableNames)

@@ -234,7 +234,7 @@
             Assert.IsTrue(ContainsLine(output, "function AClassClass()"));
             Assert.IsTrue(ContainsLine(output, "function AClass()"));
             Assert.IsTrue(ContainsLine(output, "{"));
-            Assert.IsTrue(ContainsLine(output, "this._class = new AClassClass();"));
+            Assert.IsTrue(ContainsLine(output, "this.__class = new AClassClass();"));
             Assert.IsTrue(ContainsLine(output, "}"));
         }
 

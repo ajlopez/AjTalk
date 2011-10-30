@@ -426,6 +426,9 @@ namespace AjTalk.Compiler
                     ch = this.NextChar();
                 }
 
+                if (ch == '.' && Char.IsDigit(this.PeekChar()))
+                    return this.NextReal(value+".");
+
                 this.PushChar(ch);
             }
             catch (EndOfInputException)
@@ -434,6 +437,33 @@ namespace AjTalk.Compiler
 
             Token token = new Token();
             token.Type = TokenType.Integer;
+            token.Value = value;
+
+            return token;
+        }
+
+        private Token NextReal(string value)
+        {
+            char ch;
+
+            try
+            {
+                ch = this.NextChar();
+
+                while (Char.IsDigit(ch))
+                {
+                    value += ch;
+                    ch = this.NextChar();
+                }
+
+                this.PushChar(ch);
+            }
+            catch (EndOfInputException)
+            {
+            }
+
+            Token token = new Token();
+            token.Type = TokenType.Real;
             token.Value = value;
 
             return token;

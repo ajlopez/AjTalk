@@ -212,6 +212,18 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void ProcessReal()
+        {
+            Lexer tokenizer = new Lexer("10.234");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("10.234", token.Value);
+            Assert.AreEqual(TokenType.Real, token.Type);
+        }
+
+        [TestMethod]
         public void ProcessOperator()
         {
             Lexer tokenizer = new Lexer("+");

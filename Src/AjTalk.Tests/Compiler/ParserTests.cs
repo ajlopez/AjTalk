@@ -121,6 +121,17 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileSimpleRealSum()
+        {
+            Parser compiler = new Parser("1.2 + 3.4");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
         public void CompileSimpleArithmeticWithParenthesis()
         {
             Parser compiler = new Parser("1 * (2 + 3)");

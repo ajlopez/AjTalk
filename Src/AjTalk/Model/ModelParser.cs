@@ -285,6 +285,9 @@
 
                 case TokenType.Integer:
                     return new ConstantExpression(Convert.ToInt32(token.Value, CultureInfo.InvariantCulture));
+
+                case TokenType.Real:
+                    return new ConstantExpression(Convert.ToDouble(token.Value, CultureInfo.InvariantCulture));
             }
 
             this.PushToken(token);
@@ -338,6 +341,9 @@
 
             if (token.Type == TokenType.Integer)
                 return new ConstantExpression(Convert.ToInt32(token.Value, CultureInfo.InvariantCulture));
+
+            if (token.Type == TokenType.Real)
+                return new ConstantExpression(Convert.ToDouble(token.Value, CultureInfo.InvariantCulture));
 
             return new ConstantExpression(token.Value);
         }

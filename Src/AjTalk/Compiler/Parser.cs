@@ -256,6 +256,12 @@ namespace AjTalk.Compiler
                 return;
             }
 
+            if (token.Type == TokenType.Real)
+            {
+                this.block.CompileGetConstant(Convert.ToDouble(token.Value));
+                return;
+            }
+
             if (token.Type == TokenType.String)
             {
                 this.block.CompileGetConstant(token.Value);
@@ -307,6 +313,10 @@ namespace AjTalk.Compiler
                 {
                     case TokenType.Integer:
                         this.block.CompileGetConstant(Convert.ToInt32(token.Value));
+                        nelements++;
+                        break;
+                    case TokenType.Real:
+                        this.block.CompileGetConstant(Convert.ToDouble(token.Value));
                         nelements++;
                         break;
                     case TokenType.String:

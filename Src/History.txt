@@ -308,6 +308,12 @@ Compile PharoCorePoint
 Compile PharoCoreRectangle 
 Use send(...) in Javascript
 
+2011-10-30
+Real numbers in Parser, ModelParser with tests
+Unary - as message
+Archive: old generated .js wo/send(..)
+NodeJs ajtalk.js review (not in trunk, yet)
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/
