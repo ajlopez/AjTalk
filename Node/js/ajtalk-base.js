@@ -30,11 +30,22 @@ global.Boolean.prototype._ifTrue_ = function(block) {
 	return null;
 }
 
+global.Boolean.prototype._ifTrue_ifFalse_ = function(blockTrue, blockFalse) {
+	if (this == true)
+		return blockTrue();
+	else
+		return blockFalse();
+}
+
 global.Boolean.prototype._ifFalse_ = function(block) {
 	if (this == false)
 		return block();
 	return null;
 }
+
+global.Function.prototype._isBlock = function() { return true; }
+
+global.Object.prototype._isBlock = function() { return false; }
 
 exports.send = function(receiver, selector, args)
 {

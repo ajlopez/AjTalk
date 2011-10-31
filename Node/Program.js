@@ -8267,6 +8267,54 @@ RectangleClass.prototype['_origin_extent_'] = function(originPoint, extentPoint)
     console.log('_origin_extent_');
     return send(send(self, '_basicNew'), '_setOrigin_corner_', [originPoint, send(originPoint, '+', [extentPoint])]);
 };
+function HtmlCanvasClass()
+{
+}
+function HtmlCanvas()
+{
+}
+HtmlCanvas.prototype.__class = HtmlCanvasClass.prototype;
+HtmlCanvas.classPrototype = HtmlCanvasClass.prototype;
+HtmlCanvasClass.prototype['_basicNew'] = function() { return new HtmlCanvas(); };
+HtmlCanvasClass.prototype.__proto__ = ObjectClass.prototype;
+HtmlCanvas.prototype.__proto__ = Object.prototype;
+HtmlCanvas.prototype.response = null;
+HtmlCanvasClass.__super = ObjectClass;
+HtmlCanvas.__super = Object;
+HtmlCanvas.prototype['_write_'] = function(text)
+{
+    var self = this;
+    console.log('_write_');
+	self.response.write(text);
+//    send(self.response, '_write_', [text]);
+};
+HtmlCanvas.prototype['_h1_'] = function(content)
+{
+    var self = this;
+    console.log('_h1_');
+    send(self, '_write_', ['<h1>']);
+    send(self, '_write_', [content]);
+    send(self, '_write_', ['</h1>']);
+};
+function HtmlPageClass()
+{
+}
+function HtmlPage()
+{
+}
+HtmlPage.prototype.__class = HtmlPageClass.prototype;
+HtmlPage.classPrototype = HtmlPageClass.prototype;
+HtmlPageClass.prototype['_basicNew'] = function() { return new HtmlPage(); };
+HtmlPageClass.prototype.__proto__ = ObjectClass.prototype;
+HtmlPage.prototype.__proto__ = Object.prototype;
+HtmlPageClass.__super = ObjectClass;
+HtmlPage.__super = Object;
+HtmlPage.prototype['_render_'] = function(html)
+{
+    var self = this;
+    console.log('_render_');
+    send(html, '_h1_', ['Hello, world']);
+};
 
 exports.ProtoObject = ProtoObject;
 exports.Object = Object;
@@ -8279,3 +8327,5 @@ exports.WeakMessageSend = WeakMessageSend;
 exports.WeakActionSequence = WeakActionSequence;
 exports.Point = Point;
 exports.Rectangle = Rectangle;
+exports.HtmlCanvas = HtmlCanvas;
+exports.HtmlPage = HtmlPage;
