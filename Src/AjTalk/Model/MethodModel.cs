@@ -42,9 +42,31 @@
 
         public bool IsClassMethod { get { return this.isClassMethod; } }
 
+        public bool HasBlock()
+        {
+            return HasBlock(this.body);
+        }
+
         public void Visit(IVisitor visitor)
         {
             visitor.Visit(this);
+        }
+
+        public bool HasBlock(IEnumerable<IExpression> expressions)
+        {
+            if (expressions == null)
+                return false;
+
+            foreach (var expression in expressions)
+            {
+                if (expression is BlockExpression)
+                    return true;
+                if (expression is MessageExpression)
+                    if (HasBlock(((MessageExpression)expression).Arguments))
+                        return true;
+            }
+
+            return false;
         }
     }
 }

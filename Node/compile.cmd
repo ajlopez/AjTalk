@@ -1,0 +1,1 @@
+..\Src\AjTalk.Compiler\bin\Debug\ajtalkc st\PharoCoreKernelObjects.st st\PharoCorePoint.st st\PharoCoreRectangle.st

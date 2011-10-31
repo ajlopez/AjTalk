@@ -320,6 +320,10 @@ AClass.classPrototype = AClassClass.prototype;
 AClass.prototype.__class = AClassClass.prototype;
 sendSuper invocation
 send to Name (upperclass) is compiled as send(Name.classPrototype,...)
+__context for return in local blocks
+Node directory
+js/ajtalk-base.js
+js/ajtalk-primitives.js
 
 Angel "Java" Lopez
 http://www.ajlopez.com/en

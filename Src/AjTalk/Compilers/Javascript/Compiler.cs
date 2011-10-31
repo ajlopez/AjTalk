@@ -33,6 +33,7 @@
 
         private SourceWriter writer;
         private MethodModel currentMethod;
+        private bool inBlock = false;
 
         public Compiler(SourceWriter writer)
         {
@@ -104,12 +105,17 @@
             this.writer.WriteLine(")");
             this.writer.WriteLineStart("{");
             this.writer.WriteLine("var self = this;");
+            
+            // TODO Review local variable for block returns
+            if (method.HasBlock())
+                this.writer.WriteLine("var __context = {};");
+
             this.writer.WriteLine(string.Format("console.log('{0}');", ToMethodName(method.Selector)));
 
             foreach (string locname in method.LocalVariables)
                 this.writer.WriteLine(string.Format("var {0} = null", ToVariableName(locname)));
 
-            MethodModel previousModel = this.currentMethod;
+            MethodModel previousMethod = this.currentMethod;
 
             try
             {
@@ -118,7 +124,7 @@
             }
             finally
             {
-                this.currentMethod = previousModel;
+                this.currentMethod = previousMethod;
             }
 
             if (method.Class != null)
@@ -136,6 +142,8 @@
             {
                 expr.Visit(this);
                 this.writer.WriteLine(";");
+                if (this.currentMethod != null && this.currentMethod.HasBlock() && expr is MessageExpression)
+                    this.writer.WriteLine("if (__context.return) return __context.value;");
             }
         }
 
@@ -175,6 +183,12 @@
 
         public override void Visit(CodeModel model)
         {
+            // TODO Node.js dependent
+            this.writer.WriteLine("var base = require('./js/ajtalk-base.js');");
+            this.writer.WriteLine("var send = base.send;");
+            this.writer.WriteLine("var sendSuper = base.sendSuper;");
+            this.writer.WriteLine("var primitives = require('./js/ajtalk-primitives.js');");
+
             foreach (var element in model.Elements)
                 element.Visit(this);
 
@@ -185,6 +199,7 @@
                 if (!(element is ClassModel))
                     continue;
 
+                // TODO Node.js module dependent
                 this.writer.WriteLine(string.Format("exports.{0} = {0};", ((ClassModel)element).Name));
             }
         }
@@ -213,13 +228,25 @@
 
             foreach (string locname in expression.LocalVariables)
                 this.writer.WriteLine(string.Format("var {0} = null;", locname));
-            this.Visit(expression.Body);
+
+            bool previousInBlock = this.inBlock;
+
+            try
+            {
+                this.inBlock = true;
+                this.Visit(expression.Body);
+            }
+            finally
+            {
+                this.inBlock = previousInBlock;
+            }
+
             this.writer.WriteLineEnd("}");
         }
 
         public override void Visit(PrimitiveExpression expression)
         {
-            this.writer.Write(string.Format("var _primitive = Primitive{0}(self", expression.Number));
+            this.writer.Write(string.Format("var _primitive = primitives.primitive{0}(self", expression.Number));
 
             foreach (var parameter in this.currentMethod.ParameterNames)
             {
@@ -368,6 +395,16 @@
 
         public override void Visit(ReturnExpression expression)
         {
+            if (this.currentMethod != null && this.inBlock)
+            {
+                this.writer.Write("__context.value = ");
+                expression.Expression.Visit(this);
+                this.writer.WriteLine(";");
+                this.writer.WriteLine("__context.return = true;");
+                this.writer.Write("return __context.value");
+                return;
+            }
+
             this.writer.Write("return ");
             expression.Expression.Visit(this);
         }
@@ -382,7 +419,6 @@
             expression.LeftValue.Visit(this);
             this.writer.Write(" = ");
             expression.Expression.Visit(this);
-            //this.writer.WriteLine(";");
         }
 
         public override void Visit(SymbolExpression expression)
@@ -398,7 +434,7 @@
 
         public override void Visit(InstanceVariableExpression expression)
         {
-            this.writer.Write(string.Format("this.{0}", expression.Name));
+            this.writer.Write(string.Format("self.{0}", expression.Name));
         }
 
         public override void Visit(ClassVariableExpression expression)

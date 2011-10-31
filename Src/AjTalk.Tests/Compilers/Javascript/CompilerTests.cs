@@ -341,7 +341,7 @@
             this.compiler.CompileMethod(method);
             this.writer.Close();
             string output = this.writer.ToString();
-            Assert.IsTrue(ContainsLine(output, "var _primitive = Primitive60(self, b);"));
+            Assert.IsTrue(ContainsLine(output, "var _primitive = primitives.primitive60(self, b);"));
             Assert.IsTrue(ContainsLine(output, "if (_primitive) return _primitive.value;"));
         }
 

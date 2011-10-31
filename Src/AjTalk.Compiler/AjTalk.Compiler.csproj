@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AjTalk.Compiler</RootNamespace>
-    <AssemblyName>AjTalk.Compiler</AssemblyName>
+    <AssemblyName>ajtalkc</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
