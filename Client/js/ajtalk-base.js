@@ -25,6 +25,11 @@ Number.prototype['@'] = function(x) {
 	return point;
 }
 
+Number.prototype['_do_'] = function(block) {
+	for (var k=1; k<=this; k++)
+		block(k);
+}
+
 Boolean.prototype._ifTrue_ = function(block) {
 	if (this == true)
 		return block();
