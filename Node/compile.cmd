@@ -1,1 +1,1 @@
-ajtalkc st\PharoCoreKernelObjects.st st\PharoCorePoint.st st\PharoCoreRectangle.st st\HtmlCanvas.st st\HtmlPage.st
+ajtalkc st\PharoCoreKernelObjects.st st\PharoCorePoint.st st\PharoCoreRectangle.st st\AjTalk-HttpServer.st

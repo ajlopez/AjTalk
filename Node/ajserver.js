@@ -10,9 +10,13 @@ console.log('loaded');
 
 var page = new AjTalk.HtmlPage();
 
+function Response(res) {
+	this._write_ = function(text) { res.write(text); }
+}
+
 http.createServer(function(req,res) {
 	var html = new AjTalk.HtmlCanvas();
-	html.response = res;
+	html.response = new Response(res);
 	page._render_(html);
 	res.end();
 }).listen(8080);

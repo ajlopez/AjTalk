@@ -8285,8 +8285,7 @@ HtmlCanvas.prototype['_write_'] = function(text)
 {
     var self = this;
     console.log('_write_');
-	self.response.write(text);
-//    send(self.response, '_write_', [text]);
+    send(self.response, '_write_', [text]);
 };
 HtmlCanvas.prototype['_h1_'] = function(content)
 {
@@ -8295,6 +8294,14 @@ HtmlCanvas.prototype['_h1_'] = function(content)
     send(self, '_write_', ['<h1>']);
     send(self, '_write_', [content]);
     send(self, '_write_', ['</h1>']);
+};
+HtmlCanvas.prototype['_image_'] = function(url)
+{
+    var self = this;
+    console.log('_image_');
+    send(self.response, '_write_', ['<img src="']);
+    send(self.response, '_write_', [url]);
+    send(self.response, '_write_', ['">']);
 };
 function HtmlPageClass()
 {
@@ -8314,6 +8321,7 @@ HtmlPage.prototype['_render_'] = function(html)
     var self = this;
     console.log('_render_');
     send(html, '_h1_', ['Hello, world']);
+    send(html, '_image_', ['http://www.ajlopez.com/images/imagen.jpg']);
 };
 
 exports.ProtoObject = ProtoObject;
