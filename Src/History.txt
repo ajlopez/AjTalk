@@ -325,6 +325,10 @@ Node directory
 js/ajtalk-base.js
 js/ajtalk-primitives.js
 
+2011-11-02
+Constant Expression toString using CultureInvariant
+AjTalk assembly to AjTalk.Core
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

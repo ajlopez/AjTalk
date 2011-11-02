@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Globalization;
 
     public class ConstantExpression : IExpression
     {
@@ -28,7 +29,9 @@
             if (this.value.Equals(true))
                 return "true";
 
-            return this.value.ToString();
+            return Convert.ToString(this.value, CultureInfo.InvariantCulture);
+
+            //return this.value.ToString();
         }
 
         public void Visit(IVisitor visitor)
