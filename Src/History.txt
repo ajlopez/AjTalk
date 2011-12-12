@@ -329,6 +329,9 @@ js/ajtalk-primitives.js
 Constant Expression toString using CultureInvariant
 AjTalk assembly to AjTalk.Core
 
+2011-12-12
+NodeCompiler, first steps
+
 Angel "Java" Lopez
 http://www.ajlopez.com/en
 http://ajlopez.wordpress.com/

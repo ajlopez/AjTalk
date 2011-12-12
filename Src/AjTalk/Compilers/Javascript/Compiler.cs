@@ -183,12 +183,6 @@
 
         public override void Visit(CodeModel model)
         {
-            // TODO Node.js dependent
-            this.writer.WriteLine("var base = require('./js/ajtalk-base.js');");
-            this.writer.WriteLine("var send = base.send;");
-            this.writer.WriteLine("var sendSuper = base.sendSuper;");
-            this.writer.WriteLine("var primitives = require('./js/ajtalk-primitives.js');");
-
             foreach (var element in model.Elements)
                 element.Visit(this);
 
@@ -440,6 +434,16 @@
         public override void Visit(ClassVariableExpression expression)
         {
             this.writer.Write(string.Format("{0}Class.{1}", expression.Class.Name, expression.Name));
+        }
+
+        public void WriteLine(string line)
+        {
+            this.writer.WriteLine(line);
+        }
+
+        public void Write(string text)
+        {
+            this.writer.Write(text);
         }
 
         // TODO Remove (only for demo purpose)

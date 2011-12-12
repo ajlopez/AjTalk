@@ -16,7 +16,7 @@ namespace AjTalk.Compiler
             StreamWriter swriter = new StreamWriter("Program.js");
             SourceWriter writer = new SourceWriter(swriter);
             CodeModel model = new CodeModel();
-            AjTalk.Compilers.Javascript.Compiler compiler = new AjTalk.Compilers.Javascript.Compiler(writer);
+            AjTalk.Compilers.Javascript.Compiler compiler = new AjTalk.Compilers.Javascript.NodeCompiler(writer);
 
             foreach (string filename in args)
             {
