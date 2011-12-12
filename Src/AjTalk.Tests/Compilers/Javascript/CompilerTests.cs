@@ -397,7 +397,6 @@
 
             // TODO more tests
             Assert.IsTrue(ContainsLine(output, "function Object()"));
-            Assert.IsTrue(ContainsLine(output, "exports.Object = Object;"));
         }
 
         [TestMethod]
@@ -417,8 +416,6 @@
             // TODO more tests
             Assert.IsTrue(ContainsLine(output, "function Object()"));
             Assert.IsTrue(ContainsLine(output, "function Boolean()"));
-            Assert.IsTrue(ContainsLine(output, "exports.Object = Object;"));
-            Assert.IsTrue(ContainsLine(output, "exports.Boolean = Boolean;"));
 
             // Class variables in Object
             Assert.IsTrue(ContainsLine(output, "ObjectClass.DependentsFields = null;"));
@@ -447,8 +444,6 @@
             Assert.IsTrue(ContainsLine(output, "BooleanClass.prototype.__proto__ = ObjectClass.prototype;"));
             Assert.IsTrue(ContainsLine(output, "Boolean.prototype.__proto__ = Object.prototype;"));
             Assert.IsTrue(ContainsLine(output, "function Boolean()"));
-            Assert.IsTrue(ContainsLine(output, "exports.Object = Object;"));
-            Assert.IsTrue(ContainsLine(output, "exports.Boolean = Boolean;"));
         }
 
         [TestMethod]
@@ -475,7 +470,6 @@
             Assert.IsTrue(ContainsLine(output, "Point.__super = Object;"));
             Assert.IsTrue(ContainsLine(output, "PointClass.prototype.__proto__ = ObjectClass.prototype;"));
             Assert.IsTrue(ContainsLine(output, "Point.prototype.__proto__ = Object.prototype;"));
-            Assert.IsTrue(ContainsLine(output, "exports.Point = Point;"));
             Assert.IsTrue(ContainsLine(output, "Point.prototype.x = null;"));
             Assert.IsTrue(ContainsLine(output, "Point.prototype.y = null;"));
         }
@@ -504,7 +498,6 @@
             Assert.IsTrue(ContainsLine(output, "Rectangle.__super = Object;"));
             Assert.IsTrue(ContainsLine(output, "RectangleClass.prototype.__proto__ = ObjectClass.prototype;"));
             Assert.IsTrue(ContainsLine(output, "Rectangle.prototype.__proto__ = Object.prototype;"));
-            Assert.IsTrue(ContainsLine(output, "exports.Rectangle = Rectangle;"));
             Assert.IsTrue(ContainsLine(output, "Rectangle.prototype.origin = null;"));
             Assert.IsTrue(ContainsLine(output, "Rectangle.prototype.corner = null;"));
         }

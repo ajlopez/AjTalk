@@ -185,17 +185,6 @@
         {
             foreach (var element in model.Elements)
                 element.Visit(this);
-
-            this.writer.WriteLine();
-
-            foreach (var element in model.Elements)
-            {
-                if (!(element is ClassModel))
-                    continue;
-
-                // TODO Node.js module dependent
-                this.writer.WriteLine(string.Format("exports.{0} = {0};", ((ClassModel)element).Name));
-            }
         }
 
         public override void Visit(ConstantExpression expression)
@@ -436,9 +425,24 @@
             this.writer.Write(string.Format("{0}Class.{1}", expression.Class.Name, expression.Name));
         }
 
+        public void WriteLine()
+        {
+            this.writer.WriteLine();
+        }
+
         public void WriteLine(string line)
         {
             this.writer.WriteLine(line);
+        }
+
+        public void WriteLineStart(string line)
+        {
+            this.writer.WriteLineStart(line);
+        }
+
+        public void WriteLineEnd(string line)
+        {
+            this.writer.WriteLineEnd(line);
         }
 
         public void Write(string text)

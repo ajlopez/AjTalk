@@ -1,0 +1,1 @@
+ajtalkc -target browser st\PharoCoreKernelObjects.st st\PharoCorePoint.st st\AjTalk-ClientCanvas.st ajtalk.js

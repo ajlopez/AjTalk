@@ -6,33 +6,44 @@
     using System.Text;
     using AjTalk.Model;
 
-    public class NodeCompiler : Compiler
+    public class BrowserCompiler : Compiler
     {
-        public NodeCompiler(SourceWriter writer)
+        public BrowserCompiler(SourceWriter writer)
             : base(writer)
         {
         }
 
         public override void Visit(CodeModel model)
         {
-            // TODO Review Node.js dependent preface code
-            this.WriteLine("var base = require('./js/ajtalk-base.js');");
+            // TODO Review browser dependent preface code
+            this.WriteLine("AjTalk = function() {");
             this.WriteLine("var send = base.send;");
             this.WriteLine("var sendSuper = base.sendSuper;");
-            this.WriteLine("var primitives = require('./js/ajtalk-primitives.js');");
 
             base.Visit(model);
 
             this.WriteLine();
+
+            int n = 0;
+
+            this.WriteLineStart("return {");
 
             foreach (var element in model.Elements)
             {
                 if (!(element is ClassModel))
                     continue;
 
-                // TODO Node.js module dependent
-                this.WriteLine(string.Format("exports.{0} = {0};", ((ClassModel)element).Name));
+                if (n > 0)
+                    this.WriteLine(",");
+
+                this.Write(string.Format("{0} : {0}", ((ClassModel)element).Name));
+                n++;
             }
+
+            this.WriteLine("");
+            this.WriteLineEnd("}");
+
+            this.WriteLine("}();");
         }
     }
 }
