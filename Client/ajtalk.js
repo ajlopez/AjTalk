@@ -10,130 +10,130 @@ function ProtoObject()
 ProtoObject.prototype.__class = ProtoObjectClass.prototype;
 ProtoObject.classPrototype = ProtoObjectClass.prototype;
 ProtoObjectClass.prototype['_basicNew'] = function() { return new ProtoObject(); };
-ProtoObject.prototype['_executeMethod_'] = function(compiledMethod)
+ProtoObject.prototype['executeMethod_'] = function(compiledMethod)
 {
     var self = this;
-    console.log('_executeMethod_');
-    send(self, '_deprecated_on_in_', ['use #withArgs:executeMethod:', '2011-04-27', 'Pharo1.3']);
-    return send(self, '_withArgs_executeMethod_', [[], compiledMethod]);
+    console.log('executeMethod_');
+    send(self, 'deprecated_on_in_', ['use #withArgs:executeMethod:', '2011-04-27', 'Pharo1.3']);
+    return send(self, 'withArgs_executeMethod_', [[], compiledMethod]);
 };
-ProtoObject.prototype['_with_executeMethod_'] = function(arg1, compiledMethod)
+ProtoObject.prototype['with_executeMethod_'] = function(arg1, compiledMethod)
 {
     var self = this;
-    console.log('_with_executeMethod_');
-    send(self, '_deprecated_on_in_', ['use #withArgs:executeMethod:', '2011-04-27', 'Pharo1.3']);
-    return send(self, '_withArgs_executeMethod_', [[arg1], compiledMethod]);
+    console.log('with_executeMethod_');
+    send(self, 'deprecated_on_in_', ['use #withArgs:executeMethod:', '2011-04-27', 'Pharo1.3']);
+    return send(self, 'withArgs_executeMethod_', [[arg1], compiledMethod]);
 };
-ProtoObject.prototype['_with_with_executeMethod_'] = function(arg1, arg2, compiledMethod)
+ProtoObject.prototype['with_with_executeMethod_'] = function(arg1, arg2, compiledMethod)
 {
     var self = this;
-    console.log('_with_with_executeMethod_');
-    send(self, '_deprecated_on_in_', ['use #withArgs:executeMethod:', '2011-04-27', 'Pharo1.3']);
-    return send(self, '_withArgs_executeMethod_', [[arg1, arg2], compiledMethod]);
+    console.log('with_with_executeMethod_');
+    send(self, 'deprecated_on_in_', ['use #withArgs:executeMethod:', '2011-04-27', 'Pharo1.3']);
+    return send(self, 'withArgs_executeMethod_', [[arg1, arg2], compiledMethod]);
 };
-ProtoObject.prototype['_with_with_with_executeMethod_'] = function(arg1, arg2, arg3, compiledMethod)
+ProtoObject.prototype['with_with_with_executeMethod_'] = function(arg1, arg2, arg3, compiledMethod)
 {
     var self = this;
-    console.log('_with_with_with_executeMethod_');
-    send(self, '_deprecated_on_in_', ['use #withArgs:executeMethod:', '2011-04-27', 'Pharo1.3']);
-    return send(self, '_withArgs_executeMethod_', [[arg1, arg2, arg3], compiledMethod]);
+    console.log('with_with_with_executeMethod_');
+    send(self, 'deprecated_on_in_', ['use #withArgs:executeMethod:', '2011-04-27', 'Pharo1.3']);
+    return send(self, 'withArgs_executeMethod_', [[arg1, arg2, arg3], compiledMethod]);
 };
-ProtoObject.prototype['_with_with_with_with_executeMethod_'] = function(arg1, arg2, arg3, arg4, compiledMethod)
+ProtoObject.prototype['with_with_with_with_executeMethod_'] = function(arg1, arg2, arg3, arg4, compiledMethod)
 {
     var self = this;
-    console.log('_with_with_with_with_executeMethod_');
-    send(self, '_deprecated_on_in_', ['use #withArgs:executeMethod:', '2011-04-27', 'Pharo1.3']);
-    return send(self, '_withArgs_executeMethod_', [[arg1, arg2, arg3, arg4], compiledMethod]);
+    console.log('with_with_with_with_executeMethod_');
+    send(self, 'deprecated_on_in_', ['use #withArgs:executeMethod:', '2011-04-27', 'Pharo1.3']);
+    return send(self, 'withArgs_executeMethod_', [[arg1, arg2, arg3, arg4], compiledMethod]);
 };
-ProtoObject.prototype['_tryNamedPrimitive'] = function()
+ProtoObject.prototype['tryNamedPrimitive'] = function()
 {
     var self = this;
-    console.log('_tryNamedPrimitive');
+    console.log('tryNamedPrimitive');
     var _primitive = primitives.primitive0(self);
     if (_primitive) return _primitive.value;
     ;
-    return send(ContextPart.classPrototype, '_primitiveFailToken');
+    return send(ContextPart.classPrototype, 'primitiveFailToken');
 };
-ProtoObject.prototype['_tryNamedPrimitive_'] = function(arg1)
+ProtoObject.prototype['tryNamedPrimitive_'] = function(arg1)
 {
     var self = this;
-    console.log('_tryNamedPrimitive_');
+    console.log('tryNamedPrimitive_');
     var _primitive = primitives.primitive0(self, arg1);
     if (_primitive) return _primitive.value;
     ;
-    return send(ContextPart.classPrototype, '_primitiveFailToken');
+    return send(ContextPart.classPrototype, 'primitiveFailToken');
 };
-ProtoObject.prototype['_tryNamedPrimitive_with_'] = function(arg1, arg2)
+ProtoObject.prototype['tryNamedPrimitive_with_'] = function(arg1, arg2)
 {
     var self = this;
-    console.log('_tryNamedPrimitive_with_');
+    console.log('tryNamedPrimitive_with_');
     var _primitive = primitives.primitive0(self, arg1, arg2);
     if (_primitive) return _primitive.value;
     ;
-    return send(ContextPart.classPrototype, '_primitiveFailToken');
+    return send(ContextPart.classPrototype, 'primitiveFailToken');
 };
-ProtoObject.prototype['_tryNamedPrimitive_with_with_'] = function(arg1, arg2, arg3)
+ProtoObject.prototype['tryNamedPrimitive_with_with_'] = function(arg1, arg2, arg3)
 {
     var self = this;
-    console.log('_tryNamedPrimitive_with_with_');
+    console.log('tryNamedPrimitive_with_with_');
     var _primitive = primitives.primitive0(self, arg1, arg2, arg3);
     if (_primitive) return _primitive.value;
     ;
-    return send(ContextPart.classPrototype, '_primitiveFailToken');
+    return send(ContextPart.classPrototype, 'primitiveFailToken');
 };
-ProtoObject.prototype['_tryNamedPrimitive_with_with_with_'] = function(arg1, arg2, arg3, arg4)
+ProtoObject.prototype['tryNamedPrimitive_with_with_with_'] = function(arg1, arg2, arg3, arg4)
 {
     var self = this;
-    console.log('_tryNamedPrimitive_with_with_with_');
+    console.log('tryNamedPrimitive_with_with_with_');
     var _primitive = primitives.primitive0(self, arg1, arg2, arg3, arg4);
     if (_primitive) return _primitive.value;
     ;
-    return send(ContextPart.classPrototype, '_primitiveFailToken');
+    return send(ContextPart.classPrototype, 'primitiveFailToken');
 };
-ProtoObject.prototype['_tryNamedPrimitive_with_with_with_with_'] = function(arg1, arg2, arg3, arg4, arg5)
+ProtoObject.prototype['tryNamedPrimitive_with_with_with_with_'] = function(arg1, arg2, arg3, arg4, arg5)
 {
     var self = this;
-    console.log('_tryNamedPrimitive_with_with_with_with_');
+    console.log('tryNamedPrimitive_with_with_with_with_');
     var _primitive = primitives.primitive0(self, arg1, arg2, arg3, arg4, arg5);
     if (_primitive) return _primitive.value;
     ;
-    return send(ContextPart.classPrototype, '_primitiveFailToken');
+    return send(ContextPart.classPrototype, 'primitiveFailToken');
 };
-ProtoObject.prototype['_tryNamedPrimitive_with_with_with_with_with_'] = function(arg1, arg2, arg3, arg4, arg5, arg6)
+ProtoObject.prototype['tryNamedPrimitive_with_with_with_with_with_'] = function(arg1, arg2, arg3, arg4, arg5, arg6)
 {
     var self = this;
-    console.log('_tryNamedPrimitive_with_with_with_with_with_');
+    console.log('tryNamedPrimitive_with_with_with_with_with_');
     var _primitive = primitives.primitive0(self, arg1, arg2, arg3, arg4, arg5, arg6);
     if (_primitive) return _primitive.value;
     ;
-    return send(ContextPart.classPrototype, '_primitiveFailToken');
+    return send(ContextPart.classPrototype, 'primitiveFailToken');
 };
-ProtoObject.prototype['_tryNamedPrimitive_with_with_with_with_with_with_'] = function(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+ProtoObject.prototype['tryNamedPrimitive_with_with_with_with_with_with_'] = function(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
 {
     var self = this;
-    console.log('_tryNamedPrimitive_with_with_with_with_with_with_');
+    console.log('tryNamedPrimitive_with_with_with_with_with_with_');
     var _primitive = primitives.primitive0(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
     if (_primitive) return _primitive.value;
     ;
-    return send(ContextPart.classPrototype, '_primitiveFailToken');
+    return send(ContextPart.classPrototype, 'primitiveFailToken');
 };
-ProtoObject.prototype['_tryNamedPrimitive_with_with_with_with_with_with_with_'] = function(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+ProtoObject.prototype['tryNamedPrimitive_with_with_with_with_with_with_with_'] = function(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
 {
     var self = this;
-    console.log('_tryNamedPrimitive_with_with_with_with_with_with_with_');
+    console.log('tryNamedPrimitive_with_with_with_with_with_with_with_');
     var _primitive = primitives.primitive0(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
     if (_primitive) return _primitive.value;
     ;
-    return send(ContextPart.classPrototype, '_primitiveFailToken');
+    return send(ContextPart.classPrototype, 'primitiveFailToken');
 };
-ProtoObject.prototype['_tryPrimitive_withArgs_'] = function(primIndex, argumentArray)
+ProtoObject.prototype['tryPrimitive_withArgs_'] = function(primIndex, argumentArray)
 {
     var self = this;
-    console.log('_tryPrimitive_withArgs_');
+    console.log('tryPrimitive_withArgs_');
     var _primitive = primitives.primitive118(self, primIndex, argumentArray);
     if (_primitive) return _primitive.value;
     ;
-    return send(ContextPart.classPrototype, '_primitiveFailToken');
+    return send(ContextPart.classPrototype, 'primitiveFailToken');
 };
 ProtoObject.prototype['=='] = function(anObject)
 {
@@ -142,20 +142,20 @@ ProtoObject.prototype['=='] = function(anObject)
     var _primitive = primitives.primitive110(self, anObject);
     if (_primitive) return _primitive.value;
     ;
-    send(self, '_primitiveFailed');
+    send(self, 'primitiveFailed');
 };
-ProtoObject.prototype['_identityHash'] = function()
+ProtoObject.prototype['identityHash'] = function()
 {
     var self = this;
-    console.log('_identityHash');
-    return send(send(self, '_basicIdentityHash'), '_bitShift_', [18]);
+    console.log('identityHash');
+    return send(send(self, 'basicIdentityHash'), 'bitShift_', [18]);
 };
 ProtoObject.prototype['~~'] = function(anObject)
 {
     var self = this;
     var __context = {};
     console.log('~~');
-    send(send(self, '==', [anObject]), '_ifTrue_ifFalse_', [function() {
+    send(send(self, '==', [anObject]), 'ifTrue_ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
@@ -168,167 +168,167 @@ ProtoObject.prototype['~~'] = function(anObject)
     ]);
     if (__context.return) return __context.value;
 };
-ProtoObject.prototype['_doOnlyOnce_'] = function(aBlock)
+ProtoObject.prototype['doOnlyOnce_'] = function(aBlock)
 {
     var self = this;
     var __context = {};
-    console.log('_doOnlyOnce_');
-    send(send(send(Smalltalk.classPrototype, '_globals'), '_at_ifAbsent_', ['OneShotArmed', function() {
+    console.log('doOnlyOnce_');
+    send(send(send(Smalltalk.classPrototype, 'globals'), 'at_ifAbsent_', ['OneShotArmed', function() {
         true;
     }
-    ]), '_ifTrue_', [function() {
-        send(send(Smalltalk.classPrototype, '_globals'), '_at_put_', ['OneShotArmed', false]);
+    ]), 'ifTrue_', [function() {
+        send(send(Smalltalk.classPrototype, 'globals'), 'at_put_', ['OneShotArmed', false]);
         if (__context.return) return __context.value;
-        send(aBlock, '_value');
+        send(aBlock, 'value');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-ProtoObject.prototype['_flag_'] = function(aSymbol)
+ProtoObject.prototype['flag_'] = function(aSymbol)
 {
     var self = this;
-    console.log('_flag_');
+    console.log('flag_');
 };
-ProtoObject.prototype['_rearmOneShot'] = function()
+ProtoObject.prototype['rearmOneShot'] = function()
 {
     var self = this;
-    console.log('_rearmOneShot');
-    send(send(Smalltalk.classPrototype, '_globals'), '_at_put_', ['OneShotArmed', true]);
+    console.log('rearmOneShot');
+    send(send(Smalltalk.classPrototype, 'globals'), 'at_put_', ['OneShotArmed', true]);
 };
-ProtoObject.prototype['_withArgs_executeMethod_'] = function(argArray, compiledMethod)
+ProtoObject.prototype['withArgs_executeMethod_'] = function(argArray, compiledMethod)
 {
     var self = this;
-    console.log('_withArgs_executeMethod_');
+    console.log('withArgs_executeMethod_');
     var _primitive = primitives.primitive188(self, argArray, compiledMethod);
     if (_primitive) return _primitive.value;
     ;
-    send(self, '_primitiveFailed');
+    send(self, 'primitiveFailed');
 };
-ProtoObject.prototype['_initialize'] = function()
+ProtoObject.prototype['initialize'] = function()
 {
     var self = this;
-    console.log('_initialize');
+    console.log('initialize');
     return self;
 };
-ProtoObject.prototype['_rehash'] = function()
+ProtoObject.prototype['rehash'] = function()
 {
     var self = this;
-    console.log('_rehash');
+    console.log('rehash');
 };
-ProtoObject.prototype['_basicIdentityHash'] = function()
+ProtoObject.prototype['basicIdentityHash'] = function()
 {
     var self = this;
-    console.log('_basicIdentityHash');
+    console.log('basicIdentityHash');
     var _primitive = primitives.primitive75(self);
     if (_primitive) return _primitive.value;
     ;
-    send(self, '_primitiveFailed');
+    send(self, 'primitiveFailed');
 };
-ProtoObject.prototype['_become_'] = function(otherObject)
+ProtoObject.prototype['become_'] = function(otherObject)
 {
     var self = this;
-    console.log('_become_');
-    send(send(Array.classPrototype, '_with_', [self]), '_elementsExchangeIdentityWith_', [send(Array.classPrototype, '_with_', [otherObject])]);
+    console.log('become_');
+    send(send(Array.classPrototype, 'with_', [self]), 'elementsExchangeIdentityWith_', [send(Array.classPrototype, 'with_', [otherObject])]);
 };
-ProtoObject.prototype['_cannotInterpret_'] = function(aMessage)
+ProtoObject.prototype['cannotInterpret_'] = function(aMessage)
 {
     var self = this;
     var __context = {};
-    console.log('_cannotInterpret_');
-    send(send(send(send(self, '_class'), '_lookupSelector_', [send(aMessage, '_selector')]), '==', [nil]), '_ifFalse_', [function() {
-        __context.value = send(aMessage, '_sentTo_', [self]);
+    console.log('cannotInterpret_');
+    send(send(send(send(self, 'class'), 'lookupSelector_', [send(aMessage, 'selector')]), '==', [nil]), 'ifFalse_', [function() {
+        __context.value = send(aMessage, 'sentTo_', [self]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(Error.classPrototype, '_signal_', ['MethodDictionary fault']);
+    send(Error.classPrototype, 'signal_', ['MethodDictionary fault']);
     if (__context.return) return __context.value;
-    return send(aMessage, '_sentTo_', [self]);
+    return send(aMessage, 'sentTo_', [self]);
 };
-ProtoObject.prototype['_doesNotUnderstand_'] = function(aMessage)
+ProtoObject.prototype['doesNotUnderstand_'] = function(aMessage)
 {
     var self = this;
-    console.log('_doesNotUnderstand_');
-    return send((function () {var _aux = send((function () {var _aux = send(send(MessageNotUnderstood.classPrototype, '_new'), '_message_', [aMessage]);return _aux;})(), '_receiver_', [self]);return _aux;})(), '_signal');
+    console.log('doesNotUnderstand_');
+    return send((function () {var _aux = send((function () {var _aux = send(send(MessageNotUnderstood.classPrototype, 'new'), 'message_', [aMessage]);return _aux;})(), 'receiver_', [self]);return _aux;})(), 'signal');
 };
-ProtoObject.prototype['_nextInstance'] = function()
+ProtoObject.prototype['nextInstance'] = function()
 {
     var self = this;
-    console.log('_nextInstance');
+    console.log('nextInstance');
     var _primitive = primitives.primitive78(self);
     if (_primitive) return _primitive.value;
     ;
     return nil;
 };
-ProtoObject.prototype['_nextObject'] = function()
+ProtoObject.prototype['nextObject'] = function()
 {
     var self = this;
-    console.log('_nextObject');
+    console.log('nextObject');
     var _primitive = primitives.primitive139(self);
     if (_primitive) return _primitive.value;
     ;
-    send(self, '_primitiveFailed');
+    send(self, 'primitiveFailed');
 };
-ProtoObject.prototype['_ifNil_'] = function(nilBlock)
+ProtoObject.prototype['ifNil_'] = function(nilBlock)
 {
     var self = this;
-    console.log('_ifNil_');
+    console.log('ifNil_');
     return self;
 };
-ProtoObject.prototype['_ifNil_ifNotNil_'] = function(nilBlock, ifNotNilBlock)
+ProtoObject.prototype['ifNil_ifNotNil_'] = function(nilBlock, ifNotNilBlock)
 {
     var self = this;
-    console.log('_ifNil_ifNotNil_');
-    return send(ifNotNilBlock, '_cull_', [self]);
+    console.log('ifNil_ifNotNil_');
+    return send(ifNotNilBlock, 'cull_', [self]);
 };
-ProtoObject.prototype['_ifNotNil_'] = function(ifNotNilBlock)
+ProtoObject.prototype['ifNotNil_'] = function(ifNotNilBlock)
 {
     var self = this;
-    console.log('_ifNotNil_');
-    return send(ifNotNilBlock, '_cull_', [self]);
+    console.log('ifNotNil_');
+    return send(ifNotNilBlock, 'cull_', [self]);
 };
-ProtoObject.prototype['_ifNotNil_ifNil_'] = function(ifNotNilBlock, nilBlock)
+ProtoObject.prototype['ifNotNil_ifNil_'] = function(ifNotNilBlock, nilBlock)
 {
     var self = this;
-    console.log('_ifNotNil_ifNil_');
-    return send(ifNotNilBlock, '_cull_', [self]);
+    console.log('ifNotNil_ifNil_');
+    return send(ifNotNilBlock, 'cull_', [self]);
 };
-ProtoObject.prototype['_isNil'] = function()
+ProtoObject.prototype['isNil'] = function()
 {
     var self = this;
-    console.log('_isNil');
+    console.log('isNil');
     return false;
 };
-ProtoObject.prototype['_pointersTo'] = function()
+ProtoObject.prototype['pointersTo'] = function()
 {
     var self = this;
-    console.log('_pointersTo');
-    return send(self, '_pointersToExcept_', [[]]);
+    console.log('pointersTo');
+    return send(self, 'pointersToExcept_', [[]]);
 };
-ProtoObject.prototype['_pointersToExcept_'] = function(objectsToExclude)
+ProtoObject.prototype['pointersToExcept_'] = function(objectsToExclude)
 {
     var self = this;
     var __context = {};
-    console.log('_pointersToExcept_');
+    console.log('pointersToExcept_');
     var results = null
     var anObj = null
-    send(Smalltalk.classPrototype, '_garbageCollect');
+    send(Smalltalk.classPrototype, 'garbageCollect');
     if (__context.return) return __context.value;
-    results = send(OrderedCollection.classPrototype, '_new_', [1000]);
-    anObj = send(self, '_someObject');
+    results = send(OrderedCollection.classPrototype, 'new_', [1000]);
+    anObj = send(self, 'someObject');
     send(function() {
         send(0, '==', [anObj]);
         if (__context.return) return __context.value;
     }
-    , '_whileFalse_', [function() {
-        send(send(anObj, '_pointsTo_', [self]), '_ifTrue_', [function() {
-            send(send(send(anObj, '~~', [send(results, '_collector')]), '_and_', [function() {
-                send(send(anObj, '~~', [objectsToExclude]), '_and_', [function() {
-                    send(send(anObj, '~~', [thisContext]), '_and_', [function() {
-                        send(send(anObj, '~~', [send(thisContext, '_sender')]), '_and_', [function() {
-                            send(anObj, '~~', [send(send(thisContext, '_sender'), '_sender')]);
+    , 'whileFalse_', [function() {
+        send(send(anObj, 'pointsTo_', [self]), 'ifTrue_', [function() {
+            send(send(send(anObj, '~~', [send(results, 'collector')]), 'and_', [function() {
+                send(send(anObj, '~~', [objectsToExclude]), 'and_', [function() {
+                    send(send(anObj, '~~', [thisContext]), 'and_', [function() {
+                        send(send(anObj, '~~', [send(thisContext, 'sender')]), 'and_', [function() {
+                            send(anObj, '~~', [send(send(thisContext, 'sender'), 'sender')]);
                             if (__context.return) return __context.value;
                         }
                         ]);
@@ -340,8 +340,8 @@ ProtoObject.prototype['_pointersToExcept_'] = function(objectsToExclude)
                 ]);
                 if (__context.return) return __context.value;
             }
-            ]), '_ifTrue_', [function() {
-                send(results, '_add_', [anObj]);
+            ]), 'ifTrue_', [function() {
+                send(results, 'add_', [anObj]);
                 if (__context.return) return __context.value;
             }
             ]);
@@ -349,12 +349,12 @@ ProtoObject.prototype['_pointersToExcept_'] = function(objectsToExclude)
         }
         ]);
         if (__context.return) return __context.value;
-        anObj = send(anObj, '_nextObject');
+        anObj = send(anObj, 'nextObject');
     }
     ]);
     if (__context.return) return __context.value;
-    send(objectsToExclude, '_do_', [function(obj) {
-        send(results, '_removeAllSuchThat_', [function(el) {
+    send(objectsToExclude, 'do_', [function(obj) {
+        send(results, 'removeAllSuchThat_', [function(el) {
             send(el, '==', [obj]);
             if (__context.return) return __context.value;
         }
@@ -363,12 +363,12 @@ ProtoObject.prototype['_pointersToExcept_'] = function(objectsToExclude)
     }
     ]);
     if (__context.return) return __context.value;
-    return send(results, '_asArray');
+    return send(results, 'asArray');
 };
-ProtoObject.prototype['_pointsTo_'] = function(anObject)
+ProtoObject.prototype['pointsTo_'] = function(anObject)
 {
     var self = this;
-    console.log('_pointsTo_');
+    console.log('pointsTo_');
     var _primitive = primitives.primitive132(self, anObject);
     if (_primitive) return _primitive.value;
     ;
@@ -386,196 +386,196 @@ ObjectClass.prototype.__proto__ = ProtoObjectClass.prototype;
 Object.prototype.__proto__ = ProtoObject.prototype;
 ObjectClass.__super = ProtoObjectClass;
 Object.__super = ProtoObject;
-ObjectClass.DependentsFields = null;
-Object.prototype['_printDirectlyToDisplay'] = function()
+ObjectClass.$DependentsFields = null;
+Object.prototype['printDirectlyToDisplay'] = function()
 {
     var self = this;
-    console.log('_printDirectlyToDisplay');
-    send(send(self, '_asString'), '_displayAt_', [send(0, '@', [100])]);
+    console.log('printDirectlyToDisplay');
+    send(send(self, 'asString'), 'displayAt_', [send(0, '@', [100])]);
 };
-Object.prototype['_addModelYellowButtonMenuItemsTo_forMorph_hand_'] = function(aCustomMenu, aMorph, aHandMorph)
+Object.prototype['addModelYellowButtonMenuItemsTo_forMorph_hand_'] = function(aCustomMenu, aMorph, aHandMorph)
 {
     var self = this;
     var __context = {};
-    console.log('_addModelYellowButtonMenuItemsTo_forMorph_hand_');
-    send(send(Morph.classPrototype, '_cmdGesturesEnabled'), '_ifTrue_', [function() {
-        send(aCustomMenu, '_add_target_action_', [send('inspect model', '_translated'), self, 'inspect']);
+    console.log('addModelYellowButtonMenuItemsTo_forMorph_hand_');
+    send(send(Morph.classPrototype, 'cmdGesturesEnabled'), 'ifTrue_', [function() {
+        send(aCustomMenu, 'add_target_action_', [send('inspect model', 'translated'), self, 'inspect']);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
     return aCustomMenu;
 };
-Object.prototype['_asDraggableMorph'] = function()
+Object.prototype['asDraggableMorph'] = function()
 {
     var self = this;
-    console.log('_asDraggableMorph');
-    return send((function () {var _aux = send(send(StringMorph.classPrototype, '_contents_', [send(self, '_printString')]), '_color_', [send(Color.classPrototype, '_white')]);return _aux;})(), '_yourself');
+    console.log('asDraggableMorph');
+    return send((function () {var _aux = send(send(StringMorph.classPrototype, 'contents_', [send(self, 'printString')]), 'color_', [send(Color.classPrototype, 'white')]);return _aux;})(), 'yourself');
 };
-Object.prototype['_asMorph'] = function()
+Object.prototype['asMorph'] = function()
 {
     var self = this;
-    console.log('_asMorph');
-    return send(self, '_asStringMorph');
+    console.log('asMorph');
+    return send(self, 'asStringMorph');
 };
-Object.prototype['_asStringMorph'] = function()
+Object.prototype['asStringMorph'] = function()
 {
     var self = this;
-    console.log('_asStringMorph');
-    return send(send(self, '_asStringOrText'), '_asStringMorph');
+    console.log('asStringMorph');
+    return send(send(self, 'asStringOrText'), 'asStringMorph');
 };
-Object.prototype['_asTextMorph'] = function()
+Object.prototype['asTextMorph'] = function()
 {
     var self = this;
-    console.log('_asTextMorph');
-    return send(send(TextMorph.classPrototype, '_new'), '_contentsAsIs_', [send(self, '_asStringOrText')]);
+    console.log('asTextMorph');
+    return send(send(TextMorph.classPrototype, 'new'), 'contentsAsIs_', [send(self, 'asStringOrText')]);
 };
-Object.prototype['_currentEvent'] = function()
+Object.prototype['currentEvent'] = function()
 {
     var self = this;
-    console.log('_currentEvent');
-    return send(ActiveEvent.classPrototype, '_ifNil_', [function() {
-        send(send(self, '_currentHand'), '_lastEvent');
+    console.log('currentEvent');
+    return send(ActiveEvent.classPrototype, 'ifNil_', [function() {
+        send(send(self, 'currentHand'), 'lastEvent');
     }
     ]);
 };
-Object.prototype['_currentHand'] = function()
+Object.prototype['currentHand'] = function()
 {
     var self = this;
-    console.log('_currentHand');
-    return send(ActiveHand.classPrototype, '_ifNil_', [function() {
-        send(send(self, '_currentWorld'), '_primaryHand');
+    console.log('currentHand');
+    return send(ActiveHand.classPrototype, 'ifNil_', [function() {
+        send(send(self, 'currentWorld'), 'primaryHand');
     }
     ]);
 };
-Object.prototype['_currentWorld'] = function()
+Object.prototype['currentWorld'] = function()
 {
     var self = this;
-    console.log('_currentWorld');
-    return send(send(UIManager.classPrototype, '_default'), '_currentWorld');
+    console.log('currentWorld');
+    return send(send(UIManager.classPrototype, 'default'), 'currentWorld');
 };
-Object.prototype['_externalName'] = function()
+Object.prototype['externalName'] = function()
 {
     var self = this;
-    console.log('_externalName');
+    console.log('externalName');
     return send(function() {
-        send(send(send(self, '_asString'), '_copyWithout_', [send(Character.classPrototype, '_cr')]), '_truncateTo_', [27]);
+        send(send(send(self, 'asString'), 'copyWithout_', [send(Character.classPrototype, 'cr')]), 'truncateTo_', [27]);
     }
-    , '_ifError_', [function() {
-        __context.value = send(send(send(self, '_class'), '_name'), '_printString');
+    , 'ifError_', [function() {
+        __context.value = send(send(send(self, 'class'), 'name'), 'printString');
         __context.return = true;
         return __context.value;
     }
     ]);
 };
-Object.prototype['_hasModelYellowButtonMenuItems'] = function()
+Object.prototype['hasModelYellowButtonMenuItems'] = function()
 {
     var self = this;
-    console.log('_hasModelYellowButtonMenuItems');
-    return send(Morph.classPrototype, '_cmdGesturesEnabled');
+    console.log('hasModelYellowButtonMenuItems');
+    return send(Morph.classPrototype, 'cmdGesturesEnabled');
 };
-Object.prototype['_iconOrThumbnailOfSize_'] = function(aNumberOrPoint)
+Object.prototype['iconOrThumbnailOfSize_'] = function(aNumberOrPoint)
 {
     var self = this;
-    console.log('_iconOrThumbnailOfSize_');
+    console.log('iconOrThumbnailOfSize_');
     return nil;
 };
-Object.prototype['_openAsMorph'] = function()
+Object.prototype['openAsMorph'] = function()
 {
     var self = this;
-    console.log('_openAsMorph');
-    return send(send(self, '_asMorph'), '_openInHand');
+    console.log('openAsMorph');
+    return send(send(self, 'asMorph'), 'openInHand');
 };
-Object.prototype['_when_send_to_exclusive_'] = function(anEventSelector, aMessageSelector, anObject, aValueHolder)
+Object.prototype['when_send_to_exclusive_'] = function(anEventSelector, aMessageSelector, anObject, aValueHolder)
 {
     var self = this;
-    console.log('_when_send_to_exclusive_');
-    send(self, '_when_evaluate_', [anEventSelector, send(send(ExclusiveWeakMessageSend.classPrototype, '_receiver_selector_', [anObject, aMessageSelector]), '_basicExecuting_', [aValueHolder])]);
+    console.log('when_send_to_exclusive_');
+    send(self, 'when_evaluate_', [anEventSelector, send(send(ExclusiveWeakMessageSend.classPrototype, 'receiver_selector_', [anObject, aMessageSelector]), 'basicExecuting_', [aValueHolder])]);
 };
-Object.prototype['_when_send_to_with_exclusive_'] = function(anEventSelector, aMessageSelector, anObject, anArg, aValueHolder)
+Object.prototype['when_send_to_with_exclusive_'] = function(anEventSelector, aMessageSelector, anObject, anArg, aValueHolder)
 {
     var self = this;
-    console.log('_when_send_to_with_exclusive_');
-    send(self, '_when_evaluate_', [anEventSelector, send(send(ExclusiveWeakMessageSend.classPrototype, '_receiver_selector_arguments_', [anObject, aMessageSelector, send(Array.classPrototype, '_with_', [anArg])]), '_basicExecuting_', [aValueHolder])]);
+    console.log('when_send_to_with_exclusive_');
+    send(self, 'when_evaluate_', [anEventSelector, send(send(ExclusiveWeakMessageSend.classPrototype, 'receiver_selector_arguments_', [anObject, aMessageSelector, send(Array.classPrototype, 'with_', [anArg])]), 'basicExecuting_', [aValueHolder])]);
 };
-Object.prototype['_when_send_to_withArguments_exclusive_'] = function(anEventSelector, aMessageSelector, anObject, anArgArray, aValueHolder)
+Object.prototype['when_send_to_withArguments_exclusive_'] = function(anEventSelector, aMessageSelector, anObject, anArgArray, aValueHolder)
 {
     var self = this;
-    console.log('_when_send_to_withArguments_exclusive_');
-    send(self, '_when_evaluate_', [anEventSelector, send(send(ExclusiveWeakMessageSend.classPrototype, '_receiver_selector_arguments_', [anObject, aMessageSelector, anArgArray]), '_basicExecuting_', [aValueHolder])]);
+    console.log('when_send_to_withArguments_exclusive_');
+    send(self, 'when_evaluate_', [anEventSelector, send(send(ExclusiveWeakMessageSend.classPrototype, 'receiver_selector_arguments_', [anObject, aMessageSelector, anArgArray]), 'basicExecuting_', [aValueHolder])]);
 };
-Object.prototype['_when_sendOnce_to_'] = function(anEventSelector, aMessageSelector, anObject)
+Object.prototype['when_sendOnce_to_'] = function(anEventSelector, aMessageSelector, anObject)
 {
     var self = this;
-    console.log('_when_sendOnce_to_');
-    send(self, '_when_evaluate_', [anEventSelector, send(NonReentrantWeakMessageSend.classPrototype, '_receiver_selector_', [anObject, aMessageSelector])]);
+    console.log('when_sendOnce_to_');
+    send(self, 'when_evaluate_', [anEventSelector, send(NonReentrantWeakMessageSend.classPrototype, 'receiver_selector_', [anObject, aMessageSelector])]);
 };
-Object.prototype['_when_sendOnce_to_with_'] = function(anEventSelector, aMessageSelector, anObject, anArg)
+Object.prototype['when_sendOnce_to_with_'] = function(anEventSelector, aMessageSelector, anObject, anArg)
 {
     var self = this;
-    console.log('_when_sendOnce_to_with_');
-    send(self, '_when_evaluate_', [anEventSelector, send(NonReentrantWeakMessageSend.classPrototype, '_receiver_selector_arguments_', [anObject, aMessageSelector, send(Array.classPrototype, '_with_', [anArg])])]);
+    console.log('when_sendOnce_to_with_');
+    send(self, 'when_evaluate_', [anEventSelector, send(NonReentrantWeakMessageSend.classPrototype, 'receiver_selector_arguments_', [anObject, aMessageSelector, send(Array.classPrototype, 'with_', [anArg])])]);
 };
-Object.prototype['_when_sendOnce_to_withArguments_'] = function(anEventSelector, aMessageSelector, anObject, anArgArray)
+Object.prototype['when_sendOnce_to_withArguments_'] = function(anEventSelector, aMessageSelector, anObject, anArgArray)
 {
     var self = this;
-    console.log('_when_sendOnce_to_withArguments_');
-    send(self, '_when_evaluate_', [anEventSelector, send(NonReentrantWeakMessageSend.classPrototype, '_receiver_selector_arguments_', [anObject, aMessageSelector, anArgArray])]);
+    console.log('when_sendOnce_to_withArguments_');
+    send(self, 'when_evaluate_', [anEventSelector, send(NonReentrantWeakMessageSend.classPrototype, 'receiver_selector_arguments_', [anObject, aMessageSelector, anArgArray])]);
 };
-Object.prototype['_okToClose'] = function()
+Object.prototype['okToClose'] = function()
 {
     var self = this;
-    console.log('_okToClose');
+    console.log('okToClose');
     return true;
 };
-Object.prototype['_taskbarIcon'] = function()
+Object.prototype['taskbarIcon'] = function()
 {
     var self = this;
-    console.log('_taskbarIcon');
-    return send(send(self, '_class'), '_taskbarIcon');
+    console.log('taskbarIcon');
+    return send(send(self, 'class'), 'taskbarIcon');
 };
-Object.prototype['_taskbarLabel'] = function()
+Object.prototype['taskbarLabel'] = function()
 {
     var self = this;
-    console.log('_taskbarLabel');
-    return send(send(self, '_class'), '_taskbarLabel');
+    console.log('taskbarLabel');
+    return send(send(self, 'class'), 'taskbarLabel');
 };
-Object.prototype['_windowActiveOnFirstClick'] = function()
+Object.prototype['windowActiveOnFirstClick'] = function()
 {
     var self = this;
-    console.log('_windowActiveOnFirstClick');
+    console.log('windowActiveOnFirstClick');
     return true;
 };
-Object.prototype['_comeFullyUpOnReload_'] = function(smartRefStream)
+Object.prototype['comeFullyUpOnReload_'] = function(smartRefStream)
 {
     var self = this;
-    console.log('_comeFullyUpOnReload_');
+    console.log('comeFullyUpOnReload_');
     return self;
 };
-Object.prototype['_indexIfCompact'] = function()
+Object.prototype['indexIfCompact'] = function()
 {
     var self = this;
-    console.log('_indexIfCompact');
+    console.log('indexIfCompact');
     return 0;
 };
-Object.prototype['_objectForDataStream_'] = function(refStrm)
+Object.prototype['objectForDataStream_'] = function(refStrm)
 {
     var self = this;
-    console.log('_objectForDataStream_');
+    console.log('objectForDataStream_');
     return self;
 };
-Object.prototype['_readDataFrom_size_'] = function(aDataStream, varsOnDisk)
+Object.prototype['readDataFrom_size_'] = function(aDataStream, varsOnDisk)
 {
     var self = this;
     var __context = {};
-    console.log('_readDataFrom_size_');
+    console.log('readDataFrom_size_');
     var cntInstVars = null
     var cntIndexedVars = null
-    cntInstVars = send(send(self, '_class'), '_instSize');
-    send(send(send(self, '_class'), '_isVariable'), '_ifTrue_ifFalse_', [function() {
+    cntInstVars = send(send(self, 'class'), 'instSize');
+    send(send(send(self, 'class'), 'isVariable'), 'ifTrue_ifFalse_', [function() {
         cntIndexedVars = send(varsOnDisk, '-', [cntInstVars]);
-        send(send(cntIndexedVars, '<', [0]), '_ifTrue_', [function() {
-            send(self, '_error_', ['Class has changed too much.  Define a convertxxx method']);
+        send(send(cntIndexedVars, '<', [0]), 'ifTrue_', [function() {
+            send(self, 'error_', ['Class has changed too much.  Define a convertxxx method']);
             if (__context.return) return __context.value;
         }
         ]);
@@ -587,52 +587,52 @@ Object.prototype['_readDataFrom_size_'] = function(aDataStream, varsOnDisk)
     }
     ]);
     if (__context.return) return __context.value;
-    send(aDataStream, '_beginReference_', [self]);
+    send(aDataStream, 'beginReference_', [self]);
     if (__context.return) return __context.value;
-    send(1, '_to_do_', [cntInstVars, function(i) {
-        send(self, '_instVarAt_put_', [i, send(aDataStream, '_next')]);
+    send(1, 'to_do_', [cntInstVars, function(i) {
+        send(self, 'instVarAt_put_', [i, send(aDataStream, 'next')]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(1, '_to_do_', [cntIndexedVars, function(i) {
-        send(self, '_basicAt_put_', [i, send(aDataStream, '_next')]);
+    send(1, 'to_do_', [cntIndexedVars, function(i) {
+        send(self, 'basicAt_put_', [i, send(aDataStream, 'next')]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
     return self;
 };
-Object.prototype['_rootStubInImageSegment_'] = function(imageSegment)
+Object.prototype['rootStubInImageSegment_'] = function(imageSegment)
 {
     var self = this;
-    console.log('_rootStubInImageSegment_');
-    return send(send(ImageSegmentRootStub.classPrototype, '_new'), '_xxSuperclass_format_segment_', [nil, nil, imageSegment]);
+    console.log('rootStubInImageSegment_');
+    return send(send(ImageSegmentRootStub.classPrototype, 'new'), 'xxSuperclass_format_segment_', [nil, nil, imageSegment]);
 };
-Object.prototype['_storeDataOn_'] = function(aDataStream)
+Object.prototype['storeDataOn_'] = function(aDataStream)
 {
     var self = this;
     var __context = {};
-    console.log('_storeDataOn_');
+    console.log('storeDataOn_');
     var cntInstVars = null
     var cntIndexedVars = null
-    cntInstVars = send(send(self, '_class'), '_instSize');
-    cntIndexedVars = send(self, '_basicSize');
-    send(aDataStream, '_beginInstance_size_', [send(self, '_class'), send(cntInstVars, '+', [cntIndexedVars])]);
+    cntInstVars = send(send(self, 'class'), 'instSize');
+    cntIndexedVars = send(self, 'basicSize');
+    send(aDataStream, 'beginInstance_size_', [send(self, 'class'), send(cntInstVars, '+', [cntIndexedVars])]);
     if (__context.return) return __context.value;
-    send(1, '_to_do_', [cntInstVars, function(i) {
-        send(aDataStream, '_nextPut_', [send(self, '_instVarAt_', [i])]);
+    send(1, 'to_do_', [cntInstVars, function(i) {
+        send(aDataStream, 'nextPut_', [send(self, 'instVarAt_', [i])]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(send(send(send(aDataStream, '_byteStream'), '_class'), '==', [DummyStream]), '_and_', [function() {
-        send(send(self, '_class'), '_isBits');
+    send(send(send(send(send(aDataStream, 'byteStream'), 'class'), '==', [DummyStream]), 'and_', [function() {
+        send(send(self, 'class'), 'isBits');
         if (__context.return) return __context.value;
     }
-    ]), '_ifFalse_', [function() {
-        send(1, '_to_do_', [cntIndexedVars, function(i) {
-            send(aDataStream, '_nextPut_', [send(self, '_basicAt_', [i])]);
+    ]), 'ifFalse_', [function() {
+        send(1, 'to_do_', [cntIndexedVars, function(i) {
+            send(aDataStream, 'nextPut_', [send(self, 'basicAt_', [i])]);
             if (__context.return) return __context.value;
         }
         ]);
@@ -641,141 +641,141 @@ Object.prototype['_storeDataOn_'] = function(aDataStream)
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_settingFixedDomainValueNodeFrom_'] = function(aSettingNode)
+Object.prototype['settingFixedDomainValueNodeFrom_'] = function(aSettingNode)
 {
     var self = this;
-    console.log('_settingFixedDomainValueNodeFrom_');
-    return send(aSettingNode, '_fixedDomainValueNodeForObject_', [self]);
+    console.log('settingFixedDomainValueNodeFrom_');
+    return send(aSettingNode, 'fixedDomainValueNodeForObject_', [self]);
 };
-Object.prototype['_settingStoreOn_'] = function(aStream)
+Object.prototype['settingStoreOn_'] = function(aStream)
 {
     var self = this;
-    console.log('_settingStoreOn_');
-    return send(self, '_storeOn_', [aStream]);
+    console.log('settingStoreOn_');
+    return send(self, 'storeOn_', [aStream]);
 };
-Object.prototype['_systemNavigation'] = function()
+Object.prototype['systemNavigation'] = function()
 {
     var self = this;
-    console.log('_systemNavigation');
-    return send(SystemNavigation.classPrototype, '_default');
+    console.log('systemNavigation');
+    return send(SystemNavigation.classPrototype, 'default');
 };
-Object.prototype['_defaultBackgroundColor'] = function()
+Object.prototype['defaultBackgroundColor'] = function()
 {
     var self = this;
-    console.log('_defaultBackgroundColor');
-    return send(send(UITheme.classPrototype, '_current'), '_windowColorFor_', [self]);
+    console.log('defaultBackgroundColor');
+    return send(send(UITheme.classPrototype, 'current'), 'windowColorFor_', [self]);
 };
-Object.prototype['_showDiffs'] = function()
+Object.prototype['showDiffs'] = function()
 {
     var self = this;
-    console.log('_showDiffs');
+    console.log('showDiffs');
     return false;
 };
-Object.prototype['_updateListsAndCodeIn_'] = function(aWindow)
+Object.prototype['updateListsAndCodeIn_'] = function(aWindow)
 {
     var self = this;
     var __context = {};
-    console.log('_updateListsAndCodeIn_');
-    send(send(self, '_canDiscardEdits'), '_ifFalse_', [function() {
+    console.log('updateListsAndCodeIn_');
+    send(send(self, 'canDiscardEdits'), 'ifFalse_', [function() {
         __context.value = self;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(aWindow, '_updatablePanes'), '_do_', [function(aPane) {
-        send(aPane, '_verifyContents');
+    send(send(aWindow, 'updatablePanes'), 'do_', [function(aPane) {
+        send(aPane, 'verifyContents');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_browse'] = function()
+Object.prototype['browse'] = function()
 {
     var self = this;
-    console.log('_browse');
-    send(send(self, '_systemNavigation'), '_browseClass_', [send(self, '_class')]);
+    console.log('browse');
+    send(send(self, 'systemNavigation'), 'browseClass_', [send(self, 'class')]);
 };
-Object.prototype['_browseHierarchy'] = function()
+Object.prototype['browseHierarchy'] = function()
 {
     var self = this;
-    console.log('_browseHierarchy');
-    send(send(self, '_systemNavigation'), '_browseHierarchy_', [send(self, '_class')]);
+    console.log('browseHierarchy');
+    send(send(self, 'systemNavigation'), 'browseHierarchy_', [send(self, 'class')]);
 };
-Object.prototype['_asExplorerString'] = function()
+Object.prototype['asExplorerString'] = function()
 {
     var self = this;
-    console.log('_asExplorerString');
-    return send(self, '_printString');
+    console.log('asExplorerString');
+    return send(self, 'printString');
 };
-Object.prototype['_customizeExplorerContents'] = function()
+Object.prototype['customizeExplorerContents'] = function()
 {
     var self = this;
-    console.log('_customizeExplorerContents');
+    console.log('customizeExplorerContents');
     return false;
 };
-Object.prototype['_explore'] = function()
+Object.prototype['explore'] = function()
 {
     var self = this;
-    console.log('_explore');
-    return send(send(Smalltalk.classPrototype, '_tools'), '_explore_', [self]);
+    console.log('explore');
+    return send(send(Smalltalk.classPrototype, 'tools'), 'explore_', [self]);
 };
-Object.prototype['_hasContentsInExplorer'] = function()
+Object.prototype['hasContentsInExplorer'] = function()
 {
     var self = this;
-    console.log('_hasContentsInExplorer');
-    return send(send(send(self, '_basicSize'), '>', [0]), '_or_', [function() {
-        send(send(send(self, '_class'), '_allInstVarNames'), '_notEmpty');
+    console.log('hasContentsInExplorer');
+    return send(send(send(self, 'basicSize'), '>', [0]), 'or_', [function() {
+        send(send(send(self, 'class'), 'allInstVarNames'), 'notEmpty');
     }
     ]);
 };
-Object.prototype['_basicInspect'] = function()
+Object.prototype['basicInspect'] = function()
 {
     var self = this;
-    console.log('_basicInspect');
-    return send(send(Smalltalk.classPrototype, '_tools'), '_basicInspect_', [self]);
+    console.log('basicInspect');
+    return send(send(Smalltalk.classPrototype, 'tools'), 'basicInspect_', [self]);
 };
-Object.prototype['_defaultLabelForInspector'] = function()
+Object.prototype['defaultLabelForInspector'] = function()
 {
     var self = this;
-    console.log('_defaultLabelForInspector');
-    return send(send(self, '_class'), '_name');
+    console.log('defaultLabelForInspector');
+    return send(send(self, 'class'), 'name');
 };
-Object.prototype['_doExpiredInspectCount'] = function()
+Object.prototype['doExpiredInspectCount'] = function()
 {
     var self = this;
-    console.log('_doExpiredInspectCount');
-    send(self, '_clearHaltOnce');
-    send(self, '_removeHaltCount');
-    send(self, '_inspect');
+    console.log('doExpiredInspectCount');
+    send(self, 'clearHaltOnce');
+    send(self, 'removeHaltCount');
+    send(self, 'inspect');
 };
-Object.prototype['_inspect'] = function()
+Object.prototype['inspect'] = function()
 {
     var self = this;
-    console.log('_inspect');
-    send(send(Smalltalk.classPrototype, '_tools'), '_inspect_', [self]);
+    console.log('inspect');
+    send(send(Smalltalk.classPrototype, 'tools'), 'inspect_', [self]);
 };
-Object.prototype['_inspectOnCount_'] = function(int)
+Object.prototype['inspectOnCount_'] = function(int)
 {
     var self = this;
     var __context = {};
-    console.log('_inspectOnCount_');
-    send(send(self, '_haltOnceEnabled'), '_ifTrue_', [function() {
-        send(send(self, '_hasHaltCount'), '_ifTrue_ifFalse_', [function() {
-            send(send(self, '_decrementAndCheckHaltCount'), '_ifTrue_', [function() {
-                send(self, '_doExpiredInspectCount');
+    console.log('inspectOnCount_');
+    send(send(self, 'haltOnceEnabled'), 'ifTrue_', [function() {
+        send(send(self, 'hasHaltCount'), 'ifTrue_ifFalse_', [function() {
+            send(send(self, 'decrementAndCheckHaltCount'), 'ifTrue_', [function() {
+                send(self, 'doExpiredInspectCount');
                 if (__context.return) return __context.value;
             }
             ]);
             if (__context.return) return __context.value;
         }
         , function() {
-            send(send(int, '=', [1]), '_ifTrue_ifFalse_', [function() {
-                send(self, '_doExpiredInspectCount');
+            send(send(int, '=', [1]), 'ifTrue_ifFalse_', [function() {
+                send(self, 'doExpiredInspectCount');
                 if (__context.return) return __context.value;
             }
             , function() {
-                send(self, '_setHaltCountTo_', [send(int, '-', [1])]);
+                send(self, 'setHaltCountTo_', [send(int, '-', [1])]);
                 if (__context.return) return __context.value;
             }
             ]);
@@ -787,46 +787,46 @@ Object.prototype['_inspectOnCount_'] = function(int)
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_inspectOnce'] = function()
+Object.prototype['inspectOnce'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_inspectOnce');
-    send(send(self, '_haltOnceEnabled'), '_ifTrue_', [function() {
-        send(self, '_clearHaltOnce');
+    console.log('inspectOnce');
+    send(send(self, 'haltOnceEnabled'), 'ifTrue_', [function() {
+        send(self, 'clearHaltOnce');
         if (__context.return) return __context.value;
-        __context.value = send(self, '_inspect');
+        __context.value = send(self, 'inspect');
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_inspectUntilCount_'] = function(int)
+Object.prototype['inspectUntilCount_'] = function(int)
 {
     var self = this;
     var __context = {};
-    console.log('_inspectUntilCount_');
-    send(send(self, '_haltOnceEnabled'), '_ifTrue_', [function() {
-        send(send(self, '_hasHaltCount'), '_ifTrue_ifFalse_', [function() {
-            send(send(self, '_decrementAndCheckHaltCount'), '_ifTrue_ifFalse_', [function() {
-                send(self, '_doExpiredInspectCount');
+    console.log('inspectUntilCount_');
+    send(send(self, 'haltOnceEnabled'), 'ifTrue_', [function() {
+        send(send(self, 'hasHaltCount'), 'ifTrue_ifFalse_', [function() {
+            send(send(self, 'decrementAndCheckHaltCount'), 'ifTrue_ifFalse_', [function() {
+                send(self, 'doExpiredInspectCount');
                 if (__context.return) return __context.value;
             }
             , function() {
-                send(self, '_inspect');
+                send(self, 'inspect');
                 if (__context.return) return __context.value;
             }
             ]);
             if (__context.return) return __context.value;
         }
         , function() {
-            send(send(int, '=', [1]), '_ifTrue_ifFalse_', [function() {
-                send(self, '_doExpiredInspectCount');
+            send(send(int, '=', [1]), 'ifTrue_ifFalse_', [function() {
+                send(self, 'doExpiredInspectCount');
                 if (__context.return) return __context.value;
             }
             , function() {
-                send(self, '_setHaltCountTo_', [send(int, '-', [1])]);
+                send(self, 'setHaltCountTo_', [send(int, '-', [1])]);
                 if (__context.return) return __context.value;
             }
             ]);
@@ -838,87 +838,87 @@ Object.prototype['_inspectUntilCount_'] = function(int)
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_inspectWithLabel_'] = function(aLabel)
+Object.prototype['inspectWithLabel_'] = function(aLabel)
 {
     var self = this;
-    console.log('_inspectWithLabel_');
-    return send(send(Smalltalk.classPrototype, '_tools'), '_inspect_label_', [self, aLabel]);
+    console.log('inspectWithLabel_');
+    return send(send(Smalltalk.classPrototype, 'tools'), 'inspect_label_', [self, aLabel]);
 };
-Object.prototype['_inspectorClass'] = function()
+Object.prototype['inspectorClass'] = function()
 {
     var self = this;
-    console.log('_inspectorClass');
-    return send(send(Smalltalk.classPrototype, '_tools'), '_inspector');
+    console.log('inspectorClass');
+    return send(send(Smalltalk.classPrototype, 'tools'), 'inspector');
 };
-Object.prototype['_confirm_'] = function(queryString)
+Object.prototype['confirm_'] = function(queryString)
 {
     var self = this;
-    console.log('_confirm_');
-    return send(send(UIManager.classPrototype, '_default'), '_confirm_', [queryString]);
+    console.log('confirm_');
+    return send(send(UIManager.classPrototype, 'default'), 'confirm_', [queryString]);
 };
-Object.prototype['_inform_'] = function(aString)
+Object.prototype['inform_'] = function(aString)
 {
     var self = this;
     var __context = {};
-    console.log('_inform_');
-    send(send(aString, '_isEmptyOrNil'), '_ifFalse_', [function() {
-        send(send(UIManager.classPrototype, '_default'), '_inform_', [aString]);
+    console.log('inform_');
+    send(send(aString, 'isEmptyOrNil'), 'ifFalse_', [function() {
+        send(send(UIManager.classPrototype, 'default'), 'inform_', [aString]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_primitiveError_'] = function(aString)
+Object.prototype['primitiveError_'] = function(aString)
 {
     var self = this;
-    console.log('_primitiveError_');
-    send(send(UIManager.classPrototype, '_default'), '_onPrimitiveError_', [aString]);
+    console.log('primitiveError_');
+    send(send(UIManager.classPrototype, 'default'), 'onPrimitiveError_', [aString]);
 };
-Object.prototype['_inline_'] = function(inlineFlag)
+Object.prototype['inline_'] = function(inlineFlag)
 {
     var self = this;
-    console.log('_inline_');
-    send(self, '_deprecated_on_in_', ['Tag with the equivalent <inline::> pragma which is understood in recent VMMakers instead', '25 October 2010', 'Pharo1.2']);
+    console.log('inline_');
+    send(self, 'deprecated_on_in_', ['Tag with the equivalent <inline::> pragma which is understood in recent VMMakers instead', '25 October 2010', 'Pharo1.2']);
 };
-Object.prototype['_var_declareC_'] = function(varSymbol, declString)
+Object.prototype['var_declareC_'] = function(varSymbol, declString)
 {
     var self = this;
-    console.log('_var_declareC_');
-    send(self, '_deprecated_on_in_', ['Tag with the equivalent <var:declareC:> pragma which is understood in recent VMMakers instead', '25 October 2010', 'Pharo1.2']);
+    console.log('var_declareC_');
+    send(self, 'deprecated_on_in_', ['Tag with the equivalent <var:declareC:> pragma which is understood in recent VMMakers instead', '25 October 2010', 'Pharo1.2']);
 };
-Object.prototype['_exploreWithLabel_'] = function(label)
+Object.prototype['exploreWithLabel_'] = function(label)
 {
     var self = this;
-    console.log('_exploreWithLabel_');
-    return send(send(send(send(Smalltalk.classPrototype, '_tools'), '_objectExplorer'), '_new'), '_openExplorerFor_withLabel_', [self, label]);
+    console.log('exploreWithLabel_');
+    return send(send(send(send(Smalltalk.classPrototype, 'tools'), 'objectExplorer'), 'new'), 'openExplorerFor_withLabel_', [self, label]);
 };
-Object.prototype['_notifyWithLabel_'] = function(aString)
+Object.prototype['notifyWithLabel_'] = function(aString)
 {
     var self = this;
-    console.log('_notifyWithLabel_');
-    send(self, '_deprecated_on_in_', ['Do not use this method, instead use Warning or UIManager API', '28 January 2011', 'Pharo1.3']);
-    return send(Warning.classPrototype, '_signal_', [aString]);
+    console.log('notifyWithLabel_');
+    send(self, 'deprecated_on_in_', ['Do not use this method, instead use Warning or UIManager API', '28 January 2011', 'Pharo1.3']);
+    return send(Warning.classPrototype, 'signal_', [aString]);
 };
-Object.prototype['_convertToCurrentVersion_refStream_'] = function(varDict, smartRefStrm)
+Object.prototype['convertToCurrentVersion_refStream_'] = function(varDict, smartRefStrm)
 {
     var self = this;
-    console.log('_convertToCurrentVersion_refStream_');
+    console.log('convertToCurrentVersion_refStream_');
 };
-Object.prototype['_at_'] = function(t1)
+Object.prototype['at_'] = function(t1)
 {
     var self = this;
     var __context = {};
-    console.log('_at_');
+    console.log('at_');
     var _primitive = primitives.primitive60(self, t1);
     if (_primitive) return _primitive.value;
     ;
-    send(send(t1, '_isInteger'), '_ifTrue_', [function() {
-        send(send(send(self, '_class'), '_isVariable'), '_ifTrue_ifFalse_', [function() {
-            send(self, '_errorSubscriptBounds_', [t1]);
+    send(send(t1, 'isInteger'), 'ifTrue_', [function() {
+        send(send(send(self, 'class'), 'isVariable'), 'ifTrue_ifFalse_', [function() {
+            send(self, 'errorSubscriptBounds_', [t1]);
             if (__context.return) return __context.value;
         }
         , function() {
-            send(self, '_errorNotIndexable');
+            send(self, 'errorNotIndexable');
             if (__context.return) return __context.value;
         }
         ]);
@@ -926,49 +926,49 @@ Object.prototype['_at_'] = function(t1)
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(t1, '_isNumber'), '_ifTrue_', [function() {
-        __context.value = send(self, '_at_', [send(t1, '_asInteger')]);
+    send(send(t1, 'isNumber'), 'ifTrue_', [function() {
+        __context.value = send(self, 'at_', [send(t1, 'asInteger')]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(self, '_errorNonIntegerIndex');
+    send(self, 'errorNonIntegerIndex');
     if (__context.return) return __context.value;
 };
-Object.prototype['_at_modify_'] = function(index, aBlock)
+Object.prototype['at_modify_'] = function(index, aBlock)
 {
     var self = this;
-    console.log('_at_modify_');
-    return send(self, '_at_put_', [index, send(aBlock, '_value_', [send(self, '_at_', [index])])]);
+    console.log('at_modify_');
+    return send(self, 'at_put_', [index, send(aBlock, 'value_', [send(self, 'at_', [index])])]);
 };
-Object.prototype['_at_put_'] = function(t1, t2)
+Object.prototype['at_put_'] = function(t1, t2)
 {
     var self = this;
     var __context = {};
-    console.log('_at_put_');
+    console.log('at_put_');
     var _primitive = primitives.primitive61(self, t1, t2);
     if (_primitive) return _primitive.value;
     ;
-    send(send(t1, '_isInteger'), '_ifTrue_', [function() {
-        send(send(send(self, '_class'), '_isVariable'), '_ifTrue_ifFalse_', [function() {
-            send(send(send(t1, '>=', [1]), '_and_', [function() {
-                send(t1, '<=', [send(self, '_size')]);
+    send(send(t1, 'isInteger'), 'ifTrue_', [function() {
+        send(send(send(self, 'class'), 'isVariable'), 'ifTrue_ifFalse_', [function() {
+            send(send(send(t1, '>=', [1]), 'and_', [function() {
+                send(t1, '<=', [send(self, 'size')]);
                 if (__context.return) return __context.value;
             }
-            ]), '_ifTrue_ifFalse_', [function() {
-                send(self, '_errorImproperStore');
+            ]), 'ifTrue_ifFalse_', [function() {
+                send(self, 'errorImproperStore');
                 if (__context.return) return __context.value;
             }
             , function() {
-                send(self, '_errorSubscriptBounds_', [t1]);
+                send(self, 'errorSubscriptBounds_', [t1]);
                 if (__context.return) return __context.value;
             }
             ]);
             if (__context.return) return __context.value;
         }
         , function() {
-            send(self, '_errorNotIndexable');
+            send(self, 'errorNotIndexable');
             if (__context.return) return __context.value;
         }
         ]);
@@ -976,61 +976,61 @@ Object.prototype['_at_put_'] = function(t1, t2)
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(t1, '_isNumber'), '_ifTrue_', [function() {
-        __context.value = send(self, '_at_put_', [send(t1, '_asInteger'), t2]);
+    send(send(t1, 'isNumber'), 'ifTrue_', [function() {
+        __context.value = send(self, 'at_put_', [send(t1, 'asInteger'), t2]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(self, '_errorNonIntegerIndex');
+    send(self, 'errorNonIntegerIndex');
     if (__context.return) return __context.value;
 };
-Object.prototype['_basicAt_'] = function(index)
+Object.prototype['basicAt_'] = function(index)
 {
     var self = this;
     var __context = {};
-    console.log('_basicAt_');
+    console.log('basicAt_');
     var _primitive = primitives.primitive60(self, index);
     if (_primitive) return _primitive.value;
     ;
-    send(send(index, '_isInteger'), '_ifTrue_', [function() {
-        send(self, '_errorSubscriptBounds_', [index]);
+    send(send(index, 'isInteger'), 'ifTrue_', [function() {
+        send(self, 'errorSubscriptBounds_', [index]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(index, '_isNumber'), '_ifTrue_ifFalse_', [function() {
-        __context.value = send(self, '_basicAt_', [send(index, '_asInteger')]);
+    send(send(index, 'isNumber'), 'ifTrue_ifFalse_', [function() {
+        __context.value = send(self, 'basicAt_', [send(index, 'asInteger')]);
         __context.return = true;
         return __context.value;
     }
     , function() {
-        send(self, '_errorNonIntegerIndex');
+        send(self, 'errorNonIntegerIndex');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_basicAt_put_'] = function(index, value)
+Object.prototype['basicAt_put_'] = function(index, value)
 {
     var self = this;
     var __context = {};
-    console.log('_basicAt_put_');
+    console.log('basicAt_put_');
     var _primitive = primitives.primitive61(self, index, value);
     if (_primitive) return _primitive.value;
     ;
-    send(send(index, '_isInteger'), '_ifTrue_', [function() {
-        send(send(send(index, '>=', [1]), '_and_', [function() {
-            send(index, '<=', [send(self, '_size')]);
+    send(send(index, 'isInteger'), 'ifTrue_', [function() {
+        send(send(send(index, '>=', [1]), 'and_', [function() {
+            send(index, '<=', [send(self, 'size')]);
             if (__context.return) return __context.value;
         }
-        ]), '_ifTrue_ifFalse_', [function() {
-            send(self, '_errorImproperStore');
+        ]), 'ifTrue_ifFalse_', [function() {
+            send(self, 'errorImproperStore');
             if (__context.return) return __context.value;
         }
         , function() {
-            send(self, '_errorSubscriptBounds_', [index]);
+            send(self, 'errorSubscriptBounds_', [index]);
             if (__context.return) return __context.value;
         }
         ]);
@@ -1038,119 +1038,119 @@ Object.prototype['_basicAt_put_'] = function(index, value)
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(index, '_isNumber'), '_ifTrue_ifFalse_', [function() {
-        __context.value = send(self, '_basicAt_put_', [send(index, '_asInteger'), value]);
+    send(send(index, 'isNumber'), 'ifTrue_ifFalse_', [function() {
+        __context.value = send(self, 'basicAt_put_', [send(index, 'asInteger'), value]);
         __context.return = true;
         return __context.value;
     }
     , function() {
-        send(self, '_errorNonIntegerIndex');
+        send(self, 'errorNonIntegerIndex');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_basicSize'] = function()
+Object.prototype['basicSize'] = function()
 {
     var self = this;
-    console.log('_basicSize');
+    console.log('basicSize');
     var _primitive = primitives.primitive62(self);
     if (_primitive) return _primitive.value;
     ;
     return 0;
 };
-Object.prototype['_enclosedSetElement'] = function()
+Object.prototype['enclosedSetElement'] = function()
 {
     var self = this;
-    console.log('_enclosedSetElement');
+    console.log('enclosedSetElement');
 };
-Object.prototype['_ifNil_ifNotNilDo_'] = function(nilBlock, aBlock)
+Object.prototype['ifNil_ifNotNilDo_'] = function(nilBlock, aBlock)
 {
     var self = this;
-    console.log('_ifNil_ifNotNilDo_');
-    return send(aBlock, '_value_', [self]);
+    console.log('ifNil_ifNotNilDo_');
+    return send(aBlock, 'value_', [self]);
 };
-Object.prototype['_ifNotNilDo_'] = function(aBlock)
+Object.prototype['ifNotNilDo_'] = function(aBlock)
 {
     var self = this;
-    console.log('_ifNotNilDo_');
-    return send(aBlock, '_value_', [self]);
+    console.log('ifNotNilDo_');
+    return send(aBlock, 'value_', [self]);
 };
-Object.prototype['_ifNotNilDo_ifNil_'] = function(aBlock, nilBlock)
+Object.prototype['ifNotNilDo_ifNil_'] = function(aBlock, nilBlock)
 {
     var self = this;
-    console.log('_ifNotNilDo_ifNil_');
-    return send(aBlock, '_value_', [self]);
+    console.log('ifNotNilDo_ifNil_');
+    return send(aBlock, 'value_', [self]);
 };
-Object.prototype['_in_'] = function(aBlock)
+Object.prototype['in_'] = function(aBlock)
 {
     var self = this;
-    console.log('_in_');
-    return send(aBlock, '_value_', [self]);
+    console.log('in_');
+    return send(aBlock, 'value_', [self]);
 };
-Object.prototype['_readFromString_'] = function(aString)
+Object.prototype['readFromString_'] = function(aString)
 {
     var self = this;
-    console.log('_readFromString_');
-    return send(self, '_readFrom_', [send(aString, '_readStream')]);
+    console.log('readFromString_');
+    return send(self, 'readFrom_', [send(aString, 'readStream')]);
 };
-Object.prototype['_size'] = function()
+Object.prototype['size'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_size');
+    console.log('size');
     var _primitive = primitives.primitive62(self);
     if (_primitive) return _primitive.value;
     ;
-    send(send(send(self, '_class'), '_isVariable'), '_ifFalse_', [function() {
-        send(self, '_errorNotIndexable');
+    send(send(send(self, 'class'), 'isVariable'), 'ifFalse_', [function() {
+        send(self, 'errorNotIndexable');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
     return 0;
 };
-Object.prototype['_yourself'] = function()
+Object.prototype['yourself'] = function()
 {
     var self = this;
-    console.log('_yourself');
+    console.log('yourself');
     return self;
 };
 Object.prototype['->'] = function(anObject)
 {
     var self = this;
     console.log('->');
-    return send(send(Association.classPrototype, '_basicNew'), '_key_value_', [self, anObject]);
+    return send(send(Association.classPrototype, 'basicNew'), 'key_value_', [self, anObject]);
 };
-Object.prototype['_bindingOf_'] = function(aString)
+Object.prototype['bindingOf_'] = function(aString)
 {
     var self = this;
-    console.log('_bindingOf_');
+    console.log('bindingOf_');
     return nil;
 };
-Object.prototype['_break'] = function()
+Object.prototype['break'] = function()
 {
     var self = this;
-    console.log('_break');
-    send(BreakPoint.classPrototype, '_signal');
+    console.log('break');
+    send(BreakPoint.classPrototype, 'signal');
 };
-Object.prototype['_caseOf_'] = function(aBlockAssociationCollection)
+Object.prototype['caseOf_'] = function(aBlockAssociationCollection)
 {
     var self = this;
-    console.log('_caseOf_');
-    return send(self, '_caseOf_otherwise_', [aBlockAssociationCollection, function() {
-        send(self, '_caseError');
+    console.log('caseOf_');
+    return send(self, 'caseOf_otherwise_', [aBlockAssociationCollection, function() {
+        send(self, 'caseError');
     }
     ]);
 };
-Object.prototype['_caseOf_otherwise_'] = function(aBlockAssociationCollection, aBlock)
+Object.prototype['caseOf_otherwise_'] = function(aBlockAssociationCollection, aBlock)
 {
     var self = this;
     var __context = {};
-    console.log('_caseOf_otherwise_');
-    send(aBlockAssociationCollection, '_associationsDo_', [function(assoc) {
-        send(send(send(send(assoc, '_key'), '_value'), '=', [self]), '_ifTrue_', [function() {
-            __context.value = send(send(assoc, '_value'), '_value');
+    console.log('caseOf_otherwise_');
+    send(aBlockAssociationCollection, 'associationsDo_', [function(assoc) {
+        send(send(send(send(assoc, 'key'), 'value'), '=', [self]), 'ifTrue_', [function() {
+            __context.value = send(send(assoc, 'value'), 'value');
             __context.return = true;
             return __context.value;
         }
@@ -1159,82 +1159,82 @@ Object.prototype['_caseOf_otherwise_'] = function(aBlockAssociationCollection, a
     }
     ]);
     if (__context.return) return __context.value;
-    return send(aBlock, '_value');
+    return send(aBlock, 'value');
 };
-Object.prototype['_class'] = function()
+Object.prototype['class'] = function()
 {
     var self = this;
-    console.log('_class');
+    console.log('class');
     var _primitive = primitives.primitive111(self);
     if (_primitive) return _primitive.value;
     ;
-    send(self, '_primitiveFailed');
+    send(self, 'primitiveFailed');
 };
-Object.prototype['_isKindOf_'] = function(aClass)
+Object.prototype['isKindOf_'] = function(aClass)
 {
     var self = this;
     var __context = {};
-    console.log('_isKindOf_');
-    send(send(send(self, '_class'), '==', [aClass]), '_ifTrue_ifFalse_', [function() {
+    console.log('isKindOf_');
+    send(send(send(self, 'class'), '==', [aClass]), 'ifTrue_ifFalse_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
     }
     , function() {
-        __context.value = send(send(self, '_class'), '_inheritsFrom_', [aClass]);
+        __context.value = send(send(self, 'class'), 'inheritsFrom_', [aClass]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_isMemberOf_'] = function(aClass)
+Object.prototype['isMemberOf_'] = function(aClass)
 {
     var self = this;
-    console.log('_isMemberOf_');
-    return send(send(self, '_class'), '==', [aClass]);
+    console.log('isMemberOf_');
+    return send(send(self, 'class'), '==', [aClass]);
 };
-Object.prototype['_respondsTo_'] = function(aSymbol)
+Object.prototype['respondsTo_'] = function(aSymbol)
 {
     var self = this;
-    console.log('_respondsTo_');
-    return send(send(self, '_class'), '_canUnderstand_', [aSymbol]);
+    console.log('respondsTo_');
+    return send(send(self, 'class'), 'canUnderstand_', [aSymbol]);
 };
-Object.prototype['_xxxClass'] = function()
+Object.prototype['xxxClass'] = function()
 {
     var self = this;
-    console.log('_xxxClass');
-    return send(self, '_class');
+    console.log('xxxClass');
+    return send(self, 'class');
 };
-Object.prototype['_closeTo_'] = function(anObject)
+Object.prototype['closeTo_'] = function(anObject)
 {
     var self = this;
-    console.log('_closeTo_');
+    console.log('closeTo_');
     return send(function() {
         send(self, '=', [anObject]);
     }
-    , '_ifError_', [function() {
+    , 'ifError_', [function() {
         false;
     }
     ]);
 };
-Object.prototype['_hash'] = function()
+Object.prototype['hash'] = function()
 {
     var self = this;
-    console.log('_hash');
-    return send(self, '_identityHash');
+    console.log('hash');
+    return send(self, 'identityHash');
 };
-Object.prototype['_identityHashPrintString'] = function()
+Object.prototype['identityHashPrintString'] = function()
 {
     var self = this;
-    console.log('_identityHashPrintString');
-    return send(send('(', ',', [send(send(self, '_identityHash'), '_printString')]), ',', [')']);
+    console.log('identityHashPrintString');
+    return send(send('(', ',', [send(send(self, 'identityHash'), 'printString')]), ',', [')']);
 };
-Object.prototype['_literalEqual_'] = function(other)
+Object.prototype['literalEqual_'] = function(other)
 {
     var self = this;
-    console.log('_literalEqual_');
-    return send(send(send(self, '_class'), '==', [send(other, '_class')]), '_and_', [function() {
+    console.log('literalEqual_');
+    return send(send(send(self, 'class'), '==', [send(other, 'class')]), 'and_', [function() {
         send(self, '=', [other]);
     }
     ]);
@@ -1251,137 +1251,137 @@ Object.prototype['~='] = function(anObject)
     console.log('~=');
     return send(send(self, '=', [anObject]), '==', [false]);
 };
-Object.prototype['_adaptToFloat_andCompare_'] = function(rcvr, selector)
+Object.prototype['adaptToFloat_andCompare_'] = function(rcvr, selector)
 {
     var self = this;
-    console.log('_adaptToFloat_andCompare_');
-    return send(self, '_adaptToFloat_andSend_', [rcvr, selector]);
+    console.log('adaptToFloat_andCompare_');
+    return send(self, 'adaptToFloat_andSend_', [rcvr, selector]);
 };
-Object.prototype['_adaptToFloat_andSend_'] = function(rcvr, selector)
+Object.prototype['adaptToFloat_andSend_'] = function(rcvr, selector)
 {
     var self = this;
-    console.log('_adaptToFloat_andSend_');
-    return send(self, '_adaptToNumber_andSend_', [rcvr, selector]);
+    console.log('adaptToFloat_andSend_');
+    return send(self, 'adaptToNumber_andSend_', [rcvr, selector]);
 };
-Object.prototype['_adaptToFraction_andCompare_'] = function(rcvr, selector)
+Object.prototype['adaptToFraction_andCompare_'] = function(rcvr, selector)
 {
     var self = this;
-    console.log('_adaptToFraction_andCompare_');
-    return send(self, '_adaptToFraction_andSend_', [rcvr, selector]);
+    console.log('adaptToFraction_andCompare_');
+    return send(self, 'adaptToFraction_andSend_', [rcvr, selector]);
 };
-Object.prototype['_adaptToFraction_andSend_'] = function(rcvr, selector)
+Object.prototype['adaptToFraction_andSend_'] = function(rcvr, selector)
 {
     var self = this;
-    console.log('_adaptToFraction_andSend_');
-    return send(self, '_adaptToNumber_andSend_', [rcvr, selector]);
+    console.log('adaptToFraction_andSend_');
+    return send(self, 'adaptToNumber_andSend_', [rcvr, selector]);
 };
-Object.prototype['_adaptToInteger_andCompare_'] = function(rcvr, selector)
+Object.prototype['adaptToInteger_andCompare_'] = function(rcvr, selector)
 {
     var self = this;
-    console.log('_adaptToInteger_andCompare_');
-    return send(self, '_adaptToInteger_andSend_', [rcvr, selector]);
+    console.log('adaptToInteger_andCompare_');
+    return send(self, 'adaptToInteger_andSend_', [rcvr, selector]);
 };
-Object.prototype['_adaptToInteger_andSend_'] = function(rcvr, selector)
+Object.prototype['adaptToInteger_andSend_'] = function(rcvr, selector)
 {
     var self = this;
-    console.log('_adaptToInteger_andSend_');
-    return send(self, '_adaptToNumber_andSend_', [rcvr, selector]);
+    console.log('adaptToInteger_andSend_');
+    return send(self, 'adaptToNumber_andSend_', [rcvr, selector]);
 };
-Object.prototype['_asActionSequence'] = function()
+Object.prototype['asActionSequence'] = function()
 {
     var self = this;
-    console.log('_asActionSequence');
-    return send(WeakActionSequence.classPrototype, '_with_', [self]);
+    console.log('asActionSequence');
+    return send(WeakActionSequence.classPrototype, 'with_', [self]);
 };
-Object.prototype['_asActionSequenceTrappingErrors'] = function()
+Object.prototype['asActionSequenceTrappingErrors'] = function()
 {
     var self = this;
-    console.log('_asActionSequenceTrappingErrors');
-    return send(WeakActionSequenceTrappingErrors.classPrototype, '_with_', [self]);
+    console.log('asActionSequenceTrappingErrors');
+    return send(WeakActionSequenceTrappingErrors.classPrototype, 'with_', [self]);
 };
-Object.prototype['_asLink'] = function()
+Object.prototype['asLink'] = function()
 {
     var self = this;
-    console.log('_asLink');
-    return send(ValueLink.classPrototype, '_value_', [self]);
+    console.log('asLink');
+    return send(ValueLink.classPrototype, 'value_', [self]);
 };
-Object.prototype['_asOrderedCollection'] = function()
+Object.prototype['asOrderedCollection'] = function()
 {
     var self = this;
-    console.log('_asOrderedCollection');
-    return send(OrderedCollection.classPrototype, '_with_', [self]);
+    console.log('asOrderedCollection');
+    return send(OrderedCollection.classPrototype, 'with_', [self]);
 };
-Object.prototype['_asSetElement'] = function()
+Object.prototype['asSetElement'] = function()
 {
     var self = this;
-    console.log('_asSetElement');
+    console.log('asSetElement');
 };
-Object.prototype['_asString'] = function()
+Object.prototype['asString'] = function()
 {
     var self = this;
-    console.log('_asString');
-    return send(self, '_printString');
+    console.log('asString');
+    return send(self, 'printString');
 };
-Object.prototype['_asStringOrText'] = function()
+Object.prototype['asStringOrText'] = function()
 {
     var self = this;
-    console.log('_asStringOrText');
-    return send(self, '_printString');
+    console.log('asStringOrText');
+    return send(self, 'printString');
 };
-Object.prototype['_as_'] = function(aSimilarClass)
+Object.prototype['as_'] = function(aSimilarClass)
 {
     var self = this;
-    console.log('_as_');
-    return send(aSimilarClass, '_newFrom_', [self]);
+    console.log('as_');
+    return send(aSimilarClass, 'newFrom_', [self]);
 };
-Object.prototype['_complexContents'] = function()
+Object.prototype['complexContents'] = function()
 {
     var self = this;
-    console.log('_complexContents');
+    console.log('complexContents');
     return self;
 };
-Object.prototype['_mustBeBoolean'] = function()
+Object.prototype['mustBeBoolean'] = function()
 {
     var self = this;
-    console.log('_mustBeBoolean');
-    return send(self, '_mustBeBooleanIn_', [send(thisContext, '_sender')]);
+    console.log('mustBeBoolean');
+    return send(self, 'mustBeBooleanIn_', [send(thisContext, 'sender')]);
 };
-Object.prototype['_mustBeBooleanIn_'] = function(context)
+Object.prototype['mustBeBooleanIn_'] = function(context)
 {
     var self = this;
-    console.log('_mustBeBooleanIn_');
+    console.log('mustBeBooleanIn_');
     var proceedValue = null
-    send(context, '_skipBackBeforeJump');
-    proceedValue = send((function () {var _aux = send(send(NonBooleanReceiver.classPrototype, '_new'), '_object_', [self]);return _aux;})(), '_signal_', ['proceed for truth.']);
+    send(context, 'skipBackBeforeJump');
+    proceedValue = send((function () {var _aux = send(send(NonBooleanReceiver.classPrototype, 'new'), 'object_', [self]);return _aux;})(), 'signal_', ['proceed for truth.']);
     return send(proceedValue, '~~', [false]);
 };
-Object.prototype['_withoutListWrapper'] = function()
+Object.prototype['withoutListWrapper'] = function()
 {
     var self = this;
-    console.log('_withoutListWrapper');
+    console.log('withoutListWrapper');
     return self;
 };
-Object.prototype['_copy'] = function()
+Object.prototype['copy'] = function()
 {
     var self = this;
-    console.log('_copy');
-    return send(send(self, '_shallowCopy'), '_postCopy');
+    console.log('copy');
+    return send(send(self, 'shallowCopy'), 'postCopy');
 };
-Object.prototype['_copyFrom_'] = function(anotherObject)
+Object.prototype['copyFrom_'] = function(anotherObject)
 {
     var self = this;
     var __context = {};
-    console.log('_copyFrom_');
+    console.log('copyFrom_');
     var mine = null
     var his = null
     var _primitive = primitives.primitive168(self, anotherObject);
     if (_primitive) return _primitive.value;
     ;
-    mine = send(send(self, '_class'), '_allInstVarNames');
-    his = send(send(anotherObject, '_class'), '_allInstVarNames');
-    send(1, '_to_do_', [send(send(mine, '_size'), '_min_', [send(his, '_size')]), function(ind) {
-        send(send(send(mine, '_at_', [ind]), '=', [send(his, '_at_', [ind])]), '_ifTrue_', [function() {
-            send(self, '_instVarAt_put_', [ind, send(anotherObject, '_instVarAt_', [ind])]);
+    mine = send(send(self, 'class'), 'allInstVarNames');
+    his = send(send(anotherObject, 'class'), 'allInstVarNames');
+    send(1, 'to_do_', [send(send(mine, 'size'), 'min_', [send(his, 'size')]), function(ind) {
+        send(send(send(mine, 'at_', [ind]), '=', [send(his, 'at_', [ind])]), 'ifTrue_', [function() {
+            send(self, 'instVarAt_put_', [ind, send(anotherObject, 'instVarAt_', [ind])]);
             if (__context.return) return __context.value;
         }
         ]);
@@ -1389,9 +1389,9 @@ Object.prototype['_copyFrom_'] = function(anotherObject)
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(send(send(self, '_class'), '_isVariable'), '&', [send(send(anotherObject, '_class'), '_isVariable')]), '_ifTrue_', [function() {
-        send(1, '_to_do_', [send(send(self, '_basicSize'), '_min_', [send(anotherObject, '_basicSize')]), function(ind) {
-            send(self, '_basicAt_put_', [ind, send(anotherObject, '_basicAt_', [ind])]);
+    send(send(send(send(self, 'class'), 'isVariable'), '&', [send(send(anotherObject, 'class'), 'isVariable')]), 'ifTrue_', [function() {
+        send(1, 'to_do_', [send(send(self, 'basicSize'), 'min_', [send(anotherObject, 'basicSize')]), function(ind) {
+            send(self, 'basicAt_put_', [ind, send(anotherObject, 'basicAt_', [ind])]);
             if (__context.return) return __context.value;
         }
         ]);
@@ -1400,19 +1400,19 @@ Object.prototype['_copyFrom_'] = function(anotherObject)
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_copySameFrom_'] = function(otherObject)
+Object.prototype['copySameFrom_'] = function(otherObject)
 {
     var self = this;
     var __context = {};
-    console.log('_copySameFrom_');
+    console.log('copySameFrom_');
     var myInstVars = null
     var otherInstVars = null
-    myInstVars = send(send(self, '_class'), '_allInstVarNames');
-    otherInstVars = send(send(otherObject, '_class'), '_allInstVarNames');
-    send(myInstVars, '_doWithIndex_', [function(each, index) {
+    myInstVars = send(send(self, 'class'), 'allInstVarNames');
+    otherInstVars = send(send(otherObject, 'class'), 'allInstVarNames');
+    send(myInstVars, 'doWithIndex_', [function(each, index) {
         var match = null;
-        send(send(match = send(otherInstVars, '_indexOf_', [each]), '>', [0]), '_ifTrue_', [function() {
-            send(self, '_instVarAt_put_', [index, send(otherObject, '_instVarAt_', [match])]);
+        send(send(match = send(otherInstVars, 'indexOf_', [each]), '>', [0]), 'ifTrue_', [function() {
+            send(self, 'instVarAt_put_', [index, send(otherObject, 'instVarAt_', [match])]);
             if (__context.return) return __context.value;
         }
         ]);
@@ -1420,38 +1420,38 @@ Object.prototype['_copySameFrom_'] = function(otherObject)
     }
     ]);
     if (__context.return) return __context.value;
-    send(1, '_to_do_', [send(send(self, '_basicSize'), '_min_', [send(otherObject, '_basicSize')]), function(i) {
-        send(self, '_basicAt_put_', [i, send(otherObject, '_basicAt_', [i])]);
+    send(1, 'to_do_', [send(send(self, 'basicSize'), 'min_', [send(otherObject, 'basicSize')]), function(i) {
+        send(self, 'basicAt_put_', [i, send(otherObject, 'basicAt_', [i])]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_copyTwoLevel'] = function()
+Object.prototype['copyTwoLevel'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_copyTwoLevel');
+    console.log('copyTwoLevel');
     var newObject = null
     var __class__ = null
     var index = null
-    __class__ = send(self, '_class');
-    newObject = send(self, '_shallowCopy');
-    send(send(newObject, '==', [self]), '_ifTrue_', [function() {
+    __class__ = send(self, 'class');
+    newObject = send(self, 'shallowCopy');
+    send(send(newObject, '==', [self]), 'ifTrue_', [function() {
         __context.value = self;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(__class__, '_isVariable'), '_ifTrue_', [function() {
-        index = send(self, '_basicSize');
+    send(send(__class__, 'isVariable'), 'ifTrue_', [function() {
+        index = send(self, 'basicSize');
         send(function() {
             send(index, '>', [0]);
             if (__context.return) return __context.value;
         }
-        , '_whileTrue_', [function() {
-            send(newObject, '_basicAt_put_', [index, send(send(self, '_basicAt_', [index]), '_shallowCopy')]);
+        , 'whileTrue_', [function() {
+            send(newObject, 'basicAt_put_', [index, send(send(self, 'basicAt_', [index]), 'shallowCopy')]);
             if (__context.return) return __context.value;
             index = send(index, '-', [1]);
         }
@@ -1460,13 +1460,13 @@ Object.prototype['_copyTwoLevel'] = function()
     }
     ]);
     if (__context.return) return __context.value;
-    index = send(__class__, '_instSize');
+    index = send(__class__, 'instSize');
     send(function() {
         send(index, '>', [0]);
         if (__context.return) return __context.value;
     }
-    , '_whileTrue_', [function() {
-        send(newObject, '_instVarAt_put_', [index, send(send(self, '_instVarAt_', [index]), '_shallowCopy')]);
+    , 'whileTrue_', [function() {
+        send(newObject, 'instVarAt_put_', [index, send(send(self, 'instVarAt_', [index]), 'shallowCopy')]);
         if (__context.return) return __context.value;
         index = send(index, '-', [1]);
     }
@@ -1474,31 +1474,31 @@ Object.prototype['_copyTwoLevel'] = function()
     if (__context.return) return __context.value;
     return newObject;
 };
-Object.prototype['_deepCopy'] = function()
+Object.prototype['deepCopy'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_deepCopy');
+    console.log('deepCopy');
     var newObject = null
     var __class__ = null
     var index = null
-    __class__ = send(self, '_class');
-    send(send(__class__, '==', [Object]), '_ifTrue_', [function() {
+    __class__ = send(self, 'class');
+    send(send(__class__, '==', [Object]), 'ifTrue_', [function() {
         __context.value = self;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(__class__, '_isVariable'), '_ifTrue_ifFalse_', [function() {
-        index = send(self, '_basicSize');
-        newObject = send(__class__, '_basicNew_', [index]);
+    send(send(__class__, 'isVariable'), 'ifTrue_ifFalse_', [function() {
+        index = send(self, 'basicSize');
+        newObject = send(__class__, 'basicNew_', [index]);
         send(function() {
             send(index, '>', [0]);
             if (__context.return) return __context.value;
         }
-        , '_whileTrue_', [function() {
-            send(newObject, '_basicAt_put_', [index, send(send(self, '_basicAt_', [index]), '_deepCopy')]);
+        , 'whileTrue_', [function() {
+            send(newObject, 'basicAt_put_', [index, send(send(self, 'basicAt_', [index]), 'deepCopy')]);
             if (__context.return) return __context.value;
             index = send(index, '-', [1]);
         }
@@ -1506,17 +1506,17 @@ Object.prototype['_deepCopy'] = function()
         if (__context.return) return __context.value;
     }
     , function() {
-        newObject = send(__class__, '_basicNew');
+        newObject = send(__class__, 'basicNew');
     }
     ]);
     if (__context.return) return __context.value;
-    index = send(__class__, '_instSize');
+    index = send(__class__, 'instSize');
     send(function() {
         send(index, '>', [0]);
         if (__context.return) return __context.value;
     }
-    , '_whileTrue_', [function() {
-        send(newObject, '_instVarAt_put_', [index, send(send(self, '_instVarAt_', [index]), '_deepCopy')]);
+    , 'whileTrue_', [function() {
+        send(newObject, 'instVarAt_put_', [index, send(send(self, 'instVarAt_', [index]), 'deepCopy')]);
         if (__context.return) return __context.value;
         index = send(index, '-', [1]);
     }
@@ -1524,33 +1524,33 @@ Object.prototype['_deepCopy'] = function()
     if (__context.return) return __context.value;
     return newObject;
 };
-Object.prototype['_postCopy'] = function()
+Object.prototype['postCopy'] = function()
 {
     var self = this;
-    console.log('_postCopy');
+    console.log('postCopy');
     return self;
 };
-Object.prototype['_shallowCopy'] = function()
+Object.prototype['shallowCopy'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_shallowCopy');
+    console.log('shallowCopy');
     var __class__ = null
     var newObject = null
     var index = null
     var _primitive = primitives.primitive148(self);
     if (_primitive) return _primitive.value;
     ;
-    __class__ = send(self, '_class');
-    send(send(__class__, '_isVariable'), '_ifTrue_ifFalse_', [function() {
-        index = send(self, '_basicSize');
-        newObject = send(__class__, '_basicNew_', [index]);
+    __class__ = send(self, 'class');
+    send(send(__class__, 'isVariable'), 'ifTrue_ifFalse_', [function() {
+        index = send(self, 'basicSize');
+        newObject = send(__class__, 'basicNew_', [index]);
         send(function() {
             send(index, '>', [0]);
             if (__context.return) return __context.value;
         }
-        , '_whileTrue_', [function() {
-            send(newObject, '_basicAt_put_', [index, send(self, '_basicAt_', [index])]);
+        , 'whileTrue_', [function() {
+            send(newObject, 'basicAt_put_', [index, send(self, 'basicAt_', [index])]);
             if (__context.return) return __context.value;
             index = send(index, '-', [1]);
         }
@@ -1558,17 +1558,17 @@ Object.prototype['_shallowCopy'] = function()
         if (__context.return) return __context.value;
     }
     , function() {
-        newObject = send(__class__, '_basicNew');
+        newObject = send(__class__, 'basicNew');
     }
     ]);
     if (__context.return) return __context.value;
-    index = send(__class__, '_instSize');
+    index = send(__class__, 'instSize');
     send(function() {
         send(index, '>', [0]);
         if (__context.return) return __context.value;
     }
-    , '_whileTrue_', [function() {
-        send(newObject, '_instVarAt_put_', [index, send(self, '_instVarAt_', [index])]);
+    , 'whileTrue_', [function() {
+        send(newObject, 'instVarAt_put_', [index, send(self, 'instVarAt_', [index])]);
         if (__context.return) return __context.value;
         index = send(index, '-', [1]);
     }
@@ -1576,54 +1576,54 @@ Object.prototype['_shallowCopy'] = function()
     if (__context.return) return __context.value;
     return newObject;
 };
-Object.prototype['_veryDeepCopy'] = function()
+Object.prototype['veryDeepCopy'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_veryDeepCopy');
+    console.log('veryDeepCopy');
     var copier = null
     var __new__ = null
-    copier = send(send(DeepCopier.classPrototype, '_new'), '_initialize_', [4096]);
-    __new__ = send(self, '_veryDeepCopyWith_', [copier]);
-    send(send(copier, '_references'), '_associationsDo_', [function(assoc) {
-        send(send(assoc, '_value'), '_veryDeepFixupWith_', [copier]);
+    copier = send(send(DeepCopier.classPrototype, 'new'), 'initialize_', [4096]);
+    __new__ = send(self, 'veryDeepCopyWith_', [copier]);
+    send(send(copier, 'references'), 'associationsDo_', [function(assoc) {
+        send(send(assoc, 'value'), 'veryDeepFixupWith_', [copier]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(copier, '_fixDependents');
+    send(copier, 'fixDependents');
     if (__context.return) return __context.value;
     return __new__;
 };
-Object.prototype['_veryDeepCopyUsing_'] = function(copier)
+Object.prototype['veryDeepCopyUsing_'] = function(copier)
 {
     var self = this;
     var __context = {};
-    console.log('_veryDeepCopyUsing_');
+    console.log('veryDeepCopyUsing_');
     var __new__ = null
     var refs = null
-    __new__ = send(self, '_veryDeepCopyWith_', [copier]);
-    send(send(copier, '_references'), '_associationsDo_', [function(assoc) {
-        send(send(assoc, '_value'), '_veryDeepFixupWith_', [copier]);
+    __new__ = send(self, 'veryDeepCopyWith_', [copier]);
+    send(send(copier, 'references'), 'associationsDo_', [function(assoc) {
+        send(send(assoc, 'value'), 'veryDeepFixupWith_', [copier]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    refs = send(copier, '_references');
-    send(DependentsFields.classPrototype, '_associationsDo_', [function(pair) {
-        send(send(pair, '_value'), '_do_', [function(dep) {
+    refs = send(copier, 'references');
+    send(DependentsFields.classPrototype, 'associationsDo_', [function(pair) {
+        send(send(pair, 'value'), 'do_', [function(dep) {
             var newModel = null;
             var newDep = null;
-            send(newDep = send(refs, '_at_ifAbsent_', [dep, function() {
+            send(newDep = send(refs, 'at_ifAbsent_', [dep, function() {
                 nil;
             }
-            ]), '_ifNotNil_', [function() {
-                newModel = send(refs, '_at_ifAbsent_', [send(pair, '_key'), function() {
-                    send(pair, '_key');
+            ]), 'ifNotNil_', [function() {
+                newModel = send(refs, 'at_ifAbsent_', [send(pair, 'key'), function() {
+                    send(pair, 'key');
                     if (__context.return) return __context.value;
                 }
                 ]);
-                send(newModel, '_addDependent_', [newDep]);
+                send(newModel, 'addDependent_', [newDep]);
                 if (__context.return) return __context.value;
             }
             ]);
@@ -1636,11 +1636,11 @@ Object.prototype['_veryDeepCopyUsing_'] = function(copier)
     if (__context.return) return __context.value;
     return __new__;
 };
-Object.prototype['_veryDeepCopyWith_'] = function(deepCopier)
+Object.prototype['veryDeepCopyWith_'] = function(deepCopier)
 {
     var self = this;
     var __context = {};
-    console.log('_veryDeepCopyWith_');
+    console.log('veryDeepCopyWith_');
     var __class__ = null
     var index = null
     var sub = null
@@ -1649,45 +1649,45 @@ Object.prototype['_veryDeepCopyWith_'] = function(deepCopier)
     var sup = null
     var has = null
     var mine = null
-    send(send(deepCopier, '_references'), '_at_ifPresent_', [self, function(newer) {
+    send(send(deepCopier, 'references'), 'at_ifPresent_', [self, function(newer) {
         __context.value = newer;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    __class__ = send(self, '_class');
-    send(send(__class__, '_isMeta'), '_ifTrue_', [function() {
+    __class__ = send(self, 'class');
+    send(send(__class__, 'isMeta'), 'ifTrue_', [function() {
         __context.value = self;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    __new__ = send(self, '_shallowCopy');
-    send(send(deepCopier, '_references'), '_at_put_', [self, __new__]);
+    __new__ = send(self, 'shallowCopy');
+    send(send(deepCopier, 'references'), 'at_put_', [self, __new__]);
     if (__context.return) return __context.value;
-    send(send(send(__class__, '_isVariable'), '_and_', [function() {
-        send(__class__, '_isPointers');
+    send(send(send(__class__, 'isVariable'), 'and_', [function() {
+        send(__class__, 'isPointers');
         if (__context.return) return __context.value;
     }
-    ]), '_ifTrue_', [function() {
-        index = send(self, '_basicSize');
+    ]), 'ifTrue_', [function() {
+        index = send(self, 'basicSize');
         send(function() {
             send(index, '>', [0]);
             if (__context.return) return __context.value;
         }
-        , '_whileTrue_', [function() {
-            sub = send(self, '_basicAt_', [index]);
-            send(subAss = send(send(deepCopier, '_references'), '_associationAt_ifAbsent_', [sub, function() {
+        , 'whileTrue_', [function() {
+            sub = send(self, 'basicAt_', [index]);
+            send(subAss = send(send(deepCopier, 'references'), 'associationAt_ifAbsent_', [sub, function() {
                 nil;
             }
-            ]), '_ifNil_ifNotNil_', [function() {
-                send(__new__, '_basicAt_put_', [index, send(sub, '_veryDeepCopyWith_', [deepCopier])]);
+            ]), 'ifNil_ifNotNil_', [function() {
+                send(__new__, 'basicAt_put_', [index, send(sub, 'veryDeepCopyWith_', [deepCopier])]);
                 if (__context.return) return __context.value;
             }
             , function() {
-                send(__new__, '_basicAt_put_', [index, send(subAss, '_value')]);
+                send(__new__, 'basicAt_put_', [index, send(subAss, 'value')]);
                 if (__context.return) return __context.value;
             }
             ]);
@@ -1699,38 +1699,38 @@ Object.prototype['_veryDeepCopyWith_'] = function(deepCopier)
     }
     ]);
     if (__context.return) return __context.value;
-    send(__new__, '_veryDeepInner_', [deepCopier]);
+    send(__new__, 'veryDeepInner_', [deepCopier]);
     if (__context.return) return __context.value;
     sup = __class__;
-    index = send(__class__, '_instSize');
+    index = send(__class__, 'instSize');
     send(function() {
-        has = send(sup, '_compiledMethodAt_ifAbsent_', ['veryDeepInner:', function() {
+        has = send(sup, 'compiledMethodAt_ifAbsent_', ['veryDeepInner:', function() {
             nil;
         }
         ]);
-        has = send(has, '_ifNil_ifNotNil_', [function() {
+        has = send(has, 'ifNil_ifNotNil_', [function() {
             false;
         }
         , function() {
             true;
         }
         ]);
-        mine = send(sup, '_instVarNames');
-        send(has, '_ifTrue_ifFalse_', [function() {
-            index = send(index, '-', [send(mine, '_size')]);
+        mine = send(sup, 'instVarNames');
+        send(has, 'ifTrue_ifFalse_', [function() {
+            index = send(index, '-', [send(mine, 'size')]);
         }
         , function() {
-            send(1, '_to_do_', [send(mine, '_size'), function(xx) {
-                sub = send(self, '_instVarAt_', [index]);
-                send(subAss = send(send(deepCopier, '_references'), '_associationAt_ifAbsent_', [sub, function() {
+            send(1, 'to_do_', [send(mine, 'size'), function(xx) {
+                sub = send(self, 'instVarAt_', [index]);
+                send(subAss = send(send(deepCopier, 'references'), 'associationAt_ifAbsent_', [sub, function() {
                     nil;
                 }
-                ]), '_ifNil_ifNotNil_', [function() {
-                    send(__new__, '_instVarAt_put_', [index, send(sub, '_veryDeepCopyWith_', [deepCopier])]);
+                ]), 'ifNil_ifNotNil_', [function() {
+                    send(__new__, 'instVarAt_put_', [index, send(sub, 'veryDeepCopyWith_', [deepCopier])]);
                     if (__context.return) return __context.value;
                 }
                 , function() {
-                    send(__new__, '_instVarAt_put_', [index, send(subAss, '_value')]);
+                    send(__new__, 'instVarAt_put_', [index, send(subAss, 'value')]);
                     if (__context.return) return __context.value;
                 }
                 ]);
@@ -1742,41 +1742,41 @@ Object.prototype['_veryDeepCopyWith_'] = function(deepCopier)
         }
         ]);
         if (__context.return) return __context.value;
-        send(sup = send(sup, '_superclass'), '==', [nil]);
+        send(sup = send(sup, 'superclass'), '==', [nil]);
         if (__context.return) return __context.value;
     }
-    , '_whileFalse');
+    , 'whileFalse');
     if (__context.return) return __context.value;
-    send(__new__, '_rehash');
+    send(__new__, 'rehash');
     if (__context.return) return __context.value;
     return __new__;
 };
-Object.prototype['_veryDeepFixupWith_'] = function(deepCopier)
+Object.prototype['veryDeepFixupWith_'] = function(deepCopier)
 {
     var self = this;
-    console.log('_veryDeepFixupWith_');
+    console.log('veryDeepFixupWith_');
 };
-Object.prototype['_veryDeepInner_'] = function(deepCopier)
+Object.prototype['veryDeepInner_'] = function(deepCopier)
 {
     var self = this;
-    console.log('_veryDeepInner_');
+    console.log('veryDeepInner_');
 };
-Object.prototype['_haltIf_'] = function(condition)
+Object.prototype['haltIf_'] = function(condition)
 {
     var self = this;
     var __context = {};
-    console.log('_haltIf_');
+    console.log('haltIf_');
     var cntxt = null
-    send(send(condition, '_isSymbol'), '_ifTrue_', [function() {
+    send(send(condition, 'isSymbol'), 'ifTrue_', [function() {
         cntxt = thisContext;
         send(function() {
-            send(send(cntxt, '_sender'), '_isNil');
+            send(send(cntxt, 'sender'), 'isNil');
             if (__context.return) return __context.value;
         }
-        , '_whileFalse_', [function() {
-            cntxt = send(cntxt, '_sender');
-            send(send(send(cntxt, '_selector'), '=', [condition]), '_ifTrue_', [function() {
-                send(Halt.classPrototype, '_signal');
+        , 'whileFalse_', [function() {
+            cntxt = send(cntxt, 'sender');
+            send(send(send(cntxt, 'selector'), '=', [condition]), 'ifTrue_', [function() {
+                send(Halt.classPrototype, 'signal');
                 if (__context.return) return __context.value;
             }
             ]);
@@ -1790,104 +1790,104 @@ Object.prototype['_haltIf_'] = function(condition)
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(send(condition, '_isBlock'), '_ifTrue_ifFalse_', [function() {
-        send(condition, '_cull_', [self]);
+    send(send(send(condition, 'isBlock'), 'ifTrue_ifFalse_', [function() {
+        send(condition, 'cull_', [self]);
         if (__context.return) return __context.value;
     }
     , function() {
         condition;
     }
-    ]), '_ifTrue_', [function() {
-        send(Halt.classPrototype, '_signal');
+    ]), 'ifTrue_', [function() {
+        send(Halt.classPrototype, 'signal');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_needsWork'] = function()
+Object.prototype['needsWork'] = function()
 {
     var self = this;
-    console.log('_needsWork');
+    console.log('needsWork');
 };
-Object.prototype['_checkHaltCountExpired'] = function()
+Object.prototype['checkHaltCountExpired'] = function()
 {
     var self = this;
-    console.log('_checkHaltCountExpired');
+    console.log('checkHaltCountExpired');
     var counter = null
-    counter = send(send(Smalltalk.classPrototype, '_globals'), '_at_ifAbsent_', ['HaltCount', function() {
+    counter = send(send(Smalltalk.classPrototype, 'globals'), 'at_ifAbsent_', ['HaltCount', function() {
         0;
     }
     ]);
     return send(counter, '=', [0]);
 };
-Object.prototype['_clearHaltOnce'] = function()
+Object.prototype['clearHaltOnce'] = function()
 {
     var self = this;
-    console.log('_clearHaltOnce');
-    send(send(Smalltalk.classPrototype, '_globals'), '_at_put_', ['HaltOnce', false]);
+    console.log('clearHaltOnce');
+    send(send(Smalltalk.classPrototype, 'globals'), 'at_put_', ['HaltOnce', false]);
 };
-Object.prototype['_decrementAndCheckHaltCount'] = function()
+Object.prototype['decrementAndCheckHaltCount'] = function()
 {
     var self = this;
-    console.log('_decrementAndCheckHaltCount');
-    send(self, '_decrementHaltCount');
-    return send(self, '_checkHaltCountExpired');
+    console.log('decrementAndCheckHaltCount');
+    send(self, 'decrementHaltCount');
+    return send(self, 'checkHaltCountExpired');
 };
-Object.prototype['_decrementHaltCount'] = function()
+Object.prototype['decrementHaltCount'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_decrementHaltCount');
+    console.log('decrementHaltCount');
     var counter = null
-    counter = send(send(Smalltalk.classPrototype, '_globals'), '_at_ifAbsent_', ['HaltCount', function() {
+    counter = send(send(Smalltalk.classPrototype, 'globals'), 'at_ifAbsent_', ['HaltCount', function() {
         0;
     }
     ]);
-    send(send(counter, '>', [0]), '_ifTrue_', [function() {
+    send(send(counter, '>', [0]), 'ifTrue_', [function() {
         counter = send(counter, '-', [1]);
-        send(self, '_setHaltCountTo_', [counter]);
+        send(self, 'setHaltCountTo_', [counter]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_doExpiredHaltCount'] = function()
+Object.prototype['doExpiredHaltCount'] = function()
 {
     var self = this;
-    console.log('_doExpiredHaltCount');
-    send(self, '_clearHaltOnce');
-    send(self, '_removeHaltCount');
-    send(self, '_halt');
+    console.log('doExpiredHaltCount');
+    send(self, 'clearHaltOnce');
+    send(self, 'removeHaltCount');
+    send(self, 'halt');
 };
-Object.prototype['_doExpiredHaltCount_'] = function(aString)
+Object.prototype['doExpiredHaltCount_'] = function(aString)
 {
     var self = this;
-    console.log('_doExpiredHaltCount_');
-    send(self, '_clearHaltOnce');
-    send(self, '_removeHaltCount');
-    send(self, '_halt_', [aString]);
+    console.log('doExpiredHaltCount_');
+    send(self, 'clearHaltOnce');
+    send(self, 'removeHaltCount');
+    send(self, 'halt_', [aString]);
 };
-Object.prototype['_halt_onCount_'] = function(aString, int)
+Object.prototype['halt_onCount_'] = function(aString, int)
 {
     var self = this;
     var __context = {};
-    console.log('_halt_onCount_');
-    send(send(self, '_haltOnceEnabled'), '_ifTrue_', [function() {
-        send(send(self, '_hasHaltCount'), '_ifTrue_ifFalse_', [function() {
-            send(send(self, '_decrementAndCheckHaltCount'), '_ifTrue_', [function() {
-                send(self, '_doExpiredHaltCount_', [aString]);
+    console.log('halt_onCount_');
+    send(send(self, 'haltOnceEnabled'), 'ifTrue_', [function() {
+        send(send(self, 'hasHaltCount'), 'ifTrue_ifFalse_', [function() {
+            send(send(self, 'decrementAndCheckHaltCount'), 'ifTrue_', [function() {
+                send(self, 'doExpiredHaltCount_', [aString]);
                 if (__context.return) return __context.value;
             }
             ]);
             if (__context.return) return __context.value;
         }
         , function() {
-            send(send(int, '=', [1]), '_ifTrue_ifFalse_', [function() {
-                send(self, '_doExpiredHaltCount_', [aString]);
+            send(send(int, '=', [1]), 'ifTrue_ifFalse_', [function() {
+                send(self, 'doExpiredHaltCount_', [aString]);
                 if (__context.return) return __context.value;
             }
             , function() {
-                send(self, '_setHaltCountTo_', [send(int, '-', [1])]);
+                send(self, 'setHaltCountTo_', [send(int, '-', [1])]);
                 if (__context.return) return __context.value;
             }
             ]);
@@ -1899,27 +1899,27 @@ Object.prototype['_halt_onCount_'] = function(aString, int)
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_haltOnCount_'] = function(int)
+Object.prototype['haltOnCount_'] = function(int)
 {
     var self = this;
     var __context = {};
-    console.log('_haltOnCount_');
-    send(send(self, '_haltOnceEnabled'), '_ifTrue_', [function() {
-        send(send(self, '_hasHaltCount'), '_ifTrue_ifFalse_', [function() {
-            send(send(self, '_decrementAndCheckHaltCount'), '_ifTrue_', [function() {
-                send(self, '_doExpiredHaltCount');
+    console.log('haltOnCount_');
+    send(send(self, 'haltOnceEnabled'), 'ifTrue_', [function() {
+        send(send(self, 'hasHaltCount'), 'ifTrue_ifFalse_', [function() {
+            send(send(self, 'decrementAndCheckHaltCount'), 'ifTrue_', [function() {
+                send(self, 'doExpiredHaltCount');
                 if (__context.return) return __context.value;
             }
             ]);
             if (__context.return) return __context.value;
         }
         , function() {
-            send(send(int, '=', [1]), '_ifTrue_ifFalse_', [function() {
-                send(self, '_doExpiredHaltCount');
+            send(send(int, '=', [1]), 'ifTrue_ifFalse_', [function() {
+                send(self, 'doExpiredHaltCount');
                 if (__context.return) return __context.value;
             }
             , function() {
-                send(self, '_setHaltCountTo_', [send(int, '-', [1])]);
+                send(self, 'setHaltCountTo_', [send(int, '-', [1])]);
                 if (__context.return) return __context.value;
             }
             ]);
@@ -1931,119 +1931,119 @@ Object.prototype['_haltOnCount_'] = function(int)
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_haltOnce'] = function()
+Object.prototype['haltOnce'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_haltOnce');
-    send(send(self, '_haltOnceEnabled'), '_ifTrue_', [function() {
-        send(self, '_clearHaltOnce');
+    console.log('haltOnce');
+    send(send(self, 'haltOnceEnabled'), 'ifTrue_', [function() {
+        send(self, 'clearHaltOnce');
         if (__context.return) return __context.value;
-        __context.value = send(self, '_halt');
+        __context.value = send(self, 'halt');
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_haltOnce_'] = function(aString)
+Object.prototype['haltOnce_'] = function(aString)
 {
     var self = this;
     var __context = {};
-    console.log('_haltOnce_');
-    send(send(self, '_haltOnceEnabled'), '_ifTrue_', [function() {
-        send(self, '_clearHaltOnce');
+    console.log('haltOnce_');
+    send(send(self, 'haltOnceEnabled'), 'ifTrue_', [function() {
+        send(self, 'clearHaltOnce');
         if (__context.return) return __context.value;
-        __context.value = send(self, '_halt_', [aString]);
+        __context.value = send(self, 'halt_', [aString]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_haltOnceEnabled'] = function()
+Object.prototype['haltOnceEnabled'] = function()
 {
     var self = this;
-    console.log('_haltOnceEnabled');
-    return send(send(Smalltalk.classPrototype, '_globals'), '_at_ifAbsent_', ['HaltOnce', function() {
+    console.log('haltOnceEnabled');
+    return send(send(Smalltalk.classPrototype, 'globals'), 'at_ifAbsent_', ['HaltOnce', function() {
         false;
     }
     ]);
 };
-Object.prototype['_hasHaltCount'] = function()
+Object.prototype['hasHaltCount'] = function()
 {
     var self = this;
-    console.log('_hasHaltCount');
-    return send(send(Smalltalk.classPrototype, '_globals'), '_includesKey_', ['HaltCount']);
+    console.log('hasHaltCount');
+    return send(send(Smalltalk.classPrototype, 'globals'), 'includesKey_', ['HaltCount']);
 };
-Object.prototype['_removeHaltCount'] = function()
+Object.prototype['removeHaltCount'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_removeHaltCount');
-    send(send(send(Smalltalk.classPrototype, '_globals'), '_includesKey_', ['HaltCount']), '_ifTrue_', [function() {
-        send(send(Smalltalk.classPrototype, '_globals'), '_removeKey_', ['HaltCount']);
+    console.log('removeHaltCount');
+    send(send(send(Smalltalk.classPrototype, 'globals'), 'includesKey_', ['HaltCount']), 'ifTrue_', [function() {
+        send(send(Smalltalk.classPrototype, 'globals'), 'removeKey_', ['HaltCount']);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_setHaltCountTo_'] = function(int)
+Object.prototype['setHaltCountTo_'] = function(int)
 {
     var self = this;
-    console.log('_setHaltCountTo_');
-    send(send(Smalltalk.classPrototype, '_globals'), '_at_put_', ['HaltCount', int]);
+    console.log('setHaltCountTo_');
+    send(send(Smalltalk.classPrototype, 'globals'), 'at_put_', ['HaltCount', int]);
 };
-Object.prototype['_setHaltOnce'] = function()
+Object.prototype['setHaltOnce'] = function()
 {
     var self = this;
-    console.log('_setHaltOnce');
-    send(send(Smalltalk.classPrototype, '_globals'), '_at_put_', ['HaltOnce', true]);
+    console.log('setHaltOnce');
+    send(send(Smalltalk.classPrototype, 'globals'), 'at_put_', ['HaltOnce', true]);
 };
-Object.prototype['_toggleHaltOnce'] = function()
+Object.prototype['toggleHaltOnce'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_toggleHaltOnce');
-    send(send(self, '_haltOnceEnabled'), '_ifTrue_ifFalse_', [function() {
-        send(self, '_clearHaltOnce');
+    console.log('toggleHaltOnce');
+    send(send(self, 'haltOnceEnabled'), 'ifTrue_ifFalse_', [function() {
+        send(self, 'clearHaltOnce');
         if (__context.return) return __context.value;
     }
     , function() {
-        send(self, '_setHaltOnce');
+        send(self, 'setHaltOnce');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_addDependent_'] = function(anObject)
+Object.prototype['addDependent_'] = function(anObject)
 {
     var self = this;
     var __context = {};
-    console.log('_addDependent_');
+    console.log('addDependent_');
     var dependents = null
-    dependents = send(self, '_dependents');
-    send(send(dependents, '_includes_', [anObject]), '_ifFalse_', [function() {
-        send(self, '_myDependents_', [send(dependents, '_copyWithDependent_', [anObject])]);
+    dependents = send(self, 'dependents');
+    send(send(dependents, 'includes_', [anObject]), 'ifFalse_', [function() {
+        send(self, 'myDependents_', [send(dependents, 'copyWithDependent_', [anObject])]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
     return anObject;
 };
-Object.prototype['_breakDependents'] = function()
+Object.prototype['breakDependents'] = function()
 {
     var self = this;
-    console.log('_breakDependents');
-    send(self, '_myDependents_', [nil]);
+    console.log('breakDependents');
+    send(self, 'myDependents_', [nil]);
 };
-Object.prototype['_canDiscardEdits'] = function()
+Object.prototype['canDiscardEdits'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_canDiscardEdits');
-    send(send(self, '_dependents'), '_do_without_', [function(each) {
-        send(send(each, '_canDiscardEdits'), '_ifFalse_', [function() {
+    console.log('canDiscardEdits');
+    send(send(self, 'dependents'), 'do_without_', [function(each) {
+        send(send(each, 'canDiscardEdits'), 'ifFalse_', [function() {
             __context.value = false;
             __context.return = true;
             return __context.value;
@@ -2055,22 +2055,22 @@ Object.prototype['_canDiscardEdits'] = function()
     if (__context.return) return __context.value;
     return true;
 };
-Object.prototype['_dependents'] = function()
+Object.prototype['dependents'] = function()
 {
     var self = this;
-    console.log('_dependents');
-    return send(send(self, '_myDependents'), '_ifNil_', [function() {
+    console.log('dependents');
+    return send(send(self, 'myDependents'), 'ifNil_', [function() {
         [];
     }
     ]);
 };
-Object.prototype['_hasUnacceptedEdits'] = function()
+Object.prototype['hasUnacceptedEdits'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_hasUnacceptedEdits');
-    send(send(self, '_dependents'), '_do_without_', [function(each) {
-        send(send(each, '_hasUnacceptedEdits'), '_ifTrue_', [function() {
+    console.log('hasUnacceptedEdits');
+    send(send(self, 'dependents'), 'do_without_', [function(each) {
+        send(send(each, 'hasUnacceptedEdits'), 'ifTrue_', [function() {
             __context.value = true;
             __context.return = true;
             return __context.value;
@@ -2082,232 +2082,232 @@ Object.prototype['_hasUnacceptedEdits'] = function()
     if (__context.return) return __context.value;
     return false;
 };
-Object.prototype['_myDependents'] = function()
+Object.prototype['myDependents'] = function()
 {
     var self = this;
-    console.log('_myDependents');
-    return send(DependentsFields.classPrototype, '_at_ifAbsent_', [self, function() {
+    console.log('myDependents');
+    return send(DependentsFields.classPrototype, 'at_ifAbsent_', [self, function() {
     }
     ]);
 };
-Object.prototype['_myDependents_'] = function(aCollectionOrNil)
+Object.prototype['myDependents_'] = function(aCollectionOrNil)
 {
     var self = this;
     var __context = {};
-    console.log('_myDependents_');
-    send(aCollectionOrNil, '_ifNil_ifNotNil_', [function() {
-        send(DependentsFields.classPrototype, '_removeKey_ifAbsent_', [self, function() {
+    console.log('myDependents_');
+    send(aCollectionOrNil, 'ifNil_ifNotNil_', [function() {
+        send(DependentsFields.classPrototype, 'removeKey_ifAbsent_', [self, function() {
         }
         ]);
         if (__context.return) return __context.value;
     }
     , function() {
-        send(DependentsFields.classPrototype, '_at_put_', [self, aCollectionOrNil]);
+        send(DependentsFields.classPrototype, 'at_put_', [self, aCollectionOrNil]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_release'] = function()
+Object.prototype['release'] = function()
 {
     var self = this;
-    console.log('_release');
-    send(self, '_releaseActionMap');
+    console.log('release');
+    send(self, 'releaseActionMap');
 };
-Object.prototype['_removeDependent_'] = function(anObject)
+Object.prototype['removeDependent_'] = function(anObject)
 {
     var self = this;
     var __context = {};
-    console.log('_removeDependent_');
+    console.log('removeDependent_');
     var dependents = null
-    dependents = send(send(self, '_dependents'), '_reject_', [function(each) {
+    dependents = send(send(self, 'dependents'), 'reject_', [function(each) {
         send(each, '==', [anObject]);
         if (__context.return) return __context.value;
     }
     ]);
-    send(self, '_myDependents_', [send(send(dependents, '_isEmpty'), '_ifFalse_', [function() {
+    send(self, 'myDependents_', [send(send(dependents, 'isEmpty'), 'ifFalse_', [function() {
         dependents;
     }
     ])]);
     if (__context.return) return __context.value;
     return anObject;
 };
-Object.prototype['_acceptDroppingMorph_event_inMorph_'] = function(transferMorph, evt, dstListMorph)
+Object.prototype['acceptDroppingMorph_event_inMorph_'] = function(transferMorph, evt, dstListMorph)
 {
     var self = this;
-    console.log('_acceptDroppingMorph_event_inMorph_');
+    console.log('acceptDroppingMorph_event_inMorph_');
     return false;
 };
-Object.prototype['_dragPassengerFor_inMorph_'] = function(item, dragSource)
+Object.prototype['dragPassengerFor_inMorph_'] = function(item, dragSource)
 {
     var self = this;
-    console.log('_dragPassengerFor_inMorph_');
+    console.log('dragPassengerFor_inMorph_');
     return item;
 };
-Object.prototype['_dragTransferType'] = function()
+Object.prototype['dragTransferType'] = function()
 {
     var self = this;
-    console.log('_dragTransferType');
+    console.log('dragTransferType');
     return nil;
 };
-Object.prototype['_dragTransferTypeForMorph_'] = function(dragSource)
+Object.prototype['dragTransferTypeForMorph_'] = function(dragSource)
 {
     var self = this;
-    console.log('_dragTransferTypeForMorph_');
+    console.log('dragTransferTypeForMorph_');
     return nil;
 };
-Object.prototype['_wantsDroppedMorph_event_inMorph_'] = function(aMorph, anEvent, destinationLM)
+Object.prototype['wantsDroppedMorph_event_inMorph_'] = function(aMorph, anEvent, destinationLM)
 {
     var self = this;
-    console.log('_wantsDroppedMorph_event_inMorph_');
+    console.log('wantsDroppedMorph_event_inMorph_');
     return false;
 };
-Object.prototype['_assert_'] = function(aBlock)
+Object.prototype['assert_'] = function(aBlock)
 {
     var self = this;
     var __context = {};
-    console.log('_assert_');
-    send(send(aBlock, '_value'), '_ifFalse_', [function() {
-        send(AssertionFailure.classPrototype, '_signal_', ['Assertion failed']);
+    console.log('assert_');
+    send(send(aBlock, 'value'), 'ifFalse_', [function() {
+        send(AssertionFailure.classPrototype, 'signal_', ['Assertion failed']);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_assert_descriptionBlock_'] = function(aBlock, descriptionBlock)
+Object.prototype['assert_descriptionBlock_'] = function(aBlock, descriptionBlock)
 {
     var self = this;
     var __context = {};
-    console.log('_assert_descriptionBlock_');
-    send(send(aBlock, '_value'), '_ifFalse_', [function() {
-        send(AssertionFailure.classPrototype, '_signal_', [send(send(descriptionBlock, '_value'), '_asString')]);
+    console.log('assert_descriptionBlock_');
+    send(send(aBlock, 'value'), 'ifFalse_', [function() {
+        send(AssertionFailure.classPrototype, 'signal_', [send(send(descriptionBlock, 'value'), 'asString')]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_assert_description_'] = function(aBlock, aString)
+Object.prototype['assert_description_'] = function(aBlock, aString)
 {
     var self = this;
     var __context = {};
-    console.log('_assert_description_');
-    send(send(aBlock, '_value'), '_ifFalse_', [function() {
-        send(AssertionFailure.classPrototype, '_signal_', [aString]);
+    console.log('assert_description_');
+    send(send(aBlock, 'value'), 'ifFalse_', [function() {
+        send(AssertionFailure.classPrototype, 'signal_', [aString]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_caseError'] = function()
+Object.prototype['caseError'] = function()
 {
     var self = this;
-    console.log('_caseError');
-    send(self, '_error_', [send(send('Case not found (', ',', [send(self, '_printString')]), ',', ['), and no otherwise clause'])]);
+    console.log('caseError');
+    send(self, 'error_', [send(send('Case not found (', ',', [send(self, 'printString')]), ',', ['), and no otherwise clause'])]);
 };
-Object.prototype['_confirm_orCancel_'] = function(aString, cancelBlock)
+Object.prototype['confirm_orCancel_'] = function(aString, cancelBlock)
 {
     var self = this;
-    console.log('_confirm_orCancel_');
-    return send(send(UIManager.classPrototype, '_default'), '_confirm_orCancel_', [aString, cancelBlock]);
+    console.log('confirm_orCancel_');
+    return send(send(UIManager.classPrototype, 'default'), 'confirm_orCancel_', [aString, cancelBlock]);
 };
-Object.prototype['_deprecated_'] = function(anExplanationString)
+Object.prototype['deprecated_'] = function(anExplanationString)
 {
     var self = this;
-    console.log('_deprecated_');
-    send(send(Deprecation.classPrototype, '_method_explanation_on_in_', [send(send(thisContext, '_sender'), '_method'), anExplanationString, nil, nil]), '_signal');
+    console.log('deprecated_');
+    send(send(Deprecation.classPrototype, 'method_explanation_on_in_', [send(send(thisContext, 'sender'), 'method'), anExplanationString, nil, nil]), 'signal');
 };
-Object.prototype['_deprecated_on_in_'] = function(anExplanationString, date, version)
+Object.prototype['deprecated_on_in_'] = function(anExplanationString, date, version)
 {
     var self = this;
-    console.log('_deprecated_on_in_');
-    send(send(Deprecation.classPrototype, '_method_explanation_on_in_', [send(send(thisContext, '_sender'), '_method'), anExplanationString, date, version]), '_signal');
+    console.log('deprecated_on_in_');
+    send(send(Deprecation.classPrototype, 'method_explanation_on_in_', [send(send(thisContext, 'sender'), 'method'), anExplanationString, date, version]), 'signal');
 };
-Object.prototype['_doesNotUnderstand_'] = function(aMessage)
+Object.prototype['doesNotUnderstand_'] = function(aMessage)
 {
     var self = this;
-    console.log('_doesNotUnderstand_');
+    console.log('doesNotUnderstand_');
     var exception = null
     var resumeValue = null
-    send((function () {var _aux = send(exception = send(MessageNotUnderstood.classPrototype, '_new'), '_message_', [aMessage]);return _aux;})(), '_receiver_', [self]);
-    resumeValue = send(exception, '_signal');
-    return send(send(exception, '_reachedDefaultHandler'), '_ifTrue_ifFalse_', [function() {
-        send(aMessage, '_sentTo_', [self]);
+    send((function () {var _aux = send(exception = send(MessageNotUnderstood.classPrototype, 'new'), 'message_', [aMessage]);return _aux;})(), 'receiver_', [self]);
+    resumeValue = send(exception, 'signal');
+    return send(send(exception, 'reachedDefaultHandler'), 'ifTrue_ifFalse_', [function() {
+        send(aMessage, 'sentTo_', [self]);
     }
     , function() {
         resumeValue;
     }
     ]);
 };
-Object.prototype['_dpsTrace_'] = function(reportObject)
+Object.prototype['dpsTrace_'] = function(reportObject)
 {
     var self = this;
     var __context = {};
-    console.log('_dpsTrace_');
-    send(send(send(Transcript.classPrototype, '_myDependents'), '_isNil'), '_ifTrue_', [function() {
+    console.log('dpsTrace_');
+    send(send(send(Transcript.classPrototype, 'myDependents'), 'isNil'), 'ifTrue_', [function() {
         __context.value = self;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(self, '_dpsTrace_levels_withContext_', [reportObject, 1, thisContext]);
+    send(self, 'dpsTrace_levels_withContext_', [reportObject, 1, thisContext]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_dpsTrace_levels_'] = function(reportObject, anInt)
+Object.prototype['dpsTrace_levels_'] = function(reportObject, anInt)
 {
     var self = this;
-    console.log('_dpsTrace_levels_');
-    send(self, '_dpsTrace_levels_withContext_', [reportObject, anInt, thisContext]);
+    console.log('dpsTrace_levels_');
+    send(self, 'dpsTrace_levels_withContext_', [reportObject, anInt, thisContext]);
 };
-Object.prototype['_dpsTrace_levels_withContext_'] = function(reportObject, anInt, currentContext)
+Object.prototype['dpsTrace_levels_withContext_'] = function(reportObject, anInt, currentContext)
 {
     var self = this;
     var __context = {};
-    console.log('_dpsTrace_levels_withContext_');
+    console.log('dpsTrace_levels_withContext_');
     var reportString = null
     var context = null
     var displayCount = null
-    reportString = send(send(reportObject, '_respondsTo_', ['asString']), '_ifTrue_ifFalse_', [function() {
-        send(reportObject, '_asString');
+    reportString = send(send(reportObject, 'respondsTo_', ['asString']), 'ifTrue_ifFalse_', [function() {
+        send(reportObject, 'asString');
         if (__context.return) return __context.value;
     }
     , function() {
-        send(reportObject, '_printString');
+        send(reportObject, 'printString');
         if (__context.return) return __context.value;
     }
     ]);
-    send(send(send(Smalltalk.classPrototype, '_globals'), '_at_ifAbsent_', ['Decompiler', function() {
+    send(send(send(Smalltalk.classPrototype, 'globals'), 'at_ifAbsent_', ['Decompiler', function() {
         nil;
     }
-    ]), '_ifNil_ifNotNil_', [function() {
-        send((function () {var _aux = send(Transcript.classPrototype, '_cr');return _aux;})(), '_show_', [reportString]);
+    ]), 'ifNil_ifNotNil_', [function() {
+        send((function () {var _aux = send(Transcript.classPrototype, 'cr');return _aux;})(), 'show_', [reportString]);
         if (__context.return) return __context.value;
     }
     , function() {
         context = currentContext;
         displayCount = send(anInt, '>', [1]);
-        send(1, '_to_do_', [anInt, function(count) {
-            send(Transcript.classPrototype, '_cr');
+        send(1, 'to_do_', [anInt, function(count) {
+            send(Transcript.classPrototype, 'cr');
             if (__context.return) return __context.value;
-            send(displayCount, '_ifTrue_', [function() {
-                send(Transcript.classPrototype, '_show_', [send(send(count, '_printString'), ',', [': '])]);
+            send(displayCount, 'ifTrue_', [function() {
+                send(Transcript.classPrototype, 'show_', [send(send(count, 'printString'), ',', [': '])]);
                 if (__context.return) return __context.value;
             }
             ]);
             if (__context.return) return __context.value;
-            send(send(reportString, '_notNil'), '_ifTrue_ifFalse_', [function() {
-                send(Transcript.classPrototype, '_show_', [send(send(send(send(send(send(send(send(context, '_home'), '_class'), '_name'), ',', ['/']), ',', [send(send(context, '_sender'), '_selector')]), ',', [' (']), ',', [reportString]), ',', [')'])]);
+            send(send(reportString, 'notNil'), 'ifTrue_ifFalse_', [function() {
+                send(Transcript.classPrototype, 'show_', [send(send(send(send(send(send(send(send(context, 'home'), 'class'), 'name'), ',', ['/']), ',', [send(send(context, 'sender'), 'selector')]), ',', [' (']), ',', [reportString]), ',', [')'])]);
                 if (__context.return) return __context.value;
-                context = send(context, '_sender');
+                context = send(context, 'sender');
                 reportString = nil;
             }
             , function() {
-                send(send(send(context, '_notNil'), '_and_', [function() {
-                    send(context = send(context, '_sender'), '_notNil');
+                send(send(send(context, 'notNil'), 'and_', [function() {
+                    send(context = send(context, 'sender'), 'notNil');
                     if (__context.return) return __context.value;
                 }
-                ]), '_ifTrue_', [function() {
-                    send(Transcript.classPrototype, '_show_', [send(send(send(send(send(context, '_receiver'), '_class'), '_name'), ',', ['/']), ',', [send(context, '_selector')])]);
+                ]), 'ifTrue_', [function() {
+                    send(Transcript.classPrototype, 'show_', [send(send(send(send(send(context, 'receiver'), 'class'), 'name'), ',', ['/']), ',', [send(context, 'selector')])]);
                     if (__context.return) return __context.value;
                 }
                 ]);
@@ -2322,326 +2322,326 @@ Object.prototype['_dpsTrace_levels_withContext_'] = function(reportObject, anInt
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_error'] = function()
+Object.prototype['error'] = function()
 {
     var self = this;
-    console.log('_error');
-    return send(self, '_error_', ['Error!']);
+    console.log('error');
+    return send(self, 'error_', ['Error!']);
 };
-Object.prototype['_error_'] = function(aString)
+Object.prototype['error_'] = function(aString)
 {
     var self = this;
-    console.log('_error_');
-    return send(send(Error.classPrototype, '_new'), '_signal_', [aString]);
+    console.log('error_');
+    return send(send(Error.classPrototype, 'new'), 'signal_', [aString]);
 };
-Object.prototype['_explicitRequirement'] = function()
+Object.prototype['explicitRequirement'] = function()
 {
     var self = this;
-    console.log('_explicitRequirement');
-    send(self, '_error_', ['Explicitly required method']);
+    console.log('explicitRequirement');
+    send(self, 'error_', ['Explicitly required method']);
 };
-Object.prototype['_halt'] = function()
+Object.prototype['halt'] = function()
 {
     var self = this;
-    console.log('_halt');
-    send(Halt.classPrototype, '_signal');
+    console.log('halt');
+    send(Halt.classPrototype, 'signal');
 };
-Object.prototype['_halt_'] = function(aString)
+Object.prototype['halt_'] = function(aString)
 {
     var self = this;
-    console.log('_halt_');
-    send(send(Halt.classPrototype, '_new'), '_signal_', [aString]);
+    console.log('halt_');
+    send(send(Halt.classPrototype, 'new'), 'signal_', [aString]);
 };
-Object.prototype['_haltIfShiftPressed'] = function()
+Object.prototype['haltIfShiftPressed'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_haltIfShiftPressed');
-    send(self, '_haltIf_', [function() {
-        send(Sensor.classPrototype, '_shiftPressed');
+    console.log('haltIfShiftPressed');
+    send(self, 'haltIf_', [function() {
+        send(Sensor.classPrototype, 'shiftPressed');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_handles_'] = function(exception)
+Object.prototype['handles_'] = function(exception)
 {
     var self = this;
-    console.log('_handles_');
+    console.log('handles_');
     return false;
 };
-Object.prototype['_notify_'] = function(aString)
+Object.prototype['notify_'] = function(aString)
 {
     var self = this;
-    console.log('_notify_');
-    send(Warning.classPrototype, '_signal_', [aString]);
+    console.log('notify_');
+    send(Warning.classPrototype, 'signal_', [aString]);
 };
-Object.prototype['_notify_at_'] = function(aString, location)
+Object.prototype['notify_at_'] = function(aString, location)
 {
     var self = this;
-    console.log('_notify_at_');
-    send(self, '_notify_', [aString]);
+    console.log('notify_at_');
+    send(self, 'notify_', [aString]);
 };
-Object.prototype['_primitiveFail'] = function()
+Object.prototype['primitiveFail'] = function()
 {
     var self = this;
-    console.log('_primitiveFail');
-    return send(self, '_primitiveFailed');
+    console.log('primitiveFail');
+    return send(self, 'primitiveFailed');
 };
-Object.prototype['_primitiveFailed'] = function()
+Object.prototype['primitiveFailed'] = function()
 {
     var self = this;
-    console.log('_primitiveFailed');
-    send(self, '_primitiveFailed_', [send(send(thisContext, '_sender'), '_selector')]);
+    console.log('primitiveFailed');
+    send(self, 'primitiveFailed_', [send(send(thisContext, 'sender'), 'selector')]);
 };
-Object.prototype['_primitiveFailed_'] = function(selector)
+Object.prototype['primitiveFailed_'] = function(selector)
 {
     var self = this;
-    console.log('_primitiveFailed_');
-    send(PrimitiveFailed.classPrototype, '_signalFor_', [selector]);
+    console.log('primitiveFailed_');
+    send(PrimitiveFailed.classPrototype, 'signalFor_', [selector]);
 };
-Object.prototype['_requirement'] = function()
+Object.prototype['requirement'] = function()
 {
     var self = this;
-    console.log('_requirement');
-    send(self, '_error_', ['Implicitly required method']);
+    console.log('requirement');
+    send(self, 'error_', ['Implicitly required method']);
 };
-Object.prototype['_shouldBeImplemented'] = function()
+Object.prototype['shouldBeImplemented'] = function()
 {
     var self = this;
-    console.log('_shouldBeImplemented');
-    send(ShouldBeImplemented.classPrototype, '_signalFor_', [send(send(thisContext, '_sender'), '_selector')]);
+    console.log('shouldBeImplemented');
+    send(ShouldBeImplemented.classPrototype, 'signalFor_', [send(send(thisContext, 'sender'), 'selector')]);
 };
-Object.prototype['_shouldNotImplement'] = function()
+Object.prototype['shouldNotImplement'] = function()
 {
     var self = this;
-    console.log('_shouldNotImplement');
-    send(ShouldNotImplement.classPrototype, '_signalFor_', [send(send(thisContext, '_sender'), '_selector')]);
+    console.log('shouldNotImplement');
+    send(ShouldNotImplement.classPrototype, 'signalFor_', [send(send(thisContext, 'sender'), 'selector')]);
 };
-Object.prototype['_subclassResponsibility'] = function()
+Object.prototype['subclassResponsibility'] = function()
 {
     var self = this;
-    console.log('_subclassResponsibility');
-    send(SubclassResponsibility.classPrototype, '_signalFor_', [send(send(thisContext, '_sender'), '_selector')]);
+    console.log('subclassResponsibility');
+    send(SubclassResponsibility.classPrototype, 'signalFor_', [send(send(thisContext, 'sender'), 'selector')]);
 };
-Object.prototype['_traitConflict'] = function()
+Object.prototype['traitConflict'] = function()
 {
     var self = this;
-    console.log('_traitConflict');
-    send(self, '_error_', ['A class or trait does not properly resolve a conflict between multiple traits it uses.']);
+    console.log('traitConflict');
+    send(self, 'error_', ['A class or trait does not properly resolve a conflict between multiple traits it uses.']);
 };
-Object.prototype['_value'] = function()
+Object.prototype['value'] = function()
 {
     var self = this;
-    console.log('_value');
+    console.log('value');
     return self;
 };
-Object.prototype['_valueWithArguments_'] = function(aSequenceOfArguments)
+Object.prototype['valueWithArguments_'] = function(aSequenceOfArguments)
 {
     var self = this;
-    console.log('_valueWithArguments_');
+    console.log('valueWithArguments_');
     return self;
 };
-Object.prototype['_actionForEvent_'] = function(anEventSelector)
+Object.prototype['actionForEvent_'] = function(anEventSelector)
 {
     var self = this;
     var __context = {};
-    console.log('_actionForEvent_');
+    console.log('actionForEvent_');
     var actions = null
-    actions = send(send(self, '_actionMap'), '_at_ifAbsent_', [send(anEventSelector, '_asSymbol'), function() {
+    actions = send(send(self, 'actionMap'), 'at_ifAbsent_', [send(anEventSelector, 'asSymbol'), function() {
         nil;
     }
     ]);
-    send(actions, '_ifNil_', [function() {
+    send(actions, 'ifNil_', [function() {
         __context.value = nil;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(actions, '_asMinimalRepresentation');
+    return send(actions, 'asMinimalRepresentation');
 };
-Object.prototype['_actionForEvent_ifAbsent_'] = function(anEventSelector, anExceptionBlock)
+Object.prototype['actionForEvent_ifAbsent_'] = function(anEventSelector, anExceptionBlock)
 {
     var self = this;
     var __context = {};
-    console.log('_actionForEvent_ifAbsent_');
+    console.log('actionForEvent_ifAbsent_');
     var actions = null
-    actions = send(send(self, '_actionMap'), '_at_ifAbsent_', [send(anEventSelector, '_asSymbol'), function() {
+    actions = send(send(self, 'actionMap'), 'at_ifAbsent_', [send(anEventSelector, 'asSymbol'), function() {
         nil;
     }
     ]);
-    send(actions, '_ifNil_', [function() {
-        __context.value = send(anExceptionBlock, '_value');
+    send(actions, 'ifNil_', [function() {
+        __context.value = send(anExceptionBlock, 'value');
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(actions, '_asMinimalRepresentation');
+    return send(actions, 'asMinimalRepresentation');
 };
-Object.prototype['_actionMap'] = function()
+Object.prototype['actionMap'] = function()
 {
     var self = this;
-    console.log('_actionMap');
-    return send(EventManager.classPrototype, '_actionMapFor_', [self]);
+    console.log('actionMap');
+    return send(EventManager.classPrototype, 'actionMapFor_', [self]);
 };
-Object.prototype['_actionSequenceForEvent_'] = function(anEventSelector)
+Object.prototype['actionSequenceForEvent_'] = function(anEventSelector)
 {
     var self = this;
-    console.log('_actionSequenceForEvent_');
-    return send(send(send(self, '_actionMap'), '_at_ifAbsent_', [send(anEventSelector, '_asSymbol'), function() {
-        __context.value = send(WeakActionSequence.classPrototype, '_new');
+    console.log('actionSequenceForEvent_');
+    return send(send(send(self, 'actionMap'), 'at_ifAbsent_', [send(anEventSelector, 'asSymbol'), function() {
+        __context.value = send(WeakActionSequence.classPrototype, 'new');
         __context.return = true;
         return __context.value;
     }
-    ]), '_asActionSequence');
+    ]), 'asActionSequence');
 };
-Object.prototype['_actionsDo_'] = function(aBlock)
+Object.prototype['actionsDo_'] = function(aBlock)
 {
     var self = this;
-    console.log('_actionsDo_');
-    send(send(self, '_actionMap'), '_do_', [aBlock]);
+    console.log('actionsDo_');
+    send(send(self, 'actionMap'), 'do_', [aBlock]);
 };
-Object.prototype['_createActionMap'] = function()
+Object.prototype['createActionMap'] = function()
 {
     var self = this;
-    console.log('_createActionMap');
-    return send(IdentityDictionary.classPrototype, '_new');
+    console.log('createActionMap');
+    return send(IdentityDictionary.classPrototype, 'new');
 };
-Object.prototype['_hasActionForEvent_'] = function(anEventSelector)
+Object.prototype['hasActionForEvent_'] = function(anEventSelector)
 {
     var self = this;
-    console.log('_hasActionForEvent_');
-    return send(send(self, '_actionForEvent_', [anEventSelector]), '_notNil');
+    console.log('hasActionForEvent_');
+    return send(send(self, 'actionForEvent_', [anEventSelector]), 'notNil');
 };
-Object.prototype['_hasActionsWithReceiver_'] = function(anObject)
+Object.prototype['hasActionsWithReceiver_'] = function(anObject)
 {
     var self = this;
-    console.log('_hasActionsWithReceiver_');
-    return send(send(send(self, '_actionMap'), '_keys'), '_anySatisfy_', [function(eachEventSelector) {
-        send(send(self, '_actionSequenceForEvent_', [eachEventSelector]), '_anySatisfy_', [function(anAction) {
-            send(send(anAction, '_receiver'), '==', [anObject]);
+    console.log('hasActionsWithReceiver_');
+    return send(send(send(self, 'actionMap'), 'keys'), 'anySatisfy_', [function(eachEventSelector) {
+        send(send(self, 'actionSequenceForEvent_', [eachEventSelector]), 'anySatisfy_', [function(anAction) {
+            send(send(anAction, 'receiver'), '==', [anObject]);
         }
         ]);
     }
     ]);
 };
-Object.prototype['_setActionSequence_forEvent_'] = function(actionSequence, anEventSelector)
+Object.prototype['setActionSequence_forEvent_'] = function(actionSequence, anEventSelector)
 {
     var self = this;
     var __context = {};
-    console.log('_setActionSequence_forEvent_');
+    console.log('setActionSequence_forEvent_');
     var action = null
-    action = send(actionSequence, '_asMinimalRepresentation');
-    send(send(action, '==', [nil]), '_ifTrue_ifFalse_', [function() {
-        send(self, '_removeActionsForEvent_', [anEventSelector]);
+    action = send(actionSequence, 'asMinimalRepresentation');
+    send(send(action, '==', [nil]), 'ifTrue_ifFalse_', [function() {
+        send(self, 'removeActionsForEvent_', [anEventSelector]);
         if (__context.return) return __context.value;
     }
     , function() {
-        send(send(self, '_updateableActionMap'), '_at_put_', [send(anEventSelector, '_asSymbol'), action]);
+        send(send(self, 'updateableActionMap'), 'at_put_', [send(anEventSelector, 'asSymbol'), action]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_updateableActionMap'] = function()
+Object.prototype['updateableActionMap'] = function()
 {
     var self = this;
-    console.log('_updateableActionMap');
-    return send(EventManager.classPrototype, '_updateableActionMapFor_', [self]);
+    console.log('updateableActionMap');
+    return send(EventManager.classPrototype, 'updateableActionMapFor_', [self]);
 };
-Object.prototype['_when_evaluate_'] = function(anEventSelector, anAction)
+Object.prototype['when_evaluate_'] = function(anEventSelector, anAction)
 {
     var self = this;
     var __context = {};
-    console.log('_when_evaluate_');
+    console.log('when_evaluate_');
     var actions = null
-    actions = send(self, '_actionSequenceForEvent_', [anEventSelector]);
-    send(send(actions, '_includes_', [anAction]), '_ifTrue_', [function() {
+    actions = send(self, 'actionSequenceForEvent_', [anEventSelector]);
+    send(send(actions, 'includes_', [anAction]), 'ifTrue_', [function() {
         __context.value = self;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(self, '_setActionSequence_forEvent_', [send(actions, '_copyWith_', [anAction]), anEventSelector]);
+    send(self, 'setActionSequence_forEvent_', [send(actions, 'copyWith_', [anAction]), anEventSelector]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_when_send_to_'] = function(anEventSelector, aMessageSelector, anObject)
+Object.prototype['when_send_to_'] = function(anEventSelector, aMessageSelector, anObject)
 {
     var self = this;
-    console.log('_when_send_to_');
-    send(self, '_when_evaluate_', [anEventSelector, send(WeakMessageSend.classPrototype, '_receiver_selector_', [anObject, aMessageSelector])]);
+    console.log('when_send_to_');
+    send(self, 'when_evaluate_', [anEventSelector, send(WeakMessageSend.classPrototype, 'receiver_selector_', [anObject, aMessageSelector])]);
 };
-Object.prototype['_when_send_to_withArguments_'] = function(anEventSelector, aMessageSelector, anObject, anArgArray)
+Object.prototype['when_send_to_withArguments_'] = function(anEventSelector, aMessageSelector, anObject, anArgArray)
 {
     var self = this;
-    console.log('_when_send_to_withArguments_');
-    send(self, '_when_evaluate_', [anEventSelector, send(WeakMessageSend.classPrototype, '_receiver_selector_arguments_', [anObject, aMessageSelector, anArgArray])]);
+    console.log('when_send_to_withArguments_');
+    send(self, 'when_evaluate_', [anEventSelector, send(WeakMessageSend.classPrototype, 'receiver_selector_arguments_', [anObject, aMessageSelector, anArgArray])]);
 };
-Object.prototype['_when_send_to_with_'] = function(anEventSelector, aMessageSelector, anObject, anArg)
+Object.prototype['when_send_to_with_'] = function(anEventSelector, aMessageSelector, anObject, anArg)
 {
     var self = this;
-    console.log('_when_send_to_with_');
-    send(self, '_when_evaluate_', [anEventSelector, send(WeakMessageSend.classPrototype, '_receiver_selector_arguments_', [anObject, aMessageSelector, send(Array.classPrototype, '_with_', [anArg])])]);
+    console.log('when_send_to_with_');
+    send(self, 'when_evaluate_', [anEventSelector, send(WeakMessageSend.classPrototype, 'receiver_selector_arguments_', [anObject, aMessageSelector, send(Array.classPrototype, 'with_', [anArg])])]);
 };
-Object.prototype['_releaseActionMap'] = function()
+Object.prototype['releaseActionMap'] = function()
 {
     var self = this;
-    console.log('_releaseActionMap');
-    send(EventManager.classPrototype, '_releaseActionMapFor_', [self]);
+    console.log('releaseActionMap');
+    send(EventManager.classPrototype, 'releaseActionMapFor_', [self]);
 };
-Object.prototype['_removeActionsForEvent_'] = function(anEventSelector)
+Object.prototype['removeActionsForEvent_'] = function(anEventSelector)
 {
     var self = this;
     var __context = {};
-    console.log('_removeActionsForEvent_');
+    console.log('removeActionsForEvent_');
     var map = null
-    map = send(self, '_actionMap');
-    send(map, '_removeKey_ifAbsent_', [send(anEventSelector, '_asSymbol'), function() {
+    map = send(self, 'actionMap');
+    send(map, 'removeKey_ifAbsent_', [send(anEventSelector, 'asSymbol'), function() {
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(map, '_isEmpty'), '_ifTrue_', [function() {
-        send(self, '_releaseActionMap');
+    send(send(map, 'isEmpty'), 'ifTrue_', [function() {
+        send(self, 'releaseActionMap');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_removeActionsSatisfying_'] = function(aBlock)
+Object.prototype['removeActionsSatisfying_'] = function(aBlock)
 {
     var self = this;
     var __context = {};
-    console.log('_removeActionsSatisfying_');
-    send(send(send(self, '_actionMap'), '_keys'), '_do_', [function(eachEventSelector) {
-        send(self, '_removeActionsSatisfying_forEvent_', [aBlock, eachEventSelector]);
+    console.log('removeActionsSatisfying_');
+    send(send(send(self, 'actionMap'), 'keys'), 'do_', [function(eachEventSelector) {
+        send(self, 'removeActionsSatisfying_forEvent_', [aBlock, eachEventSelector]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_removeActionsSatisfying_forEvent_'] = function(aOneArgBlock, anEventSelector)
+Object.prototype['removeActionsSatisfying_forEvent_'] = function(aOneArgBlock, anEventSelector)
 {
     var self = this;
     var __context = {};
-    console.log('_removeActionsSatisfying_forEvent_');
-    send(self, '_setActionSequence_forEvent_', [send(send(self, '_actionSequenceForEvent_', [anEventSelector]), '_reject_', [function(anAction) {
-        send(aOneArgBlock, '_value_', [anAction]);
+    console.log('removeActionsSatisfying_forEvent_');
+    send(self, 'setActionSequence_forEvent_', [send(send(self, 'actionSequenceForEvent_', [anEventSelector]), 'reject_', [function(anAction) {
+        send(aOneArgBlock, 'value_', [anAction]);
         if (__context.return) return __context.value;
     }
     ]), anEventSelector]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_removeActionsWithReceiver_'] = function(anObject)
+Object.prototype['removeActionsWithReceiver_'] = function(anObject)
 {
     var self = this;
     var __context = {};
-    console.log('_removeActionsWithReceiver_');
-    send(send(send(self, '_actionMap'), '_copy'), '_keysDo_', [function(eachEventSelector) {
-        send(self, '_removeActionsSatisfying_forEvent_', [function(anAction) {
-            send(send(anAction, '_receiver'), '==', [anObject]);
+    console.log('removeActionsWithReceiver_');
+    send(send(send(self, 'actionMap'), 'copy'), 'keysDo_', [function(eachEventSelector) {
+        send(self, 'removeActionsSatisfying_forEvent_', [function(anAction) {
+            send(send(anAction, 'receiver'), '==', [anObject]);
             if (__context.return) return __context.value;
         }
         , eachEventSelector]);
@@ -2650,287 +2650,287 @@ Object.prototype['_removeActionsWithReceiver_'] = function(anObject)
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_removeActionsWithReceiver_forEvent_'] = function(anObject, anEventSelector)
+Object.prototype['removeActionsWithReceiver_forEvent_'] = function(anObject, anEventSelector)
 {
     var self = this;
     var __context = {};
-    console.log('_removeActionsWithReceiver_forEvent_');
-    send(self, '_removeActionsSatisfying_forEvent_', [function(anAction) {
-        send(send(anAction, '_receiver'), '==', [anObject]);
+    console.log('removeActionsWithReceiver_forEvent_');
+    send(self, 'removeActionsSatisfying_forEvent_', [function(anAction) {
+        send(send(anAction, 'receiver'), '==', [anObject]);
         if (__context.return) return __context.value;
     }
     , anEventSelector]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_removeAction_forEvent_'] = function(anAction, anEventSelector)
+Object.prototype['removeAction_forEvent_'] = function(anAction, anEventSelector)
 {
     var self = this;
     var __context = {};
-    console.log('_removeAction_forEvent_');
-    send(self, '_removeActionsSatisfying_forEvent_', [function(action) {
+    console.log('removeAction_forEvent_');
+    send(self, 'removeActionsSatisfying_forEvent_', [function(action) {
         send(action, '=', [anAction]);
         if (__context.return) return __context.value;
     }
     , anEventSelector]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_triggerEvent_'] = function(anEventSelector)
+Object.prototype['triggerEvent_'] = function(anEventSelector)
 {
     var self = this;
-    console.log('_triggerEvent_');
-    return send(send(self, '_actionForEvent_', [anEventSelector]), '_value');
+    console.log('triggerEvent_');
+    return send(send(self, 'actionForEvent_', [anEventSelector]), 'value');
 };
-Object.prototype['_triggerEvent_ifNotHandled_'] = function(anEventSelector, anExceptionBlock)
+Object.prototype['triggerEvent_ifNotHandled_'] = function(anEventSelector, anExceptionBlock)
 {
     var self = this;
-    console.log('_triggerEvent_ifNotHandled_');
-    return send(send(self, '_actionForEvent_ifAbsent_', [anEventSelector, function() {
-        __context.value = send(anExceptionBlock, '_value');
+    console.log('triggerEvent_ifNotHandled_');
+    return send(send(self, 'actionForEvent_ifAbsent_', [anEventSelector, function() {
+        __context.value = send(anExceptionBlock, 'value');
         __context.return = true;
         return __context.value;
     }
-    ]), '_value');
+    ]), 'value');
 };
-Object.prototype['_triggerEvent_withArguments_'] = function(anEventSelector, anArgumentList)
+Object.prototype['triggerEvent_withArguments_'] = function(anEventSelector, anArgumentList)
 {
     var self = this;
-    console.log('_triggerEvent_withArguments_');
-    return send(send(self, '_actionForEvent_', [anEventSelector]), '_valueWithArguments_', [anArgumentList]);
+    console.log('triggerEvent_withArguments_');
+    return send(send(self, 'actionForEvent_', [anEventSelector]), 'valueWithArguments_', [anArgumentList]);
 };
-Object.prototype['_triggerEvent_withArguments_ifNotHandled_'] = function(anEventSelector, anArgumentList, anExceptionBlock)
+Object.prototype['triggerEvent_withArguments_ifNotHandled_'] = function(anEventSelector, anArgumentList, anExceptionBlock)
 {
     var self = this;
-    console.log('_triggerEvent_withArguments_ifNotHandled_');
-    return send(send(self, '_actionForEvent_ifAbsent_', [anEventSelector, function() {
-        __context.value = send(anExceptionBlock, '_value');
+    console.log('triggerEvent_withArguments_ifNotHandled_');
+    return send(send(self, 'actionForEvent_ifAbsent_', [anEventSelector, function() {
+        __context.value = send(anExceptionBlock, 'value');
         __context.return = true;
         return __context.value;
     }
-    ]), '_valueWithArguments_', [anArgumentList]);
+    ]), 'valueWithArguments_', [anArgumentList]);
 };
-Object.prototype['_triggerEvent_with_'] = function(anEventSelector, anObject)
+Object.prototype['triggerEvent_with_'] = function(anEventSelector, anObject)
 {
     var self = this;
-    console.log('_triggerEvent_with_');
-    return send(self, '_triggerEvent_withArguments_', [anEventSelector, send(Array.classPrototype, '_with_', [anObject])]);
+    console.log('triggerEvent_with_');
+    return send(self, 'triggerEvent_withArguments_', [anEventSelector, send(Array.classPrototype, 'with_', [anObject])]);
 };
-Object.prototype['_triggerEvent_with_ifNotHandled_'] = function(anEventSelector, anObject, anExceptionBlock)
+Object.prototype['triggerEvent_with_ifNotHandled_'] = function(anEventSelector, anObject, anExceptionBlock)
 {
     var self = this;
-    console.log('_triggerEvent_with_ifNotHandled_');
-    return send(self, '_triggerEvent_withArguments_ifNotHandled_', [anEventSelector, send(Array.classPrototype, '_with_', [anObject]), anExceptionBlock]);
+    console.log('triggerEvent_with_ifNotHandled_');
+    return send(self, 'triggerEvent_withArguments_ifNotHandled_', [anEventSelector, send(Array.classPrototype, 'with_', [anObject]), anExceptionBlock]);
 };
-Object.prototype['_drawOnCanvas_'] = function(aStream)
+Object.prototype['drawOnCanvas_'] = function(aStream)
 {
     var self = this;
-    console.log('_drawOnCanvas_');
-    send(self, '_flattenOnStream_', [aStream]);
+    console.log('drawOnCanvas_');
+    send(self, 'flattenOnStream_', [aStream]);
 };
-Object.prototype['_elementSeparator'] = function()
+Object.prototype['elementSeparator'] = function()
 {
     var self = this;
-    console.log('_elementSeparator');
+    console.log('elementSeparator');
     return nil;
 };
-Object.prototype['_flattenOnStream_'] = function(aStream)
+Object.prototype['flattenOnStream_'] = function(aStream)
 {
     var self = this;
-    console.log('_flattenOnStream_');
-    send(self, '_writeOnFilterStream_', [aStream]);
+    console.log('flattenOnStream_');
+    send(self, 'writeOnFilterStream_', [aStream]);
 };
-Object.prototype['_putOn_'] = function(aStream)
+Object.prototype['putOn_'] = function(aStream)
 {
     var self = this;
-    console.log('_putOn_');
-    return send(aStream, '_nextPut_', [self]);
+    console.log('putOn_');
+    return send(aStream, 'nextPut_', [self]);
 };
-Object.prototype['_writeOnFilterStream_'] = function(aStream)
+Object.prototype['writeOnFilterStream_'] = function(aStream)
 {
     var self = this;
-    console.log('_writeOnFilterStream_');
-    send(aStream, '_writeObject_', [self]);
+    console.log('writeOnFilterStream_');
+    send(aStream, 'writeObject_', [self]);
 };
-Object.prototype['_actAsExecutor'] = function()
+Object.prototype['actAsExecutor'] = function()
 {
     var self = this;
-    console.log('_actAsExecutor');
-    send(self, '_breakDependents');
+    console.log('actAsExecutor');
+    send(self, 'breakDependents');
 };
-Object.prototype['_executor'] = function()
+Object.prototype['executor'] = function()
 {
     var self = this;
-    console.log('_executor');
-    return send(send(self, '_shallowCopy'), '_actAsExecutor');
+    console.log('executor');
+    return send(send(self, 'shallowCopy'), 'actAsExecutor');
 };
-Object.prototype['_finalizationRegistry'] = function()
+Object.prototype['finalizationRegistry'] = function()
 {
     var self = this;
-    console.log('_finalizationRegistry');
-    return send(WeakRegistry.classPrototype, '_default');
+    console.log('finalizationRegistry');
+    return send(WeakRegistry.classPrototype, 'default');
 };
-Object.prototype['_finalize'] = function()
+Object.prototype['finalize'] = function()
 {
     var self = this;
-    console.log('_finalize');
+    console.log('finalize');
 };
-Object.prototype['_hasMultipleExecutors'] = function()
+Object.prototype['hasMultipleExecutors'] = function()
 {
     var self = this;
-    console.log('_hasMultipleExecutors');
+    console.log('hasMultipleExecutors');
     return false;
 };
-Object.prototype['_retryWithGC_until_'] = function(execBlock, testBlock)
+Object.prototype['retryWithGC_until_'] = function(execBlock, testBlock)
 {
     var self = this;
     var __context = {};
-    console.log('_retryWithGC_until_');
+    console.log('retryWithGC_until_');
     var blockValue = null
-    blockValue = send(execBlock, '_value');
-    send(send(testBlock, '_value_', [blockValue]), '_ifTrue_', [function() {
+    blockValue = send(execBlock, 'value');
+    send(send(testBlock, 'value_', [blockValue]), 'ifTrue_', [function() {
         __context.value = blockValue;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(Smalltalk.classPrototype, '_garbageCollectMost');
+    send(Smalltalk.classPrototype, 'garbageCollectMost');
     if (__context.return) return __context.value;
-    blockValue = send(execBlock, '_value');
-    send(send(testBlock, '_value_', [blockValue]), '_ifTrue_', [function() {
+    blockValue = send(execBlock, 'value');
+    send(send(testBlock, 'value_', [blockValue]), 'ifTrue_', [function() {
         __context.value = blockValue;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(Smalltalk.classPrototype, '_garbageCollect');
+    send(Smalltalk.classPrototype, 'garbageCollect');
     if (__context.return) return __context.value;
-    return send(execBlock, '_value');
+    return send(execBlock, 'value');
 };
-Object.prototype['_toFinalizeSend_to_with_'] = function(aSelector, aFinalizer, aResourceHandle)
+Object.prototype['toFinalizeSend_to_with_'] = function(aSelector, aFinalizer, aResourceHandle)
 {
     var self = this;
     var __context = {};
-    console.log('_toFinalizeSend_to_with_');
-    send(send(self, '==', [aFinalizer]), '_ifTrue_', [function() {
-        send(self, '_error_', ['I cannot finalize myself']);
+    console.log('toFinalizeSend_to_with_');
+    send(send(self, '==', [aFinalizer]), 'ifTrue_', [function() {
+        send(self, 'error_', ['I cannot finalize myself']);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(self, '==', [aResourceHandle]), '_ifTrue_', [function() {
-        send(self, '_error_', ['I cannot finalize myself']);
+    send(send(self, '==', [aResourceHandle]), 'ifTrue_', [function() {
+        send(self, 'error_', ['I cannot finalize myself']);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(self, '_finalizationRegistry'), '_add_executor_', [self, send(send(ObjectFinalizer.classPrototype, '_new'), '_receiver_selector_argument_', [aFinalizer, aSelector, aResourceHandle])]);
+    return send(send(self, 'finalizationRegistry'), 'add_executor_', [self, send(send(ObjectFinalizer.classPrototype, 'new'), 'receiver_selector_argument_', [aFinalizer, aSelector, aResourceHandle])]);
 };
-Object.prototype['_isThisEverCalled'] = function()
+Object.prototype['isThisEverCalled'] = function()
 {
     var self = this;
-    console.log('_isThisEverCalled');
-    return send(self, '_isThisEverCalled_', [send(send(thisContext, '_sender'), '_printString')]);
+    console.log('isThisEverCalled');
+    return send(self, 'isThisEverCalled_', [send(send(thisContext, 'sender'), 'printString')]);
 };
-Object.prototype['_isThisEverCalled_'] = function(msg)
+Object.prototype['isThisEverCalled_'] = function(msg)
 {
     var self = this;
-    console.log('_isThisEverCalled_');
-    send(self, '_halt_', [send('This is indeed called: ', ',', [send(msg, '_printString')])]);
+    console.log('isThisEverCalled_');
+    send(self, 'halt_', [send('This is indeed called: ', ',', [send(msg, 'printString')])]);
 };
-Object.prototype['_logEntry'] = function()
+Object.prototype['logEntry'] = function()
 {
     var self = this;
-    console.log('_logEntry');
-    send((function () {var _aux = send(Transcript.classPrototype, '_show_', [send('Entered ', ',', [send(send(thisContext, '_sender'), '_printString')])]);return _aux;})(), '_cr');
+    console.log('logEntry');
+    send((function () {var _aux = send(Transcript.classPrototype, 'show_', [send('Entered ', ',', [send(send(thisContext, 'sender'), 'printString')])]);return _aux;})(), 'cr');
 };
-Object.prototype['_logExecution'] = function()
+Object.prototype['logExecution'] = function()
 {
     var self = this;
-    console.log('_logExecution');
-    send((function () {var _aux = send(Transcript.classPrototype, '_show_', [send('Executing ', ',', [send(send(thisContext, '_sender'), '_printString')])]);return _aux;})(), '_cr');
+    console.log('logExecution');
+    send((function () {var _aux = send(Transcript.classPrototype, 'show_', [send('Executing ', ',', [send(send(thisContext, 'sender'), 'printString')])]);return _aux;})(), 'cr');
 };
-Object.prototype['_logExit'] = function()
+Object.prototype['logExit'] = function()
 {
     var self = this;
-    console.log('_logExit');
-    send((function () {var _aux = send(Transcript.classPrototype, '_show_', [send('Exited ', ',', [send(send(thisContext, '_sender'), '_printString')])]);return _aux;})(), '_cr');
+    console.log('logExit');
+    send((function () {var _aux = send(Transcript.classPrototype, 'show_', [send('Exited ', ',', [send(send(thisContext, 'sender'), 'printString')])]);return _aux;})(), 'cr');
 };
-Object.prototype['_crLog_'] = function(aString)
+Object.prototype['crLog_'] = function(aString)
 {
     var self = this;
-    console.log('_crLog_');
-    send((function () {var _aux = send(Transcript.classPrototype, '_cr');return _aux;})(), '_show_', [aString]);
+    console.log('crLog_');
+    send((function () {var _aux = send(Transcript.classPrototype, 'cr');return _aux;})(), 'show_', [aString]);
 };
-Object.prototype['_log_'] = function(aString)
+Object.prototype['log_'] = function(aString)
 {
     var self = this;
-    console.log('_log_');
-    send(Transcript.classPrototype, '_show_', [aString]);
+    console.log('log_');
+    send(Transcript.classPrototype, 'show_', [aString]);
 };
-Object.prototype['_logCr_'] = function(aString)
+Object.prototype['logCr_'] = function(aString)
 {
     var self = this;
-    console.log('_logCr_');
-    send((function () {var _aux = send(Transcript.classPrototype, '_show_', [aString]);return _aux;})(), '_cr');
+    console.log('logCr_');
+    send((function () {var _aux = send(Transcript.classPrototype, 'show_', [aString]);return _aux;})(), 'cr');
 };
-Object.prototype['_logCrTab_'] = function(aString)
+Object.prototype['logCrTab_'] = function(aString)
 {
     var self = this;
-    console.log('_logCrTab_');
-    send((function () {var _aux = send((function () {var _aux = send(Transcript.classPrototype, '_show_', [aString]);return _aux;})(), '_cr');return _aux;})(), '_tab');
+    console.log('logCrTab_');
+    send((function () {var _aux = send((function () {var _aux = send(Transcript.classPrototype, 'show_', [aString]);return _aux;})(), 'cr');return _aux;})(), 'tab');
 };
-Object.prototype['_contentsChanged'] = function()
+Object.prototype['contentsChanged'] = function()
 {
     var self = this;
-    console.log('_contentsChanged');
-    send(self, '_changed_', ['contents']);
+    console.log('contentsChanged');
+    send(self, 'changed_', ['contents']);
 };
-Object.prototype['_flash'] = function()
+Object.prototype['flash'] = function()
 {
     var self = this;
-    console.log('_flash');
+    console.log('flash');
 };
-Object.prototype['_refusesToAcceptCode'] = function()
+Object.prototype['refusesToAcceptCode'] = function()
 {
     var self = this;
-    console.log('_refusesToAcceptCode');
+    console.log('refusesToAcceptCode');
     return false;
 };
-Object.prototype['_sizeInMemory'] = function()
+Object.prototype['sizeInMemory'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_sizeInMemory');
+    console.log('sizeInMemory');
     var isCompact = null
     var headerBytes = null
     var contentBytes = null
-    contentBytes = send(send(send(self, '_class'), '_instSize'), '*', [send(Smalltalk.classPrototype, '_wordSize')]);
-    send(send(send(self, '_class'), '_isVariable'), '_ifTrue_', [function() {
+    contentBytes = send(send(send(self, 'class'), 'instSize'), '*', [send(Smalltalk.classPrototype, 'wordSize')]);
+    send(send(send(self, 'class'), 'isVariable'), 'ifTrue_', [function() {
         var bytesPerElement = null;
-        bytesPerElement = send(send(send(self, '_class'), '_isBytes'), '_ifTrue_ifFalse_', [function() {
+        bytesPerElement = send(send(send(self, 'class'), 'isBytes'), 'ifTrue_ifFalse_', [function() {
             1;
         }
         , function() {
             4;
         }
         ]);
-        contentBytes = send(contentBytes, '+', [send(send(self, '_basicSize'), '*', [bytesPerElement])]);
+        contentBytes = send(contentBytes, '+', [send(send(self, 'basicSize'), '*', [bytesPerElement])]);
     }
     ]);
     if (__context.return) return __context.value;
-    isCompact = send(send(send(self, '_class'), '_indexIfCompact'), '>', [0]);
-    headerBytes = send(send(contentBytes, '>', [255]), '_ifTrue_ifFalse_', [function() {
-        send(3, '*', [send(Smalltalk.classPrototype, '_wordSize')]);
+    isCompact = send(send(send(self, 'class'), 'indexIfCompact'), '>', [0]);
+    headerBytes = send(send(contentBytes, '>', [255]), 'ifTrue_ifFalse_', [function() {
+        send(3, '*', [send(Smalltalk.classPrototype, 'wordSize')]);
         if (__context.return) return __context.value;
     }
     , function() {
-        send(isCompact, '_ifTrue_ifFalse_', [function() {
-            send(Smalltalk.classPrototype, '_wordSize');
+        send(isCompact, 'ifTrue_ifFalse_', [function() {
+            send(Smalltalk.classPrototype, 'wordSize');
             if (__context.return) return __context.value;
         }
         , function() {
-            send(2, '*', [send(Smalltalk.classPrototype, '_wordSize')]);
+            send(2, '*', [send(Smalltalk.classPrototype, 'wordSize')]);
             if (__context.return) return __context.value;
         }
         ]);
@@ -2939,242 +2939,242 @@ Object.prototype['_sizeInMemory'] = function()
     ]);
     return send(headerBytes, '+', [contentBytes]);
 };
-Object.prototype['_perform_'] = function(aSymbol)
+Object.prototype['perform_'] = function(aSymbol)
 {
     var self = this;
-    console.log('_perform_');
+    console.log('perform_');
     var _primitive = primitives.primitive83(self, aSymbol);
     if (_primitive) return _primitive.value;
     ;
-    return send(self, '_perform_withArguments_', [aSymbol, send(Array.classPrototype, '_new_', [0])]);
+    return send(self, 'perform_withArguments_', [aSymbol, send(Array.classPrototype, 'new_', [0])]);
 };
-Object.prototype['_perform_orSendTo_'] = function(selector, otherTarget)
+Object.prototype['perform_orSendTo_'] = function(selector, otherTarget)
 {
     var self = this;
-    console.log('_perform_orSendTo_');
-    return send(send(self, '_respondsTo_', [selector]), '_ifTrue_ifFalse_', [function() {
-        send(self, '_perform_', [selector]);
+    console.log('perform_orSendTo_');
+    return send(send(self, 'respondsTo_', [selector]), 'ifTrue_ifFalse_', [function() {
+        send(self, 'perform_', [selector]);
     }
     , function() {
-        send(otherTarget, '_perform_', [selector]);
+        send(otherTarget, 'perform_', [selector]);
     }
     ]);
 };
-Object.prototype['_perform_withArguments_'] = function(selector, argArray)
+Object.prototype['perform_withArguments_'] = function(selector, argArray)
 {
     var self = this;
-    console.log('_perform_withArguments_');
+    console.log('perform_withArguments_');
     var _primitive = primitives.primitive84(self, selector, argArray);
     if (_primitive) return _primitive.value;
     ;
-    return send(self, '_perform_withArguments_inSuperclass_', [selector, argArray, send(self, '_class')]);
+    return send(self, 'perform_withArguments_inSuperclass_', [selector, argArray, send(self, 'class')]);
 };
-Object.prototype['_perform_withArguments_inSuperclass_'] = function(selector, argArray, lookupClass)
+Object.prototype['perform_withArguments_inSuperclass_'] = function(selector, argArray, lookupClass)
 {
     var self = this;
     var __context = {};
-    console.log('_perform_withArguments_inSuperclass_');
+    console.log('perform_withArguments_inSuperclass_');
     var _primitive = primitives.primitive100(self, selector, argArray, lookupClass);
     if (_primitive) return _primitive.value;
     ;
-    send(send(selector, '_isSymbol'), '_ifFalse_', [function() {
-        __context.value = send(self, '_error_', ['selector argument must be a Symbol']);
+    send(send(selector, 'isSymbol'), 'ifFalse_', [function() {
+        __context.value = send(self, 'error_', ['selector argument must be a Symbol']);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(send(selector, '_numArgs'), '=', [send(argArray, '_size')]), '_ifFalse_', [function() {
-        __context.value = send(self, '_error_', ['incorrect number of arguments']);
+    send(send(send(selector, 'numArgs'), '=', [send(argArray, 'size')]), 'ifFalse_', [function() {
+        __context.value = send(self, 'error_', ['incorrect number of arguments']);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(send(send(self, '_class'), '==', [lookupClass]), '_or_', [function() {
-        send(send(self, '_class'), '_inheritsFrom_', [lookupClass]);
+    send(send(send(send(self, 'class'), '==', [lookupClass]), 'or_', [function() {
+        send(send(self, 'class'), 'inheritsFrom_', [lookupClass]);
         if (__context.return) return __context.value;
     }
-    ]), '_ifFalse_', [function() {
-        __context.value = send(self, '_error_', ['lookupClass is not in my inheritance chain']);
+    ]), 'ifFalse_', [function() {
+        __context.value = send(self, 'error_', ['lookupClass is not in my inheritance chain']);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(self, '_primitiveFailed');
+    send(self, 'primitiveFailed');
     if (__context.return) return __context.value;
 };
-Object.prototype['_perform_withEnoughArguments_'] = function(selector, anArray)
+Object.prototype['perform_withEnoughArguments_'] = function(selector, anArray)
 {
     var self = this;
     var __context = {};
-    console.log('_perform_withEnoughArguments_');
+    console.log('perform_withEnoughArguments_');
     var numArgs = null
     var args = null
-    numArgs = send(selector, '_numArgs');
-    send(send(send(anArray, '_size'), '==', [numArgs]), '_ifTrue_', [function() {
-        __context.value = send(self, '_perform_withArguments_', [selector, send(anArray, '_asArray')]);
+    numArgs = send(selector, 'numArgs');
+    send(send(send(anArray, 'size'), '==', [numArgs]), 'ifTrue_', [function() {
+        __context.value = send(self, 'perform_withArguments_', [selector, send(anArray, 'asArray')]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    args = send(Array.classPrototype, '_new_', [numArgs]);
-    send(args, '_replaceFrom_to_with_startingAt_', [1, send(send(anArray, '_size'), '_min_', [send(args, '_size')]), anArray, 1]);
+    args = send(Array.classPrototype, 'new_', [numArgs]);
+    send(args, 'replaceFrom_to_with_startingAt_', [1, send(send(anArray, 'size'), 'min_', [send(args, 'size')]), anArray, 1]);
     if (__context.return) return __context.value;
-    return send(self, '_perform_withArguments_', [selector, args]);
+    return send(self, 'perform_withArguments_', [selector, args]);
 };
-Object.prototype['_perform_with_'] = function(aSymbol, anObject)
+Object.prototype['perform_with_'] = function(aSymbol, anObject)
 {
     var self = this;
-    console.log('_perform_with_');
+    console.log('perform_with_');
     var _primitive = primitives.primitive83(self, aSymbol, anObject);
     if (_primitive) return _primitive.value;
     ;
-    return send(self, '_perform_withArguments_', [aSymbol, send(Array.classPrototype, '_with_', [anObject])]);
+    return send(self, 'perform_withArguments_', [aSymbol, send(Array.classPrototype, 'with_', [anObject])]);
 };
-Object.prototype['_perform_with_with_'] = function(aSymbol, firstObject, secondObject)
+Object.prototype['perform_with_with_'] = function(aSymbol, firstObject, secondObject)
 {
     var self = this;
-    console.log('_perform_with_with_');
+    console.log('perform_with_with_');
     var _primitive = primitives.primitive83(self, aSymbol, firstObject, secondObject);
     if (_primitive) return _primitive.value;
     ;
-    return send(self, '_perform_withArguments_', [aSymbol, send(Array.classPrototype, '_with_with_', [firstObject, secondObject])]);
+    return send(self, 'perform_withArguments_', [aSymbol, send(Array.classPrototype, 'with_with_', [firstObject, secondObject])]);
 };
-Object.prototype['_perform_with_with_with_'] = function(aSymbol, firstObject, secondObject, thirdObject)
+Object.prototype['perform_with_with_with_'] = function(aSymbol, firstObject, secondObject, thirdObject)
 {
     var self = this;
-    console.log('_perform_with_with_with_');
+    console.log('perform_with_with_with_');
     var _primitive = primitives.primitive83(self, aSymbol, firstObject, secondObject, thirdObject);
     if (_primitive) return _primitive.value;
     ;
-    return send(self, '_perform_withArguments_', [aSymbol, send(Array.classPrototype, '_with_with_with_', [firstObject, secondObject, thirdObject])]);
+    return send(self, 'perform_withArguments_', [aSymbol, send(Array.classPrototype, 'with_with_with_', [firstObject, secondObject, thirdObject])]);
 };
-Object.prototype['_fullPrintString'] = function()
+Object.prototype['fullPrintString'] = function()
 {
     var self = this;
-    console.log('_fullPrintString');
-    return send(String.classPrototype, '_streamContents_', [function(s) {
-        send(self, '_printOn_', [s]);
+    console.log('fullPrintString');
+    return send(String.classPrototype, 'streamContents_', [function(s) {
+        send(self, 'printOn_', [s]);
     }
     ]);
 };
-Object.prototype['_isLiteral'] = function()
+Object.prototype['isLiteral'] = function()
 {
     var self = this;
-    console.log('_isLiteral');
+    console.log('isLiteral');
     return false;
 };
-Object.prototype['_longPrintOn_'] = function(aStream)
+Object.prototype['longPrintOn_'] = function(aStream)
 {
     var self = this;
     var __context = {};
-    console.log('_longPrintOn_');
-    send(send(send(self, '_class'), '_allInstVarNames'), '_doWithIndex_', [function(title, index) {
-        send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send(aStream, '_nextPutAll_', [title]);return _aux;})(), '_nextPut_', [':']);return _aux;})(), '_space');return _aux;})(), '_tab');return _aux;})(), '_print_', [send(self, '_instVarAt_', [index])]);return _aux;})(), '_cr');
+    console.log('longPrintOn_');
+    send(send(send(self, 'class'), 'allInstVarNames'), 'doWithIndex_', [function(title, index) {
+        send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send(aStream, 'nextPutAll_', [title]);return _aux;})(), 'nextPut_', [':']);return _aux;})(), 'space');return _aux;})(), 'tab');return _aux;})(), 'print_', [send(self, 'instVarAt_', [index])]);return _aux;})(), 'cr');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_longPrintOn_limitedTo_indent_'] = function(aStream, sizeLimit, indent)
+Object.prototype['longPrintOn_limitedTo_indent_'] = function(aStream, sizeLimit, indent)
 {
     var self = this;
     var __context = {};
-    console.log('_longPrintOn_limitedTo_indent_');
-    send(send(send(self, '_class'), '_allInstVarNames'), '_doWithIndex_', [function(title, index) {
-        send(indent, '_timesRepeat_', [function() {
-            send(aStream, '_tab');
+    console.log('longPrintOn_limitedTo_indent_');
+    send(send(send(self, 'class'), 'allInstVarNames'), 'doWithIndex_', [function(title, index) {
+        send(indent, 'timesRepeat_', [function() {
+            send(aStream, 'tab');
             if (__context.return) return __context.value;
         }
         ]);
         if (__context.return) return __context.value;
-        send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send(aStream, '_nextPutAll_', [title]);return _aux;})(), '_nextPut_', [':']);return _aux;})(), '_space');return _aux;})(), '_tab');return _aux;})(), '_nextPutAll_', [send(send(self, '_instVarAt_', [index]), '_printStringLimitedTo_', [send(send(send(sizeLimit, '-', [3]), '-', [send(title, '_size')]), '_max_', [1])])]);return _aux;})(), '_cr');
+        send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send(aStream, 'nextPutAll_', [title]);return _aux;})(), 'nextPut_', [':']);return _aux;})(), 'space');return _aux;})(), 'tab');return _aux;})(), 'nextPutAll_', [send(send(self, 'instVarAt_', [index]), 'printStringLimitedTo_', [send(send(send(sizeLimit, '-', [3]), '-', [send(title, 'size')]), 'max_', [1])])]);return _aux;})(), 'cr');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_longPrintString'] = function()
+Object.prototype['longPrintString'] = function()
 {
     var self = this;
-    console.log('_longPrintString');
+    console.log('longPrintString');
     var str = null
-    str = send(String.classPrototype, '_streamContents_', [function(aStream) {
-        send(self, '_longPrintOn_', [aStream]);
+    str = send(String.classPrototype, 'streamContents_', [function(aStream) {
+        send(self, 'longPrintOn_', [aStream]);
     }
     ]);
-    return send(send(str, '_isEmpty'), '_ifTrue_ifFalse_', [function() {
-        send(send(self, '_printString'), ',', [send(String.classPrototype, '_cr')]);
+    return send(send(str, 'isEmpty'), 'ifTrue_ifFalse_', [function() {
+        send(send(self, 'printString'), ',', [send(String.classPrototype, 'cr')]);
     }
     , function() {
         str;
     }
     ]);
 };
-Object.prototype['_longPrintStringLimitedTo_'] = function(aLimitValue)
+Object.prototype['longPrintStringLimitedTo_'] = function(aLimitValue)
 {
     var self = this;
-    console.log('_longPrintStringLimitedTo_');
+    console.log('longPrintStringLimitedTo_');
     var str = null
-    str = send(String.classPrototype, '_streamContents_', [function(aStream) {
-        send(self, '_longPrintOn_limitedTo_indent_', [aStream, aLimitValue, 0]);
+    str = send(String.classPrototype, 'streamContents_', [function(aStream) {
+        send(self, 'longPrintOn_limitedTo_indent_', [aStream, aLimitValue, 0]);
     }
     ]);
-    return send(send(str, '_isEmpty'), '_ifTrue_ifFalse_', [function() {
-        send(send(self, '_printString'), ',', [send(String.classPrototype, '_cr')]);
+    return send(send(str, 'isEmpty'), 'ifTrue_ifFalse_', [function() {
+        send(send(self, 'printString'), ',', [send(String.classPrototype, 'cr')]);
     }
     , function() {
         str;
     }
     ]);
 };
-Object.prototype['_nominallyUnsent_'] = function(aSelectorSymbol)
+Object.prototype['nominallyUnsent_'] = function(aSelectorSymbol)
 {
     var self = this;
     var __context = {};
-    console.log('_nominallyUnsent_');
-    send(false, '_ifTrue_', [function() {
-        send(self, '_flag_', ['nominallyUnsent:']);
+    console.log('nominallyUnsent_');
+    send(false, 'ifTrue_', [function() {
+        send(self, 'flag_', ['nominallyUnsent:']);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_printOn_'] = function(t1)
+Object.prototype['printOn_'] = function(t1)
 {
     var self = this;
-    console.log('_printOn_');
+    console.log('printOn_');
     var t2 = null
-    t2 = send(send(self, '_class'), '_name');
-    send((function () {var _aux = send(t1, '_nextPutAll_', [send(send(send(t2, '_first'), '_isVowel'), '_ifTrue_ifFalse_', [function() {
+    t2 = send(send(self, 'class'), 'name');
+    send((function () {var _aux = send(t1, 'nextPutAll_', [send(send(send(t2, 'first'), 'isVowel'), 'ifTrue_ifFalse_', [function() {
         'an ';
     }
     , function() {
         'a ';
     }
-    ])]);return _aux;})(), '_nextPutAll_', [t2]);
+    ])]);return _aux;})(), 'nextPutAll_', [t2]);
 };
-Object.prototype['_printString'] = function()
+Object.prototype['printString'] = function()
 {
     var self = this;
-    console.log('_printString');
-    return send(self, '_printStringLimitedTo_', [50000]);
+    console.log('printString');
+    return send(self, 'printStringLimitedTo_', [50000]);
 };
-Object.prototype['_printStringLimitedTo_'] = function(limit)
+Object.prototype['printStringLimitedTo_'] = function(limit)
 {
     var self = this;
     var __context = {};
-    console.log('_printStringLimitedTo_');
+    console.log('printStringLimitedTo_');
     var limitedString = null
-    limitedString = send(String.classPrototype, '_streamContents_limitedTo_', [function(s) {
-        send(self, '_printOn_', [s]);
+    limitedString = send(String.classPrototype, 'streamContents_limitedTo_', [function(s) {
+        send(self, 'printOn_', [s]);
         if (__context.return) return __context.value;
     }
     , limit]);
-    send(send(send(limitedString, '_size'), '<', [limit]), '_ifTrue_', [function() {
+    send(send(send(limitedString, 'size'), '<', [limit]), 'ifTrue_', [function() {
         __context.value = limitedString;
         __context.return = true;
         return __context.value;
@@ -3183,639 +3183,639 @@ Object.prototype['_printStringLimitedTo_'] = function(limit)
     if (__context.return) return __context.value;
     return send(limitedString, ',', ['...etc...']);
 };
-Object.prototype['_printWithClosureAnalysisOn_'] = function(aStream)
+Object.prototype['printWithClosureAnalysisOn_'] = function(aStream)
 {
     var self = this;
-    console.log('_printWithClosureAnalysisOn_');
+    console.log('printWithClosureAnalysisOn_');
     var title = null
-    title = send(send(self, '_class'), '_name');
-    send((function () {var _aux = send(aStream, '_nextPutAll_', [send(send(send(title, '_first'), '_isVowel'), '_ifTrue_ifFalse_', [function() {
+    title = send(send(self, 'class'), 'name');
+    send((function () {var _aux = send(aStream, 'nextPutAll_', [send(send(send(title, 'first'), 'isVowel'), 'ifTrue_ifFalse_', [function() {
         'an ';
     }
     , function() {
         'a ';
     }
-    ])]);return _aux;})(), '_nextPutAll_', [title]);
+    ])]);return _aux;})(), 'nextPutAll_', [title]);
 };
-Object.prototype['_storeOn_'] = function(aStream)
+Object.prototype['storeOn_'] = function(aStream)
 {
     var self = this;
     var __context = {};
-    console.log('_storeOn_');
-    send(aStream, '_nextPut_', ['(']);
+    console.log('storeOn_');
+    send(aStream, 'nextPut_', ['(']);
     if (__context.return) return __context.value;
-    send(send(send(self, '_class'), '_isVariable'), '_ifTrue_ifFalse_', [function() {
-        send((function () {var _aux = send((function () {var _aux = send(aStream, '_nextPutAll_', [send(send('(', ',', [send(send(self, '_class'), '_name')]), ',', [' basicNew: '])]);return _aux;})(), '_store_', [send(self, '_basicSize')]);return _aux;})(), '_nextPutAll_', [') ']);
+    send(send(send(self, 'class'), 'isVariable'), 'ifTrue_ifFalse_', [function() {
+        send((function () {var _aux = send((function () {var _aux = send(aStream, 'nextPutAll_', [send(send('(', ',', [send(send(self, 'class'), 'name')]), ',', [' basicNew: '])]);return _aux;})(), 'store_', [send(self, 'basicSize')]);return _aux;})(), 'nextPutAll_', [') ']);
         if (__context.return) return __context.value;
     }
     , function() {
-        send(aStream, '_nextPutAll_', [send(send(send(self, '_class'), '_name'), ',', [' basicNew'])]);
+        send(aStream, 'nextPutAll_', [send(send(send(self, 'class'), 'name'), ',', [' basicNew'])]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(1, '_to_do_', [send(send(self, '_class'), '_instSize'), function(i) {
-        send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send(aStream, '_nextPutAll_', [' instVarAt: ']);return _aux;})(), '_store_', [i]);return _aux;})(), '_nextPutAll_', [' put: ']);return _aux;})(), '_store_', [send(self, '_instVarAt_', [i])]);return _aux;})(), '_nextPut_', [';']);
+    send(1, 'to_do_', [send(send(self, 'class'), 'instSize'), function(i) {
+        send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send(aStream, 'nextPutAll_', [' instVarAt: ']);return _aux;})(), 'store_', [i]);return _aux;})(), 'nextPutAll_', [' put: ']);return _aux;})(), 'store_', [send(self, 'instVarAt_', [i])]);return _aux;})(), 'nextPut_', [';']);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(1, '_to_do_', [send(self, '_basicSize'), function(i) {
-        send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send(aStream, '_nextPutAll_', [' basicAt: ']);return _aux;})(), '_store_', [i]);return _aux;})(), '_nextPutAll_', [' put: ']);return _aux;})(), '_store_', [send(self, '_basicAt_', [i])]);return _aux;})(), '_nextPut_', [';']);
+    send(1, 'to_do_', [send(self, 'basicSize'), function(i) {
+        send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send((function () {var _aux = send(aStream, 'nextPutAll_', [' basicAt: ']);return _aux;})(), 'store_', [i]);return _aux;})(), 'nextPutAll_', [' put: ']);return _aux;})(), 'store_', [send(self, 'basicAt_', [i])]);return _aux;})(), 'nextPut_', [';']);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(aStream, '_nextPutAll_', [' yourself)']);
+    send(aStream, 'nextPutAll_', [' yourself)']);
     if (__context.return) return __context.value;
 };
-Object.prototype['_storeString'] = function()
+Object.prototype['storeString'] = function()
 {
     var self = this;
-    console.log('_storeString');
-    return send(String.classPrototype, '_streamContents_', [function(s) {
-        send(self, '_storeOn_', [s]);
+    console.log('storeString');
+    return send(String.classPrototype, 'streamContents_', [function(s) {
+        send(self, 'storeOn_', [s]);
     }
     ]);
 };
-Object.prototype['_isSelfEvaluating'] = function()
+Object.prototype['isSelfEvaluating'] = function()
 {
     var self = this;
-    console.log('_isSelfEvaluating');
-    return send(self, '_isLiteral');
+    console.log('isSelfEvaluating');
+    return send(self, 'isLiteral');
 };
-Object.prototype['_appendTo_'] = function(aCollection)
+Object.prototype['appendTo_'] = function(aCollection)
 {
     var self = this;
-    console.log('_appendTo_');
-    return send(aCollection, '_addLast_', [self]);
+    console.log('appendTo_');
+    return send(aCollection, 'addLast_', [self]);
 };
-Object.prototype['_join_'] = function(aSequenceableCollection)
+Object.prototype['join_'] = function(aSequenceableCollection)
 {
     var self = this;
-    console.log('_join_');
-    return send(send(Array.classPrototype, '_with_', [self]), '_join_', [aSequenceableCollection]);
+    console.log('join_');
+    return send(send(Array.classPrototype, 'with_', [self]), 'join_', [aSequenceableCollection]);
 };
-Object.prototype['_joinTo_'] = function(stream)
+Object.prototype['joinTo_'] = function(stream)
 {
     var self = this;
-    console.log('_joinTo_');
-    return send(stream, '_nextPut_', [self]);
+    console.log('joinTo_');
+    return send(stream, 'nextPut_', [self]);
 };
-Object.prototype['_split_'] = function(aSequenceableCollection)
+Object.prototype['split_'] = function(aSequenceableCollection)
 {
     var self = this;
-    console.log('_split_');
-    return send(send(Array.classPrototype, '_with_', [self]), '_split_', [aSequenceableCollection]);
+    console.log('split_');
+    return send(send(Array.classPrototype, 'with_', [self]), 'split_', [aSequenceableCollection]);
 };
-Object.prototype['_becomeForward_'] = function(otherObject)
+Object.prototype['becomeForward_'] = function(otherObject)
 {
     var self = this;
-    console.log('_becomeForward_');
-    send(send(Array.classPrototype, '_with_', [self]), '_elementsForwardIdentityTo_', [send(Array.classPrototype, '_with_', [otherObject])]);
+    console.log('becomeForward_');
+    send(send(Array.classPrototype, 'with_', [self]), 'elementsForwardIdentityTo_', [send(Array.classPrototype, 'with_', [otherObject])]);
 };
-Object.prototype['_becomeForward_copyHash_'] = function(otherObject, copyHash)
+Object.prototype['becomeForward_copyHash_'] = function(otherObject, copyHash)
 {
     var self = this;
-    console.log('_becomeForward_copyHash_');
-    send(send(Array.classPrototype, '_with_', [self]), '_elementsForwardIdentityTo_copyHash_', [send(Array.classPrototype, '_with_', [otherObject]), copyHash]);
+    console.log('becomeForward_copyHash_');
+    send(send(Array.classPrototype, 'with_', [self]), 'elementsForwardIdentityTo_copyHash_', [send(Array.classPrototype, 'with_', [otherObject]), copyHash]);
 };
-Object.prototype['_className'] = function()
+Object.prototype['className'] = function()
 {
     var self = this;
-    console.log('_className');
-    return send(send(send(self, '_class'), '_name'), '_asString');
+    console.log('className');
+    return send(send(send(self, 'class'), 'name'), 'asString');
 };
-Object.prototype['_instVarAt_'] = function(index)
+Object.prototype['instVarAt_'] = function(index)
 {
     var self = this;
-    console.log('_instVarAt_');
+    console.log('instVarAt_');
     var _primitive = primitives.primitive73(self, index);
     if (_primitive) return _primitive.value;
     ;
-    return send(self, '_basicAt_', [send(index, '-', [send(send(self, '_class'), '_instSize')])]);
+    return send(self, 'basicAt_', [send(index, '-', [send(send(self, 'class'), 'instSize')])]);
 };
-Object.prototype['_instVarAt_put_'] = function(anInteger, anObject)
+Object.prototype['instVarAt_put_'] = function(anInteger, anObject)
 {
     var self = this;
-    console.log('_instVarAt_put_');
+    console.log('instVarAt_put_');
     var _primitive = primitives.primitive74(self, anInteger, anObject);
     if (_primitive) return _primitive.value;
     ;
-    return send(self, '_basicAt_put_', [send(anInteger, '-', [send(send(self, '_class'), '_instSize')]), anObject]);
+    return send(self, 'basicAt_put_', [send(anInteger, '-', [send(send(self, 'class'), 'instSize')]), anObject]);
 };
-Object.prototype['_instVarNamed_'] = function(aString)
+Object.prototype['instVarNamed_'] = function(aString)
 {
     var self = this;
-    console.log('_instVarNamed_');
-    return send(self, '_instVarAt_', [send(send(self, '_class'), '_instVarIndexFor_ifAbsent_', [send(aString, '_asString'), function() {
-        send(self, '_error_', ['no such inst var']);
+    console.log('instVarNamed_');
+    return send(self, 'instVarAt_', [send(send(self, 'class'), 'instVarIndexFor_ifAbsent_', [send(aString, 'asString'), function() {
+        send(self, 'error_', ['no such inst var']);
     }
     ])]);
 };
-Object.prototype['_instVarNamed_put_'] = function(aString, aValue)
+Object.prototype['instVarNamed_put_'] = function(aString, aValue)
 {
     var self = this;
-    console.log('_instVarNamed_put_');
-    return send(self, '_instVarAt_put_', [send(send(self, '_class'), '_instVarIndexFor_ifAbsent_', [send(aString, '_asString'), function() {
-        send(self, '_error_', ['no such inst var']);
+    console.log('instVarNamed_put_');
+    return send(self, 'instVarAt_put_', [send(send(self, 'class'), 'instVarIndexFor_ifAbsent_', [send(aString, 'asString'), function() {
+        send(self, 'error_', ['no such inst var']);
     }
     ]), aValue]);
 };
-Object.prototype['_primitiveChangeClassTo_'] = function(anObject)
+Object.prototype['primitiveChangeClassTo_'] = function(anObject)
 {
     var self = this;
-    console.log('_primitiveChangeClassTo_');
+    console.log('primitiveChangeClassTo_');
     var _primitive = primitives.primitive115(self, anObject);
     if (_primitive) return _primitive.value;
     ;
-    send(self, '_primitiveFailed');
+    send(self, 'primitiveFailed');
 };
-Object.prototype['_someObject'] = function()
+Object.prototype['someObject'] = function()
 {
     var self = this;
-    console.log('_someObject');
+    console.log('someObject');
     var _primitive = primitives.primitive138(self);
     if (_primitive) return _primitive.value;
     ;
-    send(self, '_primitiveFailed');
+    send(self, 'primitiveFailed');
 };
-Object.prototype['_haltIfNil'] = function()
+Object.prototype['haltIfNil'] = function()
 {
     var self = this;
-    console.log('_haltIfNil');
+    console.log('haltIfNil');
 };
-Object.prototype['_hasLiteralSuchThat_'] = function(testBlock)
+Object.prototype['hasLiteralSuchThat_'] = function(testBlock)
 {
     var self = this;
-    console.log('_hasLiteralSuchThat_');
+    console.log('hasLiteralSuchThat_');
     return false;
 };
-Object.prototype['_is_'] = function(t1)
+Object.prototype['is_'] = function(t1)
 {
     var self = this;
-    console.log('_is_');
+    console.log('is_');
     return false;
 };
-Object.prototype['_isArray'] = function()
+Object.prototype['isArray'] = function()
 {
     var self = this;
-    console.log('_isArray');
+    console.log('isArray');
     return false;
 };
-Object.prototype['_isBehavior'] = function()
+Object.prototype['isBehavior'] = function()
 {
     var self = this;
-    console.log('_isBehavior');
+    console.log('isBehavior');
     return false;
 };
-Object.prototype['_isBlock'] = function()
+Object.prototype['isBlock'] = function()
 {
     var self = this;
-    console.log('_isBlock');
+    console.log('isBlock');
     return false;
 };
-Object.prototype['_isCharacter'] = function()
+Object.prototype['isCharacter'] = function()
 {
     var self = this;
-    console.log('_isCharacter');
+    console.log('isCharacter');
     return false;
 };
-Object.prototype['_isClosure'] = function()
+Object.prototype['isClosure'] = function()
 {
     var self = this;
-    console.log('_isClosure');
+    console.log('isClosure');
     return false;
 };
-Object.prototype['_isCollection'] = function()
+Object.prototype['isCollection'] = function()
 {
     var self = this;
-    console.log('_isCollection');
+    console.log('isCollection');
     return false;
 };
-Object.prototype['_isColor'] = function()
+Object.prototype['isColor'] = function()
 {
     var self = this;
-    console.log('_isColor');
+    console.log('isColor');
     return false;
 };
-Object.prototype['_isColorForm'] = function()
+Object.prototype['isColorForm'] = function()
 {
     var self = this;
-    console.log('_isColorForm');
+    console.log('isColorForm');
     return false;
 };
-Object.prototype['_isCompiledMethod'] = function()
+Object.prototype['isCompiledMethod'] = function()
 {
     var self = this;
-    console.log('_isCompiledMethod');
+    console.log('isCompiledMethod');
     return false;
 };
-Object.prototype['_isComplex'] = function()
+Object.prototype['isComplex'] = function()
 {
     var self = this;
-    console.log('_isComplex');
+    console.log('isComplex');
     return false;
 };
-Object.prototype['_isContext'] = function()
+Object.prototype['isContext'] = function()
 {
     var self = this;
-    console.log('_isContext');
+    console.log('isContext');
     return false;
 };
-Object.prototype['_isDictionary'] = function()
+Object.prototype['isDictionary'] = function()
 {
     var self = this;
-    console.log('_isDictionary');
+    console.log('isDictionary');
     return false;
 };
-Object.prototype['_isFloat'] = function()
+Object.prototype['isFloat'] = function()
 {
     var self = this;
-    console.log('_isFloat');
+    console.log('isFloat');
     return false;
 };
-Object.prototype['_isForm'] = function()
+Object.prototype['isForm'] = function()
 {
     var self = this;
-    console.log('_isForm');
+    console.log('isForm');
     return false;
 };
-Object.prototype['_isFraction'] = function()
+Object.prototype['isFraction'] = function()
 {
     var self = this;
-    console.log('_isFraction');
+    console.log('isFraction');
     return false;
 };
-Object.prototype['_isHeap'] = function()
+Object.prototype['isHeap'] = function()
 {
     var self = this;
-    console.log('_isHeap');
+    console.log('isHeap');
     return false;
 };
-Object.prototype['_isInteger'] = function()
+Object.prototype['isInteger'] = function()
 {
     var self = this;
-    console.log('_isInteger');
+    console.log('isInteger');
     return false;
 };
-Object.prototype['_isInterval'] = function()
+Object.prototype['isInterval'] = function()
 {
     var self = this;
-    console.log('_isInterval');
+    console.log('isInterval');
     return false;
 };
-Object.prototype['_isMessageSend'] = function()
+Object.prototype['isMessageSend'] = function()
 {
     var self = this;
-    console.log('_isMessageSend');
+    console.log('isMessageSend');
     return false;
 };
-Object.prototype['_isMethodProperties'] = function()
+Object.prototype['isMethodProperties'] = function()
 {
     var self = this;
-    console.log('_isMethodProperties');
+    console.log('isMethodProperties');
     return false;
 };
-Object.prototype['_isMorph'] = function()
+Object.prototype['isMorph'] = function()
 {
     var self = this;
-    console.log('_isMorph');
+    console.log('isMorph');
     return false;
 };
-Object.prototype['_isMorphicEvent'] = function()
+Object.prototype['isMorphicEvent'] = function()
 {
     var self = this;
-    console.log('_isMorphicEvent');
+    console.log('isMorphicEvent');
     return false;
 };
-Object.prototype['_isMorphicModel'] = function()
+Object.prototype['isMorphicModel'] = function()
 {
     var self = this;
-    console.log('_isMorphicModel');
+    console.log('isMorphicModel');
     return false;
 };
-Object.prototype['_isNumber'] = function()
+Object.prototype['isNumber'] = function()
 {
     var self = this;
-    console.log('_isNumber');
+    console.log('isNumber');
     return false;
 };
-Object.prototype['_isPoint'] = function()
+Object.prototype['isPoint'] = function()
 {
     var self = this;
-    console.log('_isPoint');
+    console.log('isPoint');
     return false;
 };
-Object.prototype['_isPseudoContext'] = function()
+Object.prototype['isPseudoContext'] = function()
 {
     var self = this;
-    console.log('_isPseudoContext');
+    console.log('isPseudoContext');
     return false;
 };
-Object.prototype['_isRectangle'] = function()
+Object.prototype['isRectangle'] = function()
 {
     var self = this;
-    console.log('_isRectangle');
+    console.log('isRectangle');
     return false;
 };
-Object.prototype['_isStream'] = function()
+Object.prototype['isStream'] = function()
 {
     var self = this;
-    console.log('_isStream');
+    console.log('isStream');
     return false;
 };
-Object.prototype['_isString'] = function()
+Object.prototype['isString'] = function()
 {
     var self = this;
-    console.log('_isString');
+    console.log('isString');
     return false;
 };
-Object.prototype['_isSymbol'] = function()
+Object.prototype['isSymbol'] = function()
 {
     var self = this;
-    console.log('_isSymbol');
+    console.log('isSymbol');
     return false;
 };
-Object.prototype['_isSystemWindow'] = function()
+Object.prototype['isSystemWindow'] = function()
 {
     var self = this;
-    console.log('_isSystemWindow');
+    console.log('isSystemWindow');
     return false;
 };
-Object.prototype['_isText'] = function()
+Object.prototype['isText'] = function()
 {
     var self = this;
-    console.log('_isText');
+    console.log('isText');
     return false;
 };
-Object.prototype['_isTrait'] = function()
+Object.prototype['isTrait'] = function()
 {
     var self = this;
-    console.log('_isTrait');
+    console.log('isTrait');
     return false;
 };
-Object.prototype['_isVariableBinding'] = function()
+Object.prototype['isVariableBinding'] = function()
 {
     var self = this;
-    console.log('_isVariableBinding');
+    console.log('isVariableBinding');
     return false;
 };
-Object.prototype['_name'] = function()
+Object.prototype['name'] = function()
 {
     var self = this;
-    console.log('_name');
-    return send(self, '_printString');
+    console.log('name');
+    return send(self, 'printString');
 };
-Object.prototype['_notNil'] = function()
+Object.prototype['notNil'] = function()
 {
     var self = this;
-    console.log('_notNil');
+    console.log('notNil');
     return true;
 };
-Object.prototype['_refersToLiteral_'] = function(literal)
+Object.prototype['refersToLiteral_'] = function(literal)
 {
     var self = this;
-    console.log('_refersToLiteral_');
+    console.log('refersToLiteral_');
     return false;
 };
-Object.prototype['_stepAt_in_'] = function(millisecondClockValue, aWindow)
+Object.prototype['stepAt_in_'] = function(millisecondClockValue, aWindow)
 {
     var self = this;
-    console.log('_stepAt_in_');
-    return send(self, '_stepIn_', [aWindow]);
+    console.log('stepAt_in_');
+    return send(self, 'stepIn_', [aWindow]);
 };
-Object.prototype['_stepIn_'] = function(aWindow)
+Object.prototype['stepIn_'] = function(aWindow)
 {
     var self = this;
-    console.log('_stepIn_');
-    return send(self, '_step');
+    console.log('stepIn_');
+    return send(self, 'step');
 };
-Object.prototype['_stepTime'] = function()
+Object.prototype['stepTime'] = function()
 {
     var self = this;
-    console.log('_stepTime');
+    console.log('stepTime');
     return 1000;
 };
-Object.prototype['_stepTimeIn_'] = function(aSystemWindow)
+Object.prototype['stepTimeIn_'] = function(aSystemWindow)
 {
     var self = this;
-    console.log('_stepTimeIn_');
+    console.log('stepTimeIn_');
     return 1000;
 };
-Object.prototype['_wantsDiffFeedback'] = function()
+Object.prototype['wantsDiffFeedback'] = function()
 {
     var self = this;
-    console.log('_wantsDiffFeedback');
+    console.log('wantsDiffFeedback');
     return false;
 };
-Object.prototype['_wantsSteps'] = function()
+Object.prototype['wantsSteps'] = function()
 {
     var self = this;
-    console.log('_wantsSteps');
+    console.log('wantsSteps');
     return false;
 };
-Object.prototype['_wantsStepsIn_'] = function(aSystemWindow)
+Object.prototype['wantsStepsIn_'] = function(aSystemWindow)
 {
     var self = this;
-    console.log('_wantsStepsIn_');
-    return send(self, '_wantsSteps');
+    console.log('wantsStepsIn_');
+    return send(self, 'wantsSteps');
 };
-Object.prototype['_changed'] = function()
+Object.prototype['changed'] = function()
 {
     var self = this;
-    console.log('_changed');
-    send(self, '_changed_', [self]);
+    console.log('changed');
+    send(self, 'changed_', [self]);
 };
-Object.prototype['_changed_'] = function(aParameter)
+Object.prototype['changed_'] = function(aParameter)
 {
     var self = this;
     var __context = {};
-    console.log('_changed_');
-    send(send(self, '_dependents'), '_do_', [function(aDependent) {
-        send(aDependent, '_update_', [aParameter]);
+    console.log('changed_');
+    send(send(self, 'dependents'), 'do_', [function(aDependent) {
+        send(aDependent, 'update_', [aParameter]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_changed_with_'] = function(anAspect, anObject)
+Object.prototype['changed_with_'] = function(anAspect, anObject)
 {
     var self = this;
     var __context = {};
-    console.log('_changed_with_');
-    send(send(self, '_dependents'), '_do_', [function(aDependent) {
-        send(aDependent, '_update_with_', [anAspect, anObject]);
+    console.log('changed_with_');
+    send(send(self, 'dependents'), 'do_', [function(aDependent) {
+        send(aDependent, 'update_with_', [anAspect, anObject]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Object.prototype['_noteSelectionIndex_for_'] = function(anInteger, aSymbol)
+Object.prototype['noteSelectionIndex_for_'] = function(anInteger, aSymbol)
 {
     var self = this;
-    console.log('_noteSelectionIndex_for_');
+    console.log('noteSelectionIndex_for_');
 };
-Object.prototype['_okToChange'] = function()
+Object.prototype['okToChange'] = function()
 {
     var self = this;
-    console.log('_okToChange');
+    console.log('okToChange');
     return true;
 };
-Object.prototype['_update_'] = function(aParameter)
+Object.prototype['update_'] = function(aParameter)
 {
     var self = this;
-    console.log('_update_');
+    console.log('update_');
     return self;
 };
-Object.prototype['_update_with_'] = function(anAspect, anObject)
+Object.prototype['update_with_'] = function(anAspect, anObject)
 {
     var self = this;
-    console.log('_update_with_');
-    return send(self, '_update_', [anAspect]);
+    console.log('update_with_');
+    return send(self, 'update_', [anAspect]);
 };
-Object.prototype['_windowIsClosing'] = function()
+Object.prototype['windowIsClosing'] = function()
 {
     var self = this;
-    console.log('_windowIsClosing');
+    console.log('windowIsClosing');
     return self;
 };
-Object.prototype['_addModelItemsToWindowMenu_'] = function(aMenu)
+Object.prototype['addModelItemsToWindowMenu_'] = function(aMenu)
 {
     var self = this;
-    console.log('_addModelItemsToWindowMenu_');
+    console.log('addModelItemsToWindowMenu_');
 };
-Object.prototype['_addModelMenuItemsTo_forMorph_hand_'] = function(aCustomMenu, aMorph, aHandMorph)
+Object.prototype['addModelMenuItemsTo_forMorph_hand_'] = function(aCustomMenu, aMorph, aHandMorph)
 {
     var self = this;
-    console.log('_addModelMenuItemsTo_forMorph_hand_');
+    console.log('addModelMenuItemsTo_forMorph_hand_');
 };
-Object.prototype['_modelSleep'] = function()
+Object.prototype['modelSleep'] = function()
 {
     var self = this;
-    console.log('_modelSleep');
+    console.log('modelSleep');
 };
-Object.prototype['_modelWakeUp'] = function()
+Object.prototype['modelWakeUp'] = function()
 {
     var self = this;
-    console.log('_modelWakeUp');
+    console.log('modelWakeUp');
 };
-Object.prototype['_modelWakeUpIn_'] = function(aWindow)
+Object.prototype['modelWakeUpIn_'] = function(aWindow)
 {
     var self = this;
-    console.log('_modelWakeUpIn_');
-    send(self, '_modelWakeUp');
+    console.log('modelWakeUpIn_');
+    send(self, 'modelWakeUp');
 };
-Object.prototype['_mouseUpBalk_'] = function(evt)
+Object.prototype['mouseUpBalk_'] = function(evt)
 {
     var self = this;
-    console.log('_mouseUpBalk_');
+    console.log('mouseUpBalk_');
 };
-Object.prototype['_notYetImplemented'] = function()
+Object.prototype['notYetImplemented'] = function()
 {
     var self = this;
-    console.log('_notYetImplemented');
-    send(self, '_inform_', [send(send('Not yet implemented (', ',', [send(send(thisContext, '_sender'), '_printString')]), ',', [')'])]);
+    console.log('notYetImplemented');
+    send(self, 'inform_', [send(send('Not yet implemented (', ',', [send(send(thisContext, 'sender'), 'printString')]), ',', [')'])]);
 };
-Object.prototype['_windowReqNewLabel_'] = function(labelString)
+Object.prototype['windowReqNewLabel_'] = function(labelString)
 {
     var self = this;
-    console.log('_windowReqNewLabel_');
+    console.log('windowReqNewLabel_');
     return true;
 };
-Object.prototype['_errorImproperStore'] = function()
+Object.prototype['errorImproperStore'] = function()
 {
     var self = this;
-    console.log('_errorImproperStore');
-    send(self, '_error_', ['Improper store into indexable object']);
+    console.log('errorImproperStore');
+    send(self, 'error_', ['Improper store into indexable object']);
 };
-Object.prototype['_errorNonIntegerIndex'] = function()
+Object.prototype['errorNonIntegerIndex'] = function()
 {
     var self = this;
-    console.log('_errorNonIntegerIndex');
-    send(self, '_error_', ['only integers should be used as indices']);
+    console.log('errorNonIntegerIndex');
+    send(self, 'error_', ['only integers should be used as indices']);
 };
-Object.prototype['_errorNotIndexable'] = function()
+Object.prototype['errorNotIndexable'] = function()
 {
     var self = this;
-    console.log('_errorNotIndexable');
-    send(self, '_error_', [send(send('Instances of {1} are not indexable', '_translated'), '_format_', [[send(send(self, '_class'), '_name')]])]);
+    console.log('errorNotIndexable');
+    send(self, 'error_', [send(send('Instances of {1} are not indexable', 'translated'), 'format_', [[send(send(self, 'class'), 'name')]])]);
 };
-Object.prototype['_errorSubscriptBounds_'] = function(index)
+Object.prototype['errorSubscriptBounds_'] = function(index)
 {
     var self = this;
-    console.log('_errorSubscriptBounds_');
-    send(SubscriptOutOfBounds.classPrototype, '_signalFor_', [index]);
+    console.log('errorSubscriptBounds_');
+    send(SubscriptOutOfBounds.classPrototype, 'signalFor_', [index]);
 };
-Object.prototype['_species'] = function()
+Object.prototype['species'] = function()
 {
     var self = this;
-    console.log('_species');
+    console.log('species');
     var _primitive = primitives.primitive111(self);
     if (_primitive) return _primitive.value;
     ;
-    return send(self, '_class');
+    return send(self, 'class');
 };
-Object.prototype['_storeAt_inTempFrame_'] = function(offset, aContext)
+Object.prototype['storeAt_inTempFrame_'] = function(offset, aContext)
 {
     var self = this;
-    console.log('_storeAt_inTempFrame_');
-    return send(aContext, '_tempAt_put_', [offset, self]);
+    console.log('storeAt_inTempFrame_');
+    return send(aContext, 'tempAt_put_', [offset, self]);
 };
-ObjectClass.prototype['_readFrom_'] = function(t1)
+ObjectClass.prototype['readFrom_'] = function(t1)
 {
     var self = this;
     var __context = {};
-    console.log('_readFrom_');
+    console.log('readFrom_');
     var t2 = null
-    send(send(Compiler.classPrototype, '_couldEvaluate_', [t1]), '_ifFalse_', [function() {
-        __context.value = send(self, '_error_', ['expected String, Stream, or Text']);
+    send(send(Compiler.classPrototype, 'couldEvaluate_', [t1]), 'ifFalse_', [function() {
+        __context.value = send(self, 'error_', ['expected String, Stream, or Text']);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    t2 = send(Compiler.classPrototype, '_evaluate_', [t1]);
-    send(send(t2, '_isKindOf_', [self]), '_ifFalse_', [function() {
-        send(self, '_error_', [send(send(self, '_name'), ',', [' expected'])]);
+    t2 = send(Compiler.classPrototype, 'evaluate_', [t1]);
+    send(send(t2, 'isKindOf_', [self]), 'ifFalse_', [function() {
+        send(self, 'error_', [send(send(self, 'name'), ',', [' expected'])]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
     return t2;
 };
-ObjectClass.prototype['_taskbarIcon'] = function()
+ObjectClass.prototype['taskbarIcon'] = function()
 {
     var self = this;
-    console.log('_taskbarIcon');
+    console.log('taskbarIcon');
     return nil;
 };
-ObjectClass.prototype['_taskbarLabel'] = function()
+ObjectClass.prototype['taskbarLabel'] = function()
 {
     var self = this;
-    console.log('_taskbarLabel');
+    console.log('taskbarLabel');
     return nil;
 };
-ObjectClass.prototype['_registerToolsOn_'] = function(t1)
+ObjectClass.prototype['registerToolsOn_'] = function(t1)
 {
     var self = this;
-    console.log('_registerToolsOn_');
+    console.log('registerToolsOn_');
     return self;
 };
-ObjectClass.prototype['_services'] = function()
+ObjectClass.prototype['services'] = function()
 {
     var self = this;
-    console.log('_services');
+    console.log('services');
     return [];
 };
-ObjectClass.prototype['_flushDependents'] = function()
+ObjectClass.prototype['flushDependents'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_flushDependents');
-    send(DependentsFields.classPrototype, '_keysAndValuesDo_', [function(key, dep) {
-        send(key, '_ifNotNil_', [function() {
-            send(key, '_removeDependent_', [nil]);
+    console.log('flushDependents');
+    send(DependentsFields.classPrototype, 'keysAndValuesDo_', [function(key, dep) {
+        send(key, 'ifNotNil_', [function() {
+            send(key, 'removeDependent_', [nil]);
             if (__context.return) return __context.value;
         }
         ]);
@@ -3823,44 +3823,44 @@ ObjectClass.prototype['_flushDependents'] = function()
     }
     ]);
     if (__context.return) return __context.value;
-    send(DependentsFields.classPrototype, '_finalizeValues');
+    send(DependentsFields.classPrototype, 'finalizeValues');
     if (__context.return) return __context.value;
 };
-ObjectClass.prototype['_flushEvents'] = function()
+ObjectClass.prototype['flushEvents'] = function()
 {
     var self = this;
-    console.log('_flushEvents');
-    send(EventManager.classPrototype, '_flushEvents');
+    console.log('flushEvents');
+    send(EventManager.classPrototype, 'flushEvents');
 };
-ObjectClass.prototype['_initialize'] = function()
+ObjectClass.prototype['initialize'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_initialize');
-    send(DependentsFields.classPrototype, '_ifNil_', [function() {
-        send(self, '_initializeDependentsFields');
+    console.log('initialize');
+    send(DependentsFields.classPrototype, 'ifNil_', [function() {
+        send(self, 'initializeDependentsFields');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-ObjectClass.prototype['_initializeDependentsFields'] = function()
+ObjectClass.prototype['initializeDependentsFields'] = function()
 {
     var self = this;
-    console.log('_initializeDependentsFields');
-    DependentsFields = send(WeakIdentityKeyDictionary.classPrototype, '_new');
+    console.log('initializeDependentsFields');
+    DependentsFields = send(WeakIdentityKeyDictionary.classPrototype, 'new');
 };
-ObjectClass.prototype['_reInitializeDependentsFields'] = function()
+ObjectClass.prototype['reInitializeDependentsFields'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_reInitializeDependentsFields');
+    console.log('reInitializeDependentsFields');
     var oldFields = null
     oldFields = DependentsFields;
-    DependentsFields = send(WeakIdentityKeyDictionary.classPrototype, '_new');
-    send(oldFields, '_keysAndValuesDo_', [function(obj, deps) {
-        send(deps, '_do_', [function(d) {
-            send(obj, '_addDependent_', [d]);
+    DependentsFields = send(WeakIdentityKeyDictionary.classPrototype, 'new');
+    send(oldFields, 'keysAndValuesDo_', [function(obj, deps) {
+        send(deps, 'do_', [function(d) {
+            send(obj, 'addDependent_', [d]);
             if (__context.return) return __context.value;
         }
         ]);
@@ -3869,58 +3869,58 @@ ObjectClass.prototype['_reInitializeDependentsFields'] = function()
     ]);
     if (__context.return) return __context.value;
 };
-ObjectClass.prototype['_howToModifyPrimitives'] = function()
+ObjectClass.prototype['howToModifyPrimitives'] = function()
 {
     var self = this;
-    console.log('_howToModifyPrimitives');
-    send(self, '_error_', ['comment only']);
+    console.log('howToModifyPrimitives');
+    send(self, 'error_', ['comment only']);
 };
-ObjectClass.prototype['_whatIsAPrimitive'] = function()
+ObjectClass.prototype['whatIsAPrimitive'] = function()
 {
     var self = this;
-    console.log('_whatIsAPrimitive');
-    send(self, '_error_', ['comment only']);
+    console.log('whatIsAPrimitive');
+    send(self, 'error_', ['comment only']);
 };
-ObjectClass.prototype['_fileReaderServicesForDirectory_'] = function(aFileDirectory)
+ObjectClass.prototype['fileReaderServicesForDirectory_'] = function(aFileDirectory)
 {
     var self = this;
-    console.log('_fileReaderServicesForDirectory_');
+    console.log('fileReaderServicesForDirectory_');
     return [];
 };
-ObjectClass.prototype['_fileReaderServicesForFile_suffix_'] = function(fullName, suffix)
+ObjectClass.prototype['fileReaderServicesForFile_suffix_'] = function(fullName, suffix)
 {
     var self = this;
-    console.log('_fileReaderServicesForFile_suffix_');
+    console.log('fileReaderServicesForFile_suffix_');
     return [];
 };
-ObjectClass.prototype['_newFrom_'] = function(aSimilarObject)
+ObjectClass.prototype['newFrom_'] = function(aSimilarObject)
 {
     var self = this;
-    console.log('_newFrom_');
-    return send(send(send(self, '_isVariable'), '_ifTrue_ifFalse_', [function() {
-        send(self, '_basicNew_', [send(aSimilarObject, '_basicSize')]);
+    console.log('newFrom_');
+    return send(send(send(self, 'isVariable'), 'ifTrue_ifFalse_', [function() {
+        send(self, 'basicNew_', [send(aSimilarObject, 'basicSize')]);
     }
     , function() {
-        send(self, '_basicNew');
+        send(self, 'basicNew');
     }
-    ]), '_copySameFrom_', [aSimilarObject]);
+    ]), 'copySameFrom_', [aSimilarObject]);
 };
-ObjectClass.prototype['_createFrom_size_version_'] = function(aSmartRefStream, varsOnDisk, instVarList)
+ObjectClass.prototype['createFrom_size_version_'] = function(aSmartRefStream, varsOnDisk, instVarList)
 {
     var self = this;
-    console.log('_createFrom_size_version_');
-    return send(send(self, '_isVariable'), '_ifFalse_ifTrue_', [function() {
-        send(self, '_basicNew');
+    console.log('createFrom_size_version_');
+    return send(send(self, 'isVariable'), 'ifFalse_ifTrue_', [function() {
+        send(self, 'basicNew');
     }
     , function() {
-        send(self, '_basicNew_', [send(varsOnDisk, '-', [send(send(instVarList, '_size'), '-', [1])])]);
+        send(self, 'basicNew_', [send(varsOnDisk, '-', [send(send(instVarList, 'size'), '-', [1])])]);
     }
     ]);
 };
-ObjectClass.prototype['_releaseExternalSettings'] = function()
+ObjectClass.prototype['releaseExternalSettings'] = function()
 {
     var self = this;
-    console.log('_releaseExternalSettings');
+    console.log('releaseExternalSettings');
 };
 function MessageSendClass()
 {
@@ -3933,61 +3933,61 @@ MessageSend.classPrototype = MessageSendClass.prototype;
 MessageSendClass.prototype['_basicNew'] = function() { return new MessageSend(); };
 MessageSendClass.prototype.__proto__ = ObjectClass.prototype;
 MessageSend.prototype.__proto__ = Object.prototype;
-MessageSend.prototype.receiver = null;
-MessageSend.prototype.selector = null;
-MessageSend.prototype.arguments = null;
+MessageSend.prototype.$receiver = null;
+MessageSend.prototype.$selector = null;
+MessageSend.prototype.$arguments = null;
 MessageSendClass.__super = ObjectClass;
 MessageSend.__super = Object;
-MessageSend.prototype['_arguments'] = function()
+MessageSend.prototype['arguments'] = function()
 {
     var self = this;
-    console.log('_arguments');
-    return self.arguments;
+    console.log('arguments');
+    return self.$arguments;
 };
-MessageSend.prototype['_arguments_'] = function(anArray)
+MessageSend.prototype['arguments_'] = function(anArray)
 {
     var self = this;
-    console.log('_arguments_');
-    self.arguments = anArray;
+    console.log('arguments_');
+    self.$arguments = anArray;
 };
-MessageSend.prototype['_numArgs'] = function()
+MessageSend.prototype['numArgs'] = function()
 {
     var self = this;
-    console.log('_numArgs');
-    return send(self.arguments, '_size');
+    console.log('numArgs');
+    return send(self.$arguments, 'size');
 };
-MessageSend.prototype['_receiver'] = function()
+MessageSend.prototype['receiver'] = function()
 {
     var self = this;
-    console.log('_receiver');
-    return self.receiver;
+    console.log('receiver');
+    return self.$receiver;
 };
-MessageSend.prototype['_receiver_'] = function(anObject)
+MessageSend.prototype['receiver_'] = function(anObject)
 {
     var self = this;
-    console.log('_receiver_');
-    self.receiver = anObject;
+    console.log('receiver_');
+    self.$receiver = anObject;
 };
-MessageSend.prototype['_selector'] = function()
+MessageSend.prototype['selector'] = function()
 {
     var self = this;
-    console.log('_selector');
-    return self.selector;
+    console.log('selector');
+    return self.$selector;
 };
-MessageSend.prototype['_selector_'] = function(aSymbol)
+MessageSend.prototype['selector_'] = function(aSymbol)
 {
     var self = this;
-    console.log('_selector_');
-    self.selector = aSymbol;
+    console.log('selector_');
+    self.$selector = aSymbol;
 };
 MessageSend.prototype['='] = function(anObject)
 {
     var self = this;
     console.log('=');
-    return send(send(send(anObject, '_species'), '==', [send(self, '_species')]), '_and_', [function() {
-        send(send(self.receiver, '==', [send(anObject, '_receiver')]), '_and_', [function() {
-            send(send(self.selector, '==', [send(anObject, '_selector')]), '_and_', [function() {
-                send(self.arguments, '=', [send(anObject, '_arguments')]);
+    return send(send(send(anObject, 'species'), '==', [send(self, 'species')]), 'and_', [function() {
+        send(send(self.$receiver, '==', [send(anObject, 'receiver')]), 'and_', [function() {
+            send(send(self.$selector, '==', [send(anObject, 'selector')]), 'and_', [function() {
+                send(self.$arguments, '=', [send(anObject, 'arguments')]);
             }
             ]);
         }
@@ -3995,174 +3995,174 @@ MessageSend.prototype['='] = function(anObject)
     }
     ]);
 };
-MessageSend.prototype['_hash'] = function()
+MessageSend.prototype['hash'] = function()
 {
     var self = this;
-    console.log('_hash');
-    return send(send(self.receiver, '_hash'), '_bitXor_', [send(self.selector, '_hash')]);
+    console.log('hash');
+    return send(send(self.$receiver, 'hash'), 'bitXor_', [send(self.$selector, 'hash')]);
 };
-MessageSend.prototype['_asMinimalRepresentation'] = function()
+MessageSend.prototype['asMinimalRepresentation'] = function()
 {
     var self = this;
-    console.log('_asMinimalRepresentation');
+    console.log('asMinimalRepresentation');
     return self;
 };
-MessageSend.prototype['_asWeakMessageSend'] = function()
+MessageSend.prototype['asWeakMessageSend'] = function()
 {
     var self = this;
-    console.log('_asWeakMessageSend');
-    return send(WeakMessageSend.classPrototype, '_receiver_selector_arguments_', [self.receiver, self.selector, send(self.arguments, '_copy')]);
+    console.log('asWeakMessageSend');
+    return send(WeakMessageSend.classPrototype, 'receiver_selector_arguments_', [self.$receiver, self.$selector, send(self.$arguments, 'copy')]);
 };
-MessageSend.prototype['_cull_'] = function(arg)
+MessageSend.prototype['cull_'] = function(arg)
 {
     var self = this;
-    console.log('_cull_');
-    return send(send(send(self.selector, '_numArgs'), '=', [0]), '_ifTrue_ifFalse_', [function() {
-        send(self, '_value');
+    console.log('cull_');
+    return send(send(send(self.$selector, 'numArgs'), '=', [0]), 'ifTrue_ifFalse_', [function() {
+        send(self, 'value');
     }
     , function() {
-        send(self, '_value_', [arg]);
+        send(self, 'value_', [arg]);
     }
     ]);
 };
-MessageSend.prototype['_cull_cull_'] = function(arg1, arg2)
+MessageSend.prototype['cull_cull_'] = function(arg1, arg2)
 {
     var self = this;
-    console.log('_cull_cull_');
-    return send(send(send(self.selector, '_numArgs'), '<', [2]), '_ifTrue_ifFalse_', [function() {
-        send(self, '_cull_', [arg1]);
+    console.log('cull_cull_');
+    return send(send(send(self.$selector, 'numArgs'), '<', [2]), 'ifTrue_ifFalse_', [function() {
+        send(self, 'cull_', [arg1]);
     }
     , function() {
-        send(self, '_value_value_', [arg1, arg2]);
+        send(self, 'value_value_', [arg1, arg2]);
     }
     ]);
 };
-MessageSend.prototype['_cull_cull_cull_'] = function(arg1, arg2, arg3)
+MessageSend.prototype['cull_cull_cull_'] = function(arg1, arg2, arg3)
 {
     var self = this;
-    console.log('_cull_cull_cull_');
-    return send(send(send(self.selector, '_numArgs'), '<', [3]), '_ifTrue_ifFalse_', [function() {
-        send(self, '_cull_cull_', [arg1, arg2]);
+    console.log('cull_cull_cull_');
+    return send(send(send(self.$selector, 'numArgs'), '<', [3]), 'ifTrue_ifFalse_', [function() {
+        send(self, 'cull_cull_', [arg1, arg2]);
     }
     , function() {
-        send(self, '_value_value_value_', [arg1, arg2, arg3]);
+        send(self, 'value_value_value_', [arg1, arg2, arg3]);
     }
     ]);
 };
-MessageSend.prototype['_value'] = function()
+MessageSend.prototype['value'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_value');
-    send(self.arguments, '_ifNil_', [function() {
-        __context.value = send(self.receiver, '_perform_', [self.selector]);
+    console.log('value');
+    send(self.$arguments, 'ifNil_', [function() {
+        __context.value = send(self.$receiver, 'perform_', [self.$selector]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(self.receiver, '_perform_withArguments_', [self.selector, send(self, '_collectArguments_', [self.arguments])]);
+    return send(self.$receiver, 'perform_withArguments_', [self.$selector, send(self, 'collectArguments_', [self.$arguments])]);
 };
-MessageSend.prototype['_value_'] = function(anObject)
+MessageSend.prototype['value_'] = function(anObject)
 {
     var self = this;
-    console.log('_value_');
-    return send(self.receiver, '_perform_with_', [self.selector, anObject]);
+    console.log('value_');
+    return send(self.$receiver, 'perform_with_', [self.$selector, anObject]);
 };
-MessageSend.prototype['_value_value_'] = function(anObject1, anObject2)
+MessageSend.prototype['value_value_'] = function(anObject1, anObject2)
 {
     var self = this;
-    console.log('_value_value_');
-    return send(self.receiver, '_perform_with_with_', [self.selector, anObject1, anObject2]);
+    console.log('value_value_');
+    return send(self.$receiver, 'perform_with_with_', [self.$selector, anObject1, anObject2]);
 };
-MessageSend.prototype['_value_value_value_'] = function(anObject1, anObject2, anObject3)
+MessageSend.prototype['value_value_value_'] = function(anObject1, anObject2, anObject3)
 {
     var self = this;
-    console.log('_value_value_value_');
-    return send(self.receiver, '_perform_with_with_with_', [self.selector, anObject1, anObject2, anObject3]);
+    console.log('value_value_value_');
+    return send(self.$receiver, 'perform_with_with_with_', [self.$selector, anObject1, anObject2, anObject3]);
 };
-MessageSend.prototype['_valueWithArguments_'] = function(anArray)
+MessageSend.prototype['valueWithArguments_'] = function(anArray)
 {
     var self = this;
-    console.log('_valueWithArguments_');
-    return send(self.receiver, '_perform_withArguments_', [self.selector, send(self, '_collectArguments_', [anArray])]);
+    console.log('valueWithArguments_');
+    return send(self.$receiver, 'perform_withArguments_', [self.$selector, send(self, 'collectArguments_', [anArray])]);
 };
-MessageSend.prototype['_valueWithEnoughArguments_'] = function(anArray)
+MessageSend.prototype['valueWithEnoughArguments_'] = function(anArray)
 {
     var self = this;
     var __context = {};
-    console.log('_valueWithEnoughArguments_');
+    console.log('valueWithEnoughArguments_');
     var args = null
-    args = send(Array.classPrototype, '_new_', [send(self.selector, '_numArgs')]);
-    send(args, '_replaceFrom_to_with_startingAt_', [1, send(send(self.arguments, '_size'), '_min_', [send(args, '_size')]), self.arguments, 1]);
+    args = send(Array.classPrototype, 'new_', [send(self.$selector, 'numArgs')]);
+    send(args, 'replaceFrom_to_with_startingAt_', [1, send(send(self.$arguments, 'size'), 'min_', [send(args, 'size')]), self.$arguments, 1]);
     if (__context.return) return __context.value;
-    send(send(send(args, '_size'), '>', [send(self.arguments, '_size')]), '_ifTrue_', [function() {
-        send(args, '_replaceFrom_to_with_startingAt_', [send(send(self.arguments, '_size'), '+', [1]), send(send(send(self.arguments, '_size'), '+', [send(anArray, '_size')]), '_min_', [send(args, '_size')]), anArray, 1]);
+    send(send(send(args, 'size'), '>', [send(self.$arguments, 'size')]), 'ifTrue_', [function() {
+        send(args, 'replaceFrom_to_with_startingAt_', [send(send(self.$arguments, 'size'), '+', [1]), send(send(send(self.$arguments, 'size'), '+', [send(anArray, 'size')]), 'min_', [send(args, 'size')]), anArray, 1]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(self.receiver, '_perform_withArguments_', [self.selector, args]);
+    return send(self.$receiver, 'perform_withArguments_', [self.$selector, args]);
 };
-MessageSend.prototype['_printOn_'] = function(aStream)
+MessageSend.prototype['printOn_'] = function(aStream)
 {
     var self = this;
-    console.log('_printOn_');
-    send((function () {var _aux = send(aStream, '_nextPutAll_', [send(send(self, '_class'), '_name')]);return _aux;})(), '_nextPut_', ['(']);
-    send(self.selector, '_printOn_', [aStream]);
-    send(aStream, '_nextPutAll_', [' -> ']);
-    send(self.receiver, '_printOn_', [aStream]);
-    send(aStream, '_nextPut_', [')']);
+    console.log('printOn_');
+    send((function () {var _aux = send(aStream, 'nextPutAll_', [send(send(self, 'class'), 'name')]);return _aux;})(), 'nextPut_', ['(']);
+    send(self.$selector, 'printOn_', [aStream]);
+    send(aStream, 'nextPutAll_', [' -> ']);
+    send(self.$receiver, 'printOn_', [aStream]);
+    send(aStream, 'nextPut_', [')']);
 };
-MessageSend.prototype['_isMessageSend'] = function()
+MessageSend.prototype['isMessageSend'] = function()
 {
     var self = this;
-    console.log('_isMessageSend');
+    console.log('isMessageSend');
     return true;
 };
-MessageSend.prototype['_isValid'] = function()
+MessageSend.prototype['isValid'] = function()
 {
     var self = this;
-    console.log('_isValid');
+    console.log('isValid');
     return true;
 };
-MessageSend.prototype['_collectArguments_'] = function(anArgArray)
+MessageSend.prototype['collectArguments_'] = function(anArgArray)
 {
     var self = this;
-    console.log('_collectArguments_');
+    console.log('collectArguments_');
     var staticArgs = null
-    staticArgs = send(self, '_arguments');
-    return send(send(send(anArgArray, '_size'), '=', [send(staticArgs, '_size')]), '_ifTrue_ifFalse_', [function() {
+    staticArgs = send(self, 'arguments');
+    return send(send(send(anArgArray, 'size'), '=', [send(staticArgs, 'size')]), 'ifTrue_ifFalse_', [function() {
         anArgArray;
     }
     , function() {
-        send(send(send(staticArgs, '_isEmpty'), '_ifTrue_ifFalse_', [function() {
-            staticArgs = send(Array.classPrototype, '_new_', [send(self.selector, '_numArgs')]);
+        send(send(send(staticArgs, 'isEmpty'), 'ifTrue_ifFalse_', [function() {
+            staticArgs = send(Array.classPrototype, 'new_', [send(self.$selector, 'numArgs')]);
         }
         , function() {
-            send(staticArgs, '_copy');
+            send(staticArgs, 'copy');
         }
-        ]), '_replaceFrom_to_with_startingAt_', [1, send(send(anArgArray, '_size'), '_min_', [send(staticArgs, '_size')]), anArgArray, 1]);
+        ]), 'replaceFrom_to_with_startingAt_', [1, send(send(anArgArray, 'size'), 'min_', [send(staticArgs, 'size')]), anArgArray, 1]);
     }
     ]);
 };
-MessageSendClass.prototype['_receiver_selector_'] = function(anObject, aSymbol)
+MessageSendClass.prototype['receiver_selector_'] = function(anObject, aSymbol)
 {
     var self = this;
-    console.log('_receiver_selector_');
-    return send(self, '_receiver_selector_arguments_', [anObject, aSymbol, []]);
+    console.log('receiver_selector_');
+    return send(self, 'receiver_selector_arguments_', [anObject, aSymbol, []]);
 };
-MessageSendClass.prototype['_receiver_selector_argument_'] = function(anObject, aSymbol, aParameter)
+MessageSendClass.prototype['receiver_selector_argument_'] = function(anObject, aSymbol, aParameter)
 {
     var self = this;
-    console.log('_receiver_selector_argument_');
-    return send(self, '_receiver_selector_arguments_', [anObject, aSymbol, send(Array.classPrototype, '_with_', [aParameter])]);
+    console.log('receiver_selector_argument_');
+    return send(self, 'receiver_selector_arguments_', [anObject, aSymbol, send(Array.classPrototype, 'with_', [aParameter])]);
 };
-MessageSendClass.prototype['_receiver_selector_arguments_'] = function(anObject, aSymbol, anArray)
+MessageSendClass.prototype['receiver_selector_arguments_'] = function(anObject, aSymbol, anArray)
 {
     var self = this;
-    console.log('_receiver_selector_arguments_');
-    return send((function () {var _aux = send((function () {var _aux = send(send(self, '_new'), '_receiver_', [anObject]);return _aux;})(), '_selector_', [aSymbol]);return _aux;})(), '_arguments_', [anArray]);
+    console.log('receiver_selector_arguments_');
+    return send((function () {var _aux = send((function () {var _aux = send(send(self, 'new'), 'receiver_', [anObject]);return _aux;})(), 'selector_', [aSymbol]);return _aux;})(), 'arguments_', [anArray]);
 };
 function UndefinedObjectClass()
 {
@@ -4177,242 +4177,242 @@ UndefinedObjectClass.prototype.__proto__ = ObjectClass.prototype;
 UndefinedObject.prototype.__proto__ = Object.prototype;
 UndefinedObjectClass.__super = ObjectClass;
 UndefinedObject.__super = Object;
-UndefinedObject.prototype['_parserClass'] = function()
+UndefinedObject.prototype['parserClass'] = function()
 {
     var self = this;
-    console.log('_parserClass');
-    return send(Compiler.classPrototype, '_parserClass');
+    console.log('parserClass');
+    return send(Compiler.classPrototype, 'parserClass');
 };
-UndefinedObject.prototype['_canHandleSignal_'] = function(exception)
+UndefinedObject.prototype['canHandleSignal_'] = function(exception)
 {
     var self = this;
-    console.log('_canHandleSignal_');
+    console.log('canHandleSignal_');
     return false;
 };
-UndefinedObject.prototype['_handleSignal_'] = function(exception)
+UndefinedObject.prototype['handleSignal_'] = function(exception)
 {
     var self = this;
-    console.log('_handleSignal_');
-    return send(exception, '_resumeUnchecked_', [send(exception, '_defaultAction')]);
+    console.log('handleSignal_');
+    return send(exception, 'resumeUnchecked_', [send(exception, 'defaultAction')]);
 };
-UndefinedObject.prototype['_addSubclass_'] = function(aClass)
+UndefinedObject.prototype['addSubclass_'] = function(aClass)
 {
     var self = this;
-    console.log('_addSubclass_');
+    console.log('addSubclass_');
 };
-UndefinedObject.prototype['_allSuperclassesDo_'] = function(aBlockContext)
+UndefinedObject.prototype['allSuperclassesDo_'] = function(aBlockContext)
 {
     var self = this;
-    console.log('_allSuperclassesDo_');
-    send(self, '_shouldBeImplemented');
+    console.log('allSuperclassesDo_');
+    send(self, 'shouldBeImplemented');
 };
-UndefinedObject.prototype['_environment'] = function()
+UndefinedObject.prototype['environment'] = function()
 {
     var self = this;
-    console.log('_environment');
-    return send(send(self, '_class'), '_environment');
+    console.log('environment');
+    return send(send(self, 'class'), 'environment');
 };
-UndefinedObject.prototype['_literalScannedAs_notifying_'] = function(scannedLiteral, requestor)
+UndefinedObject.prototype['literalScannedAs_notifying_'] = function(scannedLiteral, requestor)
 {
     var self = this;
-    console.log('_literalScannedAs_notifying_');
+    console.log('literalScannedAs_notifying_');
     return scannedLiteral;
 };
-UndefinedObject.prototype['_removeObsoleteSubclass_'] = function(aClass)
+UndefinedObject.prototype['removeObsoleteSubclass_'] = function(aClass)
 {
     var self = this;
-    console.log('_removeObsoleteSubclass_');
+    console.log('removeObsoleteSubclass_');
 };
-UndefinedObject.prototype['_removeSubclass_'] = function(aClass)
+UndefinedObject.prototype['removeSubclass_'] = function(aClass)
 {
     var self = this;
-    console.log('_removeSubclass_');
+    console.log('removeSubclass_');
 };
-UndefinedObject.prototype['_subclassDefinerClass'] = function()
+UndefinedObject.prototype['subclassDefinerClass'] = function()
 {
     var self = this;
-    console.log('_subclassDefinerClass');
+    console.log('subclassDefinerClass');
     return Compiler;
 };
-UndefinedObject.prototype['_subclasses'] = function()
+UndefinedObject.prototype['subclasses'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_subclasses');
+    console.log('subclasses');
     var classList = null
-    classList = send(send(Array.classPrototype, '_new'), '_writeStream');
-    send(self, '_subclassesDo_', [function(clazz) {
-        send(classList, '_nextPut_', [clazz]);
+    classList = send(send(Array.classPrototype, 'new'), 'writeStream');
+    send(self, 'subclassesDo_', [function(clazz) {
+        send(classList, 'nextPut_', [clazz]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(classList, '_contents');
+    return send(classList, 'contents');
 };
-UndefinedObject.prototype['_subclassesDo_'] = function(aBlock)
+UndefinedObject.prototype['subclassesDo_'] = function(aBlock)
 {
     var self = this;
-    console.log('_subclassesDo_');
-    return send(Class.classPrototype, '_subclassesDo_', [function(cl) {
-        send(send(cl, '_isMeta'), '_ifTrue_', [function() {
-            send(aBlock, '_value_', [send(cl, '_soleInstance')]);
+    console.log('subclassesDo_');
+    return send(Class.classPrototype, 'subclassesDo_', [function(cl) {
+        send(send(cl, 'isMeta'), 'ifTrue_', [function() {
+            send(aBlock, 'value_', [send(cl, 'soleInstance')]);
         }
         ]);
     }
     ]);
 };
-UndefinedObject.prototype['_subclass_instanceVariableNames_classVariableNames_poolDictionaries_category_'] = function(nameOfClass, instVarNames, classVarNames, poolDictnames, category)
+UndefinedObject.prototype['subclass_instanceVariableNames_classVariableNames_poolDictionaries_category_'] = function(nameOfClass, instVarNames, classVarNames, poolDictnames, category)
 {
     var self = this;
-    console.log('_subclass_instanceVariableNames_classVariableNames_poolDictionaries_category_');
-    send(self, '_logCr_', [send(send('Attempt to create ', ',', [nameOfClass]), ',', [' as a subclass of nil.  Possibly a class is being loaded before its superclass.'])]);
-    return send(ProtoObject.classPrototype, '_subclass_instanceVariableNames_classVariableNames_poolDictionaries_category_', [nameOfClass, instVarNames, classVarNames, poolDictnames, category]);
+    console.log('subclass_instanceVariableNames_classVariableNames_poolDictionaries_category_');
+    send(self, 'logCr_', [send(send('Attempt to create ', ',', [nameOfClass]), ',', [' as a subclass of nil.  Possibly a class is being loaded before its superclass.'])]);
+    return send(ProtoObject.classPrototype, 'subclass_instanceVariableNames_classVariableNames_poolDictionaries_category_', [nameOfClass, instVarNames, classVarNames, poolDictnames, category]);
 };
-UndefinedObject.prototype['_typeOfClass'] = function()
+UndefinedObject.prototype['typeOfClass'] = function()
 {
     var self = this;
-    console.log('_typeOfClass');
+    console.log('typeOfClass');
     return 'normal';
 };
-UndefinedObject.prototype['_deepCopy'] = function()
+UndefinedObject.prototype['deepCopy'] = function()
 {
     var self = this;
-    console.log('_deepCopy');
+    console.log('deepCopy');
 };
-UndefinedObject.prototype['_shallowCopy'] = function()
+UndefinedObject.prototype['shallowCopy'] = function()
 {
     var self = this;
-    console.log('_shallowCopy');
+    console.log('shallowCopy');
 };
-UndefinedObject.prototype['_veryDeepCopyWith_'] = function(deepCopier)
+UndefinedObject.prototype['veryDeepCopyWith_'] = function(deepCopier)
 {
     var self = this;
-    console.log('_veryDeepCopyWith_');
+    console.log('veryDeepCopyWith_');
 };
-UndefinedObject.prototype['_addDependent_'] = function(ignored)
+UndefinedObject.prototype['addDependent_'] = function(ignored)
 {
     var self = this;
-    console.log('_addDependent_');
-    send(self, '_error_', ['Nil should not have dependents']);
+    console.log('addDependent_');
+    send(self, 'error_', ['Nil should not have dependents']);
 };
-UndefinedObject.prototype['_release'] = function()
+UndefinedObject.prototype['release'] = function()
 {
     var self = this;
-    console.log('_release');
+    console.log('release');
 };
-UndefinedObject.prototype['_suspend'] = function()
+UndefinedObject.prototype['suspend'] = function()
 {
     var self = this;
-    console.log('_suspend');
-    send(Processor.classPrototype, '_terminateActive');
+    console.log('suspend');
+    send(Processor.classPrototype, 'terminateActive');
 };
-UndefinedObject.prototype['_printOn_'] = function(aStream)
+UndefinedObject.prototype['printOn_'] = function(aStream)
 {
     var self = this;
-    console.log('_printOn_');
-    send(aStream, '_nextPutAll_', ['nil']);
+    console.log('printOn_');
+    send(aStream, 'nextPutAll_', ['nil']);
 };
-UndefinedObject.prototype['_storeOn_'] = function(aStream)
+UndefinedObject.prototype['storeOn_'] = function(aStream)
 {
     var self = this;
-    console.log('_storeOn_');
-    send(aStream, '_nextPutAll_', ['nil']);
+    console.log('storeOn_');
+    send(aStream, 'nextPutAll_', ['nil']);
 };
-UndefinedObject.prototype['_asSetElement'] = function()
+UndefinedObject.prototype['asSetElement'] = function()
 {
     var self = this;
-    console.log('_asSetElement');
-    return send(SetElement.classPrototype, '_withNil');
+    console.log('asSetElement');
+    return send(SetElement.classPrototype, 'withNil');
 };
-UndefinedObject.prototype['_haltIfNil'] = function()
+UndefinedObject.prototype['haltIfNil'] = function()
 {
     var self = this;
-    console.log('_haltIfNil');
-    send(self, '_halt');
+    console.log('haltIfNil');
+    send(self, 'halt');
 };
-UndefinedObject.prototype['_ifNil_'] = function(aBlock)
+UndefinedObject.prototype['ifNil_'] = function(aBlock)
 {
     var self = this;
-    console.log('_ifNil_');
-    return send(aBlock, '_value');
+    console.log('ifNil_');
+    return send(aBlock, 'value');
 };
-UndefinedObject.prototype['_ifNil_ifNotNilDo_'] = function(nilBlock, ifNotNilBlock)
+UndefinedObject.prototype['ifNil_ifNotNilDo_'] = function(nilBlock, ifNotNilBlock)
 {
     var self = this;
-    console.log('_ifNil_ifNotNilDo_');
-    return send(nilBlock, '_value');
+    console.log('ifNil_ifNotNilDo_');
+    return send(nilBlock, 'value');
 };
-UndefinedObject.prototype['_ifNil_ifNotNil_'] = function(nilBlock, ifNotNilBlock)
+UndefinedObject.prototype['ifNil_ifNotNil_'] = function(nilBlock, ifNotNilBlock)
 {
     var self = this;
-    console.log('_ifNil_ifNotNil_');
-    return send(nilBlock, '_value');
+    console.log('ifNil_ifNotNil_');
+    return send(nilBlock, 'value');
 };
-UndefinedObject.prototype['_ifNotNilDo_'] = function(aBlock)
+UndefinedObject.prototype['ifNotNilDo_'] = function(aBlock)
 {
     var self = this;
-    console.log('_ifNotNilDo_');
+    console.log('ifNotNilDo_');
     return self;
 };
-UndefinedObject.prototype['_ifNotNilDo_ifNil_'] = function(ifNotNilBlock, nilBlock)
+UndefinedObject.prototype['ifNotNilDo_ifNil_'] = function(ifNotNilBlock, nilBlock)
 {
     var self = this;
-    console.log('_ifNotNilDo_ifNil_');
-    return send(nilBlock, '_value');
+    console.log('ifNotNilDo_ifNil_');
+    return send(nilBlock, 'value');
 };
-UndefinedObject.prototype['_ifNotNil_'] = function(aBlock)
+UndefinedObject.prototype['ifNotNil_'] = function(aBlock)
 {
     var self = this;
-    console.log('_ifNotNil_');
+    console.log('ifNotNil_');
     return self;
 };
-UndefinedObject.prototype['_ifNotNil_ifNil_'] = function(ifNotNilBlock, nilBlock)
+UndefinedObject.prototype['ifNotNil_ifNil_'] = function(ifNotNilBlock, nilBlock)
 {
     var self = this;
-    console.log('_ifNotNil_ifNil_');
-    return send(nilBlock, '_value');
+    console.log('ifNotNil_ifNil_');
+    return send(nilBlock, 'value');
 };
-UndefinedObject.prototype['_isEmptyOrNil'] = function()
+UndefinedObject.prototype['isEmptyOrNil'] = function()
 {
     var self = this;
-    console.log('_isEmptyOrNil');
+    console.log('isEmptyOrNil');
     return true;
 };
-UndefinedObject.prototype['_isLiteral'] = function()
+UndefinedObject.prototype['isLiteral'] = function()
 {
     var self = this;
-    console.log('_isLiteral');
+    console.log('isLiteral');
     return true;
 };
-UndefinedObject.prototype['_isNil'] = function()
+UndefinedObject.prototype['isNil'] = function()
 {
     var self = this;
-    console.log('_isNil');
+    console.log('isNil');
     return true;
 };
-UndefinedObject.prototype['_notNil'] = function()
+UndefinedObject.prototype['notNil'] = function()
 {
     var self = this;
-    console.log('_notNil');
+    console.log('notNil');
     return false;
 };
-UndefinedObjectClass.prototype['_allInstances'] = function()
+UndefinedObjectClass.prototype['allInstances'] = function()
 {
     var self = this;
-    console.log('_allInstances');
-    return send(Array.classPrototype, '_with_', [nil]);
+    console.log('allInstances');
+    return send(Array.classPrototype, 'with_', [nil]);
 };
-UndefinedObjectClass.prototype['_allInstancesDo_'] = function(aBlock)
+UndefinedObjectClass.prototype['allInstancesDo_'] = function(aBlock)
 {
     var self = this;
-    console.log('_allInstancesDo_');
-    send(aBlock, '_value_', [nil]);
+    console.log('allInstancesDo_');
+    send(aBlock, 'value_', [nil]);
 };
-UndefinedObjectClass.prototype['_new'] = function()
+UndefinedObjectClass.prototype['new'] = function()
 {
     var self = this;
-    console.log('_new');
-    send(self, '_error_', ['You may not create any more undefined objects--use nil']);
+    console.log('new');
+    send(self, 'error_', ['You may not create any more undefined objects--use nil']);
 };
 function BooleanClass()
 {
@@ -4427,28 +4427,28 @@ BooleanClass.prototype.__proto__ = ObjectClass.prototype;
 Boolean.prototype.__proto__ = Object.prototype;
 BooleanClass.__super = ObjectClass;
 Boolean.__super = Object;
-Boolean.prototype['_and_and_'] = function(block1, block2)
+Boolean.prototype['and_and_'] = function(block1, block2)
 {
     var self = this;
     var __context = {};
-    console.log('_and_and_');
-    send(self, '_deprecated_', ['use and:']);
+    console.log('and_and_');
+    send(self, 'deprecated_', ['use and:']);
     if (__context.return) return __context.value;
-    send(self, '_ifFalse_', [function() {
+    send(self, 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block1, '_value'), '_ifFalse_', [function() {
+    send(send(block1, 'value'), 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block2, '_value'), '_ifFalse_', [function() {
+    send(send(block2, 'value'), 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
@@ -4457,35 +4457,35 @@ Boolean.prototype['_and_and_'] = function(block1, block2)
     if (__context.return) return __context.value;
     return true;
 };
-Boolean.prototype['_and_and_and_'] = function(block1, block2, block3)
+Boolean.prototype['and_and_and_'] = function(block1, block2, block3)
 {
     var self = this;
     var __context = {};
-    console.log('_and_and_and_');
-    send(self, '_deprecated_', ['Use and: instead']);
+    console.log('and_and_and_');
+    send(self, 'deprecated_', ['Use and: instead']);
     if (__context.return) return __context.value;
-    send(self, '_ifFalse_', [function() {
+    send(self, 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block1, '_value'), '_ifFalse_', [function() {
+    send(send(block1, 'value'), 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block2, '_value'), '_ifFalse_', [function() {
+    send(send(block2, 'value'), 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block3, '_value'), '_ifFalse_', [function() {
+    send(send(block3, 'value'), 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
@@ -4494,42 +4494,42 @@ Boolean.prototype['_and_and_and_'] = function(block1, block2, block3)
     if (__context.return) return __context.value;
     return true;
 };
-Boolean.prototype['_and_and_and_and_'] = function(block1, block2, block3, block4)
+Boolean.prototype['and_and_and_and_'] = function(block1, block2, block3, block4)
 {
     var self = this;
     var __context = {};
-    console.log('_and_and_and_and_');
-    send(self, '_deprecated_', ['Use and: instead']);
+    console.log('and_and_and_and_');
+    send(self, 'deprecated_', ['Use and: instead']);
     if (__context.return) return __context.value;
-    send(self, '_ifFalse_', [function() {
+    send(self, 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block1, '_value'), '_ifFalse_', [function() {
+    send(send(block1, 'value'), 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block2, '_value'), '_ifFalse_', [function() {
+    send(send(block2, 'value'), 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block3, '_value'), '_ifFalse_', [function() {
+    send(send(block3, 'value'), 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block4, '_value'), '_ifFalse_', [function() {
+    send(send(block4, 'value'), 'ifFalse_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
@@ -4538,28 +4538,28 @@ Boolean.prototype['_and_and_and_and_'] = function(block1, block2, block3, block4
     if (__context.return) return __context.value;
     return true;
 };
-Boolean.prototype['_or_or_'] = function(block1, block2)
+Boolean.prototype['or_or_'] = function(block1, block2)
 {
     var self = this;
     var __context = {};
-    console.log('_or_or_');
-    send(self, '_deprecated_', ['use a or:[b or:[c]] instead']);
+    console.log('or_or_');
+    send(self, 'deprecated_', ['use a or:[b or:[c]] instead']);
     if (__context.return) return __context.value;
-    send(self, '_ifTrue_', [function() {
+    send(self, 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block1, '_value'), '_ifTrue_', [function() {
+    send(send(block1, 'value'), 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block2, '_value'), '_ifTrue_', [function() {
+    send(send(block2, 'value'), 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
@@ -4568,35 +4568,35 @@ Boolean.prototype['_or_or_'] = function(block1, block2)
     if (__context.return) return __context.value;
     return false;
 };
-Boolean.prototype['_or_or_or_'] = function(block1, block2, block3)
+Boolean.prototype['or_or_or_'] = function(block1, block2, block3)
 {
     var self = this;
     var __context = {};
-    console.log('_or_or_or_');
-    send(self, '_deprecated_', ['use a or:[b or:[c or:[d]]] instead']);
+    console.log('or_or_or_');
+    send(self, 'deprecated_', ['use a or:[b or:[c or:[d]]] instead']);
     if (__context.return) return __context.value;
-    send(self, '_ifTrue_', [function() {
+    send(self, 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block1, '_value'), '_ifTrue_', [function() {
+    send(send(block1, 'value'), 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block2, '_value'), '_ifTrue_', [function() {
+    send(send(block2, 'value'), 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block3, '_value'), '_ifTrue_', [function() {
+    send(send(block3, 'value'), 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
@@ -4605,42 +4605,42 @@ Boolean.prototype['_or_or_or_'] = function(block1, block2, block3)
     if (__context.return) return __context.value;
     return false;
 };
-Boolean.prototype['_or_or_or_or_'] = function(block1, block2, block3, block4)
+Boolean.prototype['or_or_or_or_'] = function(block1, block2, block3, block4)
 {
     var self = this;
     var __context = {};
-    console.log('_or_or_or_or_');
-    send(self, '_deprecated_', ['use a or:[b or:[c or:[d or:[e]]]] instead']);
+    console.log('or_or_or_or_');
+    send(self, 'deprecated_', ['use a or:[b or:[c or:[d or:[e]]]] instead']);
     if (__context.return) return __context.value;
-    send(self, '_ifTrue_', [function() {
+    send(self, 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block1, '_value'), '_ifTrue_', [function() {
+    send(send(block1, 'value'), 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block2, '_value'), '_ifTrue_', [function() {
+    send(send(block2, 'value'), 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block3, '_value'), '_ifTrue_', [function() {
+    send(send(block3, 'value'), 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(block4, '_value'), '_ifTrue_', [function() {
+    send(send(block4, 'value'), 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
@@ -4649,119 +4649,119 @@ Boolean.prototype['_or_or_or_or_'] = function(block1, block2, block3, block4)
     if (__context.return) return __context.value;
     return false;
 };
-Boolean.prototype['_and_'] = function(alternativeBlock)
+Boolean.prototype['and_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_and_');
-    send(self, '_subclassResponsibility');
+    console.log('and_');
+    send(self, 'subclassResponsibility');
 };
-Boolean.prototype['_ifFalse_'] = function(alternativeBlock)
+Boolean.prototype['ifFalse_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_ifFalse_');
-    send(self, '_subclassResponsibility');
+    console.log('ifFalse_');
+    send(self, 'subclassResponsibility');
 };
-Boolean.prototype['_ifFalse_ifTrue_'] = function(falseAlternativeBlock, trueAlternativeBlock)
+Boolean.prototype['ifFalse_ifTrue_'] = function(falseAlternativeBlock, trueAlternativeBlock)
 {
     var self = this;
-    console.log('_ifFalse_ifTrue_');
-    send(self, '_subclassResponsibility');
+    console.log('ifFalse_ifTrue_');
+    send(self, 'subclassResponsibility');
 };
-Boolean.prototype['_ifTrue_'] = function(alternativeBlock)
+Boolean.prototype['ifTrue_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_ifTrue_');
-    send(self, '_subclassResponsibility');
+    console.log('ifTrue_');
+    send(self, 'subclassResponsibility');
 };
-Boolean.prototype['_ifTrue_ifFalse_'] = function(trueAlternativeBlock, falseAlternativeBlock)
+Boolean.prototype['ifTrue_ifFalse_'] = function(trueAlternativeBlock, falseAlternativeBlock)
 {
     var self = this;
-    console.log('_ifTrue_ifFalse_');
-    send(self, '_subclassResponsibility');
+    console.log('ifTrue_ifFalse_');
+    send(self, 'subclassResponsibility');
 };
-Boolean.prototype['_or_'] = function(alternativeBlock)
+Boolean.prototype['or_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_or_');
-    send(self, '_subclassResponsibility');
+    console.log('or_');
+    send(self, 'subclassResponsibility');
 };
-Boolean.prototype['_deepCopy'] = function()
+Boolean.prototype['deepCopy'] = function()
 {
     var self = this;
-    console.log('_deepCopy');
+    console.log('deepCopy');
 };
-Boolean.prototype['_shallowCopy'] = function()
+Boolean.prototype['shallowCopy'] = function()
 {
     var self = this;
-    console.log('_shallowCopy');
+    console.log('shallowCopy');
 };
-Boolean.prototype['_veryDeepCopyWith_'] = function(deepCopier)
+Boolean.prototype['veryDeepCopyWith_'] = function(deepCopier)
 {
     var self = this;
-    console.log('_veryDeepCopyWith_');
+    console.log('veryDeepCopyWith_');
 };
 Boolean.prototype['&'] = function(aBoolean)
 {
     var self = this;
     console.log('&');
-    send(self, '_subclassResponsibility');
+    send(self, 'subclassResponsibility');
 };
 Boolean.prototype['==>'] = function(aBlock)
 {
     var self = this;
     console.log('==>');
-    return send(send(self, '_not'), '_or_', [function() {
-        send(aBlock, '_value');
+    return send(send(self, 'not'), 'or_', [function() {
+        send(aBlock, 'value');
     }
     ]);
 };
-Boolean.prototype['_eqv_'] = function(aBoolean)
+Boolean.prototype['eqv_'] = function(aBoolean)
 {
     var self = this;
-    console.log('_eqv_');
+    console.log('eqv_');
     return send(self, '==', [aBoolean]);
 };
-Boolean.prototype['_not'] = function()
+Boolean.prototype['not'] = function()
 {
     var self = this;
-    console.log('_not');
-    send(self, '_subclassResponsibility');
+    console.log('not');
+    send(self, 'subclassResponsibility');
 };
 Boolean.prototype['|'] = function(aBoolean)
 {
     var self = this;
     console.log('|');
-    send(self, '_subclassResponsibility');
+    send(self, 'subclassResponsibility');
 };
-Boolean.prototype['_isLiteral'] = function()
+Boolean.prototype['isLiteral'] = function()
 {
     var self = this;
-    console.log('_isLiteral');
+    console.log('isLiteral');
     return true;
 };
-Boolean.prototype['_storeOn_'] = function(aStream)
+Boolean.prototype['storeOn_'] = function(aStream)
 {
     var self = this;
-    console.log('_storeOn_');
-    send(self, '_printOn_', [aStream]);
+    console.log('storeOn_');
+    send(self, 'printOn_', [aStream]);
 };
-Boolean.prototype['_isSelfEvaluating'] = function()
+Boolean.prototype['isSelfEvaluating'] = function()
 {
     var self = this;
-    console.log('_isSelfEvaluating');
+    console.log('isSelfEvaluating');
     return true;
 };
-BooleanClass.prototype['_settingInputWidgetForNode_'] = function(aSettingNode)
+BooleanClass.prototype['settingInputWidgetForNode_'] = function(aSettingNode)
 {
     var self = this;
-    console.log('_settingInputWidgetForNode_');
-    return send(aSettingNode, '_inputWidgetForBoolean');
+    console.log('settingInputWidgetForNode_');
+    return send(aSettingNode, 'inputWidgetForBoolean');
 };
-BooleanClass.prototype['_new'] = function()
+BooleanClass.prototype['new'] = function()
 {
     var self = this;
-    console.log('_new');
-    send(self, '_error_', ['You may not create any more Booleans - this is two-valued logic']);
+    console.log('new');
+    send(self, 'error_', ['You may not create any more Booleans - this is two-valued logic']);
 };
 function FalseClass()
 {
@@ -4776,41 +4776,41 @@ FalseClass.prototype.__proto__ = BooleanClass.prototype;
 False.prototype.__proto__ = Boolean.prototype;
 FalseClass.__super = BooleanClass;
 False.__super = Boolean;
-False.prototype['_and_'] = function(alternativeBlock)
+False.prototype['and_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_and_');
+    console.log('and_');
     return self;
 };
-False.prototype['_ifFalse_'] = function(alternativeBlock)
+False.prototype['ifFalse_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_ifFalse_');
-    return send(alternativeBlock, '_value');
+    console.log('ifFalse_');
+    return send(alternativeBlock, 'value');
 };
-False.prototype['_ifFalse_ifTrue_'] = function(falseAlternativeBlock, trueAlternativeBlock)
+False.prototype['ifFalse_ifTrue_'] = function(falseAlternativeBlock, trueAlternativeBlock)
 {
     var self = this;
-    console.log('_ifFalse_ifTrue_');
-    return send(falseAlternativeBlock, '_value');
+    console.log('ifFalse_ifTrue_');
+    return send(falseAlternativeBlock, 'value');
 };
-False.prototype['_ifTrue_'] = function(alternativeBlock)
+False.prototype['ifTrue_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_ifTrue_');
+    console.log('ifTrue_');
     return nil;
 };
-False.prototype['_ifTrue_ifFalse_'] = function(trueAlternativeBlock, falseAlternativeBlock)
+False.prototype['ifTrue_ifFalse_'] = function(trueAlternativeBlock, falseAlternativeBlock)
 {
     var self = this;
-    console.log('_ifTrue_ifFalse_');
-    return send(falseAlternativeBlock, '_value');
+    console.log('ifTrue_ifFalse_');
+    return send(falseAlternativeBlock, 'value');
 };
-False.prototype['_or_'] = function(alternativeBlock)
+False.prototype['or_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_or_');
-    return send(alternativeBlock, '_value');
+    console.log('or_');
+    return send(alternativeBlock, 'value');
 };
 False.prototype['&'] = function(aBoolean)
 {
@@ -4818,17 +4818,17 @@ False.prototype['&'] = function(aBoolean)
     console.log('&');
     return self;
 };
-False.prototype['_not'] = function()
+False.prototype['not'] = function()
 {
     var self = this;
-    console.log('_not');
+    console.log('not');
     return true;
 };
-False.prototype['_xor_'] = function(aBoolean)
+False.prototype['xor_'] = function(aBoolean)
 {
     var self = this;
-    console.log('_xor_');
-    return send(aBoolean, '_value');
+    console.log('xor_');
+    return send(aBoolean, 'value');
 };
 False.prototype['|'] = function(aBoolean)
 {
@@ -4836,17 +4836,17 @@ False.prototype['|'] = function(aBoolean)
     console.log('|');
     return aBoolean;
 };
-False.prototype['_asBit'] = function()
+False.prototype['asBit'] = function()
 {
     var self = this;
-    console.log('_asBit');
+    console.log('asBit');
     return 0;
 };
-False.prototype['_printOn_'] = function(aStream)
+False.prototype['printOn_'] = function(aStream)
 {
     var self = this;
-    console.log('_printOn_');
-    send(aStream, '_nextPutAll_', ['false']);
+    console.log('printOn_');
+    send(aStream, 'nextPutAll_', ['false']);
 };
 function TrueClass()
 {
@@ -4861,40 +4861,40 @@ TrueClass.prototype.__proto__ = BooleanClass.prototype;
 True.prototype.__proto__ = Boolean.prototype;
 TrueClass.__super = BooleanClass;
 True.__super = Boolean;
-True.prototype['_and_'] = function(alternativeBlock)
+True.prototype['and_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_and_');
-    return send(alternativeBlock, '_value');
+    console.log('and_');
+    return send(alternativeBlock, 'value');
 };
-True.prototype['_ifFalse_'] = function(alternativeBlock)
+True.prototype['ifFalse_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_ifFalse_');
+    console.log('ifFalse_');
     return nil;
 };
-True.prototype['_ifFalse_ifTrue_'] = function(falseAlternativeBlock, trueAlternativeBlock)
+True.prototype['ifFalse_ifTrue_'] = function(falseAlternativeBlock, trueAlternativeBlock)
 {
     var self = this;
-    console.log('_ifFalse_ifTrue_');
-    return send(trueAlternativeBlock, '_value');
+    console.log('ifFalse_ifTrue_');
+    return send(trueAlternativeBlock, 'value');
 };
-True.prototype['_ifTrue_'] = function(alternativeBlock)
+True.prototype['ifTrue_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_ifTrue_');
-    return send(alternativeBlock, '_value');
+    console.log('ifTrue_');
+    return send(alternativeBlock, 'value');
 };
-True.prototype['_ifTrue_ifFalse_'] = function(trueAlternativeBlock, falseAlternativeBlock)
+True.prototype['ifTrue_ifFalse_'] = function(trueAlternativeBlock, falseAlternativeBlock)
 {
     var self = this;
-    console.log('_ifTrue_ifFalse_');
-    return send(trueAlternativeBlock, '_value');
+    console.log('ifTrue_ifFalse_');
+    return send(trueAlternativeBlock, 'value');
 };
-True.prototype['_or_'] = function(alternativeBlock)
+True.prototype['or_'] = function(alternativeBlock)
 {
     var self = this;
-    console.log('_or_');
+    console.log('or_');
     return self;
 };
 True.prototype['&'] = function(aBoolean)
@@ -4903,17 +4903,17 @@ True.prototype['&'] = function(aBoolean)
     console.log('&');
     return aBoolean;
 };
-True.prototype['_not'] = function()
+True.prototype['not'] = function()
 {
     var self = this;
-    console.log('_not');
+    console.log('not');
     return false;
 };
-True.prototype['_xor_'] = function(aBoolean)
+True.prototype['xor_'] = function(aBoolean)
 {
     var self = this;
-    console.log('_xor_');
-    return send(send(aBoolean, '_value'), '_not');
+    console.log('xor_');
+    return send(send(aBoolean, 'value'), 'not');
 };
 True.prototype['|'] = function(aBoolean)
 {
@@ -4921,17 +4921,17 @@ True.prototype['|'] = function(aBoolean)
     console.log('|');
     return self;
 };
-True.prototype['_asBit'] = function()
+True.prototype['asBit'] = function()
 {
     var self = this;
-    console.log('_asBit');
+    console.log('asBit');
     return 1;
 };
-True.prototype['_printOn_'] = function(aStream)
+True.prototype['printOn_'] = function(aStream)
 {
     var self = this;
-    console.log('_printOn_');
-    send(aStream, '_nextPutAll_', ['true']);
+    console.log('printOn_');
+    send(aStream, 'nextPutAll_', ['true']);
 };
 function WeakMessageSendClass()
 {
@@ -4944,62 +4944,62 @@ WeakMessageSend.classPrototype = WeakMessageSendClass.prototype;
 WeakMessageSendClass.prototype['_basicNew'] = function() { return new WeakMessageSend(); };
 WeakMessageSendClass.prototype.__proto__ = ObjectClass.prototype;
 WeakMessageSend.prototype.__proto__ = Object.prototype;
-WeakMessageSend.prototype.selector = null;
-WeakMessageSend.prototype.shouldBeNil = null;
-WeakMessageSend.prototype.arguments = null;
+WeakMessageSend.prototype.$selector = null;
+WeakMessageSend.prototype.$shouldBeNil = null;
+WeakMessageSend.prototype.$arguments = null;
 WeakMessageSendClass.__super = ObjectClass;
 WeakMessageSend.__super = Object;
-WeakMessageSend.prototype['_arguments'] = function()
+WeakMessageSend.prototype['arguments'] = function()
 {
     var self = this;
-    console.log('_arguments');
-    return send(self.arguments, '_ifNil_', [function() {
-        send(Array.classPrototype, '_new');
+    console.log('arguments');
+    return send(self.$arguments, 'ifNil_', [function() {
+        send(Array.classPrototype, 'new');
     }
     ]);
 };
-WeakMessageSend.prototype['_arguments_'] = function(anArray)
+WeakMessageSend.prototype['arguments_'] = function(anArray)
 {
     var self = this;
-    console.log('_arguments_');
-    self.arguments = send(WeakArray.classPrototype, '_withAll_', [anArray]);
-    self.shouldBeNil = send(Array.classPrototype, '_withAll_', [send(anArray, '_collect_', [function(ea) {
-        send(ea, '_isNil');
+    console.log('arguments_');
+    self.$arguments = send(WeakArray.classPrototype, 'withAll_', [anArray]);
+    self.$shouldBeNil = send(Array.classPrototype, 'withAll_', [send(anArray, 'collect_', [function(ea) {
+        send(ea, 'isNil');
     }
     ])]);
 };
-WeakMessageSend.prototype['_receiver'] = function()
+WeakMessageSend.prototype['receiver'] = function()
 {
     var self = this;
-    console.log('_receiver');
-    return send(self, '_at_', [1]);
+    console.log('receiver');
+    return send(self, 'at_', [1]);
 };
-WeakMessageSend.prototype['_receiver_'] = function(anObject)
+WeakMessageSend.prototype['receiver_'] = function(anObject)
 {
     var self = this;
-    console.log('_receiver_');
-    send(self, '_at_put_', [1, anObject]);
+    console.log('receiver_');
+    send(self, 'at_put_', [1, anObject]);
 };
-WeakMessageSend.prototype['_selector'] = function()
+WeakMessageSend.prototype['selector'] = function()
 {
     var self = this;
-    console.log('_selector');
-    return self.selector;
+    console.log('selector');
+    return self.$selector;
 };
-WeakMessageSend.prototype['_selector_'] = function(aSymbol)
+WeakMessageSend.prototype['selector_'] = function(aSymbol)
 {
     var self = this;
-    console.log('_selector_');
-    self.selector = aSymbol;
+    console.log('selector_');
+    self.$selector = aSymbol;
 };
 WeakMessageSend.prototype['='] = function(anObject)
 {
     var self = this;
     console.log('=');
-    return send(send(anObject, '_isMessageSend'), '_and_', [function() {
-        send(send(send(self, '_receiver'), '==', [send(anObject, '_receiver')]), '_and_', [function() {
-            send(send(self.selector, '==', [send(anObject, '_selector')]), '_and_', [function() {
-                send(send(Array.classPrototype, '_withAll_', [self.arguments]), '=', [send(Array.classPrototype, '_withAll_', [send(anObject, '_arguments')])]);
+    return send(send(anObject, 'isMessageSend'), 'and_', [function() {
+        send(send(send(self, 'receiver'), '==', [send(anObject, 'receiver')]), 'and_', [function() {
+            send(send(self.$selector, '==', [send(anObject, 'selector')]), 'and_', [function() {
+                send(send(Array.classPrototype, 'withAll_', [self.$arguments]), '=', [send(Array.classPrototype, 'withAll_', [send(anObject, 'arguments')])]);
             }
             ]);
         }
@@ -5007,24 +5007,24 @@ WeakMessageSend.prototype['='] = function(anObject)
     }
     ]);
 };
-WeakMessageSend.prototype['_hash'] = function()
+WeakMessageSend.prototype['hash'] = function()
 {
     var self = this;
-    console.log('_hash');
-    return send(send(send(self, '_receiver'), '_hash'), '_bitXor_', [send(self.selector, '_hash')]);
+    console.log('hash');
+    return send(send(send(self, 'receiver'), 'hash'), 'bitXor_', [send(self.$selector, 'hash')]);
 };
-WeakMessageSend.prototype['_asMessageSend'] = function()
+WeakMessageSend.prototype['asMessageSend'] = function()
 {
     var self = this;
-    console.log('_asMessageSend');
-    return send(MessageSend.classPrototype, '_receiver_selector_arguments_', [send(self, '_receiver'), self.selector, send(Array.classPrototype, '_withAll_', [send(self, '_arguments')])]);
+    console.log('asMessageSend');
+    return send(MessageSend.classPrototype, 'receiver_selector_arguments_', [send(self, 'receiver'), self.$selector, send(Array.classPrototype, 'withAll_', [send(self, 'arguments')])]);
 };
-WeakMessageSend.prototype['_asMinimalRepresentation'] = function()
+WeakMessageSend.prototype['asMinimalRepresentation'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_asMinimalRepresentation');
-    send(send(self, '_isReceiverOrAnyArgumentGarbage'), '_ifTrue_ifFalse_', [function() {
+    console.log('asMinimalRepresentation');
+    send(send(self, 'isReceiverOrAnyArgumentGarbage'), 'ifTrue_ifFalse_', [function() {
         __context.value = nil;
         __context.return = true;
         return __context.value;
@@ -5037,57 +5037,57 @@ WeakMessageSend.prototype['_asMinimalRepresentation'] = function()
     ]);
     if (__context.return) return __context.value;
 };
-WeakMessageSend.prototype['_cull_'] = function(arg)
+WeakMessageSend.prototype['cull_'] = function(arg)
 {
     var self = this;
-    console.log('_cull_');
-    return send(send(send(self.selector, '_numArgs'), '=', [0]), '_ifTrue_ifFalse_', [function() {
-        send(self, '_value');
+    console.log('cull_');
+    return send(send(send(self.$selector, 'numArgs'), '=', [0]), 'ifTrue_ifFalse_', [function() {
+        send(self, 'value');
     }
     , function() {
-        send(self, '_value_', [arg]);
+        send(self, 'value_', [arg]);
     }
     ]);
 };
-WeakMessageSend.prototype['_cull_cull_'] = function(arg1, arg2)
+WeakMessageSend.prototype['cull_cull_'] = function(arg1, arg2)
 {
     var self = this;
-    console.log('_cull_cull_');
-    return send(send(send(self.selector, '_numArgs'), '<', [2]), '_ifTrue_ifFalse_', [function() {
-        send(self, '_cull_', [arg1]);
+    console.log('cull_cull_');
+    return send(send(send(self.$selector, 'numArgs'), '<', [2]), 'ifTrue_ifFalse_', [function() {
+        send(self, 'cull_', [arg1]);
     }
     , function() {
-        send(self, '_value_value_', [arg1, arg2]);
+        send(self, 'value_value_', [arg1, arg2]);
     }
     ]);
 };
-WeakMessageSend.prototype['_cull_cull_cull_'] = function(arg1, arg2, arg3)
+WeakMessageSend.prototype['cull_cull_cull_'] = function(arg1, arg2, arg3)
 {
     var self = this;
-    console.log('_cull_cull_cull_');
-    return send(send(send(self.selector, '_numArgs'), '<', [3]), '_ifTrue_ifFalse_', [function() {
-        send(self, '_cull_cull_', [arg1, arg2]);
+    console.log('cull_cull_cull_');
+    return send(send(send(self.$selector, 'numArgs'), '<', [3]), 'ifTrue_ifFalse_', [function() {
+        send(self, 'cull_cull_', [arg1, arg2]);
     }
     , function() {
-        send(self, '_value_value_value_', [arg1, arg2, arg3]);
+        send(self, 'value_value_value_', [arg1, arg2, arg3]);
     }
     ]);
 };
-WeakMessageSend.prototype['_value'] = function()
+WeakMessageSend.prototype['value'] = function()
 {
     var self = this;
-    console.log('_value');
-    return send(send(self.arguments, '_isNil'), '_ifTrue_ifFalse_', [function() {
-        send(send(self, '_ensureReceiver'), '_ifTrue_ifFalse_', [function() {
-            send(send(self, '_receiver'), '_perform_', [self.selector]);
+    console.log('value');
+    return send(send(self.$arguments, 'isNil'), 'ifTrue_ifFalse_', [function() {
+        send(send(self, 'ensureReceiver'), 'ifTrue_ifFalse_', [function() {
+            send(send(self, 'receiver'), 'perform_', [self.$selector]);
         }
         , function() {
         }
         ]);
     }
     , function() {
-        send(send(self, '_ensureReceiverAndArguments'), '_ifTrue_ifFalse_', [function() {
-            send(send(self, '_receiver'), '_perform_withArguments_', [self.selector, send(Array.classPrototype, '_withAll_', [self.arguments])]);
+        send(send(self, 'ensureReceiverAndArguments'), 'ifTrue_ifFalse_', [function() {
+            send(send(self, 'receiver'), 'perform_withArguments_', [self.$selector, send(Array.classPrototype, 'withAll_', [self.$arguments])]);
         }
         , function() {
         }
@@ -5095,137 +5095,137 @@ WeakMessageSend.prototype['_value'] = function()
     }
     ]);
 };
-WeakMessageSend.prototype['_value_'] = function(anObject)
+WeakMessageSend.prototype['value_'] = function(anObject)
 {
     var self = this;
     var __context = {};
-    console.log('_value_');
-    send(send(self, '_ensureReceiver'), '_ifFalse_', [function() {
+    console.log('value_');
+    send(send(self, 'ensureReceiver'), 'ifFalse_', [function() {
         __context.value = nil;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(self, '_receiver'), '_perform_with_', [self.selector, anObject]);
+    return send(send(self, 'receiver'), 'perform_with_', [self.$selector, anObject]);
 };
-WeakMessageSend.prototype['_value_value_'] = function(anObject1, anObject2)
+WeakMessageSend.prototype['value_value_'] = function(anObject1, anObject2)
 {
     var self = this;
     var __context = {};
-    console.log('_value_value_');
-    send(send(self, '_ensureReceiver'), '_ifFalse_', [function() {
+    console.log('value_value_');
+    send(send(self, 'ensureReceiver'), 'ifFalse_', [function() {
         __context.value = nil;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(self, '_receiver'), '_perform_with_with_', [self.selector, anObject1, anObject2]);
+    return send(send(self, 'receiver'), 'perform_with_with_', [self.$selector, anObject1, anObject2]);
 };
-WeakMessageSend.prototype['_value_value_value_'] = function(anObject1, anObject2, anObject3)
+WeakMessageSend.prototype['value_value_value_'] = function(anObject1, anObject2, anObject3)
 {
     var self = this;
     var __context = {};
-    console.log('_value_value_value_');
-    send(send(self, '_ensureReceiver'), '_ifFalse_', [function() {
+    console.log('value_value_value_');
+    send(send(self, 'ensureReceiver'), 'ifFalse_', [function() {
         __context.value = nil;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(self, '_receiver'), '_perform_with_with_with_', [self.selector, anObject1, anObject2, anObject3]);
+    return send(send(self, 'receiver'), 'perform_with_with_with_', [self.$selector, anObject1, anObject2, anObject3]);
 };
-WeakMessageSend.prototype['_valueWithArguments_'] = function(anArray)
+WeakMessageSend.prototype['valueWithArguments_'] = function(anArray)
 {
     var self = this;
     var __context = {};
-    console.log('_valueWithArguments_');
-    send(send(self, '_ensureReceiverAndArguments'), '_ifFalse_', [function() {
+    console.log('valueWithArguments_');
+    send(send(self, 'ensureReceiverAndArguments'), 'ifFalse_', [function() {
         __context.value = nil;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(self, '_receiver'), '_perform_withArguments_', [self.selector, send(self, '_collectArguments_', [anArray])]);
+    return send(send(self, 'receiver'), 'perform_withArguments_', [self.$selector, send(self, 'collectArguments_', [anArray])]);
 };
-WeakMessageSend.prototype['_valueWithEnoughArguments_'] = function(anArray)
+WeakMessageSend.prototype['valueWithEnoughArguments_'] = function(anArray)
 {
     var self = this;
     var __context = {};
-    console.log('_valueWithEnoughArguments_');
+    console.log('valueWithEnoughArguments_');
     var args = null
-    send(send(self, '_ensureReceiverAndArguments'), '_ifFalse_', [function() {
+    send(send(self, 'ensureReceiverAndArguments'), 'ifFalse_', [function() {
         __context.value = nil;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    args = send(Array.classPrototype, '_new_', [send(self.selector, '_numArgs')]);
-    send(args, '_replaceFrom_to_with_startingAt_', [1, send(send(self.arguments, '_size'), '_min_', [send(args, '_size')]), self.arguments, 1]);
+    args = send(Array.classPrototype, 'new_', [send(self.$selector, 'numArgs')]);
+    send(args, 'replaceFrom_to_with_startingAt_', [1, send(send(self.$arguments, 'size'), 'min_', [send(args, 'size')]), self.$arguments, 1]);
     if (__context.return) return __context.value;
-    send(send(send(args, '_size'), '>', [send(self.arguments, '_size')]), '_ifTrue_', [function() {
-        send(args, '_replaceFrom_to_with_startingAt_', [send(send(self.arguments, '_size'), '+', [1]), send(send(send(self.arguments, '_size'), '+', [send(anArray, '_size')]), '_min_', [send(args, '_size')]), anArray, 1]);
+    send(send(send(args, 'size'), '>', [send(self.$arguments, 'size')]), 'ifTrue_', [function() {
+        send(args, 'replaceFrom_to_with_startingAt_', [send(send(self.$arguments, 'size'), '+', [1]), send(send(send(self.$arguments, 'size'), '+', [send(anArray, 'size')]), 'min_', [send(args, 'size')]), anArray, 1]);
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(self, '_receiver'), '_perform_withArguments_', [self.selector, args]);
+    return send(send(self, 'receiver'), 'perform_withArguments_', [self.$selector, args]);
 };
-WeakMessageSend.prototype['_printOn_'] = function(aStream)
+WeakMessageSend.prototype['printOn_'] = function(aStream)
 {
     var self = this;
-    console.log('_printOn_');
-    send((function () {var _aux = send(aStream, '_nextPutAll_', [send(send(self, '_class'), '_name')]);return _aux;})(), '_nextPut_', ['(']);
-    send(self.selector, '_printOn_', [aStream]);
-    send(aStream, '_nextPutAll_', [' -> ']);
-    send(send(self, '_receiver'), '_printOn_', [aStream]);
-    send(aStream, '_nextPut_', [')']);
+    console.log('printOn_');
+    send((function () {var _aux = send(aStream, 'nextPutAll_', [send(send(self, 'class'), 'name')]);return _aux;})(), 'nextPut_', ['(']);
+    send(self.$selector, 'printOn_', [aStream]);
+    send(aStream, 'nextPutAll_', [' -> ']);
+    send(send(self, 'receiver'), 'printOn_', [aStream]);
+    send(aStream, 'nextPut_', [')']);
 };
-WeakMessageSend.prototype['_isMessageSend'] = function()
+WeakMessageSend.prototype['isMessageSend'] = function()
 {
     var self = this;
-    console.log('_isMessageSend');
+    console.log('isMessageSend');
     return true;
 };
-WeakMessageSend.prototype['_isValid'] = function()
+WeakMessageSend.prototype['isValid'] = function()
 {
     var self = this;
-    console.log('_isValid');
-    return send(send(self, '_isReceiverOrAnyArgumentGarbage'), '_not');
+    console.log('isValid');
+    return send(send(self, 'isReceiverOrAnyArgumentGarbage'), 'not');
 };
-WeakMessageSend.prototype['_collectArguments_'] = function(anArgArray)
+WeakMessageSend.prototype['collectArguments_'] = function(anArgArray)
 {
     var self = this;
-    console.log('_collectArguments_');
+    console.log('collectArguments_');
     var staticArgs = null
-    staticArgs = send(self, '_arguments');
-    return send(send(send(anArgArray, '_size'), '=', [send(staticArgs, '_size')]), '_ifTrue_ifFalse_', [function() {
+    staticArgs = send(self, 'arguments');
+    return send(send(send(anArgArray, 'size'), '=', [send(staticArgs, 'size')]), 'ifTrue_ifFalse_', [function() {
         anArgArray;
     }
     , function() {
-        send(send(send(staticArgs, '_isEmpty'), '_ifTrue_ifFalse_', [function() {
-            staticArgs = send(Array.classPrototype, '_new_', [send(self.selector, '_numArgs')]);
+        send(send(send(staticArgs, 'isEmpty'), 'ifTrue_ifFalse_', [function() {
+            staticArgs = send(Array.classPrototype, 'new_', [send(self.$selector, 'numArgs')]);
         }
         , function() {
-            send(staticArgs, '_copy');
+            send(staticArgs, 'copy');
         }
-        ]), '_replaceFrom_to_with_startingAt_', [1, send(send(anArgArray, '_size'), '_min_', [send(staticArgs, '_size')]), anArgArray, 1]);
+        ]), 'replaceFrom_to_with_startingAt_', [1, send(send(anArgArray, 'size'), 'min_', [send(staticArgs, 'size')]), anArgArray, 1]);
     }
     ]);
 };
-WeakMessageSend.prototype['_ensureArguments'] = function()
+WeakMessageSend.prototype['ensureArguments'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_ensureArguments');
-    send(self.arguments, '_ifNotNil_', [function() {
-        send(self.arguments, '_with_do_', [self.shouldBeNil, function(arg, flag) {
-            send(arg, '_ifNil_', [function() {
-                send(flag, '_ifFalse_', [function() {
+    console.log('ensureArguments');
+    send(self.$arguments, 'ifNotNil_', [function() {
+        send(self.$arguments, 'with_do_', [self.$shouldBeNil, function(arg, flag) {
+            send(arg, 'ifNil_', [function() {
+                send(flag, 'ifFalse_', [function() {
                     __context.value = false;
                     __context.return = true;
                     return __context.value;
@@ -5243,28 +5243,28 @@ WeakMessageSend.prototype['_ensureArguments'] = function()
     if (__context.return) return __context.value;
     return true;
 };
-WeakMessageSend.prototype['_ensureReceiver'] = function()
+WeakMessageSend.prototype['ensureReceiver'] = function()
 {
     var self = this;
-    console.log('_ensureReceiver');
-    return send(send(self, '_receiver'), '_notNil');
+    console.log('ensureReceiver');
+    return send(send(self, 'receiver'), 'notNil');
 };
-WeakMessageSend.prototype['_ensureReceiverAndArguments'] = function()
+WeakMessageSend.prototype['ensureReceiverAndArguments'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_ensureReceiverAndArguments');
-    send(send(self, '_receiver'), '_ifNil_', [function() {
+    console.log('ensureReceiverAndArguments');
+    send(send(self, 'receiver'), 'ifNil_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(self.arguments, '_ifNotNil_', [function() {
-        send(self.arguments, '_with_do_', [self.shouldBeNil, function(arg, flag) {
-            send(arg, '_ifNil_', [function() {
-                send(flag, '_ifFalse_', [function() {
+    send(self.$arguments, 'ifNotNil_', [function() {
+        send(self.$arguments, 'with_do_', [self.$shouldBeNil, function(arg, flag) {
+            send(arg, 'ifNil_', [function() {
+                send(flag, 'ifFalse_', [function() {
                     __context.value = false;
                     __context.return = true;
                     return __context.value;
@@ -5282,18 +5282,18 @@ WeakMessageSend.prototype['_ensureReceiverAndArguments'] = function()
     if (__context.return) return __context.value;
     return true;
 };
-WeakMessageSend.prototype['_isAnyArgumentGarbage'] = function()
+WeakMessageSend.prototype['isAnyArgumentGarbage'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_isAnyArgumentGarbage');
-    send(self.arguments, '_ifNotNil_', [function() {
-        send(self.arguments, '_with_do_', [self.shouldBeNil, function(arg, flag) {
-            send(send(send(flag, '_not'), '_and_', [function() {
-                send(arg, '_isNil');
+    console.log('isAnyArgumentGarbage');
+    send(self.$arguments, 'ifNotNil_', [function() {
+        send(self.$arguments, 'with_do_', [self.$shouldBeNil, function(arg, flag) {
+            send(send(send(flag, 'not'), 'and_', [function() {
+                send(arg, 'isNil');
                 if (__context.return) return __context.value;
             }
-            ]), '_ifTrue_', [function() {
+            ]), 'ifTrue_', [function() {
                 __context.value = true;
                 __context.return = true;
                 return __context.value;
@@ -5308,44 +5308,44 @@ WeakMessageSend.prototype['_isAnyArgumentGarbage'] = function()
     if (__context.return) return __context.value;
     return false;
 };
-WeakMessageSend.prototype['_isReceiverGarbage'] = function()
+WeakMessageSend.prototype['isReceiverGarbage'] = function()
 {
     var self = this;
-    console.log('_isReceiverGarbage');
-    return send(send(self, '_receiver'), '_isNil');
+    console.log('isReceiverGarbage');
+    return send(send(self, 'receiver'), 'isNil');
 };
-WeakMessageSend.prototype['_isReceiverOrAnyArgumentGarbage'] = function()
+WeakMessageSend.prototype['isReceiverOrAnyArgumentGarbage'] = function()
 {
     var self = this;
-    console.log('_isReceiverOrAnyArgumentGarbage');
-    return send(send(self, '_isReceiverGarbage'), '_or_', [function() {
-        send(self, '_isAnyArgumentGarbage');
+    console.log('isReceiverOrAnyArgumentGarbage');
+    return send(send(self, 'isReceiverGarbage'), 'or_', [function() {
+        send(self, 'isAnyArgumentGarbage');
     }
     ]);
 };
-WeakMessageSendClass.prototype['_new'] = function()
+WeakMessageSendClass.prototype['new'] = function()
 {
     var self = this;
-    console.log('_new');
-    return send(self, '_new_', [1]);
+    console.log('new');
+    return send(self, 'new_', [1]);
 };
-WeakMessageSendClass.prototype['_receiver_selector_'] = function(anObject, aSymbol)
+WeakMessageSendClass.prototype['receiver_selector_'] = function(anObject, aSymbol)
 {
     var self = this;
-    console.log('_receiver_selector_');
-    return send(self, '_receiver_selector_arguments_', [anObject, aSymbol, []]);
+    console.log('receiver_selector_');
+    return send(self, 'receiver_selector_arguments_', [anObject, aSymbol, []]);
 };
-WeakMessageSendClass.prototype['_receiver_selector_argument_'] = function(anObject, aSymbol, aParameter)
+WeakMessageSendClass.prototype['receiver_selector_argument_'] = function(anObject, aSymbol, aParameter)
 {
     var self = this;
-    console.log('_receiver_selector_argument_');
-    return send(self, '_receiver_selector_arguments_', [anObject, aSymbol, send(Array.classPrototype, '_with_', [aParameter])]);
+    console.log('receiver_selector_argument_');
+    return send(self, 'receiver_selector_arguments_', [anObject, aSymbol, send(Array.classPrototype, 'with_', [aParameter])]);
 };
-WeakMessageSendClass.prototype['_receiver_selector_arguments_'] = function(anObject, aSymbol, anArray)
+WeakMessageSendClass.prototype['receiver_selector_arguments_'] = function(anObject, aSymbol, anArray)
 {
     var self = this;
-    console.log('_receiver_selector_arguments_');
-    return send((function () {var _aux = send((function () {var _aux = send(send(self, '_new'), '_receiver_', [anObject]);return _aux;})(), '_selector_', [aSymbol]);return _aux;})(), '_arguments_', [anArray]);
+    console.log('receiver_selector_arguments_');
+    return send((function () {var _aux = send((function () {var _aux = send(send(self, 'new'), 'receiver_', [anObject]);return _aux;})(), 'selector_', [aSymbol]);return _aux;})(), 'arguments_', [anArray]);
 };
 function WeakActionSequenceClass()
 {
@@ -5356,38 +5356,38 @@ function WeakActionSequence()
 WeakActionSequence.prototype.__class = WeakActionSequenceClass.prototype;
 WeakActionSequence.classPrototype = WeakActionSequenceClass.prototype;
 WeakActionSequenceClass.prototype['_basicNew'] = function() { return new WeakActionSequence(); };
-WeakActionSequence.prototype['_asActionSequence'] = function()
+WeakActionSequence.prototype['asActionSequence'] = function()
 {
     var self = this;
-    console.log('_asActionSequence');
+    console.log('asActionSequence');
     return self;
 };
-WeakActionSequence.prototype['_asActionSequenceTrappingErrors'] = function()
+WeakActionSequence.prototype['asActionSequenceTrappingErrors'] = function()
 {
     var self = this;
-    console.log('_asActionSequenceTrappingErrors');
-    return send(WeakActionSequenceTrappingErrors.classPrototype, '_withAll_', [self]);
+    console.log('asActionSequenceTrappingErrors');
+    return send(WeakActionSequenceTrappingErrors.classPrototype, 'withAll_', [self]);
 };
-WeakActionSequence.prototype['_asMinimalRepresentation'] = function()
+WeakActionSequence.prototype['asMinimalRepresentation'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_asMinimalRepresentation');
+    console.log('asMinimalRepresentation');
     var valid = null
-    valid = send(self, '_select_', [function(e) {
-        send(e, '_isValid');
+    valid = send(self, 'select_', [function(e) {
+        send(e, 'isValid');
         if (__context.return) return __context.value;
     }
     ]);
-    send(send(send(valid, '_size'), '=', [0]), '_ifTrue_', [function() {
+    send(send(send(valid, 'size'), '=', [0]), 'ifTrue_', [function() {
         __context.value = nil;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(send(valid, '_size'), '=', [1]), '_ifTrue_', [function() {
-        __context.value = send(valid, '_first');
+    send(send(send(valid, 'size'), '=', [1]), 'ifTrue_', [function() {
+        __context.value = send(valid, 'first');
         __context.return = true;
         return __context.value;
     }
@@ -5395,15 +5395,15 @@ WeakActionSequence.prototype['_asMinimalRepresentation'] = function()
     if (__context.return) return __context.value;
     return valid;
 };
-WeakActionSequence.prototype['_value'] = function()
+WeakActionSequence.prototype['value'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_value');
+    console.log('value');
     var answer = null
-    send(self, '_do_', [function(each) {
-        send(send(each, '_isValid'), '_ifTrue_', [function() {
-            answer = send(each, '_value');
+    send(self, 'do_', [function(each) {
+        send(send(each, 'isValid'), 'ifTrue_', [function() {
+            answer = send(each, 'value');
         }
         ]);
         if (__context.return) return __context.value;
@@ -5412,15 +5412,15 @@ WeakActionSequence.prototype['_value'] = function()
     if (__context.return) return __context.value;
     return answer;
 };
-WeakActionSequence.prototype['_valueWithArguments_'] = function(anArray)
+WeakActionSequence.prototype['valueWithArguments_'] = function(anArray)
 {
     var self = this;
     var __context = {};
-    console.log('_valueWithArguments_');
+    console.log('valueWithArguments_');
     var answer = null
-    send(self, '_do_', [function(each) {
-        send(send(each, '_isValid'), '_ifTrue_', [function() {
-            answer = send(each, '_valueWithArguments_', [anArray]);
+    send(self, 'do_', [function(each) {
+        send(send(each, 'isValid'), 'ifTrue_', [function() {
+            answer = send(each, 'valueWithArguments_', [anArray]);
         }
         ]);
         if (__context.return) return __context.value;
@@ -5429,31 +5429,31 @@ WeakActionSequence.prototype['_valueWithArguments_'] = function(anArray)
     if (__context.return) return __context.value;
     return answer;
 };
-WeakActionSequence.prototype['_printOn_'] = function(aStream)
+WeakActionSequence.prototype['printOn_'] = function(aStream)
 {
     var self = this;
     var __context = {};
-    console.log('_printOn_');
-    send(send(send(self, '_size'), '<', [2]), '_ifTrue_', [function() {
-        __context.value = sendSuper(self, WeakActionSequence, '_printOn_', [aStream]);
+    console.log('printOn_');
+    send(send(send(self, 'size'), '<', [2]), 'ifTrue_', [function() {
+        __context.value = sendSuper(self, WeakActionSequence, 'printOn_', [aStream]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(aStream, '_nextPutAll_', ['#(']);
+    send(aStream, 'nextPutAll_', ['#(']);
     if (__context.return) return __context.value;
-    send(self, '_do_separatedBy_', [function(each) {
-        send(each, '_printOn_', [aStream]);
+    send(self, 'do_separatedBy_', [function(each) {
+        send(each, 'printOn_', [aStream]);
         if (__context.return) return __context.value;
     }
     , function() {
-        send(aStream, '_cr');
+        send(aStream, 'cr');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(aStream, '_nextPut_', [')']);
+    send(aStream, 'nextPut_', [')']);
     if (__context.return) return __context.value;
 };
 function PointClass()
@@ -5467,170 +5467,170 @@ Point.classPrototype = PointClass.prototype;
 PointClass.prototype['_basicNew'] = function() { return new Point(); };
 PointClass.prototype.__proto__ = ObjectClass.prototype;
 Point.prototype.__proto__ = Object.prototype;
-Point.prototype.x = null;
-Point.prototype.y = null;
+Point.prototype.$x = null;
+Point.prototype.$y = null;
 PointClass.__super = ObjectClass;
 Point.__super = Object;
-Point.prototype['_directionToLineFrom_to_'] = function(p1, p2)
+Point.prototype['directionToLineFrom_to_'] = function(p1, p2)
 {
     var self = this;
-    console.log('_directionToLineFrom_to_');
-    return send(send(send(send(p2, '_x'), '-', [send(p1, '_x')]), '*', [send(send(self, '_y'), '-', [send(p1, '_y')])]), '-', [send(send(send(self, '_x'), '-', [send(p1, '_x')]), '*', [send(send(p2, '_y'), '-', [send(p1, '_y')])])]);
+    console.log('directionToLineFrom_to_');
+    return send(send(send(send(p2, 'x'), '-', [send(p1, 'x')]), '*', [send(send(self, 'y'), '-', [send(p1, 'y')])]), '-', [send(send(send(self, 'x'), '-', [send(p1, 'x')]), '*', [send(send(p2, 'y'), '-', [send(p1, 'y')])])]);
 };
-Point.prototype['_angle'] = function()
+Point.prototype['angle'] = function()
 {
     var self = this;
-    console.log('_angle');
-    return send(send(self, '_y'), '_arcTan_', [send(self, '_x')]);
+    console.log('angle');
+    return send(send(self, 'y'), 'arcTan_', [send(self, 'x')]);
 };
-Point.prototype['_angleWith_'] = function(aPoint)
+Point.prototype['angleWith_'] = function(aPoint)
 {
     var self = this;
-    console.log('_angleWith_');
+    console.log('angleWith_');
     var ar = null
     var ap = null
-    ar = send(self, '_angle');
-    ap = send(aPoint, '_angle');
-    return send(send(ap, '>=', [ar]), '_ifTrue_ifFalse_', [function() {
+    ar = send(self, 'angle');
+    ap = send(aPoint, 'angle');
+    return send(send(ap, '>=', [ar]), 'ifTrue_ifFalse_', [function() {
         send(ap, '-', [ar]);
     }
     , function() {
-        send(send(send(send(Float.classPrototype, '_pi'), '*', [2]), '-', [ar]), '+', [ap]);
+        send(send(send(send(Float.classPrototype, 'pi'), '*', [2]), '-', [ar]), '+', [ap]);
     }
     ]);
 };
-Point.prototype['_max'] = function()
+Point.prototype['max'] = function()
 {
     var self = this;
-    console.log('_max');
-    return send(send(self, '_x'), '_max_', [send(self, '_y')]);
+    console.log('max');
+    return send(send(self, 'x'), 'max_', [send(self, 'y')]);
 };
-Point.prototype['_min'] = function()
+Point.prototype['min'] = function()
 {
     var self = this;
-    console.log('_min');
-    return send(send(self, '_x'), '_min_', [send(self, '_y')]);
+    console.log('min');
+    return send(send(self, 'x'), 'min_', [send(self, 'y')]);
 };
-Point.prototype['_reflectedAbout_'] = function(aPoint)
+Point.prototype['reflectedAbout_'] = function(aPoint)
 {
     var self = this;
-    console.log('_reflectedAbout_');
-    return send(send(send(self, '-', [aPoint]), '_negated'), '+', [aPoint]);
+    console.log('reflectedAbout_');
+    return send(send(send(self, '-', [aPoint]), 'negated'), '+', [aPoint]);
 };
-Point.prototype['_x'] = function()
+Point.prototype['x'] = function()
 {
     var self = this;
-    console.log('_x');
-    return self.x;
+    console.log('x');
+    return self.$x;
 };
-Point.prototype['_y'] = function()
+Point.prototype['y'] = function()
 {
     var self = this;
-    console.log('_y');
-    return self.y;
+    console.log('y');
+    return self.$y;
 };
 Point.prototype['*'] = function(arg)
 {
     var self = this;
     var __context = {};
     console.log('*');
-    send(send(arg, '_isPoint'), '_ifTrue_', [function() {
-        __context.value = send(send(self.x, '*', [send(arg, '_x')]), '@', [send(self.y, '*', [send(arg, '_y')])]);
+    send(send(arg, 'isPoint'), 'ifTrue_', [function() {
+        __context.value = send(send(self.$x, '*', [send(arg, 'x')]), '@', [send(self.$y, '*', [send(arg, 'y')])]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(arg, '_adaptToPoint_andSend_', [self, '*']);
+    return send(arg, 'adaptToPoint_andSend_', [self, '*']);
 };
 Point.prototype['+'] = function(arg)
 {
     var self = this;
     var __context = {};
     console.log('+');
-    send(send(arg, '_isPoint'), '_ifTrue_', [function() {
-        __context.value = send(send(self.x, '+', [send(arg, '_x')]), '@', [send(self.y, '+', [send(arg, '_y')])]);
+    send(send(arg, 'isPoint'), 'ifTrue_', [function() {
+        __context.value = send(send(self.$x, '+', [send(arg, 'x')]), '@', [send(self.$y, '+', [send(arg, 'y')])]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(arg, '_adaptToPoint_andSend_', [self, '+']);
+    return send(arg, 'adaptToPoint_andSend_', [self, '+']);
 };
 Point.prototype['-'] = function(arg)
 {
     var self = this;
     var __context = {};
     console.log('-');
-    send(send(arg, '_isPoint'), '_ifTrue_', [function() {
-        __context.value = send(send(self.x, '-', [send(arg, '_x')]), '@', [send(self.y, '-', [send(arg, '_y')])]);
+    send(send(arg, 'isPoint'), 'ifTrue_', [function() {
+        __context.value = send(send(self.$x, '-', [send(arg, 'x')]), '@', [send(self.$y, '-', [send(arg, 'y')])]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(arg, '_adaptToPoint_andSend_', [self, '-']);
+    return send(arg, 'adaptToPoint_andSend_', [self, '-']);
 };
 Point.prototype['/'] = function(arg)
 {
     var self = this;
     var __context = {};
     console.log('/');
-    send(send(arg, '_isPoint'), '_ifTrue_', [function() {
-        __context.value = send(send(self.x, '/', [send(arg, '_x')]), '@', [send(self.y, '/', [send(arg, '_y')])]);
+    send(send(arg, 'isPoint'), 'ifTrue_', [function() {
+        __context.value = send(send(self.$x, '/', [send(arg, 'x')]), '@', [send(self.$y, '/', [send(arg, 'y')])]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(arg, '_adaptToPoint_andSend_', [self, '/']);
+    return send(arg, 'adaptToPoint_andSend_', [self, '/']);
 };
 Point.prototype['//'] = function(arg)
 {
     var self = this;
     var __context = {};
     console.log('//');
-    send(send(arg, '_isPoint'), '_ifTrue_', [function() {
-        __context.value = send(send(self.x, '//', [send(arg, '_x')]), '@', [send(self.y, '//', [send(arg, '_y')])]);
+    send(send(arg, 'isPoint'), 'ifTrue_', [function() {
+        __context.value = send(send(self.$x, '//', [send(arg, 'x')]), '@', [send(self.$y, '//', [send(arg, 'y')])]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(arg, '_adaptToPoint_andSend_', [self, '//']);
+    return send(arg, 'adaptToPoint_andSend_', [self, '//']);
 };
 Point.prototype['\\'] = function(arg)
 {
     var self = this;
     var __context = {};
     console.log('\\');
-    send(send(arg, '_isPoint'), '_ifTrue_', [function() {
-        __context.value = send(send(self.x, '\\', [send(arg, '_x')]), '@', [send(self.y, '\\', [send(arg, '_y')])]);
+    send(send(arg, 'isPoint'), 'ifTrue_', [function() {
+        __context.value = send(send(self.$x, '\\', [send(arg, 'x')]), '@', [send(self.$y, '\\', [send(arg, 'y')])]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(arg, '_adaptToPoint_andSend_', [self, '\\']);
+    return send(arg, 'adaptToPoint_andSend_', [self, '\\']);
 };
-Point.prototype['_abs'] = function()
+Point.prototype['abs'] = function()
 {
     var self = this;
-    console.log('_abs');
-    return send(send(self.x, '_abs'), '@', [send(self.y, '_abs')]);
+    console.log('abs');
+    return send(send(self.$x, 'abs'), '@', [send(self.$y, 'abs')]);
 };
-Point.prototype['_reciprocal'] = function()
+Point.prototype['reciprocal'] = function()
 {
     var self = this;
-    console.log('_reciprocal');
-    return send(send(self.x, '_reciprocal'), '@', [send(self.y, '_reciprocal')]);
+    console.log('reciprocal');
+    return send(send(self.$x, 'reciprocal'), '@', [send(self.$y, 'reciprocal')]);
 };
 Point.prototype['<'] = function(aPoint)
 {
     var self = this;
     console.log('<');
-    return send(send(self.x, '<', [send(aPoint, '_x')]), '_and_', [function() {
-        send(self.y, '<', [send(aPoint, '_y')]);
+    return send(send(self.$x, '<', [send(aPoint, 'x')]), 'and_', [function() {
+        send(self.$y, '<', [send(aPoint, 'y')]);
     }
     ]);
 };
@@ -5638,8 +5638,8 @@ Point.prototype['<='] = function(aPoint)
 {
     var self = this;
     console.log('<=');
-    return send(send(self.x, '<=', [send(aPoint, '_x')]), '_and_', [function() {
-        send(self.y, '<=', [send(aPoint, '_y')]);
+    return send(send(self.$x, '<=', [send(aPoint, 'x')]), 'and_', [function() {
+        send(self.$y, '<=', [send(aPoint, 'y')]);
     }
     ]);
 };
@@ -5648,9 +5648,9 @@ Point.prototype['='] = function(aPoint)
     var self = this;
     var __context = {};
     console.log('=');
-    send(send(send(self, '_species'), '=', [send(aPoint, '_species')]), '_ifTrue_ifFalse_', [function() {
-        __context.value = send(send(self.x, '=', [send(aPoint, '_x')]), '_and_', [function() {
-            send(self.y, '=', [send(aPoint, '_y')]);
+    send(send(send(self, 'species'), '=', [send(aPoint, 'species')]), 'ifTrue_ifFalse_', [function() {
+        __context.value = send(send(self.$x, '=', [send(aPoint, 'x')]), 'and_', [function() {
+            send(self.$y, '=', [send(aPoint, 'y')]);
             if (__context.return) return __context.value;
         }
         ]);
@@ -5669,8 +5669,8 @@ Point.prototype['>'] = function(aPoint)
 {
     var self = this;
     console.log('>');
-    return send(send(self.x, '>', [send(aPoint, '_x')]), '_and_', [function() {
-        send(self.y, '>', [send(aPoint, '_y')]);
+    return send(send(self.$x, '>', [send(aPoint, 'x')]), 'and_', [function() {
+        send(self.$y, '>', [send(aPoint, 'y')]);
     }
     ]);
 };
@@ -5678,223 +5678,223 @@ Point.prototype['>='] = function(aPoint)
 {
     var self = this;
     console.log('>=');
-    return send(send(self.x, '>=', [send(aPoint, '_x')]), '_and_', [function() {
-        send(self.y, '>=', [send(aPoint, '_y')]);
+    return send(send(self.$x, '>=', [send(aPoint, 'x')]), 'and_', [function() {
+        send(self.$y, '>=', [send(aPoint, 'y')]);
     }
     ]);
 };
-Point.prototype['_closeTo_'] = function(aPoint)
+Point.prototype['closeTo_'] = function(aPoint)
 {
     var self = this;
-    console.log('_closeTo_');
-    return send(send(self.x, '_closeTo_', [send(aPoint, '_x')]), '_and_', [function() {
-        send(self.y, '_closeTo_', [send(aPoint, '_y')]);
+    console.log('closeTo_');
+    return send(send(self.$x, 'closeTo_', [send(aPoint, 'x')]), 'and_', [function() {
+        send(self.$y, 'closeTo_', [send(aPoint, 'y')]);
     }
     ]);
 };
-Point.prototype['_hash'] = function()
+Point.prototype['hash'] = function()
 {
     var self = this;
-    console.log('_hash');
-    return send(send(send(send(self.x, '_hash'), '_hashMultiply'), '+', [send(self.y, '_hash')]), '_hashMultiply');
+    console.log('hash');
+    return send(send(send(send(self.$x, 'hash'), 'hashMultiply'), '+', [send(self.$y, 'hash')]), 'hashMultiply');
 };
-Point.prototype['_max_'] = function(aPoint)
+Point.prototype['max_'] = function(aPoint)
 {
     var self = this;
-    console.log('_max_');
-    return send(send(self.x, '_max_', [send(aPoint, '_x')]), '@', [send(self.y, '_max_', [send(aPoint, '_y')])]);
+    console.log('max_');
+    return send(send(self.$x, 'max_', [send(aPoint, 'x')]), '@', [send(self.$y, 'max_', [send(aPoint, 'y')])]);
 };
-Point.prototype['_min_'] = function(aPoint)
+Point.prototype['min_'] = function(aPoint)
 {
     var self = this;
-    console.log('_min_');
-    return send(send(self.x, '_min_', [send(aPoint, '_x')]), '@', [send(self.y, '_min_', [send(aPoint, '_y')])]);
+    console.log('min_');
+    return send(send(self.$x, 'min_', [send(aPoint, 'x')]), '@', [send(self.$y, 'min_', [send(aPoint, 'y')])]);
 };
-Point.prototype['_min_max_'] = function(aMin, aMax)
+Point.prototype['min_max_'] = function(aMin, aMax)
 {
     var self = this;
-    console.log('_min_max_');
-    return send(send(self, '_min_', [aMin]), '_max_', [aMax]);
+    console.log('min_max_');
+    return send(send(self, 'min_', [aMin]), 'max_', [aMax]);
 };
-Point.prototype['_adaptToCollection_andSend_'] = function(rcvr, selector)
+Point.prototype['adaptToCollection_andSend_'] = function(rcvr, selector)
 {
     var self = this;
-    console.log('_adaptToCollection_andSend_');
-    return send(rcvr, '_collect_', [function(element) {
-        send(element, '_perform_with_', [selector, self]);
+    console.log('adaptToCollection_andSend_');
+    return send(rcvr, 'collect_', [function(element) {
+        send(element, 'perform_with_', [selector, self]);
     }
     ]);
 };
-Point.prototype['_adaptToNumber_andSend_'] = function(rcvr, selector)
+Point.prototype['adaptToNumber_andSend_'] = function(rcvr, selector)
 {
     var self = this;
-    console.log('_adaptToNumber_andSend_');
-    return send(send(rcvr, '@', [rcvr]), '_perform_with_', [selector, self]);
+    console.log('adaptToNumber_andSend_');
+    return send(send(rcvr, '@', [rcvr]), 'perform_with_', [selector, self]);
 };
-Point.prototype['_adaptToString_andSend_'] = function(rcvr, selector)
+Point.prototype['adaptToString_andSend_'] = function(rcvr, selector)
 {
     var self = this;
-    console.log('_adaptToString_andSend_');
-    return send(send(rcvr, '_asNumber'), '_perform_with_', [selector, self]);
+    console.log('adaptToString_andSend_');
+    return send(send(rcvr, 'asNumber'), 'perform_with_', [selector, self]);
 };
-Point.prototype['_asFloatPoint'] = function()
+Point.prototype['asFloatPoint'] = function()
 {
     var self = this;
-    console.log('_asFloatPoint');
-    return send(send(self.x, '_asFloat'), '@', [send(self.y, '_asFloat')]);
+    console.log('asFloatPoint');
+    return send(send(self.$x, 'asFloat'), '@', [send(self.$y, 'asFloat')]);
 };
-Point.prototype['_asIntegerPoint'] = function()
+Point.prototype['asIntegerPoint'] = function()
 {
     var self = this;
-    console.log('_asIntegerPoint');
-    return send(send(self.x, '_asInteger'), '@', [send(self.y, '_asInteger')]);
+    console.log('asIntegerPoint');
+    return send(send(self.$x, 'asInteger'), '@', [send(self.$y, 'asInteger')]);
 };
-Point.prototype['_asNonFractionalPoint'] = function()
+Point.prototype['asNonFractionalPoint'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_asNonFractionalPoint');
-    send(send(send(self.x, '_isFraction'), '_or_', [function() {
-        send(self.y, '_isFraction');
+    console.log('asNonFractionalPoint');
+    send(send(send(self.$x, 'isFraction'), 'or_', [function() {
+        send(self.$y, 'isFraction');
         if (__context.return) return __context.value;
     }
-    ]), '_ifTrue_', [function() {
-        __context.value = send(send(self.x, '_asFloat'), '@', [send(self.y, '_asFloat')]);
+    ]), 'ifTrue_', [function() {
+        __context.value = send(send(self.$x, 'asFloat'), '@', [send(self.$y, 'asFloat')]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
 };
-Point.prototype['_asPoint'] = function()
+Point.prototype['asPoint'] = function()
 {
     var self = this;
-    console.log('_asPoint');
+    console.log('asPoint');
     return self;
 };
-Point.prototype['_corner_'] = function(aPoint)
+Point.prototype['corner_'] = function(aPoint)
 {
     var self = this;
-    console.log('_corner_');
-    return send(Rectangle.classPrototype, '_origin_corner_', [self, aPoint]);
+    console.log('corner_');
+    return send(Rectangle.classPrototype, 'origin_corner_', [self, aPoint]);
 };
-Point.prototype['_extent_'] = function(aPoint)
+Point.prototype['extent_'] = function(aPoint)
 {
     var self = this;
-    console.log('_extent_');
-    return send(Rectangle.classPrototype, '_origin_extent_', [self, aPoint]);
+    console.log('extent_');
+    return send(Rectangle.classPrototype, 'origin_extent_', [self, aPoint]);
 };
-Point.prototype['_isPoint'] = function()
+Point.prototype['isPoint'] = function()
 {
     var self = this;
-    console.log('_isPoint');
+    console.log('isPoint');
     return true;
 };
-Point.prototype['_rect_'] = function(aPoint)
+Point.prototype['rect_'] = function(aPoint)
 {
     var self = this;
-    console.log('_rect_');
-    return send(Rectangle.classPrototype, '_origin_corner_', [send(self, '_min_', [aPoint]), send(self, '_max_', [aPoint])]);
+    console.log('rect_');
+    return send(Rectangle.classPrototype, 'origin_corner_', [send(self, 'min_', [aPoint]), send(self, 'max_', [aPoint])]);
 };
-Point.prototype['_deepCopy'] = function()
+Point.prototype['deepCopy'] = function()
 {
     var self = this;
-    console.log('_deepCopy');
-    return send(send(self.x, '_deepCopy'), '@', [send(self.y, '_deepCopy')]);
+    console.log('deepCopy');
+    return send(send(self.$x, 'deepCopy'), '@', [send(self.$y, 'deepCopy')]);
 };
-Point.prototype['_veryDeepCopyWith_'] = function(deepCopier)
+Point.prototype['veryDeepCopyWith_'] = function(deepCopier)
 {
     var self = this;
-    console.log('_veryDeepCopyWith_');
+    console.log('veryDeepCopyWith_');
 };
-Point.prototype['_guarded'] = function()
+Point.prototype['guarded'] = function()
 {
     var self = this;
-    console.log('_guarded');
-    send(self, '_max_', [send(1, '@', [1])]);
+    console.log('guarded');
+    send(self, 'max_', [send(1, '@', [1])]);
 };
-Point.prototype['_scaleTo_'] = function(anExtent)
+Point.prototype['scaleTo_'] = function(anExtent)
 {
     var self = this;
     var __context = {};
-    console.log('_scaleTo_');
+    console.log('scaleTo_');
     var factor = null
     var sX = null
     var sY = null
-    factor = send(3, '_reciprocal');
-    sX = send(send(anExtent, '_x'), '/', [send(send(self, '_x'), '_asFloat')]);
-    sY = send(send(anExtent, '_y'), '/', [send(send(self, '_y'), '_asFloat')]);
-    send(send(sX, '=', [sY]), '_ifTrue_', [function() {
+    factor = send(3, 'reciprocal');
+    sX = send(send(anExtent, 'x'), '/', [send(send(self, 'x'), 'asFloat')]);
+    sY = send(send(anExtent, 'y'), '/', [send(send(self, 'y'), 'asFloat')]);
+    send(send(sX, '=', [sY]), 'ifTrue_', [function() {
         __context.value = send(sX, '@', [sY]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(sX, '<', [sY]), '_ifTrue_ifFalse_', [function() {
-        send(sX, '@', [send(sX, '_max_', [send(sY, '*', [factor])])]);
+    return send(send(sX, '<', [sY]), 'ifTrue_ifFalse_', [function() {
+        send(sX, '@', [send(sX, 'max_', [send(sY, '*', [factor])])]);
         if (__context.return) return __context.value;
     }
     , function() {
-        send(send(sY, '_max_', [send(sX, '*', [factor])]), '@', [sY]);
+        send(send(sY, 'max_', [send(sX, '*', [factor])]), '@', [sY]);
         if (__context.return) return __context.value;
     }
     ]);
 };
-Point.prototype['_isInsideCircle_with_with_'] = function(a, b, c)
+Point.prototype['isInsideCircle_with_with_'] = function(a, b, c)
 {
     var self = this;
-    console.log('_isInsideCircle_with_with_');
-    return send(send(send(send(send(send(a, '_dotProduct_', [a]), '*', [send(b, '_triangleArea_with_', [c, self])]), '-', [send(send(b, '_dotProduct_', [b]), '*', [send(a, '_triangleArea_with_', [c, self])])]), '+', [send(send(c, '_dotProduct_', [c]), '*', [send(a, '_triangleArea_with_', [b, self])])]), '-', [send(send(self, '_dotProduct_', [self]), '*', [send(a, '_triangleArea_with_', [b, c])])]), '>', [0]);
+    console.log('isInsideCircle_with_with_');
+    return send(send(send(send(send(send(a, 'dotProduct_', [a]), '*', [send(b, 'triangleArea_with_', [c, self])]), '-', [send(send(b, 'dotProduct_', [b]), '*', [send(a, 'triangleArea_with_', [c, self])])]), '+', [send(send(c, 'dotProduct_', [c]), '*', [send(a, 'triangleArea_with_', [b, self])])]), '-', [send(send(self, 'dotProduct_', [self]), '*', [send(a, 'triangleArea_with_', [b, c])])]), '>', [0]);
 };
-Point.prototype['_sideOf_'] = function(otherPoint)
+Point.prototype['sideOf_'] = function(otherPoint)
 {
     var self = this;
-    console.log('_sideOf_');
+    console.log('sideOf_');
     var side = null
-    side = send(send(self, '_crossProduct_', [otherPoint]), '_sign');
-    return send(['right', 'center', 'left'], '_at_', [send(side, '+', [2])]);
+    side = send(send(self, 'crossProduct_', [otherPoint]), 'sign');
+    return send(['right', 'center', 'left'], 'at_', [send(side, '+', [2])]);
 };
-Point.prototype['_to_intersects_to_'] = function(end1, start2, end2)
+Point.prototype['to_intersects_to_'] = function(end1, start2, end2)
 {
     var self = this;
     var __context = {};
-    console.log('_to_intersects_to_');
+    console.log('to_intersects_to_');
     var start1 = null
     var sideStart = null
     var sideEnd = null
     start1 = self;
-    send(send(send(send(send(start1, '=', [start2]), '_or_', [function() {
+    send(send(send(send(send(start1, '=', [start2]), 'or_', [function() {
         send(end1, '=', [end2]);
         if (__context.return) return __context.value;
     }
-    ]), '_or_', [function() {
+    ]), 'or_', [function() {
         send(start1, '=', [end2]);
         if (__context.return) return __context.value;
     }
-    ]), '_or_', [function() {
+    ]), 'or_', [function() {
         send(start2, '=', [end1]);
         if (__context.return) return __context.value;
     }
-    ]), '_ifTrue_', [function() {
+    ]), 'ifTrue_', [function() {
         __context.value = true;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    sideStart = send(start1, '_to_sideOf_', [end1, start2]);
-    sideEnd = send(start1, '_to_sideOf_', [end1, end2]);
-    send(send(sideStart, '=', [sideEnd]), '_ifTrue_', [function() {
+    sideStart = send(start1, 'to_sideOf_', [end1, start2]);
+    sideEnd = send(start1, 'to_sideOf_', [end1, end2]);
+    send(send(sideStart, '=', [sideEnd]), 'ifTrue_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    sideStart = send(start2, '_to_sideOf_', [end2, start1]);
-    sideEnd = send(start2, '_to_sideOf_', [end2, end1]);
-    send(send(sideStart, '=', [sideEnd]), '_ifTrue_', [function() {
+    sideStart = send(start2, 'to_sideOf_', [end2, start1]);
+    sideEnd = send(start2, 'to_sideOf_', [end2, end1]);
+    send(send(sideStart, '=', [sideEnd]), 'ifTrue_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
@@ -5903,35 +5903,35 @@ Point.prototype['_to_intersects_to_'] = function(end1, start2, end2)
     if (__context.return) return __context.value;
     return true;
 };
-Point.prototype['_to_sideOf_'] = function(end, otherPoint)
+Point.prototype['to_sideOf_'] = function(end, otherPoint)
 {
     var self = this;
-    console.log('_to_sideOf_');
-    return send(send(end, '-', [self]), '_sideOf_', [send(otherPoint, '-', [self])]);
+    console.log('to_sideOf_');
+    return send(send(end, '-', [self]), 'sideOf_', [send(otherPoint, '-', [self])]);
 };
-Point.prototype['_triangleArea_with_'] = function(b, c)
+Point.prototype['triangleArea_with_'] = function(b, c)
 {
     var self = this;
-    console.log('_triangleArea_with_');
-    return send(send(send(send(b, '_x'), '-', [send(self, '_x')]), '*', [send(send(c, '_y'), '-', [send(self, '_y')])]), '-', [send(send(send(b, '_y'), '-', [send(self, '_y')]), '*', [send(send(c, '_x'), '-', [send(self, '_x')])])]);
+    console.log('triangleArea_with_');
+    return send(send(send(send(b, 'x'), '-', [send(self, 'x')]), '*', [send(send(c, 'y'), '-', [send(self, 'y')])]), '-', [send(send(send(b, 'y'), '-', [send(self, 'y')]), '*', [send(send(c, 'x'), '-', [send(self, 'x')])])]);
 };
-Point.prototype['_interpolateTo_at_'] = function(end, amountDone)
+Point.prototype['interpolateTo_at_'] = function(end, amountDone)
 {
     var self = this;
-    console.log('_interpolateTo_at_');
+    console.log('interpolateTo_at_');
     return send(self, '+', [send(send(end, '-', [self]), '*', [amountDone])]);
 };
-Point.prototype['_bearingToPoint_'] = function(anotherPoint)
+Point.prototype['bearingToPoint_'] = function(anotherPoint)
 {
     var self = this;
     var __context = {};
-    console.log('_bearingToPoint_');
+    console.log('bearingToPoint_');
     var deltaX = null
     var deltaY = null
-    deltaX = send(send(anotherPoint, '_x'), '-', [self.x]);
-    deltaY = send(send(anotherPoint, '_y'), '-', [self.y]);
-    send(send(send(deltaX, '_abs'), '<', [0.001]), '_ifTrue_', [function() {
-        __context.value = send(send(deltaY, '>', [0]), '_ifTrue_ifFalse_', [function() {
+    deltaX = send(send(anotherPoint, 'x'), '-', [self.$x]);
+    deltaY = send(send(anotherPoint, 'y'), '-', [self.$y]);
+    send(send(send(deltaX, 'abs'), '<', [0.001]), 'ifTrue_', [function() {
+        __context.value = send(send(deltaY, '>', [0]), 'ifTrue_ifFalse_', [function() {
             180;
         }
         , function() {
@@ -5943,99 +5943,99 @@ Point.prototype['_bearingToPoint_'] = function(anotherPoint)
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(send(send(deltaX, '>=', [0]), '_ifTrue_ifFalse_', [function() {
+    return send(send(send(send(deltaX, '>=', [0]), 'ifTrue_ifFalse_', [function() {
         90;
     }
     , function() {
         270;
     }
-    ]), '-', [send(send(send(send(deltaY, '/', [deltaX]), '_arcTan'), '_negated'), '_radiansToDegrees')]), '_rounded');
+    ]), '-', [send(send(send(send(deltaY, '/', [deltaX]), 'arcTan'), 'negated'), 'radiansToDegrees')]), 'rounded');
 };
-Point.prototype['_crossProduct_'] = function(aPoint)
+Point.prototype['crossProduct_'] = function(aPoint)
 {
     var self = this;
-    console.log('_crossProduct_');
-    return send(send(self.x, '*', [send(aPoint, '_y')]), '-', [send(self.y, '*', [send(aPoint, '_x')])]);
+    console.log('crossProduct_');
+    return send(send(self.$x, '*', [send(aPoint, 'y')]), '-', [send(self.$y, '*', [send(aPoint, 'x')])]);
 };
-Point.prototype['_dist_'] = function(aPoint)
+Point.prototype['dist_'] = function(aPoint)
 {
     var self = this;
-    console.log('_dist_');
+    console.log('dist_');
     var dx = null
     var dy = null
-    dx = send(send(aPoint, '_x'), '-', [self.x]);
-    dy = send(send(aPoint, '_y'), '-', [self.y]);
-    return send(send(send(dx, '*', [dx]), '+', [send(dy, '*', [dy])]), '_sqrt');
+    dx = send(send(aPoint, 'x'), '-', [self.$x]);
+    dy = send(send(aPoint, 'y'), '-', [self.$y]);
+    return send(send(send(dx, '*', [dx]), '+', [send(dy, '*', [dy])]), 'sqrt');
 };
-Point.prototype['_dotProduct_'] = function(aPoint)
+Point.prototype['dotProduct_'] = function(aPoint)
 {
     var self = this;
-    console.log('_dotProduct_');
-    return send(send(self.x, '*', [send(aPoint, '_x')]), '+', [send(self.y, '*', [send(aPoint, '_y')])]);
+    console.log('dotProduct_');
+    return send(send(self.$x, '*', [send(aPoint, 'x')]), '+', [send(self.$y, '*', [send(aPoint, 'y')])]);
 };
-Point.prototype['_eightNeighbors'] = function()
+Point.prototype['eightNeighbors'] = function()
 {
     var self = this;
-    console.log('_eightNeighbors');
+    console.log('eightNeighbors');
     return [send(self, '+', [send(1, '@', [0])]), send(self, '+', [send(1, '@', [1])]), send(self, '+', [send(0, '@', [1])]), send(self, '+', [send(send(1, '-'), '@', [1])]), send(self, '+', [send(send(1, '-'), '@', [0])]), send(self, '+', [send(send(1, '-'), '@', [send(1, '-')])]), send(self, '+', [send(0, '@', [send(1, '-')])]), send(self, '+', [send(1, '@', [send(1, '-')])])];
 };
-Point.prototype['_flipBy_centerAt_'] = function(direction, c)
+Point.prototype['flipBy_centerAt_'] = function(direction, c)
 {
     var self = this;
     var __context = {};
-    console.log('_flipBy_centerAt_');
-    send(send(direction, '==', ['vertical']), '_ifTrue_', [function() {
-        __context.value = send(self.x, '@', [send(send(send(c, '_y'), '*', [2]), '-', [self.y])]);
+    console.log('flipBy_centerAt_');
+    send(send(direction, '==', ['vertical']), 'ifTrue_', [function() {
+        __context.value = send(self.$x, '@', [send(send(send(c, 'y'), '*', [2]), '-', [self.$y])]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(direction, '==', ['horizontal']), '_ifTrue_', [function() {
-        __context.value = send(send(send(send(c, '_x'), '*', [2]), '-', [self.x]), '@', [self.y]);
+    send(send(direction, '==', ['horizontal']), 'ifTrue_', [function() {
+        __context.value = send(send(send(send(c, 'x'), '*', [2]), '-', [self.$x]), '@', [self.$y]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(self, '_error_', ['unrecognizable direction']);
+    send(self, 'error_', ['unrecognizable direction']);
     if (__context.return) return __context.value;
 };
-Point.prototype['_fourDirections'] = function()
+Point.prototype['fourDirections'] = function()
 {
     var self = this;
-    console.log('_fourDirections');
-    return send(Array.classPrototype, '_with_with_with_with_', [send(self, '_leftRotated'), send(self, '_negated'), send(self, '_rightRotated'), self]);
+    console.log('fourDirections');
+    return send(Array.classPrototype, 'with_with_with_with_', [send(self, 'leftRotated'), send(self, 'negated'), send(self, 'rightRotated'), self]);
 };
-Point.prototype['_fourNeighbors'] = function()
+Point.prototype['fourNeighbors'] = function()
 {
     var self = this;
-    console.log('_fourNeighbors');
-    return send(Array.classPrototype, '_with_with_with_with_', [send(self, '+', [send(1, '@', [0])]), send(self, '+', [send(0, '@', [1])]), send(self, '+', [send(send(1, '-'), '@', [0])]), send(self, '+', [send(0, '@', [send(1, '-')])])]);
+    console.log('fourNeighbors');
+    return send(Array.classPrototype, 'with_with_with_with_', [send(self, '+', [send(1, '@', [0])]), send(self, '+', [send(0, '@', [1])]), send(self, '+', [send(send(1, '-'), '@', [0])]), send(self, '+', [send(0, '@', [send(1, '-')])])]);
 };
-Point.prototype['_grid_'] = function(aPoint)
+Point.prototype['grid_'] = function(aPoint)
 {
     var self = this;
-    console.log('_grid_');
+    console.log('grid_');
     var newX = null
     var newY = null
-    newX = send(send(self.x, '+', [send(send(aPoint, '_x'), '//', [2])]), '_truncateTo_', [send(aPoint, '_x')]);
-    newY = send(send(self.y, '+', [send(send(aPoint, '_y'), '//', [2])]), '_truncateTo_', [send(aPoint, '_y')]);
+    newX = send(send(self.$x, '+', [send(send(aPoint, 'x'), '//', [2])]), 'truncateTo_', [send(aPoint, 'x')]);
+    newY = send(send(self.$y, '+', [send(send(aPoint, 'y'), '//', [2])]), 'truncateTo_', [send(aPoint, 'y')]);
     return send(newX, '@', [newY]);
 };
-Point.prototype['_insideTriangle_with_with_'] = function(p1, p2, p3)
+Point.prototype['insideTriangle_with_with_'] = function(p1, p2, p3)
 {
     var self = this;
     var __context = {};
-    console.log('_insideTriangle_with_with_');
+    console.log('insideTriangle_with_with_');
     var p0 = null
     var b0 = null
     var b1 = null
     var b2 = null
     var b3 = null
     p0 = self;
-    b0 = send(send(send(send(p2, '_x'), '-', [send(p1, '_x')]), '*', [send(send(p3, '_y'), '-', [send(p1, '_y')])]), '-', [send(send(send(p3, '_x'), '-', [send(p1, '_x')]), '*', [send(send(p2, '_y'), '-', [send(p1, '_y')])])]);
-    send(send(b0, '_isZero'), '_ifTrue_', [function() {
+    b0 = send(send(send(send(p2, 'x'), '-', [send(p1, 'x')]), '*', [send(send(p3, 'y'), '-', [send(p1, 'y')])]), '-', [send(send(send(p3, 'x'), '-', [send(p1, 'x')]), '*', [send(send(p2, 'y'), '-', [send(p1, 'y')])])]);
+    send(send(b0, 'isZero'), 'ifTrue_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
@@ -6043,24 +6043,24 @@ Point.prototype['_insideTriangle_with_with_'] = function(p1, p2, p3)
     ]);
     if (__context.return) return __context.value;
     b0 = send(1, '/', [b0]);
-    b1 = send(send(send(send(send(p2, '_x'), '-', [send(p0, '_x')]), '*', [send(send(p3, '_y'), '-', [send(p0, '_y')])]), '-', [send(send(send(p3, '_x'), '-', [send(p0, '_x')]), '*', [send(send(p2, '_y'), '-', [send(p0, '_y')])])]), '*', [b0]);
-    b2 = send(send(send(send(send(p3, '_x'), '-', [send(p0, '_x')]), '*', [send(send(p1, '_y'), '-', [send(p0, '_y')])]), '-', [send(send(send(p1, '_x'), '-', [send(p0, '_x')]), '*', [send(send(p3, '_y'), '-', [send(p0, '_y')])])]), '*', [b0]);
-    b3 = send(send(send(send(send(p1, '_x'), '-', [send(p0, '_x')]), '*', [send(send(p2, '_y'), '-', [send(p0, '_y')])]), '-', [send(send(send(p2, '_x'), '-', [send(p0, '_x')]), '*', [send(send(p1, '_y'), '-', [send(p0, '_y')])])]), '*', [b0]);
-    send(send(b1, '<', [0]), '_ifTrue_', [function() {
+    b1 = send(send(send(send(send(p2, 'x'), '-', [send(p0, 'x')]), '*', [send(send(p3, 'y'), '-', [send(p0, 'y')])]), '-', [send(send(send(p3, 'x'), '-', [send(p0, 'x')]), '*', [send(send(p2, 'y'), '-', [send(p0, 'y')])])]), '*', [b0]);
+    b2 = send(send(send(send(send(p3, 'x'), '-', [send(p0, 'x')]), '*', [send(send(p1, 'y'), '-', [send(p0, 'y')])]), '-', [send(send(send(p1, 'x'), '-', [send(p0, 'x')]), '*', [send(send(p3, 'y'), '-', [send(p0, 'y')])])]), '*', [b0]);
+    b3 = send(send(send(send(send(p1, 'x'), '-', [send(p0, 'x')]), '*', [send(send(p2, 'y'), '-', [send(p0, 'y')])]), '-', [send(send(send(p2, 'x'), '-', [send(p0, 'x')]), '*', [send(send(p1, 'y'), '-', [send(p0, 'y')])])]), '*', [b0]);
+    send(send(b1, '<', [0]), 'ifTrue_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(b2, '<', [0]), '_ifTrue_', [function() {
+    send(send(b2, '<', [0]), 'ifTrue_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(b3, '<', [0]), '_ifTrue_', [function() {
+    send(send(b3, '<', [0]), 'ifTrue_', [function() {
         __context.value = false;
         __context.return = true;
         return __context.value;
@@ -6069,106 +6069,106 @@ Point.prototype['_insideTriangle_with_with_'] = function(p1, p2, p3)
     if (__context.return) return __context.value;
     return true;
 };
-Point.prototype['_leftRotated'] = function()
+Point.prototype['leftRotated'] = function()
 {
     var self = this;
-    console.log('_leftRotated');
-    return send(self.y, '@', [send(self.x, '_negated')]);
+    console.log('leftRotated');
+    return send(self.$y, '@', [send(self.$x, 'negated')]);
 };
-Point.prototype['_nearestPointAlongLineFrom_to_'] = function(p1, p2)
+Point.prototype['nearestPointAlongLineFrom_to_'] = function(p1, p2)
 {
     var self = this;
     var __context = {};
-    console.log('_nearestPointAlongLineFrom_to_');
+    console.log('nearestPointAlongLineFrom_to_');
     var x21 = null
     var y21 = null
     var t = null
     var x1 = null
     var y1 = null
-    send(send(send(p1, '_x'), '=', [send(p2, '_x')]), '_ifTrue_', [function() {
-        __context.value = send(send(p1, '_x'), '@', [self.y]);
+    send(send(send(p1, 'x'), '=', [send(p2, 'x')]), 'ifTrue_', [function() {
+        __context.value = send(send(p1, 'x'), '@', [self.$y]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(send(p1, '_y'), '=', [send(p2, '_y')]), '_ifTrue_', [function() {
-        __context.value = send(self.x, '@', [send(p1, '_y')]);
+    send(send(send(p1, 'y'), '=', [send(p2, 'y')]), 'ifTrue_', [function() {
+        __context.value = send(self.$x, '@', [send(p1, 'y')]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    x1 = send(send(p1, '_x'), '_asFloat');
-    y1 = send(send(p1, '_y'), '_asFloat');
-    x21 = send(send(send(p2, '_x'), '_asFloat'), '-', [x1]);
-    y21 = send(send(send(p2, '_y'), '_asFloat'), '-', [y1]);
-    t = send(send(send(send(send(self.y, '_asFloat'), '-', [y1]), '/', [x21]), '+', [send(send(send(self.x, '_asFloat'), '-', [x1]), '/', [y21])]), '/', [send(send(x21, '/', [y21]), '+', [send(y21, '/', [x21])])]);
+    x1 = send(send(p1, 'x'), 'asFloat');
+    y1 = send(send(p1, 'y'), 'asFloat');
+    x21 = send(send(send(p2, 'x'), 'asFloat'), '-', [x1]);
+    y21 = send(send(send(p2, 'y'), 'asFloat'), '-', [y1]);
+    t = send(send(send(send(send(self.$y, 'asFloat'), '-', [y1]), '/', [x21]), '+', [send(send(send(self.$x, 'asFloat'), '-', [x1]), '/', [y21])]), '/', [send(send(x21, '/', [y21]), '+', [send(y21, '/', [x21])])]);
     return send(send(x1, '+', [send(t, '*', [x21])]), '@', [send(y1, '+', [send(t, '*', [y21])])]);
 };
-Point.prototype['_nearestPointOnLineFrom_to_'] = function(p1, p2)
+Point.prototype['nearestPointOnLineFrom_to_'] = function(p1, p2)
 {
     var self = this;
-    console.log('_nearestPointOnLineFrom_to_');
-    return send(send(self, '_nearestPointAlongLineFrom_to_', [p1, p2]), '_adhereTo_', [send(p1, '_rect_', [p2])]);
+    console.log('nearestPointOnLineFrom_to_');
+    return send(send(self, 'nearestPointAlongLineFrom_to_', [p1, p2]), 'adhereTo_', [send(p1, 'rect_', [p2])]);
 };
-Point.prototype['_normal'] = function()
+Point.prototype['normal'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_normal');
+    console.log('normal');
     var n = null
     var d = null
-    n = send(send(self.y, '_negated'), '@', [self.x]);
-    send(send(d = send(send(send(n, '_x'), '*', [send(n, '_x')]), '+', [send(send(n, '_y'), '*', [send(n, '_y')])]), '=', [0]), '_ifTrue_', [function() {
+    n = send(send(self.$y, 'negated'), '@', [self.$x]);
+    send(send(d = send(send(send(n, 'x'), '*', [send(n, 'x')]), '+', [send(send(n, 'y'), '*', [send(n, 'y')])]), '=', [0]), 'ifTrue_', [function() {
         __context.value = send(send(1, '-'), '@', [0]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(n, '/', [send(d, '_sqrt')]);
+    return send(n, '/', [send(d, 'sqrt')]);
 };
-Point.prototype['_normalized'] = function()
+Point.prototype['normalized'] = function()
 {
     var self = this;
-    console.log('_normalized');
+    console.log('normalized');
     var r = null
-    r = send(send(send(self.x, '*', [self.x]), '+', [send(self.y, '*', [self.y])]), '_sqrt');
-    return send(send(self.x, '/', [r]), '@', [send(self.y, '/', [r])]);
+    r = send(send(send(self.$x, '*', [self.$x]), '+', [send(self.$y, '*', [self.$y])]), 'sqrt');
+    return send(send(self.$x, '/', [r]), '@', [send(self.$y, '/', [r])]);
 };
-Point.prototype['_octantOf_'] = function(otherPoint)
+Point.prototype['octantOf_'] = function(otherPoint)
 {
     var self = this;
     var __context = {};
-    console.log('_octantOf_');
+    console.log('octantOf_');
     var quad = null
     var moreHoriz = null
-    send(send(send(self.x, '=', [send(otherPoint, '_x')]), '_and_', [function() {
-        send(self.y, '>', [send(otherPoint, '_y')]);
+    send(send(send(self.$x, '=', [send(otherPoint, 'x')]), 'and_', [function() {
+        send(self.$y, '>', [send(otherPoint, 'y')]);
         if (__context.return) return __context.value;
     }
-    ]), '_ifTrue_', [function() {
+    ]), 'ifTrue_', [function() {
         __context.value = 6;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(send(self.y, '=', [send(otherPoint, '_y')]), '_and_', [function() {
-        send(self.x, '<', [send(otherPoint, '_x')]);
+    send(send(send(self.$y, '=', [send(otherPoint, 'y')]), 'and_', [function() {
+        send(self.$x, '<', [send(otherPoint, 'x')]);
         if (__context.return) return __context.value;
     }
-    ]), '_ifTrue_', [function() {
+    ]), 'ifTrue_', [function() {
         __context.value = 8;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    quad = send(self, '_quadrantOf_', [otherPoint]);
-    moreHoriz = send(send(send(self.x, '-', [send(otherPoint, '_x')]), '_abs'), '>=', [send(send(self.y, '-', [send(otherPoint, '_y')]), '_abs')]);
-    send(send(send(quad, '_even'), '_eqv_', [moreHoriz]), '_ifTrue_ifFalse_', [function() {
+    quad = send(self, 'quadrantOf_', [otherPoint]);
+    moreHoriz = send(send(send(self.$x, '-', [send(otherPoint, 'x')]), 'abs'), '>=', [send(send(self.$y, '-', [send(otherPoint, 'y')]), 'abs')]);
+    send(send(send(quad, 'even'), 'eqv_', [moreHoriz]), 'ifTrue_ifFalse_', [function() {
         __context.value = send(quad, '*', [2]);
         __context.return = true;
         return __context.value;
@@ -6181,23 +6181,23 @@ Point.prototype['_octantOf_'] = function(otherPoint)
     ]);
     if (__context.return) return __context.value;
 };
-Point.prototype['_onLineFrom_to_'] = function(p1, p2)
+Point.prototype['onLineFrom_to_'] = function(p1, p2)
 {
     var self = this;
-    console.log('_onLineFrom_to_');
-    return send(self, '_onLineFrom_to_within_', [p1, p2, 2]);
+    console.log('onLineFrom_to_');
+    return send(self, 'onLineFrom_to_within_', [p1, p2, 2]);
 };
-Point.prototype['_onLineFrom_to_within_'] = function(p1, p2, epsilon)
+Point.prototype['onLineFrom_to_within_'] = function(p1, p2, epsilon)
 {
     var self = this;
     var __context = {};
-    console.log('_onLineFrom_to_within_');
-    send(send(send(p1, '_x'), '<', [send(p2, '_x')]), '_ifTrue_ifFalse_', [function() {
-        send(send(send(self.x, '<', [send(send(p1, '_x'), '-', [epsilon])]), '_or_', [function() {
-            send(self.x, '>', [send(send(p2, '_x'), '+', [epsilon])]);
+    console.log('onLineFrom_to_within_');
+    send(send(send(p1, 'x'), '<', [send(p2, 'x')]), 'ifTrue_ifFalse_', [function() {
+        send(send(send(self.$x, '<', [send(send(p1, 'x'), '-', [epsilon])]), 'or_', [function() {
+            send(self.$x, '>', [send(send(p2, 'x'), '+', [epsilon])]);
             if (__context.return) return __context.value;
         }
-        ]), '_ifTrue_', [function() {
+        ]), 'ifTrue_', [function() {
             __context.value = false;
             __context.return = true;
             return __context.value;
@@ -6206,11 +6206,11 @@ Point.prototype['_onLineFrom_to_within_'] = function(p1, p2, epsilon)
         if (__context.return) return __context.value;
     }
     , function() {
-        send(send(send(self.x, '<', [send(send(p2, '_x'), '-', [epsilon])]), '_or_', [function() {
-            send(self.x, '>', [send(send(p1, '_x'), '+', [epsilon])]);
+        send(send(send(self.$x, '<', [send(send(p2, 'x'), '-', [epsilon])]), 'or_', [function() {
+            send(self.$x, '>', [send(send(p1, 'x'), '+', [epsilon])]);
             if (__context.return) return __context.value;
         }
-        ]), '_ifTrue_', [function() {
+        ]), 'ifTrue_', [function() {
             __context.value = false;
             __context.return = true;
             return __context.value;
@@ -6220,12 +6220,12 @@ Point.prototype['_onLineFrom_to_within_'] = function(p1, p2, epsilon)
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(send(p1, '_y'), '<', [send(p2, '_y')]), '_ifTrue_ifFalse_', [function() {
-        send(send(send(self.y, '<', [send(send(p1, '_y'), '-', [epsilon])]), '_or_', [function() {
-            send(self.y, '>', [send(send(p2, '_y'), '+', [epsilon])]);
+    send(send(send(p1, 'y'), '<', [send(p2, 'y')]), 'ifTrue_ifFalse_', [function() {
+        send(send(send(self.$y, '<', [send(send(p1, 'y'), '-', [epsilon])]), 'or_', [function() {
+            send(self.$y, '>', [send(send(p2, 'y'), '+', [epsilon])]);
             if (__context.return) return __context.value;
         }
-        ]), '_ifTrue_', [function() {
+        ]), 'ifTrue_', [function() {
             __context.value = false;
             __context.return = true;
             return __context.value;
@@ -6234,11 +6234,11 @@ Point.prototype['_onLineFrom_to_within_'] = function(p1, p2, epsilon)
         if (__context.return) return __context.value;
     }
     , function() {
-        send(send(send(self.y, '<', [send(send(p2, '_y'), '-', [epsilon])]), '_or_', [function() {
-            send(self.y, '>', [send(send(p1, '_y'), '+', [epsilon])]);
+        send(send(send(self.$y, '<', [send(send(p2, 'y'), '-', [epsilon])]), 'or_', [function() {
+            send(self.$y, '>', [send(send(p1, 'y'), '+', [epsilon])]);
             if (__context.return) return __context.value;
         }
-        ]), '_ifTrue_', [function() {
+        ]), 'ifTrue_', [function() {
             __context.value = false;
             __context.return = true;
             return __context.value;
@@ -6248,14 +6248,14 @@ Point.prototype['_onLineFrom_to_within_'] = function(p1, p2, epsilon)
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(self, '_dist_', [send(self, '_nearestPointAlongLineFrom_to_', [p1, p2])]), '<=', [epsilon]);
+    return send(send(self, 'dist_', [send(self, 'nearestPointAlongLineFrom_to_', [p1, p2])]), '<=', [epsilon]);
 };
-Point.prototype['_quadrantOf_'] = function(otherPoint)
+Point.prototype['quadrantOf_'] = function(otherPoint)
 {
     var self = this;
-    console.log('_quadrantOf_');
-    return send(send(self.x, '<=', [send(otherPoint, '_x')]), '_ifTrue_ifFalse_', [function() {
-        send(send(self.y, '<', [send(otherPoint, '_y')]), '_ifTrue_ifFalse_', [function() {
+    console.log('quadrantOf_');
+    return send(send(self.$x, '<=', [send(otherPoint, 'x')]), 'ifTrue_ifFalse_', [function() {
+        send(send(self.$y, '<', [send(otherPoint, 'y')]), 'ifTrue_ifFalse_', [function() {
             1;
         }
         , function() {
@@ -6264,7 +6264,7 @@ Point.prototype['_quadrantOf_'] = function(otherPoint)
         ]);
     }
     , function() {
-        send(send(self.y, '<=', [send(otherPoint, '_y')]), '_ifTrue_ifFalse_', [function() {
+        send(send(self.$y, '<=', [send(otherPoint, 'y')]), 'ifTrue_ifFalse_', [function() {
             2;
         }
         , function() {
@@ -6274,84 +6274,84 @@ Point.prototype['_quadrantOf_'] = function(otherPoint)
     }
     ]);
 };
-Point.prototype['_rightRotated'] = function()
+Point.prototype['rightRotated'] = function()
 {
     var self = this;
-    console.log('_rightRotated');
-    return send(send(self.y, '_negated'), '@', [self.x]);
+    console.log('rightRotated');
+    return send(send(self.$y, 'negated'), '@', [self.$x]);
 };
-Point.prototype['_rotateBy_centerAt_'] = function(direction, c)
+Point.prototype['rotateBy_centerAt_'] = function(direction, c)
 {
     var self = this;
     var __context = {};
-    console.log('_rotateBy_centerAt_');
+    console.log('rotateBy_centerAt_');
     var offset = null
     offset = send(self, '-', [c]);
-    send(send(direction, '==', ['right']), '_ifTrue_', [function() {
-        __context.value = send(send(send(send(offset, '_y'), '_negated'), '@', [send(offset, '_x')]), '+', [c]);
+    send(send(direction, '==', ['right']), 'ifTrue_', [function() {
+        __context.value = send(send(send(send(offset, 'y'), 'negated'), '@', [send(offset, 'x')]), '+', [c]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(direction, '==', ['left']), '_ifTrue_', [function() {
-        __context.value = send(send(send(offset, '_y'), '@', [send(send(offset, '_x'), '_negated')]), '+', [c]);
+    send(send(direction, '==', ['left']), 'ifTrue_', [function() {
+        __context.value = send(send(send(offset, 'y'), '@', [send(send(offset, 'x'), 'negated')]), '+', [c]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(send(direction, '==', ['pi']), '_ifTrue_', [function() {
+    send(send(direction, '==', ['pi']), 'ifTrue_', [function() {
         __context.value = send(c, '-', [offset]);
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(self, '_error_', ['unrecognizable direction']);
+    send(self, 'error_', ['unrecognizable direction']);
     if (__context.return) return __context.value;
 };
-Point.prototype['_sign'] = function()
+Point.prototype['sign'] = function()
 {
     var self = this;
-    console.log('_sign');
-    return send(send(self.x, '_sign'), '@', [send(self.y, '_sign')]);
+    console.log('sign');
+    return send(send(self.$x, 'sign'), '@', [send(self.$y, 'sign')]);
 };
-Point.prototype['_sortsBefore_'] = function(otherPoint)
+Point.prototype['sortsBefore_'] = function(otherPoint)
 {
     var self = this;
-    console.log('_sortsBefore_');
-    return send(send(self.y, '=', [send(otherPoint, '_y')]), '_ifTrue_ifFalse_', [function() {
-        send(self.x, '<=', [send(otherPoint, '_x')]);
+    console.log('sortsBefore_');
+    return send(send(self.$y, '=', [send(otherPoint, 'y')]), 'ifTrue_ifFalse_', [function() {
+        send(self.$x, '<=', [send(otherPoint, 'x')]);
     }
     , function() {
-        send(self.y, '<=', [send(otherPoint, '_y')]);
+        send(self.$y, '<=', [send(otherPoint, 'y')]);
     }
     ]);
 };
-Point.prototype['_squaredDistanceTo_'] = function(aPoint)
+Point.prototype['squaredDistanceTo_'] = function(aPoint)
 {
     var self = this;
-    console.log('_squaredDistanceTo_');
+    console.log('squaredDistanceTo_');
     var delta = null
     delta = send(aPoint, '-', [self]);
-    return send(delta, '_dotProduct_', [delta]);
+    return send(delta, 'dotProduct_', [delta]);
 };
-Point.prototype['_transposed'] = function()
+Point.prototype['transposed'] = function()
 {
     var self = this;
-    console.log('_transposed');
-    return send(self.y, '@', [self.x]);
+    console.log('transposed');
+    return send(self.$y, '@', [self.$x]);
 };
-Point.prototype['_degrees'] = function()
+Point.prototype['degrees'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_degrees');
+    console.log('degrees');
     var tan = null
     var theta = null
-    send(send(self.x, '=', [0]), '_ifTrue_ifFalse_', [function() {
-        send(send(self.y, '>=', [0]), '_ifTrue_ifFalse_', [function() {
+    send(send(self.$x, '=', [0]), 'ifTrue_ifFalse_', [function() {
+        send(send(self.$y, '>=', [0]), 'ifTrue_ifFalse_', [function() {
             __context.value = 90;
             __context.return = true;
             return __context.value;
@@ -6365,16 +6365,16 @@ Point.prototype['_degrees'] = function()
         if (__context.return) return __context.value;
     }
     , function() {
-        tan = send(send(self.y, '_asFloat'), '/', [send(self.x, '_asFloat')]);
-        theta = send(tan, '_arcTan');
-        send(send(self.x, '>=', [0]), '_ifTrue_ifFalse_', [function() {
-            send(send(self.y, '>=', [0]), '_ifTrue_ifFalse_', [function() {
-                __context.value = send(theta, '_radiansToDegrees');
+        tan = send(send(self.$y, 'asFloat'), '/', [send(self.$x, 'asFloat')]);
+        theta = send(tan, 'arcTan');
+        send(send(self.$x, '>=', [0]), 'ifTrue_ifFalse_', [function() {
+            send(send(self.$y, '>=', [0]), 'ifTrue_ifFalse_', [function() {
+                __context.value = send(theta, 'radiansToDegrees');
                 __context.return = true;
                 return __context.value;
             }
             , function() {
-                __context.value = send(360, '+', [send(theta, '_radiansToDegrees')]);
+                __context.value = send(360, '+', [send(theta, 'radiansToDegrees')]);
                 __context.return = true;
                 return __context.value;
             }
@@ -6382,7 +6382,7 @@ Point.prototype['_degrees'] = function()
             if (__context.return) return __context.value;
         }
         , function() {
-            __context.value = send(180, '+', [send(theta, '_radiansToDegrees')]);
+            __context.value = send(180, '+', [send(theta, 'radiansToDegrees')]);
             __context.return = true;
             return __context.value;
         }
@@ -6392,21 +6392,21 @@ Point.prototype['_degrees'] = function()
     ]);
     if (__context.return) return __context.value;
 };
-Point.prototype['_r'] = function()
+Point.prototype['r'] = function()
 {
     var self = this;
-    console.log('_r');
-    return send(send(self, '_dotProduct_', [self]), '_sqrt');
+    console.log('r');
+    return send(send(self, 'dotProduct_', [self]), 'sqrt');
 };
-Point.prototype['_theta'] = function()
+Point.prototype['theta'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_theta');
+    console.log('theta');
     var tan = null
     var theta = null
-    send(send(self.x, '=', [0]), '_ifTrue_ifFalse_', [function() {
-        send(send(self.y, '>=', [0]), '_ifTrue_ifFalse_', [function() {
+    send(send(self.$x, '=', [0]), 'ifTrue_ifFalse_', [function() {
+        send(send(self.$y, '>=', [0]), 'ifTrue_ifFalse_', [function() {
             __context.value = 1.5707963267949;
             __context.return = true;
             return __context.value;
@@ -6420,10 +6420,10 @@ Point.prototype['_theta'] = function()
         if (__context.return) return __context.value;
     }
     , function() {
-        tan = send(send(self.y, '_asFloat'), '/', [send(self.x, '_asFloat')]);
-        theta = send(tan, '_arcTan');
-        send(send(self.x, '>=', [0]), '_ifTrue_ifFalse_', [function() {
-            send(send(self.y, '>=', [0]), '_ifTrue_ifFalse_', [function() {
+        tan = send(send(self.$y, 'asFloat'), '/', [send(self.$x, 'asFloat')]);
+        theta = send(tan, 'arcTan');
+        send(send(self.$x, '>=', [0]), 'ifTrue_ifFalse_', [function() {
+            send(send(self.$y, '>=', [0]), 'ifTrue_ifFalse_', [function() {
                 __context.value = theta;
                 __context.return = true;
                 return __context.value;
@@ -6447,279 +6447,279 @@ Point.prototype['_theta'] = function()
     ]);
     if (__context.return) return __context.value;
 };
-Point.prototype['_printOn_'] = function(aStream)
+Point.prototype['printOn_'] = function(aStream)
 {
     var self = this;
     var __context = {};
-    console.log('_printOn_');
-    send(self.x, '_printOn_', [aStream]);
+    console.log('printOn_');
+    send(self.$x, 'printOn_', [aStream]);
     if (__context.return) return __context.value;
-    send(aStream, '_nextPut_', ['@']);
+    send(aStream, 'nextPut_', ['@']);
     if (__context.return) return __context.value;
-    send(send(send(self.y, '_notNil'), '_and_', [function() {
-        send(self.y, '_negative');
+    send(send(send(self.$y, 'notNil'), 'and_', [function() {
+        send(self.$y, 'negative');
         if (__context.return) return __context.value;
     }
-    ]), '_ifTrue_', [function() {
-        send(aStream, '_space');
+    ]), 'ifTrue_', [function() {
+        send(aStream, 'space');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    send(self.y, '_printOn_', [aStream]);
+    send(self.$y, 'printOn_', [aStream]);
     if (__context.return) return __context.value;
 };
-Point.prototype['_storeOn_'] = function(aStream)
+Point.prototype['storeOn_'] = function(aStream)
 {
     var self = this;
-    console.log('_storeOn_');
-    send(aStream, '_nextPut_', ['(']);
-    send(self, '_printOn_', [aStream]);
-    send(aStream, '_nextPut_', [')']);
+    console.log('storeOn_');
+    send(aStream, 'nextPut_', ['(']);
+    send(self, 'printOn_', [aStream]);
+    send(aStream, 'nextPut_', [')']);
 };
-Point.prototype['_isSelfEvaluating'] = function()
+Point.prototype['isSelfEvaluating'] = function()
 {
     var self = this;
-    console.log('_isSelfEvaluating');
-    return send(send(self, '_class'), '==', [Point]);
+    console.log('isSelfEvaluating');
+    return send(send(self, 'class'), '==', [Point]);
 };
-Point.prototype['_isZero'] = function()
+Point.prototype['isZero'] = function()
 {
     var self = this;
-    console.log('_isZero');
-    return send(send(self.x, '_isZero'), '_and_', [function() {
-        send(self.y, '_isZero');
+    console.log('isZero');
+    return send(send(self.$x, 'isZero'), 'and_', [function() {
+        send(self.$y, 'isZero');
     }
     ]);
 };
-Point.prototype['_adhereTo_'] = function(aRectangle)
+Point.prototype['adhereTo_'] = function(aRectangle)
 {
     var self = this;
     var __context = {};
-    console.log('_adhereTo_');
-    send(send(aRectangle, '_containsPoint_', [self]), '_ifTrue_', [function() {
+    console.log('adhereTo_');
+    send(send(aRectangle, 'containsPoint_', [self]), 'ifTrue_', [function() {
         __context.value = self;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(send(self.x, '_max_', [send(aRectangle, '_left')]), '_min_', [send(aRectangle, '_right')]), '@', [send(send(self.y, '_max_', [send(aRectangle, '_top')]), '_min_', [send(aRectangle, '_bottom')])]);
+    return send(send(send(self.$x, 'max_', [send(aRectangle, 'left')]), 'min_', [send(aRectangle, 'right')]), '@', [send(send(self.$y, 'max_', [send(aRectangle, 'top')]), 'min_', [send(aRectangle, 'bottom')])]);
 };
-Point.prototype['_negated'] = function()
+Point.prototype['negated'] = function()
 {
     var self = this;
-    console.log('_negated');
-    return send(send(0, '-', [self.x]), '@', [send(0, '-', [self.y])]);
+    console.log('negated');
+    return send(send(0, '-', [self.$x]), '@', [send(0, '-', [self.$y])]);
 };
-Point.prototype['_rotateBy_about_'] = function(angle, center)
+Point.prototype['rotateBy_about_'] = function(angle, center)
 {
     var self = this;
-    console.log('_rotateBy_about_');
+    console.log('rotateBy_about_');
     var p = null
     var r = null
     var theta = null
     p = send(self, '-', [center]);
-    r = send(p, '_r');
-    theta = send(send(angle, '_asFloat'), '-', [send(p, '_theta')]);
-    return send(send(send(send(center, '_x'), '_asFloat'), '+', [send(r, '*', [send(theta, '_cos')])]), '@', [send(send(send(center, '_y'), '_asFloat'), '-', [send(r, '*', [send(theta, '_sin')])])]);
+    r = send(p, 'r');
+    theta = send(send(angle, 'asFloat'), '-', [send(p, 'theta')]);
+    return send(send(send(send(center, 'x'), 'asFloat'), '+', [send(r, '*', [send(theta, 'cos')])]), '@', [send(send(send(center, 'y'), 'asFloat'), '-', [send(r, '*', [send(theta, 'sin')])])]);
 };
-Point.prototype['_scaleBy_'] = function(factor)
+Point.prototype['scaleBy_'] = function(factor)
 {
     var self = this;
-    console.log('_scaleBy_');
-    return send(send(send(factor, '_x'), '*', [self.x]), '@', [send(send(factor, '_y'), '*', [self.y])]);
+    console.log('scaleBy_');
+    return send(send(send(factor, 'x'), '*', [self.$x]), '@', [send(send(factor, 'y'), '*', [self.$y])]);
 };
-Point.prototype['_scaleFrom_to_'] = function(rect1, rect2)
+Point.prototype['scaleFrom_to_'] = function(rect1, rect2)
 {
     var self = this;
-    console.log('_scaleFrom_to_');
-    return send(send(rect2, '_topLeft'), '+', [send(send(send(send(self.x, '-', [send(rect1, '_left')]), '*', [send(rect2, '_width')]), '//', [send(rect1, '_width')]), '@', [send(send(send(self.y, '-', [send(rect1, '_top')]), '*', [send(rect2, '_height')]), '//', [send(rect1, '_height')])])]);
+    console.log('scaleFrom_to_');
+    return send(send(rect2, 'topLeft'), '+', [send(send(send(send(self.$x, '-', [send(rect1, 'left')]), '*', [send(rect2, 'width')]), '//', [send(rect1, 'width')]), '@', [send(send(send(self.$y, '-', [send(rect1, 'top')]), '*', [send(rect2, 'height')]), '//', [send(rect1, 'height')])])]);
 };
-Point.prototype['_translateBy_'] = function(delta)
+Point.prototype['translateBy_'] = function(delta)
 {
     var self = this;
-    console.log('_translateBy_');
-    return send(send(send(delta, '_x'), '+', [self.x]), '@', [send(send(delta, '_y'), '+', [self.y])]);
+    console.log('translateBy_');
+    return send(send(send(delta, 'x'), '+', [self.$x]), '@', [send(send(delta, 'y'), '+', [self.$y])]);
 };
-Point.prototype['_rounded'] = function()
+Point.prototype['rounded'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_rounded');
-    send(send(send(self.x, '_isInteger'), '_and_', [function() {
-        send(self.y, '_isInteger');
+    console.log('rounded');
+    send(send(send(self.$x, 'isInteger'), 'and_', [function() {
+        send(self.$y, 'isInteger');
         if (__context.return) return __context.value;
     }
-    ]), '_ifTrue_', [function() {
+    ]), 'ifTrue_', [function() {
         __context.value = self;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(self.x, '_rounded'), '@', [send(self.y, '_rounded')]);
+    return send(send(self.$x, 'rounded'), '@', [send(self.$y, 'rounded')]);
 };
-Point.prototype['_roundTo_'] = function(grid)
+Point.prototype['roundTo_'] = function(grid)
 {
     var self = this;
-    console.log('_roundTo_');
+    console.log('roundTo_');
     var gridPoint = null
-    gridPoint = send(grid, '_asPoint');
-    return send(send(self.x, '_roundTo_', [send(gridPoint, '_x')]), '@', [send(self.y, '_roundTo_', [send(gridPoint, '_y')])]);
+    gridPoint = send(grid, 'asPoint');
+    return send(send(self.$x, 'roundTo_', [send(gridPoint, 'x')]), '@', [send(self.$y, 'roundTo_', [send(gridPoint, 'y')])]);
 };
-Point.prototype['_truncateTo_'] = function(grid)
+Point.prototype['truncateTo_'] = function(grid)
 {
     var self = this;
-    console.log('_truncateTo_');
+    console.log('truncateTo_');
     var gridPoint = null
-    gridPoint = send(grid, '_asPoint');
-    return send(send(self.x, '_truncateTo_', [send(gridPoint, '_x')]), '@', [send(self.y, '_truncateTo_', [send(gridPoint, '_y')])]);
+    gridPoint = send(grid, 'asPoint');
+    return send(send(self.$x, 'truncateTo_', [send(gridPoint, 'x')]), '@', [send(self.$y, 'truncateTo_', [send(gridPoint, 'y')])]);
 };
-Point.prototype['_truncated'] = function()
+Point.prototype['truncated'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_truncated');
-    send(send(send(self.x, '_isInteger'), '_and_', [function() {
-        send(self.y, '_isInteger');
+    console.log('truncated');
+    send(send(send(self.$x, 'isInteger'), 'and_', [function() {
+        send(self.$y, 'isInteger');
         if (__context.return) return __context.value;
     }
-    ]), '_ifTrue_', [function() {
+    ]), 'ifTrue_', [function() {
         __context.value = self;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(self.x, '_truncated'), '@', [send(self.y, '_truncated')]);
+    return send(send(self.$x, 'truncated'), '@', [send(self.$y, 'truncated')]);
 };
-Point.prototype['_ceiling'] = function()
+Point.prototype['ceiling'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_ceiling');
-    send(send(send(self.x, '_isInteger'), '_and_', [function() {
-        send(self.y, '_isInteger');
+    console.log('ceiling');
+    send(send(send(self.$x, 'isInteger'), 'and_', [function() {
+        send(self.$y, 'isInteger');
         if (__context.return) return __context.value;
     }
-    ]), '_ifTrue_', [function() {
+    ]), 'ifTrue_', [function() {
         __context.value = self;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(self.x, '_ceiling'), '@', [send(self.y, '_ceiling')]);
+    return send(send(self.$x, 'ceiling'), '@', [send(self.$y, 'ceiling')]);
 };
-Point.prototype['_floor'] = function()
+Point.prototype['floor'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_floor');
-    send(send(send(self.x, '_isInteger'), '_and_', [function() {
-        send(self.y, '_isInteger');
+    console.log('floor');
+    send(send(send(self.$x, 'isInteger'), 'and_', [function() {
+        send(self.$y, 'isInteger');
         if (__context.return) return __context.value;
     }
-    ]), '_ifTrue_', [function() {
+    ]), 'ifTrue_', [function() {
         __context.value = self;
         __context.return = true;
         return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(send(self.x, '_floor'), '@', [send(self.y, '_floor')]);
+    return send(send(self.$x, 'floor'), '@', [send(self.$y, 'floor')]);
 };
-Point.prototype['_isIntegerPoint'] = function()
+Point.prototype['isIntegerPoint'] = function()
 {
     var self = this;
-    console.log('_isIntegerPoint');
-    return send(send(self.x, '_isInteger'), '_and_', [function() {
-        send(self.y, '_isInteger');
+    console.log('isIntegerPoint');
+    return send(send(self.$x, 'isInteger'), 'and_', [function() {
+        send(self.$y, 'isInteger');
     }
     ]);
 };
-Point.prototype['_roundDownTo_'] = function(grid)
+Point.prototype['roundDownTo_'] = function(grid)
 {
     var self = this;
-    console.log('_roundDownTo_');
+    console.log('roundDownTo_');
     var gridPoint = null
-    gridPoint = send(grid, '_asPoint');
-    return send(send(self.x, '_roundDownTo_', [send(gridPoint, '_x')]), '@', [send(self.y, '_roundDownTo_', [send(gridPoint, '_y')])]);
+    gridPoint = send(grid, 'asPoint');
+    return send(send(self.$x, 'roundDownTo_', [send(gridPoint, 'x')]), '@', [send(self.$y, 'roundDownTo_', [send(gridPoint, 'y')])]);
 };
-Point.prototype['_roundUpTo_'] = function(grid)
+Point.prototype['roundUpTo_'] = function(grid)
 {
     var self = this;
-    console.log('_roundUpTo_');
+    console.log('roundUpTo_');
     var gridPoint = null
-    gridPoint = send(grid, '_asPoint');
-    return send(send(self.x, '_roundUpTo_', [send(gridPoint, '_x')]), '@', [send(self.y, '_roundUpTo_', [send(gridPoint, '_y')])]);
+    gridPoint = send(grid, 'asPoint');
+    return send(send(self.$x, 'roundUpTo_', [send(gridPoint, 'x')]), '@', [send(self.$y, 'roundUpTo_', [send(gridPoint, 'y')])]);
 };
-Point.prototype['_bitShiftPoint_'] = function(bits)
+Point.prototype['bitShiftPoint_'] = function(bits)
 {
     var self = this;
-    console.log('_bitShiftPoint_');
-    self.x = send(self.x, '_bitShift_', [bits]);
-    self.y = send(self.y, '_bitShift_', [bits]);
+    console.log('bitShiftPoint_');
+    self.$x = send(self.$x, 'bitShift_', [bits]);
+    self.$y = send(self.$y, 'bitShift_', [bits]);
 };
-Point.prototype['_setR_degrees_'] = function(rho, degrees)
+Point.prototype['setR_degrees_'] = function(rho, degrees)
 {
     var self = this;
-    console.log('_setR_degrees_');
+    console.log('setR_degrees_');
     var radians = null
-    radians = send(send(degrees, '_asFloat'), '_degreesToRadians');
-    self.x = send(send(rho, '_asFloat'), '*', [send(radians, '_cos')]);
-    self.y = send(send(rho, '_asFloat'), '*', [send(radians, '_sin')]);
+    radians = send(send(degrees, 'asFloat'), 'degreesToRadians');
+    self.$x = send(send(rho, 'asFloat'), '*', [send(radians, 'cos')]);
+    self.$y = send(send(rho, 'asFloat'), '*', [send(radians, 'sin')]);
 };
-Point.prototype['_setX_setY_'] = function(xValue, yValue)
+Point.prototype['setX_setY_'] = function(xValue, yValue)
 {
     var self = this;
-    console.log('_setX_setY_');
-    self.x = xValue;
-    self.y = yValue;
+    console.log('setX_setY_');
+    self.$x = xValue;
+    self.$y = yValue;
 };
-PointClass.prototype['_settingInputWidgetForNode_'] = function(aSettingNode)
+PointClass.prototype['settingInputWidgetForNode_'] = function(aSettingNode)
 {
     var self = this;
-    console.log('_settingInputWidgetForNode_');
-    return send(aSettingNode, '_inputWidgetForPoint');
+    console.log('settingInputWidgetForNode_');
+    return send(aSettingNode, 'inputWidgetForPoint');
 };
-PointClass.prototype['_fromUser'] = function()
+PointClass.prototype['fromUser'] = function()
 {
     var self = this;
-    console.log('_fromUser');
-    send(Sensor.classPrototype, '_waitNoButton');
-    send(send(Cursor.classPrototype, '_crossHair'), '_show');
-    send(Sensor.classPrototype, '_waitButton');
-    send(send(Cursor.classPrototype, '_normal'), '_show');
-    return send(Sensor.classPrototype, '_cursorPoint');
+    console.log('fromUser');
+    send(Sensor.classPrototype, 'waitNoButton');
+    send(send(Cursor.classPrototype, 'crossHair'), 'show');
+    send(Sensor.classPrototype, 'waitButton');
+    send(send(Cursor.classPrototype, 'normal'), 'show');
+    return send(Sensor.classPrototype, 'cursorPoint');
 };
-PointClass.prototype['_fromUserWithCursor_'] = function(aCursor)
+PointClass.prototype['fromUserWithCursor_'] = function(aCursor)
 {
     var self = this;
     var __context = {};
-    console.log('_fromUserWithCursor_');
-    send(Sensor.classPrototype, '_waitNoButton');
+    console.log('fromUserWithCursor_');
+    send(Sensor.classPrototype, 'waitNoButton');
     if (__context.return) return __context.value;
-    send(aCursor, '_showWhile_', [function() {
-        send(Sensor.classPrototype, '_waitButton');
+    send(aCursor, 'showWhile_', [function() {
+        send(Sensor.classPrototype, 'waitButton');
         if (__context.return) return __context.value;
     }
     ]);
     if (__context.return) return __context.value;
-    return send(Sensor.classPrototype, '_cursorPoint');
+    return send(Sensor.classPrototype, 'cursorPoint');
 };
-PointClass.prototype['_r_degrees_'] = function(rho, degrees)
+PointClass.prototype['r_degrees_'] = function(rho, degrees)
 {
     var self = this;
-    console.log('_r_degrees_');
-    return send(send(self, '_basicNew'), '_setR_degrees_', [rho, degrees]);
+    console.log('r_degrees_');
+    return send(send(self, 'basicNew'), 'setR_degrees_', [rho, degrees]);
 };
-PointClass.prototype['_x_y_'] = function(xInteger, yInteger)
+PointClass.prototype['x_y_'] = function(xInteger, yInteger)
 {
     var self = this;
-    console.log('_x_y_');
-    return send(send(self, '_basicNew'), '_setX_setY_', [xInteger, yInteger]);
+    console.log('x_y_');
+    return send(send(self, 'basicNew'), 'setX_setY_', [xInteger, yInteger]);
 };
 function ClientCanvasClass()
 {
@@ -6732,28 +6732,28 @@ ClientCanvas.classPrototype = ClientCanvasClass.prototype;
 ClientCanvasClass.prototype['_basicNew'] = function() { return new ClientCanvas(); };
 ClientCanvasClass.prototype.__proto__ = ObjectClass.prototype;
 ClientCanvas.prototype.__proto__ = Object.prototype;
-ClientCanvas.prototype.html5canvas = null;
+ClientCanvas.prototype.$html5canvas = null;
 ClientCanvasClass.__super = ObjectClass;
 ClientCanvas.__super = Object;
-ClientCanvas.prototype['_drawLine_to_'] = function(fromPoint, toPoint)
+ClientCanvas.prototype['drawLine_to_'] = function(fromPoint, toPoint)
 {
     var self = this;
-    console.log('_drawLine_to_');
-    send(self.html5canvas, '_x1_y1_x2_y2_', [send(fromPoint, '_x'), send(fromPoint, '_y'), send(toPoint, '_x'), send(toPoint, '_y')]);
+    console.log('drawLine_to_');
+    send(self.$html5canvas, 'x1_y1_x2_y2_', [send(fromPoint, 'x'), send(fromPoint, 'y'), send(toPoint, 'x'), send(toPoint, 'y')]);
 };
-ClientCanvas.prototype['_example1'] = function()
+ClientCanvas.prototype['example1'] = function()
 {
     var self = this;
-    console.log('_example1');
-    send(self, '_drawLine_to_', [send(10, '@', [10]), send(100, '@', [100])]);
+    console.log('example1');
+    send(self, 'drawLine_to_', [send(10, '@', [10]), send(100, '@', [100])]);
 };
-ClientCanvas.prototype['_example2'] = function()
+ClientCanvas.prototype['example2'] = function()
 {
     var self = this;
     var __context = {};
-    console.log('_example2');
-    send(10, '_do_', [function(k) {
-        send(self, '_drawLine_to_', [send(send(k, '*', [10]), '@', [send(k, '*', [5])]), send(send(k, '*', [20]), '@', [send(k, '*', [25])])]);
+    console.log('example2');
+    send(10, 'do_', [function(k) {
+        send(self, 'drawLine_to_', [send(send(k, '*', [10]), '@', [send(k, '*', [5])]), send(send(k, '*', [20]), '@', [send(k, '*', [25])])]);
         if (__context.return) return __context.value;
     }
     ]);

@@ -11,12 +11,13 @@ console.log('loaded');
 var page = new AjTalk.HtmlPage();
 
 function Response(res) {
-	this._write_ = function(text) { res.write(text); }
+	this.write_ = function(text) { res.write(text); }
 }
 
 http.createServer(function(req,res) {
 	var html = new AjTalk.HtmlCanvas();
-	html.response = new Response(res);
-	page._render_(html);
+	html.$response = new Response(res);
+	page.render_(html);
 	res.end();
 }).listen(8080);
+

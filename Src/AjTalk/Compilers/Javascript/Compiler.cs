@@ -62,7 +62,7 @@
             }
 
             foreach (string name in @class.InstanceVariableNames)
-                this.writer.WriteLine(string.Format("{0}.prototype.{1} = null;", @class.Name, name));
+                this.writer.WriteLine(string.Format("{0}.prototype.${1} = null;", @class.Name, name));
 
             if (@class.SuperClass != null && @class.SuperClass.Name != @class.Name)
             {
@@ -72,7 +72,7 @@
 
             // TODO Review class variables. Where? at Class? at Class.prototype?
             foreach (string name in @class.ClassVariableNames)
-                this.writer.WriteLine(string.Format("{0}Class.{1} = null;", @class.Name, name));
+                this.writer.WriteLine(string.Format("{0}Class.${1} = null;", @class.Name, name));
 
             foreach (MethodModel method in @class.InstanceMethods)
                 method.Visit(this);
@@ -417,7 +417,7 @@
 
         public override void Visit(InstanceVariableExpression expression)
         {
-            this.writer.Write(string.Format("self.{0}", expression.Name));
+            this.writer.Write(string.Format("self.${0}", expression.Name));
         }
 
         public override void Visit(ClassVariableExpression expression)
@@ -450,18 +450,6 @@
             this.writer.Write(text);
         }
 
-        // TODO Remove (only for demo purpose)
-        private static string OldToMethodName(string name)
-        {
-            if (!char.IsLetter(name[0]))
-                return OperatorToMethodName(name);
-
-            name = name.Replace(":", "_");
-
-            // TODO review if needed $ at front
-            return "$" + name;
-        }
-
         private static string ToMethodName(string name)
         {
             if (!char.IsLetter(name[0]))
@@ -469,8 +457,7 @@
 
             name = name.Replace(":", "_");
 
-            // TODO review if needed $ at front
-            return "_" + name;
+            return name;
         }
 
         private static string OperatorToMethodName(string name)

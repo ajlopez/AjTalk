@@ -77,8 +77,8 @@
             Assert.IsTrue(ContainsLine(output, "PointClass.prototype.__proto__ = ObjectClass.prototype;"));
             Assert.IsTrue(ContainsLine(output, "Point.prototype.__proto__ = Object.prototype;"));
             Assert.IsTrue(ContainsLine(output, "exports.Point = Point;"));
-            Assert.IsTrue(ContainsLine(output, "Point.prototype.x = null;"));
-            Assert.IsTrue(ContainsLine(output, "Point.prototype.y = null;"));
+            Assert.IsTrue(ContainsLine(output, "Point.prototype.$x = null;"));
+            Assert.IsTrue(ContainsLine(output, "Point.prototype.$y = null;"));
         }
 
         [TestMethod]
@@ -102,7 +102,7 @@
             Assert.IsTrue(ContainsLine(output, "exports.Boolean = Boolean;"));
 
             // Class variables in Object
-            Assert.IsTrue(ContainsLine(output, "ObjectClass.DependentsFields = null;"));
+            Assert.IsTrue(ContainsLine(output, "ObjectClass.$DependentsFields = null;"));
         }
 
         [TestMethod]

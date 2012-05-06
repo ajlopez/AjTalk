@@ -2,13 +2,13 @@ base = function() {
 
 var Smalltalk;
 
-Number.prototype._max_ = function(x) {
+Number.prototype.max_ = function(x) {
 	if (this >= x)
 		return this;
 	return x;
 }
 
-Number.prototype._min_ = function(x) {
+Number.prototype.min_ = function(x) {
 	if (this >= x)
 		return this;
 	return x;
@@ -21,37 +21,37 @@ Number.prototype['*'] = function(x) {
 Number.prototype['@'] = function(x) {
 	var point = new Smalltalk.Point();
 	console.log('new Point with ' + this + ' and ' + x);
-	point._setX_setY_(this, x);
+	point.setX_setY_(this, x);
 	return point;
 }
 
-Number.prototype['_do_'] = function(block) {
+Number.prototype['do_'] = function(block) {
 	for (var k=1; k<=this; k++)
 		block(k);
 }
 
-Boolean.prototype._ifTrue_ = function(block) {
+Boolean.prototype.ifTrue_ = function(block) {
 	if (this == true)
 		return block();
 	return null;
 }
 
-Boolean.prototype._ifTrue_ifFalse_ = function(blockTrue, blockFalse) {
+Boolean.prototype.ifTrue_ifFalse_ = function(blockTrue, blockFalse) {
 	if (this == true)
 		return blockTrue();
 	else
 		return blockFalse();
 }
 
-Boolean.prototype._ifFalse_ = function(block) {
+Boolean.prototype.ifFalse_ = function(block) {
 	if (this == false)
 		return block();
 	return null;
 }
 
-Function.prototype._isBlock = function() { return true; }
+Function.prototype.isBlock = function() { return true; }
 
-Object.prototype._isBlock = function() { return false; }
+Object.prototype.isBlock = function() { return false; }
 
 var send = function(receiver, selector, args)
 {
