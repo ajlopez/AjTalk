@@ -43,6 +43,7 @@
     <Compile Include="ChunkReaderTests.cs" />
     <Compile Include="Compilers\Javascript\CompilerTests.cs" />
     <Compile Include="Compilers\Javascript\BrowserCompilerTests.cs" />
+    <Compile Include="Compilers\Javascript\VirtualMachineCompilerTests.cs" />
     <Compile Include="Compilers\Javascript\NodeCompilerTests.cs" />
     <Compile Include="Compilers\SourceWriterTests.cs" />
     <Compile Include="Model\CodeReaderTests.cs" />

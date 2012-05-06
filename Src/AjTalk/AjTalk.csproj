@@ -100,6 +100,7 @@
     <Compile Include="Compilers\ICompiler.cs" />
     <Compile Include="Compilers\Javascript\BrowserCompiler.cs" />
     <Compile Include="Compilers\Javascript\Compiler.cs" />
+    <Compile Include="Compilers\Javascript\VirtualMachineCompiler.cs" />
     <Compile Include="Compilers\Javascript\NodeCompiler.cs" />
     <Compile Include="Compilers\SourceWriter.cs" />
     <Compile Include="Model\ClassModel.cs" />

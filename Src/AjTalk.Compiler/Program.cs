@@ -24,6 +24,8 @@ namespace AjTalk.Compiler
                 compiler = new NodeCompiler(writer);
             else if (target == "browser")
                 compiler = new BrowserCompiler(writer);
+            else if (target == "vm")
+                compiler = new VirtualMachineCompiler(writer);
             else
                 throw new ArgumentException("Invalid target");
 

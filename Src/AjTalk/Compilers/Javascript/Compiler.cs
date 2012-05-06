@@ -32,7 +32,7 @@
         };
 
         private SourceWriter writer;
-        private MethodModel currentMethod;
+        protected MethodModel currentMethod;
         private bool inBlock = false;
 
         public Compiler(SourceWriter writer)
@@ -450,12 +450,22 @@
             this.writer.Write(text);
         }
 
-        private static string ToMethodName(string name)
+        protected static string ToMethodName(string name)
         {
             if (!char.IsLetter(name[0]))
                 return name;
 
             name = name.Replace(":", "_");
+
+            return name;
+        }
+
+        protected static string ToVariableName(string name)
+        {
+            if (name == "class")
+                return "__class__";
+            if (name == "new")
+                return "__new__";
 
             return name;
         }
@@ -476,16 +486,6 @@
         {
             if (jsOperators.ContainsKey(name))
                 return jsOperators[name];
-
-            return name;
-        }
-
-        private static string ToVariableName(string name)
-        {
-            if (name == "class")
-                return "__class__";
-            if (name == "new")
-                return "__new__";
 
             return name;
         }
