@@ -86,6 +86,49 @@
         }
 
         [TestMethod]
+        public void CompileNativeApply()
+        {
+            IExpression expression = ParseExpression("p napply: 'toUpper'");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "p['toUpper']()"));
+        }
+
+        [TestMethod]
+        public void CompileNativeApplyWith()
+        {
+            IExpression expression = ParseExpression("p napply: 'process' with: {x. y}");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "var __target = p;"));
+            Assert.IsTrue(ContainsLine(output, "return __target['process'].apply(__target, [x, y]);"));
+        }
+
+        [TestMethod]
+        public void CompileNativeNew()
+        {
+            IExpression expression = ParseExpression("MyClass nnew");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "var __target = MyClass;"));
+            Assert.IsTrue(ContainsLine(output, "return __target.prototype.constructor.apply(__target, null);"));
+        }
+
+        [TestMethod]
+        public void CompileNativeNewWithArgumentos()
+        {
+            IExpression expression = ParseExpression("MyClass nnew: {'foo'. 20}");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "var __target = MyClass;"));
+            Assert.IsTrue(ContainsLine(output, "return __target.prototype.constructor.apply(__target, ['foo', 20]);"));
+        }
+
+        [TestMethod]
         [DeploymentItem(@"CodeFiles\SqueakObject.st")]
         public void CompileSqueakObject()
         {

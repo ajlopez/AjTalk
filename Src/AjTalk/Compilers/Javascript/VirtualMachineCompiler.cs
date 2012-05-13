@@ -128,6 +128,45 @@
                 return;
             }
 
+            if (expression.Selector == "napply:with:")
+            {
+                this.WriteLineStart("(function() {");
+                this.Write("var __target = ");
+                expression.Target.Visit(this);
+                this.WriteLine(";");
+                this.Write("return __target[");
+                expression.Arguments.First().Visit(this);
+                this.Write("].apply(__target, ");
+                expression.Arguments.Skip(1).First().Visit(this);
+                this.WriteLine(");");
+                this.WriteLineEnd("})()");
+                return;
+            }
+
+            if (expression.Selector == "nnew")
+            {
+                this.WriteLineStart("(function() {");
+                this.Write("var __target = ");
+                expression.Target.Visit(this);
+                this.WriteLine(";");
+                this.WriteLine("return __target.prototype.constructor.apply(__target, null);");
+                this.WriteLineEnd("})()");
+                return;
+            }
+
+            if (expression.Selector == "nnew:")
+            {
+                this.WriteLineStart("(function() {");
+                this.Write("var __target = ");
+                expression.Target.Visit(this);
+                this.WriteLine(";");
+                this.Write("return __target.prototype.constructor.apply(__target, ");
+                expression.Arguments.First().Visit(this);
+                this.WriteLine(");");
+                this.WriteLineEnd("})()");
+                return;
+            }
+
             expression.Target.Visit(this);
 
             if (expression.Selector == "nat:")
@@ -144,6 +183,14 @@
                 expression.Arguments.First().Visit(this);
                 this.Write("] = ");
                 expression.Arguments.Skip(1).First().Visit(this);
+                return;
+            }
+
+            if (expression.Selector == "napply:")
+            {
+                this.Write("[");
+                expression.Arguments.First().Visit(this);
+                this.Write("]()");
                 return;
             }
 
