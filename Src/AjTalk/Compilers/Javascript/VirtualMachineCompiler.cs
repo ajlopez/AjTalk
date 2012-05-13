@@ -36,7 +36,7 @@
         public override void Visit(ClassModel @class)
         {
             // TODO review
-            if (@class.SuperClass == null)
+            if (@class.SuperClassName == null)
                 return;
 
             string instanceVariableNames = string.Empty;
@@ -58,8 +58,8 @@
                     classVariableNames += " " + name;
             }
 
-            this.WriteLine(string.Format("Smalltalk.{0}.subclass_instanceVariablesNames_classVariablesNames('{1}', '{2}', '{3}');",
-                @class.SuperClass.Name,
+            this.WriteLine(string.Format("Smalltalk.{0}.subclass_instanceVariableNames_classVariableNames_('{1}', '{2}', '{3}');",
+                @class.SuperClassName,
                 @class.Name,
                 instanceVariableNames,
                 classVariableNames));

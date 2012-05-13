@@ -33,7 +33,7 @@
             Assert.IsTrue(ContainsLine(output, "Smalltalk.MyClass.defineMethod('with:', function(a)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return sendSuper(self, MyClass, 'with_', [a]);"));
-            Assert.IsTrue(ContainsLine(output, "};"));
+            Assert.IsTrue(ContainsLine(output, "});"));
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@
             Assert.IsTrue(ContainsLine(output, "Smalltalk.MyClass.defineMethod('with:with:', function(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return a['+'](b);"));
-            Assert.IsTrue(ContainsLine(output, "};"));
+            Assert.IsTrue(ContainsLine(output, "});"));
         }
 
         [TestMethod]
@@ -87,6 +87,42 @@
             Assert.IsTrue(ContainsLine(output, "function initialize(ajtalk) {"));
             Assert.IsTrue(ContainsLine(output, "var Smalltalk = ajtalk.Smalltalk;"));
             Assert.IsTrue(ContainsLine(output, "exports.initialize = initialize;"));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
+        public void CompilePharoCoreKernelObjects()
+        {
+            ChunkReader chunkReader = new ChunkReader(@"PharoCoreKernelObjects.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            reader.Process(model);
+
+            this.compiler.Visit(model);
+            this.writer.Close();
+            string output = this.writer.ToString();
+
+            // TODO more tests
+            Assert.IsTrue(ContainsLine(output, "Smalltalk.Object.subclass_instanceVariableNames_classVariableNames_('MessageSend', 'receiver selector arguments', '');"));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\PharoCorePoint.st")]
+        public void CompilePharoCorePoint()
+        {
+            ChunkReader chunkReader = new ChunkReader(@"PharoCorePoint.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            reader.Process(model);
+
+            this.compiler.Visit(model);
+            this.writer.Close();
+            string output = this.writer.ToString();
+
+            // TODO more tests
+            Assert.IsTrue(ContainsLine(output, "Smalltalk.Object.subclass_instanceVariableNames_classVariableNames_('Point', 'x y', '');"));
         }
 
         private static MethodModel ParseMethod(string text)

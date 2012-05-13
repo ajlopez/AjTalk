@@ -55,19 +55,19 @@
 
             this.writer.WriteLine(string.Format("{0}Class.prototype['_basicNew'] = function() {{ return new {0}(); }};", @class.Name));
 
-            if (@class.SuperClass != null && @class.SuperClass.Name != @class.Name)
+            if (@class.SuperClassName != null && @class.SuperClassName != @class.Name)
             {
-                this.writer.WriteLine(string.Format("{0}Class.prototype.__proto__ = {1}Class.prototype;", @class.Name, @class.SuperClass.Name));
-                this.writer.WriteLine(string.Format("{0}.prototype.__proto__ = {1}.prototype;", @class.Name, @class.SuperClass.Name));
+                this.writer.WriteLine(string.Format("{0}Class.prototype.__proto__ = {1}Class.prototype;", @class.Name, @class.SuperClassName));
+                this.writer.WriteLine(string.Format("{0}.prototype.__proto__ = {1}.prototype;", @class.Name, @class.SuperClassName));
             }
 
             foreach (string name in @class.InstanceVariableNames)
                 this.writer.WriteLine(string.Format("{0}.prototype.${1} = null;", @class.Name, name));
 
-            if (@class.SuperClass != null && @class.SuperClass.Name != @class.Name)
+            if (@class.SuperClassName != null && @class.SuperClassName != @class.Name)
             {
-                this.writer.WriteLine(string.Format("{0}Class.__super = {1}Class;", @class.Name, @class.SuperClass.Name));
-                this.writer.WriteLine(string.Format("{0}.__super = {1};", @class.Name, @class.SuperClass.Name));
+                this.writer.WriteLine(string.Format("{0}Class.__super = {1}Class;", @class.Name, @class.SuperClassName));
+                this.writer.WriteLine(string.Format("{0}.__super = {1};", @class.Name, @class.SuperClassName));
             }
 
             // TODO Review class variables. Where? at Class? at Class.prototype?

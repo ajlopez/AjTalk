@@ -89,7 +89,13 @@
                     if (model.HasClass(variable.Name))
                         super = model.GetClass(variable.Name);
 
-                ClassModel @class = new ClassModel(symbol.Symbol, super, GetInstanceVariableNames(expression), GetClassVariableNames(expression), isvariable);
+                ClassModel @class;
+                
+                if (super != null || variable.Name == null)
+                    @class = new ClassModel(symbol.Symbol, super, GetInstanceVariableNames(expression), GetClassVariableNames(expression), isvariable);
+                else
+                    @class = new ClassModel(symbol.Symbol, variable.Name, GetInstanceVariableNames(expression), GetClassVariableNames(expression), isvariable);
+
                 model.AddElement(@class);
             }
         }
