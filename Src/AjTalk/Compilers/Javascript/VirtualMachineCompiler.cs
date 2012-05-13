@@ -15,22 +15,19 @@
 
         public override void Visit(CodeModel model)
         {
-            // TODO Review Node.js dependent preface code
-            this.WriteLineStart("(function(exports, top) {");
+            this.WriteLine("var ajtalk;");
+            this.WriteLine("var Smalltalk;");
+            this.WriteLine();
 
-            this.WriteLineStart("function initialize(ajtalk) {");
-            this.WriteLine("var Smalltalk = ajtalk.Smalltalk;");
+            this.WriteLineStart("if (typeof(ajtalk) === 'undefined')");
+            this.WriteLine("ajtalk = require('./lib/ajtalk.js');");
+            this.WriteLineEnd(string.Empty);
+
+            this.WriteLineStart("if (typeof(Smalltalk) === 'undefined')");
+            this.WriteLine("Smalltalk = ajtalk.Smalltalk;");
+            this.WriteLineEnd(string.Empty);
 
             base.Visit(model);
-
-            this.WriteLineEnd("}");
-            this.WriteLine();
-            this.WriteLine("exports.initialize = initialize;");
-            this.WriteLine();
-
-            this.WriteLineEnd("})(typeof exports == 'undefined' ? this['ajtalk'] = {} : exports,");
-            this.WriteLine("typeof global == 'undefined' ? this : global");
-            this.WriteLine(");");
         }
 
         public override void Visit(ClassModel @class)

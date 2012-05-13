@@ -24,6 +24,22 @@
         }
 
         [TestMethod]
+        public void CompileEmptyModel()
+        {
+            CodeModel model = new CodeModel();
+            this.compiler.Visit(model);
+            this.writer.Close();
+            string output = this.writer.ToString();
+
+            Assert.IsTrue(ContainsLine(output, "var ajtalk;"));
+            Assert.IsTrue(ContainsLine(output, "var Smalltalk;"));
+            Assert.IsTrue(ContainsLine(output, "if (typeof(ajtalk) === 'undefined')"));
+            Assert.IsTrue(ContainsLine(output, "ajtalk = require('./lib/ajtalk.js');"));
+            Assert.IsTrue(ContainsLine(output, "if (typeof(Smalltalk) === 'undefined')"));
+            Assert.IsTrue(ContainsLine(output, "Smalltalk = ajtalk.Smalltalk;"));
+        }
+
+        [TestMethod]
         public void CompileSuperMethod()
         {
             MethodModel method = ParseMethod("with: a ^super with: a");
@@ -64,9 +80,8 @@
             string output = this.writer.ToString();
 
             // TODO more tests
-            Assert.IsTrue(ContainsLine(output, "function initialize(ajtalk) {"));
-            Assert.IsTrue(ContainsLine(output, "var Smalltalk = ajtalk.Smalltalk;"));
-            Assert.IsTrue(ContainsLine(output, "exports.initialize = initialize;"));
+            Assert.IsTrue(ContainsLine(output, "var ajtalk;"));
+            Assert.IsTrue(ContainsLine(output, "var Smalltalk;"));
         }
 
         [TestMethod]
@@ -84,9 +99,7 @@
             string output = this.writer.ToString();
 
             // TODO more tests
-            Assert.IsTrue(ContainsLine(output, "function initialize(ajtalk) {"));
-            Assert.IsTrue(ContainsLine(output, "var Smalltalk = ajtalk.Smalltalk;"));
-            Assert.IsTrue(ContainsLine(output, "exports.initialize = initialize;"));
+            Assert.IsTrue(ContainsLine(output, "Smalltalk.Object.subclass_instanceVariableNames_classVariableNames_('MessageSend', 'receiver selector arguments', '');"));
         }
 
         [TestMethod]
