@@ -138,13 +138,19 @@
             if (expressions == null)
                 return;
 
+            IExpression lastexpr = null;
+
             foreach (var expr in expressions)
             {
+                lastexpr = expr;
                 expr.Visit(this);
                 this.writer.WriteLine(";");
                 if (this.currentMethod != null && this.currentMethod.HasBlock() && expr is MessageExpression)
                     this.writer.WriteLine("if (__context.return) return __context.value;");
             }
+
+            if (lastexpr != null && !(lastexpr is ReturnExpression))
+                this.writer.WriteLine("return self;");
         }
 
         public override void Visit(ArrayExpression expression)

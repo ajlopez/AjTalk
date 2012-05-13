@@ -20,7 +20,7 @@
             this.WriteLine();
 
             this.WriteLineStart("if (typeof(ajtalk) === 'undefined')");
-            this.WriteLine("ajtalk = require('./lib/ajtalk.js');");
+            this.WriteLine("ajtalk = require('ajtalk.js');");
             this.WriteLineEnd(string.Empty);
 
             this.WriteLineStart("if (typeof(Smalltalk) === 'undefined')");
@@ -113,7 +113,7 @@
             {
                 this.currentMethod = previousMethod;
             }
-
+           
             if (method.Class != null)
                 this.WriteLineEnd("});");
             else
@@ -129,6 +129,23 @@
             }
 
             expression.Target.Visit(this);
+
+            if (expression.Selector == "nat:")
+            {
+                this.Write("[");
+                expression.Arguments.First().Visit(this);
+                this.Write("]");
+                return;
+            }
+
+            if (expression.Selector == "nat:put:")
+            {
+                this.Write("[");
+                expression.Arguments.First().Visit(this);
+                this.Write("] = ");
+                expression.Arguments.Skip(1).First().Visit(this);
+                return;
+            }
 
             if (expression.Target is ConstantExpression || !char.IsLetter(expression.Selector[0]))
                 this.Write(string.Format("['{0}'](", ToMethodName(expression.Selector)));

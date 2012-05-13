@@ -33,6 +33,7 @@
             Assert.IsTrue(ContainsLine(output, "MyClass.prototype['with_'] = function(a)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return sendSuper(self, MyClass, 'with_', [a]);"));
+            Assert.IsFalse(ContainsLine(output, "return self;"));
             Assert.IsTrue(ContainsLine(output, "};"));
         }
 
@@ -46,6 +47,7 @@
             Assert.IsTrue(ContainsLine(output, "MyClass.prototype['with_with_'] = function(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return send(a, '+', [b]);"));
+            Assert.IsFalse(ContainsLine(output, "return self;"));
             Assert.IsTrue(ContainsLine(output, "};"));
         }
 
@@ -59,6 +61,7 @@
             Assert.IsTrue(ContainsLine(output, "MyClass.prototype['with_with_'] = function(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return send(a, '-', [b]);"));
+            Assert.IsFalse(ContainsLine(output, "return self;"));
             Assert.IsTrue(ContainsLine(output, "};"));
         }
 
@@ -72,6 +75,7 @@
             Assert.IsTrue(ContainsLine(output, "MyClass.prototype['with_with_'] = function(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return send(a, '*', [b]);"));
+            Assert.IsFalse(ContainsLine(output, "return self;"));
             Assert.IsTrue(ContainsLine(output, "};"));
         }
 
@@ -98,6 +102,7 @@
             Assert.IsTrue(ContainsLine(output, "MyClass.prototype['='] = function(a)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return a;"));
+            Assert.IsFalse(ContainsLine(output, "return self;"));
             Assert.IsTrue(ContainsLine(output, "};"));
         }
 
@@ -111,6 +116,7 @@
             Assert.IsTrue(ContainsLine(output, "MyClass.prototype['~='] = function(a)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return a;"));
+            Assert.IsFalse(ContainsLine(output, "return self;"));
             Assert.IsTrue(ContainsLine(output, "};"));
         }
 
@@ -244,6 +250,7 @@
             Assert.IsTrue(ContainsLine(output, "MyClass.prototype['with_with_'] = function(a, b)"));
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "a = b;"));
+            Assert.IsTrue(ContainsLine(output, "return self;"));
             Assert.IsTrue(ContainsLine(output, "};"));
         }
 

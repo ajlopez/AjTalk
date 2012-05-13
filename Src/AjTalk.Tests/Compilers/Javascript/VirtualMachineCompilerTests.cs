@@ -34,7 +34,7 @@
             Assert.IsTrue(ContainsLine(output, "var ajtalk;"));
             Assert.IsTrue(ContainsLine(output, "var Smalltalk;"));
             Assert.IsTrue(ContainsLine(output, "if (typeof(ajtalk) === 'undefined')"));
-            Assert.IsTrue(ContainsLine(output, "ajtalk = require('./lib/ajtalk.js');"));
+            Assert.IsTrue(ContainsLine(output, "ajtalk = require('ajtalk.js');"));
             Assert.IsTrue(ContainsLine(output, "if (typeof(Smalltalk) === 'undefined')"));
             Assert.IsTrue(ContainsLine(output, "Smalltalk = ajtalk.Smalltalk;"));
         }
@@ -63,6 +63,26 @@
             Assert.IsTrue(ContainsLine(output, "{"));
             Assert.IsTrue(ContainsLine(output, "return a['+'](b);"));
             Assert.IsTrue(ContainsLine(output, "});"));
+        }
+
+        [TestMethod]
+        public void CompileNativeAtPut()
+        {
+            IExpression expression = ParseExpression("p nat: 'x' put: 10");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "p['x'] = 10"));
+        }
+
+        [TestMethod]
+        public void CompileNativeAt()
+        {
+            IExpression expression = ParseExpression("'foo' nat: 'length'");
+            expression.Visit(this.compiler);
+            this.writer.Close();
+            string output = this.writer.ToString();
+            Assert.IsTrue(ContainsLine(output, "'foo'['length']"));
         }
 
         [TestMethod]
