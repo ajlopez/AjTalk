@@ -136,6 +136,7 @@
 
             // TODO more tests
             Assert.IsTrue(ContainsLine(output, "Smalltalk.Object.subclass_instanceVariableNames_classVariableNames_('Point', 'x y', '');"));
+            Assert.IsTrue(ContainsLine(output, "factor = 3['reciprocal']();"));            
         }
 
         private static MethodModel ParseMethod(string text)

@@ -130,10 +130,10 @@
 
             expression.Target.Visit(this);
 
-            if (char.IsLetter(expression.Selector[0]))
-                this.Write(string.Format(".{0}(", ToMethodName(expression.Selector)));
-            else
+            if (expression.Target is ConstantExpression || !char.IsLetter(expression.Selector[0]))
                 this.Write(string.Format("['{0}'](", ToMethodName(expression.Selector)));
+            else
+                this.Write(string.Format(".{0}(", ToMethodName(expression.Selector)));
 
             int narg = 0;
 
