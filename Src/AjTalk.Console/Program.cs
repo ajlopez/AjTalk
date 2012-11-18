@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.Remoting.Lifetime;
+using AjTalk.Compilers.Vm;
 
 namespace AjTalk.Console
 {
@@ -10,6 +11,7 @@ namespace AjTalk.Console
     {
         static void Main(string[] args)
         {
+            BytecodeCompiler c = new BytecodeCompiler(null);
             // According http://msdn.microsoft.com/en-us/magazine/cc300474.aspx
             LifetimeServices.LeaseTime = TimeSpan.FromMinutes(10);
             LifetimeServices.RenewOnCallTime = TimeSpan.FromMinutes(15);
