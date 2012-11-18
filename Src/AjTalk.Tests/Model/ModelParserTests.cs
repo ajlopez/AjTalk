@@ -183,6 +183,34 @@
         }
 
         [TestMethod]
+        public void ParseNativeMethodExpression()
+        {
+            ModelParser parser = new ModelParser("a !native");
+            IExpression expression = parser.ParseExpression();
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(MessageExpression));
+
+            MessageExpression mexpression = (MessageExpression)expression;
+            Assert.IsTrue(mexpression.IsUnaryMessage);
+
+            Assert.AreEqual("a !native", expression.AsString());
+        }
+
+        [TestMethod]
+        public void ParseNativeKeywordMethodExpression()
+        {
+            ModelParser parser = new ModelParser("a !native: 1");
+            IExpression expression = parser.ParseExpression();
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(MessageExpression));
+
+            MessageExpression mexpression = (MessageExpression)expression;
+            Assert.IsTrue(mexpression.IsKeywordMessage);
+
+            Assert.AreEqual("a !native: 1", expression.AsString());
+        }
+
+        [TestMethod]
         public void ParsePrimitive()
         {
             ModelParser parser = new ModelParser("<primitive: 60>");

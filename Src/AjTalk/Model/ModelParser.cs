@@ -152,11 +152,17 @@
 
         private static bool IsUnarySelector(string name)
         {
+            if (name.StartsWith("!") && name.Length > 1 && char.IsLetter(name[1]) && !name.EndsWith(":"))
+                return true;
+
             return char.IsLetter(name[0]) && !name.EndsWith(":");
         }
 
         private static bool IsBinarySelector(string name)
         {
+            if (name.StartsWith("!") && name.Length > 1 && char.IsLetter(name[1]))
+                return false;
+
             // TODO Review which selectors are binary operators
             return !char.IsLetter(name[0]);
         }

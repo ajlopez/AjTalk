@@ -118,6 +118,7 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(block);
             Assert.AreEqual(2, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(2, block.NoGlobalNames);
             Assert.IsNotNull(block.ByteCodes);
             Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
@@ -129,8 +130,11 @@ namespace AjTalk.Tests.Compiler
             Parser compiler = new Parser("a := b with: (anObject class)");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
+            Assert.AreEqual(1, block.NoConstants);
+            Assert.AreEqual(3, block.NoGlobalNames);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -140,8 +144,25 @@ namespace AjTalk.Tests.Compiler
             Parser compiler = new Parser("a := b with: (anObject !nativeMethod)");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
+            Assert.AreEqual(3, block.NoGlobalNames);
+            Assert.AreEqual(2, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(21, block.ByteCodes.Length);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
+        public void CompileSimpleCommandWithParenthesisAndBangKeyword()
+        {
+            Parser compiler = new Parser("a := b with: (anObject !nativeMethod: 1)");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(3, block.NoGlobalNames);
+            Assert.AreEqual(3, block.NoConstants);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(21, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 

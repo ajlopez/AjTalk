@@ -79,7 +79,8 @@
 
         public override void Visit(SetExpression expression)
         {
-            throw new NotImplementedException();
+            expression.Expression.Visit(this);
+            this.block.CompileSet(expression.LeftValue.Name);
         }
 
         public override void Visit(VariableExpression expression)

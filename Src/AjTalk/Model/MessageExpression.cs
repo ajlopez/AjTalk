@@ -10,11 +10,18 @@
         private IExpression target;
         private string selector;
         private IEnumerable<IExpression> arguments;
+        private bool isname;
 
         public MessageExpression(IExpression target, string selector, IEnumerable<IExpression> arguments)
         {
             this.target = target;
             this.selector = selector;
+
+            if (char.IsLetter(selector[0]))
+                this.isname = true;
+
+            if (selector[0] == '!' && selector.Length > 1 && char.IsLetter(selector[1]))
+                this.isname = true;
 
             if (arguments == null)
                 this.arguments = new List<IExpression>();
@@ -30,7 +37,7 @@
 
         public bool IsUnaryMessage { get { return this.arguments.Count() == 0; } }
 
-        public bool IsBinaryMessage { get { return this.arguments.Count() == 1 && !char.IsLetter(this.selector[0]); } }
+        public bool IsBinaryMessage { get { return this.arguments.Count() == 1 && !this.isname; } }
 
         public bool IsKeywordMessage { get { return !this.IsUnaryMessage && !this.IsBinaryMessage; } }
 

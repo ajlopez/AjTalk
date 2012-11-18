@@ -77,5 +77,52 @@
             Assert.AreEqual(21, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
         }
+
+        [TestMethod]
+        public void CompileTwoSimpleCommand()
+        {
+            ModelParser parser = new ModelParser("a := 1. b := 2");
+            
+            foreach (var expr in parser.ParseExpressions())
+                this.compiler.CompileExpression(expr);
+
+            Assert.IsNotNull(this.block);
+            Assert.AreEqual(2, this.block.NoConstants);
+            Assert.AreEqual(0, this.block.NoLocals);
+            Assert.AreEqual(2, this.block.NoGlobalNames);
+            Assert.IsNotNull(this.block.ByteCodes);
+            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(0, this.block.Arity);
+        }
+
+        [TestMethod]
+        public void CompileSimpleCommandWithParenthesis()
+        {
+            ModelParser parser = new ModelParser("a := b with: (anObject class)");
+            IExpression expr = parser.ParseExpression();
+            this.compiler.CompileExpression(expr);
+            Assert.IsNotNull(this.block);
+            Assert.AreEqual(1, this.block.NoConstants);
+            Assert.AreEqual(3, this.block.NoGlobalNames);
+            Assert.AreEqual(0, this.block.NoLocals);
+            Assert.IsNotNull(this.block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(0, this.block.Arity);
+        }
+
+        [TestMethod]
+        public void CompileSimpleCommandWithParenthesisAndBang()
+        {
+            ModelParser parser = new ModelParser("a := b with: (anObject !nativeMethod)");
+            IExpression expr = parser.ParseExpression();
+            this.compiler.CompileExpression(expr);
+            Assert.IsNotNull(this.block);
+            Assert.AreEqual(3, this.block.NoGlobalNames);
+            Assert.AreEqual(2, this.block.NoConstants);
+            Assert.AreEqual(0, this.block.NoLocals);
+            Assert.IsNotNull(this.block.ByteCodes);
+            Assert.AreEqual(21, this.block.ByteCodes.Length);
+            Assert.AreEqual(0, this.block.Arity);
+        }
     }
 }
