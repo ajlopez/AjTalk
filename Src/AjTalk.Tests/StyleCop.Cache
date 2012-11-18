@@ -75,15 +75,6 @@
     <milliseconds>873</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="BytecodeCompilerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>11/18/2012 16:16:24</timestamp>
-      <milliseconds>744</milliseconds>
-    </settings>
-    <timestamp>11/18/2012 11:40:47</timestamp>
-    <milliseconds>149</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="CompilerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>11/18/2012 16:16:24</timestamp>
@@ -357,4 +348,13 @@
   <project key="2100262046">
     <configuration>DEBUG;TRACE</configuration>
   </project>
+  <sourcecode name="BytecodeCompilerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 17:22:41</timestamp>
+    <milliseconds>494</milliseconds>
+    <violations />
+  </sourcecode>
 </stylecopresultscache>

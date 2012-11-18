@@ -183,8 +183,10 @@ namespace AjTalk.Tests.Compiler
             Parser compiler = new Parser("AClass");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
+            Assert.AreEqual(1, block.NoGlobalNames);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -194,8 +196,11 @@ namespace AjTalk.Tests.Compiler
             Parser compiler = new Parser("nil subclass: #Object");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
+            Assert.AreEqual(2, block.NoConstants);
+            Assert.AreEqual(0, block.NoGlobalNames);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -205,8 +210,10 @@ namespace AjTalk.Tests.Compiler
             Parser compiler = new Parser("nil subclass: #Object instanceVariables: 'a b c'");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
+            Assert.AreEqual(3, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -216,8 +223,11 @@ namespace AjTalk.Tests.Compiler
             Parser compiler = new Parser("nil invokeWith: 10. Global := 20");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
+            Assert.AreEqual(3, block.NoConstants);
+            Assert.AreEqual(1, block.NoGlobalNames);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -227,8 +237,10 @@ namespace AjTalk.Tests.Compiler
             Parser compiler = new Parser("nil invokeWith: 10; invokeWith: 20");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
+            Assert.AreEqual(3, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(21, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -248,15 +260,23 @@ namespace AjTalk.Tests.Compiler
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);
+            Assert.AreEqual(2, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.AreEqual(2, block.NoConstants);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
 
             object constant = block.GetConstant(0);
 
             Assert.IsNotNull(constant);
             Assert.IsInstanceOfType(constant, typeof(Block));
+
+            var newblock = (Block)constant;
+            Assert.AreEqual(0, newblock.Arity);
+            Assert.AreEqual(0, newblock.NoLocals);
+            Assert.IsNotNull(newblock.ByteCodes);
+            Assert.AreEqual(11, newblock.ByteCodes.Length);
         }
 
         [TestMethod]
@@ -266,9 +286,11 @@ namespace AjTalk.Tests.Compiler
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoGlobalNames);
             Assert.AreEqual(0, block.NoLocals);
             Assert.AreEqual(1, block.NoConstants);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(1, block.Arity);
 
             object constant = block.GetConstant(0);

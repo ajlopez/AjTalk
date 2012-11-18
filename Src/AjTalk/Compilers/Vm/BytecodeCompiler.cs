@@ -64,7 +64,8 @@
 
         public override void Visit(FluentMessageExpression expression)
         {
-            throw new NotImplementedException();
+            expression.Target.Visit(this);
+            this.block.CompileByteCode(ByteCode.ChainedSend);
         }
 
         public override void Visit(ReturnExpression expression)
@@ -74,7 +75,7 @@
 
         public override void Visit(SelfExpression expression)
         {
-            throw new NotImplementedException();
+            this.block.CompileByteCode(ByteCode.GetSelf);
         }
 
         public override void Visit(SetExpression expression)
@@ -90,7 +91,7 @@
 
         public override void Visit(SymbolExpression expression)
         {
-            throw new NotImplementedException();
+            this.block.CompileGetConstant(expression.Symbol);
         }
 
         public override void Visit(InstanceVariableExpression expression)
@@ -105,7 +106,18 @@
 
         public override void Visit(BlockExpression expression)
         {
-            throw new NotImplementedException();
+            Block newblock = new Block();
+            if (expression.ParameterNames != null)
+                foreach (var parname in expression.ParameterNames)
+                    newblock.CompileArgument(parname);
+
+            if (expression.LocalVariables != null)
+                foreach (var locname in expression.LocalVariables)
+                    newblock.CompileLocal(locname);
+
+            var compiler = new BytecodeCompiler(newblock);
+            compiler.CompileExpressions(expression.Body);
+            this.block.CompileGetBlock(newblock);
         }
 
         public override void Visit(PrimitiveExpression expression)

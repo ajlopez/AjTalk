@@ -23,6 +23,12 @@
             expression.Visit(this);
         }
 
+        public void CompileExpressions(IEnumerable<IExpression> expressions)
+        {
+            foreach (var expr in expressions)
+                expr.Visit(this);
+        }
+
         public abstract void Visit(ClassModel @class);
 
         public abstract void Visit(MethodModel method);
