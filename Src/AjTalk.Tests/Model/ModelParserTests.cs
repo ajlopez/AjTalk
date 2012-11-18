@@ -473,6 +473,18 @@
         }
 
         [TestMethod]
+        public void ParseSimpleReturnMethod()
+        {
+            ModelParser parser = new ModelParser("x ^x");
+            MethodModel method = parser.ParseMethod();
+
+            Assert.IsNotNull(method);
+            Assert.AreEqual("x", method.Selector);
+            Assert.AreEqual(0, method.ParameterNames.Count);
+            Assert.AreEqual(0, method.LocalVariables.Count);
+        }
+
+        [TestMethod]
         public void ParseMethodWithBinaryOperator()
         {
             ModelParser parser = new ModelParser("+ aNumber aNumber do. ^aNumber");

@@ -353,8 +353,14 @@
       <timestamp>11/18/2012 16:16:24</timestamp>
       <milliseconds>744</milliseconds>
     </settings>
-    <timestamp>11/18/2012 17:22:41</timestamp>
-    <milliseconds>494</milliseconds>
-    <violations />
+    <timestamp>11/18/2012 18:30:11</timestamp>
+    <milliseconds>427</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
+        <context>The call to block must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
+        <line>403</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
 </stylecopresultscache>

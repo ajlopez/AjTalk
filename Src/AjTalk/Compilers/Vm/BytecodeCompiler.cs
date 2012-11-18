@@ -23,12 +23,21 @@
 
         public override void Visit(MethodModel method)
         {
-            throw new NotImplementedException();
+            if (method.ParameterNames != null)
+                foreach (var parname in method.ParameterNames)
+                    this.block.CompileArgument(parname);
+
+            if (method.LocalVariables != null)
+                foreach (var locname in method.LocalVariables)
+                    this.block.CompileLocal(locname);
+
+            this.Visit(method.Body);
         }
 
         public override void Visit(IEnumerable<IExpression> expressions)
         {
-            throw new NotImplementedException();
+            foreach (var expr in expressions)
+                expr.Visit(this);
         }
 
         public override void Visit(ArrayExpression expression)
@@ -70,7 +79,8 @@
 
         public override void Visit(ReturnExpression expression)
         {
-            throw new NotImplementedException();
+            expression.Expression.Visit(this);
+            this.block.CompileByteCode(ByteCode.ReturnPop);
         }
 
         public override void Visit(SelfExpression expression)
