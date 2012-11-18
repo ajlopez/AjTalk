@@ -79,12 +79,6 @@
     <Compile Include="Transactions\TransactionObjectTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AjTalk\AjTalk.csproj">
-      <Project>{232A3EF3-8392-409E-8D6B-961EFEE30347}</Project>
-      <Name>AjTalk</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="CodeFiles\SetDotNetObject.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -189,6 +183,12 @@
     <None Include="Library\Object.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AjTalk\AjTalk.csproj">
+      <Project>{232A3EF3-8392-409E-8D6B-961EFEE30347}</Project>
+      <Name>AjTalk</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

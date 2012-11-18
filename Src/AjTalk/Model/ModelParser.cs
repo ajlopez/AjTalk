@@ -235,6 +235,8 @@
                         return new ConstantExpression(true);
                     if (token.Value == "false")
                         return new ConstantExpression(false);
+                    if (token.Value == "nil" || token.Value == "null")
+                        return new ConstantExpression(null);
 
                     if (this.@class != null && this.isClassMethod == false && this.@class.InstanceVariableNames.Contains(token.Value))
                         return new InstanceVariableExpression(token.Value);

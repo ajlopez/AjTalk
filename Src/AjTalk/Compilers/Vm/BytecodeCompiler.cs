@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using AjTalk.Language;
+    using AjTalk.Model;
 
     public class BytecodeCompiler : AbstractCompiler
     {
@@ -15,92 +16,103 @@
             this.block = block;
         }
 
-        public override void Visit(AjTalk.Model.ClassModel @class)
+        public override void Visit(ClassModel @class)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.MethodModel method)
+        public override void Visit(MethodModel method)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(IEnumerable<AjTalk.Model.IExpression> expressions)
+        public override void Visit(IEnumerable<IExpression> expressions)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.ArrayExpression expression)
+        public override void Visit(ArrayExpression expression)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.DynamicArrayExpression expression)
+        public override void Visit(DynamicArrayExpression expression)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.ConstantExpression expression)
+        public override void Visit(ConstantExpression expression)
+        {
+            if (expression.Value == null)
+                this.block.CompileByteCode(ByteCode.GetNil);
+            else
+                this.block.CompileGetConstant(expression.Value);
+        }
+
+        public override void Visit(MessageExpression expression)
+        {
+            expression.Target.Visit(this);
+            
+            foreach (var arg in expression.Arguments)
+                arg.Visit(this);
+
+            if (expression.IsBinaryMessage)
+                this.block.CompileBinarySend(expression.Selector);
+            else
+                this.block.CompileSend(expression.Selector);
+        }
+
+        public override void Visit(FluentMessageExpression expression)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.MessageExpression expression)
+        public override void Visit(ReturnExpression expression)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.FluentMessageExpression expression)
+        public override void Visit(SelfExpression expression)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.ReturnExpression expression)
+        public override void Visit(SetExpression expression)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.SelfExpression expression)
+        public override void Visit(VariableExpression expression)
+        {
+            this.block.CompileGet(expression.Name);
+        }
+
+        public override void Visit(SymbolExpression expression)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.SetExpression expression)
+        public override void Visit(InstanceVariableExpression expression)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.VariableExpression expression)
+        public override void Visit(ClassVariableExpression expression)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.SymbolExpression expression)
+        public override void Visit(BlockExpression expression)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.InstanceVariableExpression expression)
+        public override void Visit(PrimitiveExpression expression)
         {
             throw new NotImplementedException();
         }
 
-        public override void Visit(AjTalk.Model.ClassVariableExpression expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Visit(AjTalk.Model.BlockExpression expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Visit(AjTalk.Model.PrimitiveExpression expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Visit(AjTalk.Model.CodeModel expression)
+        public override void Visit(CodeModel expression)
         {
             throw new NotImplementedException();
         }

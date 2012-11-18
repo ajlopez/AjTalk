@@ -100,6 +100,21 @@
         }
 
         [TestMethod]
+        public void ParseNil()
+        {
+            ModelParser parser = new ModelParser("nil");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(ConstantExpression));
+
+            ConstantExpression cexpression = (ConstantExpression)expression;
+            Assert.IsNull(cexpression.Value);
+
+            Assert.AreEqual("nil", expression.AsString());
+        }
+
+        [TestMethod]
         public void ParseNestedExpression()
         {
             ModelParser parser = new ModelParser("((elementType = #systemSlot))");

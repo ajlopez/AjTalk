@@ -29,8 +29,52 @@
             IExpression expr = parser.ParseExpression();
             this.compiler.CompileExpression(expr);
             Assert.IsNotNull(this.block);
+            Assert.AreEqual(2, this.block.NoConstants);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
+            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(0, this.block.Arity);
+        }
+
+        [TestMethod]
+        public void CompileSimpleSum()
+        {
+            ModelParser parser = new ModelParser("1 + 2");
+            IExpression expr = parser.ParseExpression();
+            this.compiler.CompileExpression(expr);
+            Assert.IsNotNull(this.block);
+            Assert.AreEqual(3, this.block.NoConstants);
+            Assert.AreEqual(0, this.block.NoLocals);
+            Assert.IsNotNull(this.block.ByteCodes);
+            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(0, this.block.Arity);
+        }
+
+        [TestMethod]
+        public void CompileSimpleRealSum()
+        {
+            ModelParser parser = new ModelParser("1.2 + 3.4");
+            IExpression expr = parser.ParseExpression();
+            this.compiler.CompileExpression(expr);
+            Assert.IsNotNull(this.block);
+            Assert.AreEqual(3, this.block.NoConstants);
+            Assert.AreEqual(0, this.block.NoLocals);
+            Assert.IsNotNull(this.block.ByteCodes);
+            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(0, this.block.Arity);
+        }
+
+        [TestMethod]
+        public void CompileSimpleArithmeticWithParenthesis()
+        {
+            ModelParser parser = new ModelParser("1 * (2 + 3)");
+            IExpression expr = parser.ParseExpression();
+            this.compiler.CompileExpression(expr);
+            Assert.IsNotNull(this.block);
+            Assert.AreEqual(5, this.block.NoConstants);
+            Assert.AreEqual(0, this.block.NoLocals);
+            Assert.IsNotNull(this.block.ByteCodes);
+            Assert.AreEqual(21, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
         }
     }

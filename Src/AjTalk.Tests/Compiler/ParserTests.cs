@@ -104,8 +104,10 @@ namespace AjTalk.Tests.Compiler
             Parser compiler = new Parser("nil invokeWith: 10");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
+            Assert.AreEqual(2, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -117,6 +119,7 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(block);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -126,8 +129,10 @@ namespace AjTalk.Tests.Compiler
             Parser compiler = new Parser("1.2 + 3.4");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
+            Assert.AreEqual(3, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -137,8 +142,10 @@ namespace AjTalk.Tests.Compiler
             Parser compiler = new Parser("1 * (2 + 3)");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
+            Assert.AreEqual(5, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(21, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -148,8 +155,10 @@ namespace AjTalk.Tests.Compiler
             Parser compiler = new Parser("a := 1. b := 2");
             Block block = compiler.CompileBlock();
             Assert.IsNotNull(block);
+            Assert.AreEqual(2, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 

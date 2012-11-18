@@ -19,6 +19,8 @@
 
         public string AsString()
         {
+            if (this.value == null)
+                return "nil";
             // TODO Escape chars
             if (this.value is string)
                 return string.Format("'{0}'", NormalizeString((string)this.value));
