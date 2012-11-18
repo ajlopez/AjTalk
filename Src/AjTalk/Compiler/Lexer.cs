@@ -169,7 +169,7 @@ namespace AjTalk.Compiler
 
             if (ch < 0)
             {
-                return (char) 0;
+                return (char)0;
             }
 
             this.PushChar((char)ch);
@@ -427,7 +427,7 @@ namespace AjTalk.Compiler
                 }
 
                 if (ch == '.' && Char.IsDigit(this.PeekChar()))
-                    return this.NextReal(value+".");
+                    return this.NextReal(value + ".");
 
                 this.PushChar(ch);
             }

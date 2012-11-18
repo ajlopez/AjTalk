@@ -44,23 +44,11 @@ namespace AjTalk.Language
 
         public string SourceCode { get { return this.sourcecode; } }
 
-        public int Arity
-        {
-            get
-            {
-                return this.argnames.Count;
-            }
-        }
+        public int Arity { get { return this.argnames.Count; } }
 
         public ExecutionBlock Closure { get { return this.closure; } }
 
-        public byte[] ByteCodes
-        {
-            get
-            {
-                return this.bytecodes;
-            }
-        }
+        public byte[] ByteCodes { get { return this.bytecodes; } }
 
         public int NoLocals
         {
@@ -85,6 +73,17 @@ namespace AjTalk.Language
                 }
 
                 return this.constants.Count;
+            }
+        }
+
+        public int NoGlobalNames
+        {
+            get
+            {
+                if (this.globalnames == null)
+                    return 0;
+
+                return this.globalnames.Count;
             }
         }
 
@@ -376,17 +375,15 @@ namespace AjTalk.Language
             }
 
             // TODO Review: arguments cannot be set
-            //if (this.argnames != null)
-            //{
+            // if (this.argnames != null)
+            // {
             //    p = this.argnames.IndexOf(name);
-
             //    if (p >= 0)
             //    {
             //        this.CompileByteCode(ByteCode.SetArgument, (byte)p);
             //        return true;
             //    }
-            //}
-
+            // }
             return false;
         }
 

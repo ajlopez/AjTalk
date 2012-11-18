@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-
-namespace AjTalk.Transactions
+﻿namespace AjTalk.Transactions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+
     public class TransactionManager
     {
+        [ThreadStatic]
+        private static Transaction current;
+
         private long time;
         private Machine machine;
         private List<Transaction> transactions = new List<Transaction>();
-
-        [ThreadStatic]
-        private static Transaction current;
 
         public TransactionManager(Machine machine)
         {
@@ -23,6 +23,19 @@ namespace AjTalk.Transactions
         public static Transaction CurrentTransaction { get { return current; } }
 
         public long Time { get { return this.time; } }
+
+        public long MinimalTransactionalTime
+        {
+            get
+            {
+                // TODO review is this method needs locks
+                if (this.transactions.Count == 0)
+                    return this.time + 1;
+
+                IEnumerable<long> times = from tr in this.transactions select tr.Start;
+                return times.Min();
+            }
+        }
 
         public Transaction CreateTransaction()
         {
@@ -71,19 +84,6 @@ namespace AjTalk.Transactions
         public bool HasTransactions()
         {
             return this.transactions.Count != 0;
-        }
-
-        public long MinimalTransactionalTime
-        {
-            get
-            {
-                // TODO review is this method needs locks
-                if (this.transactions.Count == 0)
-                    return this.time+1;
-
-                IEnumerable<long> times = from tr in this.transactions select tr.Start;
-                return times.Min();
-            }
         }
     }
 }

@@ -18,7 +18,7 @@
 
         public string AsString()
         {
-            return "#" +this.symbol;
+            return "#" + this.symbol;
         }
 
         public void Visit(IVisitor visitor)

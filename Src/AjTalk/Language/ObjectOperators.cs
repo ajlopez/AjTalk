@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualBasic.CompilerServices;
-
-namespace AjTalk.Language
+﻿namespace AjTalk.Language
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Microsoft.VisualBasic.CompilerServices;
+
     public class ObjectOperators
     {
         public static object Add(object obj1, object obj2)

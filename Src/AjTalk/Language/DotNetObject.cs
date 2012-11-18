@@ -1,10 +1,10 @@
 ﻿namespace AjTalk.Language
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Reflection;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Text;
 
     public class DotNetObject
     {
@@ -100,9 +100,9 @@
                     return mth.ExecuteNative(obj, args);
             }
 
-            if (obj is Boolean)
+            if (obj is bool)
             {
-                behavior = machine.GetNativeBehavior(typeof(Boolean));
+                behavior = machine.GetNativeBehavior(typeof(bool));
                 IMethod mth = behavior.GetInstanceMethod(msgname);
 
                 if (mth != null)
@@ -117,11 +117,9 @@
             }
 
             // TODO how to use doesNotUnderstand in native behavior
-            //mth = behavior.GetInstanceMethod("doesNotUnderstand:");
-
-            //if (mth != null)
+            // mth = behavior.GetInstanceMethod("doesNotUnderstand:");
+            // if (mth != null)
             //    return mth.ExecuteNative(obj, new object[] { msgname, args });
-
             return SendNativeMessage(obj, mthname, args);
         }
     }

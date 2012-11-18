@@ -6,6 +6,8 @@ namespace AjTalk.Language
 
     public class ExecutionBlock
     {
+        private static Action<ExecutionBlock>[] codes;
+
         private Block block;
         private Machine machine;
         private IObject self;
@@ -14,7 +16,6 @@ namespace AjTalk.Language
         private object[] locals;
         private object nativeSelf;
         private object lastreceiver = null;
-        private static Action<ExecutionBlock>[] codes;
 
         private int ip;
         private IList stack;
@@ -77,7 +78,7 @@ namespace AjTalk.Language
 
                 int nlocs = block.NoLocals - block.Closure.NoLocals;
 
-                if (nlocs>0)
+                if (nlocs > 0)
                     this.locals = new object[nlocs];
                 else
                     this.locals = null;
@@ -91,6 +92,18 @@ namespace AjTalk.Language
             }
         }
 
+        public IObject Self { get { return this.self; } }
+
+        public object NativeSelf { get { return this.nativeSelf; } }
+
+        public int NoLocals { get { return this.NoParentLocals + (this.locals == null ? 0 : this.locals.Length); } }
+
+        public int NoParentLocals { get { return this.block.Closure == null ? 0 : this.block.Closure.NoLocals; } }
+
+        public int NoArguments { get { return this.NoParentArguments + (this.arguments == null ? 0 : this.arguments.Length); } }
+
+        public int NoParentArguments { get { return this.block.Closure == null ? 0 : this.block.Closure.NoArguments; } }
+
         private object Top
         {
             get
@@ -98,18 +111,6 @@ namespace AjTalk.Language
                 return this.stack[this.stack.Count - 1];
             }
         }
-
-        public IObject Self { get { return this.self; } }
-
-        public object NativeSelf { get { return this.nativeSelf; } }
-
-        public int NoLocals { get { return this.NoParentLocals + (this.locals == null ? 0 : this.locals.Length); } }
-
-        public int NoParentLocals { get { return (this.block.Closure == null ? 0 : this.block.Closure.NoLocals); } }
-
-        public int NoArguments { get { return this.NoParentArguments + (this.arguments == null ? 0 : this.arguments.Length); } }
-
-        public int NoParentArguments { get { return (this.block.Closure == null ? 0 : this.block.Closure.NoArguments); } }
 
         public object Execute()
         {
@@ -162,11 +163,12 @@ namespace AjTalk.Language
                         this.Push(this.receiver[arg]);
                         break;
                     case ByteCode.NewObject:
-                        IBehavior ibeh = (IBehavior) this.Pop();
+                        IBehavior ibeh = (IBehavior)this.Pop();
                         this.lastreceiver = ibeh;
                         this.Push(ibeh.NewObject());
                         break;
-                        // TODO remove, no primitive methods
+  
+                    // TODO remove, no primitive methods
 /*
                     case ByteCode.Add:
                         int y = (int)this.Pop();
@@ -314,8 +316,9 @@ namespace AjTalk.Language
                             this.Push(DotNetObject.SendNativeMessage(obj, mthname, args));
 
                         break;
+                    
                     // TODO review argument has no set
-                    //case ByteCode.SetArgument:
+                    // case ByteCode.SetArgument:
                     //    this.ip++;
                     //    arg = this.block.ByteCodes[this.ip];
                     //    this.arguments[arg] = this.Pop();
@@ -333,7 +336,7 @@ namespace AjTalk.Language
                         this.ip++;
                         arg = this.block.ByteCodes[this.ip];
                         this.receiver[arg] = this.Pop();
-                        this.lastreceiver = receiver;
+                        this.lastreceiver = this.receiver;
                         break;
                     case ByteCode.SetGlobalVariable:
                         this.ip++;
@@ -389,18 +392,6 @@ namespace AjTalk.Language
         internal object GetParentArgument(int nargument)
         {
             return this.block.Closure.GetArgument(nargument);
-        }
-
-        private void Push(object obj)
-        {
-            this.stack.Add(obj);
-        }
-
-        private object Pop()
-        {
-            object obj = this.stack[this.stack.Count - 1];
-            this.stack.RemoveAt(this.stack.Count - 1);
-            return obj;
         }
 
         private static void DoGetConstant(ExecutionBlock execblock)
@@ -461,7 +452,7 @@ namespace AjTalk.Language
 
         private static void DoGetClass(ExecutionBlock execblock)
         {
-            IObject iobj = (IObject) execblock.Pop();
+            IObject iobj = (IObject)execblock.Pop();
             execblock.lastreceiver = iobj;
             execblock.Push(iobj.Behavior);
         }
@@ -485,6 +476,18 @@ namespace AjTalk.Language
             execblock.ip++;
             byte arg = execblock.block.ByteCodes[execblock.ip];
             execblock.Push(TypeUtilities.AsType(execblock.block.GetGlobalName(arg)));
+        }
+
+        private void Push(object obj)
+        {
+            this.stack.Add(obj);
+        }
+
+        private object Pop()
+        {
+            object obj = this.stack[this.stack.Count - 1];
+            this.stack.RemoveAt(this.stack.Count - 1);
+            return obj;
         }
     }
 }

@@ -43,14 +43,14 @@
             {
                 string clsname = (string)args[0];
                 string instancevarnames = (string)args[1];
-                string classvarnames = (args.Length > 2 ? (string)args[2] : string.Empty);
+                string classvarnames = args.Length > 2 ? (string)args[2] : string.Empty;
 
                 IClass newclass = this.Machine.CreateClass((string)args[0], (IClass)self, instancevarnames, classvarnames);
 
                 if (msgname.StartsWith("agent:"))
                     ((BaseClass)newclass).IsAgentClass = true;
                 if (args.Length >= 5)
-                    ((BaseClass)newclass).Category = (string) args[4];
+                    ((BaseClass)newclass).Category = (string)args[4];
 
                 this.Machine.SetGlobalObject(newclass.Name, newclass);
 

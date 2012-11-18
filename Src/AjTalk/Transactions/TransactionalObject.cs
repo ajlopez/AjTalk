@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AjTalk.Language;
-
-namespace AjTalk.Transactions
+﻿namespace AjTalk.Transactions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Language;
+
     public class TransactionalObject : IObject, IObjectDecorator
     {
         private IObject inner;
@@ -24,6 +24,11 @@ namespace AjTalk.Transactions
         }
 
         public TransactionManager TransactionManager { get { return this.manager; } }
+
+        public IObject InnerObject
+        {
+            get { return this.inner; }
+        }
 
         public object this[int n]
         {
@@ -50,6 +55,7 @@ namespace AjTalk.Transactions
                     return this.inner[n];
                 }
             }
+
             set
             {
                 lock (this)
@@ -98,11 +104,6 @@ namespace AjTalk.Transactions
             // TODO native methods are directed to this Transactional object
             // instead to inner object
             return method.Execute(this, this, arguments);
-        }
-
-        public IObject InnerObject
-        {
-            get { return this.inner; }
         }
 
         internal void ReleaseValues()

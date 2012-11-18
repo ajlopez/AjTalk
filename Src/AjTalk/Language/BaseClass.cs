@@ -11,7 +11,7 @@ namespace AjTalk.Language
         private bool isBehavior;
         private bool isClassDescription;
         
-        public BaseClass(string name, Machine machine) : this(null, name, null, machine, "")
+        public BaseClass(string name, Machine machine) : this(null, name, null, machine, string.Empty)
         {
         }
 
@@ -44,13 +44,11 @@ namespace AjTalk.Language
         public override object NewObject()
         {
             // TODO review first parameter
-            //if (this.isBehavior)
+            // if (this.isBehavior)
             //    return new BaseBehavior(null, this, this.Machine);
-
             // TODO review first parameter
-            //if (this.isClassDescription)
+            // if (this.isClassDescription)
             //    return new BaseClassDescription(null, this, this.Machine, string.Empty);
-
             if (this.IsAgentClass)
                 return new AgentObject(this, this.NoInstanceVariables);
 
@@ -77,9 +75,9 @@ namespace AjTalk.Language
             foreach (IMethod method in this.GetClassMethods()) 
             {
                 sb.Append("\r\n");
-                String source = method.SourceCode;
+                string source = method.SourceCode;
 
-                if (String.IsNullOrEmpty(source))
+                if (string.IsNullOrEmpty(source))
                     continue;
 
                 source = source.Replace("!", "!!");
@@ -94,9 +92,9 @@ namespace AjTalk.Language
             foreach (IMethod method in this.GetInstanceMethods())
             {
                 sb.Append("\r\n");
-                String source = method.SourceCode;
+                string source = method.SourceCode;
 
-                if (String.IsNullOrEmpty(source))
+                if (string.IsNullOrEmpty(source))
                     continue;
 
                 source = source.Replace("!", "!!");
@@ -112,7 +110,7 @@ namespace AjTalk.Language
 
         private void BuildDefineString(StringBuilder sb)
         {
-            if (this.SuperClass is IClass && ((IClass)this.SuperClass).Name!="UndefinedObject")
+            if (this.SuperClass is IClass && ((IClass)this.SuperClass).Name != "UndefinedObject")
                 sb.Append(((IClass)this.SuperClass).Name);
             else
                 sb.Append("nil");

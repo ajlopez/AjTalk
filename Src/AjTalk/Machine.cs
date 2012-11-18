@@ -1,15 +1,17 @@
 namespace AjTalk
 {
     using System;
-    using System.Collections.Generic;
-
-    using AjTalk.Language;
-    using AjTalk.Hosting;
     using System.Collections;
+    using System.Collections.Generic;
+    using AjTalk.Hosting;
+    using AjTalk.Language;
     using AjTalk.Transactions;
 
     public class Machine
     {
+        [ThreadStatic]
+        private static Machine current;
+
         private IClass nilclass;
         private IClass classclass;
         private IClass metaclassclass;
@@ -22,9 +24,6 @@ namespace AjTalk
 
         private TransactionManager transactionManager;
 
-        [ThreadStatic]
-        private static Machine current;
-
         public Machine()
             : this(true)
         {
@@ -35,14 +34,14 @@ namespace AjTalk
             if (iscurrent)
                 this.SetCurrent();
 
-            IMetaClass meta = new BaseMetaClass(null, null, this, "");
-            this.nilclass = meta.CreateClass("UndefinedObject", "");
+            IMetaClass meta = new BaseMetaClass(null, null, this, string.Empty);
+            this.nilclass = meta.CreateClass("UndefinedObject", string.Empty);
 
             this.nilclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this));
             this.nilclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this));
 
             this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(meta, this.nilclass, this));
-            this.RegisterNativeBehavior(typeof(Boolean), new BooleanBehavior(meta, this.nilclass, this));
+            this.RegisterNativeBehavior(typeof(bool), new BooleanBehavior(meta, this.nilclass, this));
         }
 
         public static Machine Current { get { return current; } }
@@ -70,6 +69,11 @@ namespace AjTalk
             }
         }
 
+        public static void SetCurrent(Machine machine)
+        {
+            current = machine;
+        }
+
         public IClass CreateClass(string clsname)
         {
             return this.CreateClass(clsname, (this.classclass == null ? this.nilclass : this.classclass));
@@ -84,7 +88,7 @@ namespace AjTalk
 
         public IClass CreateClass(string clsname, IClass superclass)
         {
-            return this.CreateClass(clsname, superclass, "", "");
+            return this.CreateClass(clsname, superclass, string.Empty, string.Empty);
         }
 
         public IClass CreateClass(string clsname, IClass superclass, string instancevarnames, string classvarnames)
@@ -134,18 +138,13 @@ namespace AjTalk
             current = this;
         }
 
-        public static void SetCurrent(Machine machine)
-        {
-            current = machine;
-        }
-
         public ICollection<IClass> GetClasses()
         {
             List<IClass> classes = new List<IClass>();
 
             foreach (object value in this.globals.Values)
                 if (value is IClass)
-                    classes.Add((IClass) value);
+                    classes.Add((IClass)value);
 
             return classes;
         }
@@ -160,9 +159,8 @@ namespace AjTalk
 
         public IHost GetHost(Guid id)
         {
-            //if (this.Host != null && this.Host.Id == id)
+            // if (this.Host != null && this.Host.Id == id)
             //    return this.Host;
-
             if (this.localhosts.ContainsKey(id))
                 return this.localhosts[id];
 

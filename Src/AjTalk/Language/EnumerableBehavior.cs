@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections;
-
-namespace AjTalk.Language
+﻿namespace AjTalk.Language
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     public class EnumerableBehavior : NativeBehavior
     {
         public EnumerableBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
@@ -19,9 +19,9 @@ namespace AjTalk.Language
         {
             if (arguments == null)
                 throw new ArgumentException("arguments");
-            if (arguments.Count()!=1 || !(arguments[0] is IBlock))
+            if (arguments.Count() != 1 || !(arguments[0] is IBlock))
                 throw new InvalidOperationException("A Block was expected");
-            IBlock block = (IBlock) arguments[0];
+            IBlock block = (IBlock)arguments[0];
             IEnumerable elements = (IEnumerable)obj;
             object result = null;
             foreach (object element in elements)
@@ -40,7 +40,7 @@ namespace AjTalk.Language
             ArrayList result = new ArrayList();
 
             foreach (object element in elements)
-                if ((bool) block.Execute(this.Machine, new object[] { element }))
+                if ((bool)block.Execute(this.Machine, new object[] { element }))
                     result.Add(element);
 
             return result;

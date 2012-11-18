@@ -116,7 +116,6 @@
             return this.MetaClass.GetInstanceMethods();
         }
 
-
         public void SetSuperClass(IBehavior superclass)
         {
             this.superclass = superclass;

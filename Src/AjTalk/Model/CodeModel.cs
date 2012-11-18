@@ -22,8 +22,8 @@
             if (element is ClassModel)
             {
                 ClassModel @class = (ClassModel)element;
-                classes[@class.Name] = @class;
-                classes[@class.MetaClass.Name] = @class.MetaClass;
+                this.classes[@class.Name] = @class;
+                this.classes[@class.MetaClass.Name] = @class.MetaClass;
             }
         }
 

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace AjTalk.Language
+﻿namespace AjTalk.Language
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     public class Message
     {
         private IMethod method;
@@ -17,6 +17,7 @@ namespace AjTalk.Language
         }
 
         public IMethod Method { get { return this.method; } }
+        
         public object[] Arguments { get { return this.arguments; } }
     }
 }

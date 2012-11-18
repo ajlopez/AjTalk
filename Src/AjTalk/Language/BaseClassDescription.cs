@@ -10,7 +10,7 @@ namespace AjTalk.Language
         private List<string> instancevariables = new List<string>();
 
         public BaseClassDescription(Machine machine)
-            : this(null, null, machine, "")
+            : this(null, null, machine, string.Empty)
         {
         }
 
@@ -27,22 +27,6 @@ namespace AjTalk.Language
             : this(behavior, superclass, machine, varnames)
         {
             this.SetBehavior(metaclass);
-        }
-
-        private static IEnumerable<string> AsNames(string varnames)
-        {
-            if (string.IsNullOrEmpty(varnames))
-                return new string[] { };
-
-            string[] splits = varnames.Split(' ');
-
-            IList<string> names = new List<String>();
-
-            foreach (string split in splits)
-                if (!string.IsNullOrEmpty(split))
-                    names.Add(split);
-
-            return names;
         }
 
         public override int NoInstanceVariables
@@ -132,6 +116,22 @@ namespace AjTalk.Language
         public string GetClassVariableNames()
         {
             return this.MetaClass.GetInstanceVariableNames();
+        }
+
+        private static IEnumerable<string> AsNames(string varnames)
+        {
+            if (string.IsNullOrEmpty(varnames))
+                return new string[] { };
+
+            string[] splits = varnames.Split(' ');
+
+            IList<string> names = new List<string>();
+
+            foreach (string split in splits)
+                if (!string.IsNullOrEmpty(split))
+                    names.Add(split);
+
+            return names;
         }
     }
 }

@@ -89,7 +89,7 @@ namespace AjTalk.Language
 
         public object ExecuteNative(object self, object[] args)
         {
-            return (new ExecutionBlock(Machine.Current, self, this, args).Execute());
+            return new ExecutionBlock(Machine.Current, self, this, args).Execute();
         }
 
         private bool TryCompileGetVariable(string name)

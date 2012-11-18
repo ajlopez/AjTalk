@@ -15,7 +15,7 @@
             { "=", "equal" },
             { "==", "equalequal" },
             { "~=", "notequal" },
-//            { "~~", "notnot" },
+////            { "~~", "notnot" },
             { "&", "and" },
             { "|", "or" },
             { "==>", "implies" },
@@ -26,19 +26,21 @@
             { "/", "div" }*/
         };
 
-        private static IDictionary<string, string> jsOperators = new Dictionary<string, string>()
+        private static IDictionary<string, string> javaScriptOperators = new Dictionary<string, string>()
         {
             { "~~", "!==" }
         };
 
         private SourceWriter writer;
-        protected MethodModel currentMethod;
+
         private bool inBlock = false;
 
         public Compiler(SourceWriter writer)
         {
             this.writer = writer;
         }
+
+        protected MethodModel CurrentMethod { get; set; }
 
         public override void Visit(ClassModel @class)
         {
@@ -115,16 +117,16 @@
             foreach (string locname in method.LocalVariables)
                 this.writer.WriteLine(string.Format("var {0} = null", ToVariableName(locname)));
 
-            MethodModel previousMethod = this.currentMethod;
+            MethodModel previousMethod = this.CurrentMethod;
 
             try
             {
-                this.currentMethod = method;
+                this.CurrentMethod = method;
                 this.Visit(method.Body);
             }
             finally
             {
-                this.currentMethod = previousMethod;
+                this.CurrentMethod = previousMethod;
             }
 
             if (method.Class != null)
@@ -145,7 +147,7 @@
                 lastexpr = expr;
                 expr.Visit(this);
                 this.writer.WriteLine(";");
-                if (this.currentMethod != null && this.currentMethod.HasBlock() && expr is MessageExpression)
+                if (this.CurrentMethod != null && this.CurrentMethod.HasBlock() && expr is MessageExpression)
                     this.writer.WriteLine("if (__context.return) return __context.value;");
             }
 
@@ -206,6 +208,7 @@
             // TODO block with parameters, return
             this.writer.Write("function(");
             int npars = 0;
+            
             foreach (string parname in expression.ParameterNames)
             {
                 if (npars > 0)
@@ -213,6 +216,7 @@
                 this.writer.Write(parname);
                 npars++;
             }
+
             this.writer.WriteLineStart(") {");
 
             foreach (string locname in expression.LocalVariables)
@@ -237,7 +241,7 @@
         {
             this.writer.Write(string.Format("var _primitive = primitives.primitive{0}(self", expression.Number));
 
-            foreach (var parameter in this.currentMethod.ParameterNames)
+            foreach (var parameter in this.CurrentMethod.ParameterNames)
             {
                 this.writer.Write(", ");
                 this.writer.Write(parameter);
@@ -249,9 +253,9 @@
 
         public override void Visit(MessageExpression expression)
         {
-            if (this.currentMethod != null && expression.Target is ILeftValue && ((ILeftValue)expression.Target).Name == "super")
+            if (this.CurrentMethod != null && expression.Target is ILeftValue && ((ILeftValue)expression.Target).Name == "super")
             {
-                this.writer.Write(string.Format("sendSuper(self, {0}", this.currentMethod.Class.Name));
+                this.writer.Write(string.Format("sendSuper(self, {0}", this.CurrentMethod.Class.Name));
             }
             else
             {
@@ -266,9 +270,11 @@
 
             this.writer.Write(string.Format(", '{0}'", ToMethodName(expression.Selector)));
 
-            if (expression.Arguments.Count() > 0) {
+            if (expression.Arguments.Count() > 0) 
+            {
                 this.writer.Write(", [");
                 int narg = 0;
+
                 foreach (var argument in expression.Arguments)
                 {
                     if (narg > 0)
@@ -278,6 +284,7 @@
 
                     narg++;
                 }
+
                 this.writer.Write("]");
             }
 
@@ -308,7 +315,7 @@
                     ConstantExpression cexpr = (ConstantExpression)expression.Target;
 
                     // TODO other types, scape characters in string
-                    if (cexpr.Value is String)
+                    if (cexpr.Value is string)
                         this.writer.Write(string.Format("String({0})", cexpr.AsString()));
                     else if (cexpr.Value is int)
                         this.writer.Write(string.Format("Number({0})", cexpr.Value));
@@ -341,7 +348,7 @@
                 ConstantExpression cexpr = (ConstantExpression)expression.Target;
 
                 // TODO other types, scape characters in string
-                if (cexpr.Value is String)
+                if (cexpr.Value is string)
                     this.writer.Write(string.Format("String({0})", cexpr.AsString()));
                 else if (cexpr.Value is int)
                     this.writer.Write(string.Format("Number({0})", cexpr.Value));
@@ -375,6 +382,7 @@
         {
             this.writer.Write("(function () {");
             this.writer.Write("var _aux = ");
+            
             // TODO It's not implemented yet
             expression.Target.Visit(this);
             this.writer.Write(";");
@@ -384,7 +392,7 @@
 
         public override void Visit(ReturnExpression expression)
         {
-            if (this.currentMethod != null && this.inBlock)
+            if (this.CurrentMethod != null && this.inBlock)
             {
                 this.writer.Write("__context.value = ");
                 expression.Expression.Visit(this);
@@ -479,19 +487,17 @@
         private static string OperatorToMethodName(string name)
         {
             return name;
-            //return "$_" + operatorNames[name] + "_";
         }
 
         private static bool OperatorHasMethodName(string name)
         {
             return false;
-            //return operatorNames.ContainsKey(name);
         }
 
         private static string OperatorToJsOperator(string name)
         {
-            if (jsOperators.ContainsKey(name))
-                return jsOperators[name];
+            if (javaScriptOperators.ContainsKey(name))
+                return javaScriptOperators[name];
 
             return name;
         }

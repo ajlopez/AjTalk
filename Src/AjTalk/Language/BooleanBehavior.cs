@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections;
-
-namespace AjTalk.Language
+﻿namespace AjTalk.Language
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     public class BooleanBehavior : NativeBehavior
     {
         public BooleanBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
-            : base(behavior, superclass, machine, typeof(Boolean))
+            : base(behavior, superclass, machine, typeof(bool))
         {
             this.DefineInstanceMethod(new FunctionalMethod("ifFalse:", this, this.IfFalseMethod));
             this.DefineInstanceMethod(new FunctionalMethod("ifTrue:", this, this.IfTrueMethod));
@@ -20,10 +20,10 @@ namespace AjTalk.Language
         {
             if (arguments == null)
                 throw new ArgumentException("arguments");
-            if (arguments.Count()!=1 || !(arguments[0] is IBlock))
+            if (arguments.Count() != 1 || !(arguments[0] is IBlock))
                 throw new InvalidOperationException("A Block was expected");
-            IBlock block = (IBlock) arguments[0];
-            Boolean value = (Boolean)obj;
+            IBlock block = (IBlock)arguments[0];
+            bool value = (bool)obj;
 
             object result = null;
             if (!value)
@@ -38,7 +38,7 @@ namespace AjTalk.Language
             if (arguments.Count() != 1 || !(arguments[0] is IBlock))
                 throw new InvalidOperationException("A Block was expected");
             IBlock block = (IBlock)arguments[0];
-            Boolean value = (Boolean)obj;
+            bool value = (bool)obj;
 
             object result = null;
             if (value)
@@ -54,7 +54,7 @@ namespace AjTalk.Language
                 throw new InvalidOperationException("Two Blocks were expected");
             IBlock thenblock = (IBlock)arguments[0];
             IBlock elseblock = (IBlock)arguments[1];
-            Boolean value = (Boolean)obj;
+            bool value = (bool)obj;
 
             object result = null;
             if (value)

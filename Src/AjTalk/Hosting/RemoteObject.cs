@@ -33,6 +33,7 @@
             {
                 return this.obj[n];
             }
+
             set
             {
                 this.obj[n] = value;

@@ -29,7 +29,7 @@ namespace AjTalk.Language
 
         protected BaseObject(SerializationInfo info, StreamingContext context)
         {
-            this.variables = (object[]) info.GetValue("Variables", typeof(object[]));
+            this.variables = (object[])info.GetValue("Variables", typeof(object[]));
             string classname = info.GetString("ClassName");
             this.behavior = (IBehavior)Machine.Current.GetGlobalObject(classname);
         }
@@ -77,16 +77,17 @@ namespace AjTalk.Language
             return method.Execute(this, this, arguments);
         }
 
-        internal void SetBehavior(IBehavior behavior)
-        {
-            this.behavior = behavior;
-        }
-
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Variables", this.variables);
+            
             // TODO review IClass cast
             info.AddValue("ClassName", ((IClass)this.Behavior).Name);
+        }
+
+        internal void SetBehavior(IBehavior behavior)
+        {
+            this.behavior = behavior;
         }
     }
 }

@@ -67,7 +67,7 @@
                 return result + " " + this.selector + " " + argresult;
             }
 
-            string []names = this.selector.Split(':');
+            string[]names = this.selector.Split(':');
 
             int k = 0;
 

@@ -2,10 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
     using AjTalk.Compiler;
-    using System.Globalization;
 
     public class ModelParser
     {
@@ -150,6 +150,22 @@
             return this.ParseExpression(expression);
         }
 
+        private static bool IsUnarySelector(string name)
+        {
+            return char.IsLetter(name[0]) && !name.EndsWith(":");
+        }
+
+        private static bool IsBinarySelector(string name)
+        {
+            // TODO Review which selectors are binary operators
+            return !char.IsLetter(name[0]);
+        }
+
+        private static bool IsMultipleKeywordSelector(string name)
+        {
+            return name.EndsWith(":");
+        }
+
         private IExpression ParseExpression(IExpression target)
         {
             IExpression expression = this.ParseMultipleKeywordExpression(target);
@@ -175,22 +191,6 @@
                 expr = new FluentMessageExpression((MessageExpression)target);
 
             return this.ParseMultipleKeywordExpression(expr);
-        }
-
-        private static bool IsUnarySelector(string name)
-        {
-            return char.IsLetter(name[0]) && !name.EndsWith(":");
-        }
-
-        private static bool IsBinarySelector(string name)
-        {
-            // TODO Review which selectors are binary operators
-            return !char.IsLetter(name[0]);
-        }
-
-        private static bool IsMultipleKeywordSelector(string name)
-        {
-            return name.EndsWith(":");
         }
 
         private IExpression ParseMultipleKeywordExpression()
@@ -276,13 +276,16 @@
                     {
                         IExpression expression = this.ParseExpression();
                         Token lasttoken = this.NextToken();
+                        
                         if (lasttoken == null || lasttoken.Type != TokenType.Punctuation || lasttoken.Value != ")")
                         {
                             this.PushToken(lasttoken);
                             return this.ParseExpression(expression);
                         }
+
                         return expression;
                     }
+
                     break;
 
                 case TokenType.Integer:

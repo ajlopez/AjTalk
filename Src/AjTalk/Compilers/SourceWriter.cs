@@ -43,14 +43,14 @@
         public void WriteLineStart(string text)
         {
             this.WriteLine(text);
-            indent++;
+            this.indent++;
         }
 
         public void WriteLineEnd(string text)
         {
             if (!this.isNewLine)
                 this.WriteLine();
-            indent--;
+            this.indent--;
             this.WriteLine(text);
         }
 

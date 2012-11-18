@@ -40,7 +40,7 @@
                 n++;
             }
 
-            this.WriteLine("");
+            this.WriteLine(string.Empty);
             this.WriteLineEnd("}");
 
             this.WriteLine("}();");

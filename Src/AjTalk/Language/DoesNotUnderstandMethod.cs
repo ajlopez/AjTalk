@@ -39,7 +39,7 @@
 
         public object Execute(IObject self, IObject receiver, object[] args)
         {
-            return this.DoesNotUnderstand(self, receiver, (string) args[0], (object[]) args[1]);
+            return this.DoesNotUnderstand(self, receiver, (string)args[0], (object[])args[1]);
         }
 
         public object Execute(Machine machine, object[] args)
@@ -56,7 +56,7 @@
         {
             if (msgname.Equals("ifFalse:"))
             {
-                IBlock block = (IBlock) args[0];
+                IBlock block = (IBlock)args[0];
                 block.Execute(this.Machine, null);
                 
                 // TODO return block value??
@@ -70,7 +70,7 @@
 
             return DotNetObject.SendMessage(this.Machine, self, msgname, args);
 
-            //throw new InvalidOperationException(string.Format("Does not understand {0}", msgname));
+            ////throw new InvalidOperationException(string.Format("Does not understand {0}", msgname));
         }
     }
 }

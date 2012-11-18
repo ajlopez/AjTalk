@@ -332,9 +332,10 @@ namespace AjTalk.Compiler
                     case TokenType.Punctuation:
                         if (token.Value == ")")
                         {
-                            this.block.CompileByteCode(ByteCode.MakeCollection, (byte) nelements);
+                            this.block.CompileByteCode(ByteCode.MakeCollection, (byte)nelements);
                             return;
                         }
+
                         if (token.Value == "(")
                         {
                             this.CompileCollection();

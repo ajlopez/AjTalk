@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
-    using System.Globalization;
 
     public class ConstantExpression : IExpression
     {
@@ -21,7 +21,7 @@
         {
             if (this.value == null)
                 return "nil";
-            // TODO Escape chars
+            //// TODO Escape chars
             if (this.value is string)
                 return string.Format("'{0}'", NormalizeString((string)this.value));
             if (this.value is char)
@@ -33,7 +33,7 @@
 
             return Convert.ToString(this.value, CultureInfo.InvariantCulture);
 
-            //return this.value.ToString();
+            ////return this.value.ToString();
         }
 
         public void Visit(IVisitor visitor)

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AjTalk.Language;
-
-namespace AjTalk.Transactions
+﻿namespace AjTalk.Transactions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Language;
+
     public class TransactionalValue
     {
         private Transaction transaction;
@@ -39,7 +39,8 @@ namespace AjTalk.Transactions
             object candidateValue = this.trobj.InnerObject[this.position];
 
             foreach (long time in this.committedValues.Keys)
-                if (attime > time && candidateTime < time)  // TODO review if time is negative 
+                //// TODO review if time is negative 
+                if (attime > time && candidateTime < time)  
                 {
                     candidateTime = time;
                     candidateValue = this.committedValues[time];
@@ -79,6 +80,7 @@ namespace AjTalk.Transactions
                     this.transaction = null;
                     this.value = null;
                 }
+
                 if (this.trobj.TransactionManager.HasTransactions())
                     this.ReleaseValues(this.trobj.TransactionManager.MinimalTransactionalTime);
             }
@@ -100,7 +102,7 @@ namespace AjTalk.Transactions
         {
             List<long> times = (from time in this.committedValues.Keys where time < activetime select time).ToList();
 
-            if (times.Count()==0)
+            if (times.Count() == 0)
                 return;
 
             long selected = times.Max();

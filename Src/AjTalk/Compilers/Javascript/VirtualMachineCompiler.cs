@@ -55,7 +55,8 @@
                     classVariableNames += " " + name;
             }
 
-            this.WriteLine(string.Format("Smalltalk.{0}.subclass_instanceVariableNames_classVariableNames_('{1}', '{2}', '{3}');",
+            this.WriteLine(string.Format(
+                "Smalltalk.{0}.subclass_instanceVariableNames_classVariableNames_('{1}', '{2}', '{3}');",
                 @class.SuperClassName,
                 @class.Name,
                 instanceVariableNames,
@@ -102,16 +103,16 @@
             foreach (string locname in method.LocalVariables)
                 this.WriteLine(string.Format("var {0} = null", ToVariableName(locname)));
 
-            MethodModel previousMethod = this.currentMethod;
+            MethodModel previousMethod = this.CurrentMethod;
 
             try
             {
-                this.currentMethod = method;
+                this.CurrentMethod = method;
                 this.Visit(method.Body);
             }
             finally
             {
-                this.currentMethod = previousMethod;
+                this.CurrentMethod = previousMethod;
             }
            
             if (method.Class != null)
@@ -122,7 +123,7 @@
 
         public override void Visit(MessageExpression expression)
         {
-            if (this.currentMethod != null && expression.Target is ILeftValue && ((ILeftValue)expression.Target).Name == "super")
+            if (this.CurrentMethod != null && expression.Target is ILeftValue && ((ILeftValue)expression.Target).Name == "super")
             {
                 base.Visit(expression);
                 return;

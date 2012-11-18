@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace AjTalk.Transactions
+﻿namespace AjTalk.Transactions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     public class Transaction
     {
         private TransactionManager manager;
@@ -37,7 +37,7 @@ namespace AjTalk.Transactions
             this.end = attime;
             foreach (TransactionalValue value in this.values)
                 value.CommitValue(this);
-            values = null;
+            this.values = null;
         }
 
         // TODO Review: it's only called with thread local TransactionManager.Current, no lock is needed
@@ -46,7 +46,7 @@ namespace AjTalk.Transactions
             this.end = attime;
             foreach (TransactionalValue value in this.values)
                 value.RollbackValue(this);
-            values = null;
+            this.values = null;
         }
 
         // TODO Review: it's only called with thread local TransactionManager.Current, no lock is needed

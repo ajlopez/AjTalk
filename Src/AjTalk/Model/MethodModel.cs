@@ -44,7 +44,7 @@
 
         public bool HasBlock()
         {
-            return HasBlock(this.body);
+            return this.HasBlock(this.body);
         }
 
         public void Visit(IVisitor visitor)
@@ -62,7 +62,7 @@
                 if (expression is BlockExpression)
                     return true;
                 if (expression is MessageExpression)
-                    if (HasBlock(((MessageExpression)expression).Arguments))
+                    if (this.HasBlock(((MessageExpression)expression).Arguments))
                         return true;
             }
 

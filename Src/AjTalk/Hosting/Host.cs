@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AjTalk.Language;
-using AjTalk.Compiler;
-using System.IO;
-
-namespace AjTalk.Hosting
+﻿namespace AjTalk.Hosting
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Compiler;
+    using AjTalk.Language;
+
     public class Host : MarshalByRefObject, IHost
     {
         private Guid id = Guid.NewGuid();
@@ -34,7 +34,7 @@ namespace AjTalk.Hosting
 
         public Guid Id { get { return this.id; } }
 
-        public virtual string Address { get { return ""; } } // TODO review
+        public virtual string Address { get { return string.Empty; } } // TODO review
 
         public bool IsLocal { get { return true; } }
 

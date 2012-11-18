@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Channels;
-using System.Collections;
-using System.Runtime.Remoting.Channels.Tcp;
-
-namespace AjTalk.Hosting
+﻿namespace AjTalk.Hosting
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Remoting;
+    using System.Runtime.Remoting.Channels;
+    using System.Runtime.Remoting.Channels.Tcp;
+    using System.Text;
+
     public class RemotingHostServer : Host
     {
         private static bool registered = false;
@@ -48,15 +48,11 @@ namespace AjTalk.Hosting
                 ChannelServices.RegisterChannel(channel, false);
                 registered = true;
             }
+
             // end of "according"
 
             // TODO review other options to publish an object
             this.objref = RemotingServices.Marshal(this, name);
-        }
-
-        public void Stop()
-        {
-            RemotingServices.Unmarshal(this.objref);
         }
 
         public override string Address
@@ -65,6 +61,11 @@ namespace AjTalk.Hosting
             {
                 return string.Format("tcp://{0}:{1}/{2}", this.hostname, this.port, this.name);
             }
+        }
+
+        public void Stop()
+        {
+            RemotingServices.Unmarshal(this.objref);
         }
     }
 }

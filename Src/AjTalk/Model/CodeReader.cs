@@ -8,7 +8,7 @@
 
     public class CodeReader
     {
-        ChunkReader reader;
+        private ChunkReader reader;
 
         public CodeReader(ChunkReader reader)
         {
@@ -21,7 +21,8 @@
             {
                 bool isreader = false;
 
-                if (chunk.StartsWith("!")) {
+                if (chunk.StartsWith("!"))
+                {
                     chunk = chunk.Substring(1);
                     isreader = true;
                 }
@@ -44,6 +45,37 @@
                         this.ProcessMessageExpression(model, (MessageExpression)expression);
                 }
             }
+        }
+
+        private static IList<string> GetInstanceVariableNames(MessageExpression expression)
+        {
+            return GetNamesFromArgument(expression, "instanceVariableNames");
+        }
+
+        private static IList<string> GetClassVariableNames(MessageExpression expression)
+        {
+            return GetNamesFromArgument(expression, "classVariableNames");
+        }
+
+        private static IList<string> GetNamesFromArgument(MessageExpression expression, string key)
+        {
+            string[]keys = expression.Selector.Split(':');
+
+            for (int k = 0; k < keys.Length; k++)
+                if (keys[k] == key)
+                    return GetNames((ConstantExpression)expression.Arguments.ElementAt(k));
+
+            return null;
+        }
+
+        private static IList<string> GetNames(ConstantExpression expression)
+        {
+            string names = (string)expression.Value;
+
+            if (string.IsNullOrEmpty(names))
+                return null;
+
+            return names.Split(' ');
         }
 
         private void ProcessReader()
@@ -78,19 +110,19 @@
             // TODO implements weakSubclass
             if (expression.Selector.StartsWith("subclass:") || expression.Selector.StartsWith("weakSubclass:") || expression.Selector.StartsWith("variableSubclass:"))
             {
-                Boolean isvariable = expression.Selector.StartsWith("variableSubclass:");
-                SymbolExpression symbol = (SymbolExpression) expression.Arguments.First();
+                bool isvariable = expression.Selector.StartsWith("variableSubclass:");
+                SymbolExpression symbol = (SymbolExpression)expression.Arguments.First();
                 VariableExpression variable = (VariableExpression)expression.Target;
 
                 ClassModel super = null;
 
                 if (variable.Name != null && variable.Name != symbol.Symbol)
-                    // TODO review quick hack if class is not defined yet
+                    //// TODO review quick hack if class is not defined yet
                     if (model.HasClass(variable.Name))
                         super = model.GetClass(variable.Name);
 
                 ClassModel @class;
-                
+
                 if (super != null || variable.Name == null)
                     @class = new ClassModel(symbol.Symbol, super, GetInstanceVariableNames(expression), GetClassVariableNames(expression), isvariable);
                 else
@@ -98,37 +130,6 @@
 
                 model.AddElement(@class);
             }
-        }
-
-        private static IList<string> GetInstanceVariableNames(MessageExpression expression)
-        {
-            return GetNamesFromArgument(expression, "instanceVariableNames");
-        }
-
-        private static IList<string> GetClassVariableNames(MessageExpression expression)
-        {
-            return GetNamesFromArgument(expression, "classVariableNames");
-        }
-
-        private static IList<string> GetNamesFromArgument(MessageExpression expression, string key)
-        {
-            string []keys = expression.Selector.Split(':');
-
-            for (int k=0; k<keys.Length; k++)
-                if (keys[k] == key)
-                    return GetNames((ConstantExpression) (expression.Arguments.ElementAt(k)));
-
-            return null;
-        }
-
-        private static IList<string> GetNames(ConstantExpression expression)
-        {
-            string names = (string)expression.Value;
-
-            if (string.IsNullOrEmpty(names))
-                return null;
-
-            return names.Split(' ');
         }
     }
 }
