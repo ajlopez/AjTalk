@@ -44,13 +44,13 @@
             Assert.IsTrue(lines.Contains("    a = 1;"));
             Assert.IsTrue(lines.Contains("    b;"));
             Assert.IsTrue(lines.Contains("}"));
-            Assert.IsFalse(lines.Contains(""));
+            Assert.IsFalse(lines.Contains(string.Empty));
         }
 
         private string[] GetLines()
         {
-            swriter.Close();
-            string text = swriter.ToString();
+            this.swriter.Close();
+            string text = this.swriter.ToString();
             IList<string> lines = new List<string>();
             StringReader reader = new StringReader(text);
 

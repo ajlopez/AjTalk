@@ -1,12 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjTalk.Language;
-
-namespace AjTalk.Tests.Language
+﻿namespace AjTalk.Tests.Language
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Language;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class ObjectOperatorsTests
     {
@@ -28,7 +28,7 @@ namespace AjTalk.Tests.Language
         {
             Assert.AreEqual("foobar", ObjectOperators.Add("foo", "bar"));
             Assert.AreEqual("foo1", ObjectOperators.Add("foo", 1));
-            Assert.AreEqual("1foo", ObjectOperators.Add(1 ,"foo"));
+            Assert.AreEqual("1foo", ObjectOperators.Add(1, "foo"));
         }
     }
 }

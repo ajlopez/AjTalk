@@ -1,12 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjTalk.Language;
-
-namespace AjTalk.Tests.Language
+﻿namespace AjTalk.Tests.Language
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Language;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class BaseBehaviorTests
     {
@@ -30,7 +30,7 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void DefineInstanceMethod()
         {
-            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, machine);
+            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, this.machine);
             BaseBehavior behavior = new BaseBehavior(meta, null, this.machine);
             IMethod method = new Method("method");
 
@@ -59,7 +59,7 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void DefineClassMethod()
         {
-            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, machine);
+            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, this.machine);
             BaseBehavior behavior = new BaseBehavior(meta, null, this.machine);
             IMethod method = new Method("method");
 
@@ -77,7 +77,7 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void GetClassMethods()
         {
-            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, machine);
+            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, this.machine);
             BaseBehavior behavior = new BaseBehavior(meta, null, this.machine);
             IMethod method = new Method("method");
 

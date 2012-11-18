@@ -40,7 +40,7 @@ namespace AjTalk.Tests
             Assert.IsNull(cls.GetInstanceMethod("x"));
             Assert.IsNotNull(cls.SuperClass);
             Assert.IsInstanceOfType(cls.SuperClass, typeof(IClass));
-            Assert.AreEqual("UndefinedObject", ((IClass) cls.SuperClass).Name);
+            Assert.AreEqual("UndefinedObject", ((IClass)cls.SuperClass).Name);
         }
 
         [TestMethod]

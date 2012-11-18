@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using AjTalk.Compilers;
-using AjTalk.Compilers.Javascript;
-using AjTalk.Model;
-
-namespace AjTalk.Compiler
+﻿namespace AjTalk.Compiler
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Compilers;
+    using AjTalk.Compilers.Javascript;
+    using AjTalk.Model;
+
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             StreamWriter swriter = new StreamWriter(GetOutputFileName(args));
             SourceWriter writer = new SourceWriter(swriter);
@@ -42,7 +42,7 @@ namespace AjTalk.Compiler
             swriter.Close();
         }
 
-        static string GetOutputFileName(string[] args)
+        private static string GetOutputFileName(string[] args)
         {
             string filename = null;
 
@@ -63,7 +63,7 @@ namespace AjTalk.Compiler
             return filename;
         }
 
-        static string GetTarget(string[] args)
+        private static string GetTarget(string[] args)
         {
             string target = GetOption("target", args);
 
@@ -73,7 +73,7 @@ namespace AjTalk.Compiler
             return target;
         }
 
-        static string GetOption(string optionname, string[] args)
+        private static string GetOption(string optionname, string[] args)
         {
             string argument = "-" + optionname;
 
@@ -84,7 +84,7 @@ namespace AjTalk.Compiler
             return null;
         }
 
-        static IEnumerable<string> GetFileNames(string[] args)
+        private static IEnumerable<string> GetFileNames(string[] args)
         {
             for (int k = 0; k < args.Length; k++)
             {

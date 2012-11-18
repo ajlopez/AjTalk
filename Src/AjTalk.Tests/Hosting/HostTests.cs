@@ -1,12 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjTalk.Hosting;
-
-namespace AjTalk.Tests.Hosting
+﻿namespace AjTalk.Tests.Hosting
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Hosting;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class HostTests
     {

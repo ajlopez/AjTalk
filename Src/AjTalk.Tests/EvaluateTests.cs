@@ -1,18 +1,16 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-
-using AjTalk.Compiler;
-using AjTalk.Language;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
-using System.Threading;
-using System.Collections;
-
-namespace AjTalk.Tests
+﻿namespace AjTalk.Tests
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+    using AjTalk.Compiler;
+    using AjTalk.Language;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class EvaluateTests
     {
@@ -184,7 +182,7 @@ namespace AjTalk.Tests
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(bool));
-            Assert.IsFalse((bool) result);
+            Assert.IsFalse((bool)result);
         }
 
         [TestMethod]
@@ -256,13 +254,13 @@ namespace AjTalk.Tests
         [TestMethod]
         public void BasicNewObject()
         {
-            IClass clss = (IClass) this.Evaluate("nil subclass: #Object");
+            IClass clss = (IClass)this.Evaluate("nil subclass: #Object");
             object result = this.Evaluate("Object new");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IObject));
 
-            IObject obj = (IObject) result;
+            IObject obj = (IObject)result;
             Assert.AreEqual(clss, obj.Behavior);
         }
 
@@ -274,7 +272,7 @@ namespace AjTalk.Tests
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(NativeBehavior));
 
-            NativeBehavior behavior = (NativeBehavior) result;
+            NativeBehavior behavior = (NativeBehavior)result;
 
             Assert.AreEqual(typeof(System.Collections.ArrayList), behavior.NativeType);
 
@@ -300,7 +298,7 @@ namespace AjTalk.Tests
             Assert.AreEqual(0, clss.NoInstanceVariables);
             Assert.IsInstanceOfType(clss, typeof(BaseClass));
 
-            BaseClass baseclass = (BaseClass) clss;
+            BaseClass baseclass = (BaseClass)clss;
 
             Assert.IsTrue(baseclass.IsAgentClass);
         }
@@ -317,7 +315,7 @@ namespace AjTalk.Tests
 
             Assert.IsInstanceOfType(agent.Behavior, typeof(IClass));
 
-            IClass clss = (IClass) agent.Behavior;
+            IClass clss = (IClass)agent.Behavior;
 
             Assert.IsNotNull(clss.Behavior);
             Assert.IsNotNull(clss.MetaClass);
@@ -393,7 +391,7 @@ namespace AjTalk.Tests
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IEnumerable));
             
-            int k=0;
+            int k = 0;
 
             foreach (object v in (IEnumerable)result)
             {
@@ -412,7 +410,7 @@ namespace AjTalk.Tests
             Assert.IsInstanceOfType(result, typeof(IEnumerable));
 
             int k = 0;
-            object []values = new object[] { 1, "Symbol", "string" };
+            object[]values = new object[] { 1, "Symbol", "string" };
 
             foreach (object v in (IEnumerable)result)
             {
@@ -489,7 +487,7 @@ namespace AjTalk.Tests
         public void EvaluateAddTwoStrings()
         {
             object result = this.Evaluate("'foo' + 'bar'");
-            Assert.IsInstanceOfType(result, typeof(String));
+            Assert.IsInstanceOfType(result, typeof(string));
             Assert.AreEqual("foobar", result);
         }
 
@@ -497,7 +495,7 @@ namespace AjTalk.Tests
         public void EvaluateAddStringToInteger()
         {
             object result = this.Evaluate("'foo' + 1");
-            Assert.IsInstanceOfType(result, typeof(String));
+            Assert.IsInstanceOfType(result, typeof(string));
             Assert.AreEqual("foo1", result);
         }
 

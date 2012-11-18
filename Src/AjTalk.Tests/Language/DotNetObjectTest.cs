@@ -4,12 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using AjTalk;
     using AjTalk.Language;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using AjTalk.Tests.NativeObjects;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class DotNetObjectTest

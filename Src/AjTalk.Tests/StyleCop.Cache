@@ -1,77 +1,5 @@
 <stylecopresultscache>
   <version>10</version>
-  <sourcecode name="BaseObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>01/18/2009 18:11:17</timestamp>
-      <milliseconds>937</milliseconds>
-    </settings>
-    <timestamp>12/28/2008 12:03:53</timestamp>
-    <milliseconds>109</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="BlockTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>01/18/2009 18:11:17</timestamp>
-      <milliseconds>937</milliseconds>
-    </settings>
-    <timestamp>01/18/2009 17:13:11</timestamp>
-    <milliseconds>765</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>01/18/2009 18:11:17</timestamp>
-      <milliseconds>937</milliseconds>
-    </settings>
-    <timestamp>10/13/2008 15:41:29</timestamp>
-    <milliseconds>843</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="ClassTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>01/18/2009 18:11:17</timestamp>
-      <milliseconds>937</milliseconds>
-    </settings>
-    <timestamp>01/18/2009 18:11:37</timestamp>
-    <milliseconds>375</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="DotNetObjectTest.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>01/18/2009 18:11:17</timestamp>
-      <milliseconds>937</milliseconds>
-    </settings>
-    <timestamp>01/18/2009 18:18:14</timestamp>
-    <milliseconds>718</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="MachineTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>01/18/2009 18:11:17</timestamp>
-      <milliseconds>937</milliseconds>
-    </settings>
-    <timestamp>01/18/2009 18:18:21</timestamp>
-    <milliseconds>15</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="MethodTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>01/18/2009 18:11:17</timestamp>
-      <milliseconds>937</milliseconds>
-    </settings>
-    <timestamp>01/18/2009 18:18:34</timestamp>
-    <milliseconds>328</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="BasicClassTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>01/18/2009 18:11:17</timestamp>
-      <milliseconds>937</milliseconds>
-    </settings>
-    <timestamp>01/18/2009 18:20:05</timestamp>
-    <milliseconds>218</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="DoesNotUnderstandMethod.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>01/18/2009 18:11:17</timestamp>
@@ -80,85 +8,6 @@
     <timestamp>01/18/2009 18:20:34</timestamp>
     <milliseconds>734</milliseconds>
     <violations />
-  </sourcecode>
-  <sourcecode name="LoaderTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>01/18/2009 18:11:17</timestamp>
-      <milliseconds>937</milliseconds>
-    </settings>
-    <timestamp>01/18/2009 18:20:44</timestamp>
-    <milliseconds>296</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="CompilerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>01/18/2009 18:11:17</timestamp>
-      <milliseconds>937</milliseconds>
-    </settings>
-    <timestamp>01/18/2009 18:21:57</timestamp>
-    <milliseconds>109</milliseconds>
-    <violations>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="ParameterMustNotSpanMultipleLines" ruleCheckId="SA1118">
-        <context>The parameter spans multiple lines. If the parameter is short, place the entire parameter on a single line. Otherwise, save the contents of the parameter in a temporary variable and pass the temporary variable as a parameter. </context>
-        <line>196</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="ParameterMustNotSpanMultipleLines" ruleCheckId="SA1118">
-        <context>The parameter spans multiple lines. If the parameter is short, place the entire parameter on a single line. Otherwise, save the contents of the parameter in a temporary variable and pass the temporary variable as a parameter. </context>
-        <line>223</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="ParameterMustNotSpanMultipleLines" ruleCheckId="SA1118">
-        <context>The parameter spans multiple lines. If the parameter is short, place the entire parameter on a single line. Otherwise, save the contents of the parameter in a temporary variable and pass the temporary variable as a parameter. </context>
-        <line>254</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="ParameterMustNotSpanMultipleLines" ruleCheckId="SA1118">
-        <context>The parameter spans multiple lines. If the parameter is short, place the entire parameter on a single line. Otherwise, save the contents of the parameter in a temporary variable and pass the temporary variable as a parameter. </context>
-        <line>283</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="ParameterMustNotSpanMultipleLines" ruleCheckId="SA1118">
-        <context>The parameter spans multiple lines. If the parameter is short, place the entire parameter on a single line. Otherwise, save the contents of the parameter in a temporary variable and pass the temporary variable as a parameter. </context>
-        <line>305</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="ParameterMustNotSpanMultipleLines" ruleCheckId="SA1118">
-        <context>The parameter spans multiple lines. If the parameter is short, place the entire parameter on a single line. Otherwise, save the contents of the parameter in a temporary variable and pass the temporary variable as a parameter. </context>
-        <line>335</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="ParameterMustNotSpanMultipleLines" ruleCheckId="SA1118">
-        <context>The parameter spans multiple lines. If the parameter is short, place the entire parameter on a single line. Otherwise, save the contents of the parameter in a temporary variable and pass the temporary variable as a parameter. </context>
-        <line>351</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="ParameterMustNotSpanMultipleLines" ruleCheckId="SA1118">
-        <context>The parameter spans multiple lines. If the parameter is short, place the entire parameter on a single line. Otherwise, save the contents of the parameter in a temporary variable and pass the temporary variable as a parameter. </context>
-        <line>367</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="ParameterMustNotSpanMultipleLines" ruleCheckId="SA1118">
-        <context>The parameter spans multiple lines. If the parameter is short, place the entire parameter on a single line. Otherwise, save the contents of the parameter in a temporary variable and pass the temporary variable as a parameter. </context>
-        <line>388</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
-  </sourcecode>
-  <sourcecode name="ObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>01/18/2009 18:11:17</timestamp>
-      <milliseconds>937</milliseconds>
-    </settings>
-    <timestamp>01/18/2009 18:22:13</timestamp>
-    <milliseconds>718</milliseconds>
-    <violations>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="ParameterMustNotSpanMultipleLines" ruleCheckId="SA1118">
-        <context>The parameter spans multiple lines. If the parameter is short, place the entire parameter on a single line. Otherwise, save the contents of the parameter in a temporary variable and pass the temporary variable as a parameter. </context>
-        <line>47</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
   </sourcecode>
   <project key="384150884">
     <configuration>DEBUG;TRACE</configuration>
@@ -172,4 +21,340 @@
     <milliseconds>359</milliseconds>
     <violations />
   </sourcecode>
+  <sourcecode name="ChunkReaderTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:11:19</timestamp>
+    <milliseconds>290</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="LexerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>03/17/2012 18:23:21</timestamp>
+    <milliseconds>653</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BrowserCompilerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>05/06/2012 09:43:59</timestamp>
+    <milliseconds>664</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ParserTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:15:57</timestamp>
+    <milliseconds>154</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="NodeCompilerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>05/06/2012 09:37:36</timestamp>
+    <milliseconds>692</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="VirtualMachineCompilerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>05/13/2012 16:32:56</timestamp>
+    <milliseconds>873</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BytecodeCompilerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 11:40:47</timestamp>
+    <milliseconds>149</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="CompilerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>05/13/2012 15:47:40</timestamp>
+    <milliseconds>191</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BlockTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>03/17/2012 18:23:21</timestamp>
+    <milliseconds>700</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>03/17/2012 18:23:21</timestamp>
+    <milliseconds>750</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="HostTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:17:11</timestamp>
+    <milliseconds>996</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="SourceWriterTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:16:53</timestamp>
+    <milliseconds>125</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="EvaluateTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:18:38</timestamp>
+    <milliseconds>870</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="RemoteObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:18:59</timestamp>
+    <milliseconds>6</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="RemotingTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:19:20</timestamp>
+    <milliseconds>831</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AgentObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:20:25</timestamp>
+    <milliseconds>225</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BaseBehaviorTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:21:04</timestamp>
+    <milliseconds>22</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BaseIndexedObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:21:23</timestamp>
+    <milliseconds>442</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BaseObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:21:58</timestamp>
+    <milliseconds>705</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BaseMetaClassTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:22:14</timestamp>
+    <milliseconds>717</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BasicClassTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:22:36</timestamp>
+    <milliseconds>150</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ClassTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:23:22</timestamp>
+    <milliseconds>368</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DotNetObjectTest.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:23:38</timestamp>
+    <milliseconds>937</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="FunctionalMethodTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:24:02</timestamp>
+    <milliseconds>764</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="MessageQueueTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:25:17</timestamp>
+    <milliseconds>373</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ObjectOperatorsTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:25:57</timestamp>
+    <milliseconds>652</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="MethodTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:25:38</timestamp>
+    <milliseconds>467</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="NativeBehaviorTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:26:24</timestamp>
+    <milliseconds>287</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:27:46</timestamp>
+    <milliseconds>810</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="LibraryTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:28:06</timestamp>
+    <milliseconds>90</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="LoaderTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:28:43</timestamp>
+    <milliseconds>863</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ModelParserTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:29:12</timestamp>
+    <milliseconds>205</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="MachineTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:28:58</timestamp>
+    <milliseconds>345</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="CodeReaderTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:29:22</timestamp>
+    <milliseconds>671</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Rectangle.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:29:40</timestamp>
+    <milliseconds>720</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TransactionalValueTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:31:31</timestamp>
+    <milliseconds>459</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TransactionObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/18/2012 16:16:24</timestamp>
+      <milliseconds>744</milliseconds>
+    </settings>
+    <timestamp>11/18/2012 16:31:50</timestamp>
+    <milliseconds>598</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="2100262046">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>

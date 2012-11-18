@@ -18,7 +18,7 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void BeCreated() 
         {
-            IObject obj = (IObject) this.GetRectangleClass().NewObject();
+            IObject obj = (IObject)this.GetRectangleClass().NewObject();
 
             Assert.IsNotNull(obj);
             Assert.IsNull(obj[0]);
@@ -30,7 +30,7 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void RunMethod()
         {
-            IObject obj = (IObject) this.GetRectangleClass().NewObject();
+            IObject obj = (IObject)this.GetRectangleClass().NewObject();
 
             obj.SendMessage("side:", new object[] { 10 });
 
@@ -41,12 +41,8 @@ namespace AjTalk.Tests.Language
 
         private IClass GetRectangleClass()
         {
-            if (this.rectangleClass == null)
-            {
-                this.rectangleClass = ParserTests.CompileClass(
-                    "Rectangle",
-                    new string[] { "x", "y", "width", "height" },
-                    new string[] 
+            var variables = new string[] { "x", "y", "width", "height" };
+            var methods = new string[] 
                     {
                         "x ^x",
                         "y ^y",
@@ -58,7 +54,14 @@ namespace AjTalk.Tests.Language
                         "width: newWidth width := newWidth",
                         "height: newHeight height := newHeight",
                         "side: newSide x := newSide. y := newSide"
-                    });
+                    };
+
+            if (this.rectangleClass == null)
+            {
+                this.rectangleClass = ParserTests.CompileClass(
+                    "Rectangle",
+                    variables,
+                    methods);
             }
 
             return this.rectangleClass;

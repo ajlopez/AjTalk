@@ -1,13 +1,13 @@
 ﻿namespace AjTalk.Tests.Model
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using AjTalk.Model;
-    using AjTalk.Compiler;
     using System.IO;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Compiler;
+    using AjTalk.Model;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ModelParserTests

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjTalk.Transactions;
-using AjTalk.Language;
-
-namespace AjTalk.Tests.Transactions
+﻿namespace AjTalk.Tests.Transactions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Language;
+    using AjTalk.Transactions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class TransactionObjectTests
     {

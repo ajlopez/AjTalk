@@ -1,13 +1,13 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjTalk.Language;
-using System.Threading;
-
-namespace AjTalk.Tests.Language
+﻿namespace AjTalk.Tests.Language
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+    using AjTalk.Language;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class AgentObjectTests
     {
@@ -17,10 +17,13 @@ namespace AjTalk.Tests.Language
             ManualResetEvent handle = new ManualResetEvent(false);
             bool executed = false;
             AgentObject agent = new AgentObject();
-            agent.ExecuteMethod(new FunctionalMethod((x,y, args) => { 
+            agent.ExecuteMethod(
+                new FunctionalMethod((x, y, args) => 
+            { 
                 executed = true; 
                 return handle.Set();
-            }), null);
+            }), 
+            null);
             handle.WaitOne();
             Assert.IsTrue(executed);
         }

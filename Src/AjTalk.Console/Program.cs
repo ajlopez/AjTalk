@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.Remoting.Lifetime;
-using AjTalk.Compilers.Vm;
-
-namespace AjTalk.Console
+﻿namespace AjTalk.Console
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Remoting.Lifetime;
+    using System.Text;
+    using AjTalk.Compilers.Vm;
+
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             BytecodeCompiler c = new BytecodeCompiler(null);
-            // According http://msdn.microsoft.com/en-us/magazine/cc300474.aspx
+            //// According http://msdn.microsoft.com/en-us/magazine/cc300474.aspx
             LifetimeServices.LeaseTime = TimeSpan.FromMinutes(10);
             LifetimeServices.RenewOnCallTime = TimeSpan.FromMinutes(15);
             LifetimeServices.SponsorshipTimeout = TimeSpan.FromMinutes(1);

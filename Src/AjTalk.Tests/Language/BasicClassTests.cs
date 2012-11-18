@@ -2,15 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
-
     using AjTalk;
-    using AjTalk.Language;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using AjTalk.Compiler;
-    using System.IO;
+    using AjTalk.Language;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class BasicClassTest 
@@ -38,7 +36,7 @@
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(AgentObject));
 
-            AgentObject agent = (AgentObject) result;
+            AgentObject agent = (AgentObject)result;
             Assert.AreEqual(bclass, agent.Behavior);
         }
 
@@ -121,7 +119,7 @@
             Machine machine = new Machine();
             loader.LoadAndExecute(machine);
 
-            BaseClass rectangle = (BaseClass) machine.GetGlobalObject("Rectangle");
+            BaseClass rectangle = (BaseClass)machine.GetGlobalObject("Rectangle");
 
             string output = rectangle.ToOutputString();
 

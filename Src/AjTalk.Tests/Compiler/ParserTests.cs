@@ -15,45 +15,6 @@ namespace AjTalk.Tests.Compiler
     [TestClass]
     public class ParserTests
     {
-        internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
-        {
-            return CompileClass(clsname, varnames, methods, null);
-        }
-
-        internal static IClass CompileClass(string clsname, string[] varnames, string[] methods, string[] clsmethods)
-        {
-            Machine machine = new Machine();
-            IClass cls = machine.CreateClass(clsname);
-
-            if (varnames != null)
-            {
-                foreach (string varname in varnames)
-                {
-                    cls.DefineInstanceVariable(varname);
-                }
-            }
-
-            if (methods != null)
-            {
-                foreach (string method in methods)
-                {
-                    Parser compiler = new Parser(method);
-                    compiler.CompileInstanceMethod(cls);
-                }
-            }
-
-            if (clsmethods != null)
-            {
-                foreach (string method in clsmethods)
-                {
-                    Parser compiler = new Parser(method);
-                    compiler.CompileClassMethod(cls);
-                }
-            }
-
-            return cls;
-        }
-
         [TestMethod]
         public void Create()
         {
@@ -292,7 +253,7 @@ namespace AjTalk.Tests.Compiler
             object constant = block.GetConstant(0);
 
             Assert.IsNotNull(constant);
-            Assert.IsInstanceOfType(constant, typeof(String));
+            Assert.IsInstanceOfType(constant, typeof(string));
             Assert.AreEqual("doSomething", constant);
         }
 
@@ -386,13 +347,7 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
-                new string[] 
-                {
-                    "x ^x",
-                    "x: newX x := newX",
-                    "y ^y",
-                    "y: newY y := newY"
-                });
+                new string[] { "x ^x", "x: newX x := newX", "y ^y", "y: newY y := newY" });
 
             machine.SetGlobalObject("aRectangle", cls.NewObject());
 
@@ -413,15 +368,9 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
-                new string[] 
-                {
-                    "x ^x",
-                    "x: newX x := newX",
-                    "y ^y",
-                    "y: newY y := newY"
-                });
+                new string[] { "x ^x", "x: newX x := newX", "y ^y", "y: newY y := newY" });
 
-            IObject iobj = (IObject) cls.NewObject();
+            IObject iobj = (IObject)cls.NewObject();
 
             machine.SetGlobalObject("aRectangle", iobj);
 
@@ -444,15 +393,9 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
-                new string[] 
-                {
-                    "x ^x",
-                    "x: newX x := newX",
-                    "y ^y",
-                    "y: newY y := newY"
-                });
+                new string[] { "x ^x", "x: newX x := newX", "y ^y", "y: newY y := newY" });
 
-            IObject iobj = (IObject) cls.NewObject();
+            IObject iobj = (IObject)cls.NewObject();
 
             machine.SetGlobalObject("aRectangle", iobj);
 
@@ -553,13 +496,7 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
-                new string[] 
-                {
-                    "x ^x",
-                    "x: newX x := newX",
-                    "y ^y",
-                    "y: newY y := newY"
-                });
+                new string[] { "x ^x", "x: newX x := newX", "y ^y", "y: newY y := newY" });
 
             Assert.IsNotNull(cls);
 
@@ -575,17 +512,11 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
-                new string[] 
-                {
-                    "x ^x",
-                    "x: newX x := newX",
-                    "y ^y",
-                    "y: newY y := newY"
-                });
+                new string[] { "x ^x", "x: newX x := newX", "y ^y", "y: newY y := newY" });
 
             Assert.IsNotNull(cls);
 
-            IObject obj = (IObject) cls.NewObject();
+            IObject obj = (IObject)cls.NewObject();
 
             cls.GetInstanceMethod("x:").Execute(obj, new object[] { 10 });
 
@@ -605,10 +536,7 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
-                new string[] 
-                {
-                    "side: newSide x := newSide. y := newSide"
-                });
+                new string[] { "side: newSide x := newSide. y := newSide" });
 
             Assert.IsNotNull(cls);
 
@@ -621,10 +549,7 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
-                new string[] 
-                {
-                    "side: newSide | temp | temp := x. x := temp. y := temp"
-                });
+                new string[] { "side: newSide | temp | temp := x. x := temp. y := temp" });
 
             Assert.IsNotNull(cls);
 
@@ -637,10 +562,7 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Rectangle",
                 new string[] { "x", "y" },
-                new string[] 
-                {
-                    "== aRect ^x == aRect x ifTrue: [^y == aRect y] ifFalse: [^false]"
-                });
+                new string[] { "== aRect ^x == aRect x ifTrue: [^y == aRect y] ifFalse: [^false]" });
 
             Assert.IsNotNull(cls);
 
@@ -653,16 +575,13 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Adder",
                 new string[] { },
-                new string[] 
-                {
-                    "add: aVector | sum | sum := 0. aVector do: [ :x | sum := sum + x ]. ^sum"
-                });
+                new string[] { "add: aVector | sum | sum := 0. aVector do: [ :x | sum := sum + x ]. ^sum" });
 
             Assert.IsNotNull(cls);
 
             IMethod method = cls.GetInstanceMethod("add:");
             Assert.IsNotNull(method);
-            IObject obj = (IObject) cls.NewObject();
+            IObject obj = (IObject)cls.NewObject();
             Assert.AreEqual(6, method.Execute(obj, new object[] { new int[] { 1, 2, 3 } }));
         }
 
@@ -672,10 +591,7 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Adder",
                 new string[] { },
-                new string[] 
-                {
-                    "add: aVector with: aNumber | sum | sum := 0. aVector do: [ :x | sum := sum + x + aNumber ]. ^sum"
-                });
+                new string[] { "add: aVector with: aNumber | sum | sum := 0. aVector do: [ :x | sum := sum + x + aNumber ]. ^sum" });
 
             Assert.IsNotNull(cls);
 
@@ -691,14 +607,11 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
-                new string[] 
-                {
-                    "side: newSide x := newSide. y := newSide"
-                });
+                new string[] { "side: newSide x := newSide. y := newSide" });
 
             Assert.IsNotNull(cls);
 
-            IObject obj = (IObject) cls.NewObject();
+            IObject obj = (IObject)cls.NewObject();
 
             cls.GetInstanceMethod("side:").Execute(obj, new object[] { 10 });
 
@@ -712,19 +625,55 @@ namespace AjTalk.Tests.Compiler
             IClass cls = CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
-                new string[] 
-                {
-                    "side: newSide | temp | temp := newSide. x := temp. y := temp"
-                });
+                new string[] { "side: newSide | temp | temp := newSide. x := temp. y := temp" });
 
             Assert.IsNotNull(cls);
 
-            IObject obj = (IObject) cls.NewObject();
+            IObject obj = (IObject)cls.NewObject();
 
             cls.GetInstanceMethod("side:").Execute(obj, new object[] { 10 });
 
             Assert.AreEqual(10, obj[0]);
             Assert.AreEqual(10, obj[1]);
+        }
+
+        internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
+        {
+            return CompileClass(clsname, varnames, methods, null);
+        }
+
+        internal static IClass CompileClass(string clsname, string[] varnames, string[] methods, string[] clsmethods)
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass(clsname);
+
+            if (varnames != null)
+            {
+                foreach (string varname in varnames)
+                {
+                    cls.DefineInstanceVariable(varname);
+                }
+            }
+
+            if (methods != null)
+            {
+                foreach (string method in methods)
+                {
+                    Parser compiler = new Parser(method);
+                    compiler.CompileInstanceMethod(cls);
+                }
+            }
+
+            if (clsmethods != null)
+            {
+                foreach (string method in clsmethods)
+                {
+                    Parser compiler = new Parser(method);
+                    compiler.CompileClassMethod(cls);
+                }
+            }
+
+            return cls;
         }
     }
 }

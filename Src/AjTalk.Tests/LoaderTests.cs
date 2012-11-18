@@ -5,15 +5,12 @@ namespace AjTalk.Tests
     using System.Collections.Generic;
     using System.IO;
     using System.Text;
-
     using AjTalk;
-    using AjTalk.Language;
-
-    using AjTalk.Tests.Language;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using AjTalk.Tests.NativeObjects;
     using AjTalk.Hosting;
+    using AjTalk.Language;
+    using AjTalk.Tests.Language;
+    using AjTalk.Tests.NativeObjects;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class LoaderTests
@@ -337,8 +334,7 @@ namespace AjTalk.Tests
             Assert.AreEqual(metaclassclass, metaclassclass.MetaClass.Behavior);
 
             // TODO objclass super should be nil == null, now is object nil
-            //Assert.IsNull(objclass.SuperClass);
-
+            // Assert.IsNull(objclass.SuperClass);
             Assert.IsNotNull(objclass.MetaClass.SuperClass);
             Assert.AreEqual(classclass, objclass.MetaClass.SuperClass);
         }
@@ -348,7 +344,6 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\ObjectTest.st")]
         public void LoadObject()
         {
-
             Machine machine = CreateMachine();
             Loader loader = new Loader(@"Object.st");
             loader.LoadAndExecute(machine);
@@ -475,7 +470,7 @@ namespace AjTalk.Tests
 
             loader.LoadAndExecute(machine);
 
-            IBehavior objclass = (IBehavior) machine.GetGlobalObject("Object");
+            IBehavior objclass = (IBehavior)machine.GetGlobalObject("Object");
             Assert.IsNotNull(objclass);
             Assert.IsNotNull(objclass.Behavior);
             Assert.IsNotNull(objclass.MetaClass);

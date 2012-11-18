@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using AjTalk.Language;
-
-namespace AjTalk.Gui
+﻿namespace AjTalk.Gui
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Data;
+    using System.Drawing;
+    using System.Linq;
+    using System.Text;
+    using System.Windows.Forms;
+    using AjTalk.Language;
+
     public partial class Browser : Form
     {
         private Machine machine;
@@ -17,10 +17,10 @@ namespace AjTalk.Gui
 
         public Browser(Machine machine)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.machine = machine;
-            //panel1.Dock = DockStyle.Fill;
+            ////panel1.Dock = DockStyle.Fill;
 
             foreach (IClass cls in machine.GetClasses())
                 this.lstClasses.Items.Add(cls.Name);
@@ -35,7 +35,7 @@ namespace AjTalk.Gui
                 return;
 
             string clsname = (string)this.lstClasses.SelectedItem;
-            this.currentClass = (IClass) this.machine.GetGlobalObject(clsname);
+            this.currentClass = (IClass)this.machine.GetGlobalObject(clsname);
 
             foreach (IMethod method in this.currentClass.GetInstanceMethods())
                 this.lstMethods.Items.Add(method.Name);

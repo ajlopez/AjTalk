@@ -22,7 +22,7 @@ namespace AjTalk.Tests.Language
             Assert.IsNotNull(mth);
             Assert.AreEqual("method1", mth.Name);
             Assert.AreEqual(cls, mth.Class);
-            Assert.AreEqual("TestClass", ((IClass) mth.Class).Name);
+            Assert.AreEqual("TestClass", ((IClass)mth.Class).Name);
         }
 
         [TestMethod]
@@ -82,7 +82,7 @@ namespace AjTalk.Tests.Language
 
             cls.DefineInstanceMethod(mth);
 
-            IObject obj = (IObject) cls.NewObject();
+            IObject obj = (IObject)cls.NewObject();
 
             mth.Execute(obj, new object[] { 10 });
 
@@ -108,7 +108,7 @@ namespace AjTalk.Tests.Language
 
             cls.DefineInstanceMethod(mth);
 
-            IObject obj = (IObject) cls.NewObject();
+            IObject obj = (IObject)cls.NewObject();
 
             mth.Execute(obj, new object[] { 10 });
 

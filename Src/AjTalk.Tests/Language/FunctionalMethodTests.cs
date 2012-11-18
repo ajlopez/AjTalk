@@ -1,12 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjTalk.Language;
-
-namespace AjTalk.Tests.Language
+﻿namespace AjTalk.Tests.Language
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Language;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class FunctionalMethodTests
     {
@@ -34,7 +34,7 @@ namespace AjTalk.Tests.Language
             Assert.IsNull(method.Name);
             Assert.IsNull(method.Class);
 
-            object result = method.ExecuteNative(null,null);
+            object result = method.ExecuteNative(null, null);
 
             Assert.AreEqual(1, count);
             Assert.AreEqual(1, result);

@@ -1,6 +1,6 @@
 ﻿namespace AjTalk.Gui
 {
-    partial class Browser
+    public partial class Browser
     {
         /// <summary>
         /// Required designer variable.
@@ -17,6 +17,7 @@
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 

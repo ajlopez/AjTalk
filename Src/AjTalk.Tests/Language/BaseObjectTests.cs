@@ -2,14 +2,12 @@ namespace AjTalk.Tests.Language
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Runtime.Serialization.Formatters.Binary;
     using System.Text;
-
     using AjTalk;
     using AjTalk.Language;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.IO;
 
     [TestClass]
     public class BaseObjectTests
@@ -66,7 +64,7 @@ namespace AjTalk.Tests.Language
                 Assert.AreSame(Machine.Current, machine2);
                 cls2 = new BaseClass("MyClass", machine2);
                 machine2.SetGlobalObject("MyClass", cls2);
-                bo2 = (BaseObject) formatter.Deserialize(stream);
+                bo2 = (BaseObject)formatter.Deserialize(stream);
             }
 
             Assert.AreEqual(1, bo2[0]);

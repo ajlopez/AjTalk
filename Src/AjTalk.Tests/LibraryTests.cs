@@ -1,13 +1,13 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AjTalk.Language;
-using AjTalk.Compiler;
-
-namespace AjTalk.Tests
+﻿namespace AjTalk.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using AjTalk.Compiler;
+    using AjTalk.Language;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     [DeploymentItem(@"Library\Object.st")]
     [DeploymentItem(@"Library\Behavior.st")]

@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using AjTalk.Compiler;
-using AjTalk.Language;
-
-namespace AjTalk.Gui
+﻿namespace AjTalk.Gui
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Data;
+    using System.Drawing;
+    using System.Linq;
+    using System.Text;
+    using System.Windows.Forms;
+    using AjTalk.Compiler;
+    using AjTalk.Language;
+
     public partial class Transcript : Form
     {
         private Machine machine;
@@ -43,7 +43,7 @@ namespace AjTalk.Gui
             try
             {
                 Block block = parser.CompileBlock();
-                object result = block.Execute(machine, null);
+                object result = block.Execute(this.machine, null);
                 if (result != null)
                     MessageBox.Show(result.ToString(), "Result");
             }
