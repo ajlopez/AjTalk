@@ -77,6 +77,10 @@
                         int arity = this.block.ByteCodes[ip];
                         codes.Add(string.Format("{0} {1} {2}", ByteCode.Send, selector, arity));
                         break;
+
+                    case ByteCode.ReturnPop:
+                        codes.Add(string.Format("{0}", ByteCode.ReturnPop));
+                        break;
                 }
 
                 ip++;

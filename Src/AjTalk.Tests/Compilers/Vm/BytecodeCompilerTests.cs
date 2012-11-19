@@ -48,6 +48,13 @@
             Assert.IsNotNull(this.block.ByteCodes);
             Assert.AreEqual(11, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
+            BlockDecompiler decompiler = new BlockDecompiler(this.block);
+            var program = decompiler.Decompile();
+            Assert.IsNotNull(program);
+            Assert.AreEqual(3, program.Count);
+            Assert.AreEqual("GetConstant 1", program[0]);
+            Assert.AreEqual("GetConstant 2", program[1]);
+            Assert.AreEqual("Send + 1", program[2]);
         }
 
         [TestMethod]
@@ -62,6 +69,13 @@
             Assert.IsNotNull(this.block.ByteCodes);
             Assert.AreEqual(11, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
+            BlockDecompiler decompiler = new BlockDecompiler(this.block);
+            var program = decompiler.Decompile();
+            Assert.IsNotNull(program);
+            Assert.AreEqual(3, program.Count);
+            Assert.AreEqual("GetConstant 1.2", program[0]);
+            Assert.AreEqual("GetConstant 3.4", program[1]);
+            Assert.AreEqual("Send + 1", program[2]);
         }
 
         [TestMethod]
@@ -76,6 +90,15 @@
             Assert.IsNotNull(this.block.ByteCodes);
             Assert.AreEqual(21, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
+            BlockDecompiler decompiler = new BlockDecompiler(this.block);
+            var program = decompiler.Decompile();
+            Assert.IsNotNull(program);
+            Assert.AreEqual(5, program.Count);
+            Assert.AreEqual("GetConstant 1", program[0]);
+            Assert.AreEqual("GetConstant 2", program[1]);
+            Assert.AreEqual("GetConstant 3", program[2]);
+            Assert.AreEqual("Send + 1", program[3]);
+            Assert.AreEqual("Send * 1", program[4]);
         }
 
         [TestMethod]
@@ -91,6 +114,14 @@
             Assert.IsNotNull(this.block.ByteCodes);
             Assert.AreEqual(11, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
+            BlockDecompiler decompiler = new BlockDecompiler(this.block);
+            var program = decompiler.Decompile();
+            Assert.IsNotNull(program);
+            Assert.AreEqual(4, program.Count);
+            Assert.AreEqual("GetConstant 1", program[0]);
+            Assert.AreEqual("SetGlobalVariable a", program[1]);
+            Assert.AreEqual("GetConstant 2", program[2]);
+            Assert.AreEqual("SetGlobalVariable b", program[3]);
         }
 
         [TestMethod]

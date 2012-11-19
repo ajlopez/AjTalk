@@ -182,5 +182,19 @@
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual("Send foo:with: 2", result[0]);
         }
+
+        [TestMethod]
+        public void DecompileReturnPop()
+        {
+            Block block = new Block();
+            block.CompileByteCode(ByteCode.ReturnPop);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("ReturnPop", result[0]);
+        }
     }
 }
