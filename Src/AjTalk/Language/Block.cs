@@ -90,26 +90,18 @@ namespace AjTalk.Language
         public static byte MessageArity(string msgname)
         {
             if (!Char.IsLetter(msgname[0]))
-            {
-                return 2;
-            }
+                return 1;
 
             int p = msgname.IndexOf(':');
 
             if (p < 0)
-            {
                 return 0;
-            }
 
             byte n = 0;
 
             foreach (char ch in msgname)
-            {
                 if (ch == ':')
-                {
                     n++;
-                }
-            }
 
             return n;
         }
@@ -320,6 +312,11 @@ namespace AjTalk.Language
         public string GetLocalName(int nl)
         {
             return this.localnames[nl];
+        }
+
+        public string GetArgumentName(int na)
+        {
+            return this.argnames[na];
         }
 
         protected bool TryCompileGet(string name)

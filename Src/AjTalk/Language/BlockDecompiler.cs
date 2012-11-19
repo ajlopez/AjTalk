@@ -47,6 +47,36 @@
                         localname = this.block.GetLocalName(nlocal);
                         codes.Add(string.Format("{0} {1}", ByteCode.SetLocal, localname));
                         break;
+
+                    case ByteCode.GetArgument:
+                        ip++;
+                        int nargument = this.block.ByteCodes[ip];
+                        string argname = this.block.GetArgumentName(nargument);
+                        codes.Add(string.Format("{0} {1}", ByteCode.GetArgument, argname));
+                        break;
+
+                    case ByteCode.GetGlobalVariable:
+                        ip++;
+                        int nglobal = this.block.ByteCodes[ip];
+                        string globalname = this.block.GetGlobalName(nglobal);
+                        codes.Add(string.Format("{0} {1}", ByteCode.GetGlobalVariable, globalname));
+                        break;
+
+                    case ByteCode.SetGlobalVariable:
+                        ip++;
+                        nglobal = this.block.ByteCodes[ip];
+                        globalname = this.block.GetGlobalName(nglobal);
+                        codes.Add(string.Format("{0} {1}", ByteCode.SetGlobalVariable, globalname));
+                        break;
+
+                    case ByteCode.Send:
+                        ip++;
+                        nconstant = this.block.ByteCodes[ip];
+                        string selector = (string)this.block.GetConstant(nconstant);
+                        ip++;
+                        int arity = this.block.ByteCodes[ip];
+                        codes.Add(string.Format("{0} {1} {2}", ByteCode.Send, selector, arity));
+                        break;
                 }
 
                 ip++;

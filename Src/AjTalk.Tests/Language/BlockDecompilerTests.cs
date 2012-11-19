@@ -83,5 +83,104 @@
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual("SetLocal foo", result[0]);
         }
+
+        [TestMethod]
+        public void DecompileGetArgument()
+        {
+            Block block = new Block();
+            block.CompileArgument("foo");
+            block.CompileGet("foo");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetArgument foo", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileGetGlobalVariable()
+        {
+            Block block = new Block();
+            block.CompileGet("foo");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetGlobalVariable foo", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileSetGlobalVariable()
+        {
+            Block block = new Block();
+            block.CompileSet("foo");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("SetGlobalVariable foo", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileSendUnary()
+        {
+            Block block = new Block();
+            block.CompileSend("foo");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("Send foo 0", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileSendBinaryOperator()
+        {
+            Block block = new Block();
+            block.CompileSend("+");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("Send + 1", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileSendKeywordWithOneArgument()
+        {
+            Block block = new Block();
+            block.CompileSend("foo:");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("Send foo: 1", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileSendKeywordWithTwoArgument()
+        {
+            Block block = new Block();
+            block.CompileSend("foo:with:");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("Send foo:with: 2", result[0]);
+        }
     }
 }
