@@ -47,6 +47,7 @@
     <Compile Include="Compilers\Javascript\NodeCompilerTests.cs" />
     <Compile Include="Compilers\SourceWriterTests.cs" />
     <Compile Include="Compilers\Vm\BytecodeCompilerTests.cs" />
+    <Compile Include="Language\BlockDecompilerTests.cs" />
     <Compile Include="Model\CodeReaderTests.cs" />
     <Compile Include="Model\ModelParserTests.cs" />
     <Compile Include="EvaluateTests.cs" />

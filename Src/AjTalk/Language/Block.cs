@@ -317,6 +317,11 @@ namespace AjTalk.Language
             return this.globalnames[ng];
         }
 
+        public string GetLocalName(int nl)
+        {
+            return this.localnames[nl];
+        }
+
         protected bool TryCompileGet(string name)
         {
             if (name == "self")

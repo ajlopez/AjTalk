@@ -1,0 +1,87 @@
+﻿namespace AjTalk.Tests.Language
+{
+    using System;
+    using System.Text;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using AjTalk.Language;
+
+    [TestClass]
+    public class BlockDecompilerTests
+    {
+        [TestMethod]
+        public void DecompileGetIntegerConstant()
+        {
+            Block block = new Block();
+            block.CompileGetConstant(1);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileGetStringConstant()
+        {
+            Block block = new Block();
+            block.CompileGetConstant("foo");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetConstant \"foo\"", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileGetConstants()
+        {
+            Block block = new Block();
+            block.CompileGetConstant(1);
+            block.CompileGetConstant("foo");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+            Assert.AreEqual("GetConstant \"foo\"", result[1]);
+        }
+
+        [TestMethod]
+        public void DecompileGetLocalVariable()
+        {
+            Block block = new Block();
+            block.CompileLocal("foo");
+            block.CompileGet("foo");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetLocal foo", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileSetLocalVariable()
+        {
+            Block block = new Block();
+            block.CompileLocal("foo");
+            block.CompileSet("foo");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("SetLocal foo", result[0]);
+        }
+    }
+}

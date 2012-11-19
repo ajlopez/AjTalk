@@ -104,6 +104,7 @@
     <Compile Include="Compilers\Javascript\NodeCompiler.cs" />
     <Compile Include="Compilers\SourceWriter.cs" />
     <Compile Include="Compilers\Vm\BytecodeCompiler.cs" />
+    <Compile Include="Language\BlockDecompiler.cs" />
     <Compile Include="Model\ClassModel.cs" />
     <Compile Include="Model\CodeModel.cs" />
     <Compile Include="Model\CodeReader.cs" />
