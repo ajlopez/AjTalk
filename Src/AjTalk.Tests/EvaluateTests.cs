@@ -466,6 +466,13 @@
         }
 
         [TestMethod]
+        public void EvaluateSimpleAssign()
+        {
+            object result = this.Evaluate("sum := 1");
+            Assert.AreEqual(1, this.machine.GetGlobalObject("sum"));
+        }
+
+        [TestMethod]
         public void EvaluateSimpleSelect()
         {
             object result = this.Evaluate("#(1 2 3) select: [ :x | x > 1 ]");

@@ -38,3 +38,7 @@ GetConstant 1
 GetConstant 2
 Send + 1
 ReturnPop
+---------
+a := 1
+GetConstant 1
+SetGlobalVariable a

@@ -696,6 +696,20 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(10, obj[1]);
         }
 
+        [TestMethod]
+        public void CompileSimpleSetExpression()
+        {
+            Parser parser = new Parser("a := 1");
+            var result = parser.CompileBlock();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            Assert.AreEqual(ByteCode.SetGlobalVariable, (ByteCode)result.ByteCodes[2]);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual("SetGlobalVariable a", ops[1]);
+        }
+
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return CompileClass(clsname, varnames, methods, null);
