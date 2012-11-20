@@ -196,5 +196,19 @@
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual("ReturnPop", result[0]);
         }
+
+        [TestMethod]
+        public void DecompileSelf()
+        {
+            Block block = new Block();
+            block.CompileByteCode(ByteCode.GetSelf);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetSelf", result[0]);
+        }
     }
 }

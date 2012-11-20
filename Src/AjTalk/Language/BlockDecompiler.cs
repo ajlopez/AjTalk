@@ -79,7 +79,8 @@
                         break;
 
                     case ByteCode.ReturnPop:
-                        codes.Add(string.Format("{0}", ByteCode.ReturnPop));
+                    case ByteCode.GetSelf:
+                        codes.Add(string.Format("{0}", (ByteCode)this.block.ByteCodes[ip]));
                         break;
                 }
 

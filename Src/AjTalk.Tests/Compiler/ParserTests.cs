@@ -73,6 +73,20 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileSimpleSendToSelf()
+        {
+            Parser compiler = new Parser("self invokeWith: 10");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(2, block.NoConstants);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(ByteCode.GetSelf, (ByteCode)block.ByteCodes[0]);
+            Assert.AreEqual(0, block.Arity);
+        }
+
+        [TestMethod]
         public void CompileSimpleSum()
         {
             Parser compiler = new Parser("1 + 2");

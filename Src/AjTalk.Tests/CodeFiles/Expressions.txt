@@ -3,3 +3,28 @@ GetConstant 1
 ---------
 2
 GetConstant 2
+---------
+1+2
+GetConstant 1
+GetConstant 2
+Send + 1
+---------
+foo bar
+GetGlobalVariable foo
+Send bar 0
+---------
+foo bar: 1
+GetGlobalVariable foo
+GetConstant 1
+Send bar: 1
+---------
+foo bar: 1 with: 2
+GetGlobalVariable foo
+GetConstant 1
+GetConstant 2
+Send bar:with: 2
+---------
+self bar: 1
+GetSelf
+GetConstant 1
+Send bar: 1
