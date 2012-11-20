@@ -13,6 +13,8 @@
 
         void Visit(IEnumerable<IExpression> expressions);
 
+        void Visit(FreeBlockExpression expression);
+
         void Visit(ArrayExpression expression);
 
         void Visit(DynamicArrayExpression expression);

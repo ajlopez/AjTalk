@@ -3,3 +3,9 @@ GetConstant 1
 SetGlobalVariable a
 GetConstant 2
 SetGlobalVariable b
+-----------------
+|a| a := 1. b := a
+GetConstant 1
+SetLocal a
+GetLocal a
+SetGlobalVariable b

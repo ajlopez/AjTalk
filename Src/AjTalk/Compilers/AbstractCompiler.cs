@@ -64,5 +64,7 @@
         public abstract void Visit(PrimitiveExpression expression);
 
         public abstract void Visit(CodeModel expression);
+
+        public abstract void Visit(FreeBlockExpression expression);
     }
 }

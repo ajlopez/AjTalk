@@ -112,6 +112,7 @@
     <Compile Include="Model\ClassVariableExpression.cs" />
     <Compile Include="Model\BlockExpression.cs" />
     <Compile Include="Model\ArrayExpression.cs" />
+    <Compile Include="Model\FreeBlockExpression.cs" />
     <Compile Include="Model\DynamicArrayExpression.cs" />
     <Compile Include="Model\FluentMessageExpression.cs" />
     <Compile Include="Model\PrimitiveExpression.cs" />

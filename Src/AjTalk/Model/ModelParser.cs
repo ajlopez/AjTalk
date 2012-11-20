@@ -150,6 +150,23 @@
             return this.ParseExpression(expression);
         }
 
+        public IExpression ParseBlock()
+        {
+            IList<string> localVariables = this.ParseBlockLocalVariables();
+            IEnumerable<IExpression> body = this.ParseExpressions();
+
+            return new FreeBlockExpression(localVariables, body);
+        }
+
+        private IExpression ParseInternalBlock()
+        {
+            IList<string> parameterNames = this.ParseBlockParameters();
+            IList<string> localVariables = this.ParseBlockLocalVariables();
+            IEnumerable<IExpression> body = this.ParseExpressions();
+
+            return new BlockExpression(parameterNames, localVariables, body);
+        }
+
         private static bool IsUnarySelector(string name)
         {
             if (name.StartsWith("!") && name.Length > 1 && char.IsLetter(name[1]) && !name.EndsWith(":"))
@@ -270,7 +287,11 @@
 
                 case TokenType.Punctuation:
                     if (token.Value == "[")
-                        return this.ParseBlock();
+                    {
+                        var result = this.ParseInternalBlock();
+                        this.ParseToken(TokenType.Punctuation, "]");
+                        return result;
+                    }
 
                     if (token.Value == "#(")
                         return this.ParseArray();
@@ -431,19 +452,6 @@
         private void PushToken(Token token)
         {
             this.tokenizer.PushToken(token);
-        }
-
-        private IExpression ParseBlock()
-        {
-            IList<string> parameterNames = this.ParseBlockParameters();
-            IList<string> localVariables = this.ParseBlockLocalVariables();
-            IEnumerable<IExpression> body = this.ParseExpressions();
-            Token token = this.NextToken();
-
-            if (token == null || token.Type != TokenType.Punctuation || token.Value != "]")
-                throw new ParserException("Expected ']'");
-
-            return new BlockExpression(parameterNames, localVariables, body);
         }
 
         private IList<string> ParseBlockParameters()

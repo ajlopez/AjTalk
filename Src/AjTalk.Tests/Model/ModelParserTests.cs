@@ -551,6 +551,8 @@
             Assert.AreEqual("a", bexpression.ParameterNames[0]);
             Assert.AreEqual("b", bexpression.ParameterNames[1]);
             Assert.AreEqual(0, bexpression.LocalVariables.Count);
+
+            Assert.AreEqual("[ :a :b | ^a + b]", expression.AsString());
         }
 
         [TestMethod]
@@ -621,6 +623,28 @@
             Assert.AreEqual(2, bexpression.LocalVariables.Count);
             Assert.AreEqual("x", bexpression.LocalVariables[0]);
             Assert.AreEqual("y", bexpression.LocalVariables[1]);
+
+            Assert.AreEqual("[ :a :b | | x y | ^a + b]", expression.AsString());
+        }
+
+        [TestMethod]
+        public void ParseFreeBlockWithLocalVariables()
+        {
+            ModelParser parser = new ModelParser("| x y | ^a + b");
+            IExpression expression = parser.ParseBlock();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(FreeBlockExpression));
+
+            FreeBlockExpression bexpression = (FreeBlockExpression)expression;
+
+            Assert.IsNotNull(bexpression.Body);
+            Assert.IsInstanceOfType(bexpression.Body.First(), typeof(ReturnExpression));
+            Assert.AreEqual(2, bexpression.LocalVariables.Count);
+            Assert.AreEqual("x", bexpression.LocalVariables[0]);
+            Assert.AreEqual("y", bexpression.LocalVariables[1]);
+
+            Assert.AreEqual("| x y | ^a + b", expression.AsString());
         }
 
         [TestMethod]
@@ -640,6 +664,8 @@
             Assert.AreEqual(2, bexpression.LocalVariables.Count);
             Assert.AreEqual("x", bexpression.LocalVariables[0]);
             Assert.AreEqual("y", bexpression.LocalVariables[1]);
+
+            Assert.AreEqual("[ | x y | ^a + b]", expression.AsString());
         }
 
         [TestMethod]

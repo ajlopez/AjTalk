@@ -5,20 +5,16 @@
     using System.Linq;
     using System.Text;
 
-    public class BlockExpression : IExpression
+    public class FreeBlockExpression : IExpression
     {
         private IEnumerable<IExpression> body;
-        private IList<string> parameterNames;
         private IList<string> localVariables;
 
-        public BlockExpression(IList<string> parameterNames, IList<string> localVariables, IEnumerable<IExpression> body)
+        public FreeBlockExpression(IList<string> localVariables, IEnumerable<IExpression> body)
         {
-            this.parameterNames = parameterNames;
             this.localVariables = localVariables;
             this.body = body;
         }
-
-        public IList<string> ParameterNames { get { return this.parameterNames; } }
 
         public IList<string> LocalVariables { get { return this.localVariables; } }
 
@@ -28,25 +24,16 @@
         public string AsString()
         {
             // TODO Refactor to String Builder
-            string result = "[";
-
-            foreach (var param in this.parameterNames)
-                result += " :" + param;
-
-            if (this.parameterNames.Count > 0)
-                result += " |";
+            string result = string.Empty;
 
             if (this.localVariables.Count > 0)
             {
-                result += " |";
+                result += "|";
                 foreach (var local in this.localVariables)
                     result += " " + local;
 
-                result += " |";
+                result += " | ";
             }
-
-            if (result != "[")
-                result += " ";
 
             int nexpressions = 0;
 
@@ -59,7 +46,7 @@
                 nexpressions++;
             }
 
-            return result + "]";
+            return result;
         }
 
         public void Visit(IVisitor visitor)

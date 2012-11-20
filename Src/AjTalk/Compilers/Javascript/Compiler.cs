@@ -501,6 +501,11 @@
 
             return name;
         }
+
+        public override void Visit(FreeBlockExpression expression)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

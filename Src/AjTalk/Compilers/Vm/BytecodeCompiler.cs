@@ -34,6 +34,15 @@
             this.Visit(method.Body);
         }
 
+        public override void Visit(FreeBlockExpression block)
+        {
+            if (block.LocalVariables != null)
+                foreach (var locname in block.LocalVariables)
+                    this.block.CompileLocal(locname);
+
+            this.Visit(block.Body);
+        }
+
         public override void Visit(IEnumerable<IExpression> expressions)
         {
             foreach (var expr in expressions)
