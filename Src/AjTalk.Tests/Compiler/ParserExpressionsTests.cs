@@ -26,5 +26,20 @@
                 result.ValidateBlock(block);
             }
         }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Blocks.txt")]
+        public void CompileBlocks()
+        {
+            IList<ExpressionResult> results = ExpressionResult.LoadExpressionResults("Blocks.txt");
+
+            foreach (var result in results)
+            {
+                Parser parser = new Parser(result.Text);
+                var block = parser.CompileBlock();
+                Assert.IsNotNull(block);
+                result.ValidateBlock(block);
+            }
+        }
     }
 }

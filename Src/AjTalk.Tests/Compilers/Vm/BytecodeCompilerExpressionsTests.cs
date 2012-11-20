@@ -27,5 +27,21 @@
                 result.ValidateBlock(block);
             }
         }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Blocks.txt")]
+        public void CompileBlocks()
+        {
+            IList<ExpressionResult> results = ExpressionResult.LoadExpressionResults("Blocks.txt");
+
+            foreach (var result in results)
+            {
+                ModelParser parser = new ModelParser(result.Text);
+                Block block = new Block();
+                BytecodeCompiler compiler = new BytecodeCompiler(block);
+                compiler.CompileExpressions(parser.ParseExpressions());
+                result.ValidateBlock(block);
+            }
+        }
     }
 }

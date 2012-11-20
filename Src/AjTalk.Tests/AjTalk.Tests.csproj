@@ -115,6 +115,9 @@
     <None Include="CodeFiles\ClassTest.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="CodeFiles\Blocks.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="CodeFiles\Expressions.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

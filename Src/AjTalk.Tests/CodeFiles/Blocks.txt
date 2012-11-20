@@ -1,0 +1,5 @@
+﻿a := 1. b := 2
+GetConstant 1
+SetGlobalVariable a
+GetConstant 2
+SetGlobalVariable b
