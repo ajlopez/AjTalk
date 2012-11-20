@@ -1,0 +1,5 @@
+﻿1
+GetConstant 1
+---------
+2
+GetConstant 2

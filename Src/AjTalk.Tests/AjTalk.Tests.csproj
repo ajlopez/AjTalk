@@ -47,6 +47,7 @@
     <Compile Include="Compilers\Javascript\NodeCompilerTests.cs" />
     <Compile Include="Compilers\SourceWriterTests.cs" />
     <Compile Include="Compilers\Vm\BytecodeCompilerTests.cs" />
+    <Compile Include="Compiler\ParserExpressionsTests.cs" />
     <Compile Include="Language\BlockDecompilerTests.cs" />
     <Compile Include="Model\CodeReaderTests.cs" />
     <Compile Include="Model\ModelParserTests.cs" />
@@ -112,6 +113,9 @@
     <None Include="CodeFiles\ClassTest.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="CodeFiles\Expressions.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="CodeFiles\FileOut02.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
