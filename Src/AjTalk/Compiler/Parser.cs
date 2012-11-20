@@ -30,7 +30,15 @@ namespace AjTalk.Compiler
         {
             this.block = new Block(this.source);
             this.CompileBlockArguments();
-            this.CompileBlockLocals();
+            this.CompileLocals();
+            
+            // TODO review why to use this.locals instead of this.block.CompileLocal directly
+            foreach (string argname in this.arguments)
+                this.block.CompileArgument(argname);
+
+            foreach (string locname in this.locals)
+                this.block.CompileLocal(locname);
+
             this.CompileBody();
 
             return this.block;
@@ -169,29 +177,21 @@ namespace AjTalk.Compiler
 
         private void CompileBlockArguments()
         {
-            Token token = this.NextToken();
+            Token token;
+            int nparameters = 0;
 
-            while (true)
+            for (token = this.NextToken(); token != null && token.Type == TokenType.Parameter; nparameters++, token = this.NextToken())
+                this.arguments.Add(token.Value);
+
+            if (nparameters > 0)
             {
                 if (token == null)
                     throw new ParserException("Unexpected end of input");
-
-                if (token.Value == "|")
-                    break;
-
-                if (token.Type != TokenType.Parameter)
-                {
-                    this.PushToken(token);
-                    break;
-                }
-
-                this.arguments.Add(token.Value);
-
-                token = this.NextToken();
+                if (token.Type != TokenType.Punctuation || token.Value != "|")
+                    throw new ParserException("Expected '|'");
             }
-
-            foreach (string argname in this.arguments)
-                this.block.CompileArgument(argname);
+            else
+                this.PushToken(token);
         }
 
         private string CompileName()

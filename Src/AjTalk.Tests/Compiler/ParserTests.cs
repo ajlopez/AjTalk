@@ -710,6 +710,19 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual("SetGlobalVariable a", ops[1]);
         }
 
+        [TestMethod]
+        public void CompileBlockWithLocalVariable()
+        {
+            Parser parser = new Parser("|a| a := 1");
+            var result = parser.CompileBlock();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual("SetLocal a", ops[1]);
+        }
+
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return CompileClass(clsname, varnames, methods, null);
