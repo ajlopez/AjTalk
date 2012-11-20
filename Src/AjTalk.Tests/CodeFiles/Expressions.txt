@@ -28,3 +28,13 @@ self bar: 1
 GetSelf
 GetConstant 1
 Send bar: 1
+---------
+^1
+GetConstant 1
+ReturnPop
+---------
+^1+2
+GetConstant 1
+GetConstant 2
+Send + 1
+ReturnPop
