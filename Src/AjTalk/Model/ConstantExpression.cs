@@ -32,8 +32,6 @@
                 return "true";
 
             return Convert.ToString(this.value, CultureInfo.InvariantCulture);
-
-            ////return this.value.ToString();
         }
 
         public void Visit(IVisitor visitor)

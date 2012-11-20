@@ -25,6 +25,20 @@
         }
 
         [TestMethod]
+        public void DecompileGetRealConstant()
+        {
+            Block block = new Block();
+            block.CompileGetConstant(1.2);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetConstant 1.2", result[0]);
+        }
+
+        [TestMethod]
         public void DecompileGetStringConstant()
         {
             Block block = new Block();

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
 
@@ -22,7 +23,7 @@
 
             while (ip < nbytes)
             {
-                switch((ByteCode)this.block.ByteCodes[ip]) 
+                switch ((ByteCode)this.block.ByteCodes[ip]) 
                 {
                     case ByteCode.GetConstant:
                         ip++;
@@ -31,7 +32,7 @@
                         if (constant is string)
                             codes.Add(string.Format("{0} \"{1}\"", ByteCode.GetConstant, constant));
                         else
-                            codes.Add(string.Format("{0} {1}", ByteCode.GetConstant, constant));
+                            codes.Add(string.Format("{0} {1}", ByteCode.GetConstant, Convert.ToString(constant, CultureInfo.InvariantCulture)));
                         break;
 
                     case ByteCode.GetLocal:
