@@ -753,6 +753,23 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual("MakeCollection 3", ops[3]);
         }
 
+        [TestMethod]
+        public void CompileDynamicArray()
+        {
+            Parser parser = new Parser("{a. b. 3}");
+            var result = parser.CompileBlock();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(4, ops.Count);
+            Assert.AreEqual("GetGlobalVariable a", ops[0]);
+            Assert.AreEqual("GetGlobalVariable b", ops[1]);
+            Assert.AreEqual("GetConstant 3", ops[2]);
+            Assert.AreEqual("MakeCollection 3", ops[3]);
+        }
+
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return CompileClass(clsname, varnames, methods, null);

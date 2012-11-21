@@ -238,6 +238,13 @@ namespace AjTalk.Compiler
                 return;
             }
 
+            if (token.Type == TokenType.Punctuation && token.Value == "{")
+            {
+                this.CompileDynamicCollection();
+
+                return;
+            }
+
             if (token.Type == TokenType.Punctuation && token.Value == "[")
             {
                 Parser newcompiler = new Parser(this.tokenizer);
@@ -350,6 +357,22 @@ namespace AjTalk.Compiler
 
                 token = this.NextToken();
             }
+        }
+
+        private void CompileDynamicCollection()
+        {
+            int nelements = 0;
+
+            while (!this.TryCompileToken(TokenType.Punctuation, "}"))
+            {
+                if (nelements > 0)
+                    this.CompileToken(TokenType.Punctuation, ".");
+
+                this.CompileExpression();
+                nelements++;
+            }
+
+            this.block.CompileByteCode(ByteCode.MakeCollection, (byte)nelements);
         }
 
         private void CompileUnaryExpression()
@@ -514,6 +537,29 @@ namespace AjTalk.Compiler
         {
             foreach (string locname in this.locals)
                 this.block.CompileLocal(locname);
+        }
+
+        private bool TryCompileToken(TokenType type, string value)
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                return false;
+
+            if (token.Type == type && token.Value == value) 
+                return true;
+
+            this.PushToken(token);
+
+            return false;
+        }
+
+        private void CompileToken(TokenType type, string value)
+        {
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != type && token.Value != value)
+                throw new ParserException(string.Format("Expected '{0}'", value));
         }
     }
 }
