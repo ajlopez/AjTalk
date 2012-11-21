@@ -5,6 +5,11 @@
 	Apparently, it uses the number of argument, but block has the names too
 	Same for Bytecode.GetLocal
 
+- Define Array implementation
+   #(1 2 3) as IList<object>?
+   
+- Implement FreeBlockExpression in Javascript compilers
+
 - Methods for Object
 	==, ~=, ~~, =
 	at:, at:put:, size, basicSize, ...

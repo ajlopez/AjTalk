@@ -333,6 +333,22 @@
         }
 
         [TestMethod]
+        public void CompileIntegerArray()
+        {
+            ModelParser parser = new ModelParser("#(1 2 3)");
+            this.compiler.CompileExpression(parser.ParseExpression());
+            Assert.IsNotNull(this.block.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(this.block);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(4, ops.Count);
+            Assert.AreEqual("GetConstant 1", ops[0]);
+            Assert.AreEqual("GetConstant 2", ops[1]);
+            Assert.AreEqual("GetConstant 3", ops[2]);
+            Assert.AreEqual("MakeCollection 3", ops[3]);
+        }
+
+        [TestMethod]
         public void ExecuteBlock()
         {
             Machine machine = new Machine();

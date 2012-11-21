@@ -51,7 +51,10 @@
 
         public override void Visit(ArrayExpression expression)
         {
-            throw new NotImplementedException();
+            foreach (var expr in expression.Expressions)
+                this.block.CompileGetConstant(((ConstantExpression)expr).Value);
+
+            this.block.CompileByteCode(ByteCode.MakeCollection, (byte)expression.Expressions.Count());
         }
 
         public override void Visit(DynamicArrayExpression expression)

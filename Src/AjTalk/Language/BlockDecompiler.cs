@@ -110,6 +110,12 @@
                     case ByteCode.GetSelf:
                         codes.Add(string.Format("{0}", (ByteCode)this.block.ByteCodes[ip]));
                         break;
+
+                    case ByteCode.MakeCollection:
+                        ip++;
+                        int nelements = this.block.ByteCodes[ip];
+                        codes.Add(string.Format("{0} {1}", ByteCode.MakeCollection, nelements));
+                        break;
                 }
 
                 ip++;
