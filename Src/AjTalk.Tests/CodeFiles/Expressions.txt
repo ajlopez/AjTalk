@@ -42,3 +42,6 @@ ReturnPop
 a := 1
 GetConstant 1
 SetGlobalVariable a
+---------
+[ a := 1 ]
+GetBlock { GetConstant 1; SetGlobalVariable a }

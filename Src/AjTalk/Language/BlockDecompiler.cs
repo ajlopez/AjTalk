@@ -15,6 +15,26 @@
             this.block = block;
         }
 
+        public string DecompileAsString()
+        {
+            StringBuilder builder = new StringBuilder("{ ");
+            int nlines = 0;
+            var lines = this.Decompile();
+
+            foreach (var line in lines)
+            {
+                if (nlines > 0)
+                    builder.Append("; ");
+
+                builder.Append(line);
+                nlines++;
+            }
+
+            builder.Append(" }");
+
+            return builder.ToString();
+        }
+
         public IList<string> Decompile()
         {
             IList<string> codes = new List<string>();
@@ -77,6 +97,13 @@
                         ip++;
                         int arity = this.block.ByteCodes[ip];
                         codes.Add(string.Format("{0} {1} {2}", ByteCode.Send, selector, arity));
+                        break;
+                    case ByteCode.GetBlock:
+                        ip++;
+                        nconstant = this.block.ByteCodes[ip];
+                        Block newblock = (Block)this.block.GetConstant(nconstant);
+                        BlockDecompiler newdecompiler = new BlockDecompiler(newblock);
+                        codes.Add(string.Format("{0} {1}", ByteCode.GetBlock, newdecompiler.DecompileAsString()));
                         break;
 
                     case ByteCode.ReturnPop:
