@@ -1,6 +1,10 @@
 
 - Refactor ExecutionBlock: bytecode processing
 
+- Review Bytecode.GetArgument
+	Apparently, it uses the number of argument, but block has the names too
+	Same for Bytecode.GetLocal
+
 - Methods for Object
 	==, ~=, ~~, =
 	at:, at:put:, size, basicSize, ...

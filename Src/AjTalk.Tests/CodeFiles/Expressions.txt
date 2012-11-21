@@ -45,3 +45,12 @@ SetGlobalVariable a
 ---------
 [ a := 1 ]
 GetBlock { GetConstant 1; SetGlobalVariable a }
+---------
+[ |a| b := a ]
+GetBlock { GetLocal a; SetGlobalVariable b }
+---------
+[ :a | b := a ]
+GetBlock { GetArgument a; SetGlobalVariable b }
+---------
+[ :a | |b| b := a. c := b ]
+GetBlock { GetArgument a; SetLocal b; GetLocal b; SetGlobalVariable c }
