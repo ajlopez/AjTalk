@@ -52,14 +52,17 @@
         public override void Visit(ArrayExpression expression)
         {
             foreach (var expr in expression.Expressions)
-                this.block.CompileGetConstant(((ConstantExpression)expr).Value);
+                expr.Visit(this);
 
             this.block.CompileByteCode(ByteCode.MakeCollection, (byte)expression.Expressions.Count());
         }
 
         public override void Visit(DynamicArrayExpression expression)
         {
-            throw new NotImplementedException();
+            foreach (var expr in expression.Expressions)
+                expr.Visit(this);
+
+            this.block.CompileByteCode(ByteCode.MakeCollection, (byte)expression.Expressions.Count());
         }
 
         public override void Visit(ConstantExpression expression)

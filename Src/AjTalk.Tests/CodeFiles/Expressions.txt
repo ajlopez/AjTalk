@@ -54,3 +54,15 @@ GetBlock { GetArgument a; SetGlobalVariable b }
 ---------
 [ :a | |b| b := a. c := b ]
 GetBlock { GetArgument a; SetLocal b; GetLocal b; SetGlobalVariable c }
+---------
+#(1 2 3)
+GetConstant 1
+GetConstant 2
+GetConstant 3
+MakeCollection 3
+---------
+{a. b. 1}
+GetGlobalVariable a
+GetGlobalVariable b
+GetConstant 1
+MakeCollection 3
