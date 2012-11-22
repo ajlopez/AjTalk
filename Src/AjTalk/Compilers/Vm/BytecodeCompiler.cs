@@ -54,6 +54,9 @@
 
         public override void Visit(IEnumerable<IExpression> expressions)
         {
+            if (expressions == null)
+                return;
+
             foreach (var expr in expressions)
                 expr.Visit(this);
         }
@@ -130,12 +133,14 @@
 
         public override void Visit(InstanceVariableExpression expression)
         {
-            throw new NotImplementedException();
+            // TODO check if is a get or set, if is an instance variable
+            this.block.CompileGet(expression.Name);
         }
 
         public override void Visit(ClassVariableExpression expression)
         {
-            throw new NotImplementedException();
+            // TODO check if is a get or set, if is an class variable
+            this.block.CompileGet(expression.Name);
         }
 
         public override void Visit(BlockExpression expression)
@@ -150,7 +155,7 @@
                     newblock.CompileLocal(locname);
 
             var compiler = new BytecodeCompiler(newblock);
-            compiler.CompileExpressions(expression.Body);
+            compiler.Visit(expression.Body);
             this.block.CompileGetBlock(newblock);
         }
 

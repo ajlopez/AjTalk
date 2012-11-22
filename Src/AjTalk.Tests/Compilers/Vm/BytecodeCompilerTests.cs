@@ -478,15 +478,106 @@
         [DeploymentItem(@"CodeFiles\FileOut01.st")]
         public void CompileFileOut01()
         {
-            ChunkReader chunkReader = new ChunkReader(@"FileOut01.st");
+            CompileFile("FileOut01.st");
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\FileOut02.st")]
+        public void CompileFileOut02()
+        {
+            CompileFile("FileOut02.st");
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\SqueakObject.st")]
+        public void CompileSqueakObject()
+        {
+            CompileFile("SqueakObject.st");
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\SqueakKernelObjects.st")]
+        public void CompileSqueakKernelObjects()
+        {
+            CompileFile("SqueakKernelObjects.st");
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
+        public void CompilePharoCoreKernelObjects()
+        {
+            CompileFile("PharoCoreKernelObjects.st");
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
+        [DeploymentItem(@"CodeFiles\PharoCorePoint.st")]
+        public void CompilePharoCorePoint()
+        {
+            ChunkReader chunkCoreReader = new ChunkReader(@"PharoCoreKernelObjects.st");
+            CodeReader coreReader = new CodeReader(chunkCoreReader);
+            ChunkReader chunkReader = new ChunkReader(@"PharoCorePoint.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            coreReader.Process(model);
+            reader.Process(model);
+
+            foreach (var element in model.Elements)
+            {
+                Block block = new Block();
+                BytecodeCompiler compiler = new BytecodeCompiler(block);
+                element.Visit(compiler);
+                if (element is MethodModel && ((MethodModel)element).Body == null)
+                    continue;
+                Assert.IsNotNull(block.ByteCodes);
+            }
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
+        [DeploymentItem(@"CodeFiles\PharoCoreRectangle.st")]
+        public void CompilePharoCoreRectangle()
+        {
+            ChunkReader chunkCoreReader = new ChunkReader(@"PharoCoreKernelObjects.st");
+            CodeReader coreReader = new CodeReader(chunkCoreReader);
+            ChunkReader chunkReader = new ChunkReader(@"PharoCoreRectangle.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            coreReader.Process(model);
+            reader.Process(model);
+
+            foreach (var element in model.Elements)
+            {
+                Block block = new Block();
+                BytecodeCompiler compiler = new BytecodeCompiler(block);
+                element.Visit(compiler);
+
+                if (element is MethodModel && ((MethodModel)element).Body == null)
+                    continue;
+
+                Assert.IsNotNull(block.ByteCodes);
+            }
+        }
+
+        internal static void CompileFile(string filename)
+        {
+            ChunkReader chunkReader = new ChunkReader(filename);
             CodeReader reader = new CodeReader(chunkReader);
             CodeModel model = new CodeModel();
 
             reader.Process(model);
 
-            this.compiler.Visit(model);
-
-            Assert.IsNotNull(block.ByteCodes);
+            foreach (var element in model.Elements)
+            {
+                Block block = new Block();
+                BytecodeCompiler compiler = new BytecodeCompiler(block);
+                element.Visit(compiler);
+                if (element is MethodModel && ((MethodModel)element).Body == null)
+                    continue;
+                Assert.IsNotNull(block.ByteCodes);
+            }
         }
 
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
