@@ -57,6 +57,27 @@
             return GetNamesFromArgument(expression, "classVariableNames");
         }
 
+        private static IList<string> GetPoolDictionariesNames(MessageExpression expression)
+        {
+            return GetNamesFromArgument(expression, "poolDictionaries");
+        }
+
+        private static string GetCategory(MessageExpression expression)
+        {
+            return GetArgument(expression, "category");
+        }
+
+        private static string GetArgument(MessageExpression expression, string key)
+        {
+            string[] keys = expression.Selector.Split(':');
+
+            for (int k = 0; k < keys.Length; k++)
+                if (keys[k] == key)
+                    return (string)((ConstantExpression)expression.Arguments.ElementAt(k)).Value;
+
+            return null;
+        }
+
         private static IList<string> GetNamesFromArgument(MessageExpression expression, string key)
         {
             string[]keys = expression.Selector.Split(':');
@@ -124,9 +145,9 @@
                 ClassModel @class;
 
                 if (super != null || variable.Name == null)
-                    @class = new ClassModel(symbol.Symbol, super, GetInstanceVariableNames(expression), GetClassVariableNames(expression), isvariable);
+                    @class = new ClassModel(symbol.Symbol, super, GetInstanceVariableNames(expression), GetClassVariableNames(expression), isvariable, GetPoolDictionariesNames(expression), GetCategory(expression));
                 else
-                    @class = new ClassModel(symbol.Symbol, variable.Name, GetInstanceVariableNames(expression), GetClassVariableNames(expression), isvariable);
+                    @class = new ClassModel(symbol.Symbol, variable.Name, GetInstanceVariableNames(expression), GetClassVariableNames(expression), isvariable, GetPoolDictionariesNames(expression), GetCategory(expression));
 
                 model.AddElement(@class);
             }

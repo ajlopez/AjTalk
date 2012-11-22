@@ -36,6 +36,7 @@ namespace AjTalk.Language
         Send = 50,
         ChainedSend = 51,
         MakeCollection = 52,
+        Primitive = 53,
 
         InstAt = 60,
         InstAtPut = 61,

@@ -13,39 +13,36 @@
         private ClassModel metaclass;
         private IList<string> classVariableNames;
         private IList<string> instanceVariableNames;
+        private IList<string> poolDictionaries;
+        private string category;
         private IList<MethodModel> classMethods;
         private IList<MethodModel> instanceMethods;
         private bool isvariable;
 
-        public ClassModel(string name, ClassModel superclass, IList<string> instanceVariableNames, IList<string> classVariableNames)
-            : this(name, superclass, instanceVariableNames, classVariableNames, false)
+        public ClassModel(string name, ClassModel superclass, IList<string> instanceVariableNames, IList<string> classVariableNames, bool isvariable, IList<string> poolDictionaries, string category)
+            : this(name, instanceVariableNames, classVariableNames, isvariable, poolDictionaries, category)
         {
-        }
-
-        public ClassModel(string name, ClassModel superclass, IList<string> instanceVariableNames, IList<string> classVariableNames, bool isvariable)
-        {
-            this.name = name;
             this.superclass = superclass;
-            this.instanceVariableNames = instanceVariableNames ?? new List<string>();
-            this.classVariableNames = classVariableNames ?? new List<string>();
-            this.classMethods = new List<MethodModel>();
-            this.instanceMethods = new List<MethodModel>();
-            if (!name.EndsWith(" class"))
-                this.metaclass = new ClassModel(name + " class", superclass == null ? null : superclass.MetaClass, null, null);
-            this.isvariable = isvariable;
         }
 
-        public ClassModel(string name, string superclassname, IList<string> instanceVariableNames, IList<string> classVariableNames, bool isvariable)
+        public ClassModel(string name, string superclassname, IList<string> instanceVariableNames, IList<string> classVariableNames, bool isvariable, IList<string> poolDictionaries, string category)
+            : this(name, instanceVariableNames, classVariableNames, isvariable, poolDictionaries, category)
+        {
+            this.superclassname = superclassname;
+        }
+
+        public ClassModel(string name, IList<string> instanceVariableNames, IList<string> classVariableNames, bool isvariable, IList<string> poolDictionaries, string category)
         {
             this.name = name;
-            this.superclassname = superclassname;
             this.instanceVariableNames = instanceVariableNames ?? new List<string>();
             this.classVariableNames = classVariableNames ?? new List<string>();
             this.classMethods = new List<MethodModel>();
             this.instanceMethods = new List<MethodModel>();
             if (!name.EndsWith(" class"))
-                this.metaclass = new ClassModel(name + " class", superclassname == null ? null : superclassname + " class", null, null, isvariable);
+                this.metaclass = new ClassModel(name + " class", superclassname == null ? null : superclassname + " class", null, null, isvariable, null, null);
             this.isvariable = isvariable;
+            this.poolDictionaries = poolDictionaries ?? new List<string>();
+            this.category = category ?? string.Empty;
         }
 
         public string Name { get { return this.name; } }
@@ -73,9 +70,39 @@
 
         public bool IsVariable { get { return this.isvariable; } }
 
+        public IList<string> PoolDictionaries { get { return this.poolDictionaries; } }
+
+        public string Category { get { return this.category; } }
+
+        public string PoolDictionariesAsString { get { return AsString(this.poolDictionaries); } }
+
+        public string ClassVariableNamesAsString { get { return AsString(this.classVariableNames); } }
+
+        public string InstanceVariableNamesAsString { get { return AsString(this.instanceVariableNames); } }
+
         public void Visit(IVisitor visitor)
         {
             visitor.Visit(this);
+        }
+
+        private static string AsString(IList<string> names)
+        {
+            if (names == null)
+                return string.Empty;
+
+            StringBuilder sb = new StringBuilder();
+            int nnames = 0;
+
+            foreach (var name in names) 
+            {
+                if (nnames > 0)
+                    sb.Append(" ");
+
+                sb.Append(name);
+                nnames++;
+            }
+
+            return sb.ToString();
         }
     }
 }

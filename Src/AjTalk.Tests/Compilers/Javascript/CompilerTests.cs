@@ -257,7 +257,7 @@
         [TestMethod]
         public void CompileSimpleClass()
         {
-            ClassModel @class = new ClassModel("AClass", null, null, null);
+            ClassModel @class = new ClassModel("AClass", (ClassModel) null, null, null, false, null, null);
             this.compiler.CompileClass(@class);
             this.writer.Close();
             string output = this.writer.ToString();
@@ -273,7 +273,7 @@
         [TestMethod]
         public void CompileSimpleClassWithInstanceVariables()
         {
-            ClassModel @class = new ClassModel("AClass", null, new List<string>() { "x", "y" }, new List<string>());
+            ClassModel @class = new ClassModel("AClass", (ClassModel)null, new List<string>() { "x", "y" }, new List<string>(), false, null, null);
             this.compiler.CompileClass(@class);
             this.writer.Close();
             string output = this.writer.ToString();
@@ -287,7 +287,7 @@
         [TestMethod]
         public void CompileSimpleClassWithClassVariables()
         {
-            ClassModel @class = new ClassModel("AClass", null, new List<string>(), new List<string>() { "x", "y" });
+            ClassModel @class = new ClassModel("AClass", (ClassModel)null, new List<string>(), new List<string>() { "x", "y" }, false, null, null);
             this.compiler.CompileClass(@class);
             this.writer.Close();
             string output = this.writer.ToString();
@@ -301,7 +301,7 @@
         [TestMethod]
         public void CompileSimpleClassWithSimpleMethod()
         {
-            ClassModel @class = new ClassModel("AClass", null, new List<string>() { "x", "y" }, new List<string>());
+            ClassModel @class = new ClassModel("AClass", (ClassModel)null, new List<string>() { "x", "y" }, new List<string>(), false, null, null);
             ModelParser parser = new ModelParser("x ^x");
             MethodModel method = parser.ParseMethod(@class, false);
             @class.InstanceMethods.Add(method);
@@ -322,7 +322,7 @@
         [TestMethod]
         public void CompileSimpleClassWithSimpleSetMethod()
         {
-            ClassModel @class = new ClassModel("AClass", null, new List<string>() { "x", "y" }, new List<string>());
+            ClassModel @class = new ClassModel("AClass", (ClassModel)null, new List<string>() { "x", "y" }, new List<string>(), false, null, null);
             ModelParser parser = new ModelParser("x: newX x := newX");
             MethodModel method = parser.ParseMethod(@class, false);
             @class.InstanceMethods.Add(method);
@@ -512,7 +512,7 @@
         private static MethodModel ParseMethod(string text)
         {
             ModelParser parser = new ModelParser(text);
-            ClassModel classModel = new ClassModel("MyClass", null, null, null);
+            ClassModel classModel = new ClassModel("MyClass", (ClassModel)null, null, null, false, null, null);
             return parser.ParseMethod(classModel, false);
         }
 

@@ -671,7 +671,7 @@
         [TestMethod]
         public void ParseInstanceMethodReturningInstanceVariable()
         {
-            ClassModel @class = new ClassModel("AClass", null, new List<string>() { "x", "y" }, new List<string>());
+            ClassModel @class = new ClassModel("AClass", (ClassModel) null, new List<string>() { "x", "y" }, new List<string>(), false, null, null);
             ModelParser parser = new ModelParser("x ^x");
             MethodModel method = parser.ParseMethod(@class, false);
 
@@ -688,7 +688,7 @@
         [TestMethod]
         public void ParseClassMethodReturningClassVariable()
         {
-            ClassModel @class = new ClassModel("AClass", null, new List<string>(), new List<string>() { "x", "y" });
+            ClassModel @class = new ClassModel("AClass", (ClassModel)null, new List<string>(), new List<string>() { "x", "y" }, false, null, null);
             ModelParser parser = new ModelParser("x ^x");
             MethodModel method = parser.ParseMethod(@class, true);
 

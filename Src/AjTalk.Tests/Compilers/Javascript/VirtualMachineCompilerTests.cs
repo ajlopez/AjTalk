@@ -205,7 +205,7 @@
         private static MethodModel ParseMethod(string text)
         {
             ModelParser parser = new ModelParser(text);
-            ClassModel classModel = new ClassModel("MyClass", null, null, null);
+            ClassModel classModel = new ClassModel("MyClass", string.Empty, null, null, false, null, null);
             return parser.ParseMethod(classModel, false);
         }
 

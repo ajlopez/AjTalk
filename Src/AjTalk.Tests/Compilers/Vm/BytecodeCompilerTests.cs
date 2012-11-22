@@ -474,6 +474,21 @@
             Assert.IsNull(iobj[1]);
         }
 
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\FileOut01.st")]
+        public void CompileFileOut01()
+        {
+            ChunkReader chunkReader = new ChunkReader(@"FileOut01.st");
+            CodeReader reader = new CodeReader(chunkReader);
+            CodeModel model = new CodeModel();
+
+            reader.Process(model);
+
+            this.compiler.Visit(model);
+
+            Assert.IsNotNull(block.ByteCodes);
+        }
+
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return CompileClass(clsname, varnames, methods, null);

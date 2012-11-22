@@ -18,7 +18,16 @@
 
         public override void Visit(ClassModel @class)
         {
-            throw new NotImplementedException();
+            string selector = @class.IsVariable ? "variableSubclass:" : "subclass:";
+            selector += "instanceVariableNames:classVariableNames:poolDictionaries:category:";
+
+            this.block.CompileGet(@class.SuperClassName);
+            this.block.CompileConstant(@class.Name);
+            this.block.CompileGetConstant(@class.InstanceVariableNamesAsString);
+            this.block.CompileGetConstant(@class.ClassVariableNamesAsString);
+            this.block.CompileGetConstant(@class.PoolDictionariesAsString);
+            this.block.CompileGetConstant(@class.Category);
+            this.block.CompileSend(selector);
         }
 
         public override void Visit(MethodModel method)
@@ -147,12 +156,16 @@
 
         public override void Visit(PrimitiveExpression expression)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrEmpty(expression.Module))
+                throw new NotImplementedException();
+
+            this.block.CompileByteCode(ByteCode.Primitive, (byte)expression.Number);
         }
 
-        public override void Visit(CodeModel expression)
+        public override void Visit(CodeModel model)
         {
-            throw new NotImplementedException();
+            foreach (var element in model.Elements)
+                element.Visit(this);
         }
     }
 }
