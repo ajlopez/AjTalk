@@ -36,7 +36,7 @@ subclass: aSymbol
 compile: aMethodSource
 	| parser |
 	parser := @AjTalk.Compiler.Parser new: aMethodSource.
-	parser compileInstanceMethod: self.
+	self !!defineInstanceMethod: (parser !!compileInstanceMethod: self).
 
 ! !
 

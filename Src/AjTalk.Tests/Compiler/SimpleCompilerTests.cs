@@ -29,9 +29,9 @@ namespace AjTalk.Tests.Compiler
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
-            this.compiler.CompileInstanceMethod("x ^x", cls);
-
-            Assert.IsNotNull(cls.GetInstanceMethod("x"));
+            var method = this.compiler.CompileInstanceMethod("x ^x", cls);
+            Assert.IsNotNull(method);
+            Assert.IsNotNull(method.ByteCodes);
         }
 
         [TestMethod]
@@ -40,9 +40,9 @@ namespace AjTalk.Tests.Compiler
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
-            this.compiler.CompileInstanceMethod("x | temp | temp := x. ^temp", cls);
-
-            Assert.IsNotNull(cls.GetInstanceMethod("x"));
+            var method = this.compiler.CompileInstanceMethod("x | temp | temp := x. ^temp", cls);
+            Assert.IsNotNull(method);
+            Assert.IsNotNull(method.ByteCodes);
         }
 
         [TestMethod]
@@ -51,9 +51,9 @@ namespace AjTalk.Tests.Compiler
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
-            this.compiler.CompileInstanceMethod("x: newX x := newX", cls);
-
-            Assert.IsNotNull(cls.GetInstanceMethod("x:"));
+            var method = this.compiler.CompileInstanceMethod("x: newX x := newX", cls);
+            Assert.IsNotNull(method);
+            Assert.IsNotNull(method.ByteCodes);
         }
 
         [TestMethod]
@@ -753,11 +753,11 @@ namespace AjTalk.Tests.Compiler
 
             if (methods != null)
                 foreach (string method in methods)
-                    this.compiler.CompileInstanceMethod(method, cls);
+                    cls.DefineInstanceMethod(this.compiler.CompileInstanceMethod(method, cls));
 
             if (clsmethods != null)
                 foreach (string method in clsmethods)
-                    this.compiler.CompileClassMethod(method, cls);
+                    cls.DefineClassMethod(this.compiler.CompileClassMethod(method, cls));
 
             return cls;
         }

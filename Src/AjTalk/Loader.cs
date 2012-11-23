@@ -12,6 +12,7 @@ namespace AjTalk
     {
         private ChunkReader reader;
         private IBehavior currentClass;
+        private bool isclassmethod;
 
         public Loader(TextReader reader)
         {
@@ -55,7 +56,17 @@ namespace AjTalk
 
                 if (trimmed.EndsWith(" methods"))
                 {
-                    blocktext = "^" + trimmed.Substring(0, trimmed.Length - 8);
+                    if (trimmed.EndsWith(" class methods"))
+                    {
+                        this.isclassmethod = true;
+                        blocktext = "^" + trimmed.Substring(0, trimmed.Length - 14);
+                    }
+                    else
+                    {
+                        this.isclassmethod = false;
+                        blocktext = "^" + trimmed.Substring(0, trimmed.Length - 8);
+                    }
+
                     Parser compiler = new Parser(blocktext);
                     Block block = compiler.CompileBlock();
                     object value = block.Execute(machine, null);
@@ -70,7 +81,10 @@ namespace AjTalk
 
                 if (this.IsMethod())
                 {
-                    parser.CompileInstanceMethod(this.currentClass);
+                    if (this.isclassmethod)
+                        this.currentClass.DefineClassMethod(parser.CompileClassMethod(this.currentClass));
+                    else
+                        this.currentClass.DefineInstanceMethod(parser.CompileInstanceMethod(this.currentClass));
                 }
                 else
                 {

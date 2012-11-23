@@ -47,7 +47,7 @@ namespace AjTalk.Compiler
         public Method CompileInstanceMethod(IBehavior cls)
         {
             this.CompileMethod(cls);
-            cls.DefineInstanceMethod((IMethod)this.block);
+            //cls.DefineInstanceMethod((IMethod)this.block);
             return (Method)this.block;
         }
 
@@ -55,7 +55,7 @@ namespace AjTalk.Compiler
         public Method CompileClassMethod(IBehavior cls)
         {
             this.CompileMethod(cls.MetaClass); // use metaclass
-            cls.DefineClassMethod((IMethod)this.block);
+            //cls.DefineClassMethod((IMethod)this.block);
             return (Method)this.block;
         }
 

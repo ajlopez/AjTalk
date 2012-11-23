@@ -30,9 +30,11 @@ namespace AjTalk.Tests.Compiler
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
             Parser compiler = new Parser("x ^x");
-            compiler.CompileInstanceMethod(cls);
+            var method = compiler.CompileInstanceMethod(cls);
 
-            Assert.IsNotNull(cls.GetInstanceMethod("x"));
+            Assert.IsNotNull(method);
+            Assert.AreEqual("x", method.Name);
+            Assert.IsNotNull(method.ByteCodes);
         }
 
         [TestMethod]
@@ -42,9 +44,11 @@ namespace AjTalk.Tests.Compiler
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
             Parser compiler = new Parser("x | temp | temp := x. ^temp");
-            compiler.CompileInstanceMethod(cls);
+            var method = compiler.CompileInstanceMethod(cls);
 
-            Assert.IsNotNull(cls.GetInstanceMethod("x"));
+            Assert.IsNotNull(method);
+            Assert.AreEqual("x", method.Name);
+            Assert.IsNotNull(method.ByteCodes);
         }
 
         [TestMethod]
@@ -54,9 +58,11 @@ namespace AjTalk.Tests.Compiler
             IClass cls = machine.CreateClass("Rectangle");
             cls.DefineInstanceVariable("x");
             Parser compiler = new Parser("x: newX x := newX");
-            compiler.CompileInstanceMethod(cls);
+            var method = compiler.CompileInstanceMethod(cls);
 
-            Assert.IsNotNull(cls.GetInstanceMethod("x:"));
+            Assert.IsNotNull(method);
+            Assert.AreEqual("x:", method.Name);
+            Assert.IsNotNull(method.ByteCodes);
         }
 
         [TestMethod]
@@ -793,7 +799,7 @@ namespace AjTalk.Tests.Compiler
                 foreach (string method in methods)
                 {
                     Parser compiler = new Parser(method);
-                    compiler.CompileInstanceMethod(cls);
+                    cls.DefineInstanceMethod(compiler.CompileInstanceMethod(cls));
                 }
             }
 
@@ -802,7 +808,7 @@ namespace AjTalk.Tests.Compiler
                 foreach (string method in clsmethods)
                 {
                     Parser compiler = new Parser(method);
-                    compiler.CompileClassMethod(cls);
+                    cls.DefineClassMethod(compiler.CompileClassMethod(cls));
                 }
             }
 
