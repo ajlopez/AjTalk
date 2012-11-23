@@ -150,6 +150,7 @@
         public override void Visit(BlockExpression expression)
         {
             Block newblock = new Block();
+
             if (expression.ParameterNames != null)
                 foreach (var parname in expression.ParameterNames)
                     newblock.CompileArgument(parname);

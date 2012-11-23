@@ -9,3 +9,12 @@ GetConstant 1
 SetLocal a
 GetLocal a
 SetGlobalVariable b
+---------
+| sum | sum := 0. MyVector do: [ :x | sum := sum + x ]. ^sum
+GetConstant 0
+SetLocal sum
+GetGlobalVariable MyVector
+GetBlock { GetLocal sum; GetArgument x; Send + 1; SetLocal sum }
+Send do: 1
+GetLocal sum
+ReturnPop

@@ -66,3 +66,4 @@ GetGlobalVariable a
 GetGlobalVariable b
 GetConstant 1
 MakeCollection 3
+

@@ -22,8 +22,12 @@
 
         public Method CompileInstanceMethod(string text, IBehavior cls)
         {
-            Parser parser = new Parser(text);
-            return parser.CompileInstanceMethod(cls);
+            ModelParser parser = new ModelParser(text);
+            var methodmodel = parser.ParseMethod();
+            Method method = new Method(cls, methodmodel.Selector, text);
+            BytecodeCompiler compiler = new BytecodeCompiler(method);
+            compiler.CompileMethod(methodmodel);
+            return method;
         }
 
         public Method CompileClassMethod(string text, IBehavior cls)
