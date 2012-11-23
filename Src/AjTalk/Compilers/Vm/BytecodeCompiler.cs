@@ -151,6 +151,13 @@
         {
             Block newblock = new Block();
 
+            // TODO Review is the copy of argument and local names is needed
+            foreach (var parname in this.block.ParameterNames)
+                newblock.CompileArgument(parname);
+
+            foreach (var locname in this.block.LocalNames)
+                newblock.CompileLocal(locname);
+
             if (expression.ParameterNames != null)
                 foreach (var parname in expression.ParameterNames)
                     newblock.CompileArgument(parname);
