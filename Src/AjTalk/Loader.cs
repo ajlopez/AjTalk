@@ -10,17 +10,17 @@ namespace AjTalk
 
     public class Loader
     {
-        private TextReader reader;
+        private ChunkReader reader;
         private IBehavior currentClass;
 
         public Loader(TextReader reader)
         {
-            this.reader = reader;
+            this.reader = new ChunkReader(reader);
         }
 
         public Loader(string filename)
         {
-            this.reader = new StreamReader(filename);
+            this.reader = new ChunkReader(filename);
         }
 
         public bool IsMethod()
@@ -30,47 +30,7 @@ namespace AjTalk
 
         public string GetBlockText()
         {
-            TextWriter writer = new StringWriter();
-
-            char lastch = (char)0;
-            int ch = this.reader.Read();
-
-            if (ch == -1)
-                return null;
-
-            while (ch != -1)
-            {
-                if (ch == '!')
-                {
-                    if (this.reader.Peek() != '!')
-                        break;
-                    this.reader.Read();
-                    writer.Write('!');
-                    lastch = (char)ch;
-                    ch = this.reader.Read();
-                    continue;
-                }
-
-                if (ch == '\n' && lastch != '\r')
-                    writer.Write('\r');
-
-                writer.Write((char)ch);
-                lastch = (char)ch;
-                ch = this.reader.Read();
-            }
-
-            if (ch != -1)
-                if (this.reader.Peek() == '\r')
-                {
-                    this.reader.Read();
-                    if (this.reader.Peek() == '\n')
-                        this.reader.Read();
-                }
-                else if (this.reader.Peek() == '\n')
-                    this.reader.Read();
-
-            writer.Close();
-            return writer.ToString();
+            return this.reader.GetChunk();
         }
 
         public void LoadAndExecute(Machine machine)
@@ -82,6 +42,9 @@ namespace AjTalk
             while (blocktext != null)
             {
                 string trimmed = blocktext.Trim();
+
+                if (trimmed.StartsWith("!"))
+                    trimmed = trimmed.Substring(1);
 
                 if (String.IsNullOrEmpty(trimmed))
                 {

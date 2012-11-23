@@ -35,11 +35,16 @@
 
             while (ch != -1)
             {
-                if (ch == '!' && lastch != 0)
+                if (ch == '!')
                 {
                     if (this.reader.Peek() != '!')
-                        break;
-                    this.reader.Read();
+                    {
+                        if (lastch != 0)
+                            break;
+                    }
+                    else
+                        this.reader.Read();
+
                     writer.Write('!');
                     lastch = (char)ch;
                     ch = this.reader.Read();
@@ -60,6 +65,11 @@
 
             writer.Close();
             return writer.ToString();
+        }
+
+        public void Close()
+        {
+            this.reader.Close();
         }
     }
 }

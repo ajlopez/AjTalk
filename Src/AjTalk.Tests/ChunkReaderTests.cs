@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -19,6 +20,7 @@
 
             Assert.IsNotNull(chunk);
             Assert.IsTrue(chunk.StartsWith("'"));
+            reader.Close();
         }
 
         [TestMethod]
@@ -45,6 +47,18 @@
             chunk = reader.GetChunk();
             Assert.IsNotNull(chunk);
             Assert.AreEqual(" ", chunk);
+            reader.Close();
+        }
+
+        [TestMethod]
+        public void ProcessDoubleBang()
+        {
+            ChunkReader reader = new ChunkReader(new StringReader("!!new! !!new"));
+
+            Assert.AreEqual("!new", reader.GetChunk());
+            Assert.AreEqual(" !new", reader.GetChunk());
+            Assert.IsNull(reader.GetChunk());
+            reader.Close();
         }
     }
 }
