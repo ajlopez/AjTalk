@@ -44,17 +44,19 @@ namespace AjTalk.Compiler
             return this.block;
         }
 
-        public void CompileInstanceMethod(IBehavior cls)
+        public Method CompileInstanceMethod(IBehavior cls)
         {
             this.CompileMethod(cls);
             cls.DefineInstanceMethod((IMethod)this.block);
+            return (Method)this.block;
         }
 
         // TODO Review implementation, use DefineClassMethod instead
-        public void CompileClassMethod(IBehavior cls)
+        public Method CompileClassMethod(IBehavior cls)
         {
             this.CompileMethod(cls.MetaClass); // use metaclass
             cls.DefineClassMethod((IMethod)this.block);
+            return (Method)this.block;
         }
 
         private Token NextToken()
