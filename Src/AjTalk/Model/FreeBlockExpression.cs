@@ -8,13 +8,17 @@
     public class FreeBlockExpression : IExpression
     {
         private IEnumerable<IExpression> body;
+        private IList<string> parameterNames;
         private IList<string> localVariables;
 
-        public FreeBlockExpression(IList<string> localVariables, IEnumerable<IExpression> body)
+        public FreeBlockExpression(IList<string> parameterNames, IList<string> localVariables, IEnumerable<IExpression> body)
         {
+            this.parameterNames = parameterNames;
             this.localVariables = localVariables;
             this.body = body;
         }
+
+        public IList<string> ParameterNames { get { return this.parameterNames; } }
 
         public IList<string> LocalVariables { get { return this.localVariables; } }
 

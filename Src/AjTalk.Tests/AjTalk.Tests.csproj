@@ -48,6 +48,7 @@
     <Compile Include="Compilers\SourceWriterTests.cs" />
     <Compile Include="Compilers\Vm\BytecodeCompilerExpressionsTests.cs" />
     <Compile Include="Compilers\Vm\BytecodeCompilerTests.cs" />
+    <Compile Include="Compiler\VmCompilerTests.cs" />
     <Compile Include="Compiler\SimpleCompilerTests.cs" />
     <Compile Include="Compiler\ParserExpressionsTests.cs" />
     <Compile Include="ExpressionResult.cs" />

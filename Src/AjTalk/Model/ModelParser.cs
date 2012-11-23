@@ -152,10 +152,11 @@
 
         public IExpression ParseBlock()
         {
+            IList<string> parameterNames = this.ParseBlockParameters();
             IList<string> localVariables = this.ParseBlockLocalVariables();
             IEnumerable<IExpression> body = this.ParseExpressions();
 
-            return new FreeBlockExpression(localVariables, body);
+            return new FreeBlockExpression(parameterNames, localVariables, body);
         }
 
         private IExpression ParseInternalBlock()

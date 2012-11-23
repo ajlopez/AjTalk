@@ -47,15 +47,12 @@ namespace AjTalk.Compiler
         public Method CompileInstanceMethod(IBehavior cls)
         {
             this.CompileMethod(cls);
-            //cls.DefineInstanceMethod((IMethod)this.block);
             return (Method)this.block;
         }
 
-        // TODO Review implementation, use DefineClassMethod instead
         public Method CompileClassMethod(IBehavior cls)
         {
             this.CompileMethod(cls.MetaClass); // use metaclass
-            //cls.DefineClassMethod((IMethod)this.block);
             return (Method)this.block;
         }
 

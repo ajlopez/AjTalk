@@ -45,6 +45,10 @@
 
         public override void Visit(FreeBlockExpression block)
         {
+            if (block.ParameterNames != null)
+                foreach (var parname in block.ParameterNames)
+                    this.block.CompileArgument(parname);
+
             if (block.LocalVariables != null)
                 foreach (var locname in block.LocalVariables)
                     this.block.CompileLocal(locname);
