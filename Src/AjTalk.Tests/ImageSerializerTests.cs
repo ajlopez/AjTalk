@@ -211,6 +211,59 @@
 
             var newmachine = (Machine)result;
 
+            CompareMachines(machine, newmachine);
+        }
+
+        [TestMethod]
+        public void SerializeDeserializeMachineWithClassObjectAndValues()
+        {
+            Machine machine = new Machine();
+            IClass klass = machine.CreateClass("Rectangle", machine.UndefinedObjectClass, "x y", null);
+            machine.SetGlobalObject(klass.Name, klass);
+            machine.SetGlobalObject("One", 1);
+            machine.SetGlobalObject("Name", "Adam");
+            IObject rect = (IObject)klass.NewObject();
+            machine.SetGlobalObject("MyRectangle", rect);
+            rect[0] = 10;
+            rect[1] = 20;
+            var compiler = new VmCompiler();
+            Method xmethod = compiler.CompileInstanceMethod("x ^x", klass);
+            klass.DefineInstanceMethod(xmethod);
+            Method ymethod = compiler.CompileInstanceMethod("y ^y", klass);
+            klass.DefineInstanceMethod(xmethod);
+            Method addmethod = compiler.CompileClassMethod("add: x to: y ^x + y", klass);
+            klass.DefineClassMethod(addmethod);
+
+            var result = this.Process(machine);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Machine));
+
+            var newmachine = (Machine)result;
+
+            CompareMachines(machine, newmachine);
+
+            Assert.AreEqual(1, newmachine.GetGlobalObject("One"));
+            Assert.AreEqual("Adam", newmachine.GetGlobalObject("Name"));
+
+            var newvalue = newmachine.GetGlobalObject("MyRectangle");
+            Assert.IsNotNull(newvalue);
+            Assert.IsInstanceOfType(newvalue, typeof(IObject));
+
+            var newrect = (IObject)newvalue;
+
+            newvalue = newmachine.GetGlobalObject("Rectangle");
+            Assert.IsNotNull(newvalue);
+            Assert.IsInstanceOfType(newvalue, typeof(IBehavior));
+
+            var newklass = (IBehavior)newvalue;
+
+            Assert.IsNotNull(newrect.Behavior);
+            Assert.AreEqual(newrect.Behavior, newklass);
+        }
+
+        private static void CompareMachines(Machine machine, Machine newmachine)
+        {
             Assert.IsNotNull(newmachine.UndefinedObjectClass);
             Assert.IsNotNull(newmachine.GetGlobalObject("UndefinedObject"));
             Assert.AreNotEqual(machine.GetGlobalObject("UndefinedObject"), newmachine.GetGlobalObject("UndefinedObject"));
