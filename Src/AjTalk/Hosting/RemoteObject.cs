@@ -40,6 +40,8 @@
             }
         }
 
+        public int NoVariables { get { return this.obj.NoVariables; } }
+
         public object SendMessage(string msgname, object[] args)
         {
             Machine current = Machine.Current;

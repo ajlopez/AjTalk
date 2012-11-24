@@ -23,6 +23,8 @@
             get { return this.inner.Behavior; }
         }
 
+        public int NoVariables { get { return this.inner.NoVariables; } }
+
         public TransactionManager TransactionManager { get { return this.manager; } }
 
         public IObject InnerObject

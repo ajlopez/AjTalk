@@ -11,6 +11,8 @@ namespace AjTalk.Language
             get; set; 
         }
 
+        int NoVariables { get; }
+
         object SendMessage(string msgname, object[] args);
     }
 }

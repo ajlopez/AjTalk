@@ -43,6 +43,8 @@ namespace AjTalk.Language
             }
         }
 
+        public int NoVariables { get { return this.variables == null ? 0 : this.variables.Length; } }
+
         public object this[int n]
         {
             get

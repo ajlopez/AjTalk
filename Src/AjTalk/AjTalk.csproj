@@ -106,6 +106,7 @@
     <Compile Include="Compiler\ICompiler.cs" />
     <Compile Include="Compiler\VmCompiler.cs" />
     <Compile Include="Compiler\SimpleCompiler.cs" />
+    <Compile Include="ImageSerializer.cs" />
     <Compile Include="Language\BlockDecompiler.cs" />
     <Compile Include="Model\ClassModel.cs" />
     <Compile Include="Model\CodeModel.cs" />
