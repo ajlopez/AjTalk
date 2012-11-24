@@ -78,6 +78,27 @@
         }
 
         [TestMethod]
+        public void SerializeDeserializeClass()
+        {
+            Machine machine = new Machine();
+            BaseClass klass = new BaseClass("MyClass", machine);
+            klass.DefineInstanceVariable("a");
+            klass.DefineInstanceVariable("b");
+
+            var result = this.Process(klass);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            var bclass = (BaseClass)result;
+
+            Assert.AreEqual("MyClass", bclass.Name);
+            Assert.IsNotNull(bclass.Behavior);
+            Assert.AreEqual(0, bclass.GetInstanceVariableOffset("a"));
+            Assert.AreEqual(1, bclass.GetInstanceVariableOffset("b"));
+        }
+
+        [TestMethod]
         public void SerializeDeserializeObjectsWithCycle()
         {
             IObject obja = new BaseObject(null, 1);

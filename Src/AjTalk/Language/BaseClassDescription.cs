@@ -102,6 +102,17 @@ namespace AjTalk.Language
             int nv = 0;
             StringBuilder sb = new StringBuilder();
 
+            if (this.SuperClass != null && this.SuperClass is IClassDescription)
+            {
+                string vars = ((IClassDescription)this.SuperClass).GetClassVariableNames();
+
+                if (!string.IsNullOrEmpty(vars))
+                {
+                    nv++;
+                    sb.Append(vars);
+                }
+            }
+
             foreach (string varname in this.instancevariables)
             {
                 if (nv > 0)
@@ -115,6 +126,9 @@ namespace AjTalk.Language
 
         public string GetClassVariableNames()
         {
+            if (this.MetaClass == null)
+                return null;
+
             return this.MetaClass.GetInstanceVariableNames();
         }
 

@@ -45,6 +45,29 @@
                 return;
             }
 
+            if (obj is IClass)
+            {
+                var klass = (IClass)obj;
+
+                int position = this.objects.IndexOf(klass);
+
+                if (position >= 0)
+                {
+                    this.writer.Write((byte)ImageCodes.Reference);
+                    this.writer.Write(position);
+                    return;
+                }
+
+                this.objects.Add(klass);
+
+                this.writer.Write((byte)ImageCodes.Class);
+                this.Serialize(klass.Name);
+                this.Serialize(klass.Category);
+                this.Serialize(klass.GetInstanceVariableNames());
+                this.Serialize(klass.GetClassVariableNames());
+                this.Serialize(klass.SuperClass);
+            }
+
             if (obj is IObject)
             {
                 var iobj = (IObject)obj;
@@ -86,6 +109,15 @@
                     return this.reader.ReadString();
                 case ImageCodes.Reference:
                     return this.objects[this.reader.ReadInt32()];
+                case ImageCodes.Class:
+                    string name = (string)this.Deserialize();
+                    string category = (string)this.Deserialize();
+                    string instvarnames = (string)this.Deserialize();
+                    string classvarnames = (string)this.Deserialize();
+                    IClass superclass = (IClass)this.Deserialize();
+                    var klass = Machine.Current.CreateClass(name, superclass, instvarnames, classvarnames);
+                    klass.Category = category;
+                    return klass;
                 case ImageCodes.Object:
                     BaseObject bobj = new BaseObject();
                     this.objects.Add(bobj);
@@ -112,7 +144,8 @@
             Integer = 1,
             String = 2,
             Object = 3,
-            Reference = 4
+            Reference = 4,
+            Class = 5
         }
     }
 }
