@@ -90,7 +90,7 @@
                     BaseObject bobj = new BaseObject();
                     this.objects.Add(bobj);
                     IBehavior behavior = (IBehavior)this.Deserialize();
-                    bobj.Behavior = behavior;
+                    bobj.SetBehavior(behavior);
                     int nvariables = (int)this.Deserialize();
                     if (nvariables == 0)
                         return bobj;
@@ -99,7 +99,7 @@
                     for (int k = 0; k < nvariables; k++)
                         variables[k] = this.Deserialize();
 
-                    bobj.Variables = variables;
+                    bobj.SetVariables(variables);
                     return bobj;
             }
 
