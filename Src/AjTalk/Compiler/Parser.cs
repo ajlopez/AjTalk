@@ -247,6 +247,7 @@ namespace AjTalk.Compiler
             if (token.Type == TokenType.Punctuation && token.Value == "[")
             {
                 Parser newcompiler = new Parser(this.tokenizer);
+                
                 // TODO Review is the copy of argument and local names is needed
                 newcompiler.arguments = new ArrayList(this.arguments);
                 newcompiler.locals = new ArrayList(this.locals);
@@ -558,7 +559,7 @@ namespace AjTalk.Compiler
         {
             Token token = this.NextToken();
 
-            if (token == null || token.Type != type && token.Value != value)
+            if (token == null || (token.Type != type && token.Value != value))
                 throw new ParserException(string.Format("Expected '{0}'", value));
         }
     }

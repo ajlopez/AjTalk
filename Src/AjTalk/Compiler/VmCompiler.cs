@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using AjTalk.Compilers.Vm;
     using AjTalk.Language;
     using AjTalk.Model;
-    using AjTalk.Compilers.Vm;
 
-    public class VmCompiler
+    public class VmCompiler : ICompiler
     {
         public Block CompileBlock(string text)
         {

@@ -13,15 +13,28 @@ namespace AjTalk
         private ChunkReader reader;
         private IBehavior currentClass;
         private bool isclassmethod;
+        private ICompiler compiler;
 
         public Loader(TextReader reader)
+            : this(reader, new SimpleCompiler())
         {
-            this.reader = new ChunkReader(reader);
         }
 
         public Loader(string filename)
+            : this(filename, new SimpleCompiler())
+        {
+        }
+
+        public Loader(TextReader reader, ICompiler compiler)
+        {
+            this.reader = new ChunkReader(reader);
+            this.compiler = compiler;
+        }
+
+        public Loader(string filename, ICompiler compiler)
         {
             this.reader = new ChunkReader(filename);
+            this.compiler = compiler;
         }
 
         public bool IsMethod()
@@ -67,8 +80,7 @@ namespace AjTalk
                         blocktext = "^" + trimmed.Substring(0, trimmed.Length - 8);
                     }
 
-                    Parser compiler = new Parser(blocktext);
-                    Block block = compiler.CompileBlock();
+                    Block block = this.compiler.CompileBlock(blocktext);
                     object value = block.Execute(machine, null);
 
                     this.currentClass = (IBehavior)value;
@@ -77,18 +89,16 @@ namespace AjTalk
                     continue;
                 }
 
-                Parser parser = new Parser(blocktext);
-
                 if (this.IsMethod())
                 {
                     if (this.isclassmethod)
-                        this.currentClass.DefineClassMethod(parser.CompileClassMethod(this.currentClass));
+                        this.currentClass.DefineClassMethod(this.compiler.CompileClassMethod(blocktext, this.currentClass));
                     else
-                        this.currentClass.DefineInstanceMethod(parser.CompileInstanceMethod(this.currentClass));
+                        this.currentClass.DefineInstanceMethod(this.compiler.CompileInstanceMethod(blocktext, this.currentClass));
                 }
                 else
                 {
-                    Block block = parser.CompileBlock();
+                    Block block = this.compiler.CompileBlock(blocktext);
                     block.Execute(machine, null);
                 }
 

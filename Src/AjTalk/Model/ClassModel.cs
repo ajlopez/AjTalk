@@ -39,7 +39,7 @@
             this.classMethods = new List<MethodModel>();
             this.instanceMethods = new List<MethodModel>();
             if (!name.EndsWith(" class"))
-                this.metaclass = new ClassModel(name + " class", superclassname == null ? null : superclassname + " class", null, null, isvariable, null, null);
+                this.metaclass = new ClassModel(name + " class", this.superclassname == null ? null : this.superclassname + " class", null, null, isvariable, null, null);
             this.isvariable = isvariable;
             this.poolDictionaries = poolDictionaries ?? new List<string>();
             this.category = category ?? string.Empty;

@@ -159,15 +159,6 @@
             return new FreeBlockExpression(parameterNames, localVariables, body);
         }
 
-        private IExpression ParseInternalBlock()
-        {
-            IList<string> parameterNames = this.ParseBlockParameters();
-            IList<string> localVariables = this.ParseBlockLocalVariables();
-            IEnumerable<IExpression> body = this.ParseExpressions();
-
-            return new BlockExpression(parameterNames, localVariables, body);
-        }
-
         private static bool IsUnarySelector(string name)
         {
             if (name.StartsWith("!") && name.Length > 1 && char.IsLetter(name[1]) && !name.EndsWith(":"))
@@ -188,6 +179,15 @@
         private static bool IsMultipleKeywordSelector(string name)
         {
             return name.EndsWith(":");
+        }
+
+        private IExpression ParseInternalBlock()
+        {
+            IList<string> parameterNames = this.ParseBlockParameters();
+            IList<string> localVariables = this.ParseBlockLocalVariables();
+            IEnumerable<IExpression> body = this.ParseExpressions();
+
+            return new BlockExpression(parameterNames, localVariables, body);
         }
 
         private IExpression ParseExpression(IExpression target)

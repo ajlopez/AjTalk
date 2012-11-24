@@ -464,6 +464,11 @@
             this.writer.Write(text);
         }
 
+        public override void Visit(FreeBlockExpression expression)
+        {
+            throw new NotImplementedException();
+        }
+
         protected static string ToMethodName(string name)
         {
             if (!char.IsLetter(name[0]))
@@ -500,11 +505,6 @@
                 return javaScriptOperators[name];
 
             return name;
-        }
-
-        public override void Visit(FreeBlockExpression expression)
-        {
-            throw new NotImplementedException();
         }
     }
 }

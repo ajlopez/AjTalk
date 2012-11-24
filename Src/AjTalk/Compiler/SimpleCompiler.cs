@@ -6,7 +6,7 @@
     using System.Text;
     using AjTalk.Language;
 
-    public class SimpleCompiler
+    public class SimpleCompiler : AjTalk.Compiler.ICompiler
     {
         public Block CompileBlock(string text)
         {

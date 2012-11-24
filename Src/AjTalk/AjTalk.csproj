@@ -103,6 +103,7 @@
     <Compile Include="Compilers\Javascript\NodeCompiler.cs" />
     <Compile Include="Compilers\SourceWriter.cs" />
     <Compile Include="Compilers\Vm\BytecodeCompiler.cs" />
+    <Compile Include="Compiler\ICompiler.cs" />
     <Compile Include="Compiler\VmCompiler.cs" />
     <Compile Include="Compiler\SimpleCompiler.cs" />
     <Compile Include="Language\BlockDecompiler.cs" />
