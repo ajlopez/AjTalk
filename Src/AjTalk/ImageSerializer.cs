@@ -37,6 +37,13 @@
                 return;
             }
 
+            if (obj is string)
+            {
+                this.writer.Write((byte)ImageCodes.String);
+                this.writer.Write((string)obj);
+                return;
+            }
+
             if (obj is IObject)
             {
                 var iobj = (IObject)obj;
@@ -59,6 +66,8 @@
                     return null;
                 case ImageCodes.Integer:
                     return this.reader.ReadInt32();
+                case ImageCodes.String:
+                    return this.reader.ReadString();
                 case ImageCodes.Object:
                     IBehavior behavior = (IBehavior)this.Deserialize();
                     int nvariables = (int)this.Deserialize();

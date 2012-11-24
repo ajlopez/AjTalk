@@ -24,6 +24,12 @@
         }
 
         [TestMethod]
+        public void SerializeDeserializeString()
+        {
+            Assert.AreEqual("text", this.Process("text"));
+        }
+
+        [TestMethod]
         public void SerializeDeserializeEmptyObject()
         {
             IObject obj = new BaseObject();
