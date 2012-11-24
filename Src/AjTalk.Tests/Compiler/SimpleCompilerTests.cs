@@ -390,7 +390,7 @@ namespace AjTalk.Tests.Compiler
         public void ExecuteInstSizeInRectangle()
         {
             Machine machine = new Machine();
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
                 new string[] { "x ^x", "x: newX x := newX", "y ^y", "y: newY y := newY" });
@@ -410,7 +410,7 @@ namespace AjTalk.Tests.Compiler
         public void ExecuteInstAt()
         {
             Machine machine = new Machine();
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
                 new string[] { "x ^x", "x: newX x := newX", "y ^y", "y: newY y := newY" });
@@ -434,7 +434,7 @@ namespace AjTalk.Tests.Compiler
         public void ExecuteInstAtPut()
         {
             Machine machine = new Machine();
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
                 new string[] { "x ^x", "x: newX x := newX", "y ^y", "y: newY y := newY" });
@@ -458,7 +458,7 @@ namespace AjTalk.Tests.Compiler
         {
             Machine machine = new Machine();
 
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle",
                 new string[] { "x", "y" },
                 null);
@@ -483,7 +483,7 @@ namespace AjTalk.Tests.Compiler
         {
             Machine machine = new Machine();
 
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle",
                 new string[] { "x", "y" },
                 new string[] { "initialize x := 10. y := 20" },
@@ -512,7 +512,7 @@ namespace AjTalk.Tests.Compiler
         public void ExecuteBasicNew()
         {
             Machine machine = new Machine();
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle",
                 new string[] { "x", "y" },
                 null);
@@ -533,7 +533,7 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void CompileMethods()
         {
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
                 new string[] { "x ^x", "x: newX x := newX", "y ^y", "y: newY y := newY" });
@@ -549,7 +549,7 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void RunMethods()
         {
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
                 new string[] { "x ^x", "x: newX x := newX", "y ^y", "y: newY y := newY" });
@@ -573,7 +573,7 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void CompileMultiCommandMethod()
         {
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
                 new string[] { "side: newSide x := newSide. y := newSide" });
@@ -586,7 +586,7 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void CompileMultiCommandMethodWithLocal()
         {
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
                 new string[] { "side: newSide | temp | temp := x. x := temp. y := temp" });
@@ -599,7 +599,7 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void CompileSameOperator()
         {
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle",
                 new string[] { "x", "y" },
                 new string[] { "== aRect ^x == aRect x ifTrue: [^y == aRect y] ifFalse: [^false]" });
@@ -612,7 +612,7 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void CompileAndEvaluateInnerBlockWithClosure()
         {
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Adder",
                 new string[] { },
                 new string[] { "add: aVector | sum | sum := 0. aVector do: [ :x | sum := sum + x ]. ^sum" });
@@ -628,7 +628,7 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void CompileAndEvaluateInnerBlockWithClosureUsingExternalArgument()
         {
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Adder",
                 new string[] { },
                 new string[] { "add: aVector with: aNumber | sum | sum := 0. aVector do: [ :x | sum := sum + x + aNumber ]. ^sum" });
@@ -644,7 +644,7 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void RunMultiCommandMethod()
         {
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
                 new string[] { "side: newSide x := newSide. y := newSide" });
@@ -662,7 +662,7 @@ namespace AjTalk.Tests.Compiler
         [TestMethod]
         public void RunMultiCommandMethodWithLocal()
         {
-            IClass cls = CompileClass(
+            IClass cls = this.CompileClass(
                 "Rectangle", 
                 new string[] { "x", "y" },
                 new string[] { "side: newSide | temp | temp := newSide. x := temp. y := temp" });

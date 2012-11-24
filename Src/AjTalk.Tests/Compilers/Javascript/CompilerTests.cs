@@ -257,7 +257,7 @@
         [TestMethod]
         public void CompileSimpleClass()
         {
-            ClassModel @class = new ClassModel("AClass", (ClassModel) null, null, null, false, null, null);
+            ClassModel @class = new ClassModel("AClass", (ClassModel)null, null, null, false, null, null);
             this.compiler.CompileClass(@class);
             this.writer.Close();
             string output = this.writer.ToString();

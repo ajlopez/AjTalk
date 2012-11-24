@@ -1,13 +1,13 @@
 ﻿namespace AjTalk.Tests
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using AjTalk.Language;
     using System.IO;
+    using System.Linq;
+    using System.Text;
     using AjTalk.Compiler;
+    using AjTalk.Language;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ImageSerializerTests
