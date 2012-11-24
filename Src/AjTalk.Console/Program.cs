@@ -11,7 +11,6 @@
     {
         public static void Main(string[] args)
         {
-            BytecodeCompiler c = new BytecodeCompiler(null);
             //// According http://msdn.microsoft.com/en-us/magazine/cc300474.aspx
             LifetimeServices.LeaseTime = TimeSpan.FromMinutes(10);
             LifetimeServices.RenewOnCallTime = TimeSpan.FromMinutes(15);

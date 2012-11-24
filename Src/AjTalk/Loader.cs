@@ -15,16 +15,6 @@ namespace AjTalk
         private bool isclassmethod;
         private ICompiler compiler;
 
-        public Loader(TextReader reader)
-            : this(reader, new SimpleCompiler())
-        {
-        }
-
-        public Loader(string filename)
-            : this(filename, new SimpleCompiler())
-        {
-        }
-
         public Loader(TextReader reader, ICompiler compiler)
         {
             this.reader = new ChunkReader(reader);

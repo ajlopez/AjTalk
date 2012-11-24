@@ -41,7 +41,7 @@
         public void Execute(string command)
         {
             Machine current = Machine.Current;
-            Loader loader = new Loader(new StringReader(command));
+            Loader loader = new Loader(new StringReader(command), new SimpleCompiler());
 
             try
             {

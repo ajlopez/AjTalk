@@ -115,7 +115,7 @@
         [DeploymentItem(@"CodeFiles\DefineRectangleWithNewAndInitialize.st")]
         public void DefineClassAndGetItsOutputString()
         {
-            Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st");
+            Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st", new VmCompiler());
             Machine machine = new Machine();
             loader.LoadAndExecute(machine);
 
@@ -137,7 +137,7 @@
         [DeploymentItem(@"CodeFiles\DefineRectangleWithNewAndInitialize.st")]
         public void DuplicateClassInOtherMachine()
         {
-            Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st");
+            Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st", new SimpleCompiler());
             Machine machine = new Machine();
             loader.LoadAndExecute(machine);
 
@@ -145,7 +145,7 @@
 
             string output = rectangle.ToOutputString();
 
-            Loader loader2 = new Loader(new StringReader(output));
+            Loader loader2 = new Loader(new StringReader(output), new VmCompiler());
             Machine machine2 = new Machine();
             loader2.LoadAndExecute(machine2);
 

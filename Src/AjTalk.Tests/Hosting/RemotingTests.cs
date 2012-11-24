@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using AjTalk.Compiler;
     using AjTalk.Hosting;
     using AjTalk.Language;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -60,7 +61,7 @@
         [DeploymentItem(@"CodeFiles\DefineRectangleWithNewAndInitialize.st")]
         public void CreateRemotingAndClientServerAndExportClass()
         {
-            Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st");
+            Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st", new SimpleCompiler());
             Machine machine = new Machine();
             RemotingHostServer server = new RemotingHostServer(machine, 10004, "Server4");
             Machine machine2 = new Machine();

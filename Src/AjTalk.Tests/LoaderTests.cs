@@ -6,6 +6,7 @@ namespace AjTalk.Tests
     using System.IO;
     using System.Text;
     using AjTalk;
+    using AjTalk.Compiler;
     using AjTalk.Hosting;
     using AjTalk.Language;
     using AjTalk.Tests.Language;
@@ -18,7 +19,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void GetEmptyLine()
         {
-            Loader loader = new Loader(new StringReader("\n"));
+            Loader loader = new Loader(new StringReader("\n"), new SimpleCompiler());
 
             Assert.IsNotNull(loader);
             Assert.AreEqual("\r\n", loader.GetBlockText());
@@ -28,7 +29,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void GetTwoLinesBlock()
         {
-            Loader loader = new Loader(new StringReader("line 1\r\nline 2\r\n!"));
+            Loader loader = new Loader(new StringReader("line 1\r\nline 2\r\n!"), new SimpleCompiler());
 
             Assert.IsNotNull(loader);
             Assert.AreEqual("line 1\r\nline 2\r\n", loader.GetBlockText());
@@ -38,7 +39,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ProcessDoubleBang()
         {
-            Loader loader = new Loader(new StringReader("!!new! !!new"));
+            Loader loader = new Loader(new StringReader("!!new! !!new"), new SimpleCompiler());
 
             Assert.AreEqual("!new", loader.GetBlockText());
             Assert.AreEqual(" !new", loader.GetBlockText());
@@ -48,7 +49,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void GetTwoBlocks()
         {
-            Loader loader = new Loader(new StringReader("line 1\r\nline 2\r\n!\r\nline 3\r\nline 4\r\n!\r\n"));
+            Loader loader = new Loader(new StringReader("line 1\r\nline 2\r\n!\r\nline 3\r\nline 4\r\n!\r\n"), new SimpleCompiler());
 
             Assert.IsNotNull(loader);
             Assert.AreEqual("line 1\r\nline 2\r\n", loader.GetBlockText());
@@ -59,7 +60,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void GetBlockAndInmediate()
         {
-            Loader loader = new Loader(new StringReader("line 1\nline 2\n!inmediate!\n"));
+            Loader loader = new Loader(new StringReader("line 1\nline 2\n!inmediate!\n"), new SimpleCompiler());
 
             Assert.IsNotNull(loader);
             Assert.AreEqual("line 1\r\nline 2\r\n", loader.GetBlockText());
@@ -70,7 +71,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ExecuteBlock()
         {
-            Loader loader = new Loader(new StringReader("One := 1\n!\n"));
+            Loader loader = new Loader(new StringReader("One := 1\n!\n"), new SimpleCompiler());
             Machine machine = new Machine();
 
             loader.LoadAndExecute(machine);
@@ -81,7 +82,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ExecuteBlockWithTwoCommands()
         {
-            Loader loader = new Loader(new StringReader("One := 1.\nTwo := 2\n!\n"));
+            Loader loader = new Loader(new StringReader("One := 1.\nTwo := 2\n!\n"), new SimpleCompiler());
             Machine machine = new Machine();
 
             loader.LoadAndExecute(machine);
@@ -93,7 +94,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ExecuteTwoBlocks()
         {
-            Loader loader = new Loader(new StringReader("One := 1.\n!\nTwo := 2\n!\n"));
+            Loader loader = new Loader(new StringReader("One := 1.\n!\nTwo := 2\n!\n"), new SimpleCompiler());
             Machine machine = new Machine();
 
             loader.LoadAndExecute(machine);
@@ -106,7 +107,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\SetObject.st")]
         public void ExecuteSetObjectFile()
         {
-            Loader loader = new Loader(@"SetObject.st");
+            Loader loader = new Loader(@"SetObject.st", new SimpleCompiler());
             Machine machine = new Machine();
 
             loader.LoadAndExecute(machine);
@@ -118,7 +119,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\SetDotNetObject.st")]
         public void ExecuteSetDotNetObjectFile()
         {
-            Loader loader = new Loader(@"SetDotNetObject.st");
+            Loader loader = new Loader(@"SetDotNetObject.st", new SimpleCompiler());
             Machine machine = new Machine();
 
             loader.LoadAndExecute(machine);
@@ -133,7 +134,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\SetObjects.st")]
         public void ExecuteSetObjectsFile()
         {
-            Loader loader = new Loader(@"SetObjects.st");
+            Loader loader = new Loader(@"SetObjects.st", new SimpleCompiler());
             Machine machine = new Machine();
 
             loader.LoadAndExecute(machine);
@@ -146,7 +147,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\DefineSubclass.st")]
         public void ExecuteDefineSubclassFile()
         {
-            Loader loader = new Loader(@"DefineSubclass.st");
+            Loader loader = new Loader(@"DefineSubclass.st", new SimpleCompiler());
 
             Machine machine = CreateMachine();
 
@@ -161,7 +162,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\DefineSubclassWithVariables.st")]
         public void ExecuteDefineSubclassWithVariablesFile()
         {
-            Loader loader = new Loader(@"DefineSubclassWithVariables.st");
+            Loader loader = new Loader(@"DefineSubclassWithVariables.st", new SimpleCompiler());
 
             Machine machine = CreateMachine();
 
@@ -184,7 +185,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\DefineRectangle.st")]
         public void ExecuteDefineRectangleFile()
         {
-            Loader loader = new Loader(@"DefineRectangle.st");
+            Loader loader = new Loader(@"DefineRectangle.st", new SimpleCompiler());
 
             Machine machine = CreateMachine();
 
@@ -214,7 +215,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\DefineRectangleWithNewAndInitialize.st")]
         public void ExecuteDefineRectangleWithNewAndInitializeFile()
         {
-            Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st");
+            Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st", new SimpleCompiler());
 
             Machine machine = CreateMachine();
 
@@ -237,7 +238,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\DefineClassSubclass.st")]
         public void ExecuteDefineClassSubclassFile()
         {
-            Loader loader = new Loader(@"DefineClassSubclass.st");
+            Loader loader = new Loader(@"DefineClassSubclass.st", new SimpleCompiler());
 
             Machine machine = CreateMachine();
 
@@ -269,7 +270,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\Library1.st")]
         public void LoadLibrary()
         {
-            Loader loader = new Loader(@"Library1.st");
+            Loader loader = new Loader(@"Library1.st", new SimpleCompiler());
 
             Machine machine = CreateMachine();
 
@@ -292,7 +293,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\Library1.st")]
         public void LoadLibraryWithBootstrap()
         {
-            Loader loader = new Loader(@"Library1.st");
+            Loader loader = new Loader(@"Library1.st", new SimpleCompiler());
             Machine machine = CreateMachine();
 
             loader.LoadAndExecute(machine);
@@ -337,9 +338,9 @@ namespace AjTalk.Tests
         public void LoadObject()
         {
             Machine machine = CreateMachine();
-            Loader loader = new Loader(@"Object.st");
+            Loader loader = new Loader(@"Object.st", new SimpleCompiler());
             loader.LoadAndExecute(machine);
-            loader = new Loader(@"ObjectTest.st");
+            loader = new Loader(@"ObjectTest.st", new SimpleCompiler());
             loader.LoadAndExecute(machine);
 
             object obj = machine.GetGlobalObject("Object");
@@ -380,11 +381,11 @@ namespace AjTalk.Tests
         {
             Machine machine = CreateMachine();
 
-            Loader loader = new Loader(@"Object.st");
+            Loader loader = new Loader(@"Object.st", new SimpleCompiler());
             loader.LoadAndExecute(machine);
-            loader = new Loader(@"Behavior.st");
+            loader = new Loader(@"Behavior.st", new SimpleCompiler());
             loader.LoadAndExecute(machine);
-            loader = new Loader(@"BehaviorTest.st");
+            loader = new Loader(@"BehaviorTest.st", new SimpleCompiler());
             loader.LoadAndExecute(machine);
 
             object obj = machine.GetGlobalObject("NewBehavior");
@@ -407,13 +408,13 @@ namespace AjTalk.Tests
         {
             Machine machine = CreateMachine();
 
-            Loader loader = new Loader(@"Object.st");
+            Loader loader = new Loader(@"Object.st", new SimpleCompiler());
             loader.LoadAndExecute(machine);
-            loader = new Loader(@"Behavior.st");
+            loader = new Loader(@"Behavior.st", new SimpleCompiler());
             loader.LoadAndExecute(machine);
-            loader = new Loader(@"Class.st");
+            loader = new Loader(@"Class.st", new SimpleCompiler());
             loader.LoadAndExecute(machine);
-            loader = new Loader(@"ClassTest.st");
+            loader = new Loader(@"ClassTest.st", new SimpleCompiler());
             loader.LoadAndExecute(machine);
 
             object obj = machine.GetGlobalObject("MyClass");
@@ -456,7 +457,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\Library1.st")]
         public void ReviewClassGraph()
         {
-            Loader loader = new Loader(@"Library1.st");
+            Loader loader = new Loader(@"Library1.st", new SimpleCompiler());
 
             Machine machine = CreateMachine();
 
@@ -500,7 +501,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\NativeBehavior.st")]
         public void LoadNativeBehavior()
         {
-            Loader loader = new Loader(@"NativeBehavior.st");
+            Loader loader = new Loader(@"NativeBehavior.st", new SimpleCompiler());
 
             Machine machine = CreateMachine();
 
@@ -522,7 +523,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\NativeRectangle.st")]
         public void LoadNativeRectangle()
         {
-            Loader loader = new Loader(@"NativeRectangle.st");
+            Loader loader = new Loader(@"NativeRectangle.st", new SimpleCompiler());
 
             Machine machine = CreateMachine();
 
@@ -547,7 +548,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\NativeFileInfo.st")]
         public void LoadNativeFileInfo()
         {
-            Loader loader = new Loader(@"NativeFileInfo.st");
+            Loader loader = new Loader(@"NativeFileInfo.st", new SimpleCompiler());
 
             Machine machine = CreateMachine();
 
@@ -564,7 +565,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void ExecuteTwoCommands()
         {
-            Loader loader = new Loader(new StringReader("a := 1. b := 2"));
+            Loader loader = new Loader(new StringReader("a := 1. b := 2"), new SimpleCompiler());
             Machine machine = CreateMachine();
             loader.LoadAndExecute(machine);
 
@@ -576,7 +577,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\AsRemote.st")]
         public void DefineAsRemote()
         {
-            Loader loader = new Loader(@"AsRemote.st");
+            Loader loader = new Loader(@"AsRemote.st", new SimpleCompiler());
             Machine machine = CreateMachine();
             loader.LoadAndExecute(machine);
 
@@ -594,7 +595,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\RemotingHostClient.st")]
         public void LoadRemotingHostServer()
         {
-            Loader loader = new Loader(@"RemotingHostServer.st");
+            Loader loader = new Loader(@"RemotingHostServer.st", new SimpleCompiler());
             Machine machine = CreateMachine();
             loader.LoadAndExecute(machine);
 
@@ -604,7 +605,7 @@ namespace AjTalk.Tests
 
             RemotingHostServer host = (RemotingHostServer)result;
 
-            Loader loader2 = new Loader(@"RemotingHostClient.st");
+            Loader loader2 = new Loader(@"RemotingHostClient.st", new SimpleCompiler());
             Machine machine2 = CreateMachine();
             loader2.LoadAndExecute(machine2);
 

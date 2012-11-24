@@ -381,11 +381,11 @@ namespace AjTalk.Tests
         {
             Machine machine = CreateMachine();
 
-            Loader loader = new Loader(@"Object.st");
+            Loader loader = new Loader(@"Object.st", new VmCompiler());
             loader.LoadAndExecute(machine);
-            loader = new Loader(@"Behavior.st");
+            loader = new Loader(@"Behavior.st", new VmCompiler());
             loader.LoadAndExecute(machine);
-            loader = new Loader(@"BehaviorTest.st");
+            loader = new Loader(@"BehaviorTest.st", new VmCompiler());
             loader.LoadAndExecute(machine);
 
             object obj = machine.GetGlobalObject("NewBehavior");

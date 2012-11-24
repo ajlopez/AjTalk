@@ -183,15 +183,6 @@
     <milliseconds>6</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="RemotingTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>11/24/2012 17:26:39</timestamp>
-      <milliseconds>39</milliseconds>
-    </settings>
-    <timestamp>11/18/2012 16:19:20</timestamp>
-    <milliseconds>831</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="AgentObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>11/24/2012 17:26:39</timestamp>
@@ -226,15 +217,6 @@
     </settings>
     <timestamp>11/18/2012 16:22:14</timestamp>
     <milliseconds>717</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="BaseClassTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>11/24/2012 17:26:39</timestamp>
-      <milliseconds>39</milliseconds>
-    </settings>
-    <timestamp>11/24/2012 13:45:55</timestamp>
-    <milliseconds>132</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="BaseObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -318,15 +300,6 @@
     <milliseconds>652</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="LibraryTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>11/24/2012 17:26:39</timestamp>
-      <milliseconds>39</milliseconds>
-    </settings>
-    <timestamp>11/18/2012 16:28:06</timestamp>
-    <milliseconds>90</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="ObjectTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>11/24/2012 17:26:39</timestamp>
@@ -334,24 +307,6 @@
     </settings>
     <timestamp>11/18/2012 16:27:46</timestamp>
     <milliseconds>810</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="LoaderVmTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>11/24/2012 17:26:39</timestamp>
-      <milliseconds>39</milliseconds>
-    </settings>
-    <timestamp>11/24/2012 08:14:17</timestamp>
-    <milliseconds>423</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="LoaderTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>11/24/2012 17:26:39</timestamp>
-      <milliseconds>39</milliseconds>
-    </settings>
-    <timestamp>11/24/2012 07:43:04</timestamp>
-    <milliseconds>441</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="MachineTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -417,18 +372,6 @@
     <milliseconds>598</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="ImageSerializerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>11/24/2012 17:26:39</timestamp>
-      <milliseconds>39</milliseconds>
-    </settings>
-    <timestamp>11/24/2012 17:26:58</timestamp>
-    <milliseconds>254</milliseconds>
-    <violations />
-  </sourcecode>
-  <project key="2100262046">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="BlockDecompilerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>11/24/2012 17:26:39</timestamp>
@@ -445,6 +388,69 @@
     </settings>
     <timestamp>11/24/2012 17:27:28</timestamp>
     <milliseconds>16</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="LoaderTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/24/2012 17:26:39</timestamp>
+      <milliseconds>39</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 19:12:00</timestamp>
+    <milliseconds>439</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="2100262046">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="RemotingTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/24/2012 17:26:39</timestamp>
+      <milliseconds>39</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 19:11:56</timestamp>
+    <milliseconds>425</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BaseClassTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/24/2012 17:26:39</timestamp>
+      <milliseconds>39</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 19:12:52</timestamp>
+    <milliseconds>303</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ImageSerializerTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/24/2012 17:26:39</timestamp>
+      <milliseconds>39</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 17:39:27</timestamp>
+    <milliseconds>424</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.OrderingRules" rule="StaticElementsMustAppearBeforeInstanceElements" ruleCheckId="SA1204">
+        <context>All static private methods must be placed before all non-static private methods.</context>
+        <line>337</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="LibraryTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/24/2012 17:26:39</timestamp>
+      <milliseconds>39</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 17:38:46</timestamp>
+    <milliseconds>216</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="LoaderVmTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/24/2012 17:26:39</timestamp>
+      <milliseconds>39</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 19:13:05</timestamp>
+    <milliseconds>859</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>
