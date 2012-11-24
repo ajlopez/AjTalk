@@ -74,6 +74,19 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void GetGlobalNames()
+        {
+            Machine machine = new Machine();
+
+            machine.SetGlobalObject("One", 1);
+            var names = machine.GetGlobalNames();
+
+            Assert.IsNotNull(names);
+            Assert.IsTrue(names.Contains("One"));
+            Assert.IsTrue(names.Contains("UndefinedObject"));
+        }
+
+        [TestMethod]
         public void GetNullIfGlobalVariableDoesNotExists()
         {
             Machine machine = new Machine();

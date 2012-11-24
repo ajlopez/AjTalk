@@ -140,6 +140,11 @@ namespace AjTalk
             current = this;
         }
 
+        public ICollection<string> GetGlobalNames()
+        {
+            return this.globals.Keys;
+        }
+
         public ICollection<IClass> GetClasses()
         {
             List<IClass> classes = new List<IClass>();
