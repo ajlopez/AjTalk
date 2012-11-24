@@ -6,7 +6,7 @@
     using System.Text;
     using AjTalk.Model;
 
-    public abstract class AbstractCompiler : ICompiler, IVisitor
+    public abstract class AbstractCompiler : IVisitor
     {
         public void CompileClass(ClassModel @class)
         {

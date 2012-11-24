@@ -97,7 +97,6 @@
     </Compile>
     <Compile Include="ChunkReader.cs" />
     <Compile Include="Compilers\AbstractCompiler.cs" />
-    <Compile Include="Compilers\ICompiler.cs" />
     <Compile Include="Compilers\Javascript\BrowserCompiler.cs" />
     <Compile Include="Compilers\Javascript\Compiler.cs" />
     <Compile Include="Compilers\Javascript\VirtualMachineCompiler.cs" />
