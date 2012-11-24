@@ -199,6 +199,32 @@
             Assert.AreEqual(iobjb, iobja[0]);
         }
 
+        [TestMethod]
+        public void SerializeDeserializeEmptyMachine()
+        {
+            Machine machine = new Machine();
+
+            var result = this.Process(machine);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Machine));
+
+            var newmachine = (Machine)result;
+
+            Assert.IsNotNull(newmachine.UndefinedObjectClass);
+            Assert.IsNotNull(newmachine.GetGlobalObject("UndefinedObject"));
+            Assert.AreNotEqual(machine.GetGlobalObject("UndefinedObject"), newmachine.GetGlobalObject("UndefinedObject"));
+
+            var names = machine.GetGlobalNames();
+            var newnames = machine.GetGlobalNames();
+
+            Assert.IsNotNull(newnames);
+            Assert.AreEqual(names.Count, newnames.Count);
+
+            foreach (var newname in newnames)
+                Assert.IsTrue(names.Contains(newname));
+        }
+
         private object Process(object obj)
         {
             MemoryStream stream = new MemoryStream();

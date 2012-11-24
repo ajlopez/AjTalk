@@ -35,7 +35,8 @@
             String = 2,
             Object = 3,
             Reference = 4,
-            Class = 5
+            Class = 5,
+            Machine = 6
         }
 
         public void Serialize(object obj)
@@ -128,6 +129,23 @@
                 return;
             }
 
+            if (obj is Machine)
+            {
+                var mach = (Machine)obj;
+                this.writer.Write((byte)ImageCodes.Machine);
+                var names = mach.GetGlobalNames();
+                int nnames = names.Count;
+                this.writer.Write(nnames);
+
+                foreach (var name in names)
+                {
+                    this.writer.Write(name);
+                    this.Serialize(mach.GetGlobalObject(name));
+                }
+
+                return;
+            }
+
             throw new InvalidDataException();
         }
 
@@ -196,6 +214,18 @@
 
                     bobj.SetVariables(variables);
                     return bobj;
+                case ImageCodes.Machine:
+                    this.machine = new Machine(false);
+                    int nnames = this.reader.ReadInt32();
+
+                    for (int k = 0; k < nnames; k++)
+                    {
+                        name = this.reader.ReadString();
+                        object obj = this.Deserialize();
+                        this.machine.SetGlobalObject(name, obj);
+                    }
+
+                    return this.machine;
             }
 
             throw new InvalidDataException();
