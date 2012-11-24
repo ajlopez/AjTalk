@@ -83,6 +83,13 @@
                         codes.Add(string.Format("{0} {1}", ByteCode.GetGlobalVariable, globalname));
                         break;
 
+                    case ByteCode.GetDotNetType:
+                        ip++;
+                        nglobal = this.block.ByteCodes[ip];
+                        globalname = this.block.GetGlobalName(nglobal);
+                        codes.Add(string.Format("{0} {1}", ByteCode.GetDotNetType, globalname));
+                        break;
+
                     case ByteCode.SetGlobalVariable:
                         ip++;
                         nglobal = this.block.ByteCodes[ip];

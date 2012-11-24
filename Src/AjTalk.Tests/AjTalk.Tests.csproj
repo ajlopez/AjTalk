@@ -51,6 +51,7 @@
     <Compile Include="Compiler\VmCompilerTests.cs" />
     <Compile Include="Compiler\SimpleCompilerTests.cs" />
     <Compile Include="Compiler\ParserExpressionsTests.cs" />
+    <Compile Include="LoaderVmTests.cs" />
     <Compile Include="ExpressionResult.cs" />
     <Compile Include="Language\BlockDecompilerTests.cs" />
     <Compile Include="Model\ClassModelTests.cs" />

@@ -285,24 +285,6 @@ namespace AjTalk.Compiler
 
             if (token.Type == TokenType.Name)
             {
-                if (token.Value.Equals("false"))
-                {
-                    this.block.CompileGetConstant(false);
-                    return;
-                }
-
-                if (token.Value.Equals("true"))
-                {
-                    this.block.CompileGetConstant(true);
-                    return;
-                }
-
-                if (token.Value[0] == Lexer.SpecialDotNetTypeMark)
-                {
-                    this.block.CompileGetDotNetType(token.Value.Substring(1));
-                    return;
-                }
-
                 this.block.CompileGet(token.Value);
                 return;
             }

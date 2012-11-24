@@ -237,5 +237,19 @@
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual("GetSelf", result[0]);
         }
+
+        [TestMethod]
+        public void DecompileGetNativeType()
+        {
+            Block block = new Block();
+            block.CompileGet("@System.IO.File");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetDotNetType System.IO.File", result[0]);
+        }
     }
 }

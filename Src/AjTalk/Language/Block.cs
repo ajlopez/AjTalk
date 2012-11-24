@@ -325,6 +325,24 @@ namespace AjTalk.Language
 
         protected bool TryCompileGet(string name)
         {
+            if (name.Equals("false"))
+            {
+                this.CompileGetConstant(false);
+                return true;
+            }
+
+            if (name.Equals("true"))
+            {
+                this.CompileGetConstant(true);
+                return true;
+            }
+
+            if (name[0] == Lexer.SpecialDotNetTypeMark)
+            {
+                this.CompileGetDotNetType(name.Substring(1));
+                return true;
+            }
+
             if (name == "self")
             {
                 this.CompileByteCode(ByteCode.GetSelf);
