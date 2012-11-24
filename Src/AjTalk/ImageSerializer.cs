@@ -2,19 +2,19 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
-    using System.IO;
-    using AjTalk.Language;
     using AjTalk.Compiler;
+    using AjTalk.Language;
 
     public class ImageSerializer
     {
-        BinaryReader reader;
-        ICompiler compiler;
-        BinaryWriter writer;
-        List<IObject> objects = new List<IObject>();
-        Machine machine;
+        private BinaryReader reader;
+        private ICompiler compiler;
+        private BinaryWriter writer;
+        private List<IObject> objects = new List<IObject>();
+        private Machine machine;
 
         public ImageSerializer(BinaryWriter writer)
         {
@@ -25,21 +25,17 @@
         {
             this.reader = reader;
             this.compiler = new VmCompiler();
+            this.machine = Machine.Current;
         }
 
-        public Machine Machine
+        private enum ImageCodes
         {
-            get
-            {
-                if (this.machine == null)
-                    return Machine.Current;
-                return this.machine;
-            }
-
-            set
-            {
-                this.machine = value;
-            }
+            Nil = 0,
+            Integer = 1,
+            String = 2,
+            Object = 3,
+            Reference = 4,
+            Class = 5
         }
 
         public void Serialize(object obj)
@@ -155,16 +151,14 @@
                     string instvarnames = (string)this.Deserialize();
                     string classvarnames = (string)this.Deserialize();
                     IClass superclass = (IClass)this.Deserialize();
-                    var klass = this.Machine.CreateClass(name, superclass, instvarnames, classvarnames);
+                    var klass = this.machine.CreateClass(name, superclass, instvarnames, classvarnames);
                     this.objects.Add(klass);
                     klass.Category = category;
                     
-                    var global = this.Machine.GetGlobalObject(name);
+                    var global = this.machine.GetGlobalObject(name);
 
                     if (global != null)
                         klass = (IClass)global;
-                    else
-                        this.Machine.SetGlobalObject(name, klass);
 
                     int nmethods = (int)this.Deserialize();
 
@@ -205,16 +199,6 @@
             }
 
             throw new InvalidDataException();
-        }
-
-        private enum ImageCodes
-        {
-            Nil = 0,
-            Integer = 1,
-            String = 2,
-            Object = 3,
-            Reference = 4,
-            Class = 5
         }
     }
 }

@@ -127,9 +127,7 @@
             var bmethod = bclass.GetInstanceMethod("add:to:");
             Assert.IsNotNull(bmethod);
 
-            Assert.IsNotNull(machine.GetGlobalObject("UndefinedObject"));
-            Assert.IsNotNull(machine.GetGlobalObject("MyClass"));
-            Assert.AreEqual(undefined, machine.GetGlobalObject("UndefinedObject"));
+            Assert.AreEqual(undefined, bmethod.Class.SuperClass);
         }
 
         [TestMethod]
@@ -156,9 +154,7 @@
             var bmethod = bclass.GetClassMethod("add:to:");
             Assert.IsNotNull(bmethod);
 
-            Assert.IsNotNull(machine.GetGlobalObject("UndefinedObject"));
-            Assert.IsNotNull(machine.GetGlobalObject("MyClass"));
-            Assert.AreEqual(undefined, machine.GetGlobalObject("UndefinedObject"));
+            Assert.AreEqual(undefined, bclass.SuperClass);
         }
 
         [TestMethod]

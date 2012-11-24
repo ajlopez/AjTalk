@@ -27,6 +27,8 @@
             get { return this.obj; }
         }
 
+        public int NoVariables { get { return this.obj.NoVariables; } }
+
         public object this[int n]
         {
             get
@@ -39,8 +41,6 @@
                 this.obj[n] = value;
             }
         }
-
-        public int NoVariables { get { return this.obj.NoVariables; } }
 
         public object SendMessage(string msgname, object[] args)
         {

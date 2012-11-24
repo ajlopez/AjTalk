@@ -6,12 +6,12 @@ namespace AjTalk.Language
     {
         IBehavior Behavior { get; }
 
+        int NoVariables { get; }
+
         object this[int n] 
         {
             get; set; 
         }
-
-        int NoVariables { get; }
 
         object SendMessage(string msgname, object[] args);
     }
