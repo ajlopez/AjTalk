@@ -212,6 +212,7 @@
             writer.Close();
             stream = new MemoryStream(stream.ToArray());
             BinaryReader reader = new BinaryReader(stream);
+
             ImageSerializer deserializer = new ImageSerializer(reader);
             return deserializer.Deserialize();
         }

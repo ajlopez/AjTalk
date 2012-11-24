@@ -14,6 +14,7 @@
         ICompiler compiler;
         BinaryWriter writer;
         List<IObject> objects = new List<IObject>();
+        Machine machine;
 
         public ImageSerializer(BinaryWriter writer)
         {
@@ -24,6 +25,21 @@
         {
             this.reader = reader;
             this.compiler = new VmCompiler();
+        }
+
+        public Machine Machine
+        {
+            get
+            {
+                if (this.machine == null)
+                    return Machine.Current;
+                return this.machine;
+            }
+
+            set
+            {
+                this.machine = value;
+            }
         }
 
         public void Serialize(object obj)
@@ -139,16 +155,16 @@
                     string instvarnames = (string)this.Deserialize();
                     string classvarnames = (string)this.Deserialize();
                     IClass superclass = (IClass)this.Deserialize();
-                    var klass = Machine.Current.CreateClass(name, superclass, instvarnames, classvarnames);
+                    var klass = this.Machine.CreateClass(name, superclass, instvarnames, classvarnames);
                     this.objects.Add(klass);
                     klass.Category = category;
                     
-                    var global = Machine.Current.GetGlobalObject(name);
+                    var global = this.Machine.GetGlobalObject(name);
 
                     if (global != null)
                         klass = (IClass)global;
                     else
-                        Machine.Current.SetGlobalObject(name, klass);
+                        this.Machine.SetGlobalObject(name, klass);
 
                     int nmethods = (int)this.Deserialize();
 
