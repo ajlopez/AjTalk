@@ -11,7 +11,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class BasicClassTest 
+    public class BaseClassTest 
     {
         [TestMethod]
         public void Create()
