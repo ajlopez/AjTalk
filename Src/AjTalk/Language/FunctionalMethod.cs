@@ -40,6 +40,8 @@
 
         public string SourceCode { get { return null; } }
 
+        public byte[] Bytecodes { get { return null; } }
+
         public IBehavior Class { get { return this.classDescription; } }
 
         public object Execute(IObject self, object[] args)

@@ -7,6 +7,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using AjTalk.Language;
     using System.IO;
+    using AjTalk.Compiler;
 
     [TestClass]
     public class ImageSerializerTests
@@ -100,6 +101,35 @@
             Assert.AreEqual(1, bclass.GetInstanceVariableOffset("b"));
             Assert.AreEqual(0, bclass.GetClassVariableOffset("c"));
             Assert.AreEqual(1, bclass.GetClassVariableOffset("d"));
+        }
+
+        [TestMethod]
+        public void SerializeDeserializeClassWithInstanceMethod()
+        {
+            Machine machine = new Machine();
+            IClass klass = machine.CreateClass("MyClass");
+            Method method = (new VmCompiler()).CompileInstanceMethod("add: x to: y ^x + y", klass);
+            klass.DefineInstanceMethod(method);
+
+            machine = new Machine();
+            Assert.IsNotNull(machine.GetGlobalObject("UndefinedObject"));
+            Assert.IsNull(machine.GetGlobalObject("MyClass"));
+            var undefined = machine.GetGlobalObject("UndefinedObject");
+
+            var result = this.Process(klass);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            var bclass = (BaseClass)result;
+
+            Assert.AreEqual("MyClass", bclass.Name);
+            var bmethod = bclass.GetInstanceMethod("add:to:");
+            Assert.IsNotNull(bmethod);
+
+            Assert.IsNotNull(machine.GetGlobalObject("UndefinedObject"));
+            Assert.IsNotNull(machine.GetGlobalObject("MyClass"));
+            Assert.AreEqual(undefined, machine.GetGlobalObject("UndefinedObject"));
         }
 
         [TestMethod]

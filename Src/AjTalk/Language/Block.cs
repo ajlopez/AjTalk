@@ -46,6 +46,8 @@ namespace AjTalk.Language
 
         public int Arity { get { return this.argnames.Count; } }
 
+        public byte[] Bytecodes { get { return this.bytecodes; } }
+
         public ICollection<string> ParameterNames { get { return this.argnames; } }
 
         public ICollection<string> LocalNames { get { return this.localnames; } }

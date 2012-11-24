@@ -8,6 +8,8 @@ namespace AjTalk.Language
     {
         string SourceCode { get; }
 
+        byte[] Bytecodes { get; }
+
         object Execute(Machine machine, object[] args);
     }
 }

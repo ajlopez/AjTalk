@@ -23,6 +23,8 @@
         }
 
         public string SourceCode { get { return null; } }
+
+        public byte[] Bytecodes { get { return null; } }
         
         public IBehavior Class
         {

@@ -6,10 +6,12 @@
     using System.Text;
     using System.IO;
     using AjTalk.Language;
+    using AjTalk.Compiler;
 
     public class ImageSerializer
     {
         BinaryReader reader;
+        ICompiler compiler;
         BinaryWriter writer;
         List<IObject> objects = new List<IObject>();
 
@@ -21,6 +23,7 @@
         public ImageSerializer(BinaryReader reader)
         {
             this.reader = reader;
+            this.compiler = new VmCompiler();
         }
 
         public void Serialize(object obj)
@@ -66,6 +69,17 @@
                 this.Serialize(klass.GetInstanceVariableNames());
                 this.Serialize(klass.GetClassVariableNames());
                 this.Serialize(klass.SuperClass);
+                var methods = klass.GetInstanceMethods();
+                this.Serialize(methods.Count(mth => mth.SourceCode != null));
+
+                foreach (var method in methods)
+                    if (method.SourceCode != null)
+                    {
+                        this.Serialize(method.Name);
+                        this.Serialize(method.SourceCode);
+                    }
+
+                return;
             }
 
             if (obj is IObject)
@@ -92,7 +106,7 @@
                 return;
             }
 
-            throw new InvalidOperationException();
+            throw new InvalidDataException();
         }
 
         public object Deserialize()
@@ -116,7 +130,26 @@
                     string classvarnames = (string)this.Deserialize();
                     IClass superclass = (IClass)this.Deserialize();
                     var klass = Machine.Current.CreateClass(name, superclass, instvarnames, classvarnames);
+                    this.objects.Add(klass);
                     klass.Category = category;
+                    
+                    var global = Machine.Current.GetGlobalObject(name);
+
+                    if (global != null)
+                        klass = (IClass)global;
+                    else
+                        Machine.Current.SetGlobalObject(name, klass);
+
+                    int nmethods = (int)this.Deserialize();
+
+                    for (int k = 0; k < nmethods; k++)
+                    {
+                        string mthname = (string)this.Deserialize();
+                        string mthsource = (string)this.Deserialize();
+                        var method = this.compiler.CompileInstanceMethod(mthsource, klass);
+                        klass.DefineInstanceMethod(method);
+                    }
+
                     return klass;
                 case ImageCodes.Object:
                     BaseObject bobj = new BaseObject();

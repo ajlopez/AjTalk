@@ -42,6 +42,8 @@ namespace AjTalk
 
             this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(meta, this.nilclass, this));
             this.RegisterNativeBehavior(typeof(bool), new BooleanBehavior(meta, this.nilclass, this));
+
+            this.SetGlobalObject("UndefinedObject", this.nilclass);
         }
 
         public static Machine Current { get { return current; } }
