@@ -1,15 +1,1041 @@
 <stylecopresultscache>
   <version>11</version>
-  <project key="-1886451504">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
+  <sourcecode name="AssemblyInfo.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>557</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ChunkReader.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:17</timestamp>
+    <milliseconds>564</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="EndOfInputException.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>559</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ICompiler.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:17</timestamp>
+    <milliseconds>645</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="LexerException.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>561</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Parser.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:17</timestamp>
+    <milliseconds>841</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>549</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>549</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="ParserException.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>591</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>15</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>15</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="SimpleCompiler.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:17</timestamp>
+    <milliseconds>985</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Token.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>591</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="VmCompiler.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:18</timestamp>
+    <milliseconds>325</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TokenType.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>592</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AbstractCompiler.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:18</timestamp>
+    <milliseconds>327</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BrowserCompiler.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>137</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="NodeCompiler.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>619</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="VirtualMachineCompiler.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>169</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="SourceWriter.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>171</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>67</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>67</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="Compiler.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:18</timestamp>
+    <milliseconds>466</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>511</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>511</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="BytecodeCompiler.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:18</timestamp>
+    <milliseconds>524</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IHost.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>210</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Host.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>209</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="RemoteObject.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:21:19</timestamp>
+    <milliseconds>37</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.OrderingRules" rule="ElementsMustAppearInTheCorrectOrder" ruleCheckId="SA1201">
+        <context>All indexers must be placed after all properties.</context>
+        <line>43</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="RemotingHostClient.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>212</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="RemotingHostServer.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>213</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AgentObject.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>214</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>67</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>67</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="ImageSerializer.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 11:30:46</timestamp>
+    <milliseconds>784</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.OrderingRules" rule="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace" ruleCheckId="SA1210">
+        <context>Using directives must be sorted alphabetically by the namespaces.</context>
+        <line>5</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.OrderingRules" rule="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace" ruleCheckId="SA1210">
+        <context>Using directives must be sorted alphabetically by the namespaces.</context>
+        <line>6</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.MaintainabilityRules" rule="AccessModifierMustBeDeclared" ruleCheckId="SA1400">
+        <context>The field must have an access modifier.</context>
+        <line>12</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.MaintainabilityRules" rule="AccessModifierMustBeDeclared" ruleCheckId="SA1400">
+        <context>The field must have an access modifier.</context>
+        <line>13</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.MaintainabilityRules" rule="AccessModifierMustBeDeclared" ruleCheckId="SA1400">
+        <context>The field must have an access modifier.</context>
+        <line>14</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.OrderingRules" rule="ElementsMustAppearInTheCorrectOrder" ruleCheckId="SA1201">
+        <context>All methods must be placed after all enums.</context>
+        <line>109</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="BaseBehavior.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>215</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BaseClass.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>216</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>139</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>139</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="BaseClassDescription.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>223</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>138</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>138</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="UseBuiltInTypeAlias" ruleCheckId="SA1121">
+        <context>Use the built-in type alias 'string' rather than String or System.String.</context>
+        <line>65</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="BaseIndexedObject.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>643</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BaseMetaClass.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>224</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>54</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>54</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
   <sourcecode name="BaseObject.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/19/2012 17:24:38</timestamp>
       <milliseconds>757</milliseconds>
     </settings>
-    <timestamp>11/24/2012 11:06:36</timestamp>
-    <milliseconds>217</milliseconds>
+    <timestamp>11/24/2012 11:30:20</timestamp>
+    <milliseconds>791</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BehaviorDoesNotUnderstandMethod.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>226</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BlockDecompiler.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:19</timestamp>
+    <milliseconds>174</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BooleanBehavior.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>230</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Block.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:18</timestamp>
+    <milliseconds>697</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="UseBuiltInTypeAlias" ruleCheckId="SA1121">
+        <context>Use the built-in type alias 'char' rather than Char or System.Char.</context>
+        <line>96</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="ByteCodes.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:19</timestamp>
+    <milliseconds>176</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DoesNotUnderstandMethod.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>232</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="EnumerableBehavior.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>249</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ErrorException.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>250</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DotNetObject.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>233</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="FunctionalMethod.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>252</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IBehavior.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>673</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IBlock.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>253</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IClass.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>674</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>14</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>14</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="IClassDescription.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>675</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>22</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>22</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="IIndexedObject.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>675</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IMessage.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>676</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IMetaClass.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>677</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IMethod.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>677</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ExecutionBlock.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>251</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IObject.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:19:31</timestamp>
+    <milliseconds>777</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.OrderingRules" rule="ElementsMustAppearInTheCorrectOrder" ruleCheckId="SA1201">
+        <context>All indexers must be placed after all properties.</context>
+        <line>14</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="IObjectDecorator.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>253</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Message.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>254</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="MessageQueue.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>705</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>48</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>48</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="Method.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>255</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="NativeBehavior.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>706</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Primitives.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>257</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ObjectOperators.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>256</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Loader.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:19</timestamp>
+    <milliseconds>177</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="UseBuiltInTypeAlias" ruleCheckId="SA1121">
+        <context>Use the built-in type alias 'string' rather than String or System.String.</context>
+        <line>63</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="ArrayExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>711</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Machine.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>258</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BlockExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 14:42:19</timestamp>
+    <milliseconds>782</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ClassVariableExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>727</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="CodeModel.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>260</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>46</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>46</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="ClassModel.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:19</timestamp>
+    <milliseconds>229</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>109</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>109</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="ConstantExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:32:35</timestamp>
+    <milliseconds>85</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DynamicArrayExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>730</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="CodeReader.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:19</timestamp>
+    <milliseconds>258</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="FluentMessageExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>730</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>731</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ILeftValue.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>731</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="FreeBlockExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:19</timestamp>
+    <milliseconds>260</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="InstanceVariableExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>733</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IVisitable.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>732</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IVisitor.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 14:48:17</timestamp>
+    <milliseconds>389</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>49</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>49</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="MessageExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>264</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="MethodModel.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>265</milliseconds>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainBlankLinesAtEndOfFile" ruleCheckId="SA1518">
+        <context>The code must not contain blank lines at the end of the file.</context>
+        <line>73</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CodeMustNotContainMultipleBlankLinesInARow" ruleCheckId="SA1507">
+        <context>The code must not contain multiple blank lines in a row.</context>
+        <line>73</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="PrimitiveExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>753</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ReturnExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>754</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="SelfExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>754</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="SetExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>755</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="SymbolExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>268</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="VariableExpression.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>03/19/2012 17:24:38</timestamp>
+    <milliseconds>757</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ModelParser.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:04:19</timestamp>
+    <milliseconds>463</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TransactionalObject.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 10:21:43</timestamp>
+    <milliseconds>832</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Transaction.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>270</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TransactionManager.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>271</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TransactionalValue.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>273</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TypeUtilities.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/20/2012 13:24:40</timestamp>
+    <milliseconds>274</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="-1886451504">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="Lexer.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/19/2012 17:24:38</timestamp>
+      <milliseconds>757</milliseconds>
+    </settings>
+    <timestamp>11/24/2012 11:33:25</timestamp>
+    <milliseconds>680</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>

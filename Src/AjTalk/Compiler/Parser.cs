@@ -546,4 +546,3 @@ namespace AjTalk.Compiler
         }
     }
 }
-

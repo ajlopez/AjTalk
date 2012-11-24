@@ -54,12 +54,12 @@ namespace AjTalk.Compiler
             {
                 ch = this.NextCharSkipBlanksAndComments();
 
-                if (Char.IsLetter(ch) || ch == '_')
+                if (char.IsLetter(ch) || ch == '_')
                 {
                     return this.NextName(ch);
                 }
 
-                if (Char.IsDigit(ch))
+                if (char.IsDigit(ch))
                 {
                     return this.NextInteger(ch);
                 }
@@ -183,7 +183,7 @@ namespace AjTalk.Compiler
 
             ch = this.NextChar();
 
-            while (!Char.IsControl(ch))
+            while (!char.IsControl(ch))
             {
                 ch = this.NextChar();
             }
@@ -195,7 +195,7 @@ namespace AjTalk.Compiler
 
             ch = this.NextChar();
 
-            while (Char.IsWhiteSpace(ch))
+            while (char.IsWhiteSpace(ch))
             {
                 ch = this.NextChar();
             }
@@ -237,7 +237,7 @@ namespace AjTalk.Compiler
 
                 ch = this.NextChar();
 
-                while (Char.IsLetterOrDigit(ch))
+                while (char.IsLetterOrDigit(ch))
                 {
                     sb.Append(ch);
                     ch = this.NextChar();
@@ -291,7 +291,7 @@ namespace AjTalk.Compiler
 
                 ch = this.NextChar();
 
-                while (!Char.IsWhiteSpace(ch) && Separators.IndexOf(ch) < 0)
+                while (!char.IsWhiteSpace(ch) && Separators.IndexOf(ch) < 0)
                 {
                     sb.Append(ch);
                     ch = this.NextChar();
@@ -317,7 +317,7 @@ namespace AjTalk.Compiler
 
                 ch = this.NextChar();
 
-                while (!Char.IsWhiteSpace(ch))
+                while (!char.IsWhiteSpace(ch))
                 {
                     sb.Append(ch);
                     ch = this.NextChar();
@@ -347,7 +347,7 @@ namespace AjTalk.Compiler
 
                 ch = this.NextChar();
 
-                while (Char.IsLetterOrDigit(ch) || ch == '_' || ch == ':')
+                while (char.IsLetterOrDigit(ch) || ch == '_' || ch == ':')
                 {
                     sb.Append(ch);
                     if (ch == ':')
@@ -420,13 +420,13 @@ namespace AjTalk.Compiler
             {
                 ch = this.NextChar();
 
-                while (Char.IsDigit(ch))
+                while (char.IsDigit(ch))
                 {
                     value += ch;
                     ch = this.NextChar();
                 }
 
-                if (ch == '.' && Char.IsDigit(this.PeekChar()))
+                if (ch == '.' && char.IsDigit(this.PeekChar()))
                     return this.NextReal(value + ".");
 
                 this.PushChar(ch);
@@ -450,7 +450,7 @@ namespace AjTalk.Compiler
             {
                 ch = this.NextChar();
 
-                while (Char.IsDigit(ch))
+                while (char.IsDigit(ch))
                 {
                     value += ch;
                     ch = this.NextChar();
@@ -508,4 +508,3 @@ namespace AjTalk.Compiler
         }
     }
 }
-
