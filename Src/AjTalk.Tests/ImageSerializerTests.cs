@@ -81,9 +81,11 @@
         public void SerializeDeserializeClass()
         {
             Machine machine = new Machine();
-            BaseClass klass = new BaseClass("MyClass", machine);
+            IClass klass = machine.CreateClass("MyClass");
             klass.DefineInstanceVariable("a");
             klass.DefineInstanceVariable("b");
+            klass.DefineClassVariable("c");
+            klass.DefineClassVariable("d");
 
             var result = this.Process(klass);
 
@@ -96,6 +98,8 @@
             Assert.IsNotNull(bclass.Behavior);
             Assert.AreEqual(0, bclass.GetInstanceVariableOffset("a"));
             Assert.AreEqual(1, bclass.GetInstanceVariableOffset("b"));
+            Assert.AreEqual(0, bclass.GetClassVariableOffset("c"));
+            Assert.AreEqual(1, bclass.GetClassVariableOffset("d"));
         }
 
         [TestMethod]
