@@ -79,6 +79,16 @@
                         this.Serialize(method.SourceCode);
                     }
 
+                var classmethods = klass.GetClassMethods();
+                this.Serialize(classmethods.Count(mth => mth.SourceCode != null));
+
+                foreach (var method in classmethods)
+                    if (method.SourceCode != null)
+                    {
+                        this.Serialize(method.Name);
+                        this.Serialize(method.SourceCode);
+                    }
+
                 return;
             }
 
@@ -148,6 +158,16 @@
                         string mthsource = (string)this.Deserialize();
                         var method = this.compiler.CompileInstanceMethod(mthsource, klass);
                         klass.DefineInstanceMethod(method);
+                    }
+
+                    int nclassmethods = (int)this.Deserialize();
+
+                    for (int k = 0; k < nclassmethods; k++)
+                    {
+                        string mthname = (string)this.Deserialize();
+                        string mthsource = (string)this.Deserialize();
+                        var method = this.compiler.CompileClassMethod(mthsource, klass);
+                        klass.DefineClassMethod(method);
                     }
 
                     return klass;

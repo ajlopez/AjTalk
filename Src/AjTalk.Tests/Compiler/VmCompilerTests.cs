@@ -24,7 +24,7 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
-        public void CompileMethod()
+        public void CompileInstanceMethod()
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("Rectangle");
@@ -32,6 +32,19 @@ namespace AjTalk.Tests.Compiler
             var method = this.compiler.CompileInstanceMethod("x ^x", cls);
             Assert.IsNotNull(method);
             Assert.IsNotNull(method.ByteCodes);
+            Assert.AreEqual("x ^x", method.SourceCode);
+        }
+
+        [TestMethod]
+        public void CompileClassMethod()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("Rectangle");
+            cls.DefineClassVariable("x");
+            var method = this.compiler.CompileClassMethod("x ^x", cls);
+            Assert.IsNotNull(method);
+            Assert.IsNotNull(method.ByteCodes);
+            Assert.AreEqual("x ^x", method.SourceCode);
         }
 
         [TestMethod]

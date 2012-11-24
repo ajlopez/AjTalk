@@ -133,6 +133,35 @@
         }
 
         [TestMethod]
+        public void SerializeDeserializeClassWithClassMethod()
+        {
+            Machine machine = new Machine();
+            IClass klass = machine.CreateClass("MyClass");
+            Method method = (new VmCompiler()).CompileClassMethod("add: x to: y ^x + y", klass);
+            klass.DefineClassMethod(method);
+
+            machine = new Machine();
+            Assert.IsNotNull(machine.GetGlobalObject("UndefinedObject"));
+            Assert.IsNull(machine.GetGlobalObject("MyClass"));
+            var undefined = machine.GetGlobalObject("UndefinedObject");
+
+            var result = this.Process(klass);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            var bclass = (BaseClass)result;
+
+            Assert.AreEqual("MyClass", bclass.Name);
+            var bmethod = bclass.GetClassMethod("add:to:");
+            Assert.IsNotNull(bmethod);
+
+            Assert.IsNotNull(machine.GetGlobalObject("UndefinedObject"));
+            Assert.IsNotNull(machine.GetGlobalObject("MyClass"));
+            Assert.AreEqual(undefined, machine.GetGlobalObject("UndefinedObject"));
+        }
+
+        [TestMethod]
         public void SerializeDeserializeObjectsWithCycle()
         {
             IObject obja = new BaseObject(null, 1);
