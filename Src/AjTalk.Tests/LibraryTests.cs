@@ -81,7 +81,7 @@
 
         private void LoadFile(string filename)
         {
-            Loader loader = new Loader(filename);
+            Loader loader = new Loader(filename, new VmCompiler());
             loader.LoadAndExecute(this.machine);
         }
     }

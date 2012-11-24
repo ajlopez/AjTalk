@@ -82,6 +82,10 @@
                 this.Serialize(klass.GetInstanceVariableNames());
                 this.Serialize(klass.GetClassVariableNames());
                 this.Serialize(klass.SuperClass);
+                if (klass.MetaClass.SuperClass is IClass)
+                    this.Serialize(klass.MetaClass.SuperClass);
+                else
+                    this.Serialize(null);
                 var methods = klass.GetInstanceMethods();
                 this.Serialize(methods.Count(mth => mth.SourceCode != null));
 
@@ -168,9 +172,18 @@
                     string category = (string)this.Deserialize();
                     string instvarnames = (string)this.Deserialize();
                     string classvarnames = (string)this.Deserialize();
-                    IClass superclass = (IClass)this.Deserialize();
-                    var klass = this.machine.CreateClass(name, superclass, instvarnames, classvarnames);
+                    var klass = this.machine.CreateClass(name, null, instvarnames, classvarnames);
                     this.objects.Add(klass);
+                    IClass superclass = (IClass)this.Deserialize();
+                    IBehavior metaclasssuperclass = (IBehavior)this.Deserialize();
+                    ((BaseClass)klass).SetSuperClass(superclass);
+                    
+                    // TODO Review this weird chain (See SerializeDeserializeMachineWithLibrary test)
+                    if (metaclasssuperclass != null)
+                        ((BaseMetaClass)klass.MetaClass).SetSuperClass(metaclasssuperclass);
+                    else if (superclass != null)
+                        ((BaseMetaClass)klass.MetaClass).SetSuperClass(superclass.MetaClass);
+
                     klass.Category = category;
                     
                     var global = this.machine.GetGlobalObject(name);

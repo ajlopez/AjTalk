@@ -269,6 +269,41 @@
             Assert.AreEqual(3, newklass.SendMessage("add:to:", new object[] { 1, 2 }));
         }
 
+        [TestMethod]
+        [DeploymentItem(@"Library\Object.st")]
+        [DeploymentItem(@"Library\Behavior.st")]
+        [DeploymentItem(@"Library\Class.st")]
+        [DeploymentItem(@"Library\Test.st")]
+        public void SerializeDeserializeMachineWithLibrary()
+        {
+            Machine machine = new Machine();
+            LoadFile(machine, "Object.st");
+            LoadFile(machine, "Behavior.st");
+            LoadFile(machine, "Class.st");
+            LoadFile(machine, "Test.st");
+
+            var result = this.Process(machine);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Machine));
+
+            var newmachine = (Machine)result;
+
+            CompareMachines(machine, newmachine);
+
+            // Test class
+            Assert.IsNotNull(newmachine.GetGlobalObject("Test"));
+            IClass cls = (IClass)newmachine.GetGlobalObject("Object");
+            Assert.IsNotNull(cls.GetInstanceMethod("error:"));
+            Assert.IsNotNull(cls.GetClassMethod("error:"));
+            cls = (IClass)newmachine.GetGlobalObject("Class");
+            Assert.IsNotNull(cls.GetInstanceMethod("error:"));
+            Assert.IsNotNull(cls.GetClassMethod("error:"));
+            cls = (IClass)newmachine.GetGlobalObject("Test");
+            Assert.IsNotNull(cls.GetInstanceMethod("error:"));
+            Assert.IsNotNull(cls.GetClassMethod("error:"));
+        }
+
         private static void CompareMachines(Machine machine, Machine newmachine)
         {
             Assert.IsNotNull(newmachine.UndefinedObjectClass);
@@ -297,6 +332,12 @@
 
             ImageSerializer deserializer = new ImageSerializer(reader);
             return deserializer.Deserialize();
+        }
+
+        private static void LoadFile(Machine machine, string filename)
+        {
+            Loader loader = new Loader(filename, new VmCompiler());
+            loader.LoadAndExecute(machine);
         }
     }
 }
