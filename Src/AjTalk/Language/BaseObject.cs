@@ -41,9 +41,16 @@ namespace AjTalk.Language
                 // TODO:  Add BaseObject.Class getter implementation
                 return this.behavior;
             }
+
+            internal set
+            {
+                this.behavior = value;
+            }
         }
 
         public int NoVariables { get { return this.variables == null ? 0 : this.variables.Length; } }
+
+        internal object[] Variables { get { return this.variables; } set { this.variables = value; } }
 
         public object this[int n]
         {

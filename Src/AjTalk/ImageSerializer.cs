@@ -11,6 +11,7 @@
     {
         BinaryReader reader;
         BinaryWriter writer;
+        List<IObject> objects = new List<IObject>();
 
         public ImageSerializer(BinaryWriter writer)
         {
@@ -47,9 +48,24 @@
             if (obj is IObject)
             {
                 var iobj = (IObject)obj;
+
+                int position = this.objects.IndexOf(iobj);
+
+                if (position >= 0)
+                {
+                    this.writer.Write((byte)ImageCodes.Reference);
+                    this.writer.Write(position);
+                    return;
+                }
+
+                this.objects.Add(iobj);
+
                 this.writer.Write((byte)ImageCodes.Object);
                 this.Serialize(iobj.Behavior);
-                this.Serialize(iobj.NoVariables);
+                int nvars = iobj.NoVariables;
+                this.Serialize(nvars);
+                for (int k = 0; k < nvars; k++)
+                    this.Serialize(iobj[k]);
                 return;
             }
 
@@ -68,10 +84,23 @@
                     return this.reader.ReadInt32();
                 case ImageCodes.String:
                     return this.reader.ReadString();
+                case ImageCodes.Reference:
+                    return this.objects[this.reader.ReadInt32()];
                 case ImageCodes.Object:
+                    BaseObject bobj = new BaseObject();
+                    this.objects.Add(bobj);
                     IBehavior behavior = (IBehavior)this.Deserialize();
+                    bobj.Behavior = behavior;
                     int nvariables = (int)this.Deserialize();
-                    return new BaseObject(behavior, nvariables);
+                    if (nvariables == 0)
+                        return bobj;
+                    object[] variables = new object[nvariables];
+
+                    for (int k = 0; k < nvariables; k++)
+                        variables[k] = this.Deserialize();
+
+                    bobj.Variables = variables;
+                    return bobj;
             }
 
             throw new InvalidDataException();
@@ -82,7 +111,8 @@
             Nil = 0,
             Integer = 1,
             String = 2,
-            Object = 3
+            Object = 3,
+            Reference = 4
         }
     }
 }
