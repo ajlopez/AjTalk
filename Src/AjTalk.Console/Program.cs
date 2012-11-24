@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Runtime.Remoting.Lifetime;
     using System.Text;
+    using AjTalk.Compiler;
     using AjTalk.Compilers.Vm;
 
     public class Program
@@ -20,7 +21,7 @@
 
             foreach (string arg in args)
             {
-                Loader ldr = new Loader(arg);
+                Loader ldr = new Loader(arg, new VmCompiler());
                 try
                 {
                     ldr.LoadAndExecute(machine);
@@ -32,7 +33,7 @@
                 }
             }
 
-            Loader loader = new Loader(System.Console.In);
+            Loader loader = new Loader(System.Console.In, new VmCompiler());
 
             while (true)
             {

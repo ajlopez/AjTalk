@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
+    using AjTalk.Compiler;
 
     public static class Program
     {
@@ -19,7 +20,7 @@
 
             if (File.Exists(BootFile))
             {
-                Loader loader = new Loader(BootFile);
+                Loader loader = new Loader(BootFile, new VmCompiler());
                 loader.LoadAndExecute(machine);
             }
 
