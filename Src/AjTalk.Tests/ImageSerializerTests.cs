@@ -230,7 +230,7 @@
             Method xmethod = compiler.CompileInstanceMethod("x ^x", klass);
             klass.DefineInstanceMethod(xmethod);
             Method ymethod = compiler.CompileInstanceMethod("y ^y", klass);
-            klass.DefineInstanceMethod(xmethod);
+            klass.DefineInstanceMethod(ymethod);
             Method addmethod = compiler.CompileClassMethod("add: x to: y ^x + y", klass);
             klass.DefineClassMethod(addmethod);
 
@@ -260,6 +260,13 @@
 
             Assert.IsNotNull(newrect.Behavior);
             Assert.AreEqual(newrect.Behavior, newklass);
+
+            Assert.AreEqual(10, newrect[0]);
+            Assert.AreEqual(20, newrect[1]);
+
+            Assert.AreEqual(10, newrect.SendMessage("x", null));
+            Assert.AreEqual(20, newrect.SendMessage("y", null));
+            Assert.AreEqual(3, newklass.SendMessage("add:to:", new object[] { 1, 2 }));
         }
 
         private static void CompareMachines(Machine machine, Machine newmachine)
