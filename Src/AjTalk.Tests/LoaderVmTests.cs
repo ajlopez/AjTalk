@@ -580,6 +580,38 @@ namespace AjTalk.Tests
             Assert.AreEqual(2, machine.GetGlobalObject("b"));
         }
 
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\FileOut01.st")]
+        public void LoadFileOut01()
+        {
+            Loader loader = new Loader(@"FileOut01.st", new VmCompiler());
+
+            Machine machine = CreateMachine();
+
+            loader.LoadAndExecute(machine);
+
+            object result = machine.GetGlobalObject("Object");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\FileOut02.st")]
+        public void LoadFileOut02()
+        {
+            Loader loader = new Loader(@"FileOut02.st", new VmCompiler());
+
+            Machine machine = CreateMachine();
+
+            loader.LoadAndExecute(machine);
+
+            object result = machine.GetGlobalObject("Object");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+        }
+
         internal static Machine CreateMachine()
         {
             Machine machine = new Machine();

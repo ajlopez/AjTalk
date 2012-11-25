@@ -271,5 +271,19 @@
             Assert.AreEqual("GetInstanceVariable x", result[0]);
             Assert.AreEqual("SetInstanceVariable y", result[1]);
         }
+
+        [TestMethod]
+        public void DecompilePrimitive()
+        {
+            Block block = new Block();
+            block.CompileByteCode(ByteCode.Primitive, 10);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("Primitive 10", result[0]);
+        }
     }
 }

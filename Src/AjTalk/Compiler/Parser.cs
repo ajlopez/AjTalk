@@ -203,6 +203,16 @@ namespace AjTalk.Compiler
             return token.Value;
         }
 
+        private int CompileInteger()
+        {
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != TokenType.Integer)
+                throw new ParserException("Integer expected");
+
+            return Convert.ToInt32(token.Value);
+        }
+
         private void CompileTerm()
         {
             Token token = this.NextToken();
@@ -286,6 +296,14 @@ namespace AjTalk.Compiler
             if (token.Type == TokenType.Name)
             {
                 this.block.CompileGet(token.Value);
+                return;
+            }
+
+            if (token.Type == TokenType.Operator && token.Value == "<" && this.TryCompileToken(TokenType.Name, "primitive:"))
+            {
+                int number = this.CompileInteger();
+                this.CompileToken(TokenType.Operator, ">");
+                this.block.CompileByteCode(ByteCode.Primitive, (byte)number);
                 return;
             }
 

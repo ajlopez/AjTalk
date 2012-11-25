@@ -809,6 +809,20 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual("SetGlobalVariable result", ops[3]);
         }
 
+        [TestMethod]
+        public void CompileNumericPrimitive()
+        {
+            Parser parser = new Parser("<primitive: 60>");
+            var result = parser.CompileBlock();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(1, ops.Count);
+            Assert.AreEqual("Primitive 60", ops[0]);
+        }
+
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return CompileClass(clsname, varnames, methods, null);

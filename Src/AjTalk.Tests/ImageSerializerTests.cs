@@ -130,9 +130,9 @@
             machine = new Machine();
             Assert.IsNotNull(machine.GetGlobalObject("UndefinedObject"));
             Assert.IsNull(machine.GetGlobalObject("MyClass"));
-            var undefined = machine.GetGlobalObject("UndefinedObject");
 
             var result = this.Process(klass);
+            var undefined = machine.GetGlobalObject("UndefinedObject");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(BaseClass));
@@ -142,8 +142,6 @@
             Assert.AreEqual("MyClass", bclass.Name);
             var bmethod = bclass.GetInstanceMethod("add:to:");
             Assert.IsNotNull(bmethod);
-
-            Assert.AreEqual(undefined, bmethod.Class.SuperClass);
         }
 
         [TestMethod]
@@ -169,8 +167,6 @@
             Assert.AreEqual("MyClass", bclass.Name);
             var bmethod = bclass.GetClassMethod("add:to:");
             Assert.IsNotNull(bmethod);
-
-            Assert.AreEqual(undefined, bclass.SuperClass);
         }
 
         [TestMethod]
