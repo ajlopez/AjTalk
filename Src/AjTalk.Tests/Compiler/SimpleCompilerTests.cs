@@ -777,6 +777,82 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual("MakeCollection 3", ops[3]);
         }
 
+
+        [TestMethod]
+        public void CompileSumWithNegativeNumber()
+        {
+            var result = this.compiler.CompileBlock("-1 + 0");
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(4, ops.Count);
+            Assert.AreEqual("GetConstant 1", ops[0]);
+            Assert.AreEqual("Send minus 0", ops[1]);
+            Assert.AreEqual("GetConstant 0", ops[2]);
+            Assert.AreEqual("Send + 1", ops[3]);
+        }
+
+        [TestMethod]
+        public void CompileSimpleOr()
+        {
+            var result = this.compiler.CompileBlock("1 | 0");
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(3, ops.Count);
+            Assert.AreEqual("GetConstant 1", ops[0]);
+            Assert.AreEqual("GetConstant 0", ops[1]);
+            Assert.AreEqual("Send | 1", ops[2]);
+        }
+
+        [TestMethod]
+        public void CompileSimpleEqual()
+        {
+            var result = this.compiler.CompileBlock("1 = 2");
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(3, ops.Count);
+            Assert.AreEqual("GetConstant 1", ops[0]);
+            Assert.AreEqual("GetConstant 2", ops[1]);
+            Assert.AreEqual("Send = 1", ops[2]);
+        }
+
+        [TestMethod]
+        public void CompileSimpleAssingWithEqual()
+        {
+            var result = this.compiler.CompileBlock("result := value = value");
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(4, ops.Count);
+            Assert.AreEqual("GetGlobalVariable value", ops[0]);
+            Assert.AreEqual("GetGlobalVariable value", ops[1]);
+            Assert.AreEqual("Send = 1", ops[2]);
+            Assert.AreEqual("SetGlobalVariable result", ops[3]);
+        }
+
+        [TestMethod]
+        public void CompileNumericPrimitive()
+        {
+            var result = this.compiler.CompileBlock("<primitive: 60>");
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(1, ops.Count);
+            Assert.AreEqual("Primitive 60", ops[0]);
+        }
+
         internal IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return this.CompileClass(clsname, varnames, methods, null);

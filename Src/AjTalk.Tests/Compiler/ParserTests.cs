@@ -886,6 +886,22 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileSimpleOr()
+        {
+            Parser parser = new Parser("1 | 0");
+            var result = parser.CompileBlock();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(3, ops.Count);
+            Assert.AreEqual("GetConstant 1", ops[0]);
+            Assert.AreEqual("GetConstant 0", ops[1]);
+            Assert.AreEqual("Send | 1", ops[2]);
+        }
+
+        [TestMethod]
         public void CompileSimpleEqual()
         {
             Parser parser = new Parser("1 = 2");
