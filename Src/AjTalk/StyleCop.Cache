@@ -1,14 +1,5 @@
 <stylecopresultscache>
   <version>10</version>
-  <sourcecode name="ImageSerializer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>11/24/2012 16:34:45</timestamp>
-    <milliseconds>941</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="ChunkReader.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/17/2012 18:23:21</timestamp>
@@ -792,9 +783,6 @@
     <milliseconds>564</milliseconds>
     <violations />
   </sourcecode>
-  <project key="-1886451504">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="IObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/17/2012 18:23:21</timestamp>
@@ -811,6 +799,18 @@
     </settings>
     <timestamp>11/24/2012 16:35:03</timestamp>
     <milliseconds>642</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="-1886451504">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="ImageSerializer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>11/25/2012 07:29:51</timestamp>
+    <milliseconds>137</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>

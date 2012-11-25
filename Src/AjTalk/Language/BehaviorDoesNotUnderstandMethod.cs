@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
-
     using AjTalk;
+    using AjTalk.Compiler;
     using AjTalk.Language;
 
     public class BehaviorDoesNotUnderstandMethod : DoesNotUnderstandMethod
@@ -21,6 +21,17 @@
 
             if (msgname.Equals("new"))
                 return ((IBehavior)self).NewObject();
+
+            if (msgname.StartsWith("commentStamp:"))
+                return new ChunkReaderProcessor((Machine machine, ICompiler compiler, string text) => { }, 1);
+
+            if (msgname == "methods" || msgname.StartsWith("methodsFor:"))
+            {
+                IBehavior behavior = (IBehavior)self;
+                return new ChunkReaderProcessor((Machine machine, ICompiler compiler, string text) => {
+                    behavior.DefineInstanceMethod(compiler.CompileInstanceMethod(text, behavior));
+                }, 1);
+            }
 
             if (msgname.StartsWith("new:") && self is NativeBehavior)
                 return ((NativeBehavior)self).CreateObject(args);

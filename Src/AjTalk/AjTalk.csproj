@@ -96,6 +96,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ChunkReader.cs" />
+    <Compile Include="ChunkReaderProcessor.cs" />
     <Compile Include="Compilers\AbstractCompiler.cs" />
     <Compile Include="Compilers\Javascript\BrowserCompiler.cs" />
     <Compile Include="Compilers\Javascript\Compiler.cs" />
