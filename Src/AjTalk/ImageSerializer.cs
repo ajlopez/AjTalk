@@ -28,7 +28,7 @@
             this.machine = Machine.Current;
         }
 
-        private enum ImageCodes
+        private enum ImageCode
         {
             Nil = 0,
             Integer = 1,
@@ -43,20 +43,20 @@
         {
             if (obj == null) 
             {
-                this.writer.Write((byte)ImageCodes.Nil);
+                this.writer.Write((byte)ImageCode.Nil);
                 return;
             }
 
             if (obj is int)
             {
-                this.writer.Write((byte)ImageCodes.Integer);
+                this.writer.Write((byte)ImageCode.Integer);
                 this.writer.Write((int)obj);
                 return;
             }
 
             if (obj is string)
             {
-                this.writer.Write((byte)ImageCodes.String);
+                this.writer.Write((byte)ImageCode.String);
                 this.writer.Write((string)obj);
                 return;
             }
@@ -69,14 +69,14 @@
 
                 if (position >= 0)
                 {
-                    this.writer.Write((byte)ImageCodes.Reference);
+                    this.writer.Write((byte)ImageCode.Reference);
                     this.writer.Write(position);
                     return;
                 }
 
                 this.objects.Add(klass);
 
-                this.writer.Write((byte)ImageCodes.Class);
+                this.writer.Write((byte)ImageCode.Class);
                 this.Serialize(klass.Name);
                 this.Serialize(klass.Category);
                 this.Serialize(klass.GetInstanceVariableNamesAsString());
@@ -117,14 +117,14 @@
 
                 if (position >= 0)
                 {
-                    this.writer.Write((byte)ImageCodes.Reference);
+                    this.writer.Write((byte)ImageCode.Reference);
                     this.writer.Write(position);
                     return;
                 }
 
                 this.objects.Add(iobj);
 
-                this.writer.Write((byte)ImageCodes.Object);
+                this.writer.Write((byte)ImageCode.Object);
                 this.Serialize(iobj.Behavior);
                 int nvars = iobj.NoVariables;
                 this.Serialize(nvars);
@@ -136,7 +136,7 @@
             if (obj is Machine)
             {
                 var mach = (Machine)obj;
-                this.writer.Write((byte)ImageCodes.Machine);
+                this.writer.Write((byte)ImageCode.Machine);
                 var names = mach.GetGlobalNames();
                 int nnames = names.Count;
                 this.writer.Write(nnames);
@@ -157,17 +157,17 @@
         {
             byte bt = this.reader.ReadByte();
 
-            switch ((ImageCodes)bt)
+            switch ((ImageCode)bt)
             {
-                case ImageCodes.Nil:
+                case ImageCode.Nil:
                     return null;
-                case ImageCodes.Integer:
+                case ImageCode.Integer:
                     return this.reader.ReadInt32();
-                case ImageCodes.String:
+                case ImageCode.String:
                     return this.reader.ReadString();
-                case ImageCodes.Reference:
+                case ImageCode.Reference:
                     return this.objects[this.reader.ReadInt32()];
-                case ImageCodes.Class:
+                case ImageCode.Class:
                     string name = (string)this.Deserialize();
                     string category = (string)this.Deserialize();
                     string instvarnames = (string)this.Deserialize();
@@ -212,7 +212,7 @@
                     }
 
                     return klass;
-                case ImageCodes.Object:
+                case ImageCode.Object:
                     BaseObject bobj = new BaseObject();
                     this.objects.Add(bobj);
                     IBehavior behavior = (IBehavior)this.Deserialize();
@@ -227,7 +227,7 @@
 
                     bobj.SetVariables(variables);
                     return bobj;
-                case ImageCodes.Machine:
+                case ImageCode.Machine:
                     this.machine = new Machine(false);
                     int nnames = this.reader.ReadInt32();
 
