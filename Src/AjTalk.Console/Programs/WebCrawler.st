@@ -2,7 +2,7 @@
 
 Object agent: #Downloader!
 
-Downloader methods!
+!Downloader methods!
 
 download: aUrl
 	| webclient content |

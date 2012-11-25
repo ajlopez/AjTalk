@@ -1,1 +1,1 @@
-AjTalk.Console Programs\Library.st Programs\Transcript.st Programs\Form.st Programs\Data.st Programs\Remoting.st Programs\RemoteClient.st
+ajtalk Programs\Library.st Programs\Transcript.st Programs\Form.st Programs\Data.st Programs\Remoting.st Programs\RemoteClient.st

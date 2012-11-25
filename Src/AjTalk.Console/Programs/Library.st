@@ -14,6 +14,12 @@ Object subclass:#Behavior
 	category:'Kernel-Classes'
 !
 
+"Tricky code to access compile: method as instance method"
+Object !!metaclass !!setSuperClass: Behavior.
+Object !!setSuperClass: nil.
+Behavior !!defineInstanceMethod: (@AjTalk.Language.BehaviorDoesNotUnderstandMethod new: (Behavior !!machine)).
+!
+
 Behavior subclass:#ClassDescription
 	instanceVariableNames:'instvars'
 	classVariableNames:''
@@ -30,7 +36,6 @@ ClassDescription subclass:#Class
 
 "Tricky code: first knot in class hierarchy"
 Object !!metaclass !!setSuperClass: Class.
-Class !!defineInstanceMethod: (@AjTalk.Language.BehaviorDoesNotUnderstandMethod new: (Class !!machine)).
 Class !!machine !!classClass: Class.
 !
 

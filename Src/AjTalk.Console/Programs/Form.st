@@ -2,7 +2,7 @@
 
 Object subclass: #Form nativeType: @System.Windows.Forms.Form!
 
-Form methods!
+!Form methods!
 
 run
 	@System.Windows.Forms.Application run: self
@@ -14,7 +14,7 @@ add: aControl
 
 Object subclass: #Button nativeType: @System.Windows.Forms.Button!
 
-Button methods!
+!Button methods!
 
 dock
 	self dock: (@System.Windows.Forms.DockStyle fill)

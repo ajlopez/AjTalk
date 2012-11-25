@@ -66,6 +66,13 @@
         }
 
         [TestMethod]
+        [DeploymentItem(@"LibraryTests\Data.st")]
+        public void Data()
+        {
+            this.LoadFile("Data.st");
+        }
+
+        [TestMethod]
         [DeploymentItem(@"LibraryTests\TestBehavior.st")]
         public void TestBehavior()
         {
