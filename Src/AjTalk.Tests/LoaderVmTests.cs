@@ -631,6 +631,25 @@ namespace AjTalk.Tests
             Assert.IsInstanceOfType(result, typeof(BaseClass));
         }
 
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Library2.st")]
+        [DeploymentItem(@"CodeFiles\PharoCoreRectangle.st")]
+        public void LoadPharoCoreRectangle()
+        {
+            Loader loaderlib = new Loader(@"Library2.st", new VmCompiler());
+            Loader loader = new Loader(@"PharoCoreRectangle.st", new VmCompiler());
+
+            Machine machine = CreateMachine();
+
+            loaderlib.LoadAndExecute(machine);
+            loader.LoadAndExecute(machine);
+
+            object result = machine.GetGlobalObject("Rectangle");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+        }
+
         internal static Machine CreateMachine()
         {
             Machine machine = new Machine();

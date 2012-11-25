@@ -347,6 +347,7 @@ namespace AjTalk.Compiler
 
                     // TODO Review compile of Symbol
                     case TokenType.Symbol:
+                    case TokenType.Name:
                         this.block.CompileGetConstant(token.Value);
                         nelements++;
                         break;
@@ -418,7 +419,7 @@ namespace AjTalk.Compiler
 
             token = this.NextToken();
 
-            while (token != null && (token.Type == TokenType.Operator || (token.Type == TokenType.Name && !token.Value.EndsWith(":") && token.Value != "self")))
+            while (token != null && (token.Type == TokenType.Operator || (token.Type == TokenType.Punctuation && token.Value == "|") || (token.Type == TokenType.Name && !token.Value.EndsWith(":") && token.Value != "self")))
             {
                 mthname = token.Value;
                 this.CompileUnaryExpression();

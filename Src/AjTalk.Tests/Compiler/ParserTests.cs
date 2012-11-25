@@ -835,6 +835,23 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileSymbolArray()
+        {
+            Parser parser = new Parser("#(a b c)");
+            var result = parser.CompileBlock();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(4, ops.Count);
+            Assert.AreEqual("GetConstant \"a\"", ops[0]);
+            Assert.AreEqual("GetConstant \"b\"", ops[1]);
+            Assert.AreEqual("GetConstant \"c\"", ops[2]);
+            Assert.AreEqual("MakeCollection 3", ops[3]);
+        }
+
+        [TestMethod]
         public void CompileDynamicArray()
         {
             Parser parser = new Parser("{a. b. 3}");
