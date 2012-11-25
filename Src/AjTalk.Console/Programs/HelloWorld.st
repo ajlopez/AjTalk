@@ -7,7 +7,7 @@ ajtalk Programs\HelloWorld.st -s hello.im
 To launch the image
 ajtalk hello.im
 
-"
+"!
 
 
 nil subclass:#Object
