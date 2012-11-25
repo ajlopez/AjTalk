@@ -1,5 +1,6 @@
 ﻿
-Object subclass: #RemoteHost nativeType: @AjTalk.Hosting.RemotingHostClient
+Object subclass: #RemoteHost nativeType: @AjTalk.Hosting.RemotingHostClient!
+
 !RemoteHost methods!
 export: aClass
 	self execute: (aClass !!toOutputString)
