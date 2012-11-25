@@ -21,8 +21,15 @@ namespace AjTalk.Tests
         {
             Loader loader = new Loader(new StringReader("\n"), new VmCompiler());
 
-            Assert.IsNotNull(loader);
-            Assert.AreEqual("\r\n", loader.GetBlockText());
+            Assert.IsNull(loader.GetBlockText());
+        }
+
+        [TestMethod]
+        public void GetSpaceLine()
+        {
+            Loader loader = new Loader(new StringReader(" \n"), new VmCompiler());
+
+            Assert.AreEqual(" \r\n", loader.GetBlockText());
             Assert.IsNull(loader.GetBlockText());
         }
 
@@ -467,7 +474,7 @@ namespace AjTalk.Tests
             Assert.IsNotNull(objclass);
             Assert.IsNotNull(objclass.Behavior);
             Assert.IsNotNull(objclass.MetaClass);
-            Assert.IsNotNull(objclass.SuperClass);
+            Assert.IsNull(objclass.SuperClass);
 
             IBehavior behclass = (IBehavior)machine.GetGlobalObject("Behavior");
             Assert.IsNotNull(behclass);

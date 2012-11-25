@@ -30,7 +30,7 @@
             TextWriter writer = new StringWriter();
 
             char lastch = (char)0;
-            int ch = this.reader.Read();
+            int ch = this.FirstChar();
 
             if (ch == -1)
             {
@@ -77,6 +77,16 @@
         {
             this.reader.Close();
             this.closed = true;
+        }
+
+        private int FirstChar()
+        {
+            int ch = this.reader.Read();
+
+            while (ch != -1 && (ch == '\r' || ch == '\n'))
+                ch = this.reader.Read();
+
+            return ch;
         }
     }
 }

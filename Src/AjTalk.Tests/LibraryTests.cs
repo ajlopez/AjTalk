@@ -66,10 +66,10 @@
         }
 
         [TestMethod]
-        [DeploymentItem(@"LibraryTests\Data.st")]
-        public void Data()
+        [DeploymentItem(@"LibraryTests\TestData.st")]
+        public void TestData()
         {
-            this.LoadFile("Data.st");
+            this.LoadFile("TestData.st");
         }
 
         [TestMethod]

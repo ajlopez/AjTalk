@@ -40,7 +40,7 @@
 
         [TestMethod]
         [DeploymentItem(@"Library\Behavior.st")]
-        public void ReadBehavior()
+        public void ReadLibraryBehavior()
         {
             ChunkReader reader = new ChunkReader(@"Behavior.st");
 
@@ -68,6 +68,19 @@
             Assert.IsFalse(chunk.StartsWith("!"));
 
             chunk = reader.GetChunk();
+            Assert.IsNotNull(chunk);
+            Assert.IsTrue(chunk.StartsWith("!"));
+
+            reader.Close();
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Transactions.st")]
+        public void ReadBangSkippingNewLines()
+        {
+            ChunkReader reader = new ChunkReader(@"Transactions.st");
+
+            string chunk = reader.GetChunk();
             Assert.IsNotNull(chunk);
             Assert.IsTrue(chunk.StartsWith("!"));
 

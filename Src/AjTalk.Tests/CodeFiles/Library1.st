@@ -33,6 +33,7 @@ ClassDescription subclass:#Class
 Object !!metaclass !!setSuperClass: Class.
 Class !!defineInstanceMethod: (@AjTalk.Language.BehaviorDoesNotUnderstandMethod new: (Class !!machine)).
 Class !!machine !!classClass: Class.
+Object !!setSuperClass: nil.
 !
 
 ClassDescription subclass:#Metaclass

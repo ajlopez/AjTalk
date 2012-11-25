@@ -21,8 +21,15 @@ namespace AjTalk.Tests
         {
             Loader loader = new Loader(new StringReader("\n"), new SimpleCompiler());
 
-            Assert.IsNotNull(loader);
-            Assert.AreEqual("\r\n", loader.GetBlockText());
+            Assert.IsNull(loader.GetBlockText());
+        }
+
+        [TestMethod]
+        public void GetSpaceLine()
+        {
+            Loader loader = new Loader(new StringReader(" \n"), new SimpleCompiler());
+
+            Assert.AreEqual(" \r\n", loader.GetBlockText());
             Assert.IsNull(loader.GetBlockText());
         }
 
@@ -467,7 +474,7 @@ namespace AjTalk.Tests
             Assert.IsNotNull(objclass);
             Assert.IsNotNull(objclass.Behavior);
             Assert.IsNotNull(objclass.MetaClass);
-            Assert.IsNotNull(objclass.SuperClass);
+            Assert.IsNull(objclass.SuperClass);
 
             IBehavior behclass = (IBehavior)machine.GetGlobalObject("Behavior");
             Assert.IsNotNull(behclass);
@@ -495,6 +502,56 @@ namespace AjTalk.Tests
 
             Assert.AreEqual(classdes, clazz.SuperClass);
             Assert.AreEqual(classdes.MetaClass, clazz.MetaClass.SuperClass);
+
+            Assert.AreEqual(clazz, objclass.MetaClass.SuperClass);
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Library2.st")]
+        public void ReviewClassGraphUsingLibrary2()
+        {
+            Loader loader = new Loader(@"Library2.st", new SimpleCompiler());
+
+            Machine machine = CreateMachine();
+
+            loader.LoadAndExecute(machine);
+
+            IBehavior objclass = (IBehavior)machine.GetGlobalObject("Object");
+            Assert.IsNotNull(objclass);
+            Assert.IsNotNull(objclass.Behavior);
+            Assert.IsNotNull(objclass.MetaClass);
+            Assert.IsNull(objclass.SuperClass);
+
+            IBehavior behclass = (IBehavior)machine.GetGlobalObject("Behavior");
+            Assert.IsNotNull(behclass);
+            Assert.IsNotNull(behclass.Behavior);
+            Assert.IsNotNull(behclass.MetaClass);
+            Assert.IsNotNull(behclass.SuperClass);
+
+            Assert.AreEqual(objclass, behclass.SuperClass);
+            Assert.AreEqual(objclass.MetaClass, behclass.MetaClass.SuperClass);
+
+            IClassDescription classdes = (IClassDescription)machine.GetGlobalObject("ClassDescription");
+            Assert.IsNotNull(classdes);
+            Assert.IsNotNull(classdes.Behavior);
+            Assert.IsNotNull(classdes.MetaClass);
+            Assert.IsNotNull(classdes.SuperClass);
+
+            Assert.AreEqual(behclass, classdes.SuperClass);
+            Assert.AreEqual(behclass.MetaClass, classdes.MetaClass.SuperClass);
+
+            IClass clazz = (IClass)machine.GetGlobalObject("Class");
+            Assert.IsNotNull(clazz);
+            Assert.IsNotNull(clazz.Behavior);
+            Assert.IsNotNull(clazz.MetaClass);
+            Assert.IsNotNull(clazz.SuperClass);
+
+            Assert.AreEqual(classdes, clazz.SuperClass);
+            Assert.AreEqual(classdes.MetaClass, clazz.MetaClass.SuperClass);
+
+            Assert.AreEqual(clazz, objclass.MetaClass.SuperClass);
+
+            Assert.IsNotNull(objclass.GetClassMethod("new"));
         }
 
         [TestMethod]
