@@ -5,8 +5,8 @@ namespace AjTalk.Language
     public enum ByteCode : byte
     {
         Nop = 0,
-        GetVariable = 1,
-        SetVariable = 2,
+        GetInstanceVariable = 1,
+        SetInstanceVariable = 2,
         GetArgument = 3,
         ////SetArgument = 4,
         GetConstant = 5,

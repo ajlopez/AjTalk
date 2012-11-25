@@ -105,6 +105,7 @@
                         int arity = this.block.ByteCodes[ip];
                         codes.Add(string.Format("{0} {1} {2}", ByteCode.Send, selector, arity));
                         break;
+
                     case ByteCode.GetBlock:
                         ip++;
                         nconstant = this.block.ByteCodes[ip];
@@ -122,6 +123,13 @@
                         ip++;
                         int nelements = this.block.ByteCodes[ip];
                         codes.Add(string.Format("{0} {1}", ByteCode.MakeCollection, nelements));
+                        break;
+
+                    case ByteCode.GetInstanceVariable:
+                    case ByteCode.SetInstanceVariable:
+                        int nvariable = this.block.ByteCodes[ip + 1];
+                        codes.Add(string.Format("{0} {1}", (ByteCode)this.block.ByteCodes[ip], nvariable));
+                        ip++;
                         break;
                 }
 

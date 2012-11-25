@@ -251,5 +251,21 @@
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual("GetDotNetType System.IO.File", result[0]);
         }
+
+        [TestMethod]
+        public void DecompileGetSetInstanceVariable()
+        {
+            Block block = new Block();
+            block.CompileByteCode(ByteCode.GetInstanceVariable, 0);
+            block.CompileByteCode(ByteCode.SetInstanceVariable, 1);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("GetInstanceVariable 0", result[0]);
+            Assert.AreEqual("SetInstanceVariable 1", result[1]);
+        }
     }
 }

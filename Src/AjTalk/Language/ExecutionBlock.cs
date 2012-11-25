@@ -157,7 +157,7 @@ namespace AjTalk.Language
                     case ByteCode.GetNil:
                         this.Push(null);
                         break;
-                    case ByteCode.GetVariable:
+                    case ByteCode.GetInstanceVariable:
                         this.ip++;
                         arg = this.block.ByteCodes[this.ip];
                         this.Push(this.receiver[arg]);
@@ -332,7 +332,7 @@ namespace AjTalk.Language
                         this.SetLocal(arg, this.Pop());
                         this.lastreceiver = null;
                         break;
-                    case ByteCode.SetVariable:
+                    case ByteCode.SetInstanceVariable:
                         this.ip++;
                         arg = this.block.ByteCodes[this.ip];
                         this.receiver[arg] = this.Pop();

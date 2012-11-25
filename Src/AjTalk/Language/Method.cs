@@ -108,7 +108,7 @@ namespace AjTalk.Language
 
             if (p >= 0)
             {
-                CompileByteCode(ByteCode.GetVariable, (byte)p);
+                CompileByteCode(ByteCode.GetInstanceVariable, (byte)p);
                 return true;
             }
 
@@ -140,7 +140,7 @@ namespace AjTalk.Language
 
             if (p >= 0)
             {
-                this.CompileByteCode(ByteCode.SetVariable, (byte)p);
+                this.CompileByteCode(ByteCode.SetInstanceVariable, (byte)p);
                 return true;
             }
 
