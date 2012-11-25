@@ -97,14 +97,38 @@ namespace AjTalk.Language
             return offset;
         }
 
-        public string GetInstanceVariableNames()
+        public ICollection<string> GetInstanceVariableNames()
+        {
+            IList<string> names = null;
+
+            if (this.SuperClass != null && this.SuperClass is IClassDescription)
+            {
+                var supernames = ((IClassDescription)this.SuperClass).GetInstanceVariableNames();
+
+                if (supernames != null && supernames.Count > 0)
+                    names = new List<string>(supernames);
+            }
+
+            if (this.instancevariables != null && this.instancevariables.Count > 0) 
+            {
+                if (names == null)
+                    names = new List<string>();
+
+                foreach (var name in this.instancevariables)
+                    names.Add(name);
+            }
+
+            return names;
+        }
+
+        public string GetInstanceVariableNamesAsString()
         {
             int nv = 0;
             StringBuilder sb = new StringBuilder();
 
             if (this.SuperClass != null && this.SuperClass is IClassDescription)
             {
-                string vars = ((IClassDescription)this.SuperClass).GetInstanceVariableNames();
+                string vars = ((IClassDescription)this.SuperClass).GetInstanceVariableNamesAsString();
 
                 if (!string.IsNullOrEmpty(vars))
                 {
@@ -124,12 +148,20 @@ namespace AjTalk.Language
             return sb.ToString();
         }
 
-        public string GetClassVariableNames()
+        public ICollection<string> GetClassVariableNames()
         {
             if (this.Behavior == null || !(this.Behavior is IClassDescription))
                 return null;
 
             return ((IClassDescription)this.Behavior).GetInstanceVariableNames();
+        }
+
+        public string GetClassVariableNamesAsString()
+        {
+            if (this.Behavior == null || !(this.Behavior is IClassDescription))
+                return null;
+
+            return ((IClassDescription)this.Behavior).GetInstanceVariableNamesAsString();
         }
 
         private static IEnumerable<string> AsNames(string varnames)

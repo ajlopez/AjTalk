@@ -68,6 +68,16 @@
             Assert.AreEqual(0, bclass.GetInstanceVariableOffset("x"));
             Assert.AreEqual(1, bclass.GetInstanceVariableOffset("y"));
             Assert.AreEqual(-1, bclass.GetInstanceVariableOffset("z"));
+            Assert.AreEqual("x y", bclass.GetInstanceVariableNamesAsString());
+            Assert.AreEqual(null, bclass.GetClassVariableNamesAsString());
+            Assert.AreEqual(null, bclass.GetClassVariableNames());
+
+            var result = bclass.GetInstanceVariableNames();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("x", result.ElementAt(0));
+            Assert.AreEqual("y", result.ElementAt(1));
         }
 
         [TestMethod]

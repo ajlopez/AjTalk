@@ -28,18 +28,30 @@ namespace AjTalk.Tests.Language
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
             cls.DefineInstanceVariable("x");
+            cls.DefineClassVariable("count");
 
             Block block;
 
-            block = new Block();
+            block = new Method(cls, "x:");
             block.CompileArgument("newX");
             block.CompileGet("newX");
+            block.CompileGet("count");
             block.CompileSet("x");
 
             Assert.AreEqual(1, block.Arity);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
             Assert.IsTrue(block.ByteCodes.Length > 0);
+
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Count);
+
+            Assert.AreEqual("GetArgument newX", result[0]);
+            Assert.AreEqual("GetClassVariable count", result[1]);
+            Assert.AreEqual("SetInstanceVariable x", result[2]);
         }
 
         [TestMethod]

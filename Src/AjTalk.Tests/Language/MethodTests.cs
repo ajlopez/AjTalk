@@ -30,6 +30,7 @@ namespace AjTalk.Tests.Language
         {
             Machine machine = new Machine();
             IClass cls = machine.CreateClass("TestClass");
+            cls.DefineClassVariable("count");
             cls.DefineInstanceVariable("x");
 
             Method mth;
@@ -42,6 +43,8 @@ namespace AjTalk.Tests.Language
             cls.DefineInstanceMethod(mth);
 
             Assert.AreEqual(mth, cls.GetInstanceMethod("x:"));
+            Assert.AreEqual("x", mth.GetInstanceVariableName(0));
+            Assert.AreEqual("count", mth.GetClassVariableName(0));
         }
 
         [TestMethod]

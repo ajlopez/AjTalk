@@ -31,7 +31,7 @@
             IMetaClass metaclass = new BaseMetaClass(null, null, this.machine, "x y");
             Assert.AreEqual(0, metaclass.GetInstanceVariableOffset("x"));
             Assert.AreEqual(1, metaclass.GetInstanceVariableOffset("y"));
-            Assert.AreEqual("x y", metaclass.GetInstanceVariableNames());
+            Assert.AreEqual("x y", metaclass.GetInstanceVariableNamesAsString());
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@
             IMetaClass metaclass = new BaseMetaClass(null, null, this.machine, " x   y ");
             Assert.AreEqual(0, metaclass.GetInstanceVariableOffset("x"));
             Assert.AreEqual(1, metaclass.GetInstanceVariableOffset("y"));
-            Assert.AreEqual("x y", metaclass.GetInstanceVariableNames());
+            Assert.AreEqual("x y", metaclass.GetInstanceVariableNamesAsString());
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@
             Assert.AreEqual(cls.Behavior, metaclass);
             Assert.AreEqual("MyClass", cls.Name);
             Assert.AreEqual(cls.MetaClass, metaclass);
-            Assert.AreEqual("a b", cls.GetInstanceVariableNames());
+            Assert.AreEqual("a b", cls.GetInstanceVariableNamesAsString());
         }
     }
 }

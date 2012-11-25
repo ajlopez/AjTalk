@@ -438,8 +438,8 @@ namespace AjTalk.Tests
             Assert.AreEqual("Object", ((IClass)cls2.SuperClass).Name);
             Assert.AreEqual(2, cls2.NoInstanceVariables);
             Assert.AreEqual(1, cls2.Behavior.NoInstanceVariables);
-            Assert.AreEqual("width height", cls2.GetInstanceVariableNames());
-            Assert.AreEqual("number", cls2.GetClassVariableNames());
+            Assert.AreEqual("width height", cls2.GetInstanceVariableNamesAsString());
+            Assert.AreEqual("number", cls2.GetClassVariableNamesAsString());
 
             object obj3 = machine.GetGlobalObject("rect");
 

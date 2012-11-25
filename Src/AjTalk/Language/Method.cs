@@ -3,6 +3,7 @@ namespace AjTalk.Language
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Method : Block, IMethod
     {
@@ -90,6 +91,16 @@ namespace AjTalk.Language
         public object ExecuteNative(object self, object[] args)
         {
             return new ExecutionBlock(Machine.Current, self, this, args).Execute();
+        }
+
+        public override string GetInstanceVariableName(int n)
+        {
+            return ((IClassDescription)this.mthclass).GetInstanceVariableNames().ElementAt(n);
+        }
+
+        public override string GetClassVariableName(int n)
+        {
+            return ((IClassDescription)this.mthclass).GetClassVariableNames().ElementAt(n);
         }
 
         private bool TryCompileGetVariable(string name)

@@ -79,8 +79,8 @@
                 this.writer.Write((byte)ImageCodes.Class);
                 this.Serialize(klass.Name);
                 this.Serialize(klass.Category);
-                this.Serialize(klass.GetInstanceVariableNames());
-                this.Serialize(klass.GetClassVariableNames());
+                this.Serialize(klass.GetInstanceVariableNamesAsString());
+                this.Serialize(klass.GetClassVariableNamesAsString());
                 this.Serialize(klass.SuperClass);
                 if (klass.MetaClass.SuperClass is IClass)
                     this.Serialize(klass.MetaClass.SuperClass);

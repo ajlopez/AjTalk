@@ -255,7 +255,11 @@
         [TestMethod]
         public void DecompileGetSetInstanceVariable()
         {
-            Block block = new Block();
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("TestClass");
+            cls.DefineInstanceVariable("x");
+            cls.DefineInstanceVariable("y");
+            Block block = new Method(cls,"process");
             block.CompileByteCode(ByteCode.GetInstanceVariable, 0);
             block.CompileByteCode(ByteCode.SetInstanceVariable, 1);
             BlockDecompiler decompiler = new BlockDecompiler(block);
@@ -264,8 +268,8 @@
 
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count);
-            Assert.AreEqual("GetInstanceVariable 0", result[0]);
-            Assert.AreEqual("SetInstanceVariable 1", result[1]);
+            Assert.AreEqual("GetInstanceVariable x", result[0]);
+            Assert.AreEqual("SetInstanceVariable y", result[1]);
         }
     }
 }

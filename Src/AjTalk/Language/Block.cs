@@ -325,6 +325,16 @@ namespace AjTalk.Language
             return this.argnames[na];
         }
 
+        public virtual string GetInstanceVariableName(int n)
+        {
+            throw new NotSupportedException();
+        }
+
+        public virtual string GetClassVariableName(int n)
+        {
+            throw new NotSupportedException();
+        }
+
         protected bool TryCompileGet(string name)
         {
             if (name.Equals("false"))

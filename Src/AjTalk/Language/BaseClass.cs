@@ -123,10 +123,10 @@ namespace AjTalk.Language
             sb.Append(this.Name);
             sb.Append("\r\n");
             sb.Append("    instanceVariableNames: '");
-            sb.Append(this.GetInstanceVariableNames());
+            sb.Append(this.GetInstanceVariableNamesAsString());
             sb.Append("'\r\n");
             sb.Append("    classVariableNames: '");
-            sb.Append(this.GetClassVariableNames());
+            sb.Append(this.GetClassVariableNamesAsString());
             sb.Append("'\r\n");
             sb.Append("    poolDictionaries: ''\r\n");
             sb.Append("    category: '");
