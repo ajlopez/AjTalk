@@ -2,12 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Runtime.Remoting.Lifetime;
     using System.Text;
     using AjTalk.Compiler;
     using AjTalk.Compilers.Vm;
-    using System.IO;
+    using AjTalk.Language;
 
     public class Program
     {
@@ -30,6 +31,15 @@
                 machine = (Machine)serializer.Deserialize();
                 Machine.SetCurrent(machine);
                 reader.Close();
+
+                object pgm = machine.GetGlobalObject("Program");
+
+                if (pgm != null)
+                {
+                    IBehavior program = (IBehavior)pgm;
+                    program.SendMessage("main", null);
+                    return;
+                }
             }
             else
                 machine = new Machine();

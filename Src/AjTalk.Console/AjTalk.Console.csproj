@@ -56,6 +56,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Programs\HelloWorld.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="RunTransaction.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
