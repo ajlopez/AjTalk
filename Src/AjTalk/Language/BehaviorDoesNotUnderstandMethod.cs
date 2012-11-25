@@ -30,7 +30,7 @@
                 IBehavior behavior = (IBehavior)self;
                 return new ChunkReaderProcessor((Machine machine, ICompiler compiler, string text) => {
                     behavior.DefineInstanceMethod(compiler.CompileInstanceMethod(text, behavior));
-                }, 1);
+                });
             }
 
             if (msgname.StartsWith("new:") && self is NativeBehavior)

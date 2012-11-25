@@ -45,52 +45,27 @@ namespace AjTalk
 
             while (blocktext != null)
             {
+                bool isprocessor = false;
+
                 string trimmed = blocktext.Trim();
 
                 if (trimmed.StartsWith("!"))
+                {
                     trimmed = trimmed.Substring(1);
+                    isprocessor = true;
+                }
 
                 if (String.IsNullOrEmpty(trimmed))
                 {
-                    this.currentClass = null;
                     blocktext = this.GetBlockText();
                     continue;
                 }
 
-                if (trimmed.EndsWith(" methods"))
-                {
-                    if (trimmed.EndsWith(" class methods"))
-                    {
-                        this.isclassmethod = true;
-                        blocktext = "^" + trimmed.Substring(0, trimmed.Length - 14);
-                    }
-                    else
-                    {
-                        this.isclassmethod = false;
-                        blocktext = "^" + trimmed.Substring(0, trimmed.Length - 8);
-                    }
+                Block block = this.compiler.CompileBlock(trimmed);
+                var value = block.Execute(machine, null);
 
-                    Block block = this.compiler.CompileBlock(blocktext);
-                    object value = block.Execute(machine, null);
-
-                    this.currentClass = (IBehavior)value;
-
-                    blocktext = this.GetBlockText();
-                    continue;
-                }
-
-                if (this.IsMethod())
-                {
-                    if (this.isclassmethod)
-                        this.currentClass.DefineClassMethod(this.compiler.CompileClassMethod(blocktext, this.currentClass));
-                    else
-                        this.currentClass.DefineInstanceMethod(this.compiler.CompileInstanceMethod(blocktext, this.currentClass));
-                }
-                else
-                {
-                    Block block = this.compiler.CompileBlock(blocktext);
-                    block.Execute(machine, null);
-                }
+                if (isprocessor)
+                    ((ChunkReaderProcessor)value).Process(this.reader, machine, this.compiler);
 
                 blocktext = this.GetBlockText();
             }

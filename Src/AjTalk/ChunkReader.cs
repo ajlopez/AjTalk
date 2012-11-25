@@ -10,6 +10,7 @@
     public class ChunkReader
     {
         private TextReader reader;
+        private bool closed;
 
         public ChunkReader(TextReader reader)
         {
@@ -23,6 +24,9 @@
 
         public string GetChunk()
         {
+            if (this.closed)
+                return null;
+
             TextWriter writer = new StringWriter();
 
             char lastch = (char)0;
@@ -31,6 +35,7 @@
             if (ch == -1)
             {
                 this.reader.Close();
+                this.closed = true;
                 return null;
             }
 
@@ -71,6 +76,7 @@
         public void Close()
         {
             this.reader.Close();
+            this.closed = true;
         }
     }
 }

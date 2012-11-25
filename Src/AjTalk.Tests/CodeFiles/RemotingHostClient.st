@@ -1,7 +1,7 @@
 ﻿nil subclass: #Object
 !
 
-Object subclass: #RemoteHost nativeType: @AjTalk.Hosting.RemotingHostClient
+Object subclass: #RemoteHost nativeType: @AjTalk.Hosting.RemotingHostClient!
 !RemoteHost methods!
 export: aClass
 	self execute: (aClass !!toOutputString)
@@ -10,7 +10,7 @@ export: aClass
 remote := RemoteHost new: 'localhost' with: 20000 with: 'Server2000'
 !
 
-Object subclass: #Rectangle instanceVariableNames: 'width height'
+Object subclass: #Rectangle instanceVariableNames: 'width height'!
 !Rectangle methods!
 width
 	^width

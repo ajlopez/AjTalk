@@ -26,7 +26,7 @@ ClassDescription subclass:#Metaclass
 	category:'Kernel-Classes'
 !
 
-Class methods!
+!Class methods!
 
 subclass: aSymbol
 	| newcls |

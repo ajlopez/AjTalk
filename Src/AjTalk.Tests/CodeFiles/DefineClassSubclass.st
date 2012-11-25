@@ -1,4 +1,4 @@
-﻿nil subclass: #Figure instanceVariableNames: 'x y'
+﻿nil subclass: #Figure instanceVariableNames: 'x y'!
 !Figure methods!
 x
 	^x
@@ -13,7 +13,7 @@ y: newY
 	y := newY
 ! !
 
-Figure subclass: #Rectangle instanceVariableNames: 'width height'
+Figure subclass: #Rectangle instanceVariableNames: 'width height'!
 !Rectangle methods!
 width
 	^width

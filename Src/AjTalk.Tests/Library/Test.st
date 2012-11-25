@@ -7,7 +7,7 @@ Object subclass:#Test
 	category:'Test'
 !
 
-Test class methods!
+!Test class methods!
 
 assert: aBoolean
 	aBoolean ifFalse: [self error: 'assert'].

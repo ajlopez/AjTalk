@@ -1,8 +1,7 @@
-﻿"First tests for Object"
+﻿'First tests for Object'!
+'new and basicNew methods belong to Behavior, there are defined here for test purpose'!
 
-"new and basicNew methods belong to Behavior, there are defined here for test purpose"
-
-Object class methods!
+!Object class methods!
 
 basicNew
 	^self !!newObject.

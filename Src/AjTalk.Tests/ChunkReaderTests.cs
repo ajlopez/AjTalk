@@ -24,6 +24,57 @@
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\DefineRectangle.st")]
+        public void ReadDefineRectangle()
+        {
+            ChunkReader reader = new ChunkReader(@"DefineRectangle.st");
+
+            string chunk = reader.GetChunk();
+
+            Assert.IsNotNull(chunk);
+            chunk = reader.GetChunk();
+            Assert.IsNotNull(chunk);
+            Assert.IsTrue(chunk.StartsWith("!"));
+            reader.Close();
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"Library\Behavior.st")]
+        public void ReadBehavior()
+        {
+            ChunkReader reader = new ChunkReader(@"Behavior.st");
+
+            string chunk = reader.GetChunk();
+            Assert.IsNotNull(chunk);
+
+            chunk = reader.GetChunk();
+            Assert.IsNotNull(chunk);
+            Assert.IsFalse(chunk.StartsWith("!"));
+
+            chunk = reader.GetChunk();
+            Assert.IsNotNull(chunk);
+            Assert.IsTrue(chunk.StartsWith("!"));
+
+            chunk = reader.GetChunk();
+            Assert.IsNotNull(chunk);
+            Assert.IsFalse(chunk.StartsWith("!"));
+
+            chunk = reader.GetChunk();
+            Assert.IsNotNull(chunk);
+            Assert.IsFalse(chunk.StartsWith("!"));
+
+            chunk = reader.GetChunk();
+            Assert.IsNotNull(chunk);
+            Assert.IsFalse(chunk.StartsWith("!"));
+
+            chunk = reader.GetChunk();
+            Assert.IsNotNull(chunk);
+            Assert.IsTrue(chunk.StartsWith("!"));
+
+            reader.Close();
+        }
+
+        [TestMethod]
         [DeploymentItem(@"CodeFiles\FileOut01.st")]
         public void ReadChunksWithExclamationMarksAndSpace()
         {

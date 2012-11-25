@@ -118,7 +118,7 @@
             Assert.IsTrue(definition.Contains("instanceVariableNames: 'x y'"));
             Assert.IsTrue(definition.Contains("classVariableNames: ''"));
             Assert.IsTrue(definition.Contains("poolDictionaries: ''"));
-            Assert.IsTrue(definition.Contains("category: ''"));
+            Assert.IsTrue(definition.Contains("category: ''!"));
         }
 
         [TestMethod]
@@ -135,8 +135,10 @@
 
             Assert.IsNotNull(output);
             Assert.IsTrue(output.Contains("nil subclass:"));
-            Assert.IsTrue(output.Contains("Rectangle class methods!"));
-            Assert.IsTrue(output.Contains("Rectangle methods!"));
+            Assert.IsTrue(output.Contains("category: ''!"));
+            Assert.IsTrue(output.Contains("!Rectangle class methods!"));
+            Assert.IsTrue(output.Contains("!Rectangle methods!"));
+            Assert.IsTrue(output.Contains("! !"));
             Assert.IsTrue(output.Contains("^x"));
             Assert.IsTrue(output.Contains("^y"));
             Assert.IsTrue(output.Contains("x := 10"));

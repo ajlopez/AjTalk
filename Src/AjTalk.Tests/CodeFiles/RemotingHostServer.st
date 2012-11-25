@@ -1,4 +1,4 @@
-﻿nil subclass: #Object
+﻿nil subclass: #Object!
 !Object methods!
 asRemote
 	^@AjTalk.Hosting.RemoteObject new: self

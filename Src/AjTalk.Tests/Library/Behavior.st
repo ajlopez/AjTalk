@@ -14,7 +14,7 @@ Behavior subclass:#ClassDescription
 	category:'Kernel-Classes'
 !
 
-Behavior class methods!
+!Behavior class methods!
 
 basicNew
 	^self !!newObject.
@@ -22,9 +22,9 @@ basicNew
 
 new
 	^self basicNew.
-! !	
+! !
 
-Behavior methods!
+!Behavior methods!
 
 subclass: aSymbol
 	| newcls |

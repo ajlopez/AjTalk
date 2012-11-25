@@ -47,6 +47,7 @@ namespace AjTalk.Language
 
             BaseClass cls = new BaseClass(this, name, super, this.Machine, varnames);
             this.classInstance = cls;
+
             return cls;
         }
     }

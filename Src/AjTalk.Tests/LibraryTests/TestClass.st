@@ -10,7 +10,7 @@ Object subclass: #Rectangle
 	category: 'Test'.
 !
 
-Rectangle methods!
+!Rectangle methods!
 
 width
 	^width.

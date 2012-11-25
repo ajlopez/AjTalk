@@ -1,7 +1,7 @@
 ﻿nil subclass: #Object
 !
 
-Object subclass: #Rectangle nativeType: @AjTalk.Tests.NativeObjects.Rectangle
+Object subclass: #Rectangle nativeType: @AjTalk.Tests.NativeObjects.Rectangle!
 !Rectangle methods!
 area
 	^self height * self width

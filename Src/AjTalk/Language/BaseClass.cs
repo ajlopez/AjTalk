@@ -132,7 +132,7 @@ namespace AjTalk.Language
             sb.Append("    category: '");
             if (this.Category != null)
                 sb.Append(this.Category);
-            sb.Append("'\r\n");
+            sb.Append("'!\r\n");
         }
     }
 }

@@ -7,7 +7,7 @@ nil subclass:#Object
 	category:'Kernel-Objects'
 !
 
-Object methods!
+!Object methods!
 
 = anObject
 	^@AjTalk.Language.ObjectOperators equals: self with: anObject.
