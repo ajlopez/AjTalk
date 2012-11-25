@@ -104,6 +104,22 @@
         }
 
         [TestMethod]
+        public void SerializeDeserializeNativeClass()
+        {
+            Machine machine = new Machine();
+            IBehavior behavior = machine.CreateNativeBehavior(null, typeof(System.IO.File));
+
+            var result = this.Process(behavior);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(NativeBehavior));
+
+            var nbehavior = (NativeBehavior)result;
+
+            Assert.IsNotNull(nbehavior.Behavior);
+        }
+
+        [TestMethod]
         public void SerializeDeserializeClassWithInstanceMethod()
         {
             Machine machine = new Machine();

@@ -36,7 +36,8 @@
             Object = 3,
             Reference = 4,
             Class = 5,
-            Machine = 6
+            Machine = 6,
+            NativeBehavior = 7
         }
 
         public void Serialize(object obj)
@@ -58,6 +59,51 @@
             {
                 this.writer.Write((byte)ImageCode.String);
                 this.writer.Write((string)obj);
+                return;
+            }
+
+            if (obj is NativeBehavior)
+            {
+                var nbehavior = (NativeBehavior)obj;
+
+                int position = this.objects.IndexOf(nbehavior);
+
+                if (position >= 0)
+                {
+                    this.writer.Write((byte)ImageCode.Reference);
+                    this.writer.Write(position);
+                    return;
+                }
+
+                this.objects.Add(nbehavior);
+
+                this.writer.Write((byte)ImageCode.NativeBehavior);
+                this.Serialize(nbehavior.NativeType.FullName);
+                this.Serialize(nbehavior.SuperClass);
+                if (nbehavior.MetaClass.SuperClass is IClass)
+                    this.Serialize(nbehavior.MetaClass.SuperClass);
+                else
+                    this.Serialize(null);
+                var methods = nbehavior.GetInstanceMethods();
+                this.Serialize(methods.Count(mth => mth.SourceCode != null));
+
+                foreach (var method in methods)
+                    if (method.SourceCode != null)
+                    {
+                        this.Serialize(method.Name);
+                        this.Serialize(method.SourceCode);
+                    }
+
+                var classmethods = nbehavior.GetClassMethods();
+                this.Serialize(classmethods.Count(mth => mth.SourceCode != null));
+
+                foreach (var method in classmethods)
+                    if (method.SourceCode != null)
+                    {
+                        this.Serialize(method.Name);
+                        this.Serialize(method.SourceCode);
+                    }
+
                 return;
             }
 
@@ -167,6 +213,24 @@
                     return this.reader.ReadString();
                 case ImageCode.Reference:
                     return this.objects[this.reader.ReadInt32()];
+                case ImageCode.NativeBehavior:
+                    string typename = (string)this.Deserialize();
+                    Type type = TypeUtilities.GetType(typename);
+                    var nbehavior = this.machine.CreateNativeBehavior(null, type);
+                    this.objects.Add(nbehavior);
+                    IClass superclass = (IClass)this.Deserialize();
+                    IBehavior metaclasssuperclass = (IBehavior)this.Deserialize();
+                    ((NativeBehavior)nbehavior).SetSuperClass(superclass);
+
+                    // TODO Review this weird chain (See SerializeDeserializeMachineWithLibrary test)
+                    if (metaclasssuperclass != null)
+                        ((BaseMetaClass)nbehavior.MetaClass).SetSuperClass(metaclasssuperclass);
+                    else if (superclass != null)
+                        ((BaseMetaClass)nbehavior.MetaClass).SetSuperClass(superclass.MetaClass);
+
+                    this.DeserializeMethods(nbehavior);
+
+                    return nbehavior;
                 case ImageCode.Class:
                     string name = (string)this.Deserialize();
                     string category = (string)this.Deserialize();
@@ -174,8 +238,8 @@
                     string classvarnames = (string)this.Deserialize();
                     var klass = this.machine.CreateClass(name, null, instvarnames, classvarnames);
                     this.objects.Add(klass);
-                    IClass superclass = (IClass)this.Deserialize();
-                    IBehavior metaclasssuperclass = (IBehavior)this.Deserialize();
+                    superclass = (IClass)this.Deserialize();
+                    metaclasssuperclass = (IBehavior)this.Deserialize();
                     ((BaseClass)klass).SetSuperClass(superclass);
                     
                     // TODO Review this weird chain (See SerializeDeserializeMachineWithLibrary test)
@@ -189,27 +253,9 @@
                     var global = this.machine.GetGlobalObject(name);
 
                     if (global != null)
-                        klass = (IClass)global;
+                        nbehavior = (IClass)global;
 
-                    int nmethods = (int)this.Deserialize();
-
-                    for (int k = 0; k < nmethods; k++)
-                    {
-                        string mthname = (string)this.Deserialize();
-                        string mthsource = (string)this.Deserialize();
-                        var method = this.compiler.CompileInstanceMethod(mthsource, klass);
-                        klass.DefineInstanceMethod(method);
-                    }
-
-                    int nclassmethods = (int)this.Deserialize();
-
-                    for (int k = 0; k < nclassmethods; k++)
-                    {
-                        string mthname = (string)this.Deserialize();
-                        string mthsource = (string)this.Deserialize();
-                        var method = this.compiler.CompileClassMethod(mthsource, klass);
-                        klass.DefineClassMethod(method);
-                    }
+                    this.DeserializeMethods(klass);
 
                     return klass;
                 case ImageCode.Object:
@@ -242,6 +288,29 @@
             }
 
             throw new InvalidDataException();
+        }
+
+        private void DeserializeMethods(IBehavior behavior)
+        {
+            int nmethods = (int)this.Deserialize();
+
+            for (int k = 0; k < nmethods; k++)
+            {
+                string mthname = (string)this.Deserialize();
+                string mthsource = (string)this.Deserialize();
+                var method = this.compiler.CompileInstanceMethod(mthsource, behavior);
+                behavior.DefineInstanceMethod(method);
+            }
+
+            int nclassmethods = (int)this.Deserialize();
+
+            for (int k = 0; k < nclassmethods; k++)
+            {
+                string mthname = (string)this.Deserialize();
+                string mthsource = (string)this.Deserialize();
+                var method = this.compiler.CompileClassMethod(mthsource, behavior);
+                behavior.DefineClassMethod(method);
+            }
         }
     }
 }
