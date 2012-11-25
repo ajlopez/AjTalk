@@ -76,6 +76,16 @@
                 return newbehavior;
             }
 
+            if (msgname.Equals("instanceVariableNames:"))
+            {
+                string names = (string)args[0];
+
+                if (!string.IsNullOrEmpty(names))
+                    throw new NotSupportedException();
+
+                return self;
+            }
+
             return base.DoesNotUnderstand(self, receiver, msgname, args);
         }
     }

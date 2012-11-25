@@ -120,233 +120,234 @@ namespace AjTalk.Language
 
             // TODO refactor lastreceiver process
             // TODO refactor switch
-            while (this.ip < this.block.ByteCodes.Length)
-            {
-                ByteCode bc = (ByteCode)this.block.ByteCodes[this.ip];
-                byte arg;
-
-                if (codes[(int)bc] != null)
+            if (this.block.Bytecodes != null)
+                while (this.ip < this.block.ByteCodes.Length)
                 {
-                    codes[(int)bc](this);
-                    this.ip++;
-                    continue;
-                }
+                    ByteCode bc = (ByteCode)this.block.ByteCodes[this.ip];
+                    byte arg;
 
-                switch (bc)
-                {
-                    case ByteCode.ReturnSub:
-                        return null;
-                    case ByteCode.ReturnPop:
-                        return this.Top;
-                    case ByteCode.GetClassVariable:
-                        throw new Exception("Not implemented");
-                    case ByteCode.GetLocal:
+                    if (codes[(int)bc] != null)
+                    {
+                        codes[(int)bc](this);
                         this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        this.Push(this.GetLocal(arg));
-                        break;
-                    case ByteCode.GetSelf:
-                        if (this.nativeSelf != null)
-                            this.Push(this.nativeSelf);
-                        else
-                            this.Push(this.self);
-                        break;
-                    case ByteCode.GetSuperClass:
-                        this.Push(this.receiver.Behavior.SuperClass);
-                        break;
-                    case ByteCode.GetNil:
-                        this.Push(null);
-                        break;
-                    case ByteCode.GetInstanceVariable:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        this.Push(this.receiver[arg]);
-                        break;
-                    case ByteCode.NewObject:
-                        IBehavior ibeh = (IBehavior)this.Pop();
-                        this.lastreceiver = ibeh;
-                        this.Push(ibeh.NewObject());
-                        break;
-  
-                    // TODO remove, no primitive methods
-/*
-                    case ByteCode.Add:
-                        int y = (int)this.Pop();
-                        int x = (int)this.Pop();
-                        this.lastreceiver = x;
-                        this.Push(x + y);
-                        break;
-                    case ByteCode.Substract:
-                        y = (int)this.Pop();
-                        x = (int)this.Pop();
-                        this.lastreceiver = x;
-                        this.Push(x - y);
-                        break;
-                    case ByteCode.Multiply:
-                        y = (int)this.Pop();
-                        x = (int)this.Pop();
-                        this.lastreceiver = x;
-                        this.Push(x * y);
-                        break;
-                    case ByteCode.Divide:
-                        y = (int)this.Pop();
-                        x = (int)this.Pop();
-                        this.lastreceiver = x;
-                        this.Push(x / y);
-                        break;
- */
-                    case ByteCode.Nop:
-                        break;
-                    case ByteCode.Pop:
-                        this.Pop();
-                        break;
-                    case ByteCode.InstSize:
-                        IObject iobj = (IObject)this.Pop();
-                        this.lastreceiver = iobj;
-                        this.Push(iobj.Behavior.NoInstanceVariables);
-                        break;
-                    case ByteCode.InstAt:
-                        int pos = (int)this.Pop();
-                        iobj = (IObject)this.Pop();
-                        this.lastreceiver = iobj;
-                        this.Push(iobj[pos]);
-                        break;
-                    case ByteCode.InstAtPut:
-                        object par = this.Pop();
-                        pos = (int)this.Pop();
-                        iobj = (IObject)this.Pop();
-                        this.lastreceiver = iobj;
-                        iobj[pos] = par;
-                        break;
-                    case ByteCode.BasicAt:
-                        pos = (int)this.Pop();
-                        IIndexedObject indexedObj = (IIndexedObject)this.Pop();
-                        this.lastreceiver = indexedObj;
-                        this.Push(indexedObj.GetIndexedValue(pos));
-                        break;
-                    case ByteCode.BasicAtPut:
-                        par = this.Pop();
-                        pos = (int)this.Pop();
-                        indexedObj = (IIndexedObject)this.Pop();
-                        this.lastreceiver = indexedObj;
-                        indexedObj.SetIndexedValue(pos, par);
-                        break;
-                    case ByteCode.ChainedSend:
-                        this.Push(this.lastreceiver);
-                        break;
-                    case ByteCode.Send:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        mthname = (string)this.block.GetConstant(arg);
-                        this.ip++;
+                        continue;
+                    }
 
-                        arg = this.block.ByteCodes[this.ip];
-                        args = new object[arg];
+                    switch (bc)
+                    {
+                        case ByteCode.ReturnSub:
+                            return null;
+                        case ByteCode.ReturnPop:
+                            return this.Top;
+                        case ByteCode.GetClassVariable:
+                            throw new Exception("Not implemented");
+                        case ByteCode.GetLocal:
+                            this.ip++;
+                            arg = this.block.ByteCodes[this.ip];
+                            this.Push(this.GetLocal(arg));
+                            break;
+                        case ByteCode.GetSelf:
+                            if (this.nativeSelf != null)
+                                this.Push(this.nativeSelf);
+                            else
+                                this.Push(this.self);
+                            break;
+                        case ByteCode.GetSuperClass:
+                            this.Push(this.receiver.Behavior.SuperClass);
+                            break;
+                        case ByteCode.GetNil:
+                            this.Push(null);
+                            break;
+                        case ByteCode.GetInstanceVariable:
+                            this.ip++;
+                            arg = this.block.ByteCodes[this.ip];
+                            this.Push(this.receiver[arg]);
+                            break;
+                        case ByteCode.NewObject:
+                            IBehavior ibeh = (IBehavior)this.Pop();
+                            this.lastreceiver = ibeh;
+                            this.Push(ibeh.NewObject());
+                            break;
+      
+                        // TODO remove, no primitive methods
+    /*
+                        case ByteCode.Add:
+                            int y = (int)this.Pop();
+                            int x = (int)this.Pop();
+                            this.lastreceiver = x;
+                            this.Push(x + y);
+                            break;
+                        case ByteCode.Substract:
+                            y = (int)this.Pop();
+                            x = (int)this.Pop();
+                            this.lastreceiver = x;
+                            this.Push(x - y);
+                            break;
+                        case ByteCode.Multiply:
+                            y = (int)this.Pop();
+                            x = (int)this.Pop();
+                            this.lastreceiver = x;
+                            this.Push(x * y);
+                            break;
+                        case ByteCode.Divide:
+                            y = (int)this.Pop();
+                            x = (int)this.Pop();
+                            this.lastreceiver = x;
+                            this.Push(x / y);
+                            break;
+     */
+                        case ByteCode.Nop:
+                            break;
+                        case ByteCode.Pop:
+                            this.Pop();
+                            break;
+                        case ByteCode.InstSize:
+                            IObject iobj = (IObject)this.Pop();
+                            this.lastreceiver = iobj;
+                            this.Push(iobj.Behavior.NoInstanceVariables);
+                            break;
+                        case ByteCode.InstAt:
+                            int pos = (int)this.Pop();
+                            iobj = (IObject)this.Pop();
+                            this.lastreceiver = iobj;
+                            this.Push(iobj[pos]);
+                            break;
+                        case ByteCode.InstAtPut:
+                            object par = this.Pop();
+                            pos = (int)this.Pop();
+                            iobj = (IObject)this.Pop();
+                            this.lastreceiver = iobj;
+                            iobj[pos] = par;
+                            break;
+                        case ByteCode.BasicAt:
+                            pos = (int)this.Pop();
+                            IIndexedObject indexedObj = (IIndexedObject)this.Pop();
+                            this.lastreceiver = indexedObj;
+                            this.Push(indexedObj.GetIndexedValue(pos));
+                            break;
+                        case ByteCode.BasicAtPut:
+                            par = this.Pop();
+                            pos = (int)this.Pop();
+                            indexedObj = (IIndexedObject)this.Pop();
+                            this.lastreceiver = indexedObj;
+                            indexedObj.SetIndexedValue(pos, par);
+                            break;
+                        case ByteCode.ChainedSend:
+                            this.Push(this.lastreceiver);
+                            break;
+                        case ByteCode.Send:
+                            this.ip++;
+                            arg = this.block.ByteCodes[this.ip];
+                            mthname = (string)this.block.GetConstant(arg);
+                            this.ip++;
 
-                        for (int k = arg - 1; k >= 0; k--)
-                        {
-                            args[k] = this.Pop();
-                        }
+                            arg = this.block.ByteCodes[this.ip];
+                            args = new object[arg];
 
-                        object obj = this.Pop();
-                        this.lastreceiver = obj;
+                            for (int k = arg - 1; k >= 0; k--)
+                            {
+                                args[k] = this.Pop();
+                            }
 
-                        iobj = obj as IObject;
+                            object obj = this.Pop();
+                            this.lastreceiver = obj;
 
-                        if (obj == null)
-                            this.Push(this.machine.UndefinedObjectClass.SendMessage(mthname, args));
-                        else if (iobj == null)
-                            this.Push(DotNetObject.SendMessage(this.machine, obj, mthname, args));
-                        else
-                            this.Push(iobj.SendMessage(mthname, args));
+                            iobj = obj as IObject;
 
-                        break;
-                    case ByteCode.MakeCollection:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        args = new object[arg];
+                            if (obj == null)
+                                this.Push(this.machine.UndefinedObjectClass.SendMessage(mthname, args));
+                            else if (iobj == null)
+                                this.Push(DotNetObject.SendMessage(this.machine, obj, mthname, args));
+                            else
+                                this.Push(iobj.SendMessage(mthname, args));
 
-                        for (int k = arg - 1; k >= 0; k--)
-                        {
-                            args[k] = this.Pop();
-                        }
+                            break;
+                        case ByteCode.MakeCollection:
+                            this.ip++;
+                            arg = this.block.ByteCodes[this.ip];
+                            args = new object[arg];
 
-                        this.Push(new ArrayList(args));
+                            for (int k = arg - 1; k >= 0; k--)
+                            {
+                                args[k] = this.Pop();
+                            }
 
-                        break;
-                    case ByteCode.NewDotNetObject:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
+                            this.Push(new ArrayList(args));
 
-                        args = new object[arg];
+                            break;
+                        case ByteCode.NewDotNetObject:
+                            this.ip++;
+                            arg = this.block.ByteCodes[this.ip];
 
-                        for (int k = arg - 1; k >= 0; k--)
-                        {
-                            args[k] = this.Pop();
-                        }
+                            args = new object[arg];
 
-                        obj = this.Pop();
-                        this.lastreceiver = obj;
+                            for (int k = arg - 1; k >= 0; k--)
+                            {
+                                args[k] = this.Pop();
+                            }
 
-                        this.Push(DotNetObject.NewObject((Type)obj, args));
+                            obj = this.Pop();
+                            this.lastreceiver = obj;
 
-                        break;
-                    case ByteCode.InvokeDotNetMethod:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        mthname = (string)this.block.GetConstant(arg);
-                        this.ip++;
+                            this.Push(DotNetObject.NewObject((Type)obj, args));
 
-                        arg = this.block.ByteCodes[this.ip];
-                        args = new object[arg];
+                            break;
+                        case ByteCode.InvokeDotNetMethod:
+                            this.ip++;
+                            arg = this.block.ByteCodes[this.ip];
+                            mthname = (string)this.block.GetConstant(arg);
+                            this.ip++;
 
-                        for (int k = arg - 1; k >= 0; k--)
-                        {
-                            args[k] = this.Pop();
-                        }
+                            arg = this.block.ByteCodes[this.ip];
+                            args = new object[arg];
 
-                        obj = this.Pop();
-                        this.lastreceiver = obj;
+                            for (int k = arg - 1; k >= 0; k--)
+                            {
+                                args[k] = this.Pop();
+                            }
 
-                        Type type = obj as Type;
+                            obj = this.Pop();
+                            this.lastreceiver = obj;
 
-                        if (type != null)
-                            this.Push(DotNetObject.SendNativeStaticMessage(type, mthname, args));
-                        else
-                            this.Push(DotNetObject.SendNativeMessage(obj, mthname, args));
+                            Type type = obj as Type;
 
-                        break;
-                    
-                    // TODO review argument has no set
-                    // case ByteCode.SetArgument:
-                    //    this.ip++;
-                    //    arg = this.block.ByteCodes[this.ip];
-                    //    this.arguments[arg] = this.Pop();
-                    //    this.lastreceiver = null;
-                    //    break;
-                    case ByteCode.SetClassVariable:
-                        throw new Exception("Not implemented");
-                    case ByteCode.SetLocal:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        this.SetLocal(arg, this.Pop());
-                        this.lastreceiver = null;
-                        break;
-                    case ByteCode.SetInstanceVariable:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        this.receiver[arg] = this.Pop();
-                        this.lastreceiver = this.receiver;
-                        break;
-                    case ByteCode.SetGlobalVariable:
-                        this.ip++;
-                        arg = this.block.ByteCodes[this.ip];
-                        this.machine.SetGlobalObject(this.block.GetGlobalName(arg), this.Pop());
-                        this.lastreceiver = this.machine.GetGlobalObject(this.block.GetGlobalName(arg));
-                        break;
-                    default:
-                        throw new Exception("Not implemented");
-                }
+                            if (type != null)
+                                this.Push(DotNetObject.SendNativeStaticMessage(type, mthname, args));
+                            else
+                                this.Push(DotNetObject.SendNativeMessage(obj, mthname, args));
+
+                            break;
+                        
+                        // TODO review argument has no set
+                        // case ByteCode.SetArgument:
+                        //    this.ip++;
+                        //    arg = this.block.ByteCodes[this.ip];
+                        //    this.arguments[arg] = this.Pop();
+                        //    this.lastreceiver = null;
+                        //    break;
+                        case ByteCode.SetClassVariable:
+                            throw new Exception("Not implemented");
+                        case ByteCode.SetLocal:
+                            this.ip++;
+                            arg = this.block.ByteCodes[this.ip];
+                            this.SetLocal(arg, this.Pop());
+                            this.lastreceiver = null;
+                            break;
+                        case ByteCode.SetInstanceVariable:
+                            this.ip++;
+                            arg = this.block.ByteCodes[this.ip];
+                            this.receiver[arg] = this.Pop();
+                            this.lastreceiver = this.receiver;
+                            break;
+                        case ByteCode.SetGlobalVariable:
+                            this.ip++;
+                            arg = this.block.ByteCodes[this.ip];
+                            this.machine.SetGlobalObject(this.block.GetGlobalName(arg), this.Pop());
+                            this.lastreceiver = this.machine.GetGlobalObject(this.block.GetGlobalName(arg));
+                            break;
+                        default:
+                            throw new Exception("Not implemented");
+                    }
 
                 this.ip++;
             }

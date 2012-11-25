@@ -215,6 +215,13 @@ namespace AjTalk.Compiler
 
         private void CompileTerm()
         {
+            if (this.TryCompileToken(TokenType.Operator, "-"))
+            {
+                this.CompileTerm();
+                this.block.CompileSend("minus");
+                return;
+            }
+
             Token token = this.NextToken();
 
             if (token == null)
@@ -290,6 +297,12 @@ namespace AjTalk.Compiler
             if (token.Type == TokenType.Symbol)
             {
                 this.block.CompileGetConstant(token.Value);
+                return;
+            }
+
+            if (token.Type == TokenType.Character)
+            {
+                this.block.CompileGetConstant(token.Value[0]);
                 return;
             }
 

@@ -93,6 +93,55 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileInteger()
+        {
+            Parser compiler = new Parser("1");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(1, block.NoConstants);
+            Assert.AreEqual(0, block.NoGlobalNames);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+        }
+
+        [TestMethod]
+        public void CompileCharacter()
+        {
+            Parser compiler = new Parser("$+");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(1, block.NoConstants);
+            Assert.AreEqual(0, block.NoGlobalNames);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetConstant +", result[0]);
+        }
+
+        [TestMethod]
+        public void CompileNegativeInteger()
+        {
+            Parser compiler = new Parser("-1");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(2, block.NoConstants);
+            Assert.AreEqual(0, block.NoGlobalNames);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+            Assert.AreEqual("Send minus 0", result[1]);
+        }
+
+        [TestMethod]
         public void CompileSimpleSum()
         {
             Parser compiler = new Parser("1 + 2");
@@ -102,6 +151,32 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(block.ByteCodes);
             Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+            Assert.AreEqual("GetConstant 2", result[1]);
+            Assert.AreEqual("Send + 1", result[2]);
+        }
+
+        [TestMethod]
+        public void CompileSimpleAt()
+        {
+            Parser compiler = new Parser("1 @ 2");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(0, block.Arity);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+            Assert.AreEqual("GetConstant 2", result[1]);
+            Assert.AreEqual("Send @ 1", result[2]);
         }
 
         [TestMethod]
@@ -774,6 +849,23 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual("GetGlobalVariable b", ops[1]);
             Assert.AreEqual("GetConstant 3", ops[2]);
             Assert.AreEqual("MakeCollection 3", ops[3]);
+        }
+
+        [TestMethod]
+        public void CompileSumWithNegativeNumber()
+        {
+            Parser parser = new Parser("-1 + 0");
+            var result = parser.CompileBlock();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(4, ops.Count);
+            Assert.AreEqual("GetConstant 1", ops[0]);
+            Assert.AreEqual("Send minus 0", ops[1]);
+            Assert.AreEqual("GetConstant 0", ops[2]);
+            Assert.AreEqual("Send + 1", ops[3]);
         }
 
         [TestMethod]

@@ -95,6 +95,37 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileInteger()
+        {
+            Block block = this.compiler.CompileBlock("1");
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(1, block.NoConstants);
+            Assert.AreEqual(0, block.NoGlobalNames);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+        }
+
+        [TestMethod]
+        public void CompileNegativeInteger()
+        {
+            Block block = this.compiler.CompileBlock("-1");
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(2, block.NoConstants);
+            Assert.AreEqual(0, block.NoGlobalNames);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+            Assert.AreEqual("Send minus 0", result[1]);
+        }
+
+        [TestMethod]
         public void CompileSimpleSum()
         {
             Block block = this.compiler.CompileBlock("1 + 2");

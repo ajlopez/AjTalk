@@ -82,6 +82,18 @@ namespace AjTalk.Tests.Language
         }
 
         [TestMethod]
+        public void ExecuteEmptyBlock()
+        {
+            Block block;
+
+            block = new Block();
+
+            object obj = block.Execute(null, null);
+
+            Assert.IsNull(obj);
+        }
+
+        [TestMethod]
         public void CompileAndExecuteNewDotNetObject()
         {
             Block block;

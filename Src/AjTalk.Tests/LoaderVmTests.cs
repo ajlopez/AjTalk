@@ -612,6 +612,25 @@ namespace AjTalk.Tests
             Assert.IsInstanceOfType(result, typeof(BaseClass));
         }
 
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Library2.st")]
+        [DeploymentItem(@"CodeFiles\PharoCorePoint.st")]
+        public void LoadPharoCorePoint()
+        {
+            Loader loaderlib = new Loader(@"Library2.st", new VmCompiler());
+            Loader loader = new Loader(@"PharoCorePoint.st", new VmCompiler());
+
+            Machine machine = CreateMachine();
+
+            loaderlib.LoadAndExecute(machine);
+            loader.LoadAndExecute(machine);
+
+            object result = machine.GetGlobalObject("Point");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+        }
+
         internal static Machine CreateMachine()
         {
             Machine machine = new Machine();

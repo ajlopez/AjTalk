@@ -87,6 +87,15 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void ExecuteCommentBlock()
+        {
+            Loader loader = new Loader(new StringReader("\"comment\""), new SimpleCompiler());
+            Machine machine = new Machine();
+
+            loader.LoadAndExecute(machine);
+        }
+
+        [TestMethod]
         public void ExecuteBlockWithTwoCommands()
         {
             Loader loader = new Loader(new StringReader("One := 1.\nTwo := 2\n!\n"), new SimpleCompiler());
@@ -716,6 +725,25 @@ namespace AjTalk.Tests
             loader.LoadAndExecute(machine);
 
             object result = machine.GetGlobalObject("Object");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Library2.st")]
+        [DeploymentItem(@"CodeFiles\PharoCorePoint.st")]
+        public void LoadPharoCorePoint()
+        {
+            Loader loaderlib = new Loader(@"Library2.st", new SimpleCompiler());
+            Loader loader = new Loader(@"PharoCorePoint.st", new SimpleCompiler());
+
+            Machine machine = CreateMachine();
+
+            loaderlib.LoadAndExecute(machine);
+            loader.LoadAndExecute(machine);
+
+            object result = machine.GetGlobalObject("Point");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(BaseClass));

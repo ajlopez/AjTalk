@@ -70,6 +70,9 @@ namespace AjTalk.Language
 
         public int GetClassVariableOffset(string varname)
         {
+            if (!(this.Behavior is IMetaClass))
+                return -1;
+
             return this.MetaClass.GetInstanceVariableOffset(varname);
         }
 
