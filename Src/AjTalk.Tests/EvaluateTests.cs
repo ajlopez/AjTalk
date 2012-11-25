@@ -405,7 +405,7 @@
         [TestMethod]
         public void EvaluateHeterogeneousCollection()
         {
-            object result = this.Evaluate("#(1 #Symbol 'string')");
+            object result = this.Evaluate("#(1 Symbol 'string')");
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IEnumerable));
 
