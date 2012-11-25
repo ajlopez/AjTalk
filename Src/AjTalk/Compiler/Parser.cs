@@ -345,12 +345,11 @@ namespace AjTalk.Compiler
                         nelements++;
                         break;
 
-                    // TODO Review compile of Symbol
-                    case TokenType.Symbol:
                     case TokenType.Name:
                         this.block.CompileGetConstant(token.Value);
                         nelements++;
                         break;
+
                     case TokenType.Punctuation:
                         if (token.Value == ")")
                         {

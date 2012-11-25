@@ -453,9 +453,9 @@
 
         [TestMethod]
         [ExpectedException(typeof(ParserException))]
-        public void RaiseIfNameInCollection()
+        public void RaiseIfSymbolInCollection()
         {
-            object result = this.Evaluate("#(1 Name 'string')");
+            object result = this.Evaluate("#(1 #Name 'string')");
         }
 
         [TestMethod]
