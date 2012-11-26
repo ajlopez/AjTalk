@@ -75,14 +75,6 @@
         {
             NativeBehavior behavior = machine.GetNativeBehavior(obj.GetType());
 
-            string mthname = msgname;
-            int p = msgname.IndexOf(":");
-
-            if (p > 0)
-                mthname = msgname.Substring(0, p);
-            else
-                mthname = msgname;
-
             if (behavior != null)
             {
                 IMethod mth = behavior.GetInstanceMethod(msgname);
@@ -90,6 +82,14 @@
                 if (mth != null)
                     return mth.ExecuteNative(obj, args);
             }
+
+            string mthname = msgname;
+            int p = msgname.IndexOf(":");
+
+            if (p > 0)
+                mthname = msgname.Substring(0, p);
+            else
+                mthname = msgname;
 
             if (obj is bool)
             {

@@ -8,6 +8,9 @@
 - Define Array implementation
    #(1 2 3) as IList<object>?
    
+- Implement +, -, etc... only for numbers
+	Actually, + is concatenating strings
+   
 - Implement FreeBlockExpression in Javascript compilers
 
 - Methods for Object
