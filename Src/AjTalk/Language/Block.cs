@@ -224,45 +224,27 @@ namespace AjTalk.Language
             }
 
             if (msgname == "instSize")
-            {
                 this.CompileByteCode(ByteCode.InstSize);
-            }
             else if (msgname == "instAt:")
-            {
                 this.CompileByteCode(ByteCode.InstAt);
-            }
             else if (msgname == "instAt:put:")
-            {
                 this.CompileByteCode(ByteCode.InstAtPut);
-            }
             else if (msgname == "basicNew")
-            {
                 this.CompileByteCode(ByteCode.NewObject);
-            }
             else if (msgname == "basicSize")
-            {
                 this.CompileByteCode(ByteCode.BasicSize);
-            }
             else if (msgname == "basicAt:")
-            {
                 this.CompileByteCode(ByteCode.BasicAt);
-            }
             else if (msgname == "basicAt:put:")
-            {
                 this.CompileByteCode(ByteCode.BasicAtPut);
-            }
             else if (msgname.StartsWith("value:") && IsValueMessage(msgname))
-            {
                 this.CompileByteCode(ByteCode.MultiValue, MessageArity(msgname));
-            }
             else if (msgname == "class")
-            {
                 this.CompileByteCode(ByteCode.GetClass);
-            }
+            else if (msgname == "raise")
+                this.CompileByteCode(ByteCode.RaiseException);
             else
-            {
                 this.CompileByteCode(ByteCode.Send, this.CompileConstant(msgname), MessageArity(msgname));
-            }
         }
 
         public void CompileBinarySend(string msgname)

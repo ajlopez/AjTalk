@@ -338,6 +338,8 @@ namespace AjTalk.Language
                             this.machine.SetGlobalObject(this.block.GetGlobalName(arg), this.Pop());
                             this.lastreceiver = this.machine.GetGlobalObject(this.block.GetGlobalName(arg));
                             break;
+                        case ByteCode.RaiseException:
+                            throw (Exception)this.Pop();
                         default:
                             throw new Exception("Not implemented");
                     }

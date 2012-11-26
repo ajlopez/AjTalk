@@ -651,6 +651,13 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(AssertError))]
+        public void RaiseWhenEvaluateRaise()
+        {
+            this.Evaluate("@AjTalk.Exceptions.AssertError new raise");
+        }
+
+        [TestMethod]
         public void EvaluateStringConcatenationWithNil()
         {
             var result = this.Evaluate("'f' , nil");

@@ -52,5 +52,6 @@ namespace AjTalk.Language
         GetDotNetType = 80,
         NewDotNetObject = 81,
         InvokeDotNetMethod = 82, 
+        RaiseException = 83
     }
 }
