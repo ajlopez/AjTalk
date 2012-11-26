@@ -514,6 +514,14 @@
             Assert.AreEqual(1, result);
         }
 
+        [TestMethod]
+        public void EvaluateBlockValue()
+        {
+            object result = this.Evaluate("[1] value");
+            Assert.IsInstanceOfType(result, typeof(int));
+            Assert.AreEqual(1, result);
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);

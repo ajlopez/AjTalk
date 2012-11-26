@@ -42,9 +42,12 @@ namespace AjTalk
             this.nilclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this, this.nilclass));
             this.nilclass.DefineClassMethod(new FunctionalMethod("ifNil:", this.nilclass, this.IfNil));
 
+            // Native Behaviors
             this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(meta, this.nilclass, this));
             this.RegisterNativeBehavior(typeof(bool), new BooleanBehavior(meta, this.nilclass, this));
+            this.RegisterNativeBehavior(typeof(Block), new BlockBehavior(meta, this.nilclass, this));
 
+            // Global Objects
             this.SetGlobalObject("UndefinedObject", this.nilclass);
             this.SetGlobalObject("Machine", this);
         }

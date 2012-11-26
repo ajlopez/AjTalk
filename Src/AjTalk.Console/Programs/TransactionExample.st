@@ -1,5 +1,5 @@
 ﻿
-Object subclass: #Rectangle instanceVariableNames: 'width height'
+Object subclass: #Rectangle instanceVariableNames: 'width height'!
 !Rectangle methods!
 width
 	^width
@@ -19,7 +19,7 @@ rect width: 500!
 rect := rect asTransactional
 !
 
-tm := @AjTalk.Machine current transactionManager.
+tm := Machine transactionManager.
 console := @System.Console out
 !
 

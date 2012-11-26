@@ -1,7 +1,7 @@
 ﻿!Object methods!
 
 asTransactional
-	^@AjTalk.Transactions.TransactionalObject new: self with: (@AjTalk.Machine current transactionManager)
+	^@AjTalk.Transactions.TransactionalObject new: self with: (Machine transactionManager)
 ! !
 
 
