@@ -37,8 +37,8 @@ namespace AjTalk
             IMetaClass meta = new BaseMetaClass(null, null, this, string.Empty);
             this.nilclass = meta.CreateClass("UndefinedObject", string.Empty);
 
-            this.nilclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this));
-            this.nilclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this));
+            this.nilclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this, this.nilclass));
+            this.nilclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this, this.nilclass));
 
             this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(meta, this.nilclass, this));
             this.RegisterNativeBehavior(typeof(bool), new BooleanBehavior(meta, this.nilclass, this));

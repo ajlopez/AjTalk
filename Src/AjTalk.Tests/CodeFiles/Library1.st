@@ -31,7 +31,7 @@ ClassDescription subclass:#Class
 
 "Tricky code: first knot in class hierarchy"
 Object !!metaclass !!setSuperClass: Class.
-Class !!defineInstanceMethod: (@AjTalk.Language.BehaviorDoesNotUnderstandMethod new: (Class !!machine)).
+Class !!defineInstanceMethod: (@AjTalk.Language.BehaviorDoesNotUnderstandMethod new: (Class !!machine) with: Class).
 Class !!machine !!classClass: Class.
 Object !!setSuperClass: nil.
 !

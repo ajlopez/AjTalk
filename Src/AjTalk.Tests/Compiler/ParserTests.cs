@@ -560,7 +560,7 @@ namespace AjTalk.Tests.Compiler
                 new string[] { "x", "y" },
                 null);
 
-            cls.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(machine));
+            cls.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(machine, cls));
 
             machine.SetGlobalObject("Rectangle", cls);
 

@@ -9,10 +9,10 @@
 
     public class DoesNotUnderstandMethod : IMethod
     {
-        public DoesNotUnderstandMethod(Machine machine)
+        public DoesNotUnderstandMethod(Machine machine, IBehavior behavior)
         {
             this.Name = "doesNotUnderstand:";
-            this.Behavior = (IClass)machine.GetGlobalObject("nil");
+            this.Behavior = behavior;
             this.Machine = machine;
         }
 

@@ -9,8 +9,8 @@
 
     public class BehaviorDoesNotUnderstandMethod : DoesNotUnderstandMethod
     {
-        public BehaviorDoesNotUnderstandMethod(Machine machine)
-            : base(machine)
+        public BehaviorDoesNotUnderstandMethod(Machine machine, IBehavior behavior)
+            : base(machine, behavior)
         {
         }
 

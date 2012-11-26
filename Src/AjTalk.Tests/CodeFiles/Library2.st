@@ -76,7 +76,7 @@ compile: aMethodSource
 "Tricky code to access compile: method as instance method"
 Object !!metaclass !!setSuperClass: Behavior.
 Object !!setSuperClass: nil.
-Behavior !!defineInstanceMethod: (@AjTalk.Language.BehaviorDoesNotUnderstandMethod new: (Behavior !!machine)).
+Behavior !!defineInstanceMethod: (@AjTalk.Language.BehaviorDoesNotUnderstandMethod new: (Behavior !!machine) with: Behavior).
 !
 
 Behavior subclass:#ClassDescription
