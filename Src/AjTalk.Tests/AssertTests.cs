@@ -32,6 +32,12 @@
             DoAssert("String");
         }
 
+        [TestMethod]
+        public void CharAsserts()
+        {
+            DoAssert("Char");
+        }
+
         private void DoAssert(string filename)
         {
             this.LoadFile(@"AssertTests\" + filename + "Tests.st");
