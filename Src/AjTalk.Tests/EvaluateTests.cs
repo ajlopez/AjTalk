@@ -579,6 +579,43 @@
             Assert.AreEqual(4, list[3]);
         }
 
+        [TestMethod]
+        public void EvaluateIfTrue()
+        {
+            var result = this.Evaluate("true ifTrue: [1]");
+            Assert.IsInstanceOfType(result, typeof(int));
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void EvaluateFalseIfTrue()
+        {
+            var result = this.Evaluate("false ifTrue: [1]");
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void EvaluateIfFalse()
+        {
+            var result = this.Evaluate("false ifFalse: [2]");
+            Assert.IsInstanceOfType(result, typeof(int));
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
+        public void EvaluateTrueIfFalse()
+        {
+            var result = this.Evaluate("true ifFalse: [2]");
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void EvaluateTrueIfFalseIfTrue()
+        {
+            var result = this.Evaluate("true ifFalse: [2] ifTrue: [3]");
+            Assert.AreEqual(3, result);
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);

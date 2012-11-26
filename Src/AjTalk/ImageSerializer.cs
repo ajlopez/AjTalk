@@ -222,8 +222,14 @@
                 case ImageCode.NativeBehavior:
                     string typename = (string)this.Deserialize();
                     Type type = TypeUtilities.GetType(typename);
-                    var nbehavior = this.machine.CreateNativeBehavior(null, type);
-                    this.machine.RegisterNativeBehavior(type, (NativeBehavior)nbehavior);
+                    var nbehavior = this.machine.GetNativeBehavior(type);
+                    
+                    if (nbehavior == null)
+                    {
+                        nbehavior = (NativeBehavior)this.machine.CreateNativeBehavior(null, type);
+                        this.machine.RegisterNativeBehavior(type, (NativeBehavior)nbehavior);
+                    }
+
                     this.objects.Add(nbehavior);
                     IClass superclass = (IClass)this.Deserialize();
                     IBehavior metaclasssuperclass = (IBehavior)this.Deserialize();
@@ -258,9 +264,6 @@
                     klass.Category = category;
                     
                     var global = this.machine.GetGlobalObject(name);
-
-                    if (global != null)
-                        nbehavior = (IClass)global;
 
                     this.DeserializeMethods(klass);
 

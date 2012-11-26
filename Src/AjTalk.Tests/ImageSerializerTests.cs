@@ -139,6 +139,24 @@
         }
 
         [TestMethod]
+        public void SerializeDeserializeMachinePreservingBuiltinMethods()
+        {
+            Machine machine = new Machine();
+            machine.SetGlobalObject("Block", machine.GetNativeBehavior(typeof(Block)));
+
+            var result = this.Process(machine);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Machine));
+
+            var newmachine = (Machine)result;
+
+            var blockbehavior = newmachine.GetNativeBehavior(typeof(Block));
+            Assert.IsNotNull(blockbehavior);
+            Assert.IsNotNull(blockbehavior.GetInstanceMethod("value"));
+        }
+
+        [TestMethod]
         public void SerializeDeserializeClassWithInstanceMethod()
         {
             Machine machine = new Machine();
