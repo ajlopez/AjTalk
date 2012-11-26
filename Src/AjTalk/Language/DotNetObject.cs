@@ -91,15 +91,6 @@
                     return mth.ExecuteNative(obj, args);
             }
 
-            if (obj is IEnumerable)
-            {
-                behavior = machine.GetNativeBehavior(typeof(IEnumerable));
-                IMethod mth = behavior.GetInstanceMethod(msgname);
-
-                if (mth != null)
-                    return mth.ExecuteNative(obj, args);
-            }
-
             if (obj is bool)
             {
                 behavior = machine.GetNativeBehavior(typeof(bool));
@@ -114,6 +105,25 @@
                 if (msgname == "new" || msgname.StartsWith("new:"))
                     return NewObject((Type)obj, args);
                 return SendNativeStaticMessage((Type)obj, mthname, args);
+            }
+
+            behavior = machine.GetNativeBehavior(obj.GetType());
+
+            if (behavior != null)
+            {
+                IMethod mth = behavior.GetInstanceMethod(msgname);
+
+                if (mth != null)
+                    return mth.ExecuteNative(obj, args);
+            }
+
+            if (obj is IEnumerable)
+            {
+                behavior = machine.GetNativeBehavior(typeof(IEnumerable));
+                IMethod mth = behavior.GetInstanceMethod(msgname);
+
+                if (mth != null)
+                    return mth.ExecuteNative(obj, args);
             }
 
             // TODO how to use doesNotUnderstand in native behavior

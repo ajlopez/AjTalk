@@ -7,6 +7,7 @@
     using System.Text;
     using AjTalk.Language;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using AjTalk.Compiler;
 
     [TestClass]
     public class NativeBehaviorTests
@@ -26,6 +27,25 @@
             FileInfo fileinfo = (FileInfo)result;
 
             Assert.AreEqual("File.txt", fileinfo.Name);
+        }
+
+        [TestMethod]
+        public void DefineStringTypeWithMethodAndEvaluateIt()
+        {
+            Machine machine = new Machine();
+            IMetaClass meta = BaseMetaClass.CreateMetaClass(null, machine);
+            NativeBehavior behavior = new NativeBehavior(meta, null, machine, typeof(string));
+
+            behavior.DefineInstanceMethod(new FunctionalMethod("size", behavior, (object self, object[] args) => ((string)self).Length));
+            Assert.AreEqual(3, this.Evaluate("'foo' size", machine));
+            Assert.AreEqual(0, this.Evaluate("'' size", machine));
+        }
+
+        private object Evaluate(string text, Machine machine)
+        {
+            Parser parser = new Parser(text);
+            Block block = parser.CompileBlock();
+            return block.Execute(machine, null);
         }
     }
 }
