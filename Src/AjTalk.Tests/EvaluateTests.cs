@@ -641,6 +641,33 @@
             this.Evaluate("[1==2] assert");
         }
 
+        [TestMethod]
+        public void EvaluateStringConcatenation()
+        {
+            var result = this.Evaluate("'f' , 'oo'");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(string));
+            Assert.AreEqual("foo", result);
+        }
+
+        [TestMethod]
+        public void EvaluateStringConcatenationWithNil()
+        {
+            var result = this.Evaluate("'f' , nil");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(string));
+            Assert.AreEqual("fnil", result);
+        }
+
+        [TestMethod]
+        public void EvaluateStringConcatenationWithInteger()
+        {
+            var result = this.Evaluate("'f' , 4");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(string));
+            Assert.AreEqual("f4", result);
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);

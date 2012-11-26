@@ -104,3 +104,13 @@ ClassDescription subclass:#Metaclass
 	poolDictionaries:''
 	category:'Kernel-Classes'
 !
+
+Object subclass: #String nativeType: @System.String
+!
+
+!String methods!
+
+size
+	^self !!Length
+! !
+

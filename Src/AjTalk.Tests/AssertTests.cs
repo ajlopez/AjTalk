@@ -26,6 +26,12 @@
             DoAssert("Arithmetic");
         }
 
+        [TestMethod]
+        public void StringAsserts()
+        {
+            DoAssert("String");
+        }
+
         private void DoAssert(string filename)
         {
             this.LoadFile(@"AssertTests\" + filename + "Tests.st");

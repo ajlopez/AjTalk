@@ -116,6 +116,9 @@
     <None Include="AssertTests\ArithmeticTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="AssertTests\StringTests.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="AssertTests\Library.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

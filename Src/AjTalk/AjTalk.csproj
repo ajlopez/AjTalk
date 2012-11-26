@@ -112,6 +112,7 @@
     <Compile Include="Language\BlockDecompiler.cs" />
     <Compile Include="Language\BlockBehavior.cs" />
     <Compile Include="Language\ArrayBehavior.cs" />
+    <Compile Include="Language\StringBehavior.cs" />
     <Compile Include="Model\ClassModel.cs" />
     <Compile Include="Model\CodeModel.cs" />
     <Compile Include="Model\CodeReader.cs" />
