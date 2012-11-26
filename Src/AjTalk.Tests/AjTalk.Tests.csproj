@@ -130,6 +130,9 @@
     <None Include="CodeFiles\Chunks.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="CodeFiles\Form.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\Library2.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

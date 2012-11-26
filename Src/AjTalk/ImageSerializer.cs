@@ -223,6 +223,7 @@
                     string typename = (string)this.Deserialize();
                     Type type = TypeUtilities.GetType(typename);
                     var nbehavior = this.machine.CreateNativeBehavior(null, type);
+                    this.machine.RegisterNativeBehavior(type, (NativeBehavior)nbehavior);
                     this.objects.Add(nbehavior);
                     IClass superclass = (IClass)this.Deserialize();
                     IBehavior metaclasssuperclass = (IBehavior)this.Deserialize();

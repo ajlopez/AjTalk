@@ -120,6 +120,25 @@
         }
 
         [TestMethod]
+        public void SerializeDeserializeMachineWithNativeBehavior()
+        {
+            Machine machine = new Machine();
+            IBehavior behavior = machine.CreateNativeBehavior(null, typeof(System.IO.File));
+            machine.RegisterNativeBehavior(typeof(System.IO.File), (NativeBehavior)behavior);
+            machine.SetGlobalObject("File", behavior);
+
+            var result = this.Process(machine);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Machine));
+
+            var newmachine = (Machine)result;
+
+            Assert.IsNotNull(newmachine.GetGlobalObject("File"));
+            Assert.IsNotNull(newmachine.GetNativeBehavior(typeof(System.IO.File)));
+        }
+
+        [TestMethod]
         public void SerializeDeserializeClassWithInstanceMethod()
         {
             Machine machine = new Machine();

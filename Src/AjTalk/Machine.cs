@@ -218,7 +218,7 @@ namespace AjTalk
             this.nativeBehaviors[type] = behavior;
         }
 
-        internal NativeBehavior GetNativeBehavior(Type type)
+        public NativeBehavior GetNativeBehavior(Type type)
         {
             if (this.nativeBehaviors.ContainsKey(type))
                 return this.nativeBehaviors[type];
