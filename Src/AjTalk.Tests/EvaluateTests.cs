@@ -506,11 +506,26 @@
             Assert.AreEqual("foo1", result);
         }
 
+        [TestMethod]
+        public void EvaluateNilIfNil()
+        {
+            object result = this.Evaluate("nil ifNil: [^1]");
+            Assert.IsInstanceOfType(result, typeof(int));
+            Assert.AreEqual(1, result);
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);
             Block block = parser.CompileBlock();
             return block.Execute(this.machine, null);
+        }
+
+        private object Evaluate(string text, Machine machine)
+        {
+            Parser parser = new Parser(text);
+            Block block = parser.CompileBlock();
+            return block.Execute(machine, null);
         }
     }
 }

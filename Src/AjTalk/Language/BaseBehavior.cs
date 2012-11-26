@@ -12,7 +12,7 @@
         private Dictionary<string, IMethod> methods = new Dictionary<string, IMethod>();
 
         public BaseBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
-            : base(behavior, 0) // TODO review no of instvars
+            : base(behavior, behavior == null ? 0 : behavior.NoInstanceVariables)
         {
             if (machine == null)
             {

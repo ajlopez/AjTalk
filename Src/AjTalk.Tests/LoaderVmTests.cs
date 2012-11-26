@@ -650,6 +650,40 @@ namespace AjTalk.Tests
             Assert.IsInstanceOfType(result, typeof(BaseClass));
         }
 
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Library2.st")]
+        [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
+        public void LoadPharoCoreKernelObjects()
+        {
+            Loader loaderlib = new Loader(@"Library2.st", new VmCompiler());
+            Loader loader = new Loader(@"PharoCoreKernelObjects.st", new VmCompiler());
+
+            Machine machine = CreateMachine();
+
+            loaderlib.LoadAndExecute(machine);
+            loader.LoadAndExecute(machine);
+
+            object result = machine.GetGlobalObject("Object");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            result = machine.GetGlobalObject("ProtoObject");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            result = machine.GetGlobalObject("Boolean");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            result = machine.GetGlobalObject("UndefinedObject");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+        }
+
         internal static Machine CreateMachine()
         {
             Machine machine = new Machine();

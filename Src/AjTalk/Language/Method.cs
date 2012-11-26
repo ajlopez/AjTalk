@@ -27,7 +27,7 @@ namespace AjTalk.Language
             this.mthclass = cls;
         }
 
-        public IBehavior Class
+        public IBehavior Behavior
         {
             get { return this.mthclass; }
         }

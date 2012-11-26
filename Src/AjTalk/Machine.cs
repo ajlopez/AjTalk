@@ -97,6 +97,12 @@ namespace AjTalk
         {
             IMetaClass supermeta = null;
 
+            if (superclass == null)
+                if (this.classclass != null)
+                    superclass = this.classclass;
+                else
+                    superclass = this.nilclass;
+
             if (superclass != null)
                 supermeta = superclass.MetaClass;
 

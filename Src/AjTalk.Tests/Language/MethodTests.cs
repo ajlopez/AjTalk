@@ -21,8 +21,8 @@ namespace AjTalk.Tests.Language
 
             Assert.IsNotNull(mth);
             Assert.AreEqual("method1", mth.Name);
-            Assert.AreEqual(cls, mth.Class);
-            Assert.AreEqual("TestClass", ((IClass)mth.Class).Name);
+            Assert.AreEqual(cls, mth.Behavior);
+            Assert.AreEqual("TestClass", ((IClass)mth.Behavior).Name);
         }
 
         [TestMethod]

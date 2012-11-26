@@ -44,6 +44,28 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        public void CreateClassWithInstanceAndClassVariables()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("TestClass", null, "x", "count");
+
+            Assert.IsNotNull(cls);
+            Assert.AreEqual("TestClass", cls.Name);
+            Assert.AreEqual(0, cls.GetInstanceVariableOffset("x"));
+            Assert.AreEqual(-1, cls.GetInstanceVariableOffset("y"));
+            Assert.AreEqual(0, cls.GetClassVariableOffset("count"));
+            Assert.AreEqual(-1, cls.GetClassVariableOffset("y"));
+            Assert.AreEqual("x", cls.GetInstanceVariableNamesAsString());
+            Assert.AreEqual("count", cls.GetClassVariableNamesAsString());
+            Assert.AreEqual(1, cls.NoVariables);
+
+            Assert.IsNull(cls.GetInstanceMethod("x"));
+            Assert.IsNotNull(cls.SuperClass);
+            Assert.IsInstanceOfType(cls.SuperClass, typeof(IClass));
+            Assert.AreEqual("UndefinedObject", ((IClass)cls.SuperClass).Name);
+        }
+
+        [TestMethod]
         public void CreateIndexedClass()
         {
             Machine machine = new Machine();

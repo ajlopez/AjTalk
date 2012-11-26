@@ -17,7 +17,7 @@
             FunctionalMethod method = new FunctionalMethod((IObject x, IObject y, object[] args) => ++count);
 
             Assert.IsNull(method.Name);
-            Assert.IsNull(method.Class);
+            Assert.IsNull(method.Behavior);
 
             object result = method.Execute(null, null, null);
 
@@ -32,7 +32,7 @@
             FunctionalMethod method = new FunctionalMethod((object x, object[] args) => ++count);
 
             Assert.IsNull(method.Name);
-            Assert.IsNull(method.Class);
+            Assert.IsNull(method.Behavior);
 
             object result = method.ExecuteNative(null, null);
 

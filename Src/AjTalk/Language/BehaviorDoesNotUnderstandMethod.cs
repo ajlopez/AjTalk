@@ -49,6 +49,9 @@
 
             if (msgname.Equals("subclass:instanceVariableNames:") ||
                 msgname.Equals("subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:") ||
+                msgname.Equals("variableSubclass:instanceVariableNames:classVariableNames:poolDictionaries:category:") ||
+                // TODO weakSubclass because Pharo Kernel Objects defines one, WeakMessageSend
+                msgname.Equals("weakSubclass:instanceVariableNames:classVariableNames:poolDictionaries:category:") ||
                 msgname.Equals("agent:instanceVariableNames:") ||
                 msgname.Equals("agent:instanceVariableNames:classVariableNames:poolDictionaries:category:"))
             {
@@ -60,6 +63,8 @@
 
                 if (msgname.StartsWith("agent:"))
                     ((BaseClass)newclass).IsAgentClass = true;
+                if (msgname.StartsWith("variableSubclass:"))
+                    ((BaseClass)newclass).IsIndexed = true;
                 if (args.Length >= 5)
                     ((BaseClass)newclass).Category = (string)args[4];
 

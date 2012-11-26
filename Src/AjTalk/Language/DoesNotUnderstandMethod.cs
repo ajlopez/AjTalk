@@ -12,7 +12,7 @@
         public DoesNotUnderstandMethod(Machine machine)
         {
             this.Name = "doesNotUnderstand:";
-            this.Class = (IClass)machine.GetGlobalObject("nil");
+            this.Behavior = (IClass)machine.GetGlobalObject("nil");
             this.Machine = machine;
         }
 
@@ -26,7 +26,7 @@
 
         public byte[] Bytecodes { get { return null; } }
         
-        public IBehavior Class
+        public IBehavior Behavior
         {
             get;
             private set;
