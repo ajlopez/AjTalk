@@ -38,6 +38,19 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileMethodWithHorizontalBarAsName()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("Rectangle");
+            Parser compiler = new Parser("| aBoolean ^aBoolean");
+            var method = compiler.CompileInstanceMethod(cls);
+
+            Assert.IsNotNull(method);
+            Assert.AreEqual("|", method.Name);
+            Assert.IsNotNull(method.ByteCodes);
+        }
+
+        [TestMethod]
         public void CompileMethodWithLocals()
         {
             Machine machine = new Machine();
@@ -946,6 +959,20 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(ops);
             Assert.AreEqual(1, ops.Count);
             Assert.AreEqual("Primitive 60", ops[0]);
+        }
+
+        [TestMethod]
+        public void CompileNamedPrimitive()
+        {
+            Parser parser = new Parser("<primitive: '' module:''>");
+            var result = parser.CompileBlock();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(1, ops.Count);
+            Assert.AreEqual("NamedPrimitive \"\" \"\"", ops[0]);
         }
 
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)

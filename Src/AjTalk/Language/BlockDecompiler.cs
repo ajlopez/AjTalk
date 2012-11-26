@@ -144,6 +144,14 @@
                         int nprimitive = this.block.ByteCodes[ip];
                         codes.Add(string.Format("{0} {1}", ByteCode.Primitive, nprimitive));
                         break;
+
+                    case ByteCode.NamedPrimitive:
+                        ip++;
+                        nconstant = this.block.ByteCodes[ip];
+                        ip++;
+                        int nconstant2 = this.block.ByteCodes[ip];
+                        codes.Add(string.Format("{0} \"{1}\" \"{2}\"", ByteCode.NamedPrimitive, this.block.GetConstant(nconstant), this.block.GetConstant(nconstant2)));
+                        break;
                 }
 
                 ip++;

@@ -285,5 +285,19 @@
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual("Primitive 10", result[0]);
         }
+
+        [TestMethod]
+        public void DecompileNamedPrimitive()
+        {
+            Block block = new Block();
+            block.CompileByteCode(ByteCode.NamedPrimitive, block.CompileConstant("do"), block.CompileConstant("mod"));
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("NamedPrimitive \"do\" \"mod\"", result[0]);
+        }
     }
 }

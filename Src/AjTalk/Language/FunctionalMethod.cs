@@ -51,6 +51,10 @@
 
         public object Execute(IObject self, IObject receiver, object[] args)
         {
+            // TODO review, used in Machine to define ifNil:
+            if (this.function == null)
+                return this.nativeFunction(self, args);
+
             return this.function(self, receiver, args);
         }
 

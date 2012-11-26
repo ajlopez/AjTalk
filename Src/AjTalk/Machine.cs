@@ -37,8 +37,10 @@ namespace AjTalk
             IMetaClass meta = new BaseMetaClass(null, null, this, string.Empty);
             this.nilclass = meta.CreateClass("UndefinedObject", string.Empty);
 
+            // TODO review, nil object never receives a message, see Send in Execution block
             this.nilclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this, this.nilclass));
             this.nilclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this, this.nilclass));
+            this.nilclass.DefineClassMethod(new FunctionalMethod("ifNil:", this.nilclass, this.IfNil));
 
             this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(meta, this.nilclass, this));
             this.RegisterNativeBehavior(typeof(bool), new BooleanBehavior(meta, this.nilclass, this));
@@ -210,6 +212,12 @@ namespace AjTalk
 
             foreach (IClass cls in this.GetClasses())
                 ((BaseBehavior)cls.Behavior).SetBehavior(this.metaclassclass);
+        }
+
+        private object IfNil(object self, object[] arguments)
+        {
+            Block block = (Block)arguments[0];
+            return block.Execute(this, null);
         }
     }
 }

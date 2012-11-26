@@ -145,7 +145,7 @@ namespace AjTalk.Compiler
             }
 
             // TODO Review if this code is needed
-            if (token.Type == TokenType.Operator)
+            if (token.Type == TokenType.Operator || (token.Type == TokenType.Punctuation && token.Value == "|"))
             {
                 this.methodname = token.Value;
                 token = this.NextToken();
@@ -209,6 +209,29 @@ namespace AjTalk.Compiler
 
             if (token == null || token.Type != TokenType.Integer)
                 throw new ParserException("Integer expected");
+
+            return Convert.ToInt32(token.Value);
+        }
+
+        private string CompileString()
+        {
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != TokenType.String)
+                throw new ParserException("String expected");
+
+            return token.Value;
+        }
+
+        private int? TryCompileInteger()
+        {
+            Token token = this.NextToken();
+
+            if (token == null || token.Type != TokenType.Integer)
+            {
+                this.PushToken(token);
+                return null;
+            }
 
             return Convert.ToInt32(token.Value);
         }
@@ -314,9 +337,22 @@ namespace AjTalk.Compiler
 
             if (token.Type == TokenType.Operator && token.Value == "<" && this.TryCompileToken(TokenType.Name, "primitive:"))
             {
-                int number = this.CompileInteger();
+                int? number = this.TryCompileInteger();
+
+                if (number.HasValue)
+                {
+                    this.CompileToken(TokenType.Operator, ">");
+                    this.block.CompileByteCode(ByteCode.Primitive, (byte)number.Value);
+                    return;
+                }
+
+                string name = this.CompileString();
+                this.CompileToken(TokenType.Name, "module:");
+                string module = this.CompileString();
                 this.CompileToken(TokenType.Operator, ">");
-                this.block.CompileByteCode(ByteCode.Primitive, (byte)number);
+
+                this.block.CompileByteCode(ByteCode.NamedPrimitive, this.block.CompileConstant(name), this.block.CompileConstant(module));
+
                 return;
             }
 
