@@ -309,15 +309,6 @@
     <milliseconds>810</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="MachineTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>11/24/2012 17:26:39</timestamp>
-      <milliseconds>39</milliseconds>
-    </settings>
-    <timestamp>11/24/2012 16:21:45</timestamp>
-    <milliseconds>907</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="ClassModelTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>11/24/2012 17:26:39</timestamp>
@@ -399,9 +390,6 @@
     <milliseconds>439</milliseconds>
     <violations />
   </sourcecode>
-  <project key="2100262046">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="RemotingTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>11/24/2012 17:26:39</timestamp>
@@ -451,6 +439,18 @@
     </settings>
     <timestamp>11/24/2012 19:13:05</timestamp>
     <milliseconds>859</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="2100262046">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="MachineTests.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>11/24/2012 17:26:39</timestamp>
+      <milliseconds>39</milliseconds>
+    </settings>
+    <timestamp>11/26/2012 11:52:18</timestamp>
+    <milliseconds>99</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>

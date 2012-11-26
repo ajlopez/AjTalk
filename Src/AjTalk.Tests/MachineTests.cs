@@ -13,19 +13,25 @@ namespace AjTalk.Tests
     public class MachineTests
     {
         [TestMethod]
-        public void BeCreated()
-        {
-            Machine machine = new Machine();
-
-            Assert.IsNotNull(machine);
-        }
-
-        [TestMethod]
-        public void HasGlobals()
+        public void InitializeMachine()
         {
             Machine machine = new Machine();
 
             Assert.IsNotNull(machine.UndefinedObjectClass);
+            Assert.IsNull(machine.ClassClass);
+
+            var result = machine.GetGlobalObject("UndefinedObject");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IBehavior));
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            var klass = (BaseClass)result;
+            Assert.AreEqual("UndefinedObject", klass.Name);
+            Assert.AreSame(klass, machine.UndefinedObjectClass);
+
+            result = machine.GetGlobalObject("Machine");
+            Assert.IsNotNull(result);
+            Assert.AreSame(machine, result);
         }
 
         [TestMethod]

@@ -46,6 +46,7 @@ namespace AjTalk
             this.RegisterNativeBehavior(typeof(bool), new BooleanBehavior(meta, this.nilclass, this));
 
             this.SetGlobalObject("UndefinedObject", this.nilclass);
+            this.SetGlobalObject("Machine", this);
         }
 
         public static Machine Current { get { return current; } }
