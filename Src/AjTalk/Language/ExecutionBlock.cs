@@ -252,14 +252,7 @@ namespace AjTalk.Language
                             object obj = this.Pop();
                             this.lastreceiver = obj;
 
-                            iobj = obj as IObject;
-
-                            if (obj == null)
-                                this.Push(this.machine.UndefinedObjectClass.SendMessage(mthname, args));
-                            else if (iobj == null)
-                                this.Push(DotNetObject.SendMessage(this.machine, obj, mthname, args));
-                            else
-                                this.Push(iobj.SendMessage(mthname, args));
+                            this.Push(this.machine.SendMessage(obj, mthname, args));
 
                             break;
                         case ByteCode.MakeCollection:

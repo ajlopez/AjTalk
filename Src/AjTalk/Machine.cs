@@ -193,6 +193,19 @@ namespace AjTalk
             return this.remotehosts.Values;
         }
 
+        public object SendMessage(object obj, string msgname, object[] args)
+        {
+            if (obj == null)
+                return this.nilclass.SendMessage(msgname, args);
+
+            IObject iobj = obj as IObject;
+
+            if (iobj != null)
+                return iobj.SendMessage(msgname, args);
+
+            return DotNetObject.SendMessage(this, obj, msgname, args);
+        }
+
         internal void RegisterNativeBehavior(Type type, NativeBehavior behavior)
         {
             this.nativeBehaviors[type] = behavior;
