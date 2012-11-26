@@ -43,7 +43,10 @@ namespace AjTalk
             this.nilclass.DefineClassMethod(new FunctionalMethod("ifNil:", this.nilclass, this.IfNil));
 
             // Native Behaviors
-            this.RegisterNativeBehavior(typeof(IEnumerable), new EnumerableBehavior(meta, this.nilclass, this));
+            var enumerableBehavior = new EnumerableBehavior(meta, this.nilclass, this);
+            var arrayBehavior = new ArrayBehavior(meta, enumerableBehavior, this);
+            this.RegisterNativeBehavior(typeof(IEnumerable), enumerableBehavior);
+            this.RegisterNativeBehavior(typeof(ArrayList), arrayBehavior);
             this.RegisterNativeBehavior(typeof(bool), new BooleanBehavior(meta, this.nilclass, this));
             this.RegisterNativeBehavior(typeof(Block), new BlockBehavior(meta, this.nilclass, this));
 

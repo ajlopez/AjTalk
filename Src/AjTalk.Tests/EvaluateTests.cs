@@ -565,6 +565,20 @@
             Assert.IsFalse((bool)result);
         }
 
+        [TestMethod]
+        public void EvaluateAddToArray()
+        {
+            var result = this.Evaluate("#(1 2 3) add: 4");
+            Assert.IsInstanceOfType(result, typeof(IList));
+            var list = (IList)result;
+
+            Assert.AreEqual(4, list.Count);
+            Assert.AreEqual(1, list[0]);
+            Assert.AreEqual(2, list[1]);
+            Assert.AreEqual(3, list[2]);
+            Assert.AreEqual(4, list[3]);
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);
