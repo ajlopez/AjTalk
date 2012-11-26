@@ -35,7 +35,7 @@ ClassDescription subclass:#Metaclass
 	category:'Kernel-Classes'
 !
 
-Object subclass: #Rectangle instanceVariableNames: 'x y width height'
+Object subclass: #Rectangle instanceVariableNames: 'x y width height'!
 !Rectangle methods!
 "Get x"
 x
@@ -52,4 +52,5 @@ x: newX
 "Set y"
 y: newY
 	y := newY
-!
+! !
+
