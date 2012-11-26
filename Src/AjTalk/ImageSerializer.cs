@@ -183,8 +183,14 @@
             {
                 var mach = (Machine)obj;
                 this.writer.Write((byte)ImageCode.Machine);
-                var names = mach.GetGlobalNames();
-                int nnames = names.Count;
+                var names = mach.GetGlobalNames().ToList();
+                
+                // TODO review of Machine existence in global variable, other names to preserve?
+                if (names.Contains("Machine"))
+                    names.Remove("Machine");
+
+                int nnames = names.Count;                
+
                 this.writer.Write(nnames);
 
                 foreach (var name in names)
