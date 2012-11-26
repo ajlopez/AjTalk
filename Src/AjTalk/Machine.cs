@@ -213,7 +213,7 @@ namespace AjTalk
             return DotNetObject.SendMessage(this, obj, msgname, args);
         }
 
-        internal void RegisterNativeBehavior(Type type, NativeBehavior behavior)
+        public void RegisterNativeBehavior(Type type, NativeBehavior behavior)
         {
             this.nativeBehaviors[type] = behavior;
         }

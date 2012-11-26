@@ -35,6 +35,7 @@
             Machine machine = new Machine();
             IMetaClass meta = BaseMetaClass.CreateMetaClass(null, machine);
             NativeBehavior behavior = new NativeBehavior(meta, null, machine, typeof(string));
+            machine.RegisterNativeBehavior(typeof(string), behavior);
 
             behavior.DefineInstanceMethod(new FunctionalMethod("size", behavior, (object self, object[] args) => ((string)self).Length));
             Assert.AreEqual(3, this.Evaluate("'foo' size", machine));

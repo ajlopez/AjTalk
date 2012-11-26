@@ -12,7 +12,6 @@
             : base(behavior, superclass, machine)
         {
             this.nativeType = type;
-            machine.RegisterNativeBehavior(type, this);
         }
 
         public Type NativeType { get { return this.nativeType; } }
