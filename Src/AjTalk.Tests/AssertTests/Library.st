@@ -152,5 +152,9 @@ Object subclass: #CompiledBlock nativeType: @AjTalk.Language.Block
 
 assert
 	^self value ifFalse: [@AjTalk.Exceptions.AssertError new raise]
+!
+
+assertFalse
+	^self value ifTrue: [@AjTalk.Exceptions.AssertError new raise]
 ! !
 
