@@ -75,9 +75,15 @@
 
             if (msgname.Equals("subclass:nativeType:"))
             {
-                NativeBehavior newbehavior = (NativeBehavior)this.Machine.CreateNativeBehavior((IClassDescription)self, (Type)args[1]);
+                Type type = (Type)args[1];
+                NativeBehavior newbehavior = this.Machine.GetNativeBehavior(type);
 
-                this.Machine.RegisterNativeBehavior(newbehavior.NativeType, newbehavior);
+                if (newbehavior == null)
+                {
+                    newbehavior = (NativeBehavior)this.Machine.CreateNativeBehavior((IClassDescription)self, type);
+                    this.Machine.RegisterNativeBehavior(newbehavior.NativeType, newbehavior);
+                }
+
                 this.Machine.SetGlobalObject((string)args[0], newbehavior);
                 return newbehavior;
             }

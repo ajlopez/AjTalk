@@ -9,7 +9,7 @@
     public class ArrayBehavior : NativeBehavior
     {
         public ArrayBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
-            : base(behavior, superclass, machine, typeof(IEnumerable))
+            : base(behavior, superclass, machine, typeof(ArrayList))
         {
             this.DefineInstanceMethod(new FunctionalMethod("add:", this, this.AddMethod));
         }

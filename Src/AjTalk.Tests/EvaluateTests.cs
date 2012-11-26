@@ -8,6 +8,7 @@
     using System.Text;
     using System.Threading;
     using AjTalk.Compiler;
+    using AjTalk.Exceptions;
     using AjTalk.Language;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -286,6 +287,7 @@
         [TestMethod]
         public void DefineNativeBehavior()
         {
+            var originalbehavior = this.machine.GetNativeBehavior(typeof(ArrayList));
             object result = this.Evaluate("nil subclass: #List nativeType: @System.Collections.ArrayList");
 
             Assert.IsNotNull(result);
@@ -299,6 +301,7 @@
 
             Assert.IsNotNull(newobj);
             Assert.IsInstanceOfType(newobj, typeof(System.Collections.ArrayList));
+            Assert.AreSame(originalbehavior, result);
         }
 
         [TestMethod]
@@ -614,6 +617,22 @@
         {
             var result = this.Evaluate("true ifFalse: [2] ifTrue: [3]");
             Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void EvaluateAssertWhenTrue()
+        {
+            var result = this.Evaluate("[1==1] assert");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(bool));
+            Assert.IsTrue((bool)result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(AssertError))]
+        public void RaiseWhenEvaluateAssertFails()
+        {
+            this.Evaluate("[1==2] assert");
         }
 
         private object Evaluate(string text)
