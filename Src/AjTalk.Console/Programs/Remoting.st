@@ -8,7 +8,7 @@ export: aClass
 
 !Object methods!
 asRemote
-	^@AjTalk.Hosting.RemoteObject new: self
+	^@AjTalk.Hosting.RemoteObject new: self with: Machine
 ! !
 
 Object subclass: #Host nativeType: @AjTalk.Hosting.RemotingHostServer

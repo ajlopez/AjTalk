@@ -11,10 +11,10 @@
         private IObject obj;
         private Machine machine;
 
-        public RemoteObject(IObject obj)
+        public RemoteObject(IObject obj, Machine machine)
         {
             this.obj = obj;
-            this.machine = Machine.Current;
+            this.machine = machine;
         }
 
         public IBehavior Behavior
@@ -44,16 +44,7 @@
 
         public object SendMessage(string msgname, object[] args)
         {
-            Machine current = Machine.Current;
-            Machine.SetCurrent(this.machine);
-            try
-            {
-                return this.obj.SendMessage(msgname, args);
-            }
-            finally
-            {
-                Machine.SetCurrent(current);
-            }
+            return this.obj.SendMessage(msgname, args);
         }
     }
 }
