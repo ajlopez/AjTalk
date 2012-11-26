@@ -38,6 +38,12 @@
             DoAssert("Char");
         }
 
+        [TestMethod]
+        public void BooleanAsserts()
+        {
+            DoAssert("Boolean");
+        }
+
         private void DoAssert(string filename)
         {
             this.LoadFile(@"AssertTests\" + filename + "Tests.st");

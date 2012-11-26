@@ -114,3 +114,21 @@ size
 	^self !!Length
 ! !
 
+Object subclass: #Char nativeType: @System.Char
+!
+
+!Char methods!
+
+isDigit
+	^@System.Char !!IsDigit: self
+! !
+
+Object subclass: #Boolean nativeType: @System.Boolean
+!
+
+!Boolean methods!
+
+not
+	^self ifTrue: [^false] ifFalse: [^true]
+! !
+
