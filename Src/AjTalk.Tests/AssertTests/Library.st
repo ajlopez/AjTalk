@@ -121,6 +121,10 @@ Object subclass: #Char nativeType: @System.Char
 
 isDigit
 	^@System.Char !!IsDigit: self
+!
+
+isLetter
+	^@System.Char !!IsLetter: self
 ! !
 
 Object subclass: #Boolean nativeType: @System.Boolean
@@ -130,5 +134,14 @@ Object subclass: #Boolean nativeType: @System.Boolean
 
 not
 	^self ifTrue: [^false] ifFalse: [^true]
+!
+
+or: aBlock
+	^self ifTrue: [^true] ifFalse: [aBlock value]
+!
+
+and: aBlock
+	^self ifTrue: [aBlock value] ifFalse: [^false]
+
 ! !
 
