@@ -522,6 +522,30 @@
             Assert.AreEqual(1, result);
         }
 
+        [TestMethod]
+        public void EvaluateArraySelect()
+        {
+            object result = this.Evaluate("#(1 2 3) select: [ :x | x > 1]");
+            Assert.IsInstanceOfType(result, typeof(IList));
+
+            var list = (IList)result;
+
+            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual(2, list[0]);
+            Assert.AreEqual(3, list[1]);
+        }
+
+        [TestMethod]
+        public void EvaluateArrayIncludes()
+        {
+            var result = this.Evaluate("#(1 2 3) includes: 1");
+            Assert.IsInstanceOfType(result, typeof(bool));
+            Assert.IsTrue((bool)result);
+            result = this.Evaluate("#(1 2 3) includes: 5");
+            Assert.IsInstanceOfType(result, typeof(bool));
+            Assert.IsFalse((bool)result);
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);

@@ -13,6 +13,7 @@
         {
             this.DefineInstanceMethod(new FunctionalMethod("do:", this, this.DoMethod));
             this.DefineInstanceMethod(new FunctionalMethod("select:", this, this.SelectMethod));
+            this.DefineInstanceMethod(new FunctionalMethod("includes:", this, this.IncludesMethod));
         }
 
         private object DoMethod(object obj, object[] arguments)
@@ -44,6 +45,25 @@
                     result.Add(element);
 
             return result;
+        }
+
+        private object IncludesMethod(object obj, object[] arguments)
+        {
+            var list = obj as IList;
+            var argument = arguments[0];
+
+            if (list != null)
+                return list.Contains(argument);
+
+            foreach (var element in (IEnumerable)obj)
+            {
+                if (element == null && argument == null)
+                    return true;
+                if (element != null && element.Equals(argument))
+                    return true;
+            }
+
+            return false;
         }
     }
 }
