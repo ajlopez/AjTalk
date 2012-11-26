@@ -58,6 +58,12 @@
 
         public static bool Same(object obj1, object obj2)
         {
+            if (obj1 == null)
+                return obj2 == null;
+            
+            if (obj1.GetType().IsValueType)
+                return obj1.Equals(obj2);
+
             return obj1 == obj2;
         }
 

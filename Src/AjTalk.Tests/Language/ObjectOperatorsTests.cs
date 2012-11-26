@@ -30,5 +30,14 @@
             Assert.AreEqual("foo1", ObjectOperators.Add("foo", 1));
             Assert.AreEqual("1foo", ObjectOperators.Add(1, "foo"));
         }
+
+        [TestMethod]
+        public void EqualsBoxedIntegers()
+        {
+            object a = 4;
+            object b = 4;
+            Assert.IsTrue(ObjectOperators.Same(a, b));
+            Assert.IsTrue(ObjectOperators.Equals(a, b));
+        }
     }
 }

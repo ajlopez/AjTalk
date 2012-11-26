@@ -61,6 +61,12 @@
         }
 
         [TestMethod]
+        public void EvaluateIntegerAddAndEquals()
+        {
+            Assert.AreEqual(true, this.Evaluate("1+3==4"));
+        }
+
+        [TestMethod]
         public void EvaluateIntegerLess()
         {
             Assert.AreEqual(true, this.Evaluate("1<3"));

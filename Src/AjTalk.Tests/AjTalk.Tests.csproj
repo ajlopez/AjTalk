@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssertTests.cs" />
     <Compile Include="ChunckReaderProcessorTests.cs" />
     <Compile Include="ChunkReaderTests.cs" />
     <Compile Include="Compilers\Javascript\CompilerTests.cs" />
@@ -112,6 +113,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="AssertTests\ArithmeticTests.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="AssertTests\Library.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="CodeFiles\AsRemote.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
