@@ -69,7 +69,7 @@
             Assert.AreEqual(1, bclass.GetInstanceVariableOffset("y"));
             Assert.AreEqual(-1, bclass.GetInstanceVariableOffset("z"));
             Assert.AreEqual("x y", bclass.GetInstanceVariableNamesAsString());
-            Assert.AreEqual(null, bclass.GetClassVariableNamesAsString());
+            Assert.AreEqual(string.Empty, bclass.GetClassVariableNamesAsString());
             Assert.AreEqual(null, bclass.GetClassVariableNames());
 
             var result = bclass.GetInstanceVariableNames();
@@ -78,6 +78,32 @@
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual("x", result.ElementAt(0));
             Assert.AreEqual("y", result.ElementAt(1));
+        }
+
+        [TestMethod]
+        public void DefineClassVariables()
+        {
+            Machine machine = new Machine();
+            IClass bclass = machine.CreateClass("MyClass");
+
+            bclass.DefineClassVariable("count");
+            bclass.DefineClassVariable("items");
+
+            Assert.AreEqual(2, bclass.Behavior.NoInstanceVariables);
+            Assert.AreEqual(2, bclass.NoVariables);
+            Assert.AreEqual(0, bclass.GetClassVariableOffset("count"));
+            Assert.AreEqual(1, bclass.GetClassVariableOffset("items"));
+            Assert.AreEqual(-1, bclass.GetClassVariableOffset("z"));
+            Assert.AreEqual("count items", bclass.GetClassVariableNamesAsString());
+            Assert.AreEqual(string.Empty, bclass.GetInstanceVariableNamesAsString());
+            Assert.AreEqual(null, bclass.GetInstanceVariableNames());
+
+            var result = bclass.GetClassVariableNames();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("count", result.ElementAt(0));
+            Assert.AreEqual("items", result.ElementAt(1));
         }
 
         [TestMethod]

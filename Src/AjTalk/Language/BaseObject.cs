@@ -96,5 +96,23 @@ namespace AjTalk.Language
         {
             this.variables = variables;
         }
+
+        internal void ResizeVariables(int nvars)
+        {
+            if (this.variables == null)
+            {
+                this.variables = new object[nvars];
+                return;
+            }
+
+            if (this.variables.Length >= nvars)
+                return;
+
+            object[] newvars = new object[nvars];
+
+            Array.Copy(this.variables, newvars, this.variables.Length);
+
+            this.variables = newvars;
+        }
     }
 }

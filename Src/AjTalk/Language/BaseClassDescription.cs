@@ -51,6 +51,7 @@ namespace AjTalk.Language
             }
 
             this.MetaClass.DefineInstanceVariable(varname);
+            this.ResizeVariables(this.MetaClass.NoInstanceVariables);
             return;
         }
 
@@ -163,7 +164,7 @@ namespace AjTalk.Language
         public string GetClassVariableNamesAsString()
         {
             if (this.Behavior == null || !(this.Behavior is IClassDescription))
-                return null;
+                return string.Empty;
 
             return ((IClassDescription)this.Behavior).GetInstanceVariableNamesAsString();
         }
