@@ -67,9 +67,14 @@
             return obj1 == obj2;
         }
 
-        public static bool Negate(bool value)
+        public static bool NegateBoolean(bool value)
         {
             return !value;
+        }
+
+        public static object Negate(object value)
+        {
+            return Operators.NegateObject(value);
         }
 
         public static bool IsNull(object value)

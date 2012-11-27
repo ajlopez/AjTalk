@@ -9,6 +9,7 @@
     public class DotNetObject
     {
         private static Dictionary<string, IMethod> binaryMethods = new Dictionary<string, IMethod>();
+        private static Dictionary<string, IMethod> unaryMethods = new Dictionary<string, IMethod>();
 
         static DotNetObject()
         {
@@ -24,6 +25,7 @@
             binaryMethods["~="] = new FunctionalMethod((obj, args) => !ObjectOperators.Equals(obj, args[0]));
             binaryMethods["=="] = new FunctionalMethod((obj, args) => ObjectOperators.Same(obj, args[0]));
             binaryMethods["~~"] = new FunctionalMethod((obj, args) => !ObjectOperators.Same(obj, args[0]));
+            unaryMethods["minus"] = new FunctionalMethod((obj, args) => ObjectOperators.Negate(obj));
         }
 
         public static object NewObject(Type type, object[] args)
@@ -37,6 +39,12 @@
             {
                 IMethod binmethod = binaryMethods[mthname];
                 return binmethod.ExecuteNative(obj, args);
+            }
+
+            if ((args == null || args.Length == 0) && unaryMethods.ContainsKey(mthname))
+            {
+                IMethod unimethod = unaryMethods[mthname];
+                return unimethod.ExecuteNative(obj, args);
             }
 
             // TODO support for indexed properties
