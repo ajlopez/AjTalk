@@ -98,6 +98,8 @@
             Assert.IsNotNull(chunk);
             chunk = reader.GetChunk();
             Assert.IsNotNull(chunk);
+            Assert.IsTrue(chunk.Contains("\r"));
+            Assert.IsTrue(chunk.Contains("\r\n"));
             chunk = reader.GetChunk();
             Assert.IsNotNull(chunk);
             Assert.IsTrue(chunk.StartsWith("!"));

@@ -8,6 +8,7 @@
     using System.Linq;
     using System.Text;
     using System.Windows.Forms;
+    using AjTalk.Compiler;
     using AjTalk.Language;
 
     public partial class Browser : Form
@@ -19,8 +20,14 @@
         {
             this.InitializeComponent();
 
+            this.SetMachine(machine);
+        }
+
+        private void SetMachine(Machine machine)
+        {
             this.machine = machine;
-            ////panel1.Dock = DockStyle.Fill;
+            this.lstClasses.Items.Clear();
+            this.lstMethods.Items.Clear();
 
             foreach (IClass cls in machine.GetClasses())
                 this.lstClasses.Items.Add(cls.Name);
@@ -55,7 +62,35 @@
             string mthname = (string)this.lstMethods.SelectedItem;
             IMethod method = this.currentClass.GetInstanceMethod(mthname);
 
-            this.txtText.Text = method.SourceCode ?? string.Empty;
+            this.txtText.Text = this.GetMethodSource(method);
+        }
+
+        private string GetMethodSource(IMethod method)
+        {
+            if (method == null || method.SourceCode == null)
+                return string.Empty;
+
+            if (method.SourceCode.Contains("\r\n"))
+                return method.SourceCode;
+
+            return method.SourceCode.Replace("\n", "\r\n");
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void loadFileOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.openDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            string filename = this.openDialog.FileName;
+
+            Loader loader = new Loader(filename, new VmCompiler());
+            loader.LoadAndExecute(this.machine);
+            this.SetMachine(this.machine);
         }
     }
 }

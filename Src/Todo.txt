@@ -1,6 +1,8 @@
 
 - Refactor ExecutionBlock: bytecode processing
 
+- Remove EndOfInput exception in Lexer processing
+
 - Review Bytecode.GetArgument
 	Apparently, it uses the number of argument, but block has the names too
 	Same for Bytecode.GetLocal

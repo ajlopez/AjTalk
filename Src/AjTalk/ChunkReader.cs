@@ -59,6 +59,8 @@
 
                 if (ch == '\n' && lastch != '\r')
                     writer.Write('\r');
+                else if (lastch == '\r' && ch != '\n')
+                    writer.Write('\n');
 
                 writer.Write((char)ch);
                 lastch = (char)ch;

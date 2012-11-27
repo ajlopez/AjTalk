@@ -9,7 +9,7 @@
 
     public static class Program
     {
-        private const string BootFile = "Boot.st";
+        private const string BootFile = "Library.st";
 
         [STAThread]
         public static void Main()
