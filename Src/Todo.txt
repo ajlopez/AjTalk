@@ -3,6 +3,10 @@
 
 + Remove EndOfInput exception in Lexer processing
 
+- Improve Integer parsing (with radix) in Parser and Model Parser
+
+- Load Pharo Kernel Numbers using VmCompiler
+
 - Review Bytecode.GetArgument
 	Apparently, it uses the number of argument, but block has the names too
 	Same for Bytecode.GetLocal

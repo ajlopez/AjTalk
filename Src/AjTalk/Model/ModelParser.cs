@@ -297,6 +297,9 @@
                     if (token.Value == "#(")
                         return this.ParseArray();
 
+                    if (token.Value == "#[")
+                        return this.ParseByteArray();
+
                     if (token.Value == "{")
                         return this.ParseDynamicArray();
                         
@@ -338,6 +341,19 @@
             this.ParseToken(TokenType.Punctuation, ")");
 
             return new ArrayExpression(items);
+        }
+
+        private IExpression ParseByteArray()
+        {
+            IList<byte> bytes = new List<byte>();
+            IList<IExpression> items = new List<IExpression>();
+
+            for (int? value = this.TryParseInteger(); value.HasValue; value = this.TryParseInteger())
+                bytes.Add((byte)value.Value);
+
+            this.ParseToken(TokenType.Punctuation, "]");
+
+            return new ConstantExpression(bytes.ToArray());
         }
 
         private IExpression ParseDynamicArray()
@@ -529,6 +545,21 @@
             this.ParseToken(TokenType.Operator, ">");
 
             return primitive;
+        }
+
+        private int? TryParseInteger()
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                return null;
+
+            if (token.Type == TokenType.Integer)
+                return Convert.ToInt32(token.Value);
+
+            this.PushToken(token);
+
+            return null;
         }
 
         private string TryParseUnarySelector()

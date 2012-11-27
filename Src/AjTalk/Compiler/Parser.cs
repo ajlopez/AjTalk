@@ -456,7 +456,7 @@ namespace AjTalk.Compiler
                 token = this.NextToken();
             }
 
-            this.block.CompileGetConstant(bytes);
+            this.block.CompileGetConstant(bytes.ToArray());
         }
 
         private void CompileDynamicCollection()
