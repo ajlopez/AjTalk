@@ -22,7 +22,7 @@ namespace AjTalk.Compiler
         private const char ParameterMark = ':';
 
         private TextReader input;
-        private char lastchar;
+        private int lastchar;
         private bool haschar;
         private Stack<Token> tokenstack = new Stack<Token>();
 
@@ -48,99 +48,95 @@ namespace AjTalk.Compiler
                 return this.tokenstack.Pop();
             }
 
-            char ch;
+            int ch;
 
-            try
-            {
-                ch = this.NextCharSkipBlanksAndComments();
+            ch = this.NextCharSkipBlanksAndComments();
 
-                if (char.IsLetter(ch) || ch == '_')
-                {
-                    return this.NextName(ch);
-                }
-
-                if (char.IsDigit(ch))
-                {
-                    return this.NextInteger(ch);
-                }
-
-                if (ch == StringDelimiter)
-                {
-                    return this.NextString();
-                }
-
-                if (ch == SpecialCharMark)
-                {
-                    char ch2 = this.NextChar();
-                    return new Token() { Type = TokenType.Character, Value = ch2.ToString() };
-                }
-
-                if (ch == SymbolMark)
-                {
-                    char ch2 = this.NextChar();
-
-                    if (ch2 == '(')
-                        return new Token() { Type = TokenType.Punctuation, Value = "#(" };
-
-                    this.PushChar(ch2);
-
-                    return this.NextSymbol();
-                }
-
-                if (ch == ParameterMark)
-                {
-                    char ch2 = this.PeekChar();
-
-                    if (!char.IsLetter(ch2))
-                    {
-                        return this.NextOperator(ch);
-                    }
-
-                    return this.NextParameter();
-                }
-
-                if (ch == SpecialDotNetTypeMark)
-                {
-                    char ch2 = this.PeekChar();
-
-                    if (!char.IsLetter(ch2))
-                    {
-                        return this.NextOperator(ch);
-                    }
-
-                    return this.NextDotNetTypeName();
-                }
-
-                if (ch == SpecialDotNetInvokeMark)
-                {
-                    return this.NextDotNetInvokeName();
-                }
-
-                if (Operators.IndexOf(ch) >= 0)
-                {
-                    return this.NextOperator(ch);
-                }
-
-                if (Separators.IndexOf(ch) >= 0)
-                {
-                    return this.NextPunctuation(ch);
-                }
-
-                throw new LexerException("Invalid Characater '" + ch + "'");
-            }
-            catch (EndOfInputException)
-            {
+            if (ch < 0)
                 return null;
+
+            if (char.IsLetter((char)ch) || ch == '_')
+            {
+                return this.NextName((char)ch);
             }
+
+            if (char.IsDigit((char)ch))
+            {
+                return this.NextInteger((char)ch);
+            }
+
+            if (ch == StringDelimiter)
+            {
+                return this.NextString();
+            }
+
+            if (ch == SpecialCharMark)
+            {
+                int ch2 = this.NextChar();
+                return new Token() { Type = TokenType.Character, Value = ((char)ch2).ToString() };
+            }
+
+            if (ch == SymbolMark)
+            {
+                int ch2 = this.NextChar();
+
+                if (ch2 == '(')
+                    return new Token() { Type = TokenType.Punctuation, Value = "#(" };
+
+                this.PushChar(ch2);
+
+                return this.NextSymbol();
+            }
+
+            if (ch == ParameterMark)
+            {
+                int ch2 = this.PeekChar();
+
+                if (ch2 < 0 || !char.IsLetter((char)ch2))
+                {
+                    return this.NextOperator((char)ch);
+                }
+
+                return this.NextParameter();
+            }
+
+            if (ch == SpecialDotNetTypeMark)
+            {
+                int ch2 = this.PeekChar();
+
+                if (ch2 < 0 || !char.IsLetter((char)ch2))
+                {
+                    return this.NextOperator((char)ch);
+                }
+
+                return this.NextDotNetTypeName();
+            }
+
+            if (ch == SpecialDotNetInvokeMark)
+            {
+                return this.NextDotNetInvokeName();
+            }
+
+            if (Operators.IndexOf((char)ch) >= 0)
+            {
+                return this.NextOperator((char)ch);
+            }
+
+            if (Separators.IndexOf((char)ch) >= 0)
+            {
+                return this.NextPunctuation((char)ch);
+            }
+
+            throw new LexerException("Invalid Characater '" + (char)ch + "'");
         }
 
-        private void PushChar(char ch)
+        private void PushChar(int ch)
         {
             this.lastchar = ch;
             this.haschar = true;
         }
 
-        private char NextChar()
+        private int NextChar()
         {
             if (this.haschar)
             {
@@ -150,15 +146,10 @@ namespace AjTalk.Compiler
 
             int ch = this.input.Read();
 
-            if (ch < 0)
-            {
-                throw new EndOfInputException();
-            }
-
-            return (char)ch;
+            return ch;
         }
 
-        private char PeekChar()
+        private int PeekChar()
         {
             if (this.haschar)
             {
@@ -167,35 +158,30 @@ namespace AjTalk.Compiler
 
             int ch = this.input.Read();
 
-            if (ch < 0)
-            {
-                return (char)0;
-            }
+            this.PushChar(ch);
 
-            this.PushChar((char)ch);
-
-            return (char)ch;
+            return ch;
         }
 
         private void SkipToControl()
         {
-            char ch;
+            int ch;
 
             ch = this.NextChar();
 
-            while (!char.IsControl(ch))
+            while (ch >= 0 && !char.IsControl((char)ch))
             {
                 ch = this.NextChar();
             }
         }
 
-        private char NextCharSkipBlanks()
+        private int NextCharSkipBlanks()
         {
-            char ch;
+            int ch;
 
             ch = this.NextChar();
 
-            while (char.IsWhiteSpace(ch))
+            while (ch >= 0 && char.IsWhiteSpace((char)ch))
             {
                 ch = this.NextChar();
             }
@@ -203,14 +189,14 @@ namespace AjTalk.Compiler
             return ch;
         }
 
-        private char NextCharSkipBlanksAndComments()
+        private int NextCharSkipBlanksAndComments()
         {
-            char ch;
+            int ch;
 
             ch = this.NextCharSkipBlanks();
 
             // Skip Comments
-            while (ch == CommentDelimeter)
+            while (ch >= 0 && ch == CommentDelimeter)
             {
                 ch = this.NextChar();
 
@@ -231,29 +217,23 @@ namespace AjTalk.Compiler
             StringBuilder sb = new StringBuilder(10);
             sb.Append(firstchar);
 
-            try
-            {
-                char ch;
+            int ch;
 
+            ch = this.NextChar();
+
+            while (ch >= 0 && char.IsLetterOrDigit((char)ch))
+            {
+                sb.Append((char)ch);
                 ch = this.NextChar();
-
-                while (char.IsLetterOrDigit(ch))
-                {
-                    sb.Append(ch);
-                    ch = this.NextChar();
-                }
-
-                if (ch == ':')
-                {
-                    sb.Append(ch);
-                }
-                else
-                {
-                    this.PushChar(ch);
-                }
             }
-            catch (EndOfInputException)
+
+            if (ch >= 0 && ch == ':')
             {
+                sb.Append((char)ch);
+            }
+            else
+            {
+                this.PushChar(ch);
             }
 
             Token token = new Token();
@@ -285,23 +265,17 @@ namespace AjTalk.Compiler
         {
             StringBuilder sb = new StringBuilder();
 
-            try
-            {
-                char ch;
+            int ch;
 
+            ch = this.NextChar();
+
+            while (ch >= 0 && !char.IsWhiteSpace((char)ch) && Separators.IndexOf((char)ch) < 0)
+            {
+                sb.Append((char)ch);
                 ch = this.NextChar();
-
-                while (!char.IsWhiteSpace(ch) && Separators.IndexOf(ch) < 0)
-                {
-                    sb.Append(ch);
-                    ch = this.NextChar();
-                }
-
-                this.PushChar(ch);
             }
-            catch (EndOfInputException)
-            {
-            }
+
+            this.PushChar(ch);
 
             return sb.ToString();
         }
@@ -311,23 +285,17 @@ namespace AjTalk.Compiler
             StringBuilder sb = new StringBuilder();
             sb.Append(SpecialDotNetTypeMark);
 
-            try
-            {
-                char ch;
+            int ch;
 
+            ch = this.NextChar();
+
+            while (ch >= 0 && !char.IsWhiteSpace((char)ch))
+            {
+                sb.Append((char)ch);
                 ch = this.NextChar();
-
-                while (!char.IsWhiteSpace(ch))
-                {
-                    sb.Append(ch);
-                    ch = this.NextChar();
-                }
-
-                this.PushChar(ch);
             }
-            catch (EndOfInputException)
-            {
-            }
+
+            this.PushChar(ch);
 
             Token token = new Token();
             token.Type = TokenType.Name;
@@ -341,26 +309,20 @@ namespace AjTalk.Compiler
             StringBuilder sb = new StringBuilder();
             sb.Append(SpecialDotNetInvokeMark);
 
-            try
-            {
-                char ch;
+            int ch;
 
+            ch = this.NextChar();
+
+            while (ch >= 0 && char.IsLetterOrDigit((char)ch) || ch == '_' || ch == ':')
+            {
+                sb.Append((char)ch);
+                if (ch == ':')
+                    break;
                 ch = this.NextChar();
-
-                while (char.IsLetterOrDigit(ch) || ch == '_' || ch == ':')
-                {
-                    sb.Append(ch);
-                    if (ch == ':')
-                        break;
-                    ch = this.NextChar();
-                }
-
-                if (ch != ':')
-                    this.PushChar(ch);
             }
-            catch (EndOfInputException)
-            {
-            }
+
+            if (ch >= 0 && ch != ':')
+                this.PushChar(ch);
 
             Token token = new Token();
             token.Type = TokenType.Name;
@@ -373,34 +335,36 @@ namespace AjTalk.Compiler
         {
             string value = string.Empty;
 
-            char ch;
+            int ch;
 
-            try
+            while (true)
             {
-                while (true)
+                ch = this.NextChar();
+
+                while (ch >= 0 && ch != StringDelimiter)
                 {
+                    value += (char)ch;
                     ch = this.NextChar();
-
-                    while (ch != StringDelimiter)
-                    {
-                        value += ch;
-                        ch = this.NextChar();
-                    }
-
-                    char ch2 = this.PeekChar();
-
-                    if (ch2 != StringDelimiter)
-                        break;
-
-                    this.NextChar();
-
-                    value += ch;
                 }
+
+                if (ch < 0)
+                    break;
+
+                int ch2 = this.PeekChar();
+
+                if (ch2 < 0)
+                    break;
+
+                if (ch2 != StringDelimiter)
+                    break;
+
+                this.NextChar();
+
+                value += (char)ch;
             }
-            catch (EndOfInputException)
-            {
-                throw new LexerException("\"\'\" expected");
-            }
+
+            if (ch < 0)
+                throw new LexerException("Unclosed string");
 
             Token token = new Token();
 
@@ -414,26 +378,25 @@ namespace AjTalk.Compiler
         {
             string value = new string(firstdigit, 1);
 
-            char ch;
+            int ch;
 
-            try
+            ch = this.NextChar();
+
+            while (ch >= 0 && char.IsDigit((char)ch))
             {
+                value += (char)ch;
                 ch = this.NextChar();
+            }
 
-                while (char.IsDigit(ch))
-                {
-                    value += ch;
-                    ch = this.NextChar();
-                }
-
-                if (ch == '.' && char.IsDigit(this.PeekChar()))
+            if (ch == '.') 
+            { 
+                int ch2 = this.PeekChar();
+                
+                if (ch2 >= 0 && char.IsDigit((char)ch2))
                     return this.NextReal(value + ".");
+            }
 
-                this.PushChar(ch);
-            }
-            catch (EndOfInputException)
-            {
-            }
+            this.PushChar(ch);
 
             Token token = new Token();
             token.Type = TokenType.Integer;
@@ -444,23 +407,17 @@ namespace AjTalk.Compiler
 
         private Token NextReal(string value)
         {
-            char ch;
+            int ch;
 
-            try
+            ch = this.NextChar();
+
+            while (ch >= 0 && char.IsDigit((char)ch))
             {
+                value += (char)ch;
                 ch = this.NextChar();
-
-                while (char.IsDigit(ch))
-                {
-                    value += ch;
-                    ch = this.NextChar();
-                }
-
-                this.PushChar(ch);
             }
-            catch (EndOfInputException)
-            {
-            }
+
+            this.PushChar(ch);
 
             Token token = new Token();
             token.Type = TokenType.Real;
@@ -473,23 +430,17 @@ namespace AjTalk.Compiler
         {
             string value = new string(firstchar, 1);
 
-            char ch;
+            int ch;
 
-            try
+            ch = this.NextChar();
+
+            while (ch >=0 && Operators.IndexOf((char)ch) >= 0)
             {
+                value += (char)ch;
                 ch = this.NextChar();
-
-                while (Operators.IndexOf(ch) >= 0)
-                {
-                    value += ch;
-                    ch = this.NextChar();
-                }
-
-                this.PushChar(ch);
             }
-            catch (EndOfInputException)
-            {
-            }
+
+            this.PushChar(ch);
 
             Token token = new Token();
             token.Type = TokenType.Operator;

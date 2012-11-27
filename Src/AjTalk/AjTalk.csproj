@@ -169,7 +169,6 @@
     <Compile Include="Language\EnumerableBehavior.cs" />
     <Compile Include="Language\IMetaClass.cs" />
     <Compile Include="Language\IIndexedObject.cs" />
-    <Compile Include="Compiler\EndOfInputException.cs" />
     <Compile Include="Language\IClassDescription.cs" />
     <Compile Include="Language\DotNetObject.cs" />
     <Compile Include="Language\ExecutionBlock.cs">
