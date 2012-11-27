@@ -363,6 +363,18 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void ProcessByteCollectionStart()
+        {
+            string punct = "#[";
+            Lexer tokenizer = new Lexer(punct);
+            Token token;
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Punctuation, token.Type);
+            Assert.AreEqual("#[", token.Value);
+        }
+
+        [TestMethod]
         public void ProcessTokenAndString()
         {
             Lexer tokenizer = new Lexer("token 'string'");
@@ -464,6 +476,44 @@ namespace AjTalk.Tests.Compiler
 
             token = tokenizer.NextToken();
             Assert.IsNull(token);
+        }
+
+        [TestMethod]
+        public void ProcessReturnNegativeNumber()
+        {
+            Lexer tokenizer = new Lexer("^-1");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("^", token.Value);
+            Assert.AreEqual(TokenType.Operator, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("-", token.Value);
+            Assert.AreEqual(TokenType.Operator, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("1", token.Value);
+            Assert.AreEqual(TokenType.Integer, token.Type);
+
+            Assert.IsNull(tokenizer.NextToken());
+        }
+
+        [TestMethod]
+        public void ProcessIntegerNumberWithRadix()
+        {
+            Lexer tokenizer = new Lexer("16rFF");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("16rFF", token.Value);
+            Assert.AreEqual(TokenType.Integer, token.Type);
+
+            Assert.IsNull(tokenizer.NextToken());
         }
     }
 }

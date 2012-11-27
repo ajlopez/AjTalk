@@ -82,6 +82,8 @@ namespace AjTalk.Compiler
 
                 if (ch2 == '(')
                     return new Token() { Type = TokenType.Punctuation, Value = "#(" };
+                if (ch2 == '[')
+                    return new Token() { Type = TokenType.Punctuation, Value = "#[" };
 
                 this.PushChar(ch2);
 
@@ -396,6 +398,14 @@ namespace AjTalk.Compiler
                     return this.NextReal(value + ".");
             }
 
+            if (ch >= 0 && ch == 'r')
+            {
+                value += (char)ch;
+
+                for (ch = this.NextChar(); ch >= 0 && char.IsLetterOrDigit((char)ch); ch = this.NextChar())
+                    value += (char)ch;
+            }
+
             this.PushChar(ch);
 
             Token token = new Token();
@@ -430,17 +440,20 @@ namespace AjTalk.Compiler
         {
             string value = new string(firstchar, 1);
 
-            int ch;
-
-            ch = this.NextChar();
-
-            while (ch >=0 && Operators.IndexOf((char)ch) >= 0)
+            if (firstchar != '^')
             {
-                value += (char)ch;
-                ch = this.NextChar();
-            }
+                int ch;
 
-            this.PushChar(ch);
+                ch = this.NextChar();
+
+                while (ch >= 0 && Operators.IndexOf((char)ch) >= 0)
+                {
+                    value += (char)ch;
+                    ch = this.NextChar();
+                }
+
+                this.PushChar(ch);
+            }
 
             Token token = new Token();
             token.Type = TokenType.Operator;

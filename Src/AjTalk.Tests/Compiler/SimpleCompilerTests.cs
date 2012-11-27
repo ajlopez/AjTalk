@@ -338,6 +338,28 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileBlockWithParameterWithASpace()
+        {
+            Block block = this.compiler.CompileBlock(" : a | a doSomething");
+
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoGlobalNames);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(1, block.NoConstants);
+            Assert.AreEqual(1, block.Arity);
+            Assert.AreEqual("a", block.GetArgumentName(0));
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(1, block.Arity);
+
+            object constant = block.GetConstant(0);
+
+            Assert.IsNotNull(constant);
+            Assert.IsInstanceOfType(constant, typeof(string));
+            Assert.AreEqual("doSomething", constant);
+        }
+
+        [TestMethod]
         public void CompileBlockWithTwoParameters()
         {
             Block block = this.compiler.CompileBlock(" :a :b | a+b");
@@ -851,6 +873,42 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(ops);
             Assert.AreEqual(1, ops.Count);
             Assert.AreEqual("Primitive 60", ops[0]);
+        }
+
+        [TestMethod]
+        public void CompileSimpleExpressionInParenthesis()
+        {
+            var block = this.compiler.CompileBlock("(1+2)");
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(3, block.NoConstants);
+            Assert.AreEqual(0, block.NoGlobalNames);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+            Assert.AreEqual("GetConstant 2", result[1]);
+            Assert.AreEqual("Send + 1", result[2]);
+        }
+
+        [TestMethod]
+        public void CompileSimpleExpressionInParenthesisUsingYourself()
+        {
+            var block = this.compiler.CompileBlock("(1+2;yourself)");
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(4, block.NoConstants);
+            Assert.AreEqual(0, block.NoGlobalNames);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(5, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+            Assert.AreEqual("GetConstant 2", result[1]);
+            Assert.AreEqual("Send + 1", result[2]);
+            Assert.AreEqual("ChainedSend", result[3]);
+            Assert.AreEqual("Send yourself 0", result[4]);
         }
 
         internal IClass CompileClass(string clsname, string[] varnames, string[] methods)

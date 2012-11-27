@@ -152,6 +152,9 @@
     <None Include="CodeFiles\Library2.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="CodeFiles\PharoKernelNumbers.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="CodeFiles\Transactions.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

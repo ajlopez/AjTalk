@@ -2,8 +2,8 @@ namespace AjTalk.Compiler
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
-
     using AjTalk.Language;
 
     public class Parser
@@ -179,8 +179,13 @@ namespace AjTalk.Compiler
             Token token;
             int nparameters = 0;
 
-            for (token = this.NextToken(); token != null && token.Type == TokenType.Parameter; nparameters++, token = this.NextToken())
-                this.arguments.Add(token.Value);
+            for (token = this.NextToken(); token != null && (token.Type == TokenType.Parameter || token.Type == TokenType.Operator && token.Value == ":"); nparameters++, token = this.NextToken())
+            {
+                if (token.Type == TokenType.Parameter)
+                    this.arguments.Add(token.Value);
+                else
+                    this.arguments.Add(this.CompileName());
+            }
 
             if (nparameters > 0)
             {
@@ -277,6 +282,13 @@ namespace AjTalk.Compiler
                 return;
             }
 
+            if (token.Type == TokenType.Punctuation && token.Value == "#[")
+            {
+                this.CompileByteCollection();
+
+                return;
+            }
+
             if (token.Type == TokenType.Punctuation && token.Value == "{")
             {
                 this.CompileDynamicCollection();
@@ -300,7 +312,23 @@ namespace AjTalk.Compiler
 
             if (token.Type == TokenType.Integer)
             {
-                this.block.CompileGetConstant(Convert.ToInt32(token.Value));
+                long value = 0;
+                int position = token.Value.IndexOf('r');
+
+                if (position > 0)
+                {
+                    string strradix = token.Value.Substring(0, position);
+                    string strnumber = token.Value.Substring(position + 1);
+                    value = Convert.ToInt64(strnumber, Convert.ToInt32(strradix));
+                }
+                else
+                    value = Convert.ToInt64(token.Value);
+
+                if (value > int.MaxValue || value < int.MinValue)
+                    this.block.CompileGetConstant(value);
+                else
+                    this.block.CompileGetConstant((int)value);
+
                 return;
             }
 
@@ -366,7 +394,7 @@ namespace AjTalk.Compiler
 
             while (token != null)
             {
-                switch (token.Type) 
+                switch (token.Type)
                 {
                     case TokenType.Integer:
                         this.block.CompileGetConstant(Convert.ToInt32(token.Value));
@@ -407,6 +435,28 @@ namespace AjTalk.Compiler
 
                 token = this.NextToken();
             }
+        }
+        
+        private void CompileByteCollection()
+        {
+            IList<byte> bytes = new List<byte>();
+            Token token = this.NextToken();
+
+            while (token != null && !(token.Type == TokenType.Punctuation && token.Value == "]"))
+            {
+                switch (token.Type) 
+                {
+                    case TokenType.Integer:
+                        bytes.Add((byte)Convert.ToInt32(token.Value));
+                        break;
+                    default:
+                        throw new ParserException("Expected ']'");
+                }
+
+                token = this.NextToken();
+            }
+
+            this.block.CompileGetConstant(bytes);
         }
 
         private void CompileDynamicCollection()
@@ -503,6 +553,9 @@ namespace AjTalk.Compiler
         private void CompileExpression()
         {
             this.CompileKeywordExpression();
+
+            while (this.TryPeekToken(TokenType.Punctuation, ";"))
+                this.CompileKeywordExpression();
         }
 
         private bool CompileCommand()
@@ -600,6 +653,20 @@ namespace AjTalk.Compiler
                 return true;
 
             this.PushToken(token);
+
+            return false;
+        }
+
+        private bool TryPeekToken(TokenType type, string value)
+        {
+            Token token = this.NextToken();
+            this.PushToken(token);
+
+            if (token == null)
+                return false;
+
+            if (token.Type == type && token.Value == value)
+                return true;
 
             return false;
         }

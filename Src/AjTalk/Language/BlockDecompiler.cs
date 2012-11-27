@@ -152,6 +152,10 @@
                         int nconstant2 = this.block.ByteCodes[ip];
                         codes.Add(string.Format("{0} \"{1}\" \"{2}\"", ByteCode.NamedPrimitive, this.block.GetConstant(nconstant), this.block.GetConstant(nconstant2)));
                         break;
+
+                    case ByteCode.ChainedSend:
+                        codes.Add("ChainedSend");
+                        break;
                 }
 
                 ip++;

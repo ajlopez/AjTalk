@@ -746,6 +746,42 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual("MakeCollection 3", ops[3]);
         }
 
+        [TestMethod]
+        public void CompileSimpleExpressionInParenthesis()
+        {
+            var block = this.compiler.CompileBlock("(1+2)");
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(3, block.NoConstants);
+            Assert.AreEqual(0, block.NoGlobalNames);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+            Assert.AreEqual("GetConstant 2", result[1]);
+            Assert.AreEqual("Send + 1", result[2]);
+        }
+
+        [TestMethod]
+        public void CompileSimpleExpressionInParenthesisUsingYourself()
+        {
+            var block = this.compiler.CompileBlock("(1+2;yourself)");
+            Assert.IsNotNull(block);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.AreEqual(4, block.NoConstants);
+            Assert.AreEqual(0, block.NoGlobalNames);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(5, result.Count);
+            Assert.AreEqual("GetConstant 1", result[0]);
+            Assert.AreEqual("GetConstant 2", result[1]);
+            Assert.AreEqual("Send + 1", result[2]);
+            Assert.AreEqual("ChainedSend", result[3]);
+            Assert.AreEqual("Send yourself 0", result[4]);
+        }
+
         internal IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return this.CompileClass(clsname, varnames, methods, null);
