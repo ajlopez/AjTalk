@@ -10,6 +10,7 @@
     {
         private static Dictionary<string, IMethod> binaryMethods = new Dictionary<string, IMethod>();
         private static Dictionary<string, IMethod> unaryMethods = new Dictionary<string, IMethod>();
+        private static Dictionary<string, IMethod> ternaryMethods = new Dictionary<string, IMethod>();
 
         static DotNetObject()
         {
@@ -25,7 +26,9 @@
             binaryMethods["~="] = new FunctionalMethod((obj, args) => !ObjectOperators.Equals(obj, args[0]));
             binaryMethods["=="] = new FunctionalMethod((obj, args) => ObjectOperators.Same(obj, args[0]));
             binaryMethods["~~"] = new FunctionalMethod((obj, args) => !ObjectOperators.Same(obj, args[0]));
+            binaryMethods["at:"] = new FunctionalMethod(AtMethod);
             unaryMethods["minus"] = new FunctionalMethod((obj, args) => ObjectOperators.Negate(obj));
+            ternaryMethods["at:put:"] = new FunctionalMethod(AtPutMethod);
         }
 
         public static object NewObject(Type type, object[] args)
@@ -35,16 +38,29 @@
 
         public static object SendNativeMessage(object obj, string mthname, object[] args)
         {
-            if (args != null && args.Length == 1 && binaryMethods.ContainsKey(mthname))
+            if ((args == null || args.Length == 0))
             {
-                IMethod binmethod = binaryMethods[mthname];
-                return binmethod.ExecuteNative(obj, args);
+                if (unaryMethods.ContainsKey(mthname))
+                {
+                    IMethod unimethod = unaryMethods[mthname];
+                    return unimethod.ExecuteNative(obj, args);
+                }
             }
-
-            if ((args == null || args.Length == 0) && unaryMethods.ContainsKey(mthname))
+            else if (args.Length == 1)
             {
-                IMethod unimethod = unaryMethods[mthname];
-                return unimethod.ExecuteNative(obj, args);
+                if (binaryMethods.ContainsKey(mthname))
+                {
+                    IMethod binmethod = binaryMethods[mthname];
+                    return binmethod.ExecuteNative(obj, args);
+                }
+            }
+            else if (args.Length == 2)
+            {
+                if (ternaryMethods.ContainsKey(mthname))
+                {
+                    IMethod ternarymethod = ternaryMethods[mthname];
+                    return ternarymethod.ExecuteNative(obj, args);
+                }
             }
 
             // TODO support for indexed properties
@@ -139,6 +155,19 @@
             // if (mth != null)
             //    return mth.ExecuteNative(obj, new object[] { msgname, args });
             return SendNativeMessage(obj, mthname, args);
+        }
+
+        private static object AtMethod(object obj, object[] args)
+        {
+            return ((IList)obj)[(int)args[0]];
+        }
+
+        private static object AtPutMethod(object obj, object[] args)
+        {
+            int position = (int)args[0];
+            object value = args[1];
+            ((IList)obj)[position] = value;
+            return value;
         }
     }
 }

@@ -25,11 +25,11 @@ Object subclass:#Behavior
 !
 
 ~= anObject
-	^@AjTalk.Language.ObjectOperators negate: self = anObject.
+	^@AjTalk.Language.ObjectOperators negateboolean: self = anObject.
 !
 
 ~~ anObject
-	^@AjTalk.Language.ObjectOperators negate: self == anObject.
+	^@AjTalk.Language.ObjectOperators negateboolean: self == anObject.
 !
 
 error: aMessage
