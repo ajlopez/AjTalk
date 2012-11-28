@@ -16,6 +16,10 @@ Object subclass:#Behavior
 
 !Object methods!
 
+yourself
+	^self
+!
+
 = anObject
 	^@AjTalk.Language.ObjectOperators equals: self with: anObject.
 !
@@ -158,3 +162,104 @@ assertFalse
 	^self value ifTrue: [@AjTalk.Exceptions.AssertError new raise]
 ! !
 
+Object subclass:#Collection
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Collections-Abstract'
+!
+
+!Collection class methods!
+
+with: anObject
+	^ self new
+		add: anObject;
+		yourself
+!
+
+with: firstObject with: secondObject
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		yourself
+!
+
+with: firstObject with: secondObject with: thirdObject
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		add: thirdObject;
+		yourself
+!
+
+with: firstObject with: secondObject with: thirdObject with: fourthObject
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		add: thirdObject;
+		add: fourthObject;
+		yourself
+!
+
+with: firstObject with: secondObject with: thirdObject with: fourthObject with: fifthObject
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		add: thirdObject;
+		add: fourthObject;
+		add: fifthObject;
+		yourself
+!
+
+with: firstObject with: secondObject with: thirdObject with: fourthObject with: fifthObject with: sixthObject
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		add: thirdObject;
+		add: fourthObject;
+		add: fifthObject;
+		add: sixthObject;
+		yourself
+!
+
+withAll: aCollection
+	^(self new: aCollection size)
+		addAll: aCollection;
+		yourself
+! !
+
+!Collection methods!
+
+add: newObject
+	self subclassResponsability
+!
+
+do: aBlock
+	self subclassResponsability
+!
+
+anySatisfy: aBlock
+	self do: [:each | (aBlock value: each) ifTrue:[^true]].
+	^false
+!
+
+addAll: aCollection
+	aCollection do: [:each | self add: each].
+	^aCollection
+!
+
+size
+	| tally |
+	tally := 0.
+	self do: [each | tally := tally + 1].
+	^tally
+
+! !		
+
+Collection subclass: #ArrayList nativeType: @System.Collections.ArrayList!
+
+!ArrayList methods!
+
+size 
+	^self !!Count
+! !	

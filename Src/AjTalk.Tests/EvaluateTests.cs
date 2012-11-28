@@ -55,6 +55,18 @@
         }
 
         [TestMethod]
+        public void EvaluateBlockWithArgument()
+        {
+            Assert.AreEqual(1, this.Evaluate("[:a | a] value: 1"));
+        }
+
+        [TestMethod]
+        public void EvaluateBlockWithArguments()
+        {
+            Assert.AreEqual(3, this.Evaluate("[:a :b | a+b] value: 1 value: 2"));
+        }
+
+        [TestMethod]
         public void EvaluateIntegerAdd()
         {
             Assert.AreEqual(4, this.Evaluate("1+3"));

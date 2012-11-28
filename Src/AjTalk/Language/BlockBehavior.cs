@@ -13,6 +13,8 @@
             : base(behavior, superclass, machine, typeof(Block))
         {
             this.DefineInstanceMethod(new FunctionalMethod("value", this, this.ValueMethod));
+            this.DefineInstanceMethod(new FunctionalMethod("value:", this, this.ValueMethod));
+            this.DefineInstanceMethod(new FunctionalMethod("value:value:", this, this.ValueMethod));
             this.DefineInstanceMethod(new FunctionalMethod("assert", this, this.AssertMethod));
         }
 
