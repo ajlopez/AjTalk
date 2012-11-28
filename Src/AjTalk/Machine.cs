@@ -44,11 +44,9 @@ namespace AjTalk
 
             // Native Behaviors
             var enumerableBehavior = new EnumerableBehavior(meta, this.nilclass, this);
-            var arrayBehavior = new ArrayBehavior(meta, enumerableBehavior, this);
             var stringBehavior = new StringBehavior(meta, this.nilclass, this);
 
             this.RegisterNativeBehavior(typeof(IEnumerable), enumerableBehavior);
-            this.RegisterNativeBehavior(typeof(ArrayList), arrayBehavior);
             this.RegisterNativeBehavior(typeof(bool), new BooleanBehavior(meta, this.nilclass, this));
             this.RegisterNativeBehavior(typeof(Block), new BlockBehavior(meta, this.nilclass, this));
             this.RegisterNativeBehavior(typeof(string), stringBehavior);

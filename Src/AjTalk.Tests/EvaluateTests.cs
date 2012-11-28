@@ -305,20 +305,20 @@
         [TestMethod]
         public void DefineNativeBehavior()
         {
-            var originalbehavior = this.machine.GetNativeBehavior(typeof(ArrayList));
-            object result = this.Evaluate("nil subclass: #List nativeType: @System.Collections.ArrayList");
+            var originalbehavior = this.machine.GetNativeBehavior(typeof(bool));
+            object result = this.Evaluate("nil subclass: #MyBoolean nativeType: @System.Boolean");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(NativeBehavior));
 
             NativeBehavior behavior = (NativeBehavior)result;
 
-            Assert.AreEqual(typeof(System.Collections.ArrayList), behavior.NativeType);
+            Assert.AreEqual(typeof(bool), behavior.NativeType);
 
             object newobj = behavior.CreateObject();
 
             Assert.IsNotNull(newobj);
-            Assert.IsInstanceOfType(newobj, typeof(System.Collections.ArrayList));
+            Assert.IsInstanceOfType(newobj, typeof(bool));
             Assert.AreSame(originalbehavior, result);
         }
 
@@ -584,20 +584,6 @@
             result = this.Evaluate("#(1 2 3) includes: 5");
             Assert.IsInstanceOfType(result, typeof(bool));
             Assert.IsFalse((bool)result);
-        }
-
-        [TestMethod]
-        public void EvaluateAddToArray()
-        {
-            var result = this.Evaluate("#(1 2 3) add: 4");
-            Assert.IsInstanceOfType(result, typeof(IList));
-            var list = (IList)result;
-
-            Assert.AreEqual(4, list.Count);
-            Assert.AreEqual(1, list[0]);
-            Assert.AreEqual(2, list[1]);
-            Assert.AreEqual(3, list[2]);
-            Assert.AreEqual(4, list[3]);
         }
 
         [TestMethod]

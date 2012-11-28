@@ -264,6 +264,15 @@ size
 	^self !!Count
 !
 
+add: aValue
+	^self !!add: aValue
+!
+
 at: anIndex
 	^self !!nat: anIndex - 1
-! !	
+!
+
+at: anIndex put: aValue
+	^self !!nat: anIndex - 1 put: aValue
+! !
+

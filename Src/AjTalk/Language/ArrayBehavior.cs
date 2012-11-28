@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Text;
 
+    // TODO It was removed from native behaviors in machine initialization
     public class ArrayBehavior : NativeBehavior
     {
         public ArrayBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
