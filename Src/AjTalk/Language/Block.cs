@@ -198,7 +198,11 @@ namespace AjTalk.Language
 
             if (p >= 0)
             {
-                mthname = msgname.Substring(0, p);
+                string rest = msgname.Substring(p + 1);
+                if (string.IsNullOrEmpty(rest) || rest.StartsWith("with:"))
+                    mthname = msgname.Substring(0, p);
+                else
+                    mthname = msgname.Replace(":", "");
             }
             else
             {

@@ -262,4 +262,8 @@ Collection subclass: #ArrayList nativeType: @System.Collections.ArrayList!
 
 size 
 	^self !!Count
+!
+
+at: anIndex
+	^self !!nat: anIndex - 1
 ! !	

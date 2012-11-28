@@ -57,26 +57,26 @@
         }
 
         [TestMethod]
-        public void InvokeAtOnArrayList()
+        public void InvokeNativeAtOnArrayList()
         {
             ArrayList list = new ArrayList() { 1, 2, 3 };
-            object obj = DotNetObject.SendNativeMessage(list, "at:", new object[] { 1 });
+            object obj = DotNetObject.SendNativeMessage(list, "nat", new object[] { 1 });
             Assert.AreEqual(2, obj);
         }
 
         [TestMethod]
-        public void InvokeAtOnObjectArray()
+        public void InvokeNativeAtOnObjectArray()
         {
             object[] list = new object[] { 1, 2, 3 };
-            object obj = DotNetObject.SendNativeMessage(list, "at:", new object[] { 1 });
+            object obj = DotNetObject.SendNativeMessage(list, "nat", new object[] { 1 });
             Assert.AreEqual(2, obj);
         }
 
         [TestMethod]
-        public void InvokeAtPutIndexedProperty()
+        public void InvokeNativeAtPutIndexedProperty()
         {
             ArrayList list = new ArrayList() { 1, 2, 3 };
-            object obj = DotNetObject.SendNativeMessage(list, "at:put:", new object[] { 1, 3 });
+            object obj = DotNetObject.SendNativeMessage(list, "natput", new object[] { 1, 3 });
             Assert.AreEqual(3, obj);
             Assert.AreEqual(3, list[2]);
         }

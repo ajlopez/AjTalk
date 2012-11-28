@@ -26,9 +26,9 @@
             binaryMethods["~="] = new FunctionalMethod((obj, args) => !ObjectOperators.Equals(obj, args[0]));
             binaryMethods["=="] = new FunctionalMethod((obj, args) => ObjectOperators.Same(obj, args[0]));
             binaryMethods["~~"] = new FunctionalMethod((obj, args) => !ObjectOperators.Same(obj, args[0]));
-            binaryMethods["at:"] = new FunctionalMethod(AtMethod);
+            binaryMethods["nat"] = new FunctionalMethod(AtMethod);
             unaryMethods["minus"] = new FunctionalMethod((obj, args) => ObjectOperators.Negate(obj));
-            ternaryMethods["at:put:"] = new FunctionalMethod(AtPutMethod);
+            ternaryMethods["natput"] = new FunctionalMethod(AtPutMethod);
         }
 
         public static object NewObject(Type type, object[] args)

@@ -44,6 +44,12 @@
             DoAssert("Boolean");
         }
 
+        [TestMethod]
+        public void ArrayListAsserts()
+        {
+            DoAssert("ArrayList");
+        }
+
         private void DoAssert(string filename)
         {
             this.LoadFile(@"AssertTests\" + filename + "Tests.st");

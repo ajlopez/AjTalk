@@ -71,8 +71,6 @@
             }
 
             return DotNetObject.SendMessage(this.Machine, self, msgname, args);
-
-            ////throw new InvalidOperationException(string.Format("Does not understand {0}", msgname));
         }
     }
 }
