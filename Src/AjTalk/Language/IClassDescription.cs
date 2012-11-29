@@ -10,6 +10,10 @@ namespace AjTalk.Language
 
         void DefineInstanceVariable(string varname);
 
+        void RedefineClassVariables(string varnames);
+
+        void RedefineInstanceVariables(string varnames);
+
         int GetClassVariableOffset(string varname);
 
         int GetInstanceVariableOffset(string varname);

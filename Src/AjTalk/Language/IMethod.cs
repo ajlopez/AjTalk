@@ -6,8 +6,7 @@ namespace AjTalk.Language
     {
         string Name { get; }
 
-        // TODO public set used in Machine CopyMethods, to review
-        IBehavior Behavior { get; set; }
+        IBehavior Behavior { get; }
 
         object Execute(IObject self, object[] args);
 

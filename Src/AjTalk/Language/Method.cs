@@ -30,7 +30,6 @@ namespace AjTalk.Language
         public IBehavior Behavior
         {
             get { return this.mthclass; }
-            set { this.mthclass = value; }
         }
 
         public string Name

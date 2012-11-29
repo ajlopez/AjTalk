@@ -106,6 +106,15 @@ namespace AjTalk
 
         public IClass CreateClass(string clsname, IClass superclass, string instancevarnames, string classvarnames)
         {
+            var oldcls = this.GetGlobalObject(clsname) as IClass;
+
+            if (oldcls != null)
+            {
+                oldcls.RedefineClassVariables(classvarnames);
+                oldcls.RedefineInstanceVariables(instancevarnames);
+                return oldcls;
+            }
+
             IMetaClass supermeta = null;
 
             if (superclass == null)
@@ -120,18 +129,6 @@ namespace AjTalk
             // TODO review using a provisional metaclassclass, for test that doesn't define Metaclass yet
             IMetaClass meta = new BaseMetaClass(this.metaclassclass ?? this.nilclass.Behavior, supermeta, this, classvarnames);
             IClass cls = meta.CreateClass(clsname, instancevarnames);
-
-            var oldcls = this.GetGlobalObject(clsname) as IClass;
-
-            if (oldcls != null)
-            {
-                var oldmeta = oldcls.Behavior;
-
-                this.CopyMethods(meta, oldmeta);
-                this.CopyMethods(cls, oldcls);
-
-                this.SetGlobalObject(clsname, cls);
-            }
 
             return cls;
         }
@@ -257,21 +254,6 @@ namespace AjTalk
         {
             Block block = (Block)arguments[0];
             return block.Execute(this, null);
-        }
-
-        private void CopyMethods(IBehavior tocls, IBehavior fromcls)
-        {
-            VmCompiler compiler = new VmCompiler();
-
-            foreach (var mth in fromcls.GetInstanceMethods())
-            {
-                var newmth = mth;
-                if (!string.IsNullOrEmpty(mth.SourceCode))
-                    newmth = compiler.CompileInstanceMethod(mth.SourceCode, tocls);
-                else
-                    newmth.Behavior = tocls;
-                tocls.DefineInstanceMethod(newmth);
-            }
         }
     }
 }

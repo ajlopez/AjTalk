@@ -169,6 +169,19 @@ namespace AjTalk.Language
             return ((IClassDescription)this.Behavior).GetInstanceVariableNamesAsString();
         }
 
+        public void RedefineClassVariables(string varnames)
+        {
+            foreach (var varname in AsNames(varnames))
+                this.DefineClassVariable(varname);
+        }
+
+        public void RedefineInstanceVariables(string varnames)
+        {
+            foreach (var varname in AsNames(varnames))
+                if (!this.instancevariables.Contains(varname))
+                    this.DefineInstanceVariable(varname);
+        }
+
         private static IEnumerable<string> AsNames(string varnames)
         {
             if (string.IsNullOrEmpty(varnames))
