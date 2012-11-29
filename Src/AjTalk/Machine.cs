@@ -3,6 +3,7 @@ namespace AjTalk
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using AjTalk.Compiler;
     using AjTalk.Hosting;
     using AjTalk.Language;
     using AjTalk.Transactions;
@@ -119,6 +120,17 @@ namespace AjTalk
             // TODO review using a provisional metaclassclass, for test that doesn't define Metaclass yet
             IMetaClass meta = new BaseMetaClass(this.metaclassclass ?? this.nilclass.Behavior, supermeta, this, classvarnames);
             IClass cls = meta.CreateClass(clsname, instancevarnames);
+
+            var oldcls = this.GetGlobalObject(clsname) as IClass;
+
+            if (oldcls != null)
+            {
+                var oldmeta = oldcls.Behavior;
+
+                this.CopyMethods(meta, oldmeta);
+                this.CopyMethods(cls, oldcls);
+            }
+
             return cls;
         }
 
@@ -239,6 +251,21 @@ namespace AjTalk
         {
             Block block = (Block)arguments[0];
             return block.Execute(this, null);
+        }
+
+        private void CopyMethods(IBehavior tocls, IBehavior fromcls)
+        {
+            VmCompiler compiler = new VmCompiler();
+
+            foreach (var mth in fromcls.GetInstanceMethods())
+            {
+                var newmth = mth;
+                if (!string.IsNullOrEmpty(mth.SourceCode))
+                    newmth = compiler.CompileInstanceMethod(mth.SourceCode, tocls);
+                else
+                    newmth.Behavior = tocls;
+                tocls.DefineInstanceMethod(newmth);
+            }
         }
     }
 }

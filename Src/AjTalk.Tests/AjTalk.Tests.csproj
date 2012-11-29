@@ -158,6 +158,9 @@
     <Content Include="CodeFiles\PharoKernelNumbers.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="CodeFiles\PharoKernelClasses.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="CodeFiles\Transactions.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

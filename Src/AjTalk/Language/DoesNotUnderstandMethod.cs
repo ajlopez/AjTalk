@@ -29,7 +29,7 @@
         public IBehavior Behavior
         {
             get;
-            private set;
+            set;
         }
 
         public Machine Machine { get; private set; }

@@ -14,6 +14,24 @@ Object subclass:#Behavior
 	category:'Kernel-Classes'
 !
 
+"TODO implement uses for Squeak/Pharo"!
+
+!Object class methods!
+
+subclass: nameOfClass  
+	uses: trait
+	instanceVariableNames: instVarNames
+	classVariableNames: classVarNames
+	poolDictionaries: poolDictnames
+	category: category
+	
+	^self subclass: nameOfClass
+		instanceVariableNames: instVarNames
+		classVariableNames: classVarNames
+		poolDictionaries: poolDictnames
+		category: category
+! !
+
 !Object methods!
 
 = anObject

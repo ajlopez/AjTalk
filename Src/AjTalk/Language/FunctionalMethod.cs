@@ -42,7 +42,7 @@
 
         public byte[] Bytecodes { get { return null; } }
 
-        public IBehavior Behavior { get { return this.classDescription; } }
+        public IBehavior Behavior { get { return this.classDescription; } set { this.classDescription = value; } }
 
         public object Execute(IObject self, object[] args)
         {

@@ -492,13 +492,6 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParserException))]
-        public void RaiseIfSymbolInCollection()
-        {
-            object result = this.Evaluate("#(1 #Name 'string')");
-        }
-
-        [TestMethod]
         public void EvaluateSimpleDo()
         {
             object result = this.Evaluate("sum := 0. #(1 2 3) do: [ :x | sum := x + sum ]. sum");

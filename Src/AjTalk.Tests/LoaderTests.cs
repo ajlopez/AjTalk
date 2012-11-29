@@ -837,6 +837,48 @@ namespace AjTalk.Tests
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            result = machine.GetGlobalObject("Float");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Library2.st")]
+        [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
+        [DeploymentItem(@"CodeFiles\PharoKernelClasses.st")]
+        public void LoadPharoKernelClasses()
+        {
+            Loader loaderlib = new Loader(@"Library2.st", new SimpleCompiler());
+            Loader loaderobj = new Loader(@"PharoCoreKernelObjects.st", new SimpleCompiler());
+            Loader loader = new Loader(@"PharoKernelClasses.st", new SimpleCompiler());
+
+            Machine machine = CreateMachine();
+
+            loaderlib.LoadAndExecute(machine);
+            loaderobj.LoadAndExecute(machine);
+            loader.LoadAndExecute(machine);
+
+            object result = machine.GetGlobalObject("Object");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            result = machine.GetGlobalObject("ProtoObject");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            result = machine.GetGlobalObject("Boolean");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            result = machine.GetGlobalObject("UndefinedObject");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
         }
 
         internal static Machine CreateMachine()

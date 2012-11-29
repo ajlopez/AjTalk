@@ -404,6 +404,7 @@ namespace AjTalk.Compiler
                         this.block.CompileGetConstant(Convert.ToDouble(token.Value));
                         nelements++;
                         break;
+                    case TokenType.Symbol:
                     case TokenType.String:
                         this.block.CompileGetConstant(token.Value);
                         nelements++;
