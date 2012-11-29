@@ -129,6 +129,8 @@ namespace AjTalk
 
                 this.CopyMethods(meta, oldmeta);
                 this.CopyMethods(cls, oldcls);
+
+                this.SetGlobalObject(clsname, cls);
             }
 
             return cls;
@@ -160,8 +162,12 @@ namespace AjTalk
         {
             this.globals[objname] = value;
 
-            if (this.metaclassclass == null && objname == "Metaclass" && value is IClass)
+            if (/*this.metaclassclass == null && */objname == "Metaclass" && value is IClass)
                 this.DefineMetaclass((IClass)value);
+            else if (objname == "Class" && value is IClass)
+                this.classclass = (IClass)value;
+            else if (objname == "UndefinedObject" && value is IClass)
+                this.nilclass = (IClass)value;
         }
 
         public void SetCurrent()

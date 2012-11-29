@@ -38,6 +38,7 @@ namespace AjTalk.Language
         MakeCollection = 52,
         Primitive = 53,
         NamedPrimitive = 54,
+        PrimitiveError = 55,
 
         InstAt = 60,
         InstAtPut = 61,

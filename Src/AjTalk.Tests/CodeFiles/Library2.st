@@ -14,9 +14,38 @@ Object subclass:#Behavior
 	category:'Kernel-Classes'
 !
 
-"TODO implement uses for Squeak/Pharo"!
+"TODO Review implementation, used in Squeak/Pharo Kernel Objects .st"!
+
+Object subclass:#WeakIdentityKeyDictionary
+	instanceVariableNames:''
+	classVariableNames:''
+	poolDictionaries:''
+	category:'Kernel-Objects'
+!
+
+"TODO Review implementation, used in Squeak/Pharo Kernel Classes .st"!
+
+Object subclass:#TPureBehavior
+	instanceVariableNames:''
+	classVariableNames:''
+	poolDictionaries:''
+	category:'Kernel-Objects'
+!
+
+!TPureBehavior class methods!
+
+classTrait
+	^nil
+
+! !
+
+"TODO implement uses: trait for Squeak/Pharo"!
 
 !Object class methods!
+
+uses: trait instanceVariableNames: instVarNames
+	^self instanceVariableNames: instVarNames
+!
 
 subclass: nameOfClass  
 	uses: trait

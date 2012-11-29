@@ -1001,6 +1001,20 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileNumericPrimitiveWithError()
+        {
+            Parser parser = new Parser("<primitive: 60 error:ec>");
+            var result = parser.CompileBlock();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(1, ops.Count);
+            Assert.AreEqual("PrimitiveError 60 ec", ops[0]);
+        }
+
+        [TestMethod]
         public void CompileNamedPrimitive()
         {
             Parser parser = new Parser("<primitive: '' module:''>");

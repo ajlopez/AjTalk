@@ -153,6 +153,14 @@
                         codes.Add(string.Format("{0} \"{1}\" \"{2}\"", ByteCode.NamedPrimitive, this.block.GetConstant(nconstant), this.block.GetConstant(nconstant2)));
                         break;
 
+                    case ByteCode.PrimitiveError:
+                        ip++;
+                        nprimitive = this.block.ByteCodes[ip];
+                        ip++;
+                        nconstant = this.block.ByteCodes[ip];
+                        codes.Add(string.Format("{0} {1} {2}", ByteCode.PrimitiveError, nprimitive, this.block.GetConstant(nconstant)));
+                        break;
+
                     case ByteCode.ChainedSend:
                         codes.Add("ChainedSend");
                         break;

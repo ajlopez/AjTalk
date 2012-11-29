@@ -369,8 +369,15 @@ namespace AjTalk.Compiler
 
                 if (number.HasValue)
                 {
+                    string error = null;
+                    if (this.TryCompileToken(TokenType.Name, "error:"))
+                        error = this.CompileName();
+
                     this.CompileToken(TokenType.Operator, ">");
-                    this.block.CompileByteCode(ByteCode.Primitive, (byte)number.Value);
+                    if (error != null)
+                        this.block.CompileByteCode(ByteCode.PrimitiveError, (byte)number.Value, (byte)this.block.CompileConstant(error));
+                    else
+                        this.block.CompileByteCode(ByteCode.Primitive, (byte)number.Value);
                     return;
                 }
 
