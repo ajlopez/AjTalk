@@ -845,6 +845,7 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
+        [Ignore]
         [DeploymentItem(@"CodeFiles\Library2.st")]
         [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
         [DeploymentItem(@"CodeFiles\PharoKernelClasses.st")]

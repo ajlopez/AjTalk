@@ -41,7 +41,7 @@ classTrait
 
 "TODO implement uses: trait for Squeak/Pharo"!
 
-!Object class methods!
+!Behavior methods!
 
 uses: trait instanceVariableNames: instVarNames
 	^self instanceVariableNames: instVarNames
