@@ -53,6 +53,7 @@
     <Compile Include="Compiler\VmCompilerTests.cs" />
     <Compile Include="Compiler\SimpleCompilerTests.cs" />
     <Compile Include="Compiler\ParserExpressionsTests.cs" />
+    <Compile Include="HostMachineTests.cs" />
     <Compile Include="ImageSerializerTests.cs" />
     <Compile Include="LoaderVmTests.cs" />
     <Compile Include="ExpressionResult.cs" />
@@ -149,6 +150,12 @@
     <None Include="CodeFiles\Chunks.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="CodeFiles\HostedMachine.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CodeFiles\HostMachine.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="CodeFiles\Form.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -203,9 +210,9 @@
     <None Include="CodeFiles\NativeRectangle.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="CodeFiles\DefineRectangleWithNewAndInitialize.st">
+    <Content Include="CodeFiles\DefineRectangleWithNewAndInitialize.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="CodeFiles\NativeFileInfo.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

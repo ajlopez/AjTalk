@@ -70,6 +70,24 @@
                 return self.Behavior;
             }
 
+            if (this.Machine.HostMachine != null)
+            {
+                IBehavior behavior = this.Machine.HostMachine.GetAssociatedBehavior(self.Behavior);
+
+                if (behavior != null) 
+                {
+                    IMethod method = behavior.GetInstanceMethod(msgname);
+
+                    if (method != null)
+                        return method.Execute(self, receiver, args);
+
+                    method = behavior.GetInstanceMethod(this.Name);
+
+                    if (method != null)
+                        return method.Execute(self, receiver, new object[] { msgname, args });
+                }
+            }
+
             return DotNetObject.SendMessage(this.Machine, self, msgname, args);
         }
     }

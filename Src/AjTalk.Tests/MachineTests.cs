@@ -8,6 +8,7 @@ namespace AjTalk.Tests
     using AjTalk.Language;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using AjTalk.Compiler;
 
     [TestClass]
     public class MachineTests
@@ -137,6 +138,51 @@ namespace AjTalk.Tests
             Machine machine = new Machine(false);
 
             Assert.AreNotSame(Machine.Current, machine);
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\HostMachine.st")]
+        [DeploymentItem(@"CodeFiles\HostedMachine.st")]
+        public void CreateAndEvaluatedHostedObject()
+        {
+            Machine host = this.LoadMachine("HostMachine.st");
+            Machine hosted = this.LoadMachine("HostedMachine.st");
+
+            hosted.HostMachine = host;
+
+            this.Evaluate(hosted, "rect := Rectangle new");
+            var result = hosted.GetGlobalObject("rect");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IObject));
+
+            var iobj = (IObject)result;
+
+            this.Evaluate(hosted, "rect x: 10");
+            Assert.AreEqual(10, iobj[0]);
+            this.Evaluate(hosted, "rect y: 20");
+            Assert.AreEqual(20, iobj[1]);
+
+            this.Evaluate(hosted, "rect width: 10");
+            Assert.AreEqual(10, iobj[2]);
+            this.Evaluate(hosted, "rect height: 30");
+            Assert.AreEqual(30, iobj[3]);
+            Assert.AreEqual(300, this.Evaluate(hosted, "rect area"));
+        }
+
+        private object Evaluate(Machine machine, string code)
+        {
+            SimpleCompiler compiler = new SimpleCompiler();
+            Block block = compiler.CompileBlock(code);
+            return block.Execute(machine, null);
+        }
+
+        private Machine LoadMachine(string filename)
+        {
+            Machine machine = new Machine();
+            Loader loader = new Loader(filename, new SimpleCompiler());
+            loader.LoadAndExecute(machine);
+            return machine;
         }
     }
 }

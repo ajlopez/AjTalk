@@ -61,6 +61,8 @@ namespace AjTalk
 
         public IHost Host { get; set; }
 
+        public Machine HostMachine { get; set; }
+
         public IClass MetaClassClass { get { return this.metaclassclass; } }
 
         public IClass UndefinedObjectClass { get { return this.nilclass; } }
@@ -85,6 +87,51 @@ namespace AjTalk
         public static void SetCurrent(Machine machine)
         {
             current = machine;
+        }
+
+        public IClass GetClass(string clsname)
+        {
+            return this.GetGlobalObject(clsname) as IClass;
+        }
+
+        public IMetaClass GetMetaClass(string clsname)
+        {
+            var cls = this.GetGlobalObject(clsname) as IClass;
+
+            if (cls != null)
+                return (IMetaClass)cls.Behavior;
+
+            return null;
+        }
+
+        public IClass GetAssociatedClass(IClass klass)
+        {
+            var associated = this.GetClass(klass.Name);
+
+            while (associated == null && klass.SuperClass != null && klass.SuperClass is IClass)
+            {
+                klass = (IClass)klass.SuperClass;
+                associated = this.GetClass(klass.Name);
+            }
+
+            return associated;
+        }
+
+        public IMetaClass GetAssociatedMetaClass(IMetaClass metaklass)
+        {
+            var associated = this.GetAssociatedClass(metaklass.ClassInstance);
+
+            if (associated != null)
+                return associated.Behavior as IMetaClass;
+
+            return null;
+        }
+
+        public IBehavior GetAssociatedBehavior(IBehavior behavior)
+        {
+            if (behavior is IMetaClass)
+                return this.GetAssociatedMetaClass((IMetaClass)behavior);
+            return this.GetAssociatedClass((IClass)behavior);
         }
 
         public IClass CreateClass(string clsname)
