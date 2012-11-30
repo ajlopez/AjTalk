@@ -884,7 +884,7 @@ namespace AjTalk.Tests
 
         internal static Machine CreateMachine()
         {
-            Machine machine = new Machine();
+            Machine machine = new Machine(true);
 
             object nil = machine.UndefinedObjectClass;
 

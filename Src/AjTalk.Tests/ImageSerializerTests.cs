@@ -15,26 +15,26 @@
         [TestMethod]
         public void SerializeDeserializeNil()
         {
-            Assert.IsNull(this.Process(null));
+            Assert.IsNull(this.Process(null, null));
         }
 
         [TestMethod]
         public void SerializeDeserializeInteger()
         {
-            Assert.AreEqual(123, this.Process(123));
+            Assert.AreEqual(123, this.Process(123, null));
         }
 
         [TestMethod]
         public void SerializeDeserializeString()
         {
-            Assert.AreEqual("text", this.Process("text"));
+            Assert.AreEqual("text", this.Process("text", null));
         }
 
         [TestMethod]
         public void SerializeDeserializeEmptyObject()
         {
             IObject obj = new BaseObject();
-            var result = this.Process(obj);
+            var result = this.Process(obj, null);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IObject));
@@ -48,7 +48,7 @@
         public void SerializeDeserializeObjectWithNilVariables()
         {
             IObject obj = new BaseObject(null, new object[10]);
-            var result = this.Process(obj);
+            var result = this.Process(obj, null);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IObject));
@@ -65,7 +65,7 @@
         public void SerializeDeserializeObjectWithIntegerVariables()
         {
             IObject obj = new BaseObject(null, new object[4] { 0, 1, 2, 3 });
-            var result = this.Process(obj);
+            var result = this.Process(obj, null);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IObject));
@@ -88,7 +88,7 @@
             klass.DefineClassVariable("c");
             klass.DefineClassVariable("d");
 
-            var result = this.Process(klass);
+            var result = this.Process(klass, machine);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(BaseClass));
@@ -109,7 +109,7 @@
             Machine machine = new Machine();
             IBehavior behavior = machine.CreateNativeBehavior(null, typeof(System.IO.File));
 
-            var result = this.Process(behavior);
+            var result = this.Process(behavior, machine);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(NativeBehavior));
@@ -127,7 +127,7 @@
             machine.RegisterNativeBehavior(typeof(System.IO.File), (NativeBehavior)behavior);
             machine.SetGlobalObject("File", behavior);
 
-            var result = this.Process(machine);
+            var result = this.Process(machine, machine);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(Machine));
@@ -144,7 +144,7 @@
             Machine machine = new Machine();
             machine.SetGlobalObject("Block", machine.GetNativeBehavior(typeof(Block)));
 
-            var result = this.Process(machine);
+            var result = this.Process(machine, machine);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(Machine));
@@ -168,7 +168,7 @@
             Assert.IsNotNull(machine.GetGlobalObject("UndefinedObject"));
             Assert.IsNull(machine.GetGlobalObject("MyClass"));
 
-            var result = this.Process(klass);
+            var result = this.Process(klass, machine);
             var undefined = machine.GetGlobalObject("UndefinedObject");
 
             Assert.IsNotNull(result);
@@ -194,7 +194,7 @@
             Assert.IsNull(machine.GetGlobalObject("MyClass"));
             var undefined = machine.GetGlobalObject("UndefinedObject");
 
-            var result = this.Process(klass);
+            var result = this.Process(klass, machine);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(BaseClass));
@@ -225,7 +225,7 @@
             stream = new MemoryStream(stream.ToArray());
             BinaryReader reader = new BinaryReader(stream);
             
-            ImageSerializer deserializer = new ImageSerializer(reader);
+            ImageSerializer deserializer = new ImageSerializer(reader, null);
             
             var resulta = deserializer.Deserialize();
             var resultb = deserializer.Deserialize();
@@ -253,7 +253,7 @@
         {
             Machine machine = new Machine();
 
-            var result = this.Process(machine);
+            var result = this.Process(machine, machine);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(Machine));
@@ -283,7 +283,7 @@
             Method addmethod = compiler.CompileClassMethod("add: x to: y ^x + y", klass);
             klass.DefineClassMethod(addmethod);
 
-            var result = this.Process(machine);
+            var result = this.Process(machine, machine);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(Machine));
@@ -331,7 +331,7 @@
             LoadFile(machine, "Class.st");
             LoadFile(machine, "Test.st");
 
-            var result = this.Process(machine);
+            var result = this.Process(machine, machine);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(Machine));
@@ -369,7 +369,7 @@
                 Assert.IsTrue(names.Contains(newname));
         }
 
-        private object Process(object obj)
+        private object Process(object obj, Machine machine)
         {
             MemoryStream stream = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(stream);
@@ -379,7 +379,7 @@
             stream = new MemoryStream(stream.ToArray());
             BinaryReader reader = new BinaryReader(stream);
 
-            ImageSerializer deserializer = new ImageSerializer(reader);
+            ImageSerializer deserializer = new ImageSerializer(reader, machine);
             return deserializer.Deserialize();
         }
 

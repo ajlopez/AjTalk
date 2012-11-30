@@ -29,7 +29,7 @@
         {
             Machine machine = new Machine();
 
-            object obj = DotNetObject.SendNativeMessage(new System.IO.FileInfo("NonexistentFile.txt"), "exists", null);
+            object obj = DotNetObject.SendNativeMessage(machine, new System.IO.FileInfo("NonexistentFile.txt"), "exists", null);
 
             Assert.IsNotNull(obj);
             Assert.IsInstanceOfType(obj, typeof(bool));
@@ -52,7 +52,7 @@
         public void InvokeGetProperty()
         {
             Rectangle rectangle = new Rectangle() { Width = 10, Height = 20 };
-            object obj = DotNetObject.SendNativeMessage(rectangle, "width", null);
+            object obj = DotNetObject.SendNativeMessage(null, rectangle, "width", null);
             Assert.AreEqual(10, obj);
         }
 
@@ -60,7 +60,7 @@
         public void InvokeNativeAtOnArrayList()
         {
             ArrayList list = new ArrayList() { 1, 2, 3 };
-            object obj = DotNetObject.SendNativeMessage(list, "nat", new object[] { 1 });
+            object obj = DotNetObject.SendNativeMessage(null, list, "nat", new object[] { 1 });
             Assert.AreEqual(2, obj);
         }
 
@@ -68,7 +68,7 @@
         public void InvokeNativeAtOnObjectArray()
         {
             object[] list = new object[] { 1, 2, 3 };
-            object obj = DotNetObject.SendNativeMessage(list, "nat", new object[] { 1 });
+            object obj = DotNetObject.SendNativeMessage(null, list, "nat", new object[] { 1 });
             Assert.AreEqual(2, obj);
         }
 
@@ -76,7 +76,7 @@
         public void InvokeNativeAtPutIndexedProperty()
         {
             ArrayList list = new ArrayList() { 1, 2, 3 };
-            object obj = DotNetObject.SendNativeMessage(list, "natput", new object[] { 1, 3 });
+            object obj = DotNetObject.SendNativeMessage(null, list, "natput", new object[] { 1, 3 });
             Assert.AreEqual(3, obj);
             Assert.AreEqual(3, list[2]);
         }
@@ -85,8 +85,8 @@
         public void InvokeSetProperty()
         {
             Rectangle rectangle = new Rectangle() { Width = 10, Height = 20 };
-            DotNetObject.SendNativeMessage(rectangle, "width", new object[] { 15 });
-            object obj = DotNetObject.SendNativeMessage(rectangle, "width", null);
+            DotNetObject.SendNativeMessage(null, rectangle, "width", new object[] { 15 });
+            object obj = DotNetObject.SendNativeMessage(null, rectangle, "width", null);
             Assert.AreEqual(15, obj);
         }
 

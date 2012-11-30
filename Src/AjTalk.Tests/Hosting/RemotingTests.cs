@@ -62,9 +62,9 @@
         public void CreateRemotingAndClientServerAndExportClass()
         {
             Loader loader = new Loader(@"DefineRectangleWithNewAndInitialize.st", new SimpleCompiler());
-            Machine machine = new Machine();
+            Machine machine = new Machine(true);
             RemotingHostServer server = new RemotingHostServer(machine, 10004, "Server4");
-            Machine machine2 = new Machine();
+            Machine machine2 = new Machine(true);
             loader.LoadAndExecute(machine2);
             BaseClass rect = (BaseClass)machine2.GetGlobalObject("Rectangle");
             RemotingHostClient client = new RemotingHostClient("localhost", 10004, "Server4");

@@ -49,7 +49,7 @@
             throw new NotImplementedException();
         }
 
-        public object ExecuteNative(object self, object[] args)
+        public object ExecuteNative(Machine machine, object self, object[] args)
         {
             throw new NotImplementedException();
         }

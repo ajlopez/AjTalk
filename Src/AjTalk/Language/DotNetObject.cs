@@ -36,14 +36,14 @@
             return Activator.CreateInstance(type, args);
         }
 
-        public static object SendNativeMessage(object obj, string mthname, object[] args)
+        public static object SendNativeMessage(Machine machine, object obj, string mthname, object[] args)
         {
             if ((args == null || args.Length == 0))
             {
                 if (unaryMethods.ContainsKey(mthname))
                 {
                     IMethod unimethod = unaryMethods[mthname];
-                    return unimethod.ExecuteNative(obj, args);
+                    return unimethod.ExecuteNative(machine, obj, args);
                 }
             }
             else if (args.Length == 1)
@@ -51,7 +51,7 @@
                 if (binaryMethods.ContainsKey(mthname))
                 {
                     IMethod binmethod = binaryMethods[mthname];
-                    return binmethod.ExecuteNative(obj, args);
+                    return binmethod.ExecuteNative(machine, obj, args);
                 }
             }
             else if (args.Length == 2)
@@ -59,7 +59,7 @@
                 if (ternaryMethods.ContainsKey(mthname))
                 {
                     IMethod ternarymethod = ternaryMethods[mthname];
-                    return ternarymethod.ExecuteNative(obj, args);
+                    return ternarymethod.ExecuteNative(machine, obj, args);
                 }
             }
 
@@ -104,7 +104,7 @@
                 IMethod mth = behavior.GetInstanceMethod(msgname);
 
                 if (mth != null)
-                    return mth.ExecuteNative(obj, args);
+                    return mth.ExecuteNative(machine, obj, args);
             }
 
             string mthname = msgname;
@@ -121,7 +121,7 @@
                 IMethod mth = behavior.GetInstanceMethod(msgname);
 
                 if (mth != null)
-                    return mth.ExecuteNative(obj, args);
+                    return mth.ExecuteNative(machine, obj, args);
             }
 
             if (obj is Type)
@@ -138,7 +138,7 @@
                 IMethod mth = behavior.GetInstanceMethod(msgname);
 
                 if (mth != null)
-                    return mth.ExecuteNative(obj, args);
+                    return mth.ExecuteNative(machine, obj, args);
             }
 
             if (obj is IEnumerable)
@@ -147,14 +147,14 @@
                 IMethod mth = behavior.GetInstanceMethod(msgname);
 
                 if (mth != null)
-                    return mth.ExecuteNative(obj, args);
+                    return mth.ExecuteNative(machine, obj, args);
             }
 
             // TODO how to use doesNotUnderstand in native behavior
             // mth = behavior.GetInstanceMethod("doesNotUnderstand:");
             // if (mth != null)
             //    return mth.ExecuteNative(obj, new object[] { msgname, args });
-            return SendNativeMessage(obj, mthname, args);
+            return SendNativeMessage(machine, obj, mthname, args);
         }
 
         private static object AtMethod(object obj, object[] args)

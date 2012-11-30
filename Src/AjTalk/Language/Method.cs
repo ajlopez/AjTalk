@@ -88,9 +88,9 @@ namespace AjTalk.Language
             return (new ExecutionBlock(self, receiver, this, args)).Execute();
         }
 
-        public object ExecuteNative(object self, object[] args)
+        public object ExecuteNative(Machine machine, object self, object[] args)
         {
-            return new ExecutionBlock(Machine.Current, self, this, args).Execute();
+            return new ExecutionBlock(machine, self, this, args).Execute();
         }
 
         public override string GetInstanceVariableName(int n)

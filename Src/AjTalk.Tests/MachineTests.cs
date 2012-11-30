@@ -125,7 +125,7 @@ namespace AjTalk.Tests
         [TestMethod]
         public void CreateAsCurrent()
         {
-            Machine machine = new Machine();
+            Machine machine = new Machine(true);
 
             Assert.IsNotNull(Machine.Current);
             Assert.AreSame(Machine.Current, machine);

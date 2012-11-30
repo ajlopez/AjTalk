@@ -34,7 +34,7 @@
             Assert.IsNull(method.Name);
             Assert.IsNull(method.Behavior);
 
-            object result = method.ExecuteNative(null, null);
+            object result = method.ExecuteNative(null, null, null);
 
             Assert.AreEqual(1, count);
             Assert.AreEqual(1, result);

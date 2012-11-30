@@ -27,7 +27,7 @@
             {
                 var stream = File.Open(imageloadname, FileMode.Open);
                 var reader = new BinaryReader(stream);
-                ImageSerializer serializer = new ImageSerializer(reader);
+                ImageSerializer serializer = new ImageSerializer(reader, null);
                 machine = (Machine)serializer.Deserialize();
                 Machine.SetCurrent(machine);
                 reader.Close();

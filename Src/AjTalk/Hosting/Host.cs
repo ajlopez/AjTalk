@@ -26,8 +26,9 @@
         {
             this.machine = machine;
             this.machine.Host = this;
-            if (Machine.Current != null)
-                Machine.Current.RegisterHost(this);
+            machine.RegisterHost(this);
+            ////if (Machine.Current != null)
+            ////    Machine.Current.RegisterHost(this);
         }
 
         public Machine Machine { get { return this.machine; } }

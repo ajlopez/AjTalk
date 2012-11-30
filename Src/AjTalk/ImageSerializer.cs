@@ -21,11 +21,11 @@
             this.writer = writer;
         }
 
-        public ImageSerializer(BinaryReader reader)
+        public ImageSerializer(BinaryReader reader, Machine machine)
         {
             this.reader = reader;
             this.compiler = new VmCompiler();
-            this.machine = Machine.Current;
+            this.machine = machine;
         }
 
         private enum ImageCode

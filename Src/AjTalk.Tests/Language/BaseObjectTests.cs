@@ -60,7 +60,7 @@ namespace AjTalk.Tests.Language
             {
                 formatter.Serialize(stream, bo);
                 stream.Seek(0, SeekOrigin.Begin);
-                machine2 = new Machine();
+                machine2 = new Machine(true);
                 Assert.AreSame(Machine.Current, machine2);
                 cls2 = new BaseClass("MyClass", machine2);
                 machine2.SetGlobalObject("MyClass", cls2);
@@ -79,7 +79,7 @@ namespace AjTalk.Tests.Language
         [TestMethod]
         public void SerializeAndDeserializeCompositeObject()
         {
-            Machine machine = new Machine();
+            Machine machine = new Machine(true);
             BaseClass cls = new BaseClass("MyClass", machine);
             BaseObject bso1 = new BaseObject(cls, new object[] { 1, 2, 3 });
             BaseObject bso2 = new BaseObject(cls, new object[] { 2, 3, 4 });
@@ -96,7 +96,7 @@ namespace AjTalk.Tests.Language
             {
                 formatter.Serialize(stream, bo);
                 stream.Seek(0, SeekOrigin.Begin);
-                machine2 = new Machine();
+                machine2 = new Machine(true);
                 Assert.AreSame(Machine.Current, machine2);
                 cls2 = new BaseClass("MyClass", machine2);
                 machine2.SetGlobalObject("MyClass", cls2);

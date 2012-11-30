@@ -58,7 +58,7 @@
             return this.function(self, receiver, args);
         }
 
-        public object ExecuteNative(object self, object[] args)
+        public object ExecuteNative(Machine machine, object self, object[] args)
         {
             return this.nativeFunction(self, args);
         }

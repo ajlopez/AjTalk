@@ -171,15 +171,6 @@
     <milliseconds>778</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="Host.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>11/18/2012 15:35:51</timestamp>
-    <milliseconds>840</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="IHost.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/17/2012 18:23:21</timestamp>
@@ -801,9 +792,6 @@
     <milliseconds>642</milliseconds>
     <violations />
   </sourcecode>
-  <project key="-1886451504">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="ImageSerializer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/17/2012 18:23:21</timestamp>
@@ -811,6 +799,18 @@
     </settings>
     <timestamp>11/25/2012 07:29:51</timestamp>
     <milliseconds>137</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="-1886451504">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="Host.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>11/30/2012 06:02:44</timestamp>
+    <milliseconds>597</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>

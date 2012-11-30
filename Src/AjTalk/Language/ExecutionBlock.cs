@@ -308,7 +308,7 @@ namespace AjTalk.Language
                             if (type != null)
                                 this.Push(DotNetObject.SendNativeStaticMessage(type, mthname, args));
                             else
-                                this.Push(DotNetObject.SendNativeMessage(obj, mthname, args));
+                                this.Push(DotNetObject.SendNativeMessage(this.machine, obj, mthname, args));
 
                             break;
                         

@@ -26,7 +26,7 @@ namespace AjTalk
         private TransactionManager transactionManager;
 
         public Machine()
-            : this(true)
+            : this(false)
         {
         }
 
