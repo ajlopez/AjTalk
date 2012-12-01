@@ -26,5 +26,10 @@
         {
             return values.ContainsKey(name);
         }
+
+        public ICollection<string> GetNames()
+        {
+            return values.Keys;
+        }
     }
 }

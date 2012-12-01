@@ -18,7 +18,6 @@ namespace AjTalk
         private IClass metaclassclass;
         private Context environment = new Context();
 
-        private Dictionary<string, object> globals = new Dictionary<string, object>();
         private Dictionary<Type, NativeBehavior> nativeBehaviors = new Dictionary<Type, NativeBehavior>();
 
         private Dictionary<Guid, IHost> localhosts = new Dictionary<Guid, IHost>();
@@ -195,8 +194,10 @@ namespace AjTalk
 
         public object GetGlobalObject(string objname)
         {
-            if (this.globals.ContainsKey(objname))
-                return this.globals[objname];
+            var result = this.environment.GetValue(objname);
+
+            if (result != null || this.environment.HasValue(objname))
+                return result;
 
             if (this.HostMachine != null)
                 return this.HostMachine.GetGlobalObject(objname);
@@ -206,7 +207,7 @@ namespace AjTalk
 
         public void SetGlobalObject(string objname, object value)
         {
-            this.globals[objname] = value;
+            this.environment.SetValue(objname, value);
 
             if (/*this.metaclassclass == null && */objname == "Metaclass" && value is IClass)
                 this.DefineMetaclass((IClass)value);
@@ -223,16 +224,20 @@ namespace AjTalk
 
         public ICollection<string> GetGlobalNames()
         {
-            return this.globals.Keys;
+            return this.environment.GetNames();
         }
 
         public ICollection<IClass> GetClasses()
         {
             List<IClass> classes = new List<IClass>();
 
-            foreach (object value in this.globals.Values)
-                if (value is IClass)
+            foreach (string name in this.environment.GetNames())
+            {
+                object value = this.environment.GetValue(name);
+
+                if (value != null && value is IClass)
                     classes.Add((IClass)value);
+            }
 
             return classes;
         }

@@ -33,5 +33,30 @@
             Assert.IsTrue(context.HasValue("One"));
             Assert.IsFalse(context.HasValue("Foo"));
         }
+
+        [TestMethod]
+        public void GetNamesWhenEmpty()
+        {
+            Context context = new Context();
+            var result = context.GetNames();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [TestMethod]
+        public void GetNamesWhenTwoValuesAreDefined()
+        {
+            Context context = new Context();
+            context.SetValue("One", 1);
+            context.SetValue("Two", 2);
+
+            var result = context.GetNames();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.IsTrue(result.Contains("One"));
+            Assert.IsTrue(result.Contains("Two"));
+        }
     }
 }
