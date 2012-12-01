@@ -276,3 +276,14 @@ at: anIndex put: aValue
 	^self !!nat: anIndex - 1 put: aValue
 ! !
 
+Object subclass: #Global nativeType: @AjTalk.Context!
+
+!Global methods!
+
+at: aName
+	^self !!GetValue: aName
+!
+
+at: aName put: aValue
+	self !!SetValue: aName with: aValue
+! !

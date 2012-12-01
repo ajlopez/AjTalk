@@ -115,9 +115,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="AssertTests\ArithmeticTests.st">
+    <Content Include="AssertTests\ArithmeticTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="AssertTests\CharTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -128,6 +128,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="AssertTests\ObjectTests.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AssertTests\SmalltalkTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="AssertTests\StringTests.st">

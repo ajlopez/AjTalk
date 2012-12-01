@@ -56,6 +56,12 @@
             DoAssert("Object");
         }
 
+        [TestMethod]
+        public void SmalltalkAsserts()
+        {
+            DoAssert("Smalltalk");
+        }
+
         private void DoAssert(string filename)
         {
             this.LoadFile(@"AssertTests\" + filename + "Tests.st");
