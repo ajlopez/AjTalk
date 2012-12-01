@@ -13,7 +13,7 @@
         private BinaryReader reader;
         private ICompiler compiler;
         private BinaryWriter writer;
-        private List<IObject> objects = new List<IObject>();
+        private List<object> objects = new List<object>();
         private Machine machine;
 
         public ImageSerializer(BinaryWriter writer)
@@ -182,6 +182,8 @@
             if (obj is Machine)
             {
                 var mach = (Machine)obj;
+                this.objects.Add(mach);
+                this.objects.Add(mach.Environment);
                 this.writer.Write((byte)ImageCode.Machine);
                 var names = mach.GetGlobalNames().ToList();
                 
@@ -287,6 +289,8 @@
                     return bobj;
                 case ImageCode.Machine:
                     this.machine = new Machine(false);
+                    this.objects.Add(machine);
+                    this.objects.Add(machine.Environment);
                     int nnames = this.reader.ReadInt32();
 
                     for (int k = 0; k < nnames; k++)
