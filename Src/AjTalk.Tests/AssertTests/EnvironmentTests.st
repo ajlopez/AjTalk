@@ -3,7 +3,7 @@
 
 env := Environment new: #MyEnvironment.
 
-"The new environament was defined as global at Smalltalk"
+"The new environment was defined as global at Smalltalk"
 
 [(Smalltalk at: #MyEnvironment) isNil not] assert.
 [(Smalltalk at: #MyEnvironment) == MyEnvironment] assert.
@@ -15,6 +15,9 @@ env := Environment new: #MyEnvironment.
 "Dotted expression syntax sugar for MyEnvironment at: #Smalltalk"
 
 [MyEnvironment.Smalltalk == Smalltalk] assert.
+
+"Dotted expression syntax sugar for Smalltalk at: #MyEnvironment"
+
 [Smalltalk.MyEnvironment == MyEnvironment] assert.
 
 [(env at: #Smalltalk) == Smalltalk] assert.
@@ -64,6 +67,10 @@ myglobal := (env at: #MyClass) global.
 [myglobal isNil not] assert.
 [myglobal == (env at: #MyGlobal)] assert.
 [myglobal ~~ MyGlobal] assert.
+
+"Accesing the same global using dotted name"
+
+[myglobal == MyEnvironment.MyGlobal] assert.
 
 "MyGlobal here is different from MyGlobal at env"
 
