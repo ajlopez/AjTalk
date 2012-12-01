@@ -124,6 +124,112 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void ProcessDottedName()
+        {
+            Lexer tokenizer = new Lexer("Smalltalk.MyPackage");
+
+            Token token = tokenizer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual("Smalltalk.MyPackage", token.Value);
+            Assert.AreEqual(TokenType.DottedName, token.Type);
+
+            Assert.IsNull(tokenizer.NextToken());
+        }
+
+        [TestMethod]
+        public void ProcessDoubleDottedName()
+        {
+            Lexer tokenizer = new Lexer("Smalltalk.MyPackage.MySubpackage");
+
+            Token token = tokenizer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual("Smalltalk.MyPackage.MySubpackage", token.Value);
+            Assert.AreEqual(TokenType.DottedName, token.Type);
+
+            Assert.IsNull(tokenizer.NextToken());
+        }
+
+        [TestMethod]
+        public void ProcessNotDottedName()
+        {
+            Lexer tokenizer = new Lexer("Smalltalk .MyPackage");
+
+            Token token = tokenizer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual("Smalltalk", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(".", token.Value);
+            Assert.AreEqual(TokenType.Punctuation, token.Type);
+
+            token = tokenizer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual("MyPackage", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            Assert.IsNull(tokenizer.NextToken());
+        }
+
+        [TestMethod]
+        public void ProcessNotDottedNameSecondWordIsLower()
+        {
+            Lexer tokenizer = new Lexer("Smalltalk.myPackage");
+
+            Token token = tokenizer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual("Smalltalk", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(".", token.Value);
+            Assert.AreEqual(TokenType.Punctuation, token.Type);
+
+            token = tokenizer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual("myPackage", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            Assert.IsNull(tokenizer.NextToken());
+        }
+
+        [TestMethod]
+        public void ProcessNotDottedNameFirstWordIsLower()
+        {
+            Lexer tokenizer = new Lexer("smalltalk.myPackage");
+
+            Token token = tokenizer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual("smalltalk", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(".", token.Value);
+            Assert.AreEqual(TokenType.Punctuation, token.Type);
+
+            token = tokenizer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual("myPackage", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            Assert.IsNull(tokenizer.NextToken());
+        }
+
+        [TestMethod]
         public void ProcessParameter()
         {
             Lexer tokenizer = new Lexer(":x");

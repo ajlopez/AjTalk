@@ -22,8 +22,7 @@ namespace AjTalk.Compiler
         private const char ParameterMark = ':';
 
         private TextReader input;
-        private int lastchar;
-        private bool haschar;
+        private Stack<int> stacked = new Stack<int>();
         private Stack<Token> tokenstack = new Stack<Token>();
 
         public Lexer(TextReader input)
@@ -134,17 +133,13 @@ namespace AjTalk.Compiler
 
         private void PushChar(int ch)
         {
-            this.lastchar = ch;
-            this.haschar = true;
+            this.stacked.Push(ch);
         }
 
         private int NextChar()
         {
-            if (this.haschar)
-            {
-                this.haschar = false;
-                return this.lastchar;
-            }
+            if (this.stacked.Count > 0)
+                return this.stacked.Pop();
 
             int ch = this.input.Read();
 
@@ -153,10 +148,8 @@ namespace AjTalk.Compiler
 
         private int PeekChar()
         {
-            if (this.haschar)
-            {
-                return this.lastchar;
-            }
+            if (this.stacked.Count > 0)
+                return this.stacked.Peek();
 
             int ch = this.input.Read();
 
@@ -229,7 +222,17 @@ namespace AjTalk.Compiler
                 ch = this.NextChar();
             }
 
-            if (ch >= 0 && ch == ':')
+            if (ch >= 0 && ch == '.' && char.IsUpper(firstchar))
+            {
+                var peek = this.PeekChar();
+                if (peek >= 0 && char.IsLetter((char)peek) && char.IsUpper((char)peek))
+                {
+                    sb.Append((char)ch);
+                    return this.NextDottedName(sb.ToString());
+                }
+                this.PushChar(ch);
+            }
+            else if (ch >= 0 && ch == ':')
             {
                 sb.Append((char)ch);
             }
@@ -240,6 +243,40 @@ namespace AjTalk.Compiler
 
             Token token = new Token();
             token.Type = TokenType.Name;
+            token.Value = sb.ToString();
+
+            return token;
+        }
+
+        private Token NextDottedName(string name)
+        {
+            StringBuilder sb = new StringBuilder(10);
+            sb.Append(name);
+
+            int ch;
+
+            ch = this.NextChar();
+
+            while (ch >= 0 && char.IsLetterOrDigit((char)ch))
+            {
+                sb.Append((char)ch);
+                ch = this.NextChar();
+            }
+
+            if (ch >= 0 && ch == '.')
+            {
+                var peek = this.PeekChar();
+                if (peek >= 0 && char.IsLetter((char)peek) && char.IsUpper((char)peek))
+                {
+                    sb.Append((char)ch);
+                    return this.NextDottedName(sb.ToString());
+                }
+            }
+
+            this.PushChar(ch);
+
+            Token token = new Token();
+            token.Type = TokenType.DottedName;
             token.Value = sb.ToString();
 
             return token;

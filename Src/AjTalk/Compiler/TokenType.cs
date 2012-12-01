@@ -14,6 +14,7 @@
         Punctuation,
         Operator,
         Symbol,
-        Parameter
+        Parameter,
+        DottedName
     }
 }
