@@ -59,7 +59,11 @@ Object subclass:#MyClass
 [(env at: #MyClass) isNil not] assert.
 [(Smalltalk at: #MyClass) isNil] assert.
 
-"Compile class method to get the current environment MyGlobal"
+"Compile class method to get MyGlobal from its environment 
+(at MyClass creation time:
+ each class has an Scope pointing to the environment that was current 
+ at the time of class definition. The 'globals' in their methods are resolved using that
+ scope"
 
 MyClass class compile: 'global ^MyGlobal'.
 
