@@ -469,7 +469,15 @@ namespace AjTalk.Language
         {
             execblock.ip++;
             byte arg = execblock.block.ByteCodes[execblock.ip];
-            execblock.Push(execblock.machine.GetGlobalObject(execblock.block.GetGlobalName(arg)));
+            string name = execblock.block.GetGlobalName(arg);
+            object value;
+
+            if (execblock.self != null)
+                value = execblock.self.Behavior.Scope.GetValue(name);
+            else
+                value = execblock.machine.CurrentEnvironment.GetValue(name);
+
+            execblock.Push(value);
         }
 
         private static void DoGetDotNetType(ExecutionBlock execblock)
