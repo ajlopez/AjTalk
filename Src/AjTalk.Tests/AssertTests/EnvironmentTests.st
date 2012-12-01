@@ -1,5 +1,5 @@
 ﻿
-| env myglobal |
+| env myglobal subenv myobj |
 
 env := Environment new: #MyEnvironment.
 
@@ -79,3 +79,30 @@ myglobal := (env at: #MyClass) global.
 [MyGlobal == (Smalltalk at: #MyGlobal)] assert.
 [(env at: #MyGlobal) isNil not] assert.
 [MyGlobal ~~ (env at: #MyGlobal)] assert.
+
+"Sub enviroment"
+
+subenv := Environment new: #MySubenvironment in: MyEnvironment.
+
+[MyEnvironment.MySubenvironment == subenv] assert.
+
+"Smalltalk environment is still accesible from subenvironment"
+
+[MyEnvironment.MySubenvironment.Smalltalk == Smalltalk] assert.
+
+"You can create an object instance of MyEnviroment class"
+
+myobj := MyEnvironment.MyClass new.
+
+[myobj isNil not] assert.
+[myobj class == MyEnvironment.MyClass] assert.
+
+"
+TODO: to have a way of import (locate, load and set in current environment) a package/module
+Maybe:
+
+Package import: #MyLisp.
+Package import: #MyWeb.WebServer.
+
+As in Python, a 'package' already imported is retrieved from a cache
+"

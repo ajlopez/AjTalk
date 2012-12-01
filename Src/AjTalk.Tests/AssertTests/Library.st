@@ -286,6 +286,13 @@ new: aName
 	Smalltalk at: aName put: newenv.
 	newenv at: #Smalltalk put: Smalltalk.
 	^newenv
+!
+
+new: aName in: anEnvironment
+	| newenv |
+	newenv := @AjTalk.Context !!new: anEnvironment.
+	anEnvironment at: aName put: newenv.
+	^newenv
 ! !
 
 !Environment methods!
