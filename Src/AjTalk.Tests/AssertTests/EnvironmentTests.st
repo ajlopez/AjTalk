@@ -36,6 +36,12 @@ Object subclass:#MyClass
 
 Smalltalk setCurrent.
 
+"MyClass is not defined here"
+
+[MyClass isNil] assert.
+
+"MyGlobal here is different from MyGlobal at env"
+
 [MyGlobal isNil not] assert.
 [(Smalltalk at: #MyGlobal) isNil not] assert.
 [MyGlobal == (Smalltalk at: #MyGlobal)] assert.
