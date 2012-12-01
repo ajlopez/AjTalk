@@ -469,17 +469,17 @@
             Assert.IsInstanceOfType(result, typeof(IEnumerable));
 
             int k = 0;
-            object[] values = new object[] { 1, new ArrayList() { 1, 2, 3 }, "string" };
+            object[] values = new object[] { 1, new object[] { 1, 2, 3 }, "string" };
 
             foreach (object v in (IEnumerable)result)
             {
-                if (v is ArrayList && values[k] is ArrayList)
+                if (v is object[] && values[k] is object[])
                 {
-                    ArrayList a1 = (ArrayList)v;
-                    ArrayList a2 = (ArrayList)values[k];
+                    object[] a1 = (object[])v;
+                    object[] a2 = (object[])values[k];
 
-                    Assert.AreEqual(a1.Count, a2.Count);
-                    for (int j = 0; j < a1.Count; j++)
+                    Assert.AreEqual(a1.Length, a2.Length);
+                    for (int j = 0; j < a1.Length; j++)
                         Assert.AreEqual(a1[j], a2[j]);
                 }
                 else

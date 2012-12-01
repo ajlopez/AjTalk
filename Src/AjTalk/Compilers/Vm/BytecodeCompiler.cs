@@ -67,10 +67,7 @@
 
         public override void Visit(ArrayExpression expression)
         {
-            foreach (var expr in expression.Expressions)
-                expr.Visit(this);
-
-            this.block.CompileByteCode(ByteCode.MakeCollection, (byte)expression.Expressions.Count());
+            this.block.CompileGetConstant(expression.AsObjectArray());
         }
 
         public override void Visit(DynamicArrayExpression expression)

@@ -277,7 +277,7 @@ namespace AjTalk.Compiler
 
             if (token.Type == TokenType.Punctuation && token.Value == "#(")
             {
-                this.CompileCollection();
+                this.block.CompileGetConstant(this.CompileCollection());
 
                 return;
             }
@@ -408,46 +408,33 @@ namespace AjTalk.Compiler
             throw new ParserException("Name expected");
         }
 
-        private void CompileCollection()
+        private object[] CompileCollection()
         {
-            int nelements = 0;
             Token token = this.NextToken();
+            IList<object> elements = new List<object>();
 
             while (token != null)
             {
                 switch (token.Type)
                 {
                     case TokenType.Integer:
-                        this.block.CompileGetConstant(Convert.ToInt32(token.Value));
-                        nelements++;
+                        elements.Add(Convert.ToInt32(token.Value));
                         break;
                     case TokenType.Real:
-                        this.block.CompileGetConstant(Convert.ToDouble(token.Value));
-                        nelements++;
+                        elements.Add(Convert.ToDouble(token.Value));
                         break;
                     case TokenType.Symbol:
                     case TokenType.String:
-                        this.block.CompileGetConstant(token.Value);
-                        nelements++;
-                        break;
-
                     case TokenType.Name:
-                        this.block.CompileGetConstant(token.Value);
-                        nelements++;
+                        elements.Add(token.Value);
                         break;
 
                     case TokenType.Punctuation:
                         if (token.Value == ")")
-                        {
-                            this.block.CompileByteCode(ByteCode.MakeCollection, (byte)nelements);
-                            return;
-                        }
+                            return elements.ToArray();
 
                         if (token.Value == "(")
-                        {
-                            this.CompileCollection();
-                            nelements++;
-                        }
+                            elements.Add(this.CompileCollection());
                         else
                             throw new ParserException("Expected ')'");
                         break;
@@ -457,6 +444,8 @@ namespace AjTalk.Compiler
 
                 token = this.NextToken();
             }
+
+            return elements.ToArray();
         }
         
         private void CompileByteCollection()

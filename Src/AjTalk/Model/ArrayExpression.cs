@@ -16,6 +16,27 @@
 
         public IEnumerable<IExpression> Expressions { get { return this.expressions; } }
 
+        public object[] AsObjectArray()
+        {
+            IList<object> objects = new List<object>();
+
+            foreach (var expr in this.expressions)
+            {
+                if (expr is ConstantExpression)
+                    objects.Add(((ConstantExpression)expr).Value);
+                else if (expr is SymbolExpression)
+                    objects.Add(((SymbolExpression)expr).Symbol);
+                else if (expr is VariableExpression)
+                    objects.Add(((VariableExpression)expr).Name);
+                else if (expr is ArrayExpression)
+                    objects.Add(((ArrayExpression)expr).AsObjectArray());
+                else
+                    throw new InvalidOperationException();
+            }
+
+            return objects.ToArray();
+        }
+
         public string AsString()
         {
             // TODO Refactor to String Builder

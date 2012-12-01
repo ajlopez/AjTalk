@@ -5,6 +5,8 @@
 
 - Improve Integer parsing (with radix) in Parser and Model Parser
 
+- Review all Convert.ToInt32, it should be a common method, supporting 16rFF
+
 - Load Pharo Kernel Numbers using VmCompiler
 
 + CHECK if a class is redefined IN THE CURRENT CONTEXT, not .GetGlobalObject, see Machine code
@@ -50,8 +52,8 @@
 = Add method support to native types
 = do: over ICollection, IEnumerable
 = Boolean: true, false as native, but with Boolean methods
-- Real number support
-= Chunk Reader and processing
++ Real number support
++ Chunk Reader and processing
 - Get Categories for classes
 - Categories for methods
 - Image serialization
@@ -59,9 +61,7 @@
 - Browser
 - Transcript
 - Workspace
-- Console app (reading console as chunks)
-+ Post about native objects and types
-+ Post about agents
++ Console app (reading console as chunks)
 - agents example
 - Initial class library
 - Bootstrap
