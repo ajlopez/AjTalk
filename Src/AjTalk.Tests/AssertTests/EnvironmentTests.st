@@ -12,6 +12,11 @@ env := Environment new: #MyEnvironment.
 [MyEnvironment isNil not] assert.
 [MyEnvironment == env] assert.
 
+"Dotted expression syntax sugar for MyEnvironment at: #Smalltalk"
+
+[MyEnvironment.Smalltalk == Smalltalk] assert.
+[Smalltalk.MyEnvironment == MyEnvironment] assert.
+
 [(env at: #Smalltalk) == Smalltalk] assert.
 [(MyEnvironment at: #Smalltalk) == Smalltalk] assert.
 

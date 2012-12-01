@@ -1085,6 +1085,24 @@ namespace AjTalk.Tests.Compiler
             Assert.IsTrue(steps.Contains("GetLocal env"));
         }
 
+        [TestMethod]
+        public void CompileDottedName()
+        {
+            Parser compiler = new Parser("Smalltalk.MyPackage.MyClass");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.IsTrue(block.NoConstants > 0);
+            var decompiler = new BlockDecompiler(block);
+            var steps = decompiler.Decompile();
+            Assert.IsNotNull(steps);
+            Assert.AreEqual(5, steps.Count);
+            Assert.AreEqual("GetGlobalVariable Smalltalk", steps[0]);
+            Assert.AreEqual("GetConstant \"MyPackage\"", steps[1]);
+            Assert.AreEqual("Send at: 1", steps[2]);
+            Assert.AreEqual("GetConstant \"MyClass\"", steps[3]);
+            Assert.AreEqual("Send at: 1", steps[4]);
+        }
+
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return CompileClass(clsname, varnames, methods, null);

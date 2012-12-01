@@ -270,6 +270,15 @@
 
                     return new VariableExpression(token.Value);
 
+                case TokenType.DottedName:
+                    string[] names = token.Value.Split('.');
+                    IExpression expr = new VariableExpression(names[0]);
+
+                    foreach (var name in names.Skip(1))
+                        expr = new MessageExpression(expr, "at:", new IExpression[] { new ConstantExpression(name) });
+
+                    return expr;
+
                 case TokenType.String:
                     return new ConstantExpression(token.Value);
 

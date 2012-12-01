@@ -363,6 +363,20 @@ namespace AjTalk.Compiler
                 return;
             }
 
+            if (token.Type == TokenType.DottedName)
+            {
+                string[] names = token.Value.Split('.');
+                this.block.CompileByteCode(ByteCode.GetGlobalVariable, (byte)this.block.CompileGlobal(names[0]));
+
+                foreach (var name in names.Skip(1)) 
+                {
+                    this.block.CompileGetConstant(name);
+                    this.block.CompileSend("at:");
+                }
+
+                return;
+            }
+
             if (token.Type == TokenType.Operator && token.Value == "<" && this.TryCompileToken(TokenType.Name, "primitive:"))
             {
                 int? number = this.TryCompileInteger();
