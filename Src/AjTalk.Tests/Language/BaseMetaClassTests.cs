@@ -23,6 +23,7 @@
         {
             IMetaClass metaclass = new BaseMetaClass(null, null, this.machine, string.Empty);
             Assert.IsNull(metaclass.Behavior);
+            Assert.AreSame(this.machine.CurrentEnvironment, metaclass.Scope);
         }
 
         [TestMethod]

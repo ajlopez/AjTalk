@@ -10,6 +10,8 @@
 
         Machine Machine { get; }
 
+        Context Scope { get; }
+
         int NoInstanceVariables { get; }
 
         IMetaClass MetaClass { get; }

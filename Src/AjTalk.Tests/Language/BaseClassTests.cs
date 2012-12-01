@@ -23,6 +23,7 @@
             Assert.AreEqual(machine, bclass.Machine);
             Assert.IsNull(bclass.SuperClass);
             Assert.AreEqual(0, bclass.NoInstanceVariables);
+            Assert.AreSame(machine.CurrentEnvironment, bclass.Scope);
         }
 
         [TestMethod]

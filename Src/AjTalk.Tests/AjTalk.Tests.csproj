@@ -133,6 +133,9 @@
     <Content Include="AssertTests\SmalltalkTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="AssertTests\EnvironmentTests.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="AssertTests\StringTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

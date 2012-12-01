@@ -8,11 +8,27 @@
     public class Context
     {
         private IDictionary<string, object> values = new Dictionary<string, object>();
+        private Context parent;
+
+        public Context()
+            : this(null)
+        {
+        }
+
+        public Context(Context parent)
+        {
+            this.parent = parent;
+        }
 
         public object GetValue(string name)
         {
             if (!values.ContainsKey(name))
+            {
+                if (this.parent != null)
+                    return this.parent.GetValue(name);
+
                 return null;
+            }
 
             return values[name];
         }
@@ -24,7 +40,13 @@
 
         public bool HasValue(string name)
         {
-            return values.ContainsKey(name);
+            if (values.ContainsKey(name))
+                return true;
+
+            if (this.parent != null)
+                return this.parent.HasValue(name);
+
+            return false;
         }
 
         public ICollection<string> GetNames()

@@ -58,5 +58,17 @@
             Assert.IsTrue(result.Contains("One"));
             Assert.IsTrue(result.Contains("Two"));
         }
+
+        [TestMethod]
+        public void GetValueFromParent()
+        {
+            Context parent = new Context();
+            Context context = new Context(parent);
+
+            parent.SetValue("One", 1);
+
+            Assert.IsNotNull(context.GetValue("One"));
+            Assert.IsTrue(context.HasValue("One"));
+        }
     }
 }

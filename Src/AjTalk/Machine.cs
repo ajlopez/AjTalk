@@ -13,6 +13,9 @@ namespace AjTalk
         [ThreadStatic]
         private static Machine current;
 
+        [ThreadStatic]
+        private static Context currentEnvironment;
+
         private IClass nilclass;
         private IClass classclass;
         private IClass metaclassclass;
@@ -69,6 +72,22 @@ namespace AjTalk
         public IClass UndefinedObjectClass { get { return this.nilclass; } }
 
         public Context Environment { get { return this.environment; } }
+
+        public Context CurrentEnvironment
+        {
+            get
+            {
+                if (currentEnvironment == null)
+                    return this.environment;
+
+                return currentEnvironment;
+            }
+
+            set
+            {
+                currentEnvironment = value;
+            }
+        }
 
         public IClass ClassClass 
         {

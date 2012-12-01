@@ -188,6 +188,8 @@
                 // TODO review of Machine existence in global variable, other names to preserve?
                 if (names.Contains("Machine"))
                     names.Remove("Machine");
+                if (names.Contains("Smalltalk"))
+                    names.Remove("Smalltalk");
 
                 int nnames = names.Count;                
 

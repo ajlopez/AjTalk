@@ -62,6 +62,12 @@
             DoAssert("Smalltalk");
         }
 
+        [TestMethod]
+        public void EnvironmentAsserts()
+        {
+            DoAssert("Environment");
+        }
+
         private void DoAssert(string filename)
         {
             this.LoadFile(@"AssertTests\" + filename + "Tests.st");

@@ -8,6 +8,7 @@
     {
         private IBehavior superclass;
         private Machine machine;
+        private Context scope;
 
         private Dictionary<string, IMethod> methods = new Dictionary<string, IMethod>();
 
@@ -21,6 +22,7 @@
 
             this.superclass = superclass;
             this.machine = machine;
+            this.scope = machine.CurrentEnvironment;
         }
 
         public IBehavior SuperClass
@@ -46,6 +48,8 @@
                 return this.machine;
             }
         }
+
+        public Context Scope { get { return this.scope; } }
 
         public bool IsIndexed { get; set; }
 

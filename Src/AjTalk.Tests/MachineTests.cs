@@ -37,6 +37,8 @@ namespace AjTalk.Tests
             result = machine.GetGlobalObject("Smalltalk");
             Assert.IsNotNull(result);
             Assert.AreSame(machine.Environment, result);
+
+            Assert.AreSame(machine.Environment, machine.CurrentEnvironment);
         }
 
         [TestMethod]

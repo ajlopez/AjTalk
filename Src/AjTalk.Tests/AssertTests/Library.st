@@ -276,9 +276,19 @@ at: anIndex put: aValue
 	^self !!nat: anIndex - 1 put: aValue
 ! !
 
-Object subclass: #Global nativeType: @AjTalk.Context!
+Object subclass: #Environment nativeType: @AjTalk.Context!
 
-!Global methods!
+!Environment class methods!
+
+new: aName
+	| newenv |
+	newenv := @AjTalk.Context !!new.
+	Smalltalk at: aName put: newenv.
+	newenv at: #Smalltalk put: Smalltalk.
+	^newenv
+! !
+
+!Environment methods!
 
 at: aName
 	^self !!GetValue: aName
