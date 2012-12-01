@@ -5,6 +5,9 @@ new
 ! !
 
 !Rectangle methods!
+global
+	^MyGlobal
+!
 x
 	^x
 !
@@ -33,3 +36,4 @@ height: newHeight
 	height := newHeight
 ! !
 
+MyGlobal := Rectangle new!

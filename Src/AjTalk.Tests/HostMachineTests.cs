@@ -208,6 +208,27 @@
         }
 
         [TestMethod]
+        [DeploymentItem(@"CodeFiles\HostMachine.st")]
+        [DeploymentItem(@"CodeFiles\HostedMachine.st")]
+        public void GetGlobalInHostedMachineViaHostMethod()
+        {
+            Machine host = this.LoadMachine("HostMachine.st");
+            Machine hosted = this.LoadMachine("HostedMachine.st");
+            hosted.HostMachine = host;
+
+            var hostmyglobal = host.GetGlobalObject("MyGlobal");
+            var hostedmyglobal = hosted.GetGlobalObject("MyGlobal");
+
+            Assert.AreNotSame(hostmyglobal, hostedmyglobal);
+
+            var result = this.Evaluate(hosted, "MyGlobal global");
+
+            Assert.IsNotNull(result);
+            Assert.AreSame(hostedmyglobal, result);
+            Assert.AreNotSame(hostmyglobal, result);
+        }
+
+        [TestMethod]
         public void GetGlobalObjectFromHostMachine()
         {
             Machine hostmachine = new Machine();
