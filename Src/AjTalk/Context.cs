@@ -21,5 +21,10 @@
         {
             values[name] = value;
         }
+
+        public bool HasValue(string name)
+        {
+            return values.ContainsKey(name);
+        }
     }
 }

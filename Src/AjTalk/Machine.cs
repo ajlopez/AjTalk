@@ -16,6 +16,7 @@ namespace AjTalk
         private IClass nilclass;
         private IClass classclass;
         private IClass metaclassclass;
+        private Context environment = new Context();
 
         private Dictionary<string, object> globals = new Dictionary<string, object>();
         private Dictionary<Type, NativeBehavior> nativeBehaviors = new Dictionary<Type, NativeBehavior>();
