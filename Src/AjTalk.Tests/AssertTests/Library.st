@@ -29,11 +29,11 @@ yourself
 !
 
 ~= anObject
-	^@AjTalk.Language.ObjectOperators negate: self = anObject.
+	^@AjTalk.Language.ObjectOperators negateboolean: self = anObject.
 !
 
 ~~ anObject
-	^@AjTalk.Language.ObjectOperators negate: self == anObject.
+	^@AjTalk.Language.ObjectOperators negateboolean: self == anObject.
 !
 
 error: aMessage
@@ -282,13 +282,17 @@ Object subclass: #Environment nativeType: @AjTalk.Context!
 
 new: aName
 	| newenv |
-	newenv := @AjTalk.Context !!new.
+	newenv := @AjTalk.Context !!new: Smalltalk.
 	Smalltalk at: aName put: newenv.
 	newenv at: #Smalltalk put: Smalltalk.
 	^newenv
 ! !
 
 !Environment methods!
+
+setCurrent
+	Machine !!CurrentEnvironment: self
+!	
 
 at: aName
 	^self !!GetValue: aName
