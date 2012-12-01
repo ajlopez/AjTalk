@@ -19,6 +19,8 @@ namespace AjTalk.Tests
             Assert.IsNotNull(machine.UndefinedObjectClass);
             Assert.IsNull(machine.ClassClass);
 
+            Assert.IsNotNull(machine.Environment);
+
             var result = machine.GetGlobalObject("UndefinedObject");
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IBehavior));
@@ -31,6 +33,10 @@ namespace AjTalk.Tests
             result = machine.GetGlobalObject("Machine");
             Assert.IsNotNull(result);
             Assert.AreSame(machine, result);
+
+            result = machine.GetGlobalObject("Smalltalk");
+            Assert.IsNotNull(result);
+            Assert.AreSame(machine.Environment, result);
         }
 
         [TestMethod]

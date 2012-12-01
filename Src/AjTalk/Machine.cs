@@ -55,6 +55,7 @@ namespace AjTalk
             // Global Objects
             this.SetGlobalObject("UndefinedObject", this.nilclass);
             this.SetGlobalObject("Machine", this);
+            this.SetGlobalObject("Smalltalk", this.environment);
         }
 
         public static Machine Current { get { return current; } }
@@ -66,6 +67,8 @@ namespace AjTalk
         public IClass MetaClassClass { get { return this.metaclassclass; } }
 
         public IClass UndefinedObjectClass { get { return this.nilclass; } }
+
+        public Context Environment { get { return this.environment; } }
 
         public IClass ClassClass 
         {
