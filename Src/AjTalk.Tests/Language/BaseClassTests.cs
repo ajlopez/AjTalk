@@ -27,6 +27,23 @@
         }
 
         [TestMethod]
+        public void CreateInEnvironment()
+        {
+            Machine machine = new Machine();
+            Context environment = new Context(machine.Environment);
+            machine.CurrentEnvironment = environment;
+            BaseClass bclass = new BaseClass("Class", machine);
+            Assert.IsNotNull(bclass);
+            Assert.AreEqual("Class", bclass.Name);
+            Assert.AreEqual(machine, bclass.Machine);
+            Assert.IsNull(bclass.SuperClass);
+            Assert.AreEqual(0, bclass.NoInstanceVariables);
+            Assert.AreSame(machine.CurrentEnvironment, bclass.Scope);
+
+            machine.CurrentEnvironment = null;
+        }
+
+        [TestMethod]
         public void DefineAndCreateAgent()
         {
             Machine machine = new Machine();

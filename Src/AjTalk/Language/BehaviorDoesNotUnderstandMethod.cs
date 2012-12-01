@@ -39,7 +39,7 @@
             if (msgname.Equals("subclass:") || msgname.Equals("agent:"))
             {
                 IClass newclass = machine.CreateClass((string)args[0], (IClass)self);
-                machine.SetGlobalObject(newclass.Name, newclass);
+                machine.SetCurrentEnvironmentObject(newclass.Name, newclass);
 
                 if (msgname.Equals("agent:"))
                     ((BaseClass)newclass).IsAgentClass = true;
@@ -72,7 +72,7 @@
                 if (args.Length >= 5)
                     ((BaseClass)newclass).Category = (string)args[4];
 
-                machine.SetGlobalObject(newclass.Name, newclass);
+                machine.SetCurrentEnvironmentObject(newclass.Name, newclass);
 
                 return newclass;
             }
@@ -88,7 +88,7 @@
                     machine.RegisterNativeBehavior(newbehavior.NativeType, newbehavior);
                 }
 
-                machine.SetGlobalObject((string)args[0], newbehavior);
+                machine.SetCurrentEnvironmentObject((string)args[0], newbehavior);
                 return newbehavior;
             }
 

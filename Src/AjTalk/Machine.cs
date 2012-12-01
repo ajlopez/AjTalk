@@ -229,7 +229,20 @@ namespace AjTalk
 
         public void SetGlobalObject(string objname, object value)
         {
-            this.environment.SetValue(objname, value);
+            this.SetEnvironmentObject(this.environment, objname, value);
+        }
+
+        public void SetCurrentEnvironmentObject(string objname, object value)
+        {
+            this.SetEnvironmentObject(this.CurrentEnvironment, objname, value);
+        }
+
+        public void SetEnvironmentObject(Context environment, string objname, object value)
+        {
+            environment.SetValue(objname, value);
+
+            if (environment != this.environment)
+                return;
 
             if (/*this.metaclassclass == null && */objname == "Metaclass" && value is IClass)
                 this.DefineMetaclass((IClass)value);
