@@ -27,7 +27,9 @@ Object subclass:#MyClass
 	classVariableNames:''
 	poolDictionaries:''
 	category:''
-!
+.
+
+[(env at: #MyClass) isNil not] assert.
 
 "Back to Smalltalk environment"
 

@@ -1070,6 +1070,21 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual("Send yourself 0", result[4]);
         }
 
+        [TestMethod]
+        public void CompileGetLocalInBlock()
+        {
+            Parser compiler = new Parser("| env | [env at: #MyGlobal] value");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.IsTrue(block.NoConstants > 0);
+            var result = block.GetConstant(0);
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Block));
+            var decompiler = new BlockDecompiler((Block)result);
+            var steps = decompiler.Decompile();
+            Assert.IsTrue(steps.Contains("GetLocal env"));
+        }
+
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return CompileClass(clsname, varnames, methods, null);

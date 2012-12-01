@@ -6,6 +6,7 @@
     using System.Text;
     using AjTalk.Compiler;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.IO;
 
     [TestClass]
     [DeploymentItem("AssertTests", "AssertTests")]
@@ -60,6 +61,15 @@
         public void SmalltalkAsserts()
         {
             DoAssert("Smalltalk");
+        }
+
+        [TestMethod]
+        public void LoadEnvironmentTests()
+        {
+            VmCompiler compiler = new VmCompiler();
+            var block = compiler.CompileBlock(File.ReadAllText("AssertTests\\EnvironmentTests.st"));
+            Assert.IsNotNull(block);
+            Assert.IsTrue(block.NoConstants > 0);
         }
 
         [TestMethod]
