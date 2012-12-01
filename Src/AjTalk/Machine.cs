@@ -176,7 +176,7 @@ namespace AjTalk
 
         public IClass CreateClass(string clsname, IClass superclass, string instancevarnames, string classvarnames)
         {
-            var oldcls = this.GetGlobalObject(clsname) as IClass;
+            var oldcls = this.CurrentEnvironment.GetValue(clsname) as IClass;
 
             if (oldcls != null)
             {
@@ -245,7 +245,7 @@ namespace AjTalk
             if (environment != this.environment)
                 return;
 
-            if (/*this.metaclassclass == null && */objname == "Metaclass" && value is IClass)
+            if (objname == "Metaclass" && value is IClass)
                 this.DefineMetaclass((IClass)value);
             else if (objname == "Class" && value is IClass)
                 this.classclass = (IClass)value;
