@@ -127,6 +127,9 @@
     <None Include="AssertTests\ArrayListTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="AssertTests\ObjectTests.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="AssertTests\StringTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

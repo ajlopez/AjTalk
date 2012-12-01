@@ -50,6 +50,12 @@
             DoAssert("ArrayList");
         }
 
+        [TestMethod]
+        public void ObjectAsserts()
+        {
+            DoAssert("Object");
+        }
+
         private void DoAssert(string filename)
         {
             this.LoadFile(@"AssertTests\" + filename + "Tests.st");
