@@ -107,6 +107,7 @@
     <Compile Include="Compiler\ICompiler.cs" />
     <Compile Include="Compiler\VmCompiler.cs" />
     <Compile Include="Compiler\SimpleCompiler.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="Exceptions\AssertError.cs" />
     <Compile Include="ImageSerializer.cs" />
     <Compile Include="Language\BlockDecompiler.cs" />

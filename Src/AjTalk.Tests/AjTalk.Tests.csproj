@@ -53,6 +53,7 @@
     <Compile Include="Compiler\VmCompilerTests.cs" />
     <Compile Include="Compiler\SimpleCompilerTests.cs" />
     <Compile Include="Compiler\ParserExpressionsTests.cs" />
+    <Compile Include="ContextTests.cs" />
     <Compile Include="HostMachineTests.cs" />
     <Compile Include="ImageSerializerTests.cs" />
     <Compile Include="LoaderVmTests.cs" />
