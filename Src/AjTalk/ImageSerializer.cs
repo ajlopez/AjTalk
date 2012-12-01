@@ -189,12 +189,6 @@
                 this.writer.Write((byte)ImageCode.Machine);
                 var names = mach.GetGlobalNames().ToList();
                 
-                // TODO review of Machine existence in global variable, other names to preserve?
-                //if (names.Contains("Machine"))
-                //    names.Remove("Machine");
-                //if (names.Contains("Smalltalk"))
-                //    names.Remove("Smalltalk");
-
                 int nnames = names.Count;                
 
                 this.writer.Write(nnames);
