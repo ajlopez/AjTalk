@@ -13,6 +13,6 @@ namespace AjTalk.Language
             get; set; 
         }
 
-        object SendMessage(string msgname, object[] args);
+        object SendMessage(Machine machine, string msgname, object[] args);
     }
 }

@@ -8,9 +8,9 @@ namespace AjTalk.Language
 
         IBehavior Behavior { get; }
 
-        object Execute(IObject self, object[] args);
+        object Execute(Machine machine, IObject self, object[] args);
 
-        object Execute(IObject self, IObject receiver, object[] args);
+        object Execute(Machine machine, IObject self, IObject receiver, object[] args);
 
         object ExecuteNative(Machine machine, object seft, object[] args);
     }

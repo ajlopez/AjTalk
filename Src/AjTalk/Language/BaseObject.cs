@@ -58,25 +58,25 @@ namespace AjTalk.Language
             }
         }
 
-        public object SendMessage(string msgname, object[] args)
+        public object SendMessage(Machine machine, string msgname, object[] args)
         {
             // TODO objclass to review
             IMethod mth = this.behavior.GetInstanceMethod(msgname);
 
             if (mth != null)
-                return this.ExecuteMethod(mth, args);
+                return this.ExecuteMethod(machine, mth, args);
 
             mth = this.behavior.GetInstanceMethod("doesNotUnderstand:");
 
             if (mth != null)
-                return this.ExecuteMethod(mth, new object[] { msgname, args });
+                return this.ExecuteMethod(machine, mth, new object[] { msgname, args });
 
             throw new InvalidProgramException(string.Format("Does not understand {0}", msgname));
         }
 
-        public virtual object ExecuteMethod(IMethod method, object[] arguments)
+        public virtual object ExecuteMethod(Machine machine, IMethod method, object[] arguments)
         {
-            return method.Execute(this, this, arguments);
+            return method.Execute(machine, this, this, arguments);
         }
 
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)

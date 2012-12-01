@@ -77,15 +77,15 @@ namespace AjTalk.Language
         }
 
         // TODO how to implements super, sender
-        public object Execute(IObject self, object[] args)
+        public object Execute(Machine machine, IObject self, object[] args)
         {
-            return this.Execute(self, self, args);
+            return this.Execute(machine, self, self, args);
         }
 
         // TODO how to implements super, sender
-        public object Execute(IObject self, IObject receiver, object[] args)
+        public object Execute(Machine machine, IObject self, IObject receiver, object[] args)
         {
-            return (new ExecutionBlock(self, receiver, this, args)).Execute();
+            return (new ExecutionBlock(machine, self, receiver, this, args)).Execute();
         }
 
         public object ExecuteNative(Machine machine, object self, object[] args)

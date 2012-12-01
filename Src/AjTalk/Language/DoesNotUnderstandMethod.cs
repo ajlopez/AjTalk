@@ -13,7 +13,6 @@
         {
             this.Name = "doesNotUnderstand:";
             this.Behavior = behavior;
-            this.Machine = machine;
         }
 
         public string Name
@@ -32,16 +31,14 @@
             set;
         }
 
-        public Machine Machine { get; private set; }
-
-        public object Execute(IObject self, object[] args)
+        public object Execute(Machine machine, IObject self, object[] args)
         {
-            return this.Execute(self, self, args);
+            return this.Execute(machine, self, self, args);
         }
 
-        public object Execute(IObject self, IObject receiver, object[] args)
+        public object Execute(Machine machine, IObject self, IObject receiver, object[] args)
         {
-            return this.DoesNotUnderstand(self, receiver, (string)args[0], (object[])args[1]);
+            return this.DoesNotUnderstand(machine, self, receiver, (string)args[0], (object[])args[1]);
         }
 
         public object Execute(Machine machine, object[] args)
@@ -54,15 +51,15 @@
             throw new NotImplementedException();
         }
 
-        protected virtual object DoesNotUnderstand(IObject self, IObject receiver, string msgname, object[] args)
+        protected virtual object DoesNotUnderstand(Machine machine, IObject self, IObject receiver, string msgname, object[] args)
         {
             if (msgname.Equals("ifFalse:"))
             {
                 IBlock block = (IBlock)args[0];
-                block.Execute(this.Machine, null);
+                block.Execute(machine, null);
                 
                 // TODO return block value??
-                return this.Machine.GetGlobalObject("nil");
+                return machine.GetGlobalObject("nil");
             }
 
             if (msgname.Equals("class"))
@@ -70,25 +67,25 @@
                 return self.Behavior;
             }
 
-            if (this.Machine.HostMachine != null)
+            if (machine.HostMachine != null)
             {
-                IBehavior behavior = this.Machine.HostMachine.GetAssociatedBehavior(self.Behavior);
+                IBehavior behavior = machine.HostMachine.GetAssociatedBehavior(self.Behavior);
 
                 if (behavior != null) 
                 {
                     IMethod method = behavior.GetInstanceMethod(msgname);
 
                     if (method != null)
-                        return method.Execute(self, receiver, args);
+                        return method.Execute(machine, self, receiver, args);
 
                     method = behavior.GetInstanceMethod(this.Name);
 
                     if (method != null)
-                        return method.Execute(self, receiver, new object[] { msgname, args });
+                        return method.Execute(machine, self, receiver, new object[] { msgname, args });
                 }
             }
 
-            return DotNetObject.SendMessage(this.Machine, self, msgname, args);
+            return DotNetObject.SendMessage(machine, self, msgname, args);
         }
     }
 }

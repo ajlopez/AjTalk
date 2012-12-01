@@ -7,14 +7,18 @@
 
     public class Message
     {
+        private Machine machine;
         private IMethod method;
         private object[] arguments;
 
-        public Message(IMethod method, object[] arguments)
+        public Message(Machine machine, IMethod method, object[] arguments)
         {
+            this.machine = machine;
             this.method = method;
             this.arguments = arguments;
         }
+
+        public Machine Machine { get { return this.machine; } }
 
         public IMethod Method { get { return this.method; } }
         

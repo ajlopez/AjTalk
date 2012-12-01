@@ -18,6 +18,7 @@
             bool executed = false;
             AgentObject agent = new AgentObject();
             agent.ExecuteMethod(
+                null,
                 new FunctionalMethod((x, y, args) => 
             { 
                 executed = true; 
@@ -42,8 +43,8 @@
                 return ((ManualResetEvent)args[0]).Set();
             });
 
-            agent.ExecuteMethod(method, new object[] { handle1 });
-            agent.ExecuteMethod(method, new object[] { handle2 });
+            agent.ExecuteMethod(null, method, new object[] { handle1 });
+            agent.ExecuteMethod(null, method, new object[] { handle2 });
             handle1.WaitOne();
             handle2.WaitOne();
             Assert.AreEqual(2, count);

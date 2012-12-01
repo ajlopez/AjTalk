@@ -267,12 +267,12 @@ namespace AjTalk
         public object SendMessage(object obj, string msgname, object[] args)
         {
             if (obj == null)
-                return this.nilclass.SendMessage(msgname, args);
+                return this.nilclass.SendMessage(this, msgname, args);
 
             IObject iobj = obj as IObject;
 
             if (iobj != null)
-                return iobj.SendMessage(msgname, args);
+                return iobj.SendMessage(this, msgname, args);
 
             return DotNetObject.SendMessage(this, obj, msgname, args);
         }

@@ -86,7 +86,8 @@
             {
                 this.machine.SetCurrent();
 
-                return obj.SendMessage(msgname, args);
+                // TODO Review if use this.machine
+                return obj.SendMessage(this.machine, msgname, args);
             }
             finally
             {

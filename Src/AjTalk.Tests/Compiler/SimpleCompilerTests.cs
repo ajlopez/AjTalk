@@ -611,16 +611,16 @@ namespace AjTalk.Tests.Compiler
 
             IObject obj = (IObject)cls.NewObject();
 
-            cls.GetInstanceMethod("x:").Execute(obj, new object[] { 10 });
+            cls.GetInstanceMethod("x:").Execute(null, obj, new object[] { 10 });
 
             Assert.AreEqual(10, obj[0]);
 
-            cls.GetInstanceMethod("y:").Execute(obj, new object[] { 20 });
+            cls.GetInstanceMethod("y:").Execute(null, obj, new object[] { 20 });
 
             Assert.AreEqual(20, obj[1]);
 
-            Assert.AreEqual(10, cls.GetInstanceMethod("x").Execute(obj, new object[] { }));
-            Assert.AreEqual(20, cls.GetInstanceMethod("y").Execute(obj, new object[] { }));
+            Assert.AreEqual(10, cls.GetInstanceMethod("x").Execute(null, obj, new object[] { }));
+            Assert.AreEqual(20, cls.GetInstanceMethod("y").Execute(null, obj, new object[] { }));
         }
 
         [TestMethod]
@@ -675,7 +675,7 @@ namespace AjTalk.Tests.Compiler
             IMethod method = cls.GetInstanceMethod("add:");
             Assert.IsNotNull(method);
             IObject obj = (IObject)cls.NewObject();
-            Assert.AreEqual(6, method.Execute(obj, new object[] { new int[] { 1, 2, 3 } }));
+            Assert.AreEqual(6, method.Execute(cls.Machine, obj, new object[] { new int[] { 1, 2, 3 } }));
         }
 
         [TestMethod]
@@ -691,7 +691,7 @@ namespace AjTalk.Tests.Compiler
             IMethod method = cls.GetInstanceMethod("add:with:");
             Assert.IsNotNull(method);
             IObject obj = (IObject)cls.NewObject();
-            Assert.AreEqual(9, method.Execute(obj, new object[] { new int[] { 1, 2, 3 }, 1 }));
+            Assert.AreEqual(9, method.Execute(cls.Machine, obj, new object[] { new int[] { 1, 2, 3 }, 1 }));
         }
 
         [TestMethod]
@@ -706,7 +706,7 @@ namespace AjTalk.Tests.Compiler
 
             IObject obj = (IObject)cls.NewObject();
 
-            cls.GetInstanceMethod("side:").Execute(obj, new object[] { 10 });
+            cls.GetInstanceMethod("side:").Execute(null, obj, new object[] { 10 });
 
             Assert.AreEqual(10, obj[0]);
             Assert.AreEqual(10, obj[1]);
@@ -724,7 +724,7 @@ namespace AjTalk.Tests.Compiler
 
             IObject obj = (IObject)cls.NewObject();
 
-            cls.GetInstanceMethod("side:").Execute(obj, new object[] { 10 });
+            cls.GetInstanceMethod("side:").Execute(null, obj, new object[] { 10 });
 
             Assert.AreEqual(10, obj[0]);
             Assert.AreEqual(10, obj[1]);

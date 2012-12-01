@@ -38,9 +38,9 @@
             thread.Start();
         }
 
-        public override object ExecuteMethod(IMethod method, object[] arguments)
+        public override object ExecuteMethod(Machine machine, IMethod method, object[] arguments)
         {
-            Message message = new Message(method, arguments);
+            Message message = new Message(machine, method, arguments);
             this.queue.PostMessage(message);
             return null;    // TODO what to return?
         }
@@ -52,7 +52,7 @@
                 try
                 {
                     Message message = this.queue.GetMessage();
-                    message.Method.Execute(this, this, message.Arguments);
+                    message.Method.Execute(message.Machine, this, this, message.Arguments);
                 }
                 catch (Exception ex)
                 {

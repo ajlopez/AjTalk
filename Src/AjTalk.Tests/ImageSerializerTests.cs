@@ -313,9 +313,9 @@
             Assert.AreEqual(10, newrect[0]);
             Assert.AreEqual(20, newrect[1]);
 
-            Assert.AreEqual(10, newrect.SendMessage("x", null));
-            Assert.AreEqual(20, newrect.SendMessage("y", null));
-            Assert.AreEqual(3, newklass.SendMessage("add:to:", new object[] { 1, 2 }));
+            Assert.AreEqual(10, newrect.SendMessage(newmachine, "x", null));
+            Assert.AreEqual(20, newrect.SendMessage(newmachine, "y", null));
+            Assert.AreEqual(3, newklass.SendMessage(newmachine, "add:to:", new object[] { 1, 2 }));
         }
 
         [TestMethod]

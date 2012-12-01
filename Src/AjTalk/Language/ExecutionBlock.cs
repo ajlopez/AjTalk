@@ -42,11 +42,11 @@ namespace AjTalk.Language
             this.receiver = receiver;
         }
 
-        public ExecutionBlock(IObject self, IObject receiver, Block block, object[] arguments)
+        public ExecutionBlock(Machine machine, IObject self, IObject receiver, Block block, object[] arguments)
             : this(block, arguments)
         {
             this.self = self;
-            this.machine = self.Behavior.Machine;
+            this.machine = machine;
             this.receiver = receiver;
         }
 
@@ -253,7 +253,11 @@ namespace AjTalk.Language
                             object obj = this.Pop();
                             this.lastreceiver = obj;
 
-                            this.Push(this.machine.SendMessage(obj, mthname, args));
+                            // TODO this.machine is null in many tests, not in real world
+                            if (this.machine == null)
+                                this.Push(((IObject)obj).SendMessage(null, mthname, args));
+                            else
+                                this.Push(this.machine.SendMessage(obj, mthname, args));
 
                             break;
                         case ByteCode.MakeCollection:
@@ -418,7 +422,7 @@ namespace AjTalk.Language
             if (newblock.Closure != null || execblock.self == null)
                 execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, null).Execute());
             else
-                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, newblock, null).Execute());
+                execblock.Push(new ExecutionBlock(execblock.machine, execblock.self, execblock.receiver, newblock, null).Execute());
         }
 
         private static void DoMultiValue(ExecutionBlock execblock)
@@ -437,7 +441,7 @@ namespace AjTalk.Language
             if (newblock.Closure != null || execblock.self == null)
                 execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, args).Execute());
             else
-                execblock.Push(new ExecutionBlock(execblock.self, execblock.receiver, newblock, args).Execute());
+                execblock.Push(new ExecutionBlock(execblock.machine, execblock.self, execblock.receiver, newblock, args).Execute());
         }
 
         private static void DoGetArgument(ExecutionBlock execblock)

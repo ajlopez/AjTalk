@@ -15,7 +15,7 @@
         public void CreateAndUseMessageQueue()
         {
             MessageQueue queue = new MessageQueue(1);
-            Message message = new Message(new Method("name"), new object[] { 1, 2 });
+            Message message = new Message(null, new Method("name"), new object[] { 1, 2 });
 
             Thread thread = new Thread(new ThreadStart(delegate { queue.PostMessage(message); }));
             thread.Start();
@@ -28,7 +28,7 @@
         {
             MessageQueue queue = new MessageQueue(10);
 
-            Thread thread = new Thread(new ThreadStart(delegate { for (int k = 1; k <= 10; k++) queue.PostMessage(new Message(new Method("name"), new object[] { k })); }));
+            Thread thread = new Thread(new ThreadStart(delegate { for (int k = 1; k <= 10; k++) queue.PostMessage(new Message(null, new Method("name"), new object[] { k })); }));
             thread.Start();
 
             for (int j = 1; j <= 10; j++)
@@ -46,7 +46,7 @@
         public void CreateAndUseMessageQueueWithTenMessages()
         {
             MessageQueue queue = new MessageQueue(10);
-            Message message = new Message(new Method("name"), new object[] { 1, 2 });
+            Message message = new Message(null, new Method("name"), new object[] { 1, 2 });
 
             for (int k = 1; k <= 10; k++)
                 queue.PostMessage(message);
@@ -59,7 +59,7 @@
         public void CreateAndUseMessageQueueWithMoreEntriesThanSize()
         {
             MessageQueue queue = new MessageQueue(10);
-            Message message = new Message(new Method("name"), new object[] { 1, 2 });
+            Message message = new Message(null, new Method("name"), new object[] { 1, 2 });
 
             Thread thread = new Thread(new ThreadStart(delegate
             {

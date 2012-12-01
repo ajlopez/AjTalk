@@ -42,9 +42,10 @@
             }
         }
 
-        public object SendMessage(string msgname, object[] args)
+        public object SendMessage(Machine machine, string msgname, object[] args)
         {
-            return this.obj.SendMessage(msgname, args);
+            // TODO Review if use machine or this.machine
+            return this.obj.SendMessage(machine, msgname, args);
         }
     }
 }

@@ -44,12 +44,12 @@
 
         public IBehavior Behavior { get { return this.classDescription; } }
 
-        public object Execute(IObject self, object[] args)
+        public object Execute(Machine machine, IObject self, object[] args)
         {
             return this.function(self, self, args);
         }
 
-        public object Execute(IObject self, IObject receiver, object[] args)
+        public object Execute(Machine machine, IObject self, IObject receiver, object[] args)
         {
             // TODO review, used in Machine to define ifNil:
             if (this.function == null)

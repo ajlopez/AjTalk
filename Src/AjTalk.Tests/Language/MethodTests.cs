@@ -87,7 +87,7 @@ namespace AjTalk.Tests.Language
 
             IObject obj = (IObject)cls.NewObject();
 
-            mth.Execute(obj, new object[] { 10 });
+            mth.Execute(machine, obj, new object[] { 10 });
 
             Assert.AreEqual(10, obj[0]);
         }
@@ -113,7 +113,7 @@ namespace AjTalk.Tests.Language
 
             IObject obj = (IObject)cls.NewObject();
 
-            mth.Execute(obj, new object[] { 10 });
+            mth.Execute(machine, obj, new object[] { 10 });
 
             Assert.AreEqual(10, obj[0]);
         }

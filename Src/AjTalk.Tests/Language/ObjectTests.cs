@@ -32,11 +32,11 @@ namespace AjTalk.Tests.Language
         {
             IObject obj = (IObject)this.GetRectangleClass().NewObject();
 
-            obj.SendMessage("side:", new object[] { 10 });
+            obj.SendMessage(null, "side:", new object[] { 10 });
 
             Assert.AreEqual(10, obj[0]);
             Assert.AreEqual(10, obj[1]);
-            Assert.AreEqual(100, obj.SendMessage("area", null));
+            Assert.AreEqual(100, obj.SendMessage(obj.Behavior.Machine, "area", null));
         }
 
         private IClass GetRectangleClass()

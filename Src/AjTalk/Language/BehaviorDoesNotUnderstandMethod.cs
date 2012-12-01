@@ -14,21 +14,21 @@
         {
         }
 
-        protected override object DoesNotUnderstand(IObject self, IObject receiver, string msgname, object[] args)
+        protected override object DoesNotUnderstand(Machine machine, IObject self, IObject receiver, string msgname, object[] args)
         {
             if (!(self is IBehavior))
-                return base.DoesNotUnderstand(self, receiver, msgname, args);
+                return base.DoesNotUnderstand(machine, self, receiver, msgname, args);
 
             if (msgname.Equals("new"))
                 return ((IBehavior)self).NewObject();
 
             if (msgname.StartsWith("commentStamp:"))
-                return new ChunkReaderProcessor((Machine machine, ICompiler compiler, string text) => { }, 1);
+                return new ChunkReaderProcessor((Machine mach, ICompiler compiler, string text) => { }, 1);
 
             if (msgname == "methods" || msgname.StartsWith("methodsFor:"))
             {
                 IBehavior behavior = (IBehavior)self;
-                return new ChunkReaderProcessor((Machine machine, ICompiler compiler, string text) => {
+                return new ChunkReaderProcessor((Machine mach, ICompiler compiler, string text) => {
                     behavior.DefineInstanceMethod(compiler.CompileInstanceMethod(text, behavior));
                 });
             }
@@ -38,8 +38,8 @@
 
             if (msgname.Equals("subclass:") || msgname.Equals("agent:"))
             {
-                IClass newclass = this.Machine.CreateClass((string)args[0], (IClass)self);
-                this.Machine.SetGlobalObject(newclass.Name, newclass);
+                IClass newclass = machine.CreateClass((string)args[0], (IClass)self);
+                machine.SetGlobalObject(newclass.Name, newclass);
 
                 if (msgname.Equals("agent:"))
                     ((BaseClass)newclass).IsAgentClass = true;
@@ -63,7 +63,7 @@
                 string instancevarnames = (string)args[1];
                 string classvarnames = args.Length > 2 ? (string)args[2] : string.Empty;
 
-                IClass newclass = this.Machine.CreateClass((string)args[0], (IClass)self, instancevarnames, classvarnames);
+                IClass newclass = machine.CreateClass((string)args[0], (IClass)self, instancevarnames, classvarnames);
 
                 if (msgname.StartsWith("agent:"))
                     ((BaseClass)newclass).IsAgentClass = true;
@@ -72,7 +72,7 @@
                 if (args.Length >= 5)
                     ((BaseClass)newclass).Category = (string)args[4];
 
-                this.Machine.SetGlobalObject(newclass.Name, newclass);
+                machine.SetGlobalObject(newclass.Name, newclass);
 
                 return newclass;
             }
@@ -80,15 +80,15 @@
             if (msgname.Equals("subclass:nativeType:"))
             {
                 Type type = (Type)args[1];
-                NativeBehavior newbehavior = this.Machine.GetNativeBehavior(type);
+                NativeBehavior newbehavior = machine.GetNativeBehavior(type);
 
                 if (newbehavior == null)
                 {
-                    newbehavior = (NativeBehavior)this.Machine.CreateNativeBehavior((IClassDescription)self, type);
-                    this.Machine.RegisterNativeBehavior(newbehavior.NativeType, newbehavior);
+                    newbehavior = (NativeBehavior)machine.CreateNativeBehavior((IClassDescription)self, type);
+                    machine.RegisterNativeBehavior(newbehavior.NativeType, newbehavior);
                 }
 
-                this.Machine.SetGlobalObject((string)args[0], newbehavior);
+                machine.SetGlobalObject((string)args[0], newbehavior);
                 return newbehavior;
             }
 
@@ -102,7 +102,7 @@
                 return self;
             }
 
-            return base.DoesNotUnderstand(self, receiver, msgname, args);
+            return base.DoesNotUnderstand(machine, self, receiver, msgname, args);
         }
     }
 }
