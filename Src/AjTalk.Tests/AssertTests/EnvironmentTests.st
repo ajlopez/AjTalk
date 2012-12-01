@@ -5,8 +5,10 @@ env := Environment new: #MyEnvironment.
 
 [(Smalltalk at: #MyEnvironment) isNil not] assert.
 [(Smalltalk at: #MyEnvironment) == MyEnvironment] assert.
+[(Smalltalk at: #MyEnvironment) == env] assert.
 
 [(env at: #Smalltalk) == Smalltalk] assert.
+[(MyEnvironment at: #Smalltalk) == Smalltalk] assert.
 
 "Define a global at Smalltalk environment"
 
@@ -36,7 +38,7 @@ Object subclass:#MyClass
 
 Smalltalk setCurrent.
 
-"MyClass is not defined here"
+"MyClass is not defined here, at env environment"
 
 [MyClass isNil] assert.
 
