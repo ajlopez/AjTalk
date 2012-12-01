@@ -30,6 +30,7 @@ Object subclass:#MyClass
 .
 
 [(env at: #MyClass) isNil not] assert.
+[(Smalltalk at: #MyClass) isNil] assert.
 
 "Back to Smalltalk environment"
 

@@ -666,6 +666,12 @@
             Assert.AreEqual("f4", result);
         }
 
+        [TestMethod]
+        public void NilIsNil()
+        {
+            Assert.AreEqual(true, this.Evaluate("nil isNil"));
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);
