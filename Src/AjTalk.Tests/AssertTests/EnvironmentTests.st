@@ -1,6 +1,10 @@
 ﻿
 | env myglobal subenv myobj |
 
+"Current environment is Smalltalk"
+
+[Environment current == Smalltalk] assert.
+
 env := Environment new: #MyEnvironment.
 
 "The new environment was defined as global at Smalltalk"
@@ -30,6 +34,14 @@ MyGlobal := Object new.
 "Switch to env environment"
 
 env setCurrent.
+
+"Current environment check"
+
+[Environment current == env] assert.
+[Environment current == Smalltalk.MyEnvironment] assert.
+
+"The current environment is a referenced by a global variable at Smalltalk environment"
+[Environment current == MyEnvironment] assert.
 
 "Define a 'global' at current env environment"
 

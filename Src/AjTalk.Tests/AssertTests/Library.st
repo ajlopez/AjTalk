@@ -280,6 +280,10 @@ Object subclass: #Environment nativeType: @AjTalk.Context!
 
 !Environment class methods!
 
+current
+	^Machine !!CurrentEnvironment.
+!
+
 new: aName
 	| newenv |
 	newenv := @AjTalk.Context !!new: Smalltalk.
