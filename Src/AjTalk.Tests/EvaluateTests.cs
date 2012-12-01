@@ -524,6 +524,13 @@
         }
 
         [TestMethod]
+        public void EvaluateSimpleAt()
+        {
+            object result = this.Evaluate("#(1 2 3) at: 2");
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
         public void EvaluateAddTwoStrings()
         {
             object result = this.Evaluate("'foo' + 'bar'");

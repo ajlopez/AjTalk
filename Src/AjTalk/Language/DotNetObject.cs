@@ -131,10 +131,9 @@
                 return SendNativeStaticMessage((Type)obj, mthname, args);
             }
 
-            behavior = machine.GetNativeBehavior(obj.GetType());
-
-            if (behavior != null)
+            if (obj is IList)
             {
+                behavior = machine.GetNativeBehavior(typeof(IList));
                 IMethod mth = behavior.GetInstanceMethod(msgname);
 
                 if (mth != null)
