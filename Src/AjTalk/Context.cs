@@ -7,9 +7,19 @@
 
     public class Context
     {
+        private IDictionary<string, object> values = new Dictionary<string, object>();
+
         public object GetValue(string name)
         {
-            return null;
+            if (!values.ContainsKey(name))
+                return null;
+
+            return values[name];
+        }
+
+        public void SetValue(string name, object value)
+        {
+            values[name] = value;
         }
     }
 }
