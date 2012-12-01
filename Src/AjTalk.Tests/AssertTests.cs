@@ -78,6 +78,13 @@
             DoAssert("Environment");
         }
 
+        [TestMethod]
+        public void WebServerAsserts()
+        {
+            this.LoadFile(@"AssertTests\WebServer.st");
+            DoAssert("WebServer");
+        }
+
         private void DoAssert(string filename)
         {
             this.LoadFile(@"AssertTests\" + filename + "Tests.st");
