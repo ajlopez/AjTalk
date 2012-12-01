@@ -31,6 +31,7 @@ namespace AjTalk.Language
             codes[(int)ByteCode.GetClass] = DoGetClass;
             codes[(int)ByteCode.BasicSize] = DoBasicSize;
             codes[(int)ByteCode.GetGlobalVariable] = DoGetGlobalVariable;
+            codes[(int)ByteCode.SetGlobalVariable] = DoSetGlobalVariable;
             codes[(int)ByteCode.GetDotNetType] = DoGetDotNetType;
         }
 
@@ -337,12 +338,6 @@ namespace AjTalk.Language
                             this.receiver[arg] = this.Pop();
                             this.lastreceiver = this.receiver;
                             break;
-                        case ByteCode.SetGlobalVariable:
-                            this.ip++;
-                            arg = this.block.ByteCodes[this.ip];
-                            this.machine.SetGlobalObject(this.block.GetGlobalName(arg), this.Pop());
-                            this.lastreceiver = this.machine.GetGlobalObject(this.block.GetGlobalName(arg));
-                            break;
                         case ByteCode.RaiseException:
                             throw (Exception)this.Pop();
                         default:
@@ -478,6 +473,21 @@ namespace AjTalk.Language
                 value = execblock.machine.CurrentEnvironment.GetValue(name);
 
             execblock.Push(value);
+        }
+
+        private static void DoSetGlobalVariable(ExecutionBlock execblock)
+        {
+            execblock.ip++;
+            byte arg = execblock.block.ByteCodes[execblock.ip];
+            string name = execblock.block.GetGlobalName(arg);
+            object value = execblock.Pop();
+
+            if (execblock.self != null)
+                execblock.self.Behavior.Scope.SetValue(name, value);
+            else
+                execblock.machine.CurrentEnvironment.SetValue(name, value);
+
+            execblock.lastreceiver = value;
         }
 
         private static void DoGetDotNetType(ExecutionBlock execblock)
