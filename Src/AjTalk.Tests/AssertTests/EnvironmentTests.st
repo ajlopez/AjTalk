@@ -20,6 +20,15 @@ env setCurrent.
 
 MyGlobal := Object new.
 
+"Define a class at current env environment, no change to syntax"
+
+Object subclass:#MyClass
+	instanceVariableNames:''
+	classVariableNames:''
+	poolDictionaries:''
+	category:''
+!
+
 "Back to Smalltalk environment"
 
 Smalltalk setCurrent.
