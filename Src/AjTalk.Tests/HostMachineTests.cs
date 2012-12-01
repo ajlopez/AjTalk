@@ -207,6 +207,22 @@
             Assert.AreEqual(300, this.Evaluate(hosted, "rect area"));
         }
 
+        [TestMethod]
+        public void GetGlobalObjectFromHostMachine()
+        {
+            Machine hostmachine = new Machine();
+            IClass hostklass = hostmachine.CreateClass("Rectangle");
+            hostmachine.SetGlobalObject(hostklass.Name, hostklass);
+
+            Machine machine = new Machine();
+            machine.HostMachine = hostmachine;
+
+            var result = machine.GetGlobalObject("Rectangle");
+
+            Assert.IsNotNull(result);
+            Assert.AreSame(hostklass, result);
+        }
+
         private object Evaluate(Machine machine, string code)
         {
             SimpleCompiler compiler = new SimpleCompiler();

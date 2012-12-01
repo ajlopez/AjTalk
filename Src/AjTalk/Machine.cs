@@ -195,9 +195,10 @@ namespace AjTalk
         public object GetGlobalObject(string objname)
         {
             if (this.globals.ContainsKey(objname))
-            {
                 return this.globals[objname];
-            }
+
+            if (this.HostMachine != null)
+                return this.HostMachine.GetGlobalObject(objname);
 
             return null;
         }
