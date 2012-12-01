@@ -37,7 +37,8 @@
             Reference = 4,
             Class = 5,
             Machine = 6,
-            NativeBehavior = 7
+            NativeBehavior = 7,
+            Context = 8
         }
 
         public void Serialize(object obj)
@@ -55,6 +56,15 @@
                 return;
             }
 
+            int position = this.objects.IndexOf(obj);
+
+            if (position >= 0)
+            {
+                this.writer.Write((byte)ImageCode.Reference);
+                this.writer.Write(position);
+                return;
+            }
+
             if (obj is string)
             {
                 this.writer.Write((byte)ImageCode.String);
@@ -62,18 +72,28 @@
                 return;
             }
 
+            if (obj is Context)
+            {
+                var ctx = (Context)obj;
+                this.objects.Add(ctx);
+                this.writer.Write((byte)ImageCode.Context);
+                var names = ctx.GetNames();
+                int nnames = names.Count;
+
+                this.writer.Write(nnames);
+
+                foreach (var name in names)
+                {
+                    this.writer.Write(name);
+                    this.Serialize(ctx.GetValue(name));
+                }
+
+                return;
+            }
+
             if (obj is NativeBehavior)
             {
                 var nbehavior = (NativeBehavior)obj;
-
-                int position = this.objects.IndexOf(nbehavior);
-
-                if (position >= 0)
-                {
-                    this.writer.Write((byte)ImageCode.Reference);
-                    this.writer.Write(position);
-                    return;
-                }
 
                 this.objects.Add(nbehavior);
 
@@ -110,15 +130,6 @@
             if (obj is IClass)
             {
                 var klass = (IClass)obj;
-
-                int position = this.objects.IndexOf(klass);
-
-                if (position >= 0)
-                {
-                    this.writer.Write((byte)ImageCode.Reference);
-                    this.writer.Write(position);
-                    return;
-                }
 
                 this.objects.Add(klass);
 
@@ -159,15 +170,6 @@
             {
                 var iobj = (IObject)obj;
 
-                int position = this.objects.IndexOf(iobj);
-
-                if (position >= 0)
-                {
-                    this.writer.Write((byte)ImageCode.Reference);
-                    this.writer.Write(position);
-                    return;
-                }
-
                 this.objects.Add(iobj);
 
                 this.writer.Write((byte)ImageCode.Object);
@@ -188,10 +190,10 @@
                 var names = mach.GetGlobalNames().ToList();
                 
                 // TODO review of Machine existence in global variable, other names to preserve?
-                if (names.Contains("Machine"))
-                    names.Remove("Machine");
-                if (names.Contains("Smalltalk"))
-                    names.Remove("Smalltalk");
+                //if (names.Contains("Machine"))
+                //    names.Remove("Machine");
+                //if (names.Contains("Smalltalk"))
+                //    names.Remove("Smalltalk");
 
                 int nnames = names.Count;                
 
@@ -223,6 +225,19 @@
                     return this.reader.ReadString();
                 case ImageCode.Reference:
                     return this.objects[this.reader.ReadInt32()];
+                case ImageCode.Context:
+                    Context ctx = new Context();
+                    this.objects.Add(ctx);
+                    int nnames = this.reader.ReadInt32();
+
+                    for (int k = 0; k < nnames; k++)
+                    {
+                        string valuename = this.reader.ReadString();
+                        object value = this.Deserialize();
+                        ctx.SetValue(valuename, value);
+                    }
+
+                    return ctx;
                 case ImageCode.NativeBehavior:
                     string typename = (string)this.Deserialize();
                     Type type = TypeUtilities.GetType(typename);
@@ -291,7 +306,7 @@
                     this.machine = new Machine(false);
                     this.objects.Add(machine);
                     this.objects.Add(machine.Environment);
-                    int nnames = this.reader.ReadInt32();
+                    nnames = this.reader.ReadInt32();
 
                     for (int k = 0; k < nnames; k++)
                     {

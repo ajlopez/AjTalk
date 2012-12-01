@@ -157,6 +157,30 @@
         }
 
         [TestMethod]
+        public void SerializeDeserializeMachineWithEnvironment()
+        {
+            Machine machine = new Machine();
+            Context environment = new Context(machine.Environment);
+            machine.SetGlobalObject("MyEnvironment", environment);
+            environment.SetValue("One", 1);
+
+            var result = this.Process(machine, machine);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Machine));
+
+            var newmachine = (Machine)result;
+
+            result = newmachine.GetGlobalObject("MyEnvironment");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Context));
+
+            var newcontext = (Context)result;
+
+            Assert.AreEqual(1, newcontext.GetValue("One"));
+        }
+
+        [TestMethod]
         public void SerializeDeserializeClassWithInstanceMethod()
         {
             Machine machine = new Machine();
