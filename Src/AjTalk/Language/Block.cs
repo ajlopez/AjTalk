@@ -424,14 +424,6 @@ namespace AjTalk.Language
                 return true;
             }
 
-            p = this.GetClassVariableOffset(name);
-
-            if (p >= 0)
-            {
-                this.CompileByteCode(ByteCode.GetClassVariable, (byte)p);
-                return true;
-            }
-
             return false;
         }
 
@@ -458,24 +450,6 @@ namespace AjTalk.Language
                 return true;
             }
 
-            p = this.GetClassVariableOffset(name);
-
-            if (p >= 0)
-            {
-                this.CompileByteCode(ByteCode.SetClassVariable, (byte)p);
-                return true;
-            }
-
-            // TODO Review: arguments cannot be set
-            // if (this.argnames != null)
-            // {
-            //    p = this.argnames.IndexOf(name);
-            //    if (p >= 0)
-            //    {
-            //        this.CompileByteCode(ByteCode.SetArgument, (byte)p);
-            //        return true;
-            //    }
-            // }
             return false;
         }
 

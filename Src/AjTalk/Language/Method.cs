@@ -134,15 +134,6 @@ namespace AjTalk.Language
                 return true;
             }
 
-            // TODO Review if a class variable can be used in an instance method
-            p = cls.GetClassVariableOffset(name);
-
-            if (p >= 0)
-            {
-                CompileByteCode(ByteCode.GetClassVariable, (byte)p);
-                return true;
-            }
-
             return false;
         }
 
@@ -163,15 +154,6 @@ namespace AjTalk.Language
             if (p >= 0)
             {
                 this.CompileByteCode(ByteCode.SetInstanceVariable, (byte)p);
-                return true;
-            }
-
-            // TODO Is this code needed?
-            p = cls.GetClassVariableOffset(name);
-
-            if (p >= 0)
-            {
-                this.CompileByteCode(ByteCode.SetClassVariable, (byte)p);
                 return true;
             }
 

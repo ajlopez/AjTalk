@@ -133,8 +133,6 @@ namespace AjTalk.Language
                             return null;
                         case ByteCode.ReturnPop:
                             return this.Top;
-                        case ByteCode.GetClassVariable:
-                            throw new Exception("Not implemented");
                         case ByteCode.GetLocal:
                             this.ip++;
                             arg = this.block.ByteCodes[this.ip];
@@ -310,15 +308,6 @@ namespace AjTalk.Language
 
                             break;
                         
-                        // TODO review argument has no set
-                        // case ByteCode.SetArgument:
-                        //    this.ip++;
-                        //    arg = this.block.ByteCodes[this.ip];
-                        //    this.arguments[arg] = this.Pop();
-                        //    this.lastreceiver = null;
-                        //    break;
-                        case ByteCode.SetClassVariable:
-                            throw new Exception("Not implemented");
                         case ByteCode.SetLocal:
                             this.ip++;
                             arg = this.block.ByteCodes[this.ip];

@@ -60,25 +60,6 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
-        public void CompileClassVariableInBlockInsideAMethod()
-        {
-            Machine machine = new Machine();
-            IClass cls = machine.CreateClass("Rectangle");
-            cls.DefineClassVariable("x");
-            var method = this.compiler.CompileInstanceMethod("x ^[x] value", cls);
-            Assert.IsNotNull(method);
-            Assert.IsNotNull(method.ByteCodes);
-            Assert.AreEqual("x ^[x] value", method.SourceCode);
-            Assert.IsTrue(method.NoConstants > 0);
-            Assert.IsInstanceOfType(method.GetConstant(0), typeof(Block));
-            var block = (Block)method.GetConstant(0);
-            var result = (new BlockDecompiler(block)).Decompile();
-            Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual("GetClassVariable x", result[0]);
-        }
-
-        [TestMethod]
         public void CompileClassMethod()
         {
             Machine machine = new Machine();
