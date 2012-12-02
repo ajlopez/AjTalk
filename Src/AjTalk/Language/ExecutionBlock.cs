@@ -406,7 +406,8 @@ namespace AjTalk.Language
             byte arg = execblock.block.ByteCodes[execblock.ip];
 
             Block newblock = (Block)execblock.block.GetConstant(arg);
-            newblock = new Block(newblock, execblock);
+
+            newblock = newblock.Clone(execblock);
 
             execblock.Push(newblock);
         }

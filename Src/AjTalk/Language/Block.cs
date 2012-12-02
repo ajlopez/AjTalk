@@ -38,18 +38,6 @@ namespace AjTalk.Language
             this.closure = closure;
         }
 
-        public Block(Block original, ExecutionBlock closure)
-        {
-            this.bytecodes = original.bytecodes;
-            this.constants = original.constants;
-            this.argnames = original.argnames;
-            this.localnames = original.localnames;
-            this.globalnames = original.globalnames;
-            this.sourcecode = original.sourcecode;
-            this.closure = closure;
-            this.outer = original.outer;
-        }
-
         public string SourceCode { get { return this.sourcecode; } }
 
         public int Arity { get { return this.argnames.Count; } }
@@ -63,6 +51,8 @@ namespace AjTalk.Language
         public ICollection<string> LocalNames { get { return this.localnames; } }
 
         public ExecutionBlock Closure { get { return this.closure; } }
+
+        public Block OuterBlock { get { return this.outer; } }
 
         public IObject Receiver
         {
@@ -111,6 +101,13 @@ namespace AjTalk.Language
 
                 return this.globalnames.Count;
             }
+        }
+
+        public Block Clone(ExecutionBlock closure)
+        {
+            Block newblock = (Block)this.MemberwiseClone();
+            newblock.closure = closure;
+            return newblock;
         }
 
         public static byte MessageArity(string msgname)

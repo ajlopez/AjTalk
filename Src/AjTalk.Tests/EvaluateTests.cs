@@ -75,7 +75,7 @@
         }
 
         [TestMethod]
-        public void EvaluateLocalVariableInInnerBlock()
+        public void EvaluateLocalInstanceInInnerBlock()
         {
             var cls = this.machine.CreateClass("MyClass", this.machine.UndefinedObjectClass, "x", string.Empty);
             this.machine.SetCurrentEnvironmentObject(cls.Name, cls);
