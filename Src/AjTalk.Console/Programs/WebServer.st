@@ -18,23 +18,26 @@ initialize
 	bytes := @System.Array !!CreateInstance: @System.Byte with: 1024 * 16.
 	listener := @System.Net.HttpListener !!new.
 	listener !!Prefixes !!Add: 'http://*:8000/'.
+	@System.Console !!WriteLine: 'initialize'
 !
 
 process: context
 	| filename |
 	filename := context !!Request !!Url !!AbsolutePath.
 	@System.Console !!WriteLine: filename.
-	^nil
 !
 
 start
 	listener !!Start.
+	@System.Console !!WriteLine: 'start'.
 	[true] whileTrue: [
 		| context |
+		@System.Console !!WriteLine: 'get context'.
 		context := listener !!GetContext.
 		@System.Console !!WriteLine: 'new request'.
 		self process: context.
-	]
+	].
+	@System.Console !!WriteLine: 'end start'
 ! !
 
 WebServer new start
