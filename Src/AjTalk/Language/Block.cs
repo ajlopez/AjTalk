@@ -15,6 +15,7 @@ namespace AjTalk.Language
         private List<string> localnames = new List<string>();
         private List<string> globalnames = new List<string>();
         private string sourcecode;
+        private Block outer;
         private ExecutionBlock closure;
 
         public Block()
@@ -22,8 +23,14 @@ namespace AjTalk.Language
         }
 
         public Block(string sourcecode)
+            : this(sourcecode, null)
+        {
+        }
+
+        public Block(string sourcecode, Block outer)
         {
             this.sourcecode = sourcecode;
+            this.outer = outer;
         }
 
         public Block(ExecutionBlock closure)
@@ -40,6 +47,9 @@ namespace AjTalk.Language
             this.globalnames = original.globalnames;
             this.sourcecode = original.sourcecode;
             this.closure = closure;
+
+            if (closure != null)
+                this.outer = closure.Block.outer;
         }
 
         public string SourceCode { get { return this.sourcecode; } }
@@ -55,6 +65,16 @@ namespace AjTalk.Language
         public ICollection<string> LocalNames { get { return this.localnames; } }
 
         public ExecutionBlock Closure { get { return this.closure; } }
+
+        public IObject Receiver
+        {
+            get
+            {
+                if (this.Closure == null)
+                    return null;
+                return this.Closure.Receiver;
+            }
+        }
 
         public byte[] ByteCodes { get { return this.bytecodes; } }
 
@@ -311,11 +331,33 @@ namespace AjTalk.Language
 
         public virtual string GetInstanceVariableName(int n)
         {
+            if (this.outer != null)
+                return this.outer.GetInstanceVariableName(n);
+
             throw new NotSupportedException();
+        }
+
+        public virtual int GetInstanceVariableOffset(string name)
+        {
+            if (this.outer != null)
+                return this.outer.GetInstanceVariableOffset(name);
+
+            return -1;
+        }
+
+        public virtual int GetClassVariableOffset(string name)
+        {
+            if (this.outer != null)
+                return this.outer.GetClassVariableOffset(name);
+
+            return -1;
         }
 
         public virtual string GetClassVariableName(int n)
         {
+            if (this.outer != null)
+                return this.outer.GetClassVariableName(n);
+
             throw new NotSupportedException();
         }
 
@@ -376,6 +418,22 @@ namespace AjTalk.Language
                 }
             }
 
+            p = this.GetInstanceVariableOffset(name);
+
+            if (p >= 0)
+            {
+                this.CompileByteCode(ByteCode.GetInstanceVariable, (byte)p);
+                return true;
+            }
+
+            p = this.GetClassVariableOffset(name);
+
+            if (p >= 0)
+            {
+                this.CompileByteCode(ByteCode.GetClassVariable, (byte)p);
+                return true;
+            }
+
             return false;
         }
 
@@ -392,6 +450,22 @@ namespace AjTalk.Language
                     this.CompileByteCode(ByteCode.SetLocal, (byte)p);
                     return true;
                 }
+            }
+
+            p = this.GetInstanceVariableOffset(name);
+
+            if (p >= 0)
+            {
+                this.CompileByteCode(ByteCode.SetInstanceVariable, (byte)p);
+                return true;
+            }
+
+            p = this.GetClassVariableOffset(name);
+
+            if (p >= 0)
+            {
+                this.CompileByteCode(ByteCode.SetClassVariable, (byte)p);
+                return true;
             }
 
             // TODO Review: arguments cannot be set

@@ -75,6 +75,21 @@
         }
 
         [TestMethod]
+        public void EvaluateLocalVariableInInnerBlock()
+        {
+            var cls = this.machine.CreateClass("MyClass", this.machine.UndefinedObjectClass, "x", string.Empty);
+            this.machine.SetCurrentEnvironmentObject(cls.Name, cls);
+            var result = this.Evaluate("myobj := MyClass new");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IObject));
+            var iobj = (IObject)result;
+            iobj[0] = 10;
+            Parser parser = new Parser("x ^[x] value");
+            cls.DefineInstanceMethod(parser.CompileInstanceMethod(cls));
+            Assert.AreEqual(10, this.Evaluate("myobj x"));
+        }
+
+        [TestMethod]
         public void EvaluateBlockWithArgument()
         {
             Assert.AreEqual(1, this.Evaluate("[:a | a] value: 1"));

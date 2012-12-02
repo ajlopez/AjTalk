@@ -105,6 +105,8 @@ namespace AjTalk.Language
 
         public int NoParentArguments { get { return this.block.Closure == null ? 0 : this.block.Closure.NoArguments; } }
 
+        public Block Block { get { return this.block; } }
+
         private object Top
         {
             get
@@ -360,6 +362,23 @@ namespace AjTalk.Language
             return this.Pop();
         }
 
+        public IObject Receiver
+        {
+            get
+            {
+                if (this.self != null)
+                    return this.self;
+
+                if (this.receiver != null)
+                    return this.receiver;
+
+                if (this.block.Closure != null)
+                    return this.block.Closure.Receiver;
+
+                return null;
+            }
+        }
+
         internal object GetLocal(int nlocal)
         {
             if (nlocal < this.NoParentLocals)
@@ -421,10 +440,7 @@ namespace AjTalk.Language
 
             execblock.lastreceiver = newblock;
 
-            if (newblock.Closure != null || execblock.self == null)
-                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, null).Execute());
-            else
-                execblock.Push(new ExecutionBlock(execblock.machine, execblock.self, execblock.receiver, newblock, null).Execute());
+            execblock.Push(new ExecutionBlock(execblock.machine, execblock.Receiver, newblock, null).Execute());
         }
 
         private static void DoMultiValue(ExecutionBlock execblock)
@@ -440,10 +456,7 @@ namespace AjTalk.Language
             Block newblock = (Block)execblock.Pop();
             execblock.lastreceiver = newblock;
 
-            if (newblock.Closure != null || execblock.self == null)
-                execblock.Push(new ExecutionBlock(execblock.machine, execblock.receiver, newblock, args).Execute());
-            else
-                execblock.Push(new ExecutionBlock(execblock.machine, execblock.self, execblock.receiver, newblock, args).Execute());
+            execblock.Push(new ExecutionBlock(execblock.machine, execblock.Receiver, newblock, args).Execute());
         }
 
         private static void DoGetArgument(ExecutionBlock execblock)

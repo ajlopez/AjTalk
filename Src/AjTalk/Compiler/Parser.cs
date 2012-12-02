@@ -13,6 +13,7 @@ namespace AjTalk.Compiler
         private IList locals = new ArrayList();
         private string methodname;
         private Block block;
+        private Block outer;
         private string source;
 
         public Parser(Lexer tok)
@@ -28,7 +29,7 @@ namespace AjTalk.Compiler
 
         public Block CompileBlock()
         {
-            this.block = new Block(this.source);
+            this.block = new Block(this.source, this.outer);
             this.CompileBlockArguments();
             this.CompileLocals();
             
@@ -299,8 +300,9 @@ namespace AjTalk.Compiler
             if (token.Type == TokenType.Punctuation && token.Value == "[")
             {
                 Parser newcompiler = new Parser(this.tokenizer);
+                newcompiler.outer = this.block;
                 
-                // TODO Review is the copy of argument and local names is needed
+                // TODO Review is the copy of argument and local names is needed or use outer block
                 newcompiler.arguments = new ArrayList(this.arguments);
                 newcompiler.locals = new ArrayList(this.locals);
 

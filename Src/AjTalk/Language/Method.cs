@@ -105,6 +105,22 @@ namespace AjTalk.Language
             return ((IClassDescription)this.mthclass).GetClassVariableNames().ElementAt(n);
         }
 
+        public override int GetClassVariableOffset(string name)
+        {
+            var cls = this.mthclass as IClassDescription;
+            if (cls == null)
+                return -1;
+            return cls.GetClassVariableOffset(name);
+        }
+
+        public override int GetInstanceVariableOffset(string name)
+        {
+            var cls = this.mthclass as IClassDescription;
+            if (cls == null)
+                return -1;
+            return cls.GetInstanceVariableOffset(name);
+        }
+
         private bool TryCompileGetVariable(string name)
         {
             if (this.mthclass == null)

@@ -33,6 +33,49 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(method);
             Assert.IsNotNull(method.ByteCodes);
             Assert.AreEqual("x ^x", method.SourceCode);
+            var result = (new BlockDecompiler(method)).Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("GetInstanceVariable x", result[0]);
+            Assert.AreEqual("ReturnPop", result[1]);
+        }
+
+        [TestMethod]
+        public void CompileInstanceVariableInBlockInsideAMethod()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("Rectangle");
+            cls.DefineInstanceVariable("x");
+            var method = this.compiler.CompileInstanceMethod("x ^[x] value", cls);
+            Assert.IsNotNull(method);
+            Assert.IsNotNull(method.ByteCodes);
+            Assert.AreEqual("x ^[x] value", method.SourceCode);
+            Assert.IsTrue(method.NoConstants > 0);
+            Assert.IsInstanceOfType(method.GetConstant(0), typeof(Block));
+            var block = (Block)method.GetConstant(0);
+            var result = (new BlockDecompiler(block)).Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetInstanceVariable x", result[0]);
+        }
+
+        [TestMethod]
+        public void CompileClassVariableInBlockInsideAMethod()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("Rectangle");
+            cls.DefineClassVariable("x");
+            var method = this.compiler.CompileInstanceMethod("x ^[x] value", cls);
+            Assert.IsNotNull(method);
+            Assert.IsNotNull(method.ByteCodes);
+            Assert.AreEqual("x ^[x] value", method.SourceCode);
+            Assert.IsTrue(method.NoConstants > 0);
+            Assert.IsInstanceOfType(method.GetConstant(0), typeof(Block));
+            var block = (Block)method.GetConstant(0);
+            var result = (new BlockDecompiler(block)).Decompile();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("GetClassVariable x", result[0]);
         }
 
         [TestMethod]

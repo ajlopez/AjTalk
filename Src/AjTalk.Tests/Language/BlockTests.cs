@@ -226,6 +226,44 @@ namespace AjTalk.Tests.Language
             Assert.AreEqual(1, Block.MessageArity("with:"));
             Assert.AreEqual(2, Block.MessageArity("with:with:"));
         }
+
+        [TestMethod]
+        public void GetInstanceVariableOffset()
+        {
+            Block block = new Block();
+            Assert.AreEqual(-1, block.GetInstanceVariableOffset("x"));
+        }
+
+        [TestMethod]
+        public void GetInstanceVariableOffsetWithOuter()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("TestClass");
+            cls.DefineInstanceVariable("x");
+            Method method = new Method(cls, "mymethod");
+
+            Block block = new Block("x", method);
+            Assert.AreEqual(0, block.GetInstanceVariableOffset("x"));
+        }
+
+        [TestMethod]
+        public void GetClassVariableOffset()
+        {
+            Block block = new Block();
+            Assert.AreEqual(-1, block.GetClassVariableOffset("x"));
+        }
+
+        [TestMethod]
+        public void GetClassVariableOffsetWithOuter()
+        {
+            Machine machine = new Machine();
+            IClass cls = machine.CreateClass("TestClass");
+            cls.DefineClassVariable("x");
+            Method method = new Method(cls, "mymethod");
+
+            Block block = new Block("x", method);
+            Assert.AreEqual(0, block.GetClassVariableOffset("x"));
+        }
     }
 }
 

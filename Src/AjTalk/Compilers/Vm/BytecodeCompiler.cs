@@ -146,7 +146,7 @@
 
         public override void Visit(BlockExpression expression)
         {
-            Block newblock = new Block();
+            Block newblock = new Block(null, this.block);
 
             // TODO Review is the copy of argument and local names is needed
             foreach (var parname in this.block.ParameterNames)

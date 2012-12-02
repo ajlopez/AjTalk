@@ -22,19 +22,20 @@
         private object ValueMethod(object obj, object[] arguments)
         {
             Block block = (Block)obj;
-            return (new ExecutionBlock(this.Machine, null, block, arguments)).Execute();
+
+            return (new ExecutionBlock(this.Machine, block.Receiver, block, arguments)).Execute();
         }
 
         private object WhileTrueMethod(object obj, object[] arguments)
         {
             Block block = (Block)obj;
             Block body = (Block)arguments[0];
-            var result = (new ExecutionBlock(this.Machine, null, block, null)).Execute();
+            var result = (new ExecutionBlock(this.Machine, block.Receiver, block, null)).Execute();
 
             while (result.Equals(true))
             {
                 body.Execute(this.Machine, arguments);
-                result = (new ExecutionBlock(this.Machine, null, block, arguments)).Execute();
+                result = (new ExecutionBlock(this.Machine, block.Receiver, block, null)).Execute();
             }
 
             return null;
