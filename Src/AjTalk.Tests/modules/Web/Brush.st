@@ -5,6 +5,15 @@
 	category: 'Web'
 !
 
+!Brush class methods!
+
+new: tag
+	| brush |
+	brush := self basicNew.
+	brush tag: tag.
+	^brush
+! !
+
 !Brush methods!
 
 with: content
@@ -31,10 +40,7 @@ Brush subclass: #Paragraph
 !Paragraph class methods!
 
 new
-	| header |
-	header := self basicNew.
-	header tag: 'p'.
-	^header
+	^self new: 'p'
 ! !
 
 Brush subclass: #Header
@@ -47,15 +53,25 @@ Brush subclass: #Header
 !Header class methods!
 
 new
-	| header |
-	header := self basicNew.
-	header tag: 'h1'.
-	^header
+	^self new: 'h1'
 ! !
 
 !Header methods!
 
 level: aLevel
 	tag = 'h' , aLevel
+! !
+
+Brush subclass: #Div
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Web'
+! !
+
+!Div class methods!
+
+new
+	^self new: 'div'
 ! !
 

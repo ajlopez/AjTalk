@@ -43,6 +43,20 @@ header: content
 	^brush
 !
 
+div
+	| brush |
+	brush := Div new.
+	brush canvas: self.
+	^brush
+!
+	
+div: content
+	| brush |
+	brush := self div.
+	brush with: content.
+	^brush
+!
+
 asString
 	^builder !!ToString
 ! !
