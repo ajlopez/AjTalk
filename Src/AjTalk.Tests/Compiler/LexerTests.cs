@@ -124,6 +124,21 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void ProcessEnclosedSymbol()
+        {
+            Lexer tokenizer = new Lexer("#{Module.Submodule}");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("Module.Submodule", token.Value);
+            Assert.AreEqual(TokenType.Symbol, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
+
+        [TestMethod]
         public void ProcessDottedName()
         {
             Lexer tokenizer = new Lexer("Smalltalk.MyPackage");

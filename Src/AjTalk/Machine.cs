@@ -432,7 +432,7 @@ namespace AjTalk
 
         private object IsNil(object self, object[] arguments)
         {
-            return true;
+            return self == this.nilclass || self == null;
         }
     }
 }

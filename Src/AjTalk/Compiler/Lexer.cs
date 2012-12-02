@@ -83,6 +83,8 @@ namespace AjTalk.Compiler
                     return new Token() { Type = TokenType.Punctuation, Value = "#(" };
                 if (ch2 == '[')
                     return new Token() { Type = TokenType.Punctuation, Value = "#[" };
+                if (ch2 == '{')
+                    return this.NextEnclosedSymbol();
 
                 this.PushChar(ch2);
 
@@ -286,7 +288,32 @@ namespace AjTalk.Compiler
         {
             Token token = new Token();
             token.Type = TokenType.Symbol;
+
             token.Value = this.NextNameAsString();
+
+            return token;
+        }
+
+        private Token NextEnclosedSymbol()
+        {
+            StringBuilder sb = new StringBuilder(10);
+
+            int ch;
+
+            ch = this.NextChar();
+
+            while (ch >= 0 && ch != '}')
+            {
+                sb.Append((char)ch);
+                ch = this.NextChar();
+            }
+
+            if (ch != '}')
+                new LexerException("Expected '}'");
+
+            Token token = new Token();
+            token.Type = TokenType.Symbol;
+            token.Value = sb.ToString();
 
             return token;
         }
