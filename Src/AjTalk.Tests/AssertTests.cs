@@ -64,6 +64,12 @@
         }
 
         [TestMethod]
+        public void RunTestsUsingMachineLoadFile()
+        {
+            this.machine.LoadFile("AssertTests\\RunTests.st");
+        }
+
+        [TestMethod]
         public void LoadEnvironmentTests()
         {
             VmCompiler compiler = new VmCompiler();
