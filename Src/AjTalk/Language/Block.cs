@@ -47,9 +47,7 @@ namespace AjTalk.Language
             this.globalnames = original.globalnames;
             this.sourcecode = original.sourcecode;
             this.closure = closure;
-
-            if (closure != null)
-                this.outer = closure.Block.outer;
+            this.outer = original.outer;
         }
 
         public string SourceCode { get { return this.sourcecode; } }
@@ -281,7 +279,7 @@ namespace AjTalk.Language
         // TODO how to implements super, sender
         public virtual object Execute(Machine machine, object[] args)
         {
-            return (new ExecutionBlock(machine, null, this, args)).Execute();
+            return (new ExecutionBlock(machine, this.Receiver, this, args)).Execute();
         }
 
         public virtual void CompileGet(string name)

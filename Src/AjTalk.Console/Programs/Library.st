@@ -104,3 +104,21 @@ ClassDescription subclass:#Metaclass
 	poolDictionaries:''
 	category:'Kernel-Classes'
 !
+
+Object subclass: #Boolean nativeType: @System.Boolean
+!
+
+!Boolean methods!
+
+not
+	^self ifTrue: [^false] ifFalse: [^true]
+!
+
+or: aBlock
+	^self ifTrue: [^true] ifFalse: [aBlock value]
+!
+
+and: aBlock
+	^self ifTrue: [aBlock value] ifFalse: [^false]
+
+! !

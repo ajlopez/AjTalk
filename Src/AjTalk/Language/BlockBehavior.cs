@@ -44,7 +44,7 @@
         private object AssertMethod(object obj, object[] arguments)
         {
             Block block = (Block)obj;
-            var result = (new ExecutionBlock(this.Machine, null, block, arguments)).Execute();
+            var result = (new ExecutionBlock(this.Machine, block.Receiver, block, arguments)).Execute();
 
             // TODO review what is true
             if (result is bool && (bool)result == true)
