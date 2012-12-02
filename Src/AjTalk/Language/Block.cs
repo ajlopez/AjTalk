@@ -48,6 +48,8 @@ namespace AjTalk.Language
 
         public byte[] Bytecodes { get { return this.bytecodes; } }
 
+        public virtual bool IsMethod { get { return false; } }
+
         public ICollection<string> ParameterNames { get { return this.argnames; } }
 
         public ICollection<string> LocalNames { get { return this.localnames; } }

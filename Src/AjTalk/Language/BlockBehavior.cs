@@ -29,7 +29,7 @@
         {
             Block block = (Block)obj;
             Block body = (Block)arguments[0];
-            var result = (new ExecutionBlock(this.Machine, null, block, arguments)).Execute();
+            var result = (new ExecutionBlock(this.Machine, null, block, null)).Execute();
 
             while (result.Equals(true))
             {

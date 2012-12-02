@@ -40,6 +40,8 @@ namespace AjTalk.Language
             }
         }
 
+        public override bool IsMethod { get { return true; } }
+
         public override void CompileGet(string name)
         {
             if (this.TryCompileGet(name))

@@ -55,6 +55,26 @@
         }
 
         [TestMethod]
+        public void EvaluateBlockWithIntegerInMethod()
+        {
+            var cls = this.machine.CreateClass("MyClass");
+            this.machine.SetCurrentEnvironmentObject(cls.Name, cls);
+            Parser parser = new Parser("mymethod ^[1] value");
+            cls.DefineClassMethod(parser.CompileClassMethod(cls));
+            Assert.AreEqual(1, this.Evaluate("MyClass mymethod"));
+        }
+
+        [TestMethod]
+        public void EvaluateSelfAsReturnInMethodWithoutReturn()
+        {
+            var cls = this.machine.CreateClass("MyClass");
+            this.machine.SetCurrentEnvironmentObject(cls.Name, cls);
+            Parser parser = new Parser("mymethod [1] value");
+            cls.DefineClassMethod(parser.CompileClassMethod(cls));
+            Assert.AreEqual(cls, this.Evaluate("MyClass mymethod"));
+        }
+
+        [TestMethod]
         public void EvaluateBlockWithArgument()
         {
             Assert.AreEqual(1, this.Evaluate("[:a | a] value: 1"));

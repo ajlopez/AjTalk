@@ -329,13 +329,17 @@ namespace AjTalk.Language
                         case ByteCode.SetLocal:
                             this.ip++;
                             arg = this.block.ByteCodes[this.ip];
-                            this.SetLocal(arg, this.Pop());
+                            var value = this.Pop();
+                            this.SetLocal(arg, value);
+                            this.Push(value);
                             this.lastreceiver = null;
                             break;
                         case ByteCode.SetInstanceVariable:
                             this.ip++;
                             arg = this.block.ByteCodes[this.ip];
-                            this.receiver[arg] = this.Pop();
+                            value = this.Pop();
+                            this.receiver[arg] = value;
+                            this.Push(value);
                             this.lastreceiver = this.receiver;
                             break;
                         case ByteCode.RaiseException:
@@ -347,10 +351,13 @@ namespace AjTalk.Language
                 this.ip++;
             }
 
-            if (this.self == null && this.stack.Count > 0)
-                return this.Pop();
+            if (this.block.IsMethod)
+                return this.self;
 
-            return this.self;
+            if (this.stack.Count == 0)
+                return null;
+
+            return this.Pop();
         }
 
         internal object GetLocal(int nlocal)
@@ -488,6 +495,7 @@ namespace AjTalk.Language
                 execblock.machine.CurrentEnvironment.SetValue(name, value);
 
             execblock.lastreceiver = value;
+            execblock.Push(value);
         }
 
         private static void DoGetDotNetType(ExecutionBlock execblock)
