@@ -52,7 +52,7 @@
                 try
                 {
                     Message message = this.queue.GetMessage();
-                    message.Method.Execute(message.Machine, this, this, message.Arguments);
+                    message.Method.Execute(message.Machine, this, message.Arguments);
                 }
                 catch (Exception ex)
                 {

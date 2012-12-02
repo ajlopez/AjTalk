@@ -11,7 +11,6 @@ namespace AjTalk.Language
         private Block block;
         private Machine machine;
         private IObject self;
-        private IObject receiver;
         private object[] arguments;
         private object[] locals;
         private object nativeSelf;
@@ -35,20 +34,12 @@ namespace AjTalk.Language
             codes[(int)ByteCode.GetDotNetType] = DoGetDotNetType;
         }
 
-        public ExecutionBlock(Machine machine, IObject receiver, Block block, object[] arguments)
+        public ExecutionBlock(Machine machine, IObject self, Block block, object[] arguments)
             : this(block, arguments)
         {
             // this.self = receiver; // TODO review
             this.machine = machine;
-            this.receiver = receiver;
-        }
-
-        public ExecutionBlock(Machine machine, IObject self, IObject receiver, Block block, object[] arguments)
-            : this(block, arguments)
-        {
             this.self = self;
-            this.machine = machine;
-            this.receiver = receiver;
         }
 
         public ExecutionBlock(Machine machine, object nativeself, Block block, object[] arguments)
@@ -156,7 +147,7 @@ namespace AjTalk.Language
                                 this.Push(this.self);
                             break;
                         case ByteCode.GetSuperClass:
-                            this.Push(this.receiver.Behavior.SuperClass);
+                            this.Push(this.self.Behavior.SuperClass);
                             break;
                         case ByteCode.GetNil:
                             this.Push(null);
@@ -164,7 +155,7 @@ namespace AjTalk.Language
                         case ByteCode.GetInstanceVariable:
                             this.ip++;
                             arg = this.block.ByteCodes[this.ip];
-                            this.Push(this.receiver[arg]);
+                            this.Push(this.self[arg]);
                             break;
                         case ByteCode.NewObject:
                             IBehavior ibeh = (IBehavior)this.Pop();
@@ -340,9 +331,9 @@ namespace AjTalk.Language
                             this.ip++;
                             arg = this.block.ByteCodes[this.ip];
                             value = this.Pop();
-                            this.receiver[arg] = value;
+                            this.self[arg] = value;
                             this.Push(value);
-                            this.lastreceiver = this.receiver;
+                            this.lastreceiver = this.self;
                             break;
                         case ByteCode.RaiseException:
                             throw (Exception)this.Pop();
@@ -368,9 +359,6 @@ namespace AjTalk.Language
             {
                 if (this.self != null)
                     return this.self;
-
-                if (this.receiver != null)
-                    return this.receiver;
 
                 if (this.block.Closure != null)
                     return this.block.Closure.Receiver;

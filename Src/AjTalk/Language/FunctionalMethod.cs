@@ -46,6 +46,8 @@
 
         public object Execute(Machine machine, IObject self, object[] args)
         {
+            if (this.nativeFunction != null)
+                return this.nativeFunction(self, args);
             return this.function(self, self, args);
         }
 

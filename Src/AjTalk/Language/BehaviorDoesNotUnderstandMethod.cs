@@ -14,10 +14,10 @@
         {
         }
 
-        protected override object DoesNotUnderstand(Machine machine, IObject self, IObject receiver, string msgname, object[] args)
+        protected override object DoesNotUnderstand(Machine machine, IObject self, string msgname, object[] args)
         {
             if (!(self is IBehavior))
-                return base.DoesNotUnderstand(machine, self, receiver, msgname, args);
+                return base.DoesNotUnderstand(machine, self, msgname, args);
 
             if (msgname.Equals("new"))
                 return ((IBehavior)self).NewObject();
@@ -102,7 +102,7 @@
                 return self;
             }
 
-            return base.DoesNotUnderstand(machine, self, receiver, msgname, args);
+            return base.DoesNotUnderstand(machine, self, msgname, args);
         }
     }
 }

@@ -76,7 +76,7 @@ namespace AjTalk.Language
 
         public virtual object ExecuteMethod(Machine machine, IMethod method, object[] arguments)
         {
-            return method.Execute(machine, this, this, arguments);
+            return method.Execute(machine, this, arguments);
         }
 
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)

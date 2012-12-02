@@ -78,16 +78,9 @@ namespace AjTalk.Language
             throw new InvalidOperationException("A method needs a self object");
         }
 
-        // TODO how to implements super, sender
         public object Execute(Machine machine, IObject self, object[] args)
         {
-            return this.Execute(machine, self, self, args);
-        }
-
-        // TODO how to implements super, sender
-        public object Execute(Machine machine, IObject self, IObject receiver, object[] args)
-        {
-            return (new ExecutionBlock(machine, self, receiver, this, args)).Execute();
+            return new ExecutionBlock(machine, self, this, args).Execute();
         }
 
         public object ExecuteNative(Machine machine, object self, object[] args)

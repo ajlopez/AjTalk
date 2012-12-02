@@ -33,12 +33,7 @@
 
         public object Execute(Machine machine, IObject self, object[] args)
         {
-            return this.Execute(machine, self, self, args);
-        }
-
-        public object Execute(Machine machine, IObject self, IObject receiver, object[] args)
-        {
-            return this.DoesNotUnderstand(machine, self, receiver, (string)args[0], (object[])args[1]);
+            return this.DoesNotUnderstand(machine, self, (string)args[0], (object[])args[1]);
         }
 
         public object Execute(Machine machine, object[] args)
@@ -51,7 +46,7 @@
             throw new NotImplementedException();
         }
 
-        protected virtual object DoesNotUnderstand(Machine machine, IObject self, IObject receiver, string msgname, object[] args)
+        protected virtual object DoesNotUnderstand(Machine machine, IObject self, string msgname, object[] args)
         {
             if (msgname.Equals("ifFalse:"))
             {
@@ -76,12 +71,12 @@
                     IMethod method = behavior.GetInstanceMethod(msgname);
 
                     if (method != null)
-                        return method.Execute(machine, self, receiver, args);
+                        return method.Execute(machine, self, args);
 
                     method = behavior.GetInstanceMethod(this.Name);
 
                     if (method != null)
-                        return method.Execute(machine, self, receiver, new object[] { msgname, args });
+                        return method.Execute(machine, self, new object[] { msgname, args });
                 }
             }
 

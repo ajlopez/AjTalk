@@ -105,7 +105,7 @@
         {
             // TODO native methods are directed to this Transactional object
             // instead to inner object
-            return method.Execute(machine, this, this, arguments);
+            return method.Execute(machine, this, arguments);
         }
 
         internal void ReleaseValues()
