@@ -178,6 +178,48 @@ namespace AjTalk.Tests
             Assert.IsNotNull(machine.GetGlobalObject("Metaclass"));
             Assert.IsNotNull(machine.GetGlobalObject("UndefinedObject"));
         }
+
+        [TestMethod]
+        [DeploymentItem("modules", "modules")]
+        public void LoadModule1()
+        {
+            Machine machine = new Machine();
+
+            machine.ImportModule("Module1");
+
+            var result = machine.Environment.GetValue("Module1");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Context));
+
+            var context = (Context)result;
+
+            result = context.GetValue("Class1");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IClass));
+        }
+
+        [TestMethod]
+        [DeploymentItem("modules", "modules")]
+        public void LoadModule2()
+        {
+            Machine machine = new Machine();
+
+            machine.ImportModule("Module2");
+
+            var result = machine.Environment.GetValue("Module2");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Context));
+
+            var context = (Context)result;
+
+            result = context.GetValue("Class2");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IClass));
+        }
     }
 }
 

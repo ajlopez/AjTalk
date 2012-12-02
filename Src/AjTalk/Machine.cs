@@ -340,8 +340,7 @@ namespace AjTalk
 
         public void LoadFile(string filename)
         {
-            if (!Path.IsPathRooted(filename) && currentPath != null)
-                filename = Path.Combine(currentPath, filename);
+            filename = this.GetFilename(filename);
 
             string originalpath = currentPath;
             string filepath = (new FileInfo(filename)).DirectoryName;
@@ -355,6 +354,50 @@ namespace AjTalk
             {
                 currentPath = originalpath;
             }
+        }
+
+        public void ImportModule(string modulename)
+        {
+            var value = this.CurrentEnvironment.GetValue(modulename);
+
+            if (value == null)
+            {
+                value = new Context(this.CurrentEnvironment);
+                this.CurrentEnvironment.SetValue(modulename, value);
+            }
+
+            var context = (Context)value;
+            var currentenv = this.CurrentEnvironment;
+
+            try
+            {
+                string filename = this.GetFilename("modules/" + modulename + ".st");
+
+                if (filename == null)
+                    filename = this.GetFilename("modules/" + modulename + "/Init.st");
+
+                this.LoadFile(filename);
+            }
+            finally
+            {
+                this.CurrentEnvironment = currentenv;
+            }
+        }
+
+        private string GetFilename(string filename)
+        {
+            if (Path.IsPathRooted(filename) || currentPath == null)
+                if (File.Exists(filename))
+                    return filename;
+                else
+                    return null;
+
+            string newname = Path.Combine(currentPath, filename);
+
+            if (File.Exists(newname))
+                return newname;
+
+            return null;
         }
 
         private void DefineMetaclass(IClass metaclass)
