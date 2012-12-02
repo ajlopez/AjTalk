@@ -145,6 +145,99 @@ namespace AjTalk.Tests
 
             Assert.AreNotSame(Machine.Current, machine);
         }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Library2.st")]
+        public void LoadLibrary2UsingLoadFile()
+        {
+            Machine machine = new Machine();
+
+            machine.LoadFile("Library2.st");
+
+            IBehavior objclass = (IBehavior)machine.GetGlobalObject("Object");
+            Assert.IsNotNull(objclass);
+            Assert.IsNotNull(objclass.Behavior);
+            Assert.IsNotNull(objclass.MetaClass);
+            Assert.IsNull(objclass.SuperClass);
+
+            IBehavior behclass = (IBehavior)machine.GetGlobalObject("Behavior");
+            Assert.IsNotNull(behclass);
+            Assert.IsNotNull(behclass.Behavior);
+            Assert.IsNotNull(behclass.MetaClass);
+            Assert.IsNotNull(behclass.SuperClass);
+
+            Assert.AreEqual(objclass, behclass.SuperClass);
+            Assert.AreEqual(objclass.MetaClass, behclass.MetaClass.SuperClass);
+
+            IClassDescription classdes = (IClassDescription)machine.GetGlobalObject("ClassDescription");
+            Assert.IsNotNull(classdes);
+            Assert.IsNotNull(classdes.Behavior);
+            Assert.IsNotNull(classdes.MetaClass);
+            Assert.IsNotNull(classdes.SuperClass);
+
+            Assert.AreEqual(behclass, classdes.SuperClass);
+            Assert.AreEqual(behclass.MetaClass, classdes.MetaClass.SuperClass);
+
+            IClass clazz = (IClass)machine.GetGlobalObject("Class");
+            Assert.IsNotNull(clazz);
+            Assert.IsNotNull(clazz.Behavior);
+            Assert.IsNotNull(clazz.MetaClass);
+            Assert.IsNotNull(clazz.SuperClass);
+
+            Assert.AreEqual(classdes, clazz.SuperClass);
+            Assert.AreEqual(classdes.MetaClass, clazz.MetaClass.SuperClass);
+
+            Assert.AreEqual(clazz, objclass.MetaClass.SuperClass);
+
+            Assert.IsNotNull(objclass.GetClassMethod("new"));
+        }
+
+        [TestMethod]
+        [DeploymentItem(@"CodeFiles\Library2.st")]
+        [DeploymentItem(@"CodeFiles\LoadLibrary2.st")]
+        public void LoadLibrary2UsingFromAnotherFile()
+        {
+            Machine machine = new Machine();
+
+            machine.LoadFile(@"LoadLibrary2.st");
+
+            IBehavior objclass = (IBehavior)machine.GetGlobalObject("Object");
+            Assert.IsNotNull(objclass);
+            Assert.IsNotNull(objclass.Behavior);
+            Assert.IsNotNull(objclass.MetaClass);
+            Assert.IsNull(objclass.SuperClass);
+
+            IBehavior behclass = (IBehavior)machine.GetGlobalObject("Behavior");
+            Assert.IsNotNull(behclass);
+            Assert.IsNotNull(behclass.Behavior);
+            Assert.IsNotNull(behclass.MetaClass);
+            Assert.IsNotNull(behclass.SuperClass);
+
+            Assert.AreEqual(objclass, behclass.SuperClass);
+            Assert.AreEqual(objclass.MetaClass, behclass.MetaClass.SuperClass);
+
+            IClassDescription classdes = (IClassDescription)machine.GetGlobalObject("ClassDescription");
+            Assert.IsNotNull(classdes);
+            Assert.IsNotNull(classdes.Behavior);
+            Assert.IsNotNull(classdes.MetaClass);
+            Assert.IsNotNull(classdes.SuperClass);
+
+            Assert.AreEqual(behclass, classdes.SuperClass);
+            Assert.AreEqual(behclass.MetaClass, classdes.MetaClass.SuperClass);
+
+            IClass clazz = (IClass)machine.GetGlobalObject("Class");
+            Assert.IsNotNull(clazz);
+            Assert.IsNotNull(clazz.Behavior);
+            Assert.IsNotNull(clazz.MetaClass);
+            Assert.IsNotNull(clazz.SuperClass);
+
+            Assert.AreEqual(classdes, clazz.SuperClass);
+            Assert.AreEqual(classdes.MetaClass, clazz.MetaClass.SuperClass);
+
+            Assert.AreEqual(clazz, objclass.MetaClass.SuperClass);
+
+            Assert.IsNotNull(objclass.GetClassMethod("new"));
+        }
     }
 }
 

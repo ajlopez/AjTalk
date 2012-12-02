@@ -3,6 +3,7 @@ namespace AjTalk
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
     using AjTalk.Compiler;
     using AjTalk.Hosting;
     using AjTalk.Language;
@@ -15,6 +16,9 @@ namespace AjTalk
 
         [ThreadStatic]
         private static Context currentEnvironment;
+
+        [ThreadStatic]
+        private static string currentPath;
 
         private IClass nilclass;
         private IClass classclass;
@@ -332,6 +336,25 @@ namespace AjTalk
                 return this.nativeBehaviors[type];
 
             return null;
+        }
+
+        public void LoadFile(string filename)
+        {
+            if (!Path.IsPathRooted(filename) && currentPath != null)
+                filename = Path.Combine(currentPath, filename);
+
+            string originalpath = currentPath;
+            string filepath = (new FileInfo(filename)).DirectoryName;
+
+            try {
+                currentPath = filepath;
+                Loader loader = new Loader(filename, new SimpleCompiler());
+                loader.LoadAndExecute(this);
+            }
+            finally 
+            {
+                currentPath = originalpath;
+            }
         }
 
         private void DefineMetaclass(IClass metaclass)

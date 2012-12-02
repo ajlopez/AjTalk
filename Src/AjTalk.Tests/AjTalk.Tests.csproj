@@ -172,6 +172,9 @@
     <Content Include="CodeFiles\HostMachine.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="CodeFiles\LoadLibrary2.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="CodeFiles\Form.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

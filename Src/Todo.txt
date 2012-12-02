@@ -19,7 +19,7 @@
 	Apparently, it uses the number of argument, but block has the names too
 	Same for Bytecode.GetLocal
 
-- Define Array implementation
++ Define Array implementation
    #(1 2 3) as IList<object>? or new object[3]
    
 - Implement +, -, etc... only for numbers
@@ -40,7 +40,7 @@
 	yourself
 	asRemote, asTransactional, asAgent
 	
-- Methods for Behavior
+= Methods for Behavior
 	compile:
 	new
 	new:
