@@ -111,3 +111,46 @@ canvas div: [
 
 [canvas asString = '<h1>Hello, World</h1><div>Great demo</div>'] assert.
 
+!
+
+| canvas |
+
+canvas := Web.Canvas new.
+
+Web.Canvas define: #Html tag: 'html'.
+
+"
+Smalltalk !!GetNames do: [ :name | @System.Console !!WriteLine: name ].
+Web !!GetNames do: [ :name | @System.Console !!WriteLine: name ].
+
+Web.Canvas !!GetInstanceMethods do: [:mth | @System.Console !!WriteLine: mth !!Name ].
+"
+
+canvas html: 'Example'.
+
+[canvas asString = '<html>Example</html>'] assert.
+
+!
+
+| canvas |
+
+canvas := Web.Canvas new.
+
+Web.Canvas define: #Head tag: 'head'.
+Web.Canvas define: #Body tag: 'body'.
+Web.Canvas define: #Title tag: 'title'.
+
+canvas html: [
+	canvas head: [
+		canvas title: 'My Page'
+	].
+	canvas body: [
+		canvas header: 'My Page'.
+		canvas paragraph: 'Great demo'
+	]
+].
+
+[canvas asString = '<html><head><title>My Page</title></head><body><h1>My Page</h1><p>Great demo</p></body></html>'] assert.
+
+!
+

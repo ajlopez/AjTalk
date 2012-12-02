@@ -5,6 +5,36 @@
 	category: 'Web'
 !
 
+!Canvas class methods!
+
+define: aSymbol tag: aTag
+	| newclass currentenv |
+	currentenv := Environment current.
+	self !!Scope setCurrent.
+	
+	newclass := Brush subclass: aSymbol
+		instanceVariableNames: ''
+		classVariableNames: ''
+		poolDictionaries: ''
+		category: 'Web'.	
+	
+	newclass class compile: 'new ^self new: ' , $' , aTag , $'.
+	
+	self compile: (aSymbol !!ToLower) , '
+			| brush |
+			brush := ' , aSymbol , ' new.
+			brush canvas: self.
+			^brush'.			
+
+	self compile: (aSymbol !!ToLower) , ': content
+			| brush |
+			brush := self ' , (aSymbol !!ToLower) , '.
+			brush with: content.
+			^brush'.			
+	
+	currentenv setCurrent.
+! !
+
 !Canvas methods!
 
 initialize
