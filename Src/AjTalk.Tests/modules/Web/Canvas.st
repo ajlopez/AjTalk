@@ -10,7 +10,7 @@
 define: aSymbol tag: aTag
 	| newclass currentenv |
 	currentenv := Environment current.
-	self !!Scope setCurrent.
+	self scope setCurrent.
 	
 	newclass := Brush subclass: aSymbol
 		instanceVariableNames: ''
@@ -20,15 +20,15 @@ define: aSymbol tag: aTag
 	
 	newclass class compile: 'new ^self new: ' , $' , aTag , $'.
 	
-	self compile: (aSymbol !!ToLower) , '
+	self compile: (aSymbol toLower) , '
 			| brush |
 			brush := ' , aSymbol , ' new.
 			brush canvas: self.
 			^brush'.			
 
-	self compile: (aSymbol !!ToLower) , ': content
+	self compile: (aSymbol toLower) , ': content
 			| brush |
-			brush := self ' , (aSymbol !!ToLower) , '.
+			brush := self ' , (aSymbol toLower) , '.
 			brush with: content.
 			^brush'.			
 	
@@ -38,11 +38,11 @@ define: aSymbol tag: aTag
 !Canvas methods!
 
 initialize
-	builder := @System.Text.StringBuilder !!new
+	builder := StringBuilder new
 !
 
 render: anObject
-	builder !!Append: (anObject !!ToString)
+	builder append: (anObject toString)
 !
 
 paragraph
@@ -88,7 +88,7 @@ div: content
 !
 
 asString
-	^builder !!ToString
+	^builder toString
 ! !
 
 !Object methods!

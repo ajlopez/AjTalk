@@ -119,13 +119,6 @@ canvas := Web.Canvas new.
 
 Web.Canvas define: #Html tag: 'html'.
 
-"
-Smalltalk !!GetNames do: [ :name | @System.Console !!WriteLine: name ].
-Web !!GetNames do: [ :name | @System.Console !!WriteLine: name ].
-
-Web.Canvas !!GetInstanceMethods do: [:mth | @System.Console !!WriteLine: mth !!Name ].
-"
-
 canvas html: 'Example'.
 
 [canvas asString = '<html>Example</html>'] assert.

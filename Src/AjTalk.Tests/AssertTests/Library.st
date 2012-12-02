@@ -354,3 +354,5 @@ import: aName
 Object subclass: #Block nativeType: @AjTalk.Language.Block
 !
 
+Object subclass: #StringBuilder nativeType: @System.Text.StringBuilder
+!
