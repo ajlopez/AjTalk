@@ -145,6 +145,9 @@
     <Content Include="AssertTests\RunTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="AssertTests\ModuleTests.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="AssertTests\StringTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -268,6 +271,12 @@
     <None Include="Library\Object.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="modules\Module2\Submodule2\Init.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\Module2\Submodule1.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="modules\Module2\Init.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

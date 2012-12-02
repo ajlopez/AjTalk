@@ -358,30 +358,46 @@ namespace AjTalk
 
         public void ImportModule(string modulename)
         {
-            var value = this.CurrentEnvironment.GetValue(modulename);
+            var context = this.GetOrCreateChildEnvironment(this.CurrentEnvironment, modulename);
 
-            if (value == null)
-            {
-                value = new Context(this.CurrentEnvironment);
-                this.CurrentEnvironment.SetValue(modulename, value);
-            }
+            string modulefilename = modulename.Replace(".", "/");
+            string filename = this.GetFilename("modules/" + modulefilename + ".st");
 
-            var context = (Context)value;
-            var currentenv = this.CurrentEnvironment;
+            if (filename == null)
+                filename = this.GetFilename("modules/" + modulefilename + "/Init.st");
+
+            var original = this.CurrentEnvironment;
 
             try
             {
-                string filename = this.GetFilename("modules/" + modulename + ".st");
-
-                if (filename == null)
-                    filename = this.GetFilename("modules/" + modulename + "/Init.st");
-
+                this.CurrentEnvironment = context;
                 this.LoadFile(filename);
             }
             finally
             {
-                this.CurrentEnvironment = currentenv;
+                this.CurrentEnvironment = original;
             }
+        }
+
+        private Context GetOrCreateChildEnvironment(Context environment, string envname)
+        {
+            var names = envname.Split('.');
+
+            foreach (var name in names)
+            {
+                var result = environment.GetValue(name);
+
+                if (result != null)
+                    environment = (Context)result;
+                else
+                {
+                    var context = new Context(environment);
+                    environment.SetValue(name, context);
+                    environment = context;
+                }
+            }
+
+            return environment;
         }
 
         private string GetFilename(string filename)

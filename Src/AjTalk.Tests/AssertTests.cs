@@ -64,6 +64,13 @@
         }
 
         [TestMethod]
+        [DeploymentItem("modules", "modules")]
+        public void ModuleAsserts()
+        {
+            DoAssert("Module");
+        }
+
+        [TestMethod]
         public void RunTestsUsingMachineLoadFile()
         {
             this.machine.LoadFile("AssertTests\\RunTests.st");

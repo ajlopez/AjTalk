@@ -312,3 +312,29 @@ at: aName
 at: aName put: aValue
 	self !!SetValue: aName with: aValue
 ! !
+
+Object subclass: #FileLoader
+	instanceVariableNames: 'e'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Kernel-Classes'
+!
+
+!FileLoader class methods!
+
+load: aFilename
+	Machine !!LoadFile aFilename
+! !
+
+Object subclass:#Module
+	instanceVariableNames: 'e'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Kernel-Classes'
+!
+
+!Module class methods!
+
+import: aName
+	Machine !!ImportModule: aName
+! !
