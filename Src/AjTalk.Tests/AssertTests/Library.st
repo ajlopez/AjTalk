@@ -48,6 +48,10 @@ isNotNil
 	^true.
 !
 
+initialize
+	^self.
+!
+
 class
 	^self !!behavior.
 ! !
@@ -59,7 +63,7 @@ basicNew
 !
 
 new
-	^self basicNew.
+	^self basicNew initialize.
 !
 
 subclass: aSymbol
@@ -113,6 +117,14 @@ Object subclass: #String nativeType: @System.String
 !
 
 !String methods!
+
+isNil
+	^false
+!
+
+isNotNil
+	^true
+!
 
 size
 	^self !!Length
@@ -323,7 +335,7 @@ Object subclass: #FileLoader
 !FileLoader class methods!
 
 load: aFilename
-	Machine !!LoadFile aFilename
+	Machine !!LoadFile: aFilename
 ! !
 
 Object subclass:#Module

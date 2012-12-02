@@ -413,6 +413,11 @@ namespace AjTalk
             if (File.Exists(newname))
                 return newname;
 
+            newname = Path.Combine(".", filename);
+
+            if (File.Exists(newname))
+                return newname;
+
             return null;
         }
 

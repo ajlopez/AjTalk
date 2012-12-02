@@ -71,6 +71,15 @@
         }
 
         [TestMethod]
+        [DeploymentItem("modules", "modules")]
+        public void WebAsserts()
+        {
+            DoAssert("Web");
+            //this.machine.LoadFile("AssertTests\\WebTests.st");
+            //var result = this.machine.Environment.GetValue("Result");
+        }
+
+        [TestMethod]
         public void RunTestsUsingMachineLoadFile()
         {
             this.machine.LoadFile("AssertTests\\RunTests.st");
