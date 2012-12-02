@@ -59,6 +59,9 @@
     <None Include="Programs\HelloWorld.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Programs\WebServer.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="RunTransaction.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

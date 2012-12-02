@@ -36,3 +36,6 @@ start
 		self process: context.
 	]
 ! !
+
+WebServer new start
+!
