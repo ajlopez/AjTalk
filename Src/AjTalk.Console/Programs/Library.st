@@ -16,6 +16,10 @@ Object subclass:#Behavior
 
 !Object methods!
 
+yourself
+	^self
+!
+
 = anObject
 	^@AjTalk.Language.ObjectOperators equals: self with: anObject.
 !
@@ -44,6 +48,10 @@ isNotNil
 	^true.
 !
 
+initialize
+	^self.
+!
+
 class
 	^self !!behavior.
 ! !
@@ -55,7 +63,7 @@ basicNew
 !
 
 new
-	^self basicNew.
+	^self basicNew initialize.
 !
 
 subclass: aSymbol
@@ -105,6 +113,36 @@ ClassDescription subclass:#Metaclass
 	category:'Kernel-Classes'
 !
 
+Object subclass: #String nativeType: @System.String
+!
+
+!String methods!
+
+isNil
+	^false
+!
+
+isNotNil
+	^true
+!
+
+size
+	^self !!Length
+! !
+
+Object subclass: #Char nativeType: @System.Char
+!
+
+!Char methods!
+
+isDigit
+	^@System.Char !!IsDigit: self
+!
+
+isLetter
+	^@System.Char !!IsLetter: self
+! !
+
 Object subclass: #Boolean nativeType: @System.Boolean
 !
 
@@ -121,4 +159,194 @@ or: aBlock
 and: aBlock
 	^self ifTrue: [aBlock value] ifFalse: [^false]
 
+! !
+
+Object subclass: #CompiledBlock nativeType: @AjTalk.Language.Block
+!
+
+!CompiledBlock methods!
+
+assert
+	^self value ifFalse: [@AjTalk.Exceptions.AssertError new raise]
+!
+
+assertFalse
+	^self value ifTrue: [@AjTalk.Exceptions.AssertError new raise]
+! !
+
+Object subclass:#Collection
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Collections-Abstract'
+!
+
+!Collection class methods!
+
+with: anObject
+	^ self new
+		add: anObject;
+		yourself
+!
+
+with: firstObject with: secondObject
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		yourself
+!
+
+with: firstObject with: secondObject with: thirdObject
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		add: thirdObject;
+		yourself
+!
+
+with: firstObject with: secondObject with: thirdObject with: fourthObject
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		add: thirdObject;
+		add: fourthObject;
+		yourself
+!
+
+with: firstObject with: secondObject with: thirdObject with: fourthObject with: fifthObject
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		add: thirdObject;
+		add: fourthObject;
+		add: fifthObject;
+		yourself
+!
+
+with: firstObject with: secondObject with: thirdObject with: fourthObject with: fifthObject with: sixthObject
+	^ self new
+		add: firstObject;
+		add: secondObject;
+		add: thirdObject;
+		add: fourthObject;
+		add: fifthObject;
+		add: sixthObject;
+		yourself
+!
+
+withAll: aCollection
+	^(self new: aCollection size)
+		addAll: aCollection;
+		yourself
+! !
+
+!Collection methods!
+
+add: newObject
+	self subclassResponsability
+!
+
+do: aBlock
+	self subclassResponsability
+!
+
+anySatisfy: aBlock
+	self do: [:each | (aBlock value: each) ifTrue:[^true]].
+	^false
+!
+
+addAll: aCollection
+	aCollection do: [:each | self add: each].
+	^aCollection
+!
+
+size
+	| tally |
+	tally := 0.
+	self do: [each | tally := tally + 1].
+	^tally
+
+! !		
+
+Collection subclass: #ArrayList nativeType: @System.Collections.ArrayList!
+
+!ArrayList methods!
+
+size 
+	^self !!Count
+!
+
+add: aValue
+	^self !!add: aValue
+!
+
+at: anIndex
+	^self !!nat: anIndex - 1
+!
+
+at: anIndex put: aValue
+	^self !!nat: anIndex - 1 put: aValue
+! !
+
+Object subclass: #Environment nativeType: @AjTalk.Context!
+
+!Environment class methods!
+
+current
+	^Machine !!CurrentEnvironment.
+!
+
+new: aName
+	| newenv |
+	newenv := @AjTalk.Context !!new: Smalltalk.
+	Smalltalk at: aName put: newenv.
+	newenv at: #Smalltalk put: Smalltalk.
+	^newenv
+!
+
+new: aName in: anEnvironment
+	| newenv |
+	newenv := @AjTalk.Context !!new: anEnvironment.
+	anEnvironment at: aName put: newenv.
+	^newenv
+! !
+
+!Environment methods!
+
+setCurrent
+	Machine !!CurrentEnvironment: self
+!	
+
+at: aName
+	^self !!GetValue: aName
+!
+
+at: aName put: aValue
+	self !!SetValue: aName with: aValue
+! !
+
+Object subclass: #FileLoader
+	instanceVariableNames: 'e'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Kernel-Classes'
+!
+
+!FileLoader class methods!
+
+load: aFilename
+	Machine !!LoadFile: aFilename
+! !
+
+Object subclass:#Module
+	instanceVariableNames: 'e'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Kernel-Classes'
+!
+
+!Module class methods!
+
+import: aName
+	Machine !!ImportModule: aName
 ! !

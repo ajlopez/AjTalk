@@ -9,7 +9,7 @@
 
 with: content
 	canvas render: '<' , tag , '>'.
-	content isNil ifFalse: [canvas render: content].
+	content renderOn: canvas.
 	canvas render: '</', tag , '>'
 !
 
@@ -31,9 +31,31 @@ Brush subclass: #Paragraph
 !Paragraph class methods!
 
 new
-	| paragraph |
-	paragraph := self basicNew.
-	paragraph tag: 'p'.
-	^paragraph
+	| header |
+	header := self basicNew.
+	header tag: 'p'.
+	^header
+! !
+
+Brush subclass: #Header
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Web'
+! !
+
+!Header class methods!
+
+new
+	| header |
+	header := self basicNew.
+	header tag: 'h1'.
+	^header
+! !
+
+!Header methods!
+
+level: aLevel
+	tag = 'h' , aLevel
 ! !
 

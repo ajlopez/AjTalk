@@ -350,3 +350,7 @@ Object subclass:#Module
 import: aName
 	Machine !!ImportModule: aName
 ! !
+
+Object subclass: #Block nativeType: @AjTalk.Language.Block
+!
+

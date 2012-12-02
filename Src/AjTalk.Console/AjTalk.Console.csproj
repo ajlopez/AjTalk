@@ -56,18 +56,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="RunWebServer.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Programs\HelloWorld.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Programs\WebServer.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="RunTransaction.cmd">
+    <Content Include="RunTransaction.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="RunAll.cmd">
+    </Content>
+    <Content Include="RunAll.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Programs\TransactionExample.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -77,9 +80,9 @@
     <None Include="Programs\WebCrawler.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="RunClient.cmd">
+    <Content Include="RunClient.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Programs\RemoteClient.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -98,12 +101,12 @@
     <None Include="Programs\Transcript.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Programs\Library.st">
+    <Content Include="Programs\Library.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="RunServer.cmd">
+    </Content>
+    <Content Include="RunServer.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

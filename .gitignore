@@ -8,3 +8,5 @@ packages/*
 *.nupkg
 output/*
 TestResults
+*.dll
+*.exe

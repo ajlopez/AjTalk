@@ -62,3 +62,38 @@ canvas paragraph: 'World'.
 
 [canvas asString = '<p>Hello</p><p>World</p>'] assert.
 
+!
+
+| canvas brush |
+
+canvas := Web.Canvas new.
+
+canvas header: 'Hello, World'.
+
+[canvas asString = '<h1>Hello, World</h1>'] assert.
+
+!
+
+| canvas brush |
+
+canvas := Web.Canvas new.
+
+canvas header: 'Hello, World'.
+canvas paragraph: 'Great demo'.
+
+[canvas asString = '<h1>Hello, World</h1><p>Great demo</p>'] assert.
+
+!
+
+| canvas brush |
+
+canvas := Web.Canvas new.
+
+canvas header: 'Hello, World'.
+canvas paragraph: [
+	canvas render: 'Great '.
+	canvas render: 'demo'
+].
+
+[canvas asString = '<h1>Hello, World</h1><p>Great demo</p>'] assert.
+

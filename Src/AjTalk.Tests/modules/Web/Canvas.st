@@ -29,7 +29,45 @@ paragraph: content
 	^brush
 !
 	
+header
+	| brush |
+	brush := Header new.
+	brush canvas: self.
+	^brush
+!
+	
+header: content
+	| brush |
+	brush := self header.
+	brush with: content.
+	^brush
+!
+
 asString
 	^builder !!ToString
+! !
+
+!Object methods!
+
+renderOn: canvas
+	canvas render: self
+! !
+
+!String methods!
+
+renderOn: canvas
+	canvas render: self
+! !
+
+!UndefinedObject methods!
+
+renderOn: canvas
+	^nil
+! !
+
+!Block methods!
+
+renderOn: canvas
+	self value
 ! !
 
