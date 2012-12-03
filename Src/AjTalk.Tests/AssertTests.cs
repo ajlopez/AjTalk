@@ -75,8 +75,12 @@
         public void WebAsserts()
         {
             DoAssert("Web");
-            //this.machine.LoadFile("AssertTests\\WebTests.st");
-            //var result = this.machine.Environment.GetValue("Result");
+        }
+
+        [TestMethod]
+        public void TransactionAsserts()
+        {
+            DoAssert("Transaction");
         }
 
         [TestMethod]

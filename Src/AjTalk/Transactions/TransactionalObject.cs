@@ -98,7 +98,7 @@
             if (mth != null)
                 return this.ExecuteMethod(machine, mth, new object[] { msgname, args });
 
-            throw new InvalidProgramException(string.Format("Does not understand {0}", msgname));
+            return DotNetObject.SendMessage(machine, this, msgname, args);
         }
 
         public virtual object ExecuteMethod(Machine machine, IMethod method, object[] arguments)

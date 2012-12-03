@@ -60,6 +60,10 @@ initialize
 	^self.
 !
 
+asTransactional 
+    ^@AjTalk.Transactions.TransactionalObject new: self with: Machine transactionManager
+!
+
 class
 	^self !!behavior.
 ! !
