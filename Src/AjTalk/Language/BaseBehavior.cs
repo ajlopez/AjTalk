@@ -7,6 +7,7 @@
     public class BaseBehavior : BaseObject, IBehavior
     {
         private IBehavior superclass;
+        private IList<IBehavior> traits;
         private Machine machine;
         private Context scope;
 
@@ -90,6 +91,17 @@
 
             if (!this.methods.ContainsKey(mthname))
             {
+                if (this.traits != null)
+                {
+                    foreach (var trait in this.traits)
+                    {
+                        var mth = trait.GetInstanceMethod(mthname);
+
+                        if (mth != null)
+                            return mth;
+                    }
+                }
+
                 if (this.superclass != null)
                 {
                     return this.superclass.GetInstanceMethod(mthname);
@@ -123,6 +135,14 @@
         public void SetSuperClass(IBehavior superclass)
         {
             this.superclass = superclass;
+        }
+
+        public void AddTrait(IBehavior trait)
+        {
+            if (this.traits == null)
+                this.traits = new List<IBehavior>();
+
+            this.traits.Add(trait);
         }
     }
 }

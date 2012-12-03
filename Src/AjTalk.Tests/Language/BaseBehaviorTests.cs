@@ -42,6 +42,29 @@
         }
 
         [TestMethod]
+        public void AddBehaviorAsTrait()
+        {
+            BaseBehavior behavior = new BaseBehavior(null, null, this.machine);
+            IMethod method = new Method("method");
+
+            behavior.DefineInstanceMethod(method);
+
+            BaseBehavior trait = new BaseBehavior(null, null, this.machine);
+            IMethod method2 = new Method("method2");
+
+            trait.DefineInstanceMethod(method2);
+
+            behavior.AddTrait(trait);
+
+            IMethod result = behavior.GetInstanceMethod("method");
+            Assert.IsNotNull(result);
+            Assert.AreSame(method, result);
+            result = behavior.GetInstanceMethod("method2");
+            Assert.IsNotNull(result);
+            Assert.AreSame(method2, result);
+        }
+
+        [TestMethod]
         public void GetInstanceMethods()
         {
             BaseBehavior behavior = new BaseBehavior(null, null, this.machine);
