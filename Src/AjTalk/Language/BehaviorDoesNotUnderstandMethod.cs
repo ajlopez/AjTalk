@@ -87,6 +87,8 @@
                     newbehavior = (NativeBehavior)machine.CreateNativeBehavior((IClassDescription)self, type);
                     machine.RegisterNativeBehavior(newbehavior.NativeType, newbehavior);
                 }
+                else if (newbehavior.SuperClass != self)
+                    newbehavior.SetSuperClass((IBehavior)self);
 
                 machine.SetCurrentEnvironmentObject((string)args[0], newbehavior);
                 return newbehavior;

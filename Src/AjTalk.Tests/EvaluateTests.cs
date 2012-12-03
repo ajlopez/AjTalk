@@ -714,6 +714,12 @@
             Assert.AreEqual(true, this.Evaluate("nil isNil"));
         }
 
+        [TestMethod]
+        public void IntegerToString()
+        {
+            Assert.AreEqual("1", this.Evaluate("a := 1. a toString"));
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);

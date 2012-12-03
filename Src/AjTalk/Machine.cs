@@ -49,7 +49,9 @@ namespace AjTalk
             this.nilclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this, this.nilclass));
             this.nilclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this, this.nilclass));
             this.nilclass.DefineClassMethod(new FunctionalMethod("ifNil:", this.nilclass, this.IfNil));
+            this.nilclass.DefineClassMethod(new FunctionalMethod("ifNotNil:", this.nilclass, this.IfNotNil));
             this.nilclass.DefineClassMethod(new FunctionalMethod("isNil", this.nilclass, this.IsNil));
+            this.nilclass.DefineClassMethod(new FunctionalMethod("isNotNil", this.nilclass, this.IsNotNil));
 
             // Native Behaviors
             var enumerableBehavior = new EnumerableBehavior(meta, this.nilclass, this);
@@ -435,9 +437,19 @@ namespace AjTalk
             return block.Execute(this, null);
         }
 
+        private object IfNotNil(object self, object[] arguments)
+        {
+            return null;
+        }
+
         private object IsNil(object self, object[] arguments)
         {
             return self == this.nilclass || self == null;
+        }
+
+        private object IsNotNil(object self, object[] arguments)
+        {
+            return self != this.nilclass && self != null;
         }
     }
 }
