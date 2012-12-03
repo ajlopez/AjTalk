@@ -101,9 +101,9 @@
     <None Include="Programs\Transcript.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Programs\Library.st">
+    <None Include="Programs\Library.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="RunServer.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -48,8 +48,20 @@ isNotNil
 	^true.
 !
 
+ifNil: aBlock
+	^nil.
+!	
+
+ifNotNil: aBlock
+	^aBlock value.
+!
+
 initialize
 	^self.
+!
+
+asTransactional 
+    ^@AjTalk.Transactions.TransactionalObject new: self with: Machine transactionManager
 !
 
 class
@@ -113,18 +125,13 @@ ClassDescription subclass:#Metaclass
 	category:'Kernel-Classes'
 !
 
+Object subclass: #Integer nativeType: @System.Int32
+!
+
 Object subclass: #String nativeType: @System.String
 !
 
 !String methods!
-
-isNil
-	^false
-!
-
-isNotNil
-	^true
-!
 
 size
 	^self !!Length
@@ -350,3 +357,9 @@ Object subclass:#Module
 import: aName
 	Machine !!ImportModule: aName
 ! !
+
+Object subclass: #Block nativeType: @AjTalk.Language.Block
+!
+
+Object subclass: #StringBuilder nativeType: @System.Text.StringBuilder
+!
