@@ -20,6 +20,16 @@ yourself
 	^self
 !
 
+isMemberOf: aClass
+	^self class == aClass
+!
+
+isKindOf: aClass
+	self class == aClass
+		ifTrue: [^true]
+		ifFalse: [^self class inheritsFrom: aClass]
+!
+
 = anObject
 	^@AjTalk.Language.ObjectOperators equals: self with: anObject.
 !
@@ -78,6 +88,17 @@ new
 	^self basicNew initialize.
 !
 
+inheritsFrom: aClass
+	| aSuperclass |
+	aSuperclass := self superclass.
+	[aSuperclass == nil]
+		whileFalse:
+			[aSuperclass == aClass ifTrue: [^true].
+			aSuperclass := aSuperclass superclass].
+	^false
+!
+
+"TODO: review implementation to use current environment"
 subclass: aSymbol
 	| newcls |
 	newcls := self !!machine !!createClass: aSymbol with: self with: '' with: ''.

@@ -17,6 +17,7 @@
             this.DefineInstanceMethod(new FunctionalMethod("value:value:", this, this.ValueMethod));
             this.DefineInstanceMethod(new FunctionalMethod("assert", this, this.AssertMethod));
             this.DefineInstanceMethod(new FunctionalMethod("whileTrue:", this, this.WhileTrueMethod));
+            this.DefineInstanceMethod(new FunctionalMethod("whileFalse:", this, this.WhileFalseMethod));
         }
 
         private object ValueMethod(object obj, object[] arguments)
@@ -33,6 +34,21 @@
             var result = (new ExecutionBlock(this.Machine, block.Receiver, block, null)).Execute();
 
             while (result.Equals(true))
+            {
+                body.Execute(this.Machine, arguments);
+                result = (new ExecutionBlock(this.Machine, block.Receiver, block, null)).Execute();
+            }
+
+            return null;
+        }
+
+        private object WhileFalseMethod(object obj, object[] arguments)
+        {
+            Block block = (Block)obj;
+            Block body = (Block)arguments[0];
+            var result = (new ExecutionBlock(this.Machine, block.Receiver, block, null)).Execute();
+
+            while (result.Equals(false))
             {
                 body.Execute(this.Machine, arguments);
                 result = (new ExecutionBlock(this.Machine, block.Receiver, block, null)).Execute();

@@ -720,6 +720,18 @@
             Assert.AreEqual("1", this.Evaluate("a := 1. a toString"));
         }
 
+        [TestMethod]
+        public void EvaluateWhileTrue()
+        {
+            Assert.AreEqual(6, this.Evaluate("| sum k | sum := 0. k := 1. [k <= 3] whileTrue: [ sum := sum + k. k := k + 1]. sum"));
+        }
+
+        [TestMethod]
+        public void EvaluateWhileFalse()
+        {
+            Assert.AreEqual(6, this.Evaluate("| sum k | sum := 0. k := 1. [k > 3] whileFalse: [ sum := sum + k. k := k + 1]. sum"));
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);
