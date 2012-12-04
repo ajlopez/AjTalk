@@ -1,10 +1,15 @@
 ﻿
 Module import: #Web.
 
-[Web isNil not] assert.
-[Web.Canvas isNil not] assert.
-[Web.Component isNil not] assert.
-[Web.Brush isNil not] assert.
+[Web isNotNil] assert.
+[Web.Canvas isNotNil] assert.
+[Web.Component isNotNil] assert.
+[Web.Brush isNotNil] assert.
+[Web.Head isNotNil] assert.
+[Web.Body isNotNil] assert.
+[Web.Html isNotNil] assert.
+[Web.Title isNotNil] assert.
+[Web.Paragraph isNotNil] assert.
 !
 
 | canvas |
@@ -13,7 +18,7 @@ canvas := Web.Canvas new.
 
 canvas render: 'Hello'.
 
-[canvas asString = 'Hello'] assert
+[canvas asString = 'Hello'] assert.
 !
 
 | canvas brush |
@@ -25,7 +30,7 @@ brush tag: 'h1'.
 brush canvas: canvas.
 brush with: 'Hello'.
 
-[canvas asString = '<h1>Hello</h1>'] assert
+[canvas asString = '<h1>Hello</h1>'] assert.
 
 !
 
@@ -117,8 +122,6 @@ canvas div: [
 
 canvas := Web.Canvas new.
 
-Web.Canvas define: #Html tag: 'html'.
-
 canvas html: 'Example'.
 
 [canvas asString = '<html>Example</html>'] assert.
@@ -128,10 +131,6 @@ canvas html: 'Example'.
 | canvas |
 
 canvas := Web.Canvas new.
-
-Web.Canvas define: #Head tag: 'head'.
-Web.Canvas define: #Body tag: 'body'.
-Web.Canvas define: #Title tag: 'title'.
 
 canvas html: [
 	canvas head: [
@@ -145,5 +144,20 @@ canvas html: [
 
 [canvas asString = '<html><head><title>My Page</title></head><body><h1>My Page</h1><p>Great demo</p></body></html>'] assert.
 
+!
+
+| canvas |
+
+canvas := Web.Canvas new.
+" TODO Fix it
+canvas unorderedList: [
+	canvas listItem: 'item 1'.
+	canvas listItem: 'item 2'.
+	canvas listItem: 'item 3'.
+	]
+].
+
+[canvas asString = '<ul><li>item 1</li><li>item 2</li><li>item 3</li></ul>'] assert.
+"
 !
 

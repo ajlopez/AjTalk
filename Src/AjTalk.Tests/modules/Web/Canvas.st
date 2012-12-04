@@ -115,3 +115,12 @@ renderOn: canvas
 	self value
 ! !
 
+Canvas define: #Html tag: 'html'.
+Canvas define: #Head tag: 'head'.
+Canvas define: #Body tag: 'body'.
+Canvas define: #Title tag: 'title'.
+Canvas define: #UnorderedList tag: 'ul'.
+Canvas define: #OrderedList tag: 'ol'.
+Canvas define: #ListItem tag: 'li'.
+
+!

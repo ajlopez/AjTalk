@@ -24,3 +24,13 @@ rect := Rectangle new.
 
 [rect isKindOf: Object] assert.
 [obj isKindOf: Object] assert.
+
+['foo' isMemberOf: String] assert.
+[1 isMemberOf: Integer] assert.
+
+['foo' isMemberOf: Integer] assertFalse.
+[1 isMemberOf: String] assertFalse.
+
+[[true] isMemberOf: Block] assert.
+
+
