@@ -97,6 +97,9 @@
 
         public static object SendMessage(Machine machine, object obj, string msgname, object[] args)
         {
+            if (obj == null)
+                return SendNativeMessage(machine, obj, msgname, args);
+
             NativeBehavior behavior = machine.GetNativeBehavior(obj.GetType());
 
             if (behavior != null)

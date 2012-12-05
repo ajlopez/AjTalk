@@ -454,7 +454,7 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            Block block = this.compiler.CompileBlock("^nil new instSize");
+            Block block = this.compiler.CompileBlock("^UndefinedObject new instSize");
 
             Assert.IsNotNull(block);
 

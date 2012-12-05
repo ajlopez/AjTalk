@@ -522,7 +522,7 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            Parser compiler = new Parser("^nil new instSize");
+            Parser compiler = new Parser("^UndefinedObject new instSize");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);

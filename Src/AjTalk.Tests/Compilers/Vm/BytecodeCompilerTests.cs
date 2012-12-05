@@ -399,7 +399,7 @@
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            ModelParser parser = new ModelParser("^nil new instSize");
+            ModelParser parser = new ModelParser("^UndefinedObject new instSize");
             this.compiler.CompileExpression(parser.ParseExpression());
 
             object result = this.block.Execute(machine, null);

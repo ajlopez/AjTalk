@@ -16,7 +16,7 @@
 
         protected override object DoesNotUnderstand(Machine machine, IObject self, string msgname, object[] args)
         {
-            if (!(self is IBehavior))
+            if (self != null && !(self is IBehavior))
                 return base.DoesNotUnderstand(machine, self, msgname, args);
 
             if (msgname.Equals("new"))

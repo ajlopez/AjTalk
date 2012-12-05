@@ -732,6 +732,17 @@
             Assert.AreEqual(6, this.Evaluate("| sum k | sum := 0. k := 1. [k > 3] whileFalse: [ sum := sum + k. k := k + 1]. sum"));
         }
 
+        [TestMethod]
+        public void EvaluateMethodWithInternalReturn()
+        {
+            IClass testclass = this.machine.CreateClass("Test");
+            this.machine.SetCurrentEnvironmentObject("Test", testclass);
+            Parser parser = new Parser("test true ifTrue: [^1]. ^2");
+            Method method = parser.CompileClassMethod(testclass);
+            testclass.DefineClassMethod(method);
+            Assert.AreEqual(1, this.Evaluate("Test test"));
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);

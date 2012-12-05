@@ -36,6 +36,8 @@
             while (result.Equals(true))
             {
                 body.Execute(this.Machine, arguments);
+                if (body.Closure != null && body.Closure.HasReturnValue)
+                    return null;
                 result = (new ExecutionBlock(this.Machine, block.Receiver, block, null)).Execute();
             }
 
@@ -51,6 +53,8 @@
             while (result.Equals(false))
             {
                 body.Execute(this.Machine, arguments);
+                if (body.Closure != null && body.Closure.HasReturnValue)
+                    return null;
                 result = (new ExecutionBlock(this.Machine, block.Receiver, block, null)).Execute();
             }
 

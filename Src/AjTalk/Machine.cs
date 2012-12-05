@@ -24,6 +24,7 @@ namespace AjTalk
         private IClass classclass;
         private IClass metaclassclass;
         private Context environment = new Context();
+        private bool debug;
 
         private Dictionary<Type, NativeBehavior> nativeBehaviors = new Dictionary<Type, NativeBehavior>();
 
@@ -46,7 +47,7 @@ namespace AjTalk
             this.nilclass = meta.CreateClass("UndefinedObject", string.Empty);
 
             // TODO review, nil object never receives a message, see Send in Execution block
-            this.nilclass.DefineInstanceMethod(new DoesNotUnderstandMethod(this, this.nilclass));
+            this.nilclass.DefineInstanceMethod(new BehaviorDoesNotUnderstandMethod(this, this.nilclass));
             this.nilclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this, this.nilclass));
             this.nilclass.DefineClassMethod(new FunctionalMethod("ifNil:", this.nilclass, this.IfNil));
             this.nilclass.DefineClassMethod(new FunctionalMethod("ifNotNil:", this.nilclass, this.IfNotNil));
@@ -81,6 +82,8 @@ namespace AjTalk
         public IClass UndefinedObjectClass { get { return this.nilclass; } }
 
         public Context Environment { get { return this.environment; } }
+
+        public bool Debug { get { return this.debug; } set { this.debug = value; } }
 
         public Context CurrentEnvironment
         {
@@ -316,13 +319,16 @@ namespace AjTalk
 
         public object SendMessage(object obj, string msgname, object[] args)
         {
+            if (this.debug)
+                Console.WriteLine(msgname);
+
             if (obj == null)
-                return this.nilclass.SendMessage(this, msgname, args);
+                return this.nilclass.SendMessage(null, this, msgname, args);
 
             IObject iobj = obj as IObject;
 
             if (iobj != null)
-                return iobj.SendMessage(this, msgname, args);
+                return iobj.SendMessage(iobj, this, msgname, args);
 
             return DotNetObject.SendMessage(this, obj, msgname, args);
         }

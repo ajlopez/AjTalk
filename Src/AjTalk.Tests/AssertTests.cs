@@ -2,11 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using AjTalk.Compiler;
+    using AjTalk.Language;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.IO;
 
     [TestClass]
     [DeploymentItem("AssertTests", "AssertTests")]

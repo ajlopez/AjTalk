@@ -14,5 +14,7 @@ namespace AjTalk.Language
         }
 
         object SendMessage(Machine machine, string msgname, object[] args);
+
+        object SendMessage(IObject self, Machine machine, string msgname, object[] args);
     }
 }

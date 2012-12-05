@@ -31,19 +31,19 @@ isKindOf: aClass
 !
 
 = anObject
-	^@AjTalk.Language.ObjectOperators equals: self with: anObject.
+	^@AjTalk.Language.ObjectOperators !!equals: self with: anObject.
 !
 
 == anObject
-	^@AjTalk.Language.ObjectOperators same: self with: anObject.
+	^@AjTalk.Language.ObjectOperators !!same: self with: anObject.
 !
 
 ~= anObject
-	^@AjTalk.Language.ObjectOperators negateboolean: self = anObject.
+	^@AjTalk.Language.ObjectOperators !!negateboolean: self = anObject.
 !
 
 ~~ anObject
-	^@AjTalk.Language.ObjectOperators negateboolean: self == anObject.
+	^@AjTalk.Language.ObjectOperators !!negateboolean: self == anObject.
 !
 
 error: aMessage
@@ -93,7 +93,7 @@ inheritsFrom: aClass
 	aSuperclass := self superclass.
 	[aSuperclass == nil]
 		whileFalse:
-			[aSuperclass == aClass ifTrue: [^true].
+			[@System.Console !!WriteLine: aSuperclass name. aSuperclass == aClass ifTrue: [^true].
 			aSuperclass := aSuperclass superclass].
 	^false
 !
@@ -384,3 +384,17 @@ Object subclass: #Block nativeType: @AjTalk.Language.Block
 
 Object subclass: #StringBuilder nativeType: @System.Text.StringBuilder
 !
+
+Object subclass: #VirtualMachine nativeType: @AjTalk.Machine
+!
+
+!VirtualMachine class methods!
+
+exit
+	self exit: 0
+!
+
+exit: value
+	@System.Environment !!Exit: value
+! !
+

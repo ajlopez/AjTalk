@@ -15,6 +15,8 @@ namespace AjTalk.Language
         private object[] locals;
         private object nativeSelf;
         private object lastreceiver = null;
+        private bool hasreturnvalue;
+        private object returnvalue;
 
         private int ip;
         private IList stack;
@@ -115,7 +117,7 @@ namespace AjTalk.Language
             // TODO refactor lastreceiver process
             // TODO refactor switch
             if (this.block.Bytecodes != null)
-                while (this.ip < this.block.ByteCodes.Length)
+                while (this.hasreturnvalue == false && this.ip < this.block.ByteCodes.Length)
                 {
                     ByteCode bc = (ByteCode)this.block.ByteCodes[this.ip];
                     byte arg;
@@ -130,9 +132,13 @@ namespace AjTalk.Language
                     switch (bc)
                     {
                         case ByteCode.ReturnSub:
-                            return null;
+                            this.hasreturnvalue = true;
+                            this.returnvalue = null;
+                            break;
                         case ByteCode.ReturnPop:
-                            return this.Top;
+                            this.hasreturnvalue = true;
+                            this.returnvalue = this.Pop();
+                            break;
                         case ByteCode.GetLocal:
                             this.ip++;
                             arg = this.block.ByteCodes[this.ip];
@@ -333,6 +339,17 @@ namespace AjTalk.Language
                 this.ip++;
             }
 
+            if (this.hasreturnvalue)
+            {
+                if (this.block.Closure != null)
+                {
+                    this.block.Closure.hasreturnvalue = true;
+                    this.block.Closure.returnvalue = this.returnvalue;
+                }
+
+                return this.returnvalue;
+            }
+
             if (this.block.IsMethod)
                 return this.self;
 
@@ -341,6 +358,8 @@ namespace AjTalk.Language
 
             return this.Pop();
         }
+
+        public bool HasReturnValue { get { return this.hasreturnvalue; } }
 
         public IObject Receiver
         {
@@ -446,9 +465,31 @@ namespace AjTalk.Language
 
         private static void DoGetClass(ExecutionBlock execblock)
         {
-            IObject iobj = (IObject)execblock.Pop();
-            execblock.lastreceiver = iobj;
-            execblock.Push(iobj.Behavior);
+            object value = execblock.Pop();
+            execblock.lastreceiver = value;
+
+            if (value == null) {
+                execblock.Push(execblock.machine.UndefinedObjectClass);
+                return;
+            }
+
+            IObject iobj = value as IObject;
+
+            if (iobj != null)
+            {
+                execblock.Push(iobj.Behavior);
+                return;
+            }
+
+            var behavior = execblock.machine.GetNativeBehavior(value.GetType());
+
+            if (behavior != null)
+            {
+                execblock.Push(behavior);
+                return;
+            }
+
+            execblock.Push(value.GetType());
         }
 
         private static void DoBasicSize(ExecutionBlock execblock)

@@ -15,7 +15,14 @@ obj := Object new.
 "TODO fix hierarchy"
 "[obj isMemberOf: UndefinedObject] assert."
 
-Object subclass: #Rectangle.
+Object subclass: #Rectangle
+	instanceVariableNames: 'x y width height'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Kernel-Classes'.
+
+	
+Machine debug: true.
 
 rect := Rectangle new.
 
@@ -32,5 +39,9 @@ rect := Rectangle new.
 [1 isMemberOf: String] assertFalse.
 
 [[true] isMemberOf: Block] assert.
+
+VirtualMachine exit.
+
+@System.Console !!WriteLine: 'exit'.
 
 
