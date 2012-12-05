@@ -20,10 +20,7 @@ Object subclass: #Rectangle
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Kernel-Classes'.
-
 	
-Machine debug: true.
-
 rect := Rectangle new.
 
 [rect isMemberOf: Rectangle] assert.
@@ -39,9 +36,4 @@ rect := Rectangle new.
 [1 isMemberOf: String] assertFalse.
 
 [[true] isMemberOf: Block] assert.
-
-VirtualMachine exit.
-
-@System.Console !!WriteLine: 'exit'.
-
 

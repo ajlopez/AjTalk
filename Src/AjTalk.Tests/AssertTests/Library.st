@@ -93,7 +93,7 @@ inheritsFrom: aClass
 	aSuperclass := self superclass.
 	[aSuperclass == nil]
 		whileFalse:
-			[@System.Console !!WriteLine: aSuperclass name. aSuperclass == aClass ifTrue: [^true].
+			[aSuperclass == aClass ifTrue: [^true].
 			aSuperclass := aSuperclass superclass].
 	^false
 !
