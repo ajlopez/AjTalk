@@ -685,11 +685,10 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        [Ignore]
         [DeploymentItem(@"CodeFiles\Library2.st")]
         [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
         [DeploymentItem(@"CodeFiles\PharoKernelNumbers.st")]
-        public void LoadPharoKernelNumbers()
+        public void LoadPharoKernelNumbers2()
         {
             Loader loaderlib = new Loader(@"Library2.st", new VmCompiler());
             Loader loaderobj = new Loader(@"PharoCoreKernelObjects.st", new VmCompiler());

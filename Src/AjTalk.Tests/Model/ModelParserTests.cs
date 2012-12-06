@@ -556,6 +556,27 @@
         }
 
         [TestMethod]
+        public void ParseBlockWithParametersWithSpaces()
+        {
+            ModelParser parser = new ModelParser("[ : a : b | ^a + b]");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(BlockExpression));
+
+            BlockExpression bexpression = (BlockExpression)expression;
+
+            Assert.IsNotNull(bexpression.Body);
+            Assert.IsInstanceOfType(bexpression.Body.First(), typeof(ReturnExpression));
+            Assert.AreEqual(2, bexpression.ParameterNames.Count);
+            Assert.AreEqual("a", bexpression.ParameterNames[0]);
+            Assert.AreEqual("b", bexpression.ParameterNames[1]);
+            Assert.AreEqual(0, bexpression.LocalVariables.Count);
+
+            Assert.AreEqual("[ :a :b | ^a + b]", expression.AsString());
+        }
+
+        [TestMethod]
         public void ParseFluentExpression()
         {
             ModelParser parser = new ModelParser("self do: 1 with: 2; do: 2 with: 3");
@@ -739,6 +760,24 @@
         }
 
         [TestMethod]
+        public void ParseExplicitSymbolAndStringArray()
+        {
+            ModelParser parser = new ModelParser("#('option1' #do)");
+            IExpression expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.IsInstanceOfType(expression, typeof(ArrayExpression));
+
+            ArrayExpression cexpression = (ArrayExpression)expression;
+            Assert.AreEqual(2, cexpression.Expressions.Count());
+
+            Assert.IsInstanceOfType(cexpression.Expressions.First(), typeof(ConstantExpression));
+            Assert.IsInstanceOfType(cexpression.Expressions.Skip(1).First(), typeof(SymbolExpression));
+
+            Assert.AreEqual("#('option1' do)", expression.AsString());
+        }
+
+        [TestMethod]
         public void ParseOperatorArray()
         {
             ModelParser parser = new ModelParser("#(- +)");
@@ -821,6 +860,15 @@
             MessageExpression mexpression = (MessageExpression)expression;
 
             Assert.AreEqual("subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:", mexpression.Selector);
+        }
+
+        [TestMethod]
+        public void CompileBlockWithDot()
+        {
+            Lexer lexer = new Lexer("[. 1. 2]");
+            ModelParser parser = new ModelParser(lexer);
+            var result = parser.ParseBlock();
+            Assert.IsNotNull(result);
         }
     }
 }

@@ -88,6 +88,10 @@
 
         public IEnumerable<IExpression> ParseExpressions()
         {
+            // TODO Quick hack to skip initial dots
+            while (this.TryParseDot())
+                ;
+
             IExpression expression = this.ParseExpression();
 
             if (expression == null)
@@ -329,7 +333,22 @@
                     break;
 
                 case TokenType.Integer:
-                    return new ConstantExpression(Convert.ToInt32(token.Value, CultureInfo.InvariantCulture));
+                    long value = 0;
+                    int position = token.Value.IndexOf('r');
+
+                    if (position > 0)
+                    {
+                        string strradix = token.Value.Substring(0, position);
+                        string strnumber = token.Value.Substring(position + 1);
+                        value = Convert.ToInt64(strnumber, Convert.ToInt32(strradix));
+                    }
+                    else
+                        value = Convert.ToInt64(token.Value);
+
+                    if (value > int.MaxValue || value < int.MinValue)
+                        return new ConstantExpression(value);
+                    else
+                        return new ConstantExpression((int)value);
 
                 case TokenType.Real:
                     return new ConstantExpression(Convert.ToDouble(token.Value, CultureInfo.InvariantCulture));
@@ -391,11 +410,8 @@
                 return this.ParseArray();
 
             // TODO review if operators in collections are symbols or not
-            if (token.Type == TokenType.Name || token.Type == TokenType.Operator)
+            if (token.Type == TokenType.Name || token.Type == TokenType.Operator || token.Type == TokenType.Symbol)
                 return new SymbolExpression(token.Value);
-
-            if (token.Type == TokenType.Symbol)
-                throw new ParserException(string.Format("Unexpected '{0}'", token.Value));
 
             if (token.Type == TokenType.Integer)
                 return new ConstantExpression(Convert.ToInt32(token.Value, CultureInfo.InvariantCulture));
@@ -486,9 +502,13 @@
 
             Token token = this.NextToken();
 
-            while (token != null && token.Type == TokenType.Parameter)
+            while (token != null && (token.Type == TokenType.Parameter || token.Type == TokenType.Operator && token.Value == ":"))
             {
-                parameterNames.Add(token.Value);
+                // TODO improve parameter lexer
+                if (token.Type == TokenType.Operator)
+                    parameterNames.Add(this.ParseName());
+                else
+                    parameterNames.Add(token.Value);
                 token = this.NextToken();
             }
 
@@ -539,7 +559,10 @@
             if (token.Type == TokenType.Integer)
             {
                 number = Convert.ToInt32(token.Value, CultureInfo.InvariantCulture);
-                primitive = new PrimitiveExpression(number);
+                string error = null;
+                if (this.TryParseToken(TokenType.Name, "error:"))
+                    error = this.ParseName();
+                primitive = new PrimitiveExpression(number, error);
             }
             else if (token.Type == TokenType.String)
             {
@@ -770,6 +793,21 @@
                 throw new ParserException("String Expected");
 
             return token.Value;
+        }
+
+        private bool TryParseToken(TokenType type, string value)
+        {
+            Token token = this.NextToken();
+
+            if (token == null)
+                return false;
+
+            if (token.Type == type && token.Value == value)
+                return true;
+
+            this.PushToken(token);
+
+            return false;
         }
     }
 }

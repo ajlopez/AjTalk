@@ -1097,6 +1097,14 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual("Send at: 1", steps[4]);
         }
 
+        [TestMethod]
+        public void CompileBlockWithDot()
+        {
+            Parser compiler = new Parser("[. 1. 2]");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+        }
+
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return CompileClass(clsname, varnames, methods, null);

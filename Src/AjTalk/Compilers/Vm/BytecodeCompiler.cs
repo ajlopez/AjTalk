@@ -171,9 +171,9 @@
         public override void Visit(PrimitiveExpression expression)
         {
             if (!string.IsNullOrEmpty(expression.Module))
-                throw new NotImplementedException();
-
-            this.block.CompileByteCode(ByteCode.Primitive, (byte)expression.Number);
+                this.block.CompileByteCode(ByteCode.NamedPrimitive, this.block.CompileConstant(expression.Name), this.block.CompileConstant(expression.Module));
+            else
+                this.block.CompileByteCode(ByteCode.Primitive, (byte)expression.Number);
         }
 
         public override void Visit(CodeModel model)

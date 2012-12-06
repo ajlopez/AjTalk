@@ -9,6 +9,17 @@
 
     public class BehaviorDoesNotUnderstandMethod : DoesNotUnderstandMethod
     {
+        private static IList<string> reservedMethods = new List<string>() {
+            "methods",
+            "methodsFor:",
+            "methodsFor:stamp:",
+            "commentStamp:",
+            "commentStamp:prior:",
+            "subclass:instanceVariableNames:",
+            "subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:",
+            "variableSubclass:instanceVariableNames:classVariableNames:poolDictionaries:category:"
+        };
+
         public BehaviorDoesNotUnderstandMethod(Machine machine, IBehavior behavior)
             : base(machine, behavior)
         {
@@ -29,6 +40,10 @@
             {
                 IBehavior behavior = (IBehavior)self;
                 return new ChunkReaderProcessor((Machine mach, ICompiler compiler, string text) => {
+                    var method = compiler.CompileInstanceMethod(text, behavior);
+                    if (reservedMethods.Contains(method.Name))
+                        return;
+                    Console.WriteLine(method.Name);
                     behavior.DefineInstanceMethod(compiler.CompileInstanceMethod(text, behavior));
                 });
             }

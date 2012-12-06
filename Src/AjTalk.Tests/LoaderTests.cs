@@ -849,7 +849,7 @@ namespace AjTalk.Tests
         [DeploymentItem(@"CodeFiles\Library2.st")]
         [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
         [DeploymentItem(@"CodeFiles\PharoKernelClasses.st")]
-        public void LoadPharoKernelClasses()
+        public void LoadPharoKernelClassesSkippingReservedMethods()
         {
             Loader loaderlib = new Loader(@"Library2.st", new SimpleCompiler());
             Loader loaderobj = new Loader(@"PharoCoreKernelObjects.st", new SimpleCompiler());

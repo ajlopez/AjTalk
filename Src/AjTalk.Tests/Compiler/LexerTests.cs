@@ -276,6 +276,27 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void ProcessTwoNames()
+        {
+            Lexer tokenizer = new Lexer("@self");
+
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("@", token.Value);
+            Assert.AreEqual(TokenType.Operator, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("self", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
+
+        [TestMethod]
         public void ProcessComplexSymbol()
         {
             Lexer tokenizer = new Lexer("#aSymbol:with:many>chars");

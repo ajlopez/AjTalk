@@ -10,10 +10,17 @@
         private int number;
         private string name;
         private string module;
+        private string error;
 
         public PrimitiveExpression(int number)
+            : this(number, null)
+        {
+        }
+
+        public PrimitiveExpression(int number, string error)
         {
             this.number = number;
+            this.error = error;
         }
 
         public PrimitiveExpression(string name, string module)

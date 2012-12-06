@@ -151,3 +151,9 @@ ClassDescription subclass:#Metaclass
 	poolDictionaries:''
 	category:'Kernel-Classes'
 !
+
+!UndefinedObject class methods!
+
+classTrait
+	^nil
+! !

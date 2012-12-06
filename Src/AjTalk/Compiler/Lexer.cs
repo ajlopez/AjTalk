@@ -107,7 +107,7 @@ namespace AjTalk.Compiler
             {
                 int ch2 = this.PeekChar();
 
-                if (ch2 < 0 || !char.IsLetter((char)ch2))
+                if (ch2 < 0 || !char.IsLetter((char)ch2) || !char.IsUpper((char)ch2))
                 {
                     return this.NextOperator((char)ch);
                 }
