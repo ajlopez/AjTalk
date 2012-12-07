@@ -38,7 +38,7 @@
             thread.Start();
         }
 
-        public override object ExecuteMethod(IObject self, Machine machine, IMethod method, object[] arguments)
+        public override object ExecuteMethod(Machine machine, IMethod method, object[] arguments)
         {
             Message message = new Message(machine, method, arguments);
             this.queue.PostMessage(message);

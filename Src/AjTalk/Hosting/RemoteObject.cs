@@ -46,5 +46,10 @@
         {
             return this.obj.SendMessage(machine, msgname, args);
         }
+
+        public object ExecuteMethod(Machine machine, IMethod method, object[] arguments)
+        {
+            return this.obj.ExecuteMethod(machine, method, arguments);
+        }
     }
 }

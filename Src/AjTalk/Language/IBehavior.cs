@@ -29,5 +29,7 @@
         ICollection<IMethod> GetInstanceMethods();
 
         ICollection<IMethod> GetClassMethods();
+
+        object SendMessageToObject(IObject self, Machine machine, string msgname, object[] args);
     }
 }

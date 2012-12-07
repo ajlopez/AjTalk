@@ -144,5 +144,32 @@
 
             this.traits.Add(trait);
         }
+
+        public object SendMessageToObject(IObject self, Machine machine, string msgname, object[] args)
+        {
+            IMethod mth = this.GetInstanceMethod(msgname);
+
+            if (mth != null)
+            {
+                if (self == null)
+                    return mth.Execute(machine, null, args);
+
+                return self.ExecuteMethod(machine, mth, args);
+            }
+
+            mth = this.GetInstanceMethod("doesNotUnderstand:");
+
+            if (mth != null)
+            {
+                var arguments = new object[] { msgname, args };
+
+                if (self == null)
+                    return mth.Execute(machine, null, arguments);
+
+                return self.ExecuteMethod(machine, mth, arguments);
+            }
+
+            throw new InvalidProgramException(string.Format("Does not understand {0}", msgname));
+        }
     }
 }
