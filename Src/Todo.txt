@@ -7,6 +7,8 @@
 
 - Set Argument?
 
+- super for NativeBehaviors
+
 - Clear Stack in Execution block (at . (dot)?)
 
 - Review all Convert.ToInt32, it should be a common method, supporting 16rFF

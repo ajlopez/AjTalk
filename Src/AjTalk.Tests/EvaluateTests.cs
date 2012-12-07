@@ -748,7 +748,7 @@
         {
             IClass testclass = this.machine.CreateClass("Test1", null, "x", string.Empty);
             this.machine.SetCurrentEnvironmentObject("Test1", testclass);
-            IClass testclass2 = this.machine.CreateClass("Test2", testclass, "x", string.Empty);
+            IClass testclass2 = this.machine.CreateClass("Test2", testclass, "y", string.Empty);
             this.machine.SetCurrentEnvironmentObject("Test2", testclass2);
             VmCompiler compiler = new VmCompiler();
             testclass.DefineInstanceMethod(compiler.CompileInstanceMethod("x: value x := value", testclass));
