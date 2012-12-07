@@ -37,7 +37,7 @@
                 if (pgm != null)
                 {
                     IBehavior program = (IBehavior)pgm;
-                    program.SendMessage(machine, "main", null);
+                    machine.SendMessage(program, "main", null);
                     return;
                 }
             }
