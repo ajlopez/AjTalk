@@ -743,6 +743,26 @@
             Assert.AreEqual(1, this.Evaluate("Test test"));
         }
 
+        [TestMethod]
+        public void EvaluateSuperNew()
+        {
+            IClass testclass = this.machine.CreateClass("Test1", null, "x", string.Empty);
+            this.machine.SetCurrentEnvironmentObject("Test1", testclass);
+            IClass testclass2 = this.machine.CreateClass("Test2", testclass, "x", string.Empty);
+            this.machine.SetCurrentEnvironmentObject("Test2", testclass2);
+            VmCompiler compiler = new VmCompiler();
+            compiler.CompileInstanceMethod("x: value x := value", testclass);
+            compiler.CompileInstanceMethod("y: value y := value", testclass2);
+            compiler.CompileClassMethod("new ^self basicNew x: 10", testclass);
+            compiler.CompileClassMethod("new ^super new y: 20", testclass2);
+            var result = this.Evaluate("Test2 new");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IObject));
+            var iobj = (IObject)result;
+            Assert.AreEqual(10, iobj[0]);
+            Assert.AreEqual(20, iobj[1]);
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);

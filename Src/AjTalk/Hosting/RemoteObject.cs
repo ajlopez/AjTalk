@@ -44,12 +44,7 @@
 
         public object SendMessage(Machine machine, string msgname, object[] args)
         {
-            return this.obj.SendMessage(obj, machine, msgname, args);
-        }
-
-        public object SendMessage(IObject self, Machine machine, string msgname, object[] args)
-        {
-            return this.obj.SendMessage(obj, machine, msgname, args);
+            return this.obj.SendMessage(machine, msgname, args);
         }
     }
 }

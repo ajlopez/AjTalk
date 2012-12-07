@@ -323,12 +323,12 @@ namespace AjTalk
                 Console.WriteLine(msgname);
 
             if (obj == null)
-                return this.nilclass.SendMessage(null, this, msgname, args);
+                return ((BaseObject)this.nilclass).SendMessage(null, this, msgname, args);
 
             IObject iobj = obj as IObject;
 
             if (iobj != null)
-                return iobj.SendMessage(iobj, this, msgname, args);
+                return iobj.SendMessage(this, msgname, args);
 
             return DotNetObject.SendMessage(this, obj, msgname, args);
         }

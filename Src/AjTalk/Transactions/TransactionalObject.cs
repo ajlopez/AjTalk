@@ -84,23 +84,19 @@
                 }
             }
         }
-        public object SendMessage(Machine machine, string msgname, object[] args)
-        {
-            return this.SendMessage(this, machine, msgname, args);
-        }
 
-        public object SendMessage(IObject self, Machine machine, string msgname, object[] args)
+        public object SendMessage(Machine machine, string msgname, object[] args)
         {
             // TODO objclass to review
             IMethod mth = this.Behavior.GetInstanceMethod(msgname);
 
             if (mth != null)
-                return this.ExecuteMethod(self, machine, mth, args);
+                return this.ExecuteMethod(this, machine, mth, args);
 
             mth = this.Behavior.GetInstanceMethod("doesNotUnderstand:");
 
             if (mth != null)
-                return this.ExecuteMethod(self, machine, mth, new object[] { msgname, args });
+                return this.ExecuteMethod(this, machine, mth, new object[] { msgname, args });
 
             return DotNetObject.SendMessage(machine, this, msgname, args);
         }
