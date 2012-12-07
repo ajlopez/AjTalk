@@ -151,24 +151,27 @@
 
             // TODO refactor self == null, it could be all in SendMessageToNilObject
             if (mth != null)
-            {
-                if (self == null)
-                    return mth.Execute(machine, null, args);
-
                 return self.ExecuteMethod(machine, mth, args);
-            }
 
             mth = this.GetInstanceMethod("doesNotUnderstand:");
 
             if (mth != null)
-            {
-                var arguments = new object[] { msgname, args };
+                return self.ExecuteMethod(machine, mth, new object[] { msgname, args });
 
-                if (self == null)
-                    return mth.Execute(machine, null, arguments);
+            throw new InvalidProgramException(string.Format("Does not understand {0}", msgname));
+        }
 
-                return self.ExecuteMethod(machine, mth, arguments);
-            }
+        public object SendMessageToNilObject(Machine machine, string msgname, object[] args)
+        {
+            IMethod mth = this.GetInstanceMethod(msgname);
+
+            if (mth != null)
+                    return mth.Execute(machine, null, args);
+
+            mth = this.GetInstanceMethod("doesNotUnderstand:");
+
+            if (mth != null)
+                return mth.Execute(machine, null, new object[] { msgname, args });
 
             throw new InvalidProgramException(string.Format("Does not understand {0}", msgname));
         }

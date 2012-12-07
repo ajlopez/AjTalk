@@ -20,7 +20,7 @@ namespace AjTalk
         [ThreadStatic]
         private static string currentPath;
 
-        private IClass nilclass;
+        private BaseClass nilclass;
         private IClass classclass;
         private IClass metaclassclass;
         private Context environment = new Context();
@@ -44,7 +44,7 @@ namespace AjTalk
                 this.SetCurrent();
 
             IMetaClass meta = new BaseMetaClass(null, null, this, string.Empty);
-            this.nilclass = meta.CreateClass("UndefinedObject", string.Empty);
+            this.nilclass = (BaseClass)meta.CreateClass("UndefinedObject", string.Empty);
 
             // TODO review, nil object never receives a message, see Send in Execution block
             this.nilclass.DefineInstanceMethod(new BehaviorDoesNotUnderstandMethod(this, this.nilclass));
@@ -261,7 +261,7 @@ namespace AjTalk
             else if (objname == "Class" && value is IClass)
                 this.classclass = (IClass)value;
             else if (objname == "UndefinedObject" && value is IClass)
-                this.nilclass = (IClass)value;
+                this.nilclass = (BaseClass)value;
         }
 
         public void SetCurrent()
@@ -323,7 +323,7 @@ namespace AjTalk
                 Console.WriteLine(msgname);
 
             if (obj == null)
-                return this.nilclass.SendMessageToObject(null, this, msgname, args);
+                return this.nilclass.SendMessageToNilObject(this, msgname, args);
 
             IObject iobj = obj as IObject;
 
