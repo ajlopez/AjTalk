@@ -158,7 +158,7 @@
             if (mth != null)
                 return self.ExecuteMethod(machine, mth, new object[] { msgname, args });
 
-            throw new InvalidProgramException(string.Format("Does not understand {0}", msgname));
+            return DotNetObject.SendMessage(machine, self, msgname, args);
         }
 
         public object SendMessageToNilObject(Machine machine, string msgname, object[] args)

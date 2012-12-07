@@ -328,7 +328,7 @@ namespace AjTalk
             IObject iobj = obj as IObject;
 
             if (iobj != null)
-                return iobj.SendMessage(this, msgname, args);
+                return iobj.Behavior.SendMessageToObject(iobj, this, msgname, args);
 
             return DotNetObject.SendMessage(this, obj, msgname, args);
         }
