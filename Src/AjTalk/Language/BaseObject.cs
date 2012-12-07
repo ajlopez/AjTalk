@@ -60,12 +60,7 @@ namespace AjTalk.Language
 
         public object SendMessage(Machine machine, string msgname, object[] args)
         {
-            return this.SendMessage(this, machine, msgname, args);
-        }
-
-        public object SendMessage(IObject self, Machine machine, string msgname, object[] args)
-        {
-            return this.behavior.SendMessageToObject(self, machine, msgname, args);
+            return this.behavior.SendMessageToObject(this, machine, msgname, args);
         }
 
         public virtual object ExecuteMethod(Machine machine, IMethod method, object[] arguments)

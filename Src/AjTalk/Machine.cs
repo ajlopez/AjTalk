@@ -49,10 +49,10 @@ namespace AjTalk
             // TODO review, nil object never receives a message, see Send in Execution block
             this.nilclass.DefineInstanceMethod(new BehaviorDoesNotUnderstandMethod(this, this.nilclass));
             this.nilclass.DefineClassMethod(new BehaviorDoesNotUnderstandMethod(this, this.nilclass));
-            this.nilclass.DefineClassMethod(new FunctionalMethod("ifNil:", this.nilclass, this.IfNil));
-            this.nilclass.DefineClassMethod(new FunctionalMethod("ifNotNil:", this.nilclass, this.IfNotNil));
-            this.nilclass.DefineClassMethod(new FunctionalMethod("isNil", this.nilclass, this.IsNil));
-            this.nilclass.DefineClassMethod(new FunctionalMethod("isNotNil", this.nilclass, this.IsNotNil));
+            this.nilclass.DefineInstanceMethod(new FunctionalMethod("ifNil:", this.nilclass, this.IfNil));
+            this.nilclass.DefineInstanceMethod(new FunctionalMethod("ifNotNil:", this.nilclass, this.IfNotNil));
+            this.nilclass.DefineInstanceMethod(new FunctionalMethod("isNil", this.nilclass, this.IsNil));
+            this.nilclass.DefineInstanceMethod(new FunctionalMethod("isNotNil", this.nilclass, this.IsNotNil));
 
             // Native Behaviors
             var enumerableBehavior = new EnumerableBehavior(meta, this.nilclass, this);
@@ -323,7 +323,7 @@ namespace AjTalk
                 Console.WriteLine(msgname);
 
             if (obj == null)
-                return ((BaseObject)this.nilclass).SendMessage(null, this, msgname, args);
+                return this.nilclass.SendMessageToObject(null, this, msgname, args);
 
             IObject iobj = obj as IObject;
 
