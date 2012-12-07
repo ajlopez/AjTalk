@@ -149,6 +149,7 @@
         {
             IMethod mth = this.GetInstanceMethod(msgname);
 
+            // TODO refactor self == null, it could be all in SendMessageToNilObject
             if (mth != null)
             {
                 if (self == null)

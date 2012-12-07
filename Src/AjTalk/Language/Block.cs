@@ -382,6 +382,12 @@ namespace AjTalk.Language
                 return true;
             }
 
+            if (name == "super")
+            {
+                this.CompileByteCode(ByteCode.GetSuper);
+                return true;
+            }
+
             if (name == "nil" || name == "null")
             {
                 this.CompileByteCode(ByteCode.GetNil);

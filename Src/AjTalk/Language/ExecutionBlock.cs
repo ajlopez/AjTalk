@@ -6,6 +6,7 @@ namespace AjTalk.Language
 
     public class ExecutionBlock
     {
+        private static object super = new object();
         private static Action<ExecutionBlock>[] codes;
 
         private Block block;
@@ -144,6 +145,9 @@ namespace AjTalk.Language
                             arg = this.block.ByteCodes[this.ip];
                             this.Push(this.GetLocal(arg));
                             break;
+                        case ByteCode.GetSuper:
+                            this.Push(super);
+                            break;
                         case ByteCode.GetSelf:
                             if (this.nativeSelf != null)
                                 this.Push(this.nativeSelf);
@@ -251,8 +255,11 @@ namespace AjTalk.Language
                             object obj = this.Pop();
                             this.lastreceiver = obj;
 
+                            if (obj == super)
+                                // TODO this.nativeSelf processing
+                                this.Push(((IMethod)this.block).Behavior.SuperClass.SendMessageToObject(this.self, this.machine, mthname, args));
                             // TODO this.machine is null in many tests, not in real world
-                            if (this.machine == null)
+                            else if (this.machine == null)
                                 this.Push(((IObject)obj).SendMessage(null, mthname, args));
                             else
                                 this.Push(this.machine.SendMessage(obj, mthname, args));

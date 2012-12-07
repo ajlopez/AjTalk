@@ -115,7 +115,9 @@
                         break;
 
                     case ByteCode.ReturnPop:
+                    case ByteCode.ChainedSend:
                     case ByteCode.GetSelf:
+                    case ByteCode.GetSuper:
                         codes.Add(string.Format("{0}", (ByteCode)this.block.ByteCodes[ip]));
                         break;
 
@@ -152,10 +154,6 @@
                         ip++;
                         nconstant = this.block.ByteCodes[ip];
                         codes.Add(string.Format("{0} {1} {2}", ByteCode.PrimitiveError, nprimitive, this.block.GetConstant(nconstant)));
-                        break;
-
-                    case ByteCode.ChainedSend:
-                        codes.Add("ChainedSend");
                         break;
                 }
 

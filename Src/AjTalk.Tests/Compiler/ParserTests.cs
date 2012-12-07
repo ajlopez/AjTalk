@@ -1105,6 +1105,20 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(block);
         }
 
+        [TestMethod]
+        public void CompileSuperNew()
+        {
+            Parser compiler = new Parser("new super new");
+            Block block = compiler.CompileInstanceMethod(null);
+            Assert.IsNotNull(block);
+            var decompiler = new BlockDecompiler(block);
+            var steps = decompiler.Decompile();
+            Assert.IsNotNull(steps);
+            Assert.AreEqual(2, steps.Count);
+            Assert.AreEqual("GetSuper", steps[0]);
+            Assert.AreEqual("Send new 0", steps[1]);
+        }
+
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return CompileClass(clsname, varnames, methods, null);

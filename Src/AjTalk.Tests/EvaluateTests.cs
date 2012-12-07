@@ -751,10 +751,10 @@
             IClass testclass2 = this.machine.CreateClass("Test2", testclass, "x", string.Empty);
             this.machine.SetCurrentEnvironmentObject("Test2", testclass2);
             VmCompiler compiler = new VmCompiler();
-            compiler.CompileInstanceMethod("x: value x := value", testclass);
-            compiler.CompileInstanceMethod("y: value y := value", testclass2);
-            compiler.CompileClassMethod("new ^self basicNew x: 10", testclass);
-            compiler.CompileClassMethod("new ^super new y: 20", testclass2);
+            testclass.DefineInstanceMethod(compiler.CompileInstanceMethod("x: value x := value", testclass));
+            testclass2.DefineInstanceMethod(compiler.CompileInstanceMethod("y: value y := value", testclass2));
+            testclass.DefineClassMethod(compiler.CompileClassMethod("new ^self basicNew x: 10", testclass));
+            testclass2.DefineClassMethod(compiler.CompileClassMethod("new ^super new y: 20", testclass2));
             var result = this.Evaluate("Test2 new");
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IObject));
