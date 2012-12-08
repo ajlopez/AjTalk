@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using AjTalk.Compiler;
+    using AjTalk.Exceptions;
     using AjTalk.Language;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

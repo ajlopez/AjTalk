@@ -47,7 +47,7 @@ isKindOf: aClass
 !
 
 error: aMessage
-	@AjTalk.Language.Primitives raiseException: (@AjTalk.Language.ErrorException new: aMessage).
+	(@AjTalk.Exceptions.ErrorException new: aMessage) raise.
 !
 
 isNil

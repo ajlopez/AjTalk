@@ -145,7 +145,7 @@
     <Compile Include="Hosting\RemotingHostClient.cs" />
     <Compile Include="Hosting\RemotingHostServer.cs" />
     <Compile Include="Language\AgentObject.cs" />
-    <Compile Include="Language\ErrorException.cs" />
+    <Compile Include="Exceptions\ErrorException.cs" />
     <Compile Include="Language\BaseBehavior.cs" />
     <Compile Include="Language\BaseClass.cs">
       <SubType>Code</SubType>

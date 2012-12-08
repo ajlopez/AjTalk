@@ -1,4 +1,4 @@
-﻿namespace AjTalk.Language
+﻿namespace AjTalk.Exceptions
 {
     using System;
     using System.Collections.Generic;
