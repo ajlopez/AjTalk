@@ -184,7 +184,7 @@
         }
 
         [TestMethod]
-        public void CreateDotNetObject()
+        public void CreateDotNetFileInfo()
         {
             object result = this.Evaluate("@System.IO.FileInfo !new: 'afile.txt'");
 
@@ -194,6 +194,51 @@
             FileInfo fileinfo = (FileInfo)result;
 
             Assert.AreEqual("afile.txt", fileinfo.Name);
+        }
+
+        [TestMethod]
+        public void CreateDotNetObject()
+        {
+            object result = this.Evaluate("@System.Object new");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(object));
+        }
+
+        [TestMethod]
+        public void GetDotNetObjectType()
+        {
+            object result = this.Evaluate("@System.Object");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Type));
+            Assert.AreSame(result, typeof(object));
+        }
+
+        [TestMethod]
+        public void MakeDotNetObjectArrayType()
+        {
+            object result = this.Evaluate("@System.Object !GetType !MakeArrayType");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Type));
+        }
+
+        [TestMethod]
+        public void MakeDotNetObjectArray()
+        {
+            object result = this.Evaluate("@System.Object !GetType !MakeArrayType new: 10");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(object[]));
+            Assert.AreEqual(10, ((object[])result).Length);
+        }
+
+        [TestMethod]
+        public void MakeByteArray()
+        {
+            object result = this.Evaluate("@System.Array !CreateInstance: @System.Byte with: 1024");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(byte[]));
         }
 
         [TestMethod]

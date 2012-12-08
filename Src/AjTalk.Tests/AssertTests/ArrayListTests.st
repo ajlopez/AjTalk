@@ -49,13 +49,13 @@ list addAll: #(1 2 3).
 [(list at: 2) == 2] assert.
 [(list at: 3) == 3] assert.
 
-((list addIfNotPresent: 3) == 3] assert.
+[(list addIfNotPresent: 3) == 3] assert.
 [list size == 3] assert.
 [(list at: 1) == 1] assert.
 [(list at: 2) == 2] assert.
 [(list at: 3) == 3] assert.
 
-((list addIfNotPresent: 4) == 4] assert.
+[(list addIfNotPresent: 4) == 4] assert.
 [list size == 4] assert.
 
 !

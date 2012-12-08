@@ -483,3 +483,6 @@ assertAreSame: aValue with: otherValue message: aMessage
 	self assert: aValue == otherValue message: aMessage.
 ! !
 
+Collection subclass: #Array nativeType: (@System.Object !!GetType !!MakeArrayType).
+!
+
