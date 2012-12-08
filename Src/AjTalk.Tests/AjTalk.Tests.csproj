@@ -119,15 +119,15 @@
     <Content Include="AssertTests\ArithmeticTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="AssertTests\CharTests.st">
+    <Content Include="AssertTests\CharTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="AssertTests\BooleanTests.st">
+    </Content>
+    <Content Include="AssertTests\BooleanTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="AssertTests\ArrayListTests.st">
+    </Content>
+    <Content Include="AssertTests\ArrayListTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="AssertTests\ObjectTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -158,12 +158,15 @@
     <Content Include="AssertTests\IntegerTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="AssertTests\StringTests.st">
+    <Content Include="AssertTests\ArrayTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="AssertTests\Library.st">
+    </Content>
+    <Content Include="AssertTests\StringTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="AssertTests\Library.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="CodeFiles\AsRemote.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

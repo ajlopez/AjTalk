@@ -218,18 +218,23 @@
         [TestMethod]
         public void MakeDotNetObjectArrayType()
         {
-            object result = this.Evaluate("@System.Object !GetType !MakeArrayType");
+            object result = this.Evaluate("(@System.Array !CreateInstance: @System.Object with: 0) !GetType");
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(Type));
+            Assert.AreEqual("Object[]", ((Type)result).Name);
         }
 
         [TestMethod]
         public void MakeDotNetObjectArray()
         {
-            object result = this.Evaluate("@System.Object !GetType !MakeArrayType new: 10");
+            object result = this.Evaluate("((@System.Array !CreateInstance: @System.Object with: 0) !GetType) new: 10");
             Assert.IsNotNull(result);
+            Type type =  typeof(object).MakeArrayType();
             Assert.IsInstanceOfType(result, typeof(object[]));
             Assert.AreEqual(10, ((object[])result).Length);
+            object[] array = (object[])result;
+            array[0] = 1;
+            Assert.AreEqual(1, array[0]);
         }
 
         [TestMethod]

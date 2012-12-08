@@ -315,17 +315,13 @@ allSatisfy: aBlock
 !
 
 do: aBlock
+	@System.Console !!WriteLine: 'do:'.
 	self subclassResponsability
 !
 
 anySatisfy: aBlock
 	self do: [:each | (aBlock value: each) ifTrue:[^true]].
 	^false
-!
-
-addAll: aCollection
-	aCollection do: [:each | self add: each].
-	^aCollection
 !
 
 size
@@ -483,6 +479,21 @@ assertAreSame: aValue with: otherValue message: aMessage
 	self assert: aValue == otherValue message: aMessage.
 ! !
 
-Collection subclass: #Array nativeType: (@System.Object !!GetType !!MakeArrayType).
+Collection subclass: #Array nativeType: ((@System.Array !!CreateInstance: @System.Object with: 0) !!GetType).
 !
 
+Array !!AddTrait: (Machine !!GetNativeBehavior: @System.Collections.IEnumerable))!
+
+!Array methods!
+
+size 
+	^self !!Length
+!
+
+at: anIndex
+	^self !!nat: anIndex - 1
+!
+
+at: anIndex put: aValue
+	^self !!nat: anIndex - 1 put: aValue
+! !
