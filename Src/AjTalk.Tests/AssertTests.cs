@@ -29,6 +29,12 @@
         }
 
         [TestMethod]
+        public void IntegerAsserts()
+        {
+            DoAssert("Integer");
+        }
+
+        [TestMethod]
         public void StringAsserts()
         {
             DoAssert("String");

@@ -50,6 +50,10 @@ error: aMessage
 	(@AjTalk.Exceptions.ErrorException new: aMessage) raise.
 !
 
+subclassResponsability
+	self error: 'subclass responsability'
+!
+
 isNil
 	^false.
 !
@@ -148,6 +152,17 @@ ClassDescription subclass:#Metaclass
 
 Object subclass: #Integer nativeType: @System.Int32
 !
+
+!Integer methods!
+
+timesRepeat: aBlock
+	| count |
+	count := 1.
+	[count <= self]
+		whileTrue:
+			[aBlock value.
+			count := count + 1]	
+! !
 
 Object subclass: #String nativeType: @System.String
 !
@@ -274,6 +289,16 @@ add: newObject
 	self subclassResponsability
 !
 
+add: newObject withOccurrences: anInteger
+	anInteger timesRepeat: [self add: newObject].
+	^ newObject
+!
+
+anySatisfy: aBlock
+	self do: [:each | (aBlock value: each) ifTrue: [^ true]].
+	^ false
+!
+
 do: aBlock
 	self subclassResponsability
 !
@@ -297,6 +322,8 @@ size
 ! !		
 
 Collection subclass: #ArrayList nativeType: @System.Collections.ArrayList!
+
+ArrayList !!AddTrait: (Machine !!GetNativeBehavior: @System.Collections.IEnumerable))!
 
 !ArrayList methods!
 
@@ -396,5 +423,48 @@ exit
 
 exit: value
 	@System.Environment !!Exit: value
+! !
+
+"Test class"
+
+Object subclass:#Test
+	instanceVariableNames:''
+	classVariableNames:''
+	poolDictionaries:''
+	category:'Test'
+!
+
+!Test class methods!
+
+assert: aBoolean
+	aBoolean ifFalse: [self error: 'assert'].
+!
+
+assertIsFalse: aBoolean
+	aBoolean ifTrue: [self error: 'assert'].
+!
+
+assert: aBoolean message: aMessage
+	aBoolean ifFalse: [self error: aMessage].
+!
+	
+assertIsFalse: aBoolean message: aMessage
+	aBoolean ifTrue: [self error: aMessage].
+!
+	
+assertAreEqual: aValue with: otherValue
+	self assert: aValue = otherValue message: 'assertAreEqual'.
+!
+
+assertAreEqual: aValue with: otherValue message: aMessage
+	self assert: aValue = otherValue message: aMessage.
+!
+	
+assertAreSame: aValue with: otherValue
+	self assert: aValue == otherValue message: 'assertAreSame'.
+!
+
+assertAreSame: aValue with: otherValue message: aMessage
+	self assert: aValue == otherValue message: aMessage.
 ! !
 

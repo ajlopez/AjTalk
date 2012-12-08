@@ -276,6 +276,27 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void ProcessSpecialNameAndParenthesis()
+        {
+            Lexer tokenizer = new Lexer("@System.IO.FileInfo)");
+
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("@System.IO.FileInfo", token.Value);
+            Assert.AreEqual(TokenType.Name, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual(")", token.Value);
+            Assert.AreEqual(TokenType.Punctuation, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
+
+        [TestMethod]
         public void ProcessTwoNames()
         {
             Lexer tokenizer = new Lexer("@self");

@@ -355,7 +355,7 @@ namespace AjTalk.Compiler
 
             ch = this.NextChar();
 
-            while (ch >= 0 && !char.IsWhiteSpace((char)ch))
+            while (ch >= 0 && (char.IsLetterOrDigit((char)ch) || ch == '.'))
             {
                 sb.Append((char)ch);
                 ch = this.NextChar();

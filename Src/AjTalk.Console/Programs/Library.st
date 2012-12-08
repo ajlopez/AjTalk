@@ -277,6 +277,8 @@ size
 
 Collection subclass: #ArrayList nativeType: @System.Collections.ArrayList!
 
+ArrayList !!AddTrait: (Machine !!GetNativeBehavior: @System.Collections.IEnumerable))!
+
 !ArrayList methods!
 
 size 
