@@ -43,7 +43,6 @@
                     var method = compiler.CompileInstanceMethod(text, behavior);
                     if (reservedMethods.Contains(method.Name))
                         return;
-                    Console.WriteLine(method.Name);
                     behavior.DefineInstanceMethod(compiler.CompileInstanceMethod(text, behavior));
                 });
             }

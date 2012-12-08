@@ -294,9 +294,24 @@ add: newObject withOccurrences: anInteger
 	^ newObject
 !
 
+addAll: aCollection 
+	aCollection do: [:each | self add: each].
+	^ aCollection
+!
+
+addIfNotPresent: anObject
+	(self includes: anObject) ifFalse: [self add: anObject].
+	^ anObject
+!
+	
 anySatisfy: aBlock
 	self do: [:each | (aBlock value: each) ifTrue: [^ true]].
 	^ false
+!
+
+allSatisfy: aBlock
+	self do: [:each | (aBlock value: each) ifFalse: [^ false]].
+	^ true
 !
 
 do: aBlock
