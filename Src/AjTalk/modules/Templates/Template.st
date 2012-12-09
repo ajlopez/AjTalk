@@ -13,7 +13,7 @@ new: aBlock
 !
 
 compileWriteText: text
-    ^' stream write: ''', text, '''.'
+    ^' stream write: ''', (text !!Replace: '''' with: ''''''), '''.'
 !
 
 compileWriteExpression: expr

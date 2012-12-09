@@ -56,6 +56,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="public\css\bootstrap.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="public\css\docs.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="RunWebServer.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

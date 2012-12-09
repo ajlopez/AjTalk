@@ -46,6 +46,7 @@ model := DynamicObject new customers: customers; yourself.
 
 server := Web.Server new
 	addPrefix: 'http://*:8000/';
+	root: 'public';
 	get: '/' do: [ :req :res |
 		TemplateServer processResponse: res template: '/' model: nil.
 	];

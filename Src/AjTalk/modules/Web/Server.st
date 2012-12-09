@@ -38,6 +38,8 @@ processFile: name context: context
 	(filename = '' or: [filename = '/']) ifTrue: [filename := 'index.html'].
 	(filename !!StartsWith: '/') ifTrue: [filename := filename !!Substring: 1].
 	filename := @System.IO.Path !!Combine: root with: filename.
+	
+	@System.Console !!WriteLine: filename.
 
 	(@System.IO.File !!Exists: filename) ifFalse: [^false].	
 
