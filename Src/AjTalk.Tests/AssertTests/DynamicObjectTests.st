@@ -49,16 +49,16 @@ dyn name: 'Customer';
 dyn := DynamicObject new.
 
 dyn name: 'Customer';
-	table: 'customers';
-	properties: {DynamicObject new
-				name: 'Id';
-				description: 'Id';
-				yourself.
-				
-				DynamicObject new
-				name: 'Name';
-				description: 'Customer Name';
-				yourself}.
+    table: 'customers';
+    properties: {DynamicObject new
+                name: 'Id';
+                description: 'Id';
+                yourself.
+                
+                DynamicObject new
+                name: 'Name';
+                description: 'Customer Name';
+                yourself}.
 
 [dyn name = 'Customer'] assert.
 [dyn table = 'customers'] assert.
