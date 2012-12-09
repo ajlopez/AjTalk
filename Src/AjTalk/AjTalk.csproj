@@ -224,6 +224,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Model\Model.cd" />
+    <Content Include="modules\Templates\Init.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\Templates\Template.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="modules\Web\Init.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
