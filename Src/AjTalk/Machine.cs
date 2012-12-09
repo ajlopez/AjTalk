@@ -320,7 +320,27 @@ namespace AjTalk
         public object SendMessage(object obj, string msgname, object[] args)
         {
             if (this.debug)
+            {
+                if (obj == null)
+                    Console.Write("UndefinedObject");
+                else if ((obj as IObject) == null)
+                    Console.Write(obj.GetType().FullName);
+                else 
+                {
+                    IObject io = (IObject)obj;
+
+                    if (io.Behavior is IMetaClass) 
+                    {
+                        Console.Write(((IMetaClass)io.Behavior).ClassInstance.Name);
+                        Console.Write(" class");
+                    }
+                    else
+                        Console.Write(((IClass)io.Behavior).Name);
+                }
+
+                Console.Write(">>");
                 Console.WriteLine(msgname);
+            }
 
             if (obj == null)
                 return this.nilclass.SendMessageToNilObject(this, msgname, args);

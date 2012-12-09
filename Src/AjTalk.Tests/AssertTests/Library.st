@@ -433,7 +433,9 @@ exit
 !
 
 exit: value
-	@System.Environment !!Exit: value
+	@AjTalk.Tests.AssertTests == nil ifTrue: [
+		@System.Environment !!Exit: value
+	]
 ! !
 
 "Test class"

@@ -63,6 +63,9 @@
                 }
             }
 
+            if (obj is Type)
+                return SendNativeStaticMessage((Type)obj, mthname, args);
+
             // TODO support for indexed properties
             Type type = obj.GetType();
 
@@ -118,20 +121,10 @@
             else
                 mthname = msgname;
 
-            if (obj is bool)
-            {
-                behavior = machine.GetNativeBehavior(typeof(bool));
-                IMethod mth = behavior.GetInstanceMethod(msgname);
-
-                if (mth != null)
-                    return mth.ExecuteNative(machine, obj, args);
-            }
-
             if (obj is Type)
             {
                 if (msgname == "new" || msgname.StartsWith("new:"))
                     return NewObject((Type)obj, args);
-                return SendNativeStaticMessage((Type)obj, mthname, args);
             }
 
             if (obj is IList)

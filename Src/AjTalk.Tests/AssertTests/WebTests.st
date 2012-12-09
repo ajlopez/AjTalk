@@ -167,4 +167,53 @@ canvas unorderedList: [
 
 !
 
+| canvas component |
+
+canvas := Web.Canvas new.
+component := Web.Component new.
+
+component renderOn: canvas.
+
+[canvas asString = ''] assert.
+!
+
+Web.Component subclass: #MyComponent
+	instanceVariableNames: 'children'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'WebTests'.
+
+!
+
+!MyComponent methods!
+
+renderOn: canvas
+	canvas html: [
+		canvas head: [
+			canvas title: 'My Page'
+		].
+		canvas body: [
+			canvas header: 'My Page'
+		]
+	]
+
+! !
+
+| canvas component |
+
+"Machine debug: true."
+
+canvas := Web.Canvas new.
+
+[MyComponent isNotNil] assert.
+
+component := MyComponent new.
+
+component renderOn: canvas.
+
+[canvas asString = '<html><head><title>My Page</title></head><body><h1>My Page</h1></body></html>'] assert.
+!
+
 @System.Console !!WriteLine: 'Done'.
+
+VirtualMachine exit.

@@ -783,6 +783,18 @@
         }
 
         [TestMethod]
+        public void EvaluateTypeIsNil()
+        {
+            Assert.AreEqual(true, this.Evaluate("@AjTalk.Console == nil"));
+        }
+
+        [TestMethod]
+        public void EvaluateTypeIsNotNil()
+        {
+            Assert.AreEqual(false, this.Evaluate("@AjTalk.Machine == nil"));
+        }
+
+        [TestMethod]
         public void EvaluateMethodWithInternalReturn()
         {
             IClass testclass = this.machine.CreateClass("Test");
