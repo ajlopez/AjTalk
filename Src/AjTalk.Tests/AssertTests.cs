@@ -59,6 +59,12 @@
         }
 
         [TestMethod]
+        public void ObjectDictionaryAsserts()
+        {
+            DoAssert("ObjectDictionary");
+        }
+
+        [TestMethod]
         public void ObjectAsserts()
         {
             DoAssert("Object");

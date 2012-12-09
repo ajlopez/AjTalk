@@ -4,6 +4,7 @@ Machine !!LoadFile: 'BooleanTests.st'.
 Machine !!LoadFile: 'CharTests.st'.
 Machine !!LoadFile: 'EnvironmentTests.st'.
 Machine !!LoadFile: 'IntegerTests.st'.
+Machine !!LoadFile: 'ObjectDictionaryTests.st'.
 Machine !!LoadFile: 'ObjectListTests.st'.
 Machine !!LoadFile: 'ObjectTests.st'.
 Machine !!LoadFile: 'SmalltalkTests.st'.

@@ -54,6 +54,10 @@ subclassResponsability
 	self error: 'subclass responsability'
 !
 
+notImplemented
+	self error: 'not implemented'
+!
+
 isNil
 	^false.
 !
@@ -324,6 +328,10 @@ anySatisfy: aBlock
 	^false
 !
 
+isEmpty
+	^self size == 0
+!
+
 size
 	| tally |
 	tally := 0.
@@ -499,3 +507,26 @@ at: anIndex
 at: anIndex put: aValue
 	^self !!nat: anIndex - 1 put: aValue
 ! !
+
+Collection subclass: #ObjectDictionary nativeType: @System.Collections.Hashtable!
+
+ObjectDictionary !!AddTrait: (Machine !!GetNativeBehavior: @System.Collections.IEnumerable))!
+
+!ObjectDictionary methods!
+
+size 
+	^self !!Count
+!
+
+add: aValue
+	self notImplemented
+!
+
+at: key
+	^@AjTalk.Language.Primitives !!GetDictionaryValue: self with: key
+!
+
+at: key put: value
+	@AjTalk.Language.Primitives !!SetDictionaryValue: self with: key with: value
+! !
+

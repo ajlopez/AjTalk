@@ -167,6 +167,9 @@
     <Content Include="AssertTests\Library.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="AssertTests\ObjectDictionaryTests.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="CodeFiles\AsRemote.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
