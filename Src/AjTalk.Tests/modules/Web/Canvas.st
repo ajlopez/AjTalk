@@ -1,130 +1,130 @@
 ﻿Object subclass:#Canvas
-	instanceVariableNames: 'builder brush'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Web'
+    instanceVariableNames: 'builder brush'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Web'
 !
 
 !Canvas class methods!
 
 define: aSymbol tag: aTag
-	| newclass currentenv mthname |
-	currentenv := Environment current.
-	self scope setCurrent.
-	
-	newclass := Brush subclass: aSymbol
-		instanceVariableNames: ''
-		classVariableNames: ''
-		poolDictionaries: ''
-		category: 'Web'.	
-		
-	mthname := (aSymbol !!Substring: 0 with: 1) toLower , (aSymbol !!Substring: 1).
-	
-	newclass class compile: 'new ^self new: ' , $' , aTag , $'.
-	
-	self compile: mthname , '
-			| brush |
-			brush := ' , aSymbol , ' new.
-			brush canvas: self.
-			self brush: brush.
-			^brush'.			
+    | newclass currentenv mthname |
+    currentenv := Environment current.
+    self scope setCurrent.
+    
+    newclass := Brush subclass: aSymbol
+        instanceVariableNames: ''
+        classVariableNames: ''
+        poolDictionaries: ''
+        category: 'Web'.    
+        
+    mthname := (aSymbol !!Substring: 0 with: 1) toLower , (aSymbol !!Substring: 1).
+    
+    newclass class compile: 'new ^self new: ' , $' , aTag , $'.
+    
+    self compile: mthname , '
+            | brush |
+            brush := ' , aSymbol , ' new.
+            brush canvas: self.
+            self brush: brush.
+            ^brush'.            
 
-	self compile: mthname , ': content
-			| brush |
-			brush := self ' , mthname , '.
-			brush with: content.
-			^brush'.			
-	
-	currentenv setCurrent.
+    self compile: mthname , ': content
+            | brush |
+            brush := self ' , mthname , '.
+            brush with: content.
+            ^brush'.            
+    
+    currentenv setCurrent.
 ! !
 
 !Canvas methods!
 
 initialize
-	builder := StringBuilder new
+    builder := StringBuilder new
 !
 
 render: anObject
-	anObject ifNotNil: [builder append: (anObject toString)]
+    anObject ifNotNil: [builder append: (anObject toString)]
 !
 
 brush: aBrush
-	brush ifNotNil: [brush close].
-	brush := aBrush
+    brush ifNotNil: [brush close].
+    brush := aBrush
 !
 
 paragraph
-	| brush |
-	brush := Paragraph new.
-	brush canvas: self.
-	self brush: brush.
-	^brush
+    | brush |
+    brush := Paragraph new.
+    brush canvas: self.
+    self brush: brush.
+    ^brush
 !
-	
+    
 paragraph: content
-	| brush |
-	brush := self paragraph.
-	brush with: content.
-	^brush
+    | brush |
+    brush := self paragraph.
+    brush with: content.
+    ^brush
 !
-	
+    
 header
-	| brush |
-	brush := Header new.
-	brush canvas: self.
-	self brush: brush.
-	^brush
+    | brush |
+    brush := Header new.
+    brush canvas: self.
+    self brush: brush.
+    ^brush
 !
-	
+    
 header: content
-	| brush |
-	brush := self header.
-	brush with: content.
-	^brush
+    | brush |
+    brush := self header.
+    brush with: content.
+    ^brush
 !
 
 div
-	| brush |
-	brush := Div new.
-	brush canvas: self.
-	self brush: brush.
-	^brush
+    | brush |
+    brush := Div new.
+    brush canvas: self.
+    self brush: brush.
+    ^brush
 !
-	
+    
 div: content
-	| brush |
-	brush := self div.
-	brush with: content.
-	^brush
+    | brush |
+    brush := self div.
+    brush with: content.
+    ^brush
 !
 
 asString
-	brush ifNotNil: [brush close].
-	^builder toString
+    brush ifNotNil: [brush close].
+    ^builder toString
 ! !
 
 !Object methods!
 
 renderOn: canvas
-	canvas render: self
+    canvas render: self
 ! !
 
 !String methods!
 
 renderOn: canvas
-	canvas render: self
+    canvas render: self
 ! !
 
 !UndefinedObject methods!
 
 renderOn: canvas
-	^nil
+    ^nil
 ! !
 
 !Block methods!
 
 renderOn: canvas
-	self value
+    self value
 ! !
 
 Canvas define: #ListItem tag: 'li'.
