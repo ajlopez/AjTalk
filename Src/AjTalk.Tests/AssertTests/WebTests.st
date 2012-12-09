@@ -303,7 +303,6 @@ canvas := Web.Canvas new.
 component := MyComponent new.
 subcomponent := MySubComponent new.
 
-"Machine debug: true."
 component child: subcomponent.
 
 component renderOn: canvas.
