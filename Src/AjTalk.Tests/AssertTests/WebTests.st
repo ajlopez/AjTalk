@@ -37,6 +37,32 @@ brush with: 'Hello'.
 
 canvas := Web.Canvas new.
 
+brush := Web.Brush new.
+brush tag: 'h1'.
+brush canvas: canvas.
+brush attribute: 'id' value: 'title'.
+brush with: 'Hello'.
+
+[canvas asString = '<h1 id="title">Hello</h1>'] assert.
+!
+
+| canvas brush |
+
+canvas := Web.Canvas new.
+
+brush := Web.Brush new.
+brush tag: 'h1'.
+brush canvas: canvas.
+brush attribute: 'selected' value: nil.
+brush with: 'Hello'.
+
+[canvas asString = '<h1 selected>Hello</h1>'] assert.
+!
+
+| canvas brush |
+
+canvas := Web.Canvas new.
+
 brush := Web.Paragraph new.
 brush canvas: canvas.
 brush with: 'Hello'.

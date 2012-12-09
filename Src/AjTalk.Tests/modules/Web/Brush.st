@@ -1,5 +1,5 @@
 ﻿Object subclass: #Brush
-	instanceVariableNames: 'tag canvas closed'
+	instanceVariableNames: 'tag canvas closed attributes'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Web'
@@ -20,6 +20,23 @@ initialize
 	closed := false
 !
 
+attribute: name value: value
+	attributes ifNil: [attributes := ObjectDictionary new].
+	attributes at: name put: value.
+!
+
+renderAttributesOn: canvas
+	attributes ifNotNil: [
+		attributes keys do: [ :key ||value|
+			canvas render: ' ', key.
+			value := attributes at: key.
+			value ifNotNil: [
+				canvas render: '="', value, '"'
+			].
+		]
+	]
+!
+
 with: content
 	closed := true.
 	content isNil 
@@ -27,7 +44,9 @@ with: content
 			canvas render: '<' , tag , '/>'
 		]
 		ifFalse: [
-			canvas render: '<' , tag , '>'.
+			canvas render: '<' , tag.
+			self renderAttributesOn: canvas.
+			canvas render: '>'.
 			content renderOn: canvas.
 			canvas render: '</', tag , '>'
 		]

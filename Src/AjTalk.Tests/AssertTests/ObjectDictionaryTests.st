@@ -12,6 +12,10 @@ dict at: 'Two' put: 2.
 [(dict at: 'One') == 1] assert.
 [(dict at: 'Two') == 2] assert.
 
+[dict contains: 'One'] assert.
+[dict contains: 'Two'] assert.
+[dict contains: 'Three'] assertFalse.
+
 VirtualMachine exit.
 
 !
