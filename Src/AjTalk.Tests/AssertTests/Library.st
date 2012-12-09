@@ -550,13 +550,24 @@ initialize
 !
 
 doesNotUnderstand: selector with: arguments
+	(selector !!EndsWith: ':do:')
+		ifTrue: [
+			| value block name |				
+			value := arguments at: 1.
+			block := arguments at: 2.
+			block value: value.
+			name := selector !!Substring: 0 with: selector size - 4.
+			attributes at: name put: value.
+			^self
+		].
+		
 	(selector !!EndsWith: ':')
 		ifTrue: [
 			| value name |
 			value := arguments at: 1.
 			name := selector !!Substring: 0 with: selector size - 1.
 			attributes at: name put: value.
-			^value
+			^self
 		]
 		ifFalse: [
 			(attributes contains: selector)
