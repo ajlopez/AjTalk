@@ -153,7 +153,7 @@
             if (mth != null)
                 return self.ExecuteMethod(machine, mth, args);
 
-            mth = this.GetInstanceMethod("doesNotUnderstand:");
+            mth = this.GetInstanceMethod("doesNotUnderstand:with:");
 
             if (mth != null)
                 return self.ExecuteMethod(machine, mth, new object[] { msgname, args });
@@ -168,7 +168,7 @@
             if (mth != null)
                     return mth.Execute(machine, null, args);
 
-            mth = this.GetInstanceMethod("doesNotUnderstand:");
+            mth = this.GetInstanceMethod("doesNotUnderstand:with:");
 
             if (mth != null)
                 return mth.Execute(machine, null, new object[] { msgname, args });

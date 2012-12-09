@@ -146,7 +146,7 @@
             }
 
             // TODO how to use doesNotUnderstand in native behavior
-            // mth = behavior.GetInstanceMethod("doesNotUnderstand:");
+            // mth = behavior.GetInstanceMethod("doesNotUnderstand:with:");
             // if (mth != null)
             //    return mth.ExecuteNative(obj, new object[] { msgname, args });
             return SendNativeMessage(machine, obj, mthname, args);

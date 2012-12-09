@@ -11,7 +11,7 @@
     {
         public DoesNotUnderstandMethod(Machine machine, IBehavior behavior)
         {
-            this.Name = "doesNotUnderstand:";
+            this.Name = "doesNotUnderstand:with:";
             this.Behavior = behavior;
         }
 

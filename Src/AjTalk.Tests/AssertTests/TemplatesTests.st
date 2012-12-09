@@ -72,6 +72,33 @@ template run: #(1 2 3) stream: stream.
 
 [stream toString = 'Hello 123'] assert.
 !
+
+| template stream |
+
+template := Templates.Template file: 'AssertTests/Hello.tpl'.
+
+stream := @System.IO.StringWriter new.
+
+template run: 'World' stream: stream.
+
+[stream toString = 'Hello World'] assert.
+!
+
+| template stream model |
+
+
+template := Templates.Template text: 'Hello ${model name}'.
+
+stream := @System.IO.StringWriter new.
+
+model := DynamicObject new.
+model name: 'World'.
+
+template run: model stream: stream.
+
+[stream toString = 'Hello World'] assert.
+!
+
 @System.Console !!WriteLine: 'Done'.
 
 VirtualMachine exit.

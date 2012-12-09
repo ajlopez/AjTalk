@@ -93,7 +93,7 @@
             if (mth != null)
                 return this.ExecuteMethod(this, machine, mth, args);
 
-            mth = this.Behavior.GetInstanceMethod("doesNotUnderstand:");
+            mth = this.Behavior.GetInstanceMethod("doesNotUnderstand:with:");
 
             if (mth != null)
                 return this.ExecuteMethod(this, machine, mth, new object[] { msgname, args });

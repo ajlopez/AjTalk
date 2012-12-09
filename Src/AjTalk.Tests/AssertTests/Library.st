@@ -536,3 +536,33 @@ at: key put: value
 	@AjTalk.Language.Primitives !!SetDictionaryValue: self with: key with: value
 ! !
 
+Object subclass:#DynamicObject
+	instanceVariableNames:'attributes'
+	classVariableNames:''
+	poolDictionaries:''
+	category:'Kernel-Classes'
+!
+
+!DynamicObject methods!
+
+initialize
+	attributes := ObjectDictionary new
+!
+
+doesNotUnderstand: selector with: arguments
+	(selector !!EndsWith: ':')
+		ifTrue: [
+			| value name |
+			value := arguments at: 1.
+			name := selector !!Substring: 0 with: selector size - 1.
+			attributes at: name put: value.
+			^value
+		]
+		ifFalse: [
+			(attributes contains: selector)
+				ifTrue: [
+					^attributes at: selector
+				].
+			^nil.
+		]
+! !

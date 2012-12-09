@@ -58,6 +58,10 @@ compileTemplate: text
 	^code.
 !
 
+file: filename
+	^self text: (@System.IO.File !!ReadAllText: filename)
+!
+
 text: text
 	| code block |
 	code := self compileTemplate: text.

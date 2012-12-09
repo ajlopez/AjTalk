@@ -173,6 +173,15 @@
     <Content Include="AssertTests\TemplatesTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="AssertTests\Hello.tpl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AssertTests\Debug.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="AssertTests\DynamicObjectTests.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <None Include="CodeFiles\AsRemote.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
