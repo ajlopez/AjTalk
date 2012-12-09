@@ -38,6 +38,9 @@ brush with: 'Hello'.
 canvas := Web.Canvas new.
 
 brush := Web.Brush new.
+
+[(brush attribute: 'style') isNil] assert.
+
 brush tag: 'h1'.
 brush canvas: canvas.
 brush attribute: 'id' value: 'title'.
@@ -57,6 +60,47 @@ brush attribute: 'selected' value: nil.
 brush with: 'Hello'.
 
 [canvas asString = '<h1 selected>Hello</h1>'] assert.
+!
+
+| canvas brush |
+
+canvas := Web.Canvas new.
+
+brush := Web.Brush new.
+brush tag: 'h1'.
+brush canvas: canvas.
+brush attribute: 'class' add: 'title'.
+brush with: 'Hello'.
+
+[canvas asString = '<h1 class="title">Hello</h1>'] assert.
+!
+
+| canvas brush |
+
+canvas := Web.Canvas new.
+
+brush := Web.Brush new.
+brush tag: 'h1'.
+brush canvas: canvas.
+brush attribute: 'class' add: 'title'.
+brush attribute: 'class' add: 'urgent'.
+brush with: 'Hello'.
+
+[canvas asString = '<h1 class="title urgent">Hello</h1>'] assert.
+!
+
+| canvas brush |
+
+canvas := Web.Canvas new.
+
+brush := Web.Brush new.
+
+brush tag: 'h1'.
+brush canvas: canvas.
+brush width: '100px'.
+brush with: 'Hello'.
+
+[canvas asString = '<h1 style="width: 100px;">Hello</h1>'] assert.
 !
 
 | canvas brush |

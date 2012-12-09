@@ -7,6 +7,11 @@
 
 !Brush class methods!
 
+style: name
+	self compile: name , ': value
+		self attribute: ''style'' add: ''' , name , ': '' , value , '';'''.
+!
+
 new: tag
 	| brush |
 	brush := self basicNew.
@@ -20,9 +25,27 @@ initialize
 	closed := false
 !
 
+attribute: name
+	attributes ifNil: [^nil].
+	(attributes contains: name) ifTrue: [^attributes at: name].
+	^nil.
+!
+
 attribute: name value: value
 	attributes ifNil: [attributes := ObjectDictionary new].
 	attributes at: name put: value.
+!
+
+attribute: name add: value
+	| oldvalue |
+	oldvalue := self attribute: name.
+	oldvalue isNil 
+		ifTrue: [
+			self attribute: name value: value
+		]
+		ifFalse: [
+			self attribute: name value: oldvalue , ' ', value
+		]
 !
 
 renderAttributesOn: canvas
@@ -108,4 +131,8 @@ Brush subclass: #Div
 new
 	^self new: 'div'
 ! !
+
+Brush style: #width.
+Brush style: #height.
+
 
