@@ -919,6 +919,30 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void CompileDynamicArrayWithChainedExpression()
+        {
+            Parser parser = new Parser("{a do: 1; do: 2; yourself. b. 3}");
+            var result = parser.CompileBlock();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ByteCodes);
+            BlockDecompiler decompiler = new BlockDecompiler(result);
+            var ops = decompiler.Decompile();
+            Assert.IsNotNull(ops);
+            Assert.AreEqual(11, ops.Count);
+            Assert.AreEqual("GetGlobalVariable a", ops[0]);
+            Assert.AreEqual("GetConstant 1", ops[1]);
+            Assert.AreEqual("Send do: 1", ops[2]);
+            Assert.AreEqual("ChainedSend", ops[3]);
+            Assert.AreEqual("GetConstant 2", ops[4]);
+            Assert.AreEqual("Send do: 1", ops[5]);
+            Assert.AreEqual("ChainedSend", ops[6]);
+            Assert.AreEqual("Send yourself 0", ops[7]);
+            Assert.AreEqual("GetGlobalVariable b", ops[8]);
+            Assert.AreEqual("GetConstant 3", ops[9]);
+            Assert.AreEqual("MakeCollection 3", ops[10]);
+        }
+
+        [TestMethod]
         public void CompileSumWithNegativeNumber()
         {
             Parser parser = new Parser("-1 + 0");

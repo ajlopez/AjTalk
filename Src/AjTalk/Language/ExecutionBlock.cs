@@ -235,7 +235,7 @@ namespace AjTalk.Language
                             indexedObj.SetIndexedValue(pos, par);
                             break;
                         case ByteCode.ChainedSend:
-                            // TODO Review if the last result should be removed from stack
+                            this.Pop();
                             this.Push(this.lastreceiver);
                             break;
                         case ByteCode.Send:

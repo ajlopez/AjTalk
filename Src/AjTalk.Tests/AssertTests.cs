@@ -97,6 +97,12 @@
         }
 
         [TestMethod]
+        public void DynamicObjectAsserts()
+        {
+            DoAssert("DynamicObject");
+        }
+
+        [TestMethod]
         public void RunTestsUsingMachineLoadFile()
         {
             this.machine.LoadFile("AssertTests\\RunTests.st");

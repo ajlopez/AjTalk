@@ -179,9 +179,9 @@
     <Content Include="AssertTests\Debug.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Compile Include="AssertTests\DynamicObjectTests.st">
+    <Content Include="AssertTests\DynamicObjectTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    </Content>
     <None Include="CodeFiles\AsRemote.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
