@@ -14,20 +14,20 @@
 
         static DotNetObject()
         {
-            binaryMethods["+"] = new FunctionalMethod((obj, args) => ObjectOperators.Add(obj, args[0]));
-            binaryMethods["-"] = new FunctionalMethod((obj, args) => ObjectOperators.Substract(obj, args[0]));
-            binaryMethods["*"] = new FunctionalMethod((obj, args) => ObjectOperators.Multiply(obj, args[0]));
-            binaryMethods["/"] = new FunctionalMethod((obj, args) => ObjectOperators.Divide(obj, args[0]));
-            binaryMethods["<"] = new FunctionalMethod((obj, args) => ObjectOperators.Less(obj, args[0]));
-            binaryMethods[">"] = new FunctionalMethod((obj, args) => ObjectOperators.Greater(obj, args[0]));
-            binaryMethods["<="] = new FunctionalMethod((obj, args) => ObjectOperators.LessEqual(obj, args[0]));
-            binaryMethods[">="] = new FunctionalMethod((obj, args) => ObjectOperators.GreaterEqual(obj, args[0]));
-            binaryMethods["="] = new FunctionalMethod((obj, args) => ObjectOperators.Equals(obj, args[0]));
-            binaryMethods["~="] = new FunctionalMethod((obj, args) => !ObjectOperators.Equals(obj, args[0]));
-            binaryMethods["=="] = new FunctionalMethod((obj, args) => ObjectOperators.Same(obj, args[0]));
-            binaryMethods["~~"] = new FunctionalMethod((obj, args) => !ObjectOperators.Same(obj, args[0]));
+            binaryMethods["+"] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Add(obj, args[0]));
+            binaryMethods["-"] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Substract(obj, args[0]));
+            binaryMethods["*"] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Multiply(obj, args[0]));
+            binaryMethods["/"] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Divide(obj, args[0]));
+            binaryMethods["<"] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Less(obj, args[0]));
+            binaryMethods[">"] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Greater(obj, args[0]));
+            binaryMethods["<="] = new FunctionalMethod((machine, obj, args) => ObjectOperators.LessEqual(obj, args[0]));
+            binaryMethods[">="] = new FunctionalMethod((machine, obj, args) => ObjectOperators.GreaterEqual(obj, args[0]));
+            binaryMethods["="] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Equals(obj, args[0]));
+            binaryMethods["~="] = new FunctionalMethod((machine, obj, args) => !ObjectOperators.Equals(obj, args[0]));
+            binaryMethods["=="] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Same(obj, args[0]));
+            binaryMethods["~~"] = new FunctionalMethod((machine, obj, args) => !ObjectOperators.Same(obj, args[0]));
             binaryMethods["nat"] = new FunctionalMethod(AtMethod);
-            unaryMethods["minus"] = new FunctionalMethod((obj, args) => ObjectOperators.Negate(obj));
+            unaryMethods["minus"] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Negate(obj));
             ternaryMethods["natput"] = new FunctionalMethod(AtPutMethod);
         }
 
@@ -152,12 +152,12 @@
             return SendNativeMessage(machine, obj, mthname, args);
         }
 
-        private static object AtMethod(object obj, object[] args)
+        private static object AtMethod(Machine machine, object obj, object[] args)
         {
             return ((IList)obj)[(int)args[0]];
         }
 
-        private static object AtPutMethod(object obj, object[] args)
+        private static object AtPutMethod(Machine machine, object obj, object[] args)
         {
             int position = (int)args[0];
             object value = args[1];

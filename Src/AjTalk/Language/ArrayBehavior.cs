@@ -15,7 +15,7 @@
             this.DefineInstanceMethod(new FunctionalMethod("add:", this, this.AddMethod));
         }
 
-        private object AddMethod(object obj, object[] arguments)
+        private object AddMethod(Machine machine, object obj, object[] arguments)
         {
             ((IList)obj).Add(arguments[0]);
             return obj;

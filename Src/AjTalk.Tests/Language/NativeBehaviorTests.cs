@@ -37,7 +37,7 @@
             NativeBehavior behavior = new NativeBehavior(meta, null, machine, typeof(string));
             machine.RegisterNativeBehavior(typeof(string), behavior);
 
-            behavior.DefineInstanceMethod(new FunctionalMethod("size", behavior, (object self, object[] args) => ((string)self).Length));
+            behavior.DefineInstanceMethod(new FunctionalMethod("size", behavior, (Machine mach, object self, object[] args) => ((string)self).Length));
             Assert.AreEqual(3, this.Evaluate("'foo' size", machine));
             Assert.AreEqual(0, this.Evaluate("'' size", machine));
         }

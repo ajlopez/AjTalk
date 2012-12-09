@@ -16,7 +16,7 @@
             this.DefineInstanceMethod(new FunctionalMethod("includes:", this, this.IncludesMethod));
         }
 
-        private object DoMethod(object obj, object[] arguments)
+        private object DoMethod(Machine machine, object obj, object[] arguments)
         {
             if (arguments == null)
                 throw new ArgumentException("arguments");
@@ -30,7 +30,7 @@
             return result;
         }
 
-        private object SelectMethod(object obj, object[] arguments)
+        private object SelectMethod(Machine machine, object obj, object[] arguments)
         {
             if (arguments == null)
                 throw new ArgumentException("arguments");
@@ -47,7 +47,7 @@
             return result;
         }
 
-        private object IncludesMethod(object obj, object[] arguments)
+        private object IncludesMethod(Machine machine, object obj, object[] arguments)
         {
             var list = obj as IList;
             var argument = arguments[0];

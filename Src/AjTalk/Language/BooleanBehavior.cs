@@ -17,7 +17,7 @@
             this.DefineInstanceMethod(new FunctionalMethod("ifFalse:ifTrue:", this, this.IfFalseIfTrueMethod));
         }
 
-        private object IfFalseMethod(object obj, object[] arguments)
+        private object IfFalseMethod(Machine machine, object obj, object[] arguments)
         {
             if (arguments == null)
                 throw new ArgumentException("arguments");
@@ -28,11 +28,11 @@
 
             object result = null;
             if (!value)
-                result = block.Execute(this.Machine, null);
+                result = block.Execute(machine, null);
             return result;
         }
 
-        private object IfTrueMethod(object obj, object[] arguments)
+        private object IfTrueMethod(Machine machine, object obj, object[] arguments)
         {
             if (arguments == null)
                 throw new ArgumentException("arguments");
@@ -43,11 +43,11 @@
 
             object result = null;
             if (value)
-                result = block.Execute(this.Machine, null);
+                result = block.Execute(machine, null);
             return result;
         }
 
-        private object IfTrueIfFalseMethod(object obj, object[] arguments)
+        private object IfTrueIfFalseMethod(Machine machine, object obj, object[] arguments)
         {
             if (arguments == null)
                 throw new ArgumentException("arguments");
@@ -59,13 +59,13 @@
 
             object result = null;
             if (value)
-                result = thenblock.Execute(this.Machine, null);
+                result = thenblock.Execute(machine, null);
             else
-                result = elseblock.Execute(this.Machine, null);
+                result = elseblock.Execute(machine, null);
             return result;
         }
 
-        private object IfFalseIfTrueMethod(object obj, object[] arguments)
+        private object IfFalseIfTrueMethod(Machine machine, object obj, object[] arguments)
         {
             if (arguments == null)
                 throw new ArgumentException("arguments");
@@ -77,9 +77,9 @@
 
             object result = null;
             if (value)
-                result = thenblock.Execute(this.Machine, null);
+                result = thenblock.Execute(machine, null);
             else
-                result = elseblock.Execute(this.Machine, null);
+                result = elseblock.Execute(machine, null);
             return result;
         }
     }

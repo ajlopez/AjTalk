@@ -640,6 +640,20 @@
         }
 
         [TestMethod]
+        public void EvaluateStringIsNilIsNotNil()
+        {
+            Assert.AreEqual(false, this.Evaluate("'foo' isNil"));
+            Assert.AreEqual(true, this.Evaluate("'foo' isNotNil"));
+        }
+
+        [TestMethod]
+        public void EvaluateStringIfNilIfNotNil()
+        {
+            Assert.AreEqual(null, this.Evaluate("'foo' ifNil: [^1]"));
+            Assert.AreEqual(2, this.Evaluate("'foo' isNotNil: [^2]"));
+        }
+
+        [TestMethod]
         public void EvaluateBlockValue()
         {
             object result = this.Evaluate("[1] value");

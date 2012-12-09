@@ -55,9 +55,9 @@ namespace AjTalk
             this.nilclass.DefineInstanceMethod(new FunctionalMethod("isNotNil", this.nilclass, this.IsNotNil));
 
             // Native Behaviors
-            var enumerableBehavior = new EnumerableBehavior(meta, this.nilclass, this);
+            var enumerableBehavior = new EnumerableBehavior(meta, null, this);
             var listBehavior = new ListBehavior(meta, enumerableBehavior, this);
-            var stringBehavior = new StringBehavior(meta, this.nilclass, this);
+            var stringBehavior = new StringBehavior(meta, null, this);
 
             this.RegisterNativeBehavior(typeof(IEnumerable), enumerableBehavior);
             this.RegisterNativeBehavior(typeof(IList), listBehavior);
@@ -331,7 +331,12 @@ namespace AjTalk
 
                     if (io.Behavior is IMetaClass) 
                     {
-                        Console.Write(((IMetaClass)io.Behavior).ClassInstance.Name);
+                        IClass cls = ((IMetaClass)io.Behavior).ClassInstance;
+
+                        if (cls == null)
+                            Console.Write("meta");
+                        else
+                            Console.Write(cls.Name);
                         Console.Write(" class");
                     }
                     else
@@ -457,25 +462,25 @@ namespace AjTalk
                 ((BaseBehavior)cls.Behavior).SetBehavior(this.metaclassclass);
         }
 
-        private object IfNil(object self, object[] arguments)
+        private object IfNil(Machine machine, object self, object[] arguments)
         {
             Block block = (Block)arguments[0];
-            return block.Execute(this, null);
+            return block.Execute(machine, null);
         }
 
-        private object IfNotNil(object self, object[] arguments)
+        private object IfNotNil(Machine machine, object self, object[] arguments)
         {
             return null;
         }
 
-        private object IsNil(object self, object[] arguments)
+        private object IsNil(Machine machine, object self, object[] arguments)
         {
-            return self == this.nilclass || self == null;
+            return self == machine.UndefinedObjectClass || self == null;
         }
 
-        private object IsNotNil(object self, object[] arguments)
+        private object IsNotNil(Machine machine, object self, object[] arguments)
         {
-            return self != this.nilclass && self != null;
+            return self != machine.UndefinedObjectClass && self != null;
         }
     }
 }

@@ -178,7 +178,7 @@ component renderOn: canvas.
 !
 
 Web.Component subclass: #MyComponent
-	instanceVariableNames: 'children'
+	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'WebTests'.
@@ -193,25 +193,54 @@ renderOn: canvas
 			canvas title: 'My Page'
 		].
 		canvas body: [
-			canvas header: 'My Page'
+			canvas header: 'My Page'.
+			self renderChildrenOn: canvas
 		]
 	]
 
 ! !
 
+Web.Component subclass: #MySubComponent
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'WebTests'.
+
+!
+
+!MySubComponent methods!
+
+renderOn: canvas
+	canvas div: 'Subcomponent'.
+	
+! !
+
 | canvas component |
 
-"Machine debug: true."
-
 canvas := Web.Canvas new.
-
-[MyComponent isNotNil] assert.
 
 component := MyComponent new.
 
 component renderOn: canvas.
 
 [canvas asString = '<html><head><title>My Page</title></head><body><h1>My Page</h1></body></html>'] assert.
+!
+
+| canvas component subcomponent |
+
+canvas := Web.Canvas new.
+
+component := MyComponent new.
+subcomponent := MySubComponent new.
+
+"Machine debug: true."
+component child: subcomponent.
+
+component renderOn: canvas.
+
+@System.Console !!WriteLine: canvas asString.
+
+[canvas asString = '<html><head><title>My Page</title></head><body><h1>My Page</h1><div>Subcomponent</div></body></html>'] assert.
 !
 
 @System.Console !!WriteLine: 'Done'.

@@ -9,27 +9,27 @@
     {
         private string name;
         private IBehavior classDescription;
-        private Func<IObject, IObject, object[], object> function;
-        private Func<object, object[], object> nativeFunction;
+        private Func<Machine, IObject, IObject, object[], object> function;
+        private Func<Machine, object, object[], object> nativeFunction;
 
-        public FunctionalMethod(Func<IObject, IObject, object[], object> function)
+        public FunctionalMethod(Func<Machine, IObject, IObject, object[], object> function)
             : this(null, null, function)
         {
         }
 
-        public FunctionalMethod(Func<object, object[], object> nativeFunction)
+        public FunctionalMethod(Func<Machine, object, object[], object> nativeFunction)
             : this(null, null, nativeFunction)
         {
         }
 
-        public FunctionalMethod(string name, IBehavior classDescription, Func<IObject, IObject, object[], object> function)
+        public FunctionalMethod(string name, IBehavior classDescription, Func<Machine, IObject, IObject, object[], object> function)
         {
             this.name = name;
             this.classDescription = classDescription;
             this.function = function;
         }
 
-        public FunctionalMethod(string name, IBehavior classDescription, Func<object, object[], object> nativeFunction)
+        public FunctionalMethod(string name, IBehavior classDescription, Func<Machine, object, object[], object> nativeFunction)
         {
             this.name = name;
             this.classDescription = classDescription;
@@ -47,22 +47,22 @@
         public object Execute(Machine machine, IObject self, object[] args)
         {
             if (this.nativeFunction != null)
-                return this.nativeFunction(self, args);
-            return this.function(self, self, args);
+                return this.nativeFunction(machine, self, args);
+            return this.function(machine, self, self, args);
         }
 
         public object Execute(Machine machine, IObject self, IObject receiver, object[] args)
         {
             // TODO review, used in Machine to define ifNil:
             if (this.function == null)
-                return this.nativeFunction(self, args);
+                return this.nativeFunction(machine, self, args);
 
-            return this.function(self, receiver, args);
+            return this.function(machine, self, receiver, args);
         }
 
         public object ExecuteNative(Machine machine, object self, object[] args)
         {
-            return this.nativeFunction(self, args);
+            return this.nativeFunction(machine, self, args);
         }
 
         public object Execute(Machine machine, object[] args)

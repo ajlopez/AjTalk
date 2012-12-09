@@ -14,7 +14,7 @@
         public void CreateAndExecuteFunctionalMethod()
         {
             int count = 0;
-            FunctionalMethod method = new FunctionalMethod((IObject x, IObject y, object[] args) => ++count);
+            FunctionalMethod method = new FunctionalMethod((Machine machine, IObject x, IObject y, object[] args) => ++count);
 
             Assert.IsNull(method.Name);
             Assert.IsNull(method.Behavior);
@@ -29,7 +29,7 @@
         public void CreateAndExecuteNativeFunctionalMethod()
         {
             int count = 0;
-            FunctionalMethod method = new FunctionalMethod((object x, object[] args) => ++count);
+            FunctionalMethod method = new FunctionalMethod((Machine machine, object x, object[] args) => ++count);
 
             Assert.IsNull(method.Name);
             Assert.IsNull(method.Behavior);

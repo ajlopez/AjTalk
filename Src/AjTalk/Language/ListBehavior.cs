@@ -14,7 +14,7 @@
             this.DefineInstanceMethod(new FunctionalMethod("at:", this, this.AtMethod));
         }
 
-        private object AtMethod(object obj, object[] arguments)
+        private object AtMethod(Machine machine, object obj, object[] arguments)
         {
             return ((IList)obj)[((int)arguments[0]) - 1];
         }

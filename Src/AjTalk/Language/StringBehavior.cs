@@ -15,7 +15,7 @@
             this.DefineInstanceMethod(new FunctionalMethod(",", this, this.ConcatenateMethod));
         }
 
-        private object ConcatenateMethod(object obj, object[] arguments)
+        private object ConcatenateMethod(Machine machine, object obj, object[] arguments)
         {
             string str = (string)obj;
             object arg = arguments[0];
@@ -26,18 +26,6 @@
                 arg = arg.ToString();
 
             return str + arg;
-        }
-
-        private object AssertMethod(object obj, object[] arguments)
-        {
-            Block block = (Block)obj;
-            var result = (new ExecutionBlock(this.Machine, block.Receiver, block, arguments)).Execute();
-
-            // TODO review what is true
-            if (result is bool && (bool)result == true)
-                return true;
-
-            throw new AssertError();
         }
     }
 }
