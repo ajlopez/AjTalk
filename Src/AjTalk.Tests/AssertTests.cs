@@ -10,6 +10,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem("lib", "lib")]
     [DeploymentItem("AssertTests", "AssertTests")]
     public class AssertTests
     {
@@ -19,7 +20,7 @@
         public void Setup()
         {
             this.machine = new Machine();
-            this.LoadFile(@"AssertTests\Library.st");
+            this.LoadFile(@"lib\Library.st");
         }
 
         [TestMethod]

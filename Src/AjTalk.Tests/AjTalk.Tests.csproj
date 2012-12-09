@@ -164,9 +164,6 @@
     <Content Include="AssertTests\StringTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="AssertTests\Library.st">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="AssertTests\ObjectDictionaryTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -299,16 +296,7 @@
     <None Include="Library\Object.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="modules\Web\Brush.st">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="modules\Web\Component.st">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="modules\Web\Canvas.st">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="modules\Web\Init.st">
+    <Content Include="modules\Module1.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="modules\Module2\Submodule2\Init.st">
@@ -318,9 +306,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="modules\Module2\Init.st">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="modules\Module1.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

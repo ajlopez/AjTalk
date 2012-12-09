@@ -13,7 +13,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    [DeploymentItem(@"AssertTests\Library.st")]
+    [DeploymentItem(@"lib\Library.st")]
     public class LibraryEvaluateTests
     {
         private Machine machine;

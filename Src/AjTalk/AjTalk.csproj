@@ -220,7 +220,22 @@
     <None Include="Language\BehaviorsDiagram.cd" />
     <None Include="Language\ClassDiagram.cd" />
     <None Include="Language\ObjectsDiagram.cd" />
+    <Content Include="lib\Library.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Model\Model.cd" />
+    <Content Include="modules\Web\Init.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\Web\Component.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\Web\Canvas.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="modules\Web\Brush.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
