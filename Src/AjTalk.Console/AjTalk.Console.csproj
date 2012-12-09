@@ -59,6 +59,12 @@
     <Content Include="RunWebServer.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Programs\WebSiteTomcat.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RunTomcat.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Programs\HelloWorld.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -99,9 +105,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Programs\Transcript.st">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Programs\Library.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="RunServer.cmd">

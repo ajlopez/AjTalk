@@ -1,1 +1,1 @@
-ajtalk Programs\Library.st Programs\WebServer.st
+ajtalk lib\Library.st Programs\WebServer.st
