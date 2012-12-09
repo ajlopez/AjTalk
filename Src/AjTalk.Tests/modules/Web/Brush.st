@@ -1,5 +1,5 @@
 ﻿Object subclass: #Brush
-	instanceVariableNames: 'tag canvas'
+	instanceVariableNames: 'tag canvas closed'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Web'
@@ -16,14 +16,29 @@ new: tag
 
 !Brush methods!
 
+initialize
+	closed := false
+!
+
 with: content
-	canvas render: '<' , tag , '>'.
-	content renderOn: canvas.
-	canvas render: '</', tag , '>'
+	closed := true.
+	content isNil 
+		ifTrue: [
+			canvas render: '<' , tag , '/>'
+		]
+		ifFalse: [
+			canvas render: '<' , tag , '>'.
+			content renderOn: canvas.
+			canvas render: '</', tag , '>'
+		]
 !
 
 canvas: aCanvas
 	canvas := aCanvas
+!
+
+close
+	closed ifFalse: [self with: nil]
 !
 
 tag: aTag

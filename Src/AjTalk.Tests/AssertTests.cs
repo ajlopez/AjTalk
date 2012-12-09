@@ -53,9 +53,9 @@
         }
 
         [TestMethod]
-        public void ArrayListAsserts()
+        public void ObjectListAsserts()
         {
-            DoAssert("ArrayList");
+            DoAssert("ObjectList");
         }
 
         [TestMethod]

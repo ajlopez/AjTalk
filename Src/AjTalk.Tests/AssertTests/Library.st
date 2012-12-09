@@ -332,11 +332,11 @@ size
 
 ! !		
 
-Collection subclass: #ArrayList nativeType: @System.Collections.ArrayList!
+Collection subclass: #ObjectList nativeType: @System.Collections.ArrayList!
 
-ArrayList !!AddTrait: (Machine !!GetNativeBehavior: @System.Collections.IEnumerable))!
+ObjectList !!AddTrait: (Machine !!GetNativeBehavior: @System.Collections.IEnumerable))!
 
-!ArrayList methods!
+!ObjectList methods!
 
 size 
 	^self !!Count

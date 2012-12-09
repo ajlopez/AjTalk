@@ -1,6 +1,6 @@
 ﻿| list |
 
-list := ArrayList new.
+list := ObjectList new.
 
 list add: 1.
 list add: 2.
@@ -21,7 +21,7 @@ list at: 1 put: 10.
 
 | list |
 
-list := ArrayList with: 10.
+list := ObjectList with: 10.
 
 [list size == 1] assert.
 [(list at: 1) == 10] assert
@@ -29,7 +29,7 @@ list := ArrayList with: 10.
 
 | list |
 
-list := ArrayList new.
+list := ObjectList new.
 [(list add: 2 withOccurrences: 3) == 2] assert.
 [list size == 3] assert.
 [(list at: 1) == 2] assert.
@@ -41,7 +41,7 @@ list := ArrayList new.
 
 | list |
 
-list := ArrayList new.
+list := ObjectList new.
 
 list addAll: #(1 2 3).
 "

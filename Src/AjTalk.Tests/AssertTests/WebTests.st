@@ -31,7 +31,6 @@ brush canvas: canvas.
 brush with: 'Hello'.
 
 [canvas asString = '<h1>Hello</h1>'] assert.
-
 !
 
 | canvas brush |
@@ -43,7 +42,6 @@ brush canvas: canvas.
 brush with: 'Hello'.
 
 [canvas asString = '<p>Hello</p>'] assert.
-
 !
 
 | canvas brush |
@@ -55,7 +53,6 @@ canvas paragraph: 'Hello'.
 "(@System.Exception new: canvas asString) raise."
 
 [canvas asString = '<p>Hello</p>'] assert.
-
 !
 
 | canvas brush |
@@ -149,15 +146,25 @@ canvas html: [
 | canvas |
 
 canvas := Web.Canvas new.
-" TODO Fix it
+
+canvas break.
+
+[canvas asString = '<br/>'] assert.
+
+!
+
+| canvas |
+
+canvas := Web.Canvas new.
+
 canvas unorderedList: [
 	canvas listItem: 'item 1'.
 	canvas listItem: 'item 2'.
 	canvas listItem: 'item 3'.
-	]
-].
+	].
 
 [canvas asString = '<ul><li>item 1</li><li>item 2</li><li>item 3</li></ul>'] assert.
-"
+
 !
 
+@System.Console !!WriteLine: 'Done'.

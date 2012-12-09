@@ -125,7 +125,7 @@
     <Content Include="AssertTests\BooleanTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="AssertTests\ArrayListTests.st">
+    <Content Include="AssertTests\ObjectListTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="AssertTests\ObjectTests.st">
