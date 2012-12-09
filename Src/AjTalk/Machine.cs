@@ -86,6 +86,8 @@ namespace AjTalk
 
         public bool Debug { get { return this.debug; } set { this.debug = value; } }
 
+        public string CurrentPath { get { return currentPath; } }
+
         public Context CurrentEnvironment
         {
             get

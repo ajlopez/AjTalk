@@ -1,6 +1,6 @@
 ﻿
 Object subclass: #Server
-	instanceVariableNames: 'root listener bytes'
+	instanceVariableNames: 'root listener routes'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: ''
@@ -15,9 +15,8 @@ new
 !Server methods!
 
 initialize
-	bytes := @System.Array !!CreateInstance: @System.Byte with: 1024 * 16.
 	listener := @System.Net.HttpListener !!new.
-	@System.Console !!WriteLine: 'initialize'
+	routes := ObjectDictionary new.
 !
 
 root: directory
@@ -28,33 +27,49 @@ addPrefix: address
 	listener !!Prefixes !!Add: address.
 !
 
-process: context
-	| filename input nbytes |
-	filename := context !!Request !!Url !!AbsolutePath.
-	
-	@System.Console !!WriteLine: filename.
-	
+get: route do: block
+	routes at: route put: block
+!
+
+processFile: name context: context
+	| input bytes nbytes filename |
+	root ifNil: [^false].
+	filename := name.
 	(filename = '' or: [filename = '/']) ifTrue: [filename := 'index.html'].
-	
 	(filename !!StartsWith: '/') ifTrue: [filename := filename !!Substring: 1].
-	@System.Console !!WriteLine: filename.
-	
 	filename := @System.IO.Path !!Combine: root with: filename.
 
-	@System.Console !!WriteLine: filename.	
+	(@System.IO.File !!Exists: filename) ifFalse: [^false].	
+
+	bytes := @System.Array !!CreateInstance: @System.Byte with: 1024 * 16.
+
+	input := @System.IO.FileStream !!new: filename with: @System.IO.FileMode !!Open.
+	[[nbytes := input !!Read: bytes with: 0 with: bytes !!Length] value > 0] whileTrue: [
+		context !!Response !!OutputStream !!Write: bytes with: 0 with: nbytes.
+	].
 	
-	(@System.IO.File !!Exists: filename) 
-	ifFalse: [ context !!Response !!Abort. ]
-	ifTrue: [		
-		input := @System.IO.FileStream !!new: filename with: @System.IO.FileMode !!Open.
-		[[nbytes := input !!Read: bytes with: 0 with: bytes !!Length] value > 0] whileTrue: [
-			context !!Response !!OutputStream !!Write: bytes with: 0 with: nbytes.
-		].
-		
-		input !!Close.
-		
-		context !!Response !!OutputStream !!Close
-	]
+	input !!Close.	
+	context !!Response !!OutputStream !!Close.
+	
+	^true
+!
+
+process: context
+	| url |
+	url := context !!Request !!Url !!AbsolutePath.
+	
+	@System.Console !!WriteLine: url.
+	
+	(self processFile: url context: context) ifTrue: [^self].
+	
+	(routes contains: url) 
+		ifTrue: [
+			(routes at: url) value: context !!Request value: context !!Response.
+			context !!Response !!Close.
+		]
+		ifFalse: [
+			context !!Response !!Abort
+		]
 !
 
 start
@@ -62,9 +77,7 @@ start
 	@System.Console !!WriteLine: 'start'.
 	[true] whileTrue: [
 		| context |
-		@System.Console !!WriteLine: 'get context'.
 		context := listener !!GetContext.
-		@System.Console !!WriteLine: 'new request'.
 		self process: context.
 	].
 	@System.Console !!WriteLine: 'end start'

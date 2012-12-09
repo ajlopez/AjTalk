@@ -65,9 +65,18 @@
     <Content Include="RunTomcat.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Programs\HelloWorld.st">
+    <Content Include="Programs\WebSiteTemplates.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RunWebTemplates.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="templates\index.tpl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Programs\HelloWorld.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Programs\WebServer.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -77,39 +86,44 @@
     <Content Include="RunAll.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Programs\TransactionExample.st">
+    <Content Include="Programs\TransactionExample.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Programs\Transactions.st">
+    </Content>
+    <Content Include="Programs\Transactions.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Programs\WebCrawler.st">
+    </Content>
+    <Content Include="Programs\WebCrawler.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="RunClient.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Programs\RemoteClient.st">
+    <Content Include="Programs\RemoteClient.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Programs\RemoteServer.st">
+    </Content>
+    <Content Include="Programs\RemoteServer.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Programs\Remoting.st">
+    </Content>
+    <Content Include="Programs\Remoting.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Programs\Data.st">
+    </Content>
+    <Content Include="Programs\Data.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Programs\Form.st">
+    </Content>
+    <Content Include="Programs\Form.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Programs\Transcript.st">
+    </Content>
+    <Content Include="Programs\Transcript.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="RunServer.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="templates\customers.tpl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
