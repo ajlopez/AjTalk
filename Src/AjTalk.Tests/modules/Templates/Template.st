@@ -20,6 +20,25 @@ compileWriteExpression: expr
 	^' stream write: (', expr, ').'
 !
 
+compileTemplateWithCode: text
+	| code position rest |
+	code := ''.
+	rest := text.
+	position := rest !!IndexOf: '<#'.
+	
+	[position >= 0] whileTrue: [
+		code := code , (self compileWriteText: (rest !!Substring: 0 with: position)).
+		rest := rest !!Substring: position + 2.
+		position := rest !!IndexOf: '#>'.
+		code := code , (rest !!Substring: 0 with: position).
+		rest := rest !!Substring: position + 2.
+		position := rest !!IndexOf: '<#'.
+	].
+	
+	code := code , (self compileWriteText: rest).
+	^code.
+!
+
 compileTemplate: text
 	| code position rest |
 	code := ':model :stream |'.
@@ -27,7 +46,7 @@ compileTemplate: text
 	position := rest !!IndexOf: '${'.
 	
 	[position >= 0] whileTrue: [
-		code := code , (self compileWriteText: (rest !!Substring: 0 with: position)).
+		code := code , (self compileTemplateWithCode: (rest !!Substring: 0 with: position)).
 		rest := rest !!Substring: position + 2.
 		position := rest !!IndexOf: '}'.
 		code := code , (self compileWriteExpression: (rest !!Substring: 0 with: position)).
@@ -35,7 +54,7 @@ compileTemplate: text
 		position := rest !!IndexOf: '${'.
 	].
 	
-	code := code , ' stream write: ''', rest, '''.'.
+	code := code , (self compileTemplateWithCode: rest).
 	^code.
 !
 
