@@ -12,10 +12,10 @@
         public NativeObjectBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
             : base(behavior, superclass, machine, typeof(object))
         {
-            //this.DefineInstanceMethod(new FunctionalMethod("isNil", this, this.isNil));
-            //this.DefineInstanceMethod(new FunctionalMethod("isNotNil", this, this.isNotNil));
-            //this.DefineInstanceMethod(new FunctionalMethod("ifNil:", this, this.ifNil));
-            //this.DefineInstanceMethod(new FunctionalMethod("ifNotNil:", this, this.ifNotNil));
+            this.DefineInstanceMethod(new FunctionalMethod("isNil", this, this.IsNil));
+            this.DefineInstanceMethod(new FunctionalMethod("isNotNil", this, this.IsNotNil));
+            this.DefineInstanceMethod(new FunctionalMethod("ifNil:", this, this.IfNil));
+            this.DefineInstanceMethod(new FunctionalMethod("ifNotNil:", this, this.IfNotNil));
         }
 
         private object IfNil(Machine machine, object self, object[] arguments)

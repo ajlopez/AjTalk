@@ -650,7 +650,7 @@
         public void EvaluateStringIfNilIfNotNil()
         {
             Assert.AreEqual(null, this.Evaluate("'foo' ifNil: [^1]"));
-            Assert.AreEqual(2, this.Evaluate("'foo' isNotNil: [^2]"));
+            Assert.AreEqual(2, this.Evaluate("'foo' ifNotNil: [^2]"));
         }
 
         [TestMethod]

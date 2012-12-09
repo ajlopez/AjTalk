@@ -238,8 +238,6 @@ component child: subcomponent.
 
 component renderOn: canvas.
 
-@System.Console !!WriteLine: canvas asString.
-
 [canvas asString = '<html><head><title>My Page</title></head><body><h1>My Page</h1><div>Subcomponent</div></body></html>'] assert.
 !
 

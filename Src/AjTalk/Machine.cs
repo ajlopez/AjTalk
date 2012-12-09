@@ -55,9 +55,10 @@ namespace AjTalk
             this.nilclass.DefineInstanceMethod(new FunctionalMethod("isNotNil", this.nilclass, this.IsNotNil));
 
             // Native Behaviors
-            var enumerableBehavior = new EnumerableBehavior(meta, null, this);
+            var nativeObjectBehavior = new NativeObjectBehavior(meta, null, this);
+            var enumerableBehavior = new EnumerableBehavior(meta, nativeObjectBehavior, this);
             var listBehavior = new ListBehavior(meta, enumerableBehavior, this);
-            var stringBehavior = new StringBehavior(meta, null, this);
+            var stringBehavior = new StringBehavior(meta, nativeObjectBehavior, this);
 
             this.RegisterNativeBehavior(typeof(IEnumerable), enumerableBehavior);
             this.RegisterNativeBehavior(typeof(IList), listBehavior);
