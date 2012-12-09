@@ -1,0 +1,59 @@
+﻿
+Module import: #Templates.
+
+[Templates isNotNil] assert.
+[Templates.Template isNotNil] assert.
+!
+
+| template stream |
+
+template := Templates.Template new: [ :model : stream | stream write: 'Hello' ].
+
+stream := @System.IO.StringWriter new.
+
+template run: nil stream: stream.
+
+[stream toString = 'Hello'] assert.
+!
+
+[(Templates.Template compileTemplate: 'Hello') = ':model :stream | stream write: ''Hello''.'] assert.
+
+!
+
+[(Templates.Template compileTemplate: 'Hello ${1} world') = ':model :stream | stream write: ''Hello ''. stream write: (1). stream write: '' world''.'] assert.
+
+!
+
+| template stream |
+
+template := Templates.Template text: 'Hello'.
+
+[template isNotNil] assert.
+[template isMemberOf: Templates.Template] assert.
+[template class == Templates.Template] assert.
+
+stream := @System.IO.StringWriter new.
+
+template run: nil stream: stream.
+
+[stream toString = 'Hello'] assert.
+!
+
+| template stream |
+
+template := Templates.Template text: 'Hello ${model}'.
+
+[template isNotNil] assert.
+[template isMemberOf: Templates.Template] assert.
+[template class == Templates.Template] assert.
+
+stream := @System.IO.StringWriter new.
+
+template run: 'World' stream: stream.
+
+[stream toString = 'Hello World'] assert.
+!
+@System.Console !!WriteLine: 'Done'.
+
+VirtualMachine exit.
+

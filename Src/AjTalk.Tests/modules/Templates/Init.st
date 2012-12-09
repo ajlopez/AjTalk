@@ -1,0 +1,1 @@
+﻿FileLoader load: 'Template.st'.

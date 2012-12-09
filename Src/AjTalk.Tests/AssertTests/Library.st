@@ -114,10 +114,16 @@ subclass: aSymbol
 	^newcls.
 !
 
+compileBlock: aBlockSource
+	| parser |
+	parser := @AjTalk.Compiler.Parser new: aBlockSource.
+	^parser !!CompileBlock.
+!
+
 compile: aMethodSource
 	| parser |
 	parser := @AjTalk.Compiler.Parser new: aMethodSource.
-	self !!defineInstanceMethod: (parser !!compileInstanceMethod: self).
+	self !!DefineInstanceMethod: (parser !!CompileInstanceMethod: self).
 
 ! !
 
