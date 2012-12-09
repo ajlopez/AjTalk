@@ -16,11 +16,11 @@ obj := Object new.
 "[obj isMemberOf: UndefinedObject] assert."
 
 Object subclass: #Rectangle
-	instanceVariableNames: 'x y width height'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Kernel-Classes'.
-	
+    instanceVariableNames: 'x y width height'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Kernel-Classes'.
+    
 rect := Rectangle new.
 
 [rect isMemberOf: Rectangle] assert.

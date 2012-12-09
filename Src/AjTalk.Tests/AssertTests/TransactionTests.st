@@ -2,16 +2,16 @@
 
 !Rectangle methods!
 width
-	^width
+    ^width
 !
 height
-	^height
+    ^height
 !
 width: newWidth
-	width := newWidth
+    width := newWidth
 !
 height: newHeight
-	height := newHeight
+    height := newHeight
 ! !
 
 rect := Rectangle new.

@@ -24,18 +24,18 @@ dyn name: 'Joe Doe'.
 dyn := DynamicObject new.
 
 dyn name: 'Customer';
-	table: 'customers';
-	properties: ObjectList new do: [ :list | 			
-			list add: [DynamicObject new
-				name: 'Id';
-				description: 'Id';
-				yourself] value.
-				
-			list add: [DynamicObject new
-				name: 'Name';
-				description: 'Customer Name';
-				yourself] value.
-		].
+    table: 'customers';
+    properties: ObjectList new do: [ :list |             
+            list add: [DynamicObject new
+                name: 'Id';
+                description: 'Id';
+                yourself] value.
+                
+            list add: [DynamicObject new
+                name: 'Name';
+                description: 'Customer Name';
+                yourself] value.
+        ].
 
 [dyn name = 'Customer'] assert.
 [dyn table = 'customers'] assert.

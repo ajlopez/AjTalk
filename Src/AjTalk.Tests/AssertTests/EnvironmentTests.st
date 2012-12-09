@@ -50,10 +50,10 @@ MyGlobal := Object new.
 "Define a class at current env environment, no change to syntax"
 
 Object subclass:#MyClass
-	instanceVariableNames:''
-	classVariableNames:''
-	poolDictionaries:''
-	category:''
+    instanceVariableNames:''
+    classVariableNames:''
+    poolDictionaries:''
+    category:''
 .
 
 [(env at: #MyClass) isNil not] assert.

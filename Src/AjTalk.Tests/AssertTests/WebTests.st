@@ -163,8 +163,8 @@ canvas := Web.Canvas new.
 
 canvas header: 'Hello, World'.
 canvas paragraph: [
-	canvas render: 'Great '.
-	canvas render: 'demo'
+    canvas render: 'Great '.
+    canvas render: 'demo'
 ].
 
 [canvas asString = '<h1>Hello, World</h1><p>Great demo</p>'] assert.
@@ -177,8 +177,8 @@ canvas := Web.Canvas new.
 
 canvas header: 'Hello, World'.
 canvas div: [
-	canvas render: 'Great '.
-	canvas render: 'demo'
+    canvas render: 'Great '.
+    canvas render: 'demo'
 ].
 
 [canvas asString = '<h1>Hello, World</h1><div>Great demo</div>'] assert.
@@ -200,13 +200,13 @@ canvas html: 'Example'.
 canvas := Web.Canvas new.
 
 canvas html: [
-	canvas head: [
-		canvas title: 'My Page'
-	].
-	canvas body: [
-		canvas header: 'My Page'.
-		canvas paragraph: 'Great demo'
-	]
+    canvas head: [
+        canvas title: 'My Page'
+    ].
+    canvas body: [
+        canvas header: 'My Page'.
+        canvas paragraph: 'Great demo'
+    ]
 ].
 
 [canvas asString = '<html><head><title>My Page</title></head><body><h1>My Page</h1><p>Great demo</p></body></html>'] assert.
@@ -228,10 +228,10 @@ canvas break.
 canvas := Web.Canvas new.
 
 canvas unorderedList: [
-	canvas listItem: 'item 1'.
-	canvas listItem: 'item 2'.
-	canvas listItem: 'item 3'.
-	].
+    canvas listItem: 'item 1'.
+    canvas listItem: 'item 2'.
+    canvas listItem: 'item 3'.
+    ].
 
 [canvas asString = '<ul><li>item 1</li><li>item 2</li><li>item 3</li></ul>'] assert.
 
@@ -248,41 +248,41 @@ component renderOn: canvas.
 !
 
 Web.Component subclass: #MyComponent
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'WebTests'.
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'WebTests'.
 
 !
 
 !MyComponent methods!
 
 renderOn: canvas
-	canvas html: [
-		canvas head: [
-			canvas title: 'My Page'
-		].
-		canvas body: [
-			canvas header: 'My Page'.
-			self renderChildrenOn: canvas
-		]
-	]
+    canvas html: [
+        canvas head: [
+            canvas title: 'My Page'
+        ].
+        canvas body: [
+            canvas header: 'My Page'.
+            self renderChildrenOn: canvas
+        ]
+    ]
 
 ! !
 
 Web.Component subclass: #MySubComponent
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'WebTests'.
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'WebTests'.
 
 !
 
 !MySubComponent methods!
 
 renderOn: canvas
-	canvas div: 'Subcomponent'.
-	
+    canvas div: 'Subcomponent'.
+    
 ! !
 
 | canvas component |
