@@ -11,7 +11,7 @@
   <Class Name="AjTalk.Language.BaseObject">
     <Position X="2.25" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAACiAAAAggAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAAAAAAAAAgAAgAACiEAAAwgAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Language\BaseObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -19,36 +19,29 @@
   <Class Name="AjTalk.Compiler.Parser" Collapsed="true">
     <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>RAIAAAAwAAgAAQoECoAAKAAAAIAgAACAQAICgCAQBAA=</HashCode>
+      <HashCode>RAIBAQA0CQgAAQ4ECoAAKAAQAKCgAACAQAICgAAQBAA=</HashCode>
       <FileName>Compiler\Parser.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.Language.ExecutionBlock" Collapsed="true">
     <Position X="11.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAABAAAIBEUAAQQABAgEAACpAIAARAAoAAAADAg=</HashCode>
+      <HashCode>AABEEAwBAAAJBEcAgQQBBAgEQpCtIMAAQAAoAAAADBg=</HashCode>
       <FileName>Language\ExecutionBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.Machine" Collapsed="true">
     <Position X="7.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAAgAAiAAAIAACACEABAAoAAIGAAYAAiAQAACAAA=</HashCode>
+      <HashCode>QMEKAAiCE2AAAqAgCCCEQBgAuAKMGAARAAjDQIACRAI=</HashCode>
       <FileName>Machine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.Compiler.Token" Collapsed="true">
     <Position X="11.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAgAAAQAAA=</HashCode>
       <FileName>Compiler\Token.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AjTalk.Compiler.EndOfInputException" Collapsed="true">
-    <Position X="9.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Compiler\EndOfInputException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.Compiler.LexerException" Collapsed="true">
@@ -61,14 +54,14 @@
   <Class Name="AjTalk.Compiler.Lexer" Collapsed="true">
     <Position X="7.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQIAAEAQFAgAIAABEAIAQDAQAAAABBKAAAAAEAIhIBA=</HashCode>
+      <HashCode>AQIAAEAQFAgAIAABEAIQQBEQAAIABBqAAAAAEAIwqBA=</HashCode>
       <FileName>Compiler\Lexer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AjTalk.Language.Block">
     <Position X="0.5" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAAAACAADAUQACAEAiSIBRAACQEAAICAIIICIjAA=</HashCode>
+      <HashCode>AIEAEAAACAADAUQACAEAmSIRxBCGQcCBICCIIJCIjBA=</HashCode>
       <FileName>Language\Block.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="1.3" />
@@ -76,7 +69,7 @@
   <Class Name="AjTalk.Language.Method">
     <Position X="2.75" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAQAAAAAAAAQAAAIAAAQAAAAEAAAAJAAAEAQAgAA=</HashCode>
+      <HashCode>AAAAEQAAAAAAAAQACAAAAAQABAAEAIAAJAAAEBQAgAA=</HashCode>
       <FileName>Language\Method.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -98,35 +91,35 @@
   <Interface Name="AjTalk.Language.IObject">
     <Position X="2.25" Y="9" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAACCAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAgAAgAACCAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Language\IObject.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AjTalk.Language.IBlock">
     <Position X="6.5" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAABAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAABAAQAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
       <FileName>Language\IBlock.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AjTalk.Language.IMethod" Collapsed="true">
     <Position X="4.75" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAIAAAQAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQACAAAAAQAAAAAAAAAAAAAAAQAAAA=</HashCode>
       <FileName>Language\IMethod.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AjTalk.Language.IClassDescription">
     <Position X="2.25" Y="6.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAAAAAAAAAAAAQABAAAAIAAAAIAAAAAgAA=</HashCode>
+      <HashCode>AAAAEAAIAAAAAAAAAAQAAAQAJAAAAIAAAAIAAAQAgAA=</HashCode>
       <FileName>Language\IClassDescription.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AjTalk.Language.IMetaClass">
     <Position X="5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAQAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Language\IMetaClass.cs</FileName>
       <NewMemberFileName>Language\IBehavior.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -134,21 +127,21 @@
   <Interface Name="AjTalk.Language.IBehavior">
     <Position X="4.75" Y="8" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAEAAAAAAAAAAEAAAAAQACAAAEAACg=</HashCode>
+      <HashCode>AAQAAAAAAAAAACAEAAAAAAAAAAEAAAAAQACQAAEAACg=</HashCode>
       <FileName>Language\IBehavior.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="AjTalk.Language.ByteCode" Collapsed="true">
     <Position X="7.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABB4AQgABAIQIABAEAQgAwAiiGIAwAAQAAgQIQAUAQ=</HashCode>
+      <HashCode>AABBwCSgABgIAIABIEAQgAgAiiGIAwAAQAAgQIAAEAQ=</HashCode>
       <FileName>Language\ByteCodes.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AjTalk.Compiler.TokenType" Collapsed="true">
     <Position X="9.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAQAAAAAQAAAAAAgQAAAAAAAAAKAA=</HashCode>
+      <HashCode>EAAAAAAAAAAAAAAAQAAAACQAAAAQAgQAAAAAAAAAKAA=</HashCode>
       <FileName>Compiler\TokenType.cs</FileName>
     </TypeIdentifier>
   </Enum>
