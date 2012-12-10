@@ -37,3 +37,18 @@ rect := Rectangle new.
 
 [[true] isMemberOf: Block] assert.
 
+!
+
+| obj |
+
+" Object methods "
+
+obj := Object new.
+
+obj compile: 'sayHello: name ^''Hello '', name'.
+
+[(obj sayHello: 'World') = 'Hello World'] assert.
+[obj isPrototype] assert.
+[obj isMemberOf: Object] assertFalse.
+[obj isKindOf: Object] assert.
+
