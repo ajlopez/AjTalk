@@ -114,6 +114,11 @@ namespace AjTalk.Language
             return cls.GetInstanceVariableOffset(name);
         }
 
+        internal void SetBehavior(IBehavior behavior)
+        {
+            this.mthclass = behavior;
+        }
+
         private bool TryCompileGetVariable(string name)
         {
             if (this.mthclass == null)

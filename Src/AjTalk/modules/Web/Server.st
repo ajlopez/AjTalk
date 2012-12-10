@@ -15,7 +15,7 @@ new
 !Server methods!
 
 initialize
-	listener := @System.Net.HttpListener !!new.
+	listener := HttpListener new.
 	routes := ObjectDictionary new.
 !
 
@@ -24,7 +24,7 @@ root: directory
 !
 
 addPrefix: address
-	listener !!Prefixes !!Add: address.
+	listener addPrefix: address.
 !
 
 get: route do: block
@@ -75,11 +75,11 @@ process: context
 !
 
 start
-	listener !!Start.
+	listener start.
 	@System.Console !!WriteLine: 'start'.
 	[true] whileTrue: [
 		| context |
-		context := listener !!GetContext.
+		context := listener nextContext.
 		self process: context.
 	].
 	@System.Console !!WriteLine: 'end start'

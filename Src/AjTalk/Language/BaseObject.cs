@@ -45,6 +45,23 @@ namespace AjTalk.Language
 
         public int NoVariables { get { return this.variables == null ? 0 : this.variables.Length; } }
 
+        public bool IsPrototype
+        {
+            get
+            {
+                if (this.behavior == null)
+                    return false;
+
+                var cd = this.behavior as IClass;
+
+                if (cd == null)
+                    return false;
+
+                // TODO review predicate, GUID check?
+                return cd.Name.StartsWith("__");
+            }
+        }
+
         public object this[int n]
         {
             get
@@ -74,6 +91,21 @@ namespace AjTalk.Language
             
             // TODO review IClass cast
             info.AddValue("ClassName", ((IClass)this.Behavior).Name);
+        }
+
+        public void DefineObjectMethod(IMethod method)
+        {
+            if (this.IsPrototype)
+            {
+                this.Behavior.DefineInstanceMethod(method);
+                return;
+            }
+
+            string clsname = "__" + Guid.NewGuid().ToString();
+            var newbehavior = this.Behavior.Machine.CreateClass(clsname, (IClass)this.behavior);
+            this.behavior = newbehavior;
+            newbehavior.DefineInstanceMethod(method);
+            ((Method)method).SetBehavior(newbehavior);
         }
 
         internal void SetBehavior(IBehavior behavior)

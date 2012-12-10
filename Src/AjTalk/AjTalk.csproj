@@ -224,6 +224,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Model\Model.cd" />
+    <Content Include="modules\Web\HttpListener.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="modules\WebSide\Init.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

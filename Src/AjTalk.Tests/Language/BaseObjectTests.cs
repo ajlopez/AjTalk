@@ -45,6 +45,30 @@ namespace AjTalk.Tests.Language
         }
 
         [TestMethod]
+        public void DefineObjectMethod()
+        {
+            Machine machine = new Machine();
+            BaseClass cls = new BaseClass("MyClass", machine);
+            BaseObject bo = (BaseObject)cls.NewObject();
+
+            Assert.AreEqual(cls, bo.Behavior);
+
+            IMethod method = new Method(cls, "mymethod");
+
+            bo.DefineObjectMethod(method);
+
+            Assert.AreNotEqual(cls, bo.Behavior);
+            Assert.IsNotNull(bo.Behavior.GetInstanceMethod("mymethod"));
+            Assert.AreEqual(method, bo.Behavior.GetInstanceMethod("mymethod"));
+
+            Assert.AreNotEqual(cls, method.Behavior);
+            Assert.AreEqual(bo.Behavior, method.Behavior);
+
+            Assert.IsTrue(bo.IsPrototype);
+            Assert.AreEqual(true, bo.SendMessage(machine, "isPrototype", null));
+        }
+
+        [TestMethod]
         public void SerializeAndDeserializeSimpleObject()
         {
             Machine machine = new Machine();

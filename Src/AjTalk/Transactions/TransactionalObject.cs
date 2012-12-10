@@ -120,5 +120,10 @@
 
             this.values = new Dictionary<int, TransactionalValue>();
         }
+
+        public void DefineObjectMethod(IMethod method)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

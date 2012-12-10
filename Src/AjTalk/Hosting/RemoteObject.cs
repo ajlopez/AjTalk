@@ -51,5 +51,10 @@
         {
             return this.obj.ExecuteMethod(machine, method, arguments);
         }
+
+        public void DefineObjectMethod(IMethod method)
+        {
+            this.obj.DefineObjectMethod(method);
+        }
     }
 }

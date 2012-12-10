@@ -82,6 +82,12 @@ asTransactional
     ^@AjTalk.Transactions.TransactionalObject new: self with: Machine transactionManager
 !
 
+compile: aMethodSource
+    | parser |
+    parser := @AjTalk.Compiler.Parser new: aMethodSource.
+    self !!DefineObjectMethod: (parser !!CompileInstanceMethod: self class).
+!
+
 class
     ^self !!behavior.
 ! !
