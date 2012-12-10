@@ -68,4 +68,17 @@ dyn name: 'Customer';
 [(dyn properties at: 2) name = 'Name'] assert.
 !
 
+| dyn |
+
+dyn := DynamicObject new.
+
+dyn height: 10.
+dyn width: 20.
+
+dyn compile: 'area ^self width * self height'.
+
+[dyn area == 200] assert.
+
+!
+
 VirtualMachine exit.
