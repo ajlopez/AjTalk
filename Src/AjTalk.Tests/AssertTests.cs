@@ -86,9 +86,9 @@
 
         [TestMethod]
         [DeploymentItem("modules", "modules")]
-        public void WebAsserts()
+        public void WebSideAsserts()
         {
-            DoAssert("Web");
+            DoAssert("WebSide");
         }
 
         [TestMethod]

@@ -149,7 +149,7 @@
     <Content Include="AssertTests\ModuleTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="AssertTests\WebTests.st">
+    <Content Include="AssertTests\WebSideTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="AssertTests\TransactionTests.st">

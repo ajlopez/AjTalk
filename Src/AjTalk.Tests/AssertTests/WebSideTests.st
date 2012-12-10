@@ -1,20 +1,20 @@
 ﻿
-Module import: #Web.
+Module import: #WebSide.
 
-[Web isNotNil] assert.
-[Web.Canvas isNotNil] assert.
-[Web.Component isNotNil] assert.
-[Web.Brush isNotNil] assert.
-[Web.Head isNotNil] assert.
-[Web.Body isNotNil] assert.
-[Web.Html isNotNil] assert.
-[Web.Title isNotNil] assert.
-[Web.Paragraph isNotNil] assert.
+[WebSide isNotNil] assert.
+[WebSide.Canvas isNotNil] assert.
+[WebSide.Component isNotNil] assert.
+[WebSide.Brush isNotNil] assert.
+[WebSide.Head isNotNil] assert.
+[WebSide.Body isNotNil] assert.
+[WebSide.Html isNotNil] assert.
+[WebSide.Title isNotNil] assert.
+[WebSide.Paragraph isNotNil] assert.
 !
 
 | canvas |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 canvas render: 'Hello'.
 
@@ -23,9 +23,9 @@ canvas render: 'Hello'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
-brush := Web.Brush new.
+brush := WebSide.Brush new.
 brush tag: 'h1'.
 brush canvas: canvas.
 brush with: 'Hello'.
@@ -35,9 +35,9 @@ brush with: 'Hello'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
-brush := Web.Brush new.
+brush := WebSide.Brush new.
 
 [(brush attribute: 'style') isNil] assert.
 
@@ -51,9 +51,9 @@ brush with: 'Hello'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
-brush := Web.Brush new.
+brush := WebSide.Brush new.
 brush tag: 'h1'.
 brush canvas: canvas.
 brush attribute: 'selected' value: nil.
@@ -64,9 +64,9 @@ brush with: 'Hello'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
-brush := Web.Brush new.
+brush := WebSide.Brush new.
 brush tag: 'h1'.
 brush canvas: canvas.
 brush attribute: 'class' add: 'title'.
@@ -77,9 +77,9 @@ brush with: 'Hello'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
-brush := Web.Brush new.
+brush := WebSide.Brush new.
 brush tag: 'h1'.
 brush canvas: canvas.
 brush attribute: 'class' add: 'title'.
@@ -91,9 +91,9 @@ brush with: 'Hello'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
-brush := Web.Brush new.
+brush := WebSide.Brush new.
 
 brush tag: 'h1'.
 brush canvas: canvas.
@@ -105,9 +105,9 @@ brush with: 'Hello'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
-brush := Web.Paragraph new.
+brush := WebSide.Paragraph new.
 brush canvas: canvas.
 brush with: 'Hello'.
 
@@ -116,7 +116,7 @@ brush with: 'Hello'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 canvas paragraph: 'Hello'.
 
@@ -127,7 +127,7 @@ canvas paragraph: 'Hello'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 canvas paragraph: 'Hello'.
 canvas paragraph: 'World'.
@@ -138,7 +138,7 @@ canvas paragraph: 'World'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 canvas header: 'Hello, World'.
 
@@ -148,7 +148,7 @@ canvas header: 'Hello, World'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 canvas header: 'Hello, World'.
 canvas paragraph: 'Great demo'.
@@ -159,7 +159,7 @@ canvas paragraph: 'Great demo'.
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 canvas header: 'Hello, World'.
 canvas paragraph: [
@@ -173,7 +173,7 @@ canvas paragraph: [
 
 | canvas brush |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 canvas header: 'Hello, World'.
 canvas div: [
@@ -187,7 +187,7 @@ canvas div: [
 
 | canvas |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 canvas html: 'Example'.
 
@@ -197,7 +197,7 @@ canvas html: 'Example'.
 
 | canvas |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 canvas html: [
     canvas head: [
@@ -215,7 +215,7 @@ canvas html: [
 
 | canvas |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 canvas break.
 
@@ -225,7 +225,7 @@ canvas break.
 
 | canvas |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 canvas unorderedList: [
     canvas listItem: 'item 1'.
@@ -239,15 +239,15 @@ canvas unorderedList: [
 
 | canvas component |
 
-canvas := Web.Canvas new.
-component := Web.Component new.
+canvas := WebSide.Canvas new.
+component := WebSide.Component new.
 
 component renderOn: canvas.
 
 [canvas asString = ''] assert.
 !
 
-Web.Component subclass: #MyComponent
+WebSide.Component subclass: #MyComponent
     instanceVariableNames: ''
     classVariableNames: ''
     poolDictionaries: ''
@@ -270,7 +270,7 @@ renderOn: canvas
 
 ! !
 
-Web.Component subclass: #MySubComponent
+WebSide.Component subclass: #MySubComponent
     instanceVariableNames: ''
     classVariableNames: ''
     poolDictionaries: ''
@@ -287,7 +287,7 @@ renderOn: canvas
 
 | canvas component |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 component := MyComponent new.
 
@@ -298,7 +298,7 @@ component renderOn: canvas.
 
 | canvas component subcomponent |
 
-canvas := Web.Canvas new.
+canvas := WebSide.Canvas new.
 
 component := MyComponent new.
 subcomponent := MySubComponent new.
