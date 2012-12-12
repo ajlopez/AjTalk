@@ -24,8 +24,14 @@
 + Define Array implementation
    #(1 2 3) as IList<object>? or new object[3]
    
+- Implement SetArgument
+
 - Implement +, -, etc... only for numbers
 	Actually, + is concatenating strings
+	
+- block fork using thread
+- Process
+- block fork using Process
    
 - Implement FreeBlockExpression in Javascript compilers
 

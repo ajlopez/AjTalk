@@ -381,7 +381,8 @@ namespace AjTalk
             string originalpath = currentPath;
             string filepath = (new FileInfo(filename)).DirectoryName;
 
-            try {
+            try 
+            {
                 currentPath = filepath;
                 Loader loader = new Loader(filename, new SimpleCompiler());
                 loader.LoadAndExecute(this);

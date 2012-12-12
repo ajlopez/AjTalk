@@ -12,8 +12,6 @@ namespace AjTalk.Language
         GetConstant = 5,
         GetLocal = 6,
         SetLocal = 7,
-        //GetClassVariable = 8,
-        //SetClassVariable = 9,
         GetGlobalVariable = 10,
         SetGlobalVariable = 11,
         GetBlock = 12,

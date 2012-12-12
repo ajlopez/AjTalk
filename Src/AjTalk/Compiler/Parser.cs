@@ -180,7 +180,7 @@ namespace AjTalk.Compiler
             Token token;
             int nparameters = 0;
 
-            for (token = this.NextToken(); token != null && (token.Type == TokenType.Parameter || token.Type == TokenType.Operator && token.Value == ":"); nparameters++, token = this.NextToken())
+            for (token = this.NextToken(); token != null && (token.Type == TokenType.Parameter || (token.Type == TokenType.Operator && token.Value == ":")); nparameters++, token = this.NextToken())
             {
                 if (token.Type == TokenType.Parameter)
                     this.arguments.Add(token.Value);

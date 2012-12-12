@@ -111,6 +111,11 @@
             return method.Execute(machine, self, arguments);
         }
 
+        public void DefineObjectMethod(IMethod method)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void ReleaseValues()
         {
             long time = this.manager.MinimalTransactionalTime;
@@ -119,11 +124,6 @@
                 val.ReleaseValues(time);
 
             this.values = new Dictionary<int, TransactionalValue>();
-        }
-
-        public void DefineObjectMethod(IMethod method)
-        {
-            throw new NotImplementedException();
         }
     }
 }

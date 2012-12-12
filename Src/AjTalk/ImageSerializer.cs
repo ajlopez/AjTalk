@@ -298,8 +298,8 @@
                     return bobj;
                 case ImageCode.Machine:
                     this.machine = new Machine(false);
-                    this.objects.Add(machine);
-                    this.objects.Add(machine.Environment);
+                    this.objects.Add(this.machine);
+                    this.objects.Add(this.machine.Environment);
                     nnames = this.reader.ReadInt32();
 
                     for (int k = 0; k < nnames; k++)

@@ -22,7 +22,7 @@
 
         public object GetValue(string name)
         {
-            if (!values.ContainsKey(name))
+            if (!this.values.ContainsKey(name))
             {
                 if (this.parent != null)
                     return this.parent.GetValue(name);
@@ -30,17 +30,17 @@
                 return null;
             }
 
-            return values[name];
+            return this.values[name];
         }
 
         public void SetValue(string name, object value)
         {
-            values[name] = value;
+            this.values[name] = value;
         }
 
         public bool HasValue(string name)
         {
-            if (values.ContainsKey(name))
+            if (this.values.ContainsKey(name))
                 return true;
 
             if (this.parent != null)
@@ -51,7 +51,7 @@
 
         public ICollection<string> GetNames()
         {
-            return values.Keys;
+            return this.values.Keys;
         }
     }
 }

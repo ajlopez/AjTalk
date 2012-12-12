@@ -9,7 +9,8 @@
 
     public class BehaviorDoesNotUnderstandMethod : DoesNotUnderstandMethod
     {
-        private static IList<string> reservedMethods = new List<string>() {
+        private static IList<string> reservedMethods = new List<string>() 
+        {
             "methods",
             "methodsFor:",
             "methodsFor:stamp:",
@@ -39,7 +40,8 @@
             if (msgname == "methods" || msgname.StartsWith("methodsFor:"))
             {
                 IBehavior behavior = (IBehavior)self;
-                return new ChunkReaderProcessor((Machine mach, ICompiler compiler, string text) => {
+                return new ChunkReaderProcessor((Machine mach, ICompiler compiler, string text) => 
+                {
                     var method = compiler.CompileInstanceMethod(text, behavior);
                     if (reservedMethods.Contains(method.Name))
                         return;
@@ -64,10 +66,13 @@
             if (msgname.Equals("subclass:instanceVariableNames:") ||
                 msgname.Equals("subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:") ||
                 msgname.Equals("variableSubclass:instanceVariableNames:classVariableNames:poolDictionaries:category:") ||
+
                 // TODO weakSubclass because Pharo Kernel Objects defines one, WeakMessageSend
                 msgname.Equals("weakSubclass:instanceVariableNames:classVariableNames:poolDictionaries:category:") ||
+
                 // TODO variableWordSubclass because Pharo Kernel Number use it
                 msgname.Equals("variableWordSubclass:instanceVariableNames:classVariableNames:poolDictionaries:category:") ||
+
                 // TODO variableByteSubclass because Pharo Kernel Number use it
                 msgname.Equals("variableByteSubclass:instanceVariableNames:classVariableNames:poolDictionaries:category:") ||
                 msgname.Equals("agent:instanceVariableNames:") ||

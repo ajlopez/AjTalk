@@ -11,8 +11,6 @@ namespace AjTalk
     public class Loader
     {
         private ChunkReader reader;
-        private IBehavior currentClass;
-        private bool isclassmethod;
         private ICompiler compiler;
 
         public Loader(TextReader reader, ICompiler compiler)
@@ -25,11 +23,6 @@ namespace AjTalk
         {
             this.reader = new ChunkReader(filename);
             this.compiler = compiler;
-        }
-
-        public bool IsMethod()
-        {
-            return this.currentClass != null;
         }
 
         public string GetBlockText()

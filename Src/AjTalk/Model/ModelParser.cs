@@ -90,7 +90,8 @@
         {
             // TODO Quick hack to skip initial dots
             while (this.TryParseDot())
-                ;
+            { 
+            }
 
             IExpression expression = this.ParseExpression();
 
@@ -502,7 +503,7 @@
 
             Token token = this.NextToken();
 
-            while (token != null && (token.Type == TokenType.Parameter || token.Type == TokenType.Operator && token.Value == ":"))
+            while (token != null && (token.Type == TokenType.Parameter || (token.Type == TokenType.Operator && token.Value == ":")))
             {
                 // TODO improve parameter lexer
                 if (token.Type == TokenType.Operator)

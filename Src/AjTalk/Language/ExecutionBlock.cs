@@ -101,6 +101,22 @@ namespace AjTalk.Language
 
         public Block Block { get { return this.block; } }
 
+        public bool HasReturnValue { get { return this.hasreturnvalue; } }
+
+        public IObject Receiver
+        {
+            get
+            {
+                if (this.self != null)
+                    return this.self;
+
+                if (this.block.Closure != null)
+                    return this.block.Closure.Receiver;
+
+                return null;
+            }
+        }
+
         private object Top
         {
             get
@@ -256,9 +272,9 @@ namespace AjTalk.Language
                             this.lastreceiver = obj;
 
                             if (obj == super)
-                                // TODO this.nativeSelf processing
+                                //// TODO this.nativeSelf processing
                                 this.Push(((IMethod)this.block).Behavior.SuperClass.SendMessageToObject(this.self, this.machine, mthname, args));
-                            // TODO this.machine is null in many tests, not in real world
+                            //// TODO this.machine is null in many tests, not in real world
                             else if (this.machine == null)
                                 this.Push(((IObject)obj).SendMessage(null, mthname, args));
                             else
@@ -366,22 +382,6 @@ namespace AjTalk.Language
             return this.Pop();
         }
 
-        public bool HasReturnValue { get { return this.hasreturnvalue; } }
-
-        public IObject Receiver
-        {
-            get
-            {
-                if (this.self != null)
-                    return this.self;
-
-                if (this.block.Closure != null)
-                    return this.block.Closure.Receiver;
-
-                return null;
-            }
-        }
-
         internal object GetLocal(int nlocal)
         {
             if (nlocal < this.NoParentLocals)
@@ -475,7 +475,8 @@ namespace AjTalk.Language
             object value = execblock.Pop();
             execblock.lastreceiver = value;
 
-            if (value == null) {
+            if (value == null) 
+            {
                 execblock.Push(execblock.machine.UndefinedObjectClass);
                 return;
             }

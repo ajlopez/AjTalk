@@ -38,7 +38,7 @@
 
         public static object SendNativeMessage(Machine machine, object obj, string mthname, object[] args)
         {
-            if ((args == null || args.Length == 0))
+            if (args == null || args.Length == 0)
             {
                 if (unaryMethods.ContainsKey(mthname))
                 {

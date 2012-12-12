@@ -227,11 +227,13 @@ namespace AjTalk.Compiler
             if (ch >= 0 && ch == '.' && char.IsUpper(firstchar))
             {
                 var peek = this.PeekChar();
+                
                 if (peek >= 0 && char.IsLetter((char)peek) && char.IsUpper((char)peek))
                 {
                     sb.Append((char)ch);
                     return this.NextDottedName(sb.ToString());
                 }
+
                 this.PushChar(ch);
             }
             else if (ch >= 0 && ch == ':')
@@ -379,7 +381,7 @@ namespace AjTalk.Compiler
 
             ch = this.NextChar();
 
-            while (ch >= 0 && char.IsLetterOrDigit((char)ch) || ch == '_' || ch == ':')
+            while (ch >= 0 && (char.IsLetterOrDigit((char)ch) || ch == '_' || ch == ':'))
             {
                 sb.Append((char)ch);
                 if (ch == ':')

@@ -103,13 +103,6 @@ namespace AjTalk.Language
             }
         }
 
-        public Block Clone(ExecutionBlock closure)
-        {
-            Block newblock = (Block)this.MemberwiseClone();
-            newblock.closure = closure;
-            return newblock;
-        }
-
         public static byte MessageArity(string msgname)
         {
             if (!Char.IsLetter(msgname[0]))
@@ -127,6 +120,13 @@ namespace AjTalk.Language
                     n++;
 
             return n;
+        }
+
+        public Block Clone(ExecutionBlock closure)
+        {
+            Block newblock = (Block)this.MemberwiseClone();
+            newblock.closure = closure;
+            return newblock;
         }
 
         public void CompileArgument(string argname)
@@ -219,7 +219,7 @@ namespace AjTalk.Language
                 if (string.IsNullOrEmpty(rest) || rest.StartsWith("with:"))
                     mthname = msgname.Substring(0, p);
                 else
-                    mthname = msgname.Replace(":", "");
+                    mthname = msgname.Replace(":", string.Empty);
             }
             else
             {
