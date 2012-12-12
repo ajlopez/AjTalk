@@ -583,3 +583,25 @@ doesNotUnderstand: selector with: arguments
             ^nil.
         ]
 ! !
+
+Object subclass:#Semaphore
+    instanceVariableNames: 'handle'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category:'Kernel-Classes'
+!
+
+!Semaphore methods!
+
+initialize
+	handle := @System.Threading.AutoResetEvent new: false
+!
+
+signal
+	handle !!Set
+!
+
+wait
+	handle !!WaitOne
+! !
+

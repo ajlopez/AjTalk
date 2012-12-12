@@ -180,6 +180,9 @@
     <Content Include="AssertTests\DynamicObjectTests.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="AssertTests\SemaphoreTests.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="CodeFiles\AsRemote.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

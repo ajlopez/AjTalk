@@ -92,6 +92,12 @@
         }
 
         [TestMethod]
+        public void SemaphoreAsserts()
+        {
+            DoAssert("Semaphore");
+        }
+
+        [TestMethod]
         public void TransactionAsserts()
         {
             DoAssert("Transaction");
