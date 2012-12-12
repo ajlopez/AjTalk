@@ -40,5 +40,23 @@
             if (!handle.WaitOne(500))
                 Assert.Fail("Process didn't run");
         }
+
+        [TestMethod]
+        public void ResumeNewProcess()
+        {
+            AutoResetEvent handle = new AutoResetEvent(false);
+            Machine machine = new Machine();
+            VmCompiler compiler = new VmCompiler();
+            machine.SetGlobalObject("handle", handle);
+            Block block = compiler.CompileBlock("handle !Set");
+
+            Process process = new Process(block, null, machine);
+            machine.SetGlobalObject("process", process);
+
+            compiler.CompileBlock("process resume").Execute(machine, null);
+
+            if (!handle.WaitOne(500))
+                Assert.Fail("Process didn't run");
+        }
     }
 }

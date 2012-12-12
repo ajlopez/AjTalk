@@ -11,6 +11,7 @@
         private IBlock block;
         private object[] arguments;
         private Machine machine;
+        private Thread thread;
 
         public Process(IBlock block, object[] arguments, Machine machine)
         {
@@ -28,8 +29,17 @@
         public void Start()
         {
             ThreadStart start = new ThreadStart(this.Run);
-            Thread thread = new Thread(start);
-            thread.Start();
+            this.thread = new Thread(start);
+            this.thread.Start();
+        }
+
+        public void Resume()
+        {
+            if (this.thread == null)
+                this.Start();
+            else
+                //// TODO Resume is obsolete
+                this.thread.Resume();
         }
 
         private void Run()
