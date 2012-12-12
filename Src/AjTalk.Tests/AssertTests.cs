@@ -98,6 +98,12 @@
         }
 
         [TestMethod]
+        public void ProcessAsserts()
+        {
+            DoAssert("Process");
+        }
+
+        [TestMethod]
         public void TransactionAsserts()
         {
             DoAssert("Transaction");

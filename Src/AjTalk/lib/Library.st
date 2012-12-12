@@ -440,6 +440,15 @@ import: aName
 Object subclass: #Block nativeType: @AjTalk.Language.Block
 !
 
+!Block methods!
+fork
+	self newProcess resume
+!
+
+newProcess
+	^Process new: self arguments: nil machine: Machine
+! !
+
 Object subclass: #StringBuilder nativeType: @System.Text.StringBuilder
 !
 
@@ -605,3 +614,5 @@ wait
 	handle !!WaitOne
 ! !
 
+Object subclass: #Process nativeType: @AjTalk.Language.Process
+!
