@@ -115,6 +115,7 @@
     <Compile Include="Language\ArrayBehavior.cs" />
     <Compile Include="Language\NativeObjectBehavior.cs" />
     <Compile Include="Language\ListBehavior.cs" />
+    <Compile Include="Language\Process.cs" />
     <Compile Include="Language\StringBehavior.cs" />
     <Compile Include="Model\ClassModel.cs" />
     <Compile Include="Model\CodeModel.cs" />
