@@ -30,6 +30,7 @@ namespace AjTalk.Language
             codes[(int)ByteCode.Value] = DoValue;
             codes[(int)ByteCode.MultiValue] = DoMultiValue;
             codes[(int)ByteCode.GetArgument] = DoGetArgument;
+            codes[(int)ByteCode.SetArgument] = DoSetArgument;
             codes[(int)ByteCode.GetClass] = DoGetClass;
             codes[(int)ByteCode.BasicSize] = DoBasicSize;
             codes[(int)ByteCode.GetGlobalVariable] = DoGetGlobalVariable;
@@ -402,6 +403,19 @@ namespace AjTalk.Language
                 this.locals[nlocal - this.NoParentLocals] = value;
         }
 
+        internal void SetArgument(int nargument, object value)
+        {
+            if (nargument < this.NoParentArguments)
+                this.SetParentArgument(nargument, value);
+            else
+                this.arguments[nargument - this.NoParentArguments] = value;
+        }
+
+        internal void SetParentArgument(int nargument, object value)
+        {
+            this.block.Closure.SetArgument(nargument, value);
+        }
+
         internal void SetParentLocal(int nlocal, object value)
         {
             this.block.Closure.SetLocal(nlocal, value);
@@ -468,6 +482,15 @@ namespace AjTalk.Language
             execblock.ip++;
             byte arg = execblock.block.ByteCodes[execblock.ip];
             execblock.Push(execblock.GetArgument(arg));
+        }
+
+        private static void DoSetArgument(ExecutionBlock execblock)
+        {
+            execblock.ip++;
+            byte arg = execblock.block.ByteCodes[execblock.ip];
+            var value = execblock.Pop();
+            execblock.SetArgument(arg, value);
+            execblock.lastreceiver = null;
         }
 
         private static void DoGetClass(ExecutionBlock execblock)

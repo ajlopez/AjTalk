@@ -445,6 +445,17 @@ namespace AjTalk.Language
                 }
             }
 
+            if (this.argnames != null)
+            {
+                p = this.argnames.IndexOf(name);
+
+                if (p >= 0)
+                {
+                    this.CompileByteCode(ByteCode.SetArgument, (byte)p);
+                    return true;
+                }
+            }
+
             p = this.GetInstanceVariableOffset(name);
 
             if (p >= 0)

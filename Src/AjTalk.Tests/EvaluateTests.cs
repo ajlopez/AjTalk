@@ -839,6 +839,12 @@
             Assert.AreEqual(20, iobj[1]);
         }
 
+        [TestMethod]
+        public void EvaluateSetArgument()
+        {
+            Assert.AreEqual(2, this.Evaluate("[ :arg | arg := arg + 1. arg ] value: 1"));
+        }
+
         private object Evaluate(string text)
         {
             Parser parser = new Parser(text);
