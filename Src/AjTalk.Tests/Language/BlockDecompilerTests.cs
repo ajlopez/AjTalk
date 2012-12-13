@@ -127,6 +127,21 @@
         }
 
         [TestMethod]
+        public void DecompileSetArgument()
+        {
+            Block block = new Block();
+            block.CompileArgument("foo");
+            block.CompileSet("foo");
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("SetArgument foo", result[0]);
+        }
+
+        [TestMethod]
         public void DecompileGetGlobalVariable()
         {
             Block block = new Block();

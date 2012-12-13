@@ -76,6 +76,13 @@
                         codes.Add(string.Format("{0} {1}", ByteCode.GetArgument, argname));
                         break;
 
+                    case ByteCode.SetArgument:
+                        ip++;
+                        nargument = this.block.ByteCodes[ip];
+                        argname = this.block.GetArgumentName(nargument);
+                        codes.Add(string.Format("{0} {1}", ByteCode.SetArgument, argname));
+                        break;
+
                     case ByteCode.GetGlobalVariable:
                         ip++;
                         int nglobal = this.block.ByteCodes[ip];
