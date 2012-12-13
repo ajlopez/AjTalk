@@ -44,7 +44,6 @@ namespace AjTalk.Tests.Language
 
             Assert.AreEqual(mth, cls.GetInstanceMethod("x:"));
             Assert.AreEqual("x", mth.GetInstanceVariableName(0));
-            Assert.AreEqual("count", mth.GetClassVariableName(0));
         }
 
         [TestMethod]

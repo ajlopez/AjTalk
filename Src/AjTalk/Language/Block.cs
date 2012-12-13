@@ -340,22 +340,6 @@ namespace AjTalk.Language
             return -1;
         }
 
-        public virtual int GetClassVariableOffset(string name)
-        {
-            if (this.outer != null)
-                return this.outer.GetClassVariableOffset(name);
-
-            return -1;
-        }
-
-        public virtual string GetClassVariableName(int n)
-        {
-            if (this.outer != null)
-                return this.outer.GetClassVariableName(n);
-
-            throw new NotSupportedException();
-        }
-
         protected bool TryCompileGet(string name)
         {
             if (name.Equals("false"))
