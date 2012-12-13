@@ -792,15 +792,6 @@
     <milliseconds>568</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="ExecutionBlock.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/12/2012 06:32:53</timestamp>
-    <milliseconds>152</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="ImageSerializer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/17/2012 18:23:21</timestamp>
@@ -882,9 +873,6 @@
     <milliseconds>72</milliseconds>
     <violations />
   </sourcecode>
-  <project key="-1886451504">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="Process.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/17/2012 18:23:21</timestamp>
@@ -893,5 +881,33 @@
     <timestamp>12/12/2012 08:11:03</timestamp>
     <milliseconds>869</milliseconds>
     <violations />
+  </sourcecode>
+  <project key="-1886451504">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="ExecutionBlock.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/13/2012 05:43:37</timestamp>
+    <milliseconds>422</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.OrderingRules" rule="ElementsMustBeOrderedByAccess" ruleCheckId="SA1202">
+        <context>All private fields must be placed after all internal fields.</context>
+        <line>22</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" rule="FieldsMustBePrivate" ruleCheckId="SA1401">
+        <context>Fields must be declared with private access. Use properties to expose fields.</context>
+        <line>22</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.StyleCop.CSharp.NamingRules" rule="AccessibleFieldsMustBeginWithUpperCaseLetter" ruleCheckId="SA1307">
+        <context>Public and internal fields must start with an upper-case letter: ip.</context>
+        <line>22</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
 </stylecopresultscache>
