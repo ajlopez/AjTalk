@@ -4,7 +4,7 @@ namespace AjTalk.Language
     using System.Collections;
     using System.Collections.Generic;
 
-    public class ExecutionBlock
+    public class ExecutionContext
     {
         internal Block block;
         internal Machine machine;
@@ -19,7 +19,7 @@ namespace AjTalk.Language
         internal int ip;
         internal IList stack;
 
-        public ExecutionBlock(Machine machine, IObject self, Block block, object[] arguments)
+        public ExecutionContext(Machine machine, IObject self, Block block, object[] arguments)
             : this(block, arguments)
         {
             // this.self = receiver; // TODO review
@@ -27,14 +27,14 @@ namespace AjTalk.Language
             this.self = self;
         }
 
-        public ExecutionBlock(Machine machine, object nativeself, Block block, object[] arguments)
+        public ExecutionContext(Machine machine, object nativeself, Block block, object[] arguments)
             : this(block, arguments)
         {
             this.machine = machine;
             this.nativeSelf = nativeself;
         }
 
-        private ExecutionBlock(Block block, object[] arguments)
+        private ExecutionContext(Block block, object[] arguments)
         {
             this.block = block;
             this.stack = new ArrayList(5);

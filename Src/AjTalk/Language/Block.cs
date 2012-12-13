@@ -16,7 +16,7 @@ namespace AjTalk.Language
         private List<string> globalnames = new List<string>();
         private string sourcecode;
         private Block outer;
-        private ExecutionBlock closure;
+        private ExecutionContext closure;
 
         public Block()
         {
@@ -33,7 +33,7 @@ namespace AjTalk.Language
             this.outer = outer;
         }
 
-        public Block(ExecutionBlock closure)
+        public Block(ExecutionContext closure)
         {
             this.closure = closure;
         }
@@ -50,7 +50,7 @@ namespace AjTalk.Language
 
         public ICollection<string> LocalNames { get { return this.localnames; } }
 
-        public ExecutionBlock Closure { get { return this.closure; } }
+        public ExecutionContext Closure { get { return this.closure; } }
 
         public Block OuterBlock { get { return this.outer; } }
 
@@ -122,7 +122,7 @@ namespace AjTalk.Language
             return n;
         }
 
-        public Block Clone(ExecutionBlock closure)
+        public Block Clone(ExecutionContext closure)
         {
             Block newblock = (Block)this.MemberwiseClone();
             newblock.closure = closure;
@@ -276,7 +276,7 @@ namespace AjTalk.Language
         // TODO how to implements super, sender
         public virtual object Execute(Machine machine, object[] args)
         {
-            return (new ExecutionBlock(machine, this.Receiver, this, args)).Execute();
+            return (new ExecutionContext(machine, this.Receiver, this, args)).Execute();
         }
 
         public virtual void CompileGet(string name)

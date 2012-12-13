@@ -9,13 +9,13 @@
     public class Interpreter
     {
         private static object super = new object();
-        private static Action<ExecutionBlock>[] codes;
+        private static Action<ExecutionContext>[] codes;
 
-        private ExecutionBlock execblock;
+        private ExecutionContext context;
 
         static Interpreter()
         {
-            codes = new Action<ExecutionBlock>[256];
+            codes = new Action<ExecutionContext>[256];
             codes[(int)ByteCode.GetConstant] = DoGetConstant;
             codes[(int)ByteCode.GetBlock] = DoGetBlock;
             codes[(int)ByteCode.Value] = DoValue;
@@ -29,308 +29,308 @@
             codes[(int)ByteCode.GetDotNetType] = DoGetDotNetType;
         }
 
-        public Interpreter(ExecutionBlock execblock)
+        public Interpreter(ExecutionContext context)
         {
-            this.execblock = execblock;
+            this.context = context;
         }
 
         public object Execute()
         {
-            this.execblock.ip = 0;
+            this.context.ip = 0;
             string mthname;
             object[] args;
 
             // TODO refactor lastreceiver process
             // TODO refactor switch
-            if (this.execblock.block.Bytecodes != null)
-                while (this.execblock.hasreturnvalue == false && this.execblock.ip < this.execblock.block.ByteCodes.Length)
+            if (this.context.block.Bytecodes != null)
+                while (this.context.hasreturnvalue == false && this.context.ip < this.context.block.ByteCodes.Length)
                 {
-                    ByteCode bc = (ByteCode)this.execblock.block.ByteCodes[this.execblock.ip];
+                    ByteCode bc = (ByteCode)this.context.block.ByteCodes[this.context.ip];
                     byte arg;
 
                     if (codes[(int)bc] != null)
                     {
-                        codes[(int)bc](this.execblock);
-                        this.execblock.ip++;
+                        codes[(int)bc](this.context);
+                        this.context.ip++;
                         continue;
                     }
 
                     switch (bc)
                     {
                         case ByteCode.ReturnSub:
-                            this.execblock.hasreturnvalue = true;
-                            this.execblock.returnvalue = null;
+                            this.context.hasreturnvalue = true;
+                            this.context.returnvalue = null;
                             break;
                         case ByteCode.ReturnPop:
-                            this.execblock.hasreturnvalue = true;
-                            this.execblock.returnvalue = this.execblock.Pop();
+                            this.context.hasreturnvalue = true;
+                            this.context.returnvalue = this.context.Pop();
                             break;
                         case ByteCode.GetLocal:
-                            this.execblock.ip++;
-                            arg = this.execblock.block.ByteCodes[this.execblock.ip];
-                            this.execblock.Push(this.execblock.GetLocal(arg));
+                            this.context.ip++;
+                            arg = this.context.block.ByteCodes[this.context.ip];
+                            this.context.Push(this.context.GetLocal(arg));
                             break;
                         case ByteCode.GetSuper:
-                            this.execblock.Push(super);
+                            this.context.Push(super);
                             break;
                         case ByteCode.GetSelf:
-                            if (this.execblock.nativeSelf != null)
-                                this.execblock.Push(this.execblock.nativeSelf);
+                            if (this.context.nativeSelf != null)
+                                this.context.Push(this.context.nativeSelf);
                             else
-                                this.execblock.Push(this.execblock.self);
+                                this.context.Push(this.context.self);
                             break;
                         case ByteCode.GetSuperClass:
-                            this.execblock.Push(this.execblock.self.Behavior.SuperClass);
+                            this.context.Push(this.context.self.Behavior.SuperClass);
                             break;
                         case ByteCode.GetNil:
-                            this.execblock.Push(null);
+                            this.context.Push(null);
                             break;
                         case ByteCode.GetInstanceVariable:
-                            this.execblock.ip++;
-                            arg = this.execblock.block.ByteCodes[this.execblock.ip];
-                            this.execblock.Push(this.execblock.self[arg]);
+                            this.context.ip++;
+                            arg = this.context.block.ByteCodes[this.context.ip];
+                            this.context.Push(this.context.self[arg]);
                             break;
                         case ByteCode.NewObject:
-                            IBehavior ibeh = (IBehavior)this.execblock.Pop();
-                            this.execblock.lastreceiver = ibeh;
-                            this.execblock.Push(ibeh.NewObject());
+                            IBehavior ibeh = (IBehavior)this.context.Pop();
+                            this.context.lastreceiver = ibeh;
+                            this.context.Push(ibeh.NewObject());
                             break;
                         case ByteCode.Nop:
                             break;
                         case ByteCode.Pop:
-                            this.execblock.Pop();
+                            this.context.Pop();
                             break;
                         case ByteCode.InstSize:
-                            IObject iobj = (IObject)this.execblock.Pop();
-                            this.execblock.lastreceiver = iobj;
-                            this.execblock.Push(iobj.Behavior.NoInstanceVariables);
+                            IObject iobj = (IObject)this.context.Pop();
+                            this.context.lastreceiver = iobj;
+                            this.context.Push(iobj.Behavior.NoInstanceVariables);
                             break;
                         case ByteCode.InstAt:
-                            int pos = (int)this.execblock.Pop();
-                            iobj = (IObject)this.execblock.Pop();
-                            this.execblock.lastreceiver = iobj;
-                            this.execblock.Push(iobj[pos]);
+                            int pos = (int)this.context.Pop();
+                            iobj = (IObject)this.context.Pop();
+                            this.context.lastreceiver = iobj;
+                            this.context.Push(iobj[pos]);
                             break;
                         case ByteCode.InstAtPut:
-                            object par = this.execblock.Pop();
-                            pos = (int)this.execblock.Pop();
-                            iobj = (IObject)this.execblock.Pop();
-                            this.execblock.lastreceiver = iobj;
+                            object par = this.context.Pop();
+                            pos = (int)this.context.Pop();
+                            iobj = (IObject)this.context.Pop();
+                            this.context.lastreceiver = iobj;
                             iobj[pos] = par;
                             break;
                         case ByteCode.BasicAt:
-                            pos = (int)this.execblock.Pop();
-                            IIndexedObject indexedObj = (IIndexedObject)this.execblock.Pop();
-                            this.execblock.lastreceiver = indexedObj;
-                            this.execblock.Push(indexedObj.GetIndexedValue(pos));
+                            pos = (int)this.context.Pop();
+                            IIndexedObject indexedObj = (IIndexedObject)this.context.Pop();
+                            this.context.lastreceiver = indexedObj;
+                            this.context.Push(indexedObj.GetIndexedValue(pos));
                             break;
                         case ByteCode.BasicAtPut:
-                            par = this.execblock.Pop();
-                            pos = (int)this.execblock.Pop();
-                            indexedObj = (IIndexedObject)this.execblock.Pop();
-                            this.execblock.lastreceiver = indexedObj;
+                            par = this.context.Pop();
+                            pos = (int)this.context.Pop();
+                            indexedObj = (IIndexedObject)this.context.Pop();
+                            this.context.lastreceiver = indexedObj;
                             indexedObj.SetIndexedValue(pos, par);
                             break;
                         case ByteCode.ChainedSend:
-                            this.execblock.Pop();
-                            this.execblock.Push(this.execblock.lastreceiver);
+                            this.context.Pop();
+                            this.context.Push(this.context.lastreceiver);
                             break;
                         case ByteCode.Send:
-                            this.execblock.ip++;
-                            arg = this.execblock.block.ByteCodes[this.execblock.ip];
-                            mthname = (string)this.execblock.block.GetConstant(arg);
-                            this.execblock.ip++;
+                            this.context.ip++;
+                            arg = this.context.block.ByteCodes[this.context.ip];
+                            mthname = (string)this.context.block.GetConstant(arg);
+                            this.context.ip++;
 
-                            arg = this.execblock.block.ByteCodes[this.execblock.ip];
+                            arg = this.context.block.ByteCodes[this.context.ip];
                             args = new object[arg];
 
                             for (int k = arg - 1; k >= 0; k--)
                             {
-                                args[k] = this.execblock.Pop();
+                                args[k] = this.context.Pop();
                             }
 
-                            object obj = this.execblock.Pop();
-                            this.execblock.lastreceiver = obj;
+                            object obj = this.context.Pop();
+                            this.context.lastreceiver = obj;
 
                             if (obj == super)
-                                //// TODO this.execblock.nativeSelf processing
-                                this.execblock.Push(((IMethod)this.execblock.block).Behavior.SuperClass.SendMessageToObject(this.execblock.self, this.execblock.machine, mthname, args));
-                            //// TODO this.execblock.machine is null in many tests, not in real world
-                            else if (this.execblock.machine == null)
-                                this.execblock.Push(((IObject)obj).SendMessage(null, mthname, args));
+                                //// TODO this.context.nativeSelf processing
+                                this.context.Push(((IMethod)this.context.block).Behavior.SuperClass.SendMessageToObject(this.context.self, this.context.machine, mthname, args));
+                            //// TODO this.context.machine is null in many tests, not in real world
+                            else if (this.context.machine == null)
+                                this.context.Push(((IObject)obj).SendMessage(null, mthname, args));
                             else
-                                this.execblock.Push(this.execblock.machine.SendMessage(obj, mthname, args));
+                                this.context.Push(this.context.machine.SendMessage(obj, mthname, args));
 
                             break;
                         case ByteCode.MakeCollection:
-                            this.execblock.ip++;
-                            arg = this.execblock.block.ByteCodes[this.execblock.ip];
+                            this.context.ip++;
+                            arg = this.context.block.ByteCodes[this.context.ip];
                             args = new object[arg];
 
                             for (int k = arg - 1; k >= 0; k--)
                             {
-                                args[k] = this.execblock.Pop();
+                                args[k] = this.context.Pop();
                             }
 
-                            this.execblock.Push(new ArrayList(args));
+                            this.context.Push(new ArrayList(args));
 
                             break;
                         case ByteCode.NewDotNetObject:
-                            this.execblock.ip++;
-                            arg = this.execblock.block.ByteCodes[this.execblock.ip];
+                            this.context.ip++;
+                            arg = this.context.block.ByteCodes[this.context.ip];
 
                             args = new object[arg];
 
                             for (int k = arg - 1; k >= 0; k--)
                             {
-                                args[k] = this.execblock.Pop();
+                                args[k] = this.context.Pop();
                             }
 
-                            obj = this.execblock.Pop();
-                            this.execblock.lastreceiver = obj;
+                            obj = this.context.Pop();
+                            this.context.lastreceiver = obj;
 
-                            this.execblock.Push(DotNetObject.NewObject((Type)obj, args));
+                            this.context.Push(DotNetObject.NewObject((Type)obj, args));
 
                             break;
                         case ByteCode.InvokeDotNetMethod:
-                            this.execblock.ip++;
-                            arg = this.execblock.block.ByteCodes[this.execblock.ip];
-                            mthname = (string)this.execblock.block.GetConstant(arg);
-                            this.execblock.ip++;
+                            this.context.ip++;
+                            arg = this.context.block.ByteCodes[this.context.ip];
+                            mthname = (string)this.context.block.GetConstant(arg);
+                            this.context.ip++;
 
-                            arg = this.execblock.block.ByteCodes[this.execblock.ip];
+                            arg = this.context.block.ByteCodes[this.context.ip];
                             args = new object[arg];
 
                             for (int k = arg - 1; k >= 0; k--)
                             {
-                                args[k] = this.execblock.Pop();
+                                args[k] = this.context.Pop();
                             }
 
-                            obj = this.execblock.Pop();
-                            this.execblock.lastreceiver = obj;
+                            obj = this.context.Pop();
+                            this.context.lastreceiver = obj;
 
                             Type type = obj as Type;
 
                             if (type != null)
-                                this.execblock.Push(DotNetObject.SendNativeStaticMessage(type, mthname, args));
+                                this.context.Push(DotNetObject.SendNativeStaticMessage(type, mthname, args));
                             else
-                                this.execblock.Push(DotNetObject.SendNativeMessage(this.execblock.machine, obj, mthname, args));
+                                this.context.Push(DotNetObject.SendNativeMessage(this.context.machine, obj, mthname, args));
 
                             break;
 
                         case ByteCode.SetLocal:
-                            this.execblock.ip++;
-                            arg = this.execblock.block.ByteCodes[this.execblock.ip];
-                            var value = this.execblock.Pop();
-                            this.execblock.SetLocal(arg, value);
-                            this.execblock.Push(value);
-                            this.execblock.lastreceiver = null;
+                            this.context.ip++;
+                            arg = this.context.block.ByteCodes[this.context.ip];
+                            var value = this.context.Pop();
+                            this.context.SetLocal(arg, value);
+                            this.context.Push(value);
+                            this.context.lastreceiver = null;
                             break;
                         case ByteCode.SetInstanceVariable:
-                            this.execblock.ip++;
-                            arg = this.execblock.block.ByteCodes[this.execblock.ip];
-                            value = this.execblock.Pop();
-                            this.execblock.self[arg] = value;
-                            this.execblock.Push(value);
-                            this.execblock.lastreceiver = this.execblock.self;
+                            this.context.ip++;
+                            arg = this.context.block.ByteCodes[this.context.ip];
+                            value = this.context.Pop();
+                            this.context.self[arg] = value;
+                            this.context.Push(value);
+                            this.context.lastreceiver = this.context.self;
                             break;
                         case ByteCode.RaiseException:
-                            throw (Exception)this.execblock.Pop();
+                            throw (Exception)this.context.Pop();
                         default:
                             throw new Exception("Not implemented");
                     }
 
-                    this.execblock.ip++;
+                    this.context.ip++;
                 }
 
-            if (this.execblock.hasreturnvalue)
+            if (this.context.hasreturnvalue)
             {
-                if (this.execblock.block.Closure != null)
+                if (this.context.block.Closure != null)
                 {
-                    this.execblock.block.Closure.hasreturnvalue = true;
-                    this.execblock.block.Closure.returnvalue = this.execblock.returnvalue;
+                    this.context.block.Closure.hasreturnvalue = true;
+                    this.context.block.Closure.returnvalue = this.context.returnvalue;
                 }
 
-                return this.execblock.returnvalue;
+                return this.context.returnvalue;
             }
 
-            if (this.execblock.block.IsMethod)
-                return this.execblock.self;
+            if (this.context.block.IsMethod)
+                return this.context.self;
 
-            if (this.execblock.stack.Count == 0)
+            if (this.context.stack.Count == 0)
                 return null;
 
-            return this.execblock.Pop();
+            return this.context.Pop();
         }
 
-        private static void DoGetConstant(ExecutionBlock execblock)
+        private static void DoGetConstant(ExecutionContext context)
         {
-            execblock.ip++;
-            byte arg = execblock.block.ByteCodes[execblock.ip];
-            execblock.Push(execblock.block.GetConstant(arg));
+            context.ip++;
+            byte arg = context.block.ByteCodes[context.ip];
+            context.Push(context.block.GetConstant(arg));
         }
 
-        private static void DoGetBlock(ExecutionBlock execblock)
+        private static void DoGetBlock(ExecutionContext context)
         {
-            execblock.ip++;
-            byte arg = execblock.block.ByteCodes[execblock.ip];
+            context.ip++;
+            byte arg = context.block.ByteCodes[context.ip];
 
-            Block newblock = (Block)execblock.block.GetConstant(arg);
+            Block newblock = (Block)context.block.GetConstant(arg);
 
-            newblock = newblock.Clone(execblock);
+            newblock = newblock.Clone(context);
 
-            execblock.Push(newblock);
+            context.Push(newblock);
         }
 
-        private static void DoValue(ExecutionBlock execblock)
+        private static void DoValue(ExecutionContext context)
         {
-            Block newblock = (Block)execblock.Pop();
+            Block newblock = (Block)context.Pop();
 
-            execblock.lastreceiver = newblock;
+            context.lastreceiver = newblock;
 
-            execblock.Push(new ExecutionBlock(execblock.machine, execblock.Receiver, newblock, null).Execute());
+            context.Push(new ExecutionContext(context.machine, context.Receiver, newblock, null).Execute());
         }
 
-        private static void DoMultiValue(ExecutionBlock execblock)
+        private static void DoMultiValue(ExecutionContext context)
         {
-            execblock.ip++;
-            byte arg = execblock.block.ByteCodes[execblock.ip];
+            context.ip++;
+            byte arg = context.block.ByteCodes[context.ip];
 
             object[] args = new object[arg];
 
             for (int k = arg - 1; k >= 0; k--)
-                args[k] = execblock.Pop();
+                args[k] = context.Pop();
 
-            Block newblock = (Block)execblock.Pop();
-            execblock.lastreceiver = newblock;
+            Block newblock = (Block)context.Pop();
+            context.lastreceiver = newblock;
 
-            execblock.Push(new ExecutionBlock(execblock.machine, execblock.Receiver, newblock, args).Execute());
+            context.Push(new ExecutionContext(context.machine, context.Receiver, newblock, args).Execute());
         }
 
-        private static void DoGetArgument(ExecutionBlock execblock)
+        private static void DoGetArgument(ExecutionContext context)
         {
-            execblock.ip++;
-            byte arg = execblock.block.ByteCodes[execblock.ip];
-            execblock.Push(execblock.GetArgument(arg));
+            context.ip++;
+            byte arg = context.block.ByteCodes[context.ip];
+            context.Push(context.GetArgument(arg));
         }
 
-        private static void DoSetArgument(ExecutionBlock execblock)
+        private static void DoSetArgument(ExecutionContext context)
         {
-            execblock.ip++;
-            byte arg = execblock.block.ByteCodes[execblock.ip];
-            var value = execblock.Pop();
-            execblock.SetArgument(arg, value);
-            execblock.lastreceiver = null;
+            context.ip++;
+            byte arg = context.block.ByteCodes[context.ip];
+            var value = context.Pop();
+            context.SetArgument(arg, value);
+            context.lastreceiver = null;
         }
 
-        private static void DoGetClass(ExecutionBlock execblock)
+        private static void DoGetClass(ExecutionContext context)
         {
-            object value = execblock.Pop();
-            execblock.lastreceiver = value;
+            object value = context.Pop();
+            context.lastreceiver = value;
 
             if (value == null)
             {
-                execblock.Push(execblock.machine.UndefinedObjectClass);
+                context.Push(context.machine.UndefinedObjectClass);
                 return;
             }
 
@@ -338,64 +338,64 @@
 
             if (iobj != null)
             {
-                execblock.Push(iobj.Behavior);
+                context.Push(iobj.Behavior);
                 return;
             }
 
-            var behavior = execblock.machine.GetNativeBehavior(value.GetType());
+            var behavior = context.machine.GetNativeBehavior(value.GetType());
 
             if (behavior != null)
             {
-                execblock.Push(behavior);
+                context.Push(behavior);
                 return;
             }
 
-            execblock.Push(value.GetType());
+            context.Push(value.GetType());
         }
 
-        private static void DoBasicSize(ExecutionBlock execblock)
+        private static void DoBasicSize(ExecutionContext context)
         {
-            IIndexedObject indexedObj = (IIndexedObject)execblock.Pop();
-            execblock.lastreceiver = indexedObj;
-            execblock.Push(indexedObj.BasicSize);
+            IIndexedObject indexedObj = (IIndexedObject)context.Pop();
+            context.lastreceiver = indexedObj;
+            context.Push(indexedObj.BasicSize);
         }
 
-        private static void DoGetGlobalVariable(ExecutionBlock execblock)
+        private static void DoGetGlobalVariable(ExecutionContext context)
         {
-            execblock.ip++;
-            byte arg = execblock.block.ByteCodes[execblock.ip];
-            string name = execblock.block.GetGlobalName(arg);
+            context.ip++;
+            byte arg = context.block.ByteCodes[context.ip];
+            string name = context.block.GetGlobalName(arg);
             object value;
 
-            if (execblock.self != null)
-                value = execblock.self.Behavior.Scope.GetValue(name);
+            if (context.self != null)
+                value = context.self.Behavior.Scope.GetValue(name);
             else
-                value = execblock.machine.CurrentEnvironment.GetValue(name);
+                value = context.machine.CurrentEnvironment.GetValue(name);
 
-            execblock.Push(value);
+            context.Push(value);
         }
 
-        private static void DoSetGlobalVariable(ExecutionBlock execblock)
+        private static void DoSetGlobalVariable(ExecutionContext context)
         {
-            execblock.ip++;
-            byte arg = execblock.block.ByteCodes[execblock.ip];
-            string name = execblock.block.GetGlobalName(arg);
-            object value = execblock.Pop();
+            context.ip++;
+            byte arg = context.block.ByteCodes[context.ip];
+            string name = context.block.GetGlobalName(arg);
+            object value = context.Pop();
 
-            if (execblock.self != null)
-                execblock.self.Behavior.Scope.SetValue(name, value);
+            if (context.self != null)
+                context.self.Behavior.Scope.SetValue(name, value);
             else
-                execblock.machine.CurrentEnvironment.SetValue(name, value);
+                context.machine.CurrentEnvironment.SetValue(name, value);
 
-            execblock.lastreceiver = value;
-            execblock.Push(value);
+            context.lastreceiver = value;
+            context.Push(value);
         }
 
-        private static void DoGetDotNetType(ExecutionBlock execblock)
+        private static void DoGetDotNetType(ExecutionContext context)
         {
-            execblock.ip++;
-            byte arg = execblock.block.ByteCodes[execblock.ip];
-            execblock.Push(TypeUtilities.AsType(execblock.block.GetGlobalName(arg)));
+            context.ip++;
+            byte arg = context.block.ByteCodes[context.ip];
+            context.Push(TypeUtilities.AsType(context.block.GetGlobalName(arg)));
         }
     }
 }

@@ -176,7 +176,7 @@
     <Compile Include="Language\IIndexedObject.cs" />
     <Compile Include="Language\IClassDescription.cs" />
     <Compile Include="Language\DotNetObject.cs" />
-    <Compile Include="Language\ExecutionBlock.cs">
+    <Compile Include="Language\ExecutionContext.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Language\IBehavior.cs" />

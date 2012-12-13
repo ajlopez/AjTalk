@@ -24,21 +24,21 @@
         {
             Block block = (Block)obj;
 
-            return (new ExecutionBlock(machine, block.Receiver, block, arguments)).Execute();
+            return (new ExecutionContext(machine, block.Receiver, block, arguments)).Execute();
         }
 
         private object WhileTrueMethod(Machine machine, object obj, object[] arguments)
         {
             Block block = (Block)obj;
             Block body = (Block)arguments[0];
-            var result = (new ExecutionBlock(machine, block.Receiver, block, null)).Execute();
+            var result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
 
             while (result.Equals(true))
             {
                 body.Execute(this.Machine, arguments);
                 if (body.Closure != null && body.Closure.HasReturnValue)
                     return null;
-                result = (new ExecutionBlock(machine, block.Receiver, block, null)).Execute();
+                result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
             }
 
             return null;
@@ -48,14 +48,14 @@
         {
             Block block = (Block)obj;
             Block body = (Block)arguments[0];
-            var result = (new ExecutionBlock(machine, block.Receiver, block, null)).Execute();
+            var result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
 
             while (result.Equals(false))
             {
                 body.Execute(this.Machine, arguments);
                 if (body.Closure != null && body.Closure.HasReturnValue)
                     return null;
-                result = (new ExecutionBlock(machine, block.Receiver, block, null)).Execute();
+                result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
             }
 
             return null;
@@ -64,7 +64,7 @@
         private object AssertMethod(Machine machine, object obj, object[] arguments)
         {
             Block block = (Block)obj;
-            var result = (new ExecutionBlock(machine, block.Receiver, block, arguments)).Execute();
+            var result = (new ExecutionContext(machine, block.Receiver, block, arguments)).Execute();
 
             // TODO review what is true
             if (result is bool && (bool)result == true)
