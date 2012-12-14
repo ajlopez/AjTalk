@@ -31,14 +31,14 @@
         {
             Block block = (Block)obj;
             Block body = (Block)arguments[0];
-            var result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
+            var result = (new ExecutionContext(machine, block.Receiver, block, null)).FullExecute();
 
             while (result.Equals(true))
             {
-                body.Execute(this.Machine, arguments);
+                body.FullExecute(this.Machine, arguments);
                 if (body.Closure != null && body.Closure.HasReturnValue)
                     return null;
-                result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
+                result = (new ExecutionContext(machine, block.Receiver, block, null)).FullExecute();
             }
 
             return null;
@@ -48,14 +48,14 @@
         {
             Block block = (Block)obj;
             Block body = (Block)arguments[0];
-            var result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
+            var result = (new ExecutionContext(machine, block.Receiver, block, null)).FullExecute();
 
             while (result.Equals(false))
             {
-                body.Execute(this.Machine, arguments);
+                body.FullExecute(this.Machine, arguments);
                 if (body.Closure != null && body.Closure.HasReturnValue)
                     return null;
-                result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
+                result = (new ExecutionContext(machine, block.Receiver, block, null)).FullExecute();
             }
 
             return null;
@@ -64,7 +64,7 @@
         private object AssertMethod(Machine machine, object obj, object[] arguments)
         {
             Block block = (Block)obj;
-            var result = (new ExecutionContext(machine, block.Receiver, block, arguments)).Execute();
+            var result = (new ExecutionContext(machine, block.Receiver, block, arguments)).FullExecute();
 
             // TODO review what is true
             if (result is bool && (bool)result == true)

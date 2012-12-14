@@ -55,7 +55,7 @@ namespace AjTalk
                 }
 
                 Block block = this.compiler.CompileBlock(trimmed);
-                var value = block.Execute(machine, null);
+                var value = block.FullExecute(machine, null);
 
                 if (isprocessor)
                     ((ChunkReaderProcessor)value).Process(this.reader, machine, this.compiler);

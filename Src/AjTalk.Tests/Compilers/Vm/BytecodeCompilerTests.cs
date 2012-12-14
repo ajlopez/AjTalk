@@ -355,7 +355,7 @@
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            ModelParser parser = new ModelParser("nil ifFalse: [GlobalName := 'foo']");
+            ModelParser parser = new ModelParser("nil ifNil: [GlobalName := 'foo']");
             this.compiler.CompileExpression(parser.ParseExpression());
 
             this.block.Execute(machine, null);

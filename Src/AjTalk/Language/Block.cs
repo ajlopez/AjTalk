@@ -279,6 +279,11 @@ namespace AjTalk.Language
             return (new ExecutionContext(machine, this.Receiver, this, args)).Execute();
         }
 
+        public virtual object FullExecute(Machine machine, object[] args)
+        {
+            return (new ExecutionContext(machine, this.Receiver, this, args)).FullExecute();
+        }
+
         public virtual void CompileGet(string name)
         {
             if (this.TryCompileGet(name))

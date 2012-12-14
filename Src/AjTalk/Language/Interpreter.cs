@@ -18,8 +18,6 @@
             codes = new Action<ExecutionContext>[256];
             codes[(int)ByteCode.GetConstant] = DoGetConstant;
             codes[(int)ByteCode.GetBlock] = DoGetBlock;
-            codes[(int)ByteCode.Value] = DoValue;
-            codes[(int)ByteCode.MultiValue] = DoMultiValue;
             codes[(int)ByteCode.GetArgument] = DoGetArgument;
             codes[(int)ByteCode.SetArgument] = DoSetArgument;
             codes[(int)ByteCode.GetClass] = DoGetClass;
@@ -60,11 +58,48 @@
                         case ByteCode.ReturnSub:
                             this.context.hasreturnvalue = true;
                             this.context.returnvalue = null;
+
+                            if (this.context.sender != null)
+                            {
+                                this.PopContext(this.GetReturnValue());
+                                break;
+                            }
+
                             break;
                         case ByteCode.ReturnPop:
                             this.context.hasreturnvalue = true;
                             this.context.returnvalue = this.context.Pop();
+
+                            if (this.context.sender != null)
+                            {
+                                this.PopContext(this.GetReturnValue());
+                                break;
+                            }
+
                             break;
+                        case ByteCode.Value:
+                            Block newblock = (Block)this.context.Pop();
+
+                            this.context.lastreceiver = newblock;
+
+                            this.PushContext(new ExecutionContext(context.machine, context.Receiver, newblock, null));
+                            continue;
+
+                        case ByteCode.MultiValue:
+                            this.context.ip++;
+                            arg = context.block.ByteCodes[context.ip];
+
+                            object[] mvargs = new object[arg];
+
+                            for (int k = arg - 1; k >= 0; k--)
+                                mvargs[k] = this.context.Pop();
+
+                            newblock = (Block)this.context.Pop();
+                            this.context.lastreceiver = newblock;
+                            this.PushContext(new ExecutionContext(context.machine, context.Receiver, newblock, mvargs));
+
+                            continue;
+
                         case ByteCode.GetLocal:
                             this.context.ip++;
                             arg = this.context.block.ByteCodes[this.context.ip];
@@ -152,14 +187,21 @@
                             object obj = this.context.Pop();
                             this.context.lastreceiver = obj;
 
+                            object value;
+
                             if (obj == super)
                                 //// TODO this.context.nativeSelf processing
-                                this.context.Push(((IMethod)this.context.block).Behavior.SuperClass.SendMessageToObject(this.context.self, this.context.machine, mthname, args));
+                                value = ((IMethod)this.context.block).Behavior.SuperClass.SendMessageToObject(this.context.self, this.context.machine, mthname, args);
                             //// TODO this.context.machine is null in many tests, not in real world
                             else if (this.context.machine == null)
-                                this.context.Push(((IObject)obj).SendMessage(null, mthname, args));
+                                value = ((IObject)obj).SendMessage(null, mthname, args);
                             else
-                                this.context.Push(this.context.machine.SendMessage(obj, mthname, args));
+                                value = this.context.machine.SendMessage(obj, mthname, args);
+
+                            if (value == this)
+                                continue;
+
+                            this.context.Push(value);
 
                             break;
                         case ByteCode.MakeCollection:
@@ -221,7 +263,7 @@
                         case ByteCode.SetLocal:
                             this.context.ip++;
                             arg = this.context.block.ByteCodes[this.context.ip];
-                            var value = this.context.Pop();
+                            value = this.context.Pop();
                             this.context.SetLocal(arg, value);
                             this.context.Push(value);
                             this.context.lastreceiver = null;
@@ -241,8 +283,32 @@
                     }
 
                     this.context.ip++;
+
+                    while ((this.context.hasreturnvalue || this.context.ip >= this.context.block.ByteCodes.Length) && this.context.sender != null)
+                    {
+                        object retvalue = this.GetReturnValue();
+                        this.PopContext(retvalue);
+                        this.context.ip++;
+                    }
                 }
 
+            return this.GetReturnValue();
+        }
+
+        public void PushContext(ExecutionContext newcontext)
+        {
+            newcontext.sender = this.context;
+            this.context = newcontext;
+        }
+
+        public void PopContext(object retvalue)
+        {
+            this.context = this.context.sender;
+            this.context.Push(retvalue);
+        }
+
+        private object GetReturnValue()
+        {
             if (this.context.hasreturnvalue)
             {
                 if (this.context.block.Closure != null)
@@ -280,15 +346,6 @@
             newblock = newblock.Clone(context);
 
             context.Push(newblock);
-        }
-
-        private static void DoValue(ExecutionContext context)
-        {
-            Block newblock = (Block)context.Pop();
-
-            context.lastreceiver = newblock;
-
-            context.Push(new ExecutionContext(context.machine, context.Receiver, newblock, null).Execute());
         }
 
         private static void DoMultiValue(ExecutionContext context)

@@ -354,7 +354,7 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            Block block = this.compiler.CompileBlock("nil ifFalse: [GlobalName := 'foo']");
+            Block block = this.compiler.CompileBlock("nil ifNil: [GlobalName := 'foo']");
 
             Assert.IsNotNull(block);
 

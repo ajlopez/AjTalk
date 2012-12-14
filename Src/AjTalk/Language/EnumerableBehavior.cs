@@ -26,7 +26,7 @@
             IEnumerable elements = (IEnumerable)obj;
             object result = null;
             foreach (object element in elements)
-                result = block.Execute(this.Machine, new object[] { element });
+                result = block.FullExecute(this.Machine, new object[] { element });
             return result;
         }
 
@@ -41,7 +41,7 @@
             ArrayList result = new ArrayList();
 
             foreach (object element in elements)
-                if ((bool)block.Execute(this.Machine, new object[] { element }))
+                if ((bool)block.FullExecute(this.Machine, new object[] { element }))
                     result.Add(element);
 
             return result;

@@ -69,5 +69,10 @@
         {
             throw new NotImplementedException();
         }
+
+        public object FullExecute(Machine machine, object[] args)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -472,7 +472,7 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            Parser compiler = new Parser("nil ifFalse: [GlobalName := 'foo']");
+            Parser compiler = new Parser("nil ifNil: [GlobalName := 'foo']");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);

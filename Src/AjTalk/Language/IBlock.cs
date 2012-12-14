@@ -11,5 +11,8 @@ namespace AjTalk.Language
         byte[] Bytecodes { get; }
 
         object Execute(Machine machine, object[] args);
+
+        // TODO remove to have Process.resume/suspend, call with continuation, etc..
+        object FullExecute(Machine machine, object[] args);
     }
 }
