@@ -326,22 +326,6 @@
             context.Push(newblock);
         }
 
-        private static void DoMultiValue(ExecutionContext context)
-        {
-            context.InstructionPointer++;
-            byte arg = context.Block.ByteCodes[context.InstructionPointer];
-
-            object[] args = new object[arg];
-
-            for (int k = arg - 1; k >= 0; k--)
-                args[k] = context.Pop();
-
-            Block newblock = (Block)context.Pop();
-            context.LastReceiver = newblock;
-
-            context.Push(new ExecutionContext(context.Machine, context.Receiver, newblock, args).Execute());
-        }
-
         private static void DoGetArgument(ExecutionContext context)
         {
             context.InstructionPointer++;
