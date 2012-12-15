@@ -49,12 +49,17 @@
             return this.interpreter;
         }
 
-        private void Run()
+        public object Execute()
         {
             ExecutionContext context = this.block.CreateContext(this.machine, this.arguments);
             this.interpreter = new Interpreter(context);
 
-            this.interpreter.Execute();
+            return this.interpreter.Execute();
+        }
+
+        private void Run()
+        {
+            this.Execute();
         }
     }
 }

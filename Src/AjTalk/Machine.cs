@@ -20,9 +20,6 @@ namespace AjTalk
         [ThreadStatic]
         private static string currentPath;
 
-        [ThreadStatic]
-        private static Interpreter currentInterpreter;
-
         private BaseClass nilclass;
         private IClass classclass;
         private IClass metaclassclass;
@@ -76,8 +73,6 @@ namespace AjTalk
         }
 
         public static Machine Current { get { return current; } }
-
-        public static Interpreter CurrentInterpreter { get { return currentInterpreter; } set { currentInterpreter = value; } }
 
         public IHost Host { get; set; }
 

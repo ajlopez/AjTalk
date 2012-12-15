@@ -845,18 +845,16 @@
             Assert.AreEqual(2, this.Evaluate("[ :arg | arg := arg + 1. arg ] value: 1"));
         }
 
-        private object Evaluate(string text)
-        {
-            Parser parser = new Parser(text);
-            Block block = parser.CompileBlock();
-            return block.Execute(this.machine, null);
-        }
-
-        private object Evaluate(string text, Machine machine)
+        protected virtual object Evaluate(string text, Machine machine)
         {
             Parser parser = new Parser(text);
             Block block = parser.CompileBlock();
             return block.Execute(machine, null);
+        }
+
+        private object Evaluate(string text)
+        {
+            return this.Evaluate(text, this.machine);
         }
     }
 }
