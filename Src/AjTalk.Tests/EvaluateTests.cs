@@ -390,20 +390,21 @@
         [TestMethod]
         public void DefineNativeBehavior()
         {
-            var originalbehavior = this.machine.GetNativeBehavior(typeof(bool));
-            object result = this.Evaluate("nil subclass: #MyBoolean nativeType: @System.Boolean");
+            var originalbehavior = this.machine.GetNativeBehavior(typeof(string));
+            object result = this.Evaluate("nil subclass: #MyString nativeType: @System.String");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(NativeBehavior));
 
             NativeBehavior behavior = (NativeBehavior)result;
 
-            Assert.AreEqual(typeof(bool), behavior.NativeType);
+            Assert.AreEqual(typeof(string), behavior.NativeType);
 
-            object newobj = behavior.CreateObject();
+            object newobj = behavior.CreateObject(new object[] { 'c', 3 });
 
             Assert.IsNotNull(newobj);
-            Assert.IsInstanceOfType(newobj, typeof(bool));
+            Assert.AreEqual("ccc", newobj);
+            Assert.IsInstanceOfType(newobj, typeof(string));
             Assert.AreSame(originalbehavior, result);
         }
 
