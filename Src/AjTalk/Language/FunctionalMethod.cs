@@ -70,6 +70,11 @@
             throw new NotImplementedException();
         }
 
+        public object ExecuteInProcess(Process process, object[] args)
+        {
+            throw new NotImplementedException();
+        }
+
         public object FullExecute(Machine machine, object[] args)
         {
             throw new NotImplementedException();

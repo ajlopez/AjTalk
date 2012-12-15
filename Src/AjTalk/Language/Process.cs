@@ -8,19 +8,20 @@
 
     public class Process
     {
-        private IBlock block;
+        private Block block;
         private object[] arguments;
         private Machine machine;
         private Thread thread;
+        private Interpreter interpreter;
 
-        public Process(IBlock block, object[] arguments, Machine machine)
+        public Process(Block block, object[] arguments, Machine machine)
         {
             this.block = block;
             this.arguments = arguments;
             this.machine = machine;
         }
 
-        public IBlock Block { get { return this.block; } }
+        public Block Block { get { return this.block; } }
 
         public object[] Arguments { get { return this.arguments; } }
 
@@ -42,9 +43,18 @@
                 this.thread.Resume();
         }
 
+        public object CallContext(ExecutionContext context)
+        {
+            this.interpreter.PushContext(context);
+            return this.interpreter;
+        }
+
         private void Run()
         {
-            this.block.Execute(this.machine, this.arguments);
+            ExecutionContext context = this.block.CreateContext(this.machine, this.arguments);
+            this.interpreter = new Interpreter(context);
+
+            interpreter.Execute();
         }
     }
 }

@@ -273,10 +273,20 @@ namespace AjTalk.Language
             this.CompileByteCode(ByteCode.Send, this.CompileConstant(msgname), 1);
         }
 
+        public ExecutionContext CreateContext(Machine machine, object[] args)
+        {
+            return new ExecutionContext(machine, this.Receiver, this, args);
+        }
+
         // TODO how to implements super, sender
         public virtual object Execute(Machine machine, object[] args)
         {
             return (new ExecutionContext(machine, this.Receiver, this, args)).Execute();
+        }
+
+        public virtual object ExecuteInProcess(Process process, object[] args)
+        {
+            return process.CallContext(this.CreateContext(process.Machine, args));
         }
 
         public virtual object FullExecute(Machine machine, object[] args)
