@@ -845,6 +845,12 @@
             Assert.AreEqual(2, this.Evaluate("[ :arg | arg := arg + 1. arg ] value: 1"));
         }
 
+        [TestMethod]
+        public void EvaluateBlockWithReturn()
+        {
+            Assert.AreEqual(3, this.Evaluate("|sum| sum := 0. #(1 2 3) do: [ :item | sum := sum + item. item == 2 ifTrue:[^sum]]. ^sum"));
+        }
+
         protected virtual object Evaluate(string text, Machine machine)
         {
             Parser parser = new Parser(text);

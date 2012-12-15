@@ -75,16 +75,12 @@
 
             string assemblyName = name.Substring(0, p);
 
-            try
-            {
-                Assembly assembly = Assembly.LoadWithPartialName(assemblyName);
+            Assembly assembly = Assembly.LoadWithPartialName(assemblyName);
 
-                return assembly.GetType(name);
-            }
-            catch
-            {
+            if (assembly == null)
                 return null;
-            }
+
+            return assembly.GetType(name);
         }
 
         private static Type GetTypeFromLoadedAssemblies(string name)
