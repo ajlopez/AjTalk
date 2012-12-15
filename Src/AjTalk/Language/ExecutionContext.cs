@@ -100,12 +100,6 @@ namespace AjTalk.Language
             }
         }
 
-        public object Execute()
-        {
-            this.InstructionPointer = 0;
-            return (new Interpreter(this)).Execute();
-        }
-
         internal object GetLocal(int nlocal)
         {
             if (nlocal < this.NoParentLocals)

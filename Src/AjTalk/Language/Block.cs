@@ -283,7 +283,7 @@ namespace AjTalk.Language
         // TODO how to implements super, sender
         public virtual object Execute(Machine machine, object[] args)
         {
-            return (new ExecutionContext(machine, this.Receiver, this, args)).Execute();
+            return (new Interpreter(this.CreateContext(machine, args)).Execute());
         }
 
         public virtual object ExecuteInProcess(Process process, object[] args)
