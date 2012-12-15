@@ -258,6 +258,8 @@ namespace AjTalk.Language
                 this.CompileByteCode(ByteCode.BasicAt);
             else if (msgname == "basicAt:put:")
                 this.CompileByteCode(ByteCode.BasicAtPut);
+            else if (msgname == "value")
+                this.CompileByteCode(ByteCode.Value);
             else if (msgname.StartsWith("value:") && IsValueMessage(msgname))
                 this.CompileByteCode(ByteCode.MultiValue, MessageArity(msgname));
             else if (msgname == "class")

@@ -157,3 +157,11 @@ ClassDescription subclass:#Metaclass
 classTrait
 	^nil
 ! !
+
+"To use in PharoCoreKernelObjects, Object initialize"
+Object subclass: #WeakIdentityKeyDictionary
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category:'Kernel-Classes'
+!

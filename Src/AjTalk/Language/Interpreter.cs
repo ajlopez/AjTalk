@@ -82,7 +82,7 @@
 
                             this.context.LastReceiver = newblock;
 
-                            this.PushContext(new ExecutionContext(this.context.Machine, this.context.Receiver, newblock, null));
+                            this.PushContext(newblock.CreateContext(this.context.Machine, null));
                             continue;
 
                         case ByteCode.MultiValue:
@@ -96,7 +96,7 @@
 
                             newblock = (Block)this.context.Pop();
                             this.context.LastReceiver = newblock;
-                            this.PushContext(new ExecutionContext(this.context.Machine, this.context.Receiver, newblock, mvargs));
+                            this.PushContext(newblock.CreateContext(this.context.Machine, mvargs));
 
                             continue;
 

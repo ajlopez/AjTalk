@@ -153,7 +153,6 @@
 
             var blockbehavior = newmachine.GetNativeBehavior(typeof(Block));
             Assert.IsNotNull(blockbehavior);
-            Assert.IsNotNull(blockbehavior.GetInstanceMethod("value"));
         }
 
         [TestMethod]

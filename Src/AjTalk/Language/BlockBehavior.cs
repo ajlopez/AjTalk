@@ -12,19 +12,9 @@
         public BlockBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
             : base(behavior, superclass, machine, typeof(Block))
         {
-            this.DefineInstanceMethod(new FunctionalMethod("value", this, this.ValueMethod));
-            this.DefineInstanceMethod(new FunctionalMethod("value:", this, this.ValueMethod));
-            this.DefineInstanceMethod(new FunctionalMethod("value:value:", this, this.ValueMethod));
             this.DefineInstanceMethod(new FunctionalMethod("assert", this, this.AssertMethod));
             this.DefineInstanceMethod(new FunctionalMethod("whileTrue:", this, this.WhileTrueMethod));
             this.DefineInstanceMethod(new FunctionalMethod("whileFalse:", this, this.WhileFalseMethod));
-        }
-
-        private object ValueMethod(Machine machine, object obj, object[] arguments)
-        {
-            Block block = (Block)obj;
-
-            return (new ExecutionContext(machine, block.Receiver, block, arguments)).Execute();
         }
 
         private object WhileTrueMethod(Machine machine, object obj, object[] arguments)
