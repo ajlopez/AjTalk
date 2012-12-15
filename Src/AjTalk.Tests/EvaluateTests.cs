@@ -820,6 +820,17 @@
         }
 
         [TestMethod]
+        public void EvaluateMethodWithInternalReturnIfFalse()
+        {
+            IClass testclass = this.machine.CreateClass("Test");
+            this.machine.SetCurrentEnvironmentObject("Test", testclass);
+            Parser parser = new Parser("test false ifFalse: [^1]. ^2");
+            Method method = parser.CompileClassMethod(testclass);
+            testclass.DefineClassMethod(method);
+            Assert.AreEqual(1, this.Evaluate("Test test"));
+        }
+
+        [TestMethod]
         public void EvaluateSuperNew()
         {
             IClass testclass = this.machine.CreateClass("Test1", null, "x", string.Empty);

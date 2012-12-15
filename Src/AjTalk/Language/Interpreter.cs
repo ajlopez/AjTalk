@@ -59,9 +59,11 @@
                             this.context.HasReturnValue = true;
                             this.context.ReturnValue = null;
 
-                            if (this.context.Sender != null)
+                            ExecutionContext retcontext = this.context.ReturnExecutionContext;
+
+                            if (retcontext != null)
                             {
-                                this.PopContext(this.GetReturnValue());
+                                this.ReturnToContext(retcontext, this.GetReturnValue());
                                 break;
                             }
 
@@ -70,9 +72,11 @@
                             this.context.HasReturnValue = true;
                             this.context.ReturnValue = this.context.Pop();
 
-                            if (this.context.Sender != null)
+                            retcontext = this.context.ReturnExecutionContext;
+
+                            if (retcontext != null)
                             {
-                                this.PopContext(this.GetReturnValue());
+                                this.ReturnToContext(retcontext, this.GetReturnValue());
                                 break;
                             }
 
@@ -84,6 +88,32 @@
 
                             this.PushContext(newblock.CreateContext(this.context.Machine, null));
                             continue;
+
+                        case ByteCode.IfTrue:
+                            newblock = (Block)this.context.Pop();
+                            bool cond = (bool)this.context.Pop();
+
+                            if (cond)
+                            {
+                                this.PushContext(newblock.CreateContext(this.context.Machine, null));
+                                continue;
+                            }
+
+                            this.context.Push(null);
+                            break;
+
+                        case ByteCode.IfFalse:
+                            newblock = (Block)this.context.Pop();
+                            cond = (bool)this.context.Pop();
+
+                            if (!cond)
+                            {
+                                this.PushContext(newblock.CreateContext(this.context.Machine, null));
+                                continue;
+                            }
+
+                            this.context.Push(null);
+                            break;
 
                         case ByteCode.MultiValue:
                             this.context.InstructionPointer++;
@@ -284,6 +314,7 @@
 
                     this.context.InstructionPointer++;
 
+                    // TODO review is ask for Sender or ReturnExecutionContext
                     while ((this.context.HasReturnValue || this.context.InstructionPointer >= this.context.Block.ByteCodes.Length) && this.context.Sender != null)
                     {
                         object retvalue = this.GetReturnValue();
@@ -304,6 +335,12 @@
         public void PopContext(object retvalue)
         {
             this.context = this.context.Sender;
+            this.context.Push(retvalue);
+        }
+
+        public void ReturnToContext(ExecutionContext retcontext, object retvalue)
+        {
+            this.context = retcontext;
             this.context.Push(retvalue);
         }
 
@@ -421,6 +458,7 @@
         {
             if (this.context.HasReturnValue)
             {
+                // TODO Review, only needed for some tests
                 if (this.context.Block.Closure != null)
                 {
                     this.context.Block.Closure.HasReturnValue = true;

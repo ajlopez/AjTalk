@@ -72,6 +72,21 @@ namespace AjTalk.Language
 
         public IObject Self { get { return this.self; } }
 
+        public ExecutionContext TopClosure { get { return this.block.TopClosure; } }
+
+        public ExecutionContext ReturnExecutionContext
+        {
+            get
+            {
+                var value = this.TopClosure;
+
+                if (value != null)
+                    return value.Sender;
+
+                return this.Sender;
+            }
+        }
+
         public object NativeSelf { get { return this.nativeSelf; } }
 
         public int NoLocals { get { return this.NoParentLocals + (this.locals == null ? 0 : this.locals.Length); } }

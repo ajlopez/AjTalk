@@ -33,11 +33,6 @@ namespace AjTalk.Language
             this.outer = outer;
         }
 
-        public Block(ExecutionContext closure)
-        {
-            this.closure = closure;
-        }
-
         public string SourceCode { get { return this.sourcecode; } }
 
         public int Arity { get { return this.argnames.Count; } }
@@ -51,6 +46,22 @@ namespace AjTalk.Language
         public ICollection<string> LocalNames { get { return this.localnames; } }
 
         public ExecutionContext Closure { get { return this.closure; } }
+
+        public ExecutionContext TopClosure
+        {
+            get
+            {
+                if (this.closure == null)
+                    return null;
+
+                var value = this.closure.Block.TopClosure;
+
+                if (value == null)
+                    return this.closure;
+
+                return value;
+            }
+        }
 
         public Block OuterBlock { get { return this.outer; } }
 
@@ -125,6 +136,7 @@ namespace AjTalk.Language
         public Block Clone(ExecutionContext closure)
         {
             Block newblock = (Block)this.MemberwiseClone();
+
             newblock.closure = closure;
             return newblock;
         }
@@ -258,6 +270,10 @@ namespace AjTalk.Language
                 this.CompileByteCode(ByteCode.BasicAt);
             else if (msgname == "basicAt:put:")
                 this.CompileByteCode(ByteCode.BasicAtPut);
+            //else if (msgname == "ifTrue:")
+            //    this.CompileByteCode(ByteCode.IfTrue);
+            //else if (msgname == "ifFalse:")
+            //    this.CompileByteCode(ByteCode.IfFalse);
             else if (msgname == "value")
                 this.CompileByteCode(ByteCode.Value);
             else if (msgname.StartsWith("value:") && IsValueMessage(msgname))
