@@ -63,7 +63,7 @@
 
                             if (retcontext != null)
                             {
-                                this.ReturnToContext(retcontext, this.GetReturnValue());
+                                this.ReturnToContext(retcontext, null);
                                 break;
                             }
 
@@ -76,7 +76,7 @@
 
                             if (retcontext != null)
                             {
-                                this.ReturnToContext(retcontext, this.GetReturnValue());
+                                this.ReturnToContext(retcontext, this.context.ReturnValue);
                                 break;
                             }
 
