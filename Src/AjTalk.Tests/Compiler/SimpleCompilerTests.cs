@@ -322,9 +322,8 @@ namespace AjTalk.Tests.Compiler
             Block block = this.compiler.CompileBlock("nil ifFalse: [self halt]");
 
             Assert.IsNotNull(block);
-            Assert.AreEqual(2, block.NoConstants);
+            Assert.AreEqual(1, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
-            Assert.AreEqual(2, block.NoConstants);
             Assert.IsNotNull(block.ByteCodes);
             Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);

@@ -207,6 +207,16 @@ Object subclass: #Boolean nativeType: @System.Boolean
 
 !Boolean methods!
 
+ifTrue2: trueBlock ifFalse: falseBlock
+	self ifTrue: [^trueBlock value].
+	^falseBlock value
+!
+
+ifFalse2: falseBlock ifTrue: trueBlock
+	self ifTrue: [^trueBlock value].
+	^falseBlock value
+!
+
 not
     ^self ifTrue: [^false] ifFalse: [^true]
 !

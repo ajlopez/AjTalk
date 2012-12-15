@@ -15,6 +15,7 @@ style: name
 new: tag
     | brush |
     brush := self basicNew.
+    brush initialize.
     brush tag: tag.
     ^brush
 ! !

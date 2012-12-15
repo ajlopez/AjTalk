@@ -257,9 +257,8 @@
             this.compiler.CompileExpression(parser.ParseExpression());
 
             Assert.IsNotNull(this.block);
-            Assert.AreEqual(2, this.block.NoConstants);
+            Assert.AreEqual(1, this.block.NoConstants);
             Assert.AreEqual(0, this.block.NoLocals);
-            Assert.AreEqual(2, this.block.NoConstants);
             Assert.IsNotNull(this.block.ByteCodes);
             Assert.AreEqual(11, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
