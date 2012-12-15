@@ -104,47 +104,6 @@ namespace AjTalk.Language
         {
             this.ip = 0;
             return (new Interpreter(this)).Execute();
-            /*
-            var interpreter = Machine.CurrentInterpreter;
-
-            if (interpreter == null)
-            {
-                interpreter = new Interpreter(this);
-                Machine.CurrentInterpreter = interpreter;
-
-                try
-                {
-                    return interpreter.Execute();
-                }
-                finally
-                {
-                    Machine.CurrentInterpreter = null;
-                }
-            }
-
-            interpreter.PushContext(this);
-
-            return interpreter;
-             */ 
-        }
-
-        public object FullExecute()
-        {
-            return this.Execute();
-            /*
-            this.ip = 0;
-            var currentinterpreter = Machine.CurrentInterpreter;
-
-            try
-            {
-                var interpreter = new Interpreter(this);
-                Machine.CurrentInterpreter = interpreter;
-                return interpreter.Execute();
-            }
-            finally
-            {
-                Machine.CurrentInterpreter = currentinterpreter;
-            }*/
         }
 
         internal object GetLocal(int nlocal)

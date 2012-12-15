@@ -85,7 +85,7 @@ namespace AjTalk.Language
 
         public object ExecuteNative(Machine machine, object self, object[] args)
         {
-            return new ExecutionContext(machine, self, this, args).FullExecute();
+            return new ExecutionContext(machine, self, this, args).Execute();
         }
 
         public override string GetInstanceVariableName(int n)

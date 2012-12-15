@@ -46,11 +46,6 @@
             throw new NotImplementedException();
         }
 
-        public object FullExecute(Machine machine, object[] args)
-        {
-            throw new NotImplementedException();
-        }
-
         public object ExecuteNative(Machine machine, object self, object[] args)
         {
             throw new NotImplementedException();

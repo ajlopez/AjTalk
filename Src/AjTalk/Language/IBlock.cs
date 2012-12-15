@@ -13,8 +13,5 @@ namespace AjTalk.Language
         object Execute(Machine machine, object[] args);
 
         object ExecuteInProcess(Process process, object[] args);
-
-        // TODO remove to have Process.resume/suspend, call with continuation, etc..
-        object FullExecute(Machine machine, object[] args);
     }
 }
