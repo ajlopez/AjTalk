@@ -29,6 +29,8 @@
 - Implement +, -, etc... only for numbers
 	Actually, + is concatenating strings
 	
+- Review Brush initialize, in new: (or define new as basicNew initialize)
+	
 - block fork using thread
 - Process
 - block fork using Process

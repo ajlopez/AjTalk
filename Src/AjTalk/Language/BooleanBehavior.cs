@@ -11,10 +11,10 @@
         public BooleanBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
             : base(behavior, superclass, machine, typeof(bool))
         {
-            this.DefineInstanceMethod(new FunctionalMethod("ifFalse:", this, this.IfFalseMethod));
-            this.DefineInstanceMethod(new FunctionalMethod("ifTrue:", this, this.IfTrueMethod));
-            this.DefineInstanceMethod(new FunctionalMethod("ifTrue:ifFalse:", this, this.IfTrueIfFalseMethod));
-            this.DefineInstanceMethod(new FunctionalMethod("ifFalse:ifTrue:", this, this.IfFalseIfTrueMethod));
+            //this.DefineInstanceMethod(new FunctionalMethod("ifFalse:", this, this.IfFalseMethod));
+            //this.DefineInstanceMethod(new FunctionalMethod("ifTrue:", this, this.IfTrueMethod));
+            //this.DefineInstanceMethod(new FunctionalMethod("ifTrue:ifFalse:", this, this.IfTrueIfFalseMethod));
+            //this.DefineInstanceMethod(new FunctionalMethod("ifFalse:ifTrue:", this, this.IfFalseIfTrueMethod));
         }
 
         private object IfFalseMethod(Machine machine, object obj, object[] arguments)

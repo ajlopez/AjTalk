@@ -54,6 +54,8 @@ namespace AjTalk.Language
         RaiseException = 83,
 
         IfTrue = 90,
-        IfFalse = 91
+        IfFalse = 91,
+        IfTrueFalse = 92,
+        IfFalseTrue = 93
     }
 }
