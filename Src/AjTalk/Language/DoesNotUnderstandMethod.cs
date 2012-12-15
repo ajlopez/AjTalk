@@ -53,20 +53,6 @@
 
         protected virtual object DoesNotUnderstand(Machine machine, IObject self, string msgname, object[] args)
         {
-            if (msgname.Equals("ifFalse:"))
-            {
-                IBlock block = (IBlock)args[0];
-                block.Execute(machine, null);
-                
-                // TODO return block value??
-                return machine.GetGlobalObject("nil");
-            }
-
-            if (msgname.Equals("class"))
-            {
-                return self.Behavior;
-            }
-
             if (machine.HostMachine != null)
             {
                 IBehavior behavior = machine.HostMachine.GetAssociatedBehavior(self.Behavior);
