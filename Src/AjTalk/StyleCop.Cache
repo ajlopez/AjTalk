@@ -162,15 +162,6 @@
     <milliseconds>848</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="IBlock.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>11/24/2012 15:27:01</timestamp>
-    <milliseconds>320</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="IClass.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/17/2012 18:23:21</timestamp>
@@ -585,60 +576,6 @@
     <milliseconds>200</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="BlockBehavior.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/09/2012 06:36:22</timestamp>
-    <milliseconds>645</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="BlockDecompiler.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/07/2012 06:27:23</timestamp>
-    <milliseconds>634</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="BooleanBehavior.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/09/2012 06:34:51</timestamp>
-    <milliseconds>525</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="DoesNotUnderstandMethod.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/09/2012 11:54:06</timestamp>
-    <milliseconds>869</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="EnumerableBehavior.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/09/2012 06:32:02</timestamp>
-    <milliseconds>710</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="FunctionalMethod.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/09/2012 06:52:55</timestamp>
-    <milliseconds>542</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="IBehavior.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/17/2012 18:23:21</timestamp>
@@ -709,15 +646,6 @@
     </settings>
     <timestamp>12/09/2012 06:57:16</timestamp>
     <milliseconds>505</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="Method.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/10/2012 06:36:36</timestamp>
-    <milliseconds>651</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="Primitives.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -801,15 +729,6 @@
     <milliseconds>71</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="ByteCodes.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/12/2012 06:30:45</timestamp>
-    <milliseconds>933</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="DotNetObject.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/17/2012 18:23:21</timestamp>
@@ -826,33 +745,6 @@
     </settings>
     <timestamp>12/12/2012 06:33:26</timestamp>
     <milliseconds>306</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="Block.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/12/2012 06:33:14</timestamp>
-    <milliseconds>572</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="Machine.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/12/2012 06:33:18</timestamp>
-    <milliseconds>362</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="Loader.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/12/2012 06:39:51</timestamp>
-    <milliseconds>114</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="ModelParser.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -873,18 +765,6 @@
     <milliseconds>72</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="Process.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/17/2012 18:23:21</timestamp>
-      <milliseconds>978</milliseconds>
-    </settings>
-    <timestamp>12/12/2012 08:11:03</timestamp>
-    <milliseconds>869</milliseconds>
-    <violations />
-  </sourcecode>
-  <project key="-1886451504">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="ExecutionBlock.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/17/2012 18:23:21</timestamp>
@@ -906,6 +786,175 @@
       <violation namespace="Microsoft.StyleCop.CSharp.NamingRules" rule="AccessibleFieldsMustBeginWithUpperCaseLetter" ruleCheckId="SA1307">
         <context>Public and internal fields must start with an upper-case letter: ip.</context>
         <line>22</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="BlockBehavior.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/15/2012 05:46:28</timestamp>
+    <milliseconds>665</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Block.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/15/2012 05:44:43</timestamp>
+    <milliseconds>980</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BooleanBehavior.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/14/2012 06:56:35</timestamp>
+    <milliseconds>472</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BlockDecompiler.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/13/2012 05:31:07</timestamp>
+    <milliseconds>683</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ByteCodes.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/13/2012 05:12:59</timestamp>
+    <milliseconds>510</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DoesNotUnderstandMethod.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/15/2012 05:44:56</timestamp>
+    <milliseconds>960</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="EnumerableBehavior.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/15/2012 05:50:55</timestamp>
+    <milliseconds>883</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="FunctionalMethod.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/15/2012 05:46:28</timestamp>
+    <milliseconds>713</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IBlock.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/15/2012 05:46:43</timestamp>
+    <milliseconds>921</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Method.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/15/2012 05:45:20</timestamp>
+    <milliseconds>465</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Loader.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/15/2012 05:46:19</timestamp>
+    <milliseconds>497</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Machine.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/14/2012 06:13:35</timestamp>
+    <milliseconds>958</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Process.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/15/2012 05:51:48</timestamp>
+    <milliseconds>850</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Interpreter.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/15/2012 06:08:04</timestamp>
+    <milliseconds>467</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="-1886451504">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="ExecutionContext.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/17/2012 18:23:21</timestamp>
+      <milliseconds>978</milliseconds>
+    </settings>
+    <timestamp>12/15/2012 06:08:46</timestamp>
+    <milliseconds>226</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" rule="FieldsMustBePrivate" ruleCheckId="SA1401">
+        <context>Fields must be declared with private access. Use properties to expose fields.</context>
+        <line>9</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" rule="FieldsMustBePrivate" ruleCheckId="SA1401">
+        <context>Fields must be declared with private access. Use properties to expose fields.</context>
+        <line>10</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" rule="FieldsMustBePrivate" ruleCheckId="SA1401">
+        <context>Fields must be declared with private access. Use properties to expose fields.</context>
+        <line>11</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" rule="FieldsMustBePrivate" ruleCheckId="SA1401">
+        <context>Fields must be declared with private access. Use properties to expose fields.</context>
+        <line>12</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" rule="FieldsMustBePrivate" ruleCheckId="SA1401">
+        <context>Fields must be declared with private access. Use properties to expose fields.</context>
+        <line>13</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" rule="FieldsMustBePrivate" ruleCheckId="SA1401">
+        <context>Fields must be declared with private access. Use properties to expose fields.</context>
+        <line>14</line>
         <warning>False</warning>
       </violation>
     </violations>

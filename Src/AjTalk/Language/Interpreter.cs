@@ -34,32 +34,32 @@
 
         public object Execute()
         {
-            this.context.ip = 0;
+            this.context.InstructionPointer = 0;
             string mthname;
             object[] args;
 
             // TODO refactor lastreceiver process
             // TODO refactor switch
-            if (this.context.block.Bytecodes != null)
-                while (this.context.hasreturnvalue == false && this.context.ip < this.context.block.ByteCodes.Length)
+            if (this.context.Block.Bytecodes != null)
+                while (this.context.HasReturnValue == false && this.context.InstructionPointer < this.context.Block.ByteCodes.Length)
                 {
-                    ByteCode bc = (ByteCode)this.context.block.ByteCodes[this.context.ip];
+                    ByteCode bc = (ByteCode)this.context.Block.ByteCodes[this.context.InstructionPointer];
                     byte arg;
 
                     if (codes[(int)bc] != null)
                     {
                         codes[(int)bc](this.context);
-                        this.context.ip++;
+                        this.context.InstructionPointer++;
                         continue;
                     }
 
                     switch (bc)
                     {
                         case ByteCode.ReturnSub:
-                            this.context.hasreturnvalue = true;
-                            this.context.returnvalue = null;
+                            this.context.HasReturnValue = true;
+                            this.context.ReturnValue = null;
 
-                            if (this.context.sender != null)
+                            if (this.context.Sender != null)
                             {
                                 this.PopContext(this.GetReturnValue());
                                 break;
@@ -67,10 +67,10 @@
 
                             break;
                         case ByteCode.ReturnPop:
-                            this.context.hasreturnvalue = true;
-                            this.context.returnvalue = this.context.Pop();
+                            this.context.HasReturnValue = true;
+                            this.context.ReturnValue = this.context.Pop();
 
-                            if (this.context.sender != null)
+                            if (this.context.Sender != null)
                             {
                                 this.PopContext(this.GetReturnValue());
                                 break;
@@ -80,14 +80,14 @@
                         case ByteCode.Value:
                             Block newblock = (Block)this.context.Pop();
 
-                            this.context.lastreceiver = newblock;
+                            this.context.LastReceiver = newblock;
 
-                            this.PushContext(new ExecutionContext(context.machine, context.Receiver, newblock, null));
+                            this.PushContext(new ExecutionContext(this.context.Machine, this.context.Receiver, newblock, null));
                             continue;
 
                         case ByteCode.MultiValue:
-                            this.context.ip++;
-                            arg = context.block.ByteCodes[context.ip];
+                            this.context.InstructionPointer++;
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
 
                             object[] mvargs = new object[arg];
 
@@ -95,39 +95,39 @@
                                 mvargs[k] = this.context.Pop();
 
                             newblock = (Block)this.context.Pop();
-                            this.context.lastreceiver = newblock;
-                            this.PushContext(new ExecutionContext(context.machine, context.Receiver, newblock, mvargs));
+                            this.context.LastReceiver = newblock;
+                            this.PushContext(new ExecutionContext(this.context.Machine, this.context.Receiver, newblock, mvargs));
 
                             continue;
 
                         case ByteCode.GetLocal:
-                            this.context.ip++;
-                            arg = this.context.block.ByteCodes[this.context.ip];
+                            this.context.InstructionPointer++;
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
                             this.context.Push(this.context.GetLocal(arg));
                             break;
                         case ByteCode.GetSuper:
                             this.context.Push(super);
                             break;
                         case ByteCode.GetSelf:
-                            if (this.context.nativeSelf != null)
-                                this.context.Push(this.context.nativeSelf);
+                            if (this.context.NativeSelf != null)
+                                this.context.Push(this.context.NativeSelf);
                             else
-                                this.context.Push(this.context.self);
+                                this.context.Push(this.context.Self);
                             break;
                         case ByteCode.GetSuperClass:
-                            this.context.Push(this.context.self.Behavior.SuperClass);
+                            this.context.Push(this.context.Self.Behavior.SuperClass);
                             break;
                         case ByteCode.GetNil:
                             this.context.Push(null);
                             break;
                         case ByteCode.GetInstanceVariable:
-                            this.context.ip++;
-                            arg = this.context.block.ByteCodes[this.context.ip];
-                            this.context.Push(this.context.self[arg]);
+                            this.context.InstructionPointer++;
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
+                            this.context.Push(this.context.Self[arg]);
                             break;
                         case ByteCode.NewObject:
                             IBehavior ibeh = (IBehavior)this.context.Pop();
-                            this.context.lastreceiver = ibeh;
+                            this.context.LastReceiver = ibeh;
                             this.context.Push(ibeh.NewObject());
                             break;
                         case ByteCode.Nop:
@@ -137,46 +137,46 @@
                             break;
                         case ByteCode.InstSize:
                             IObject iobj = (IObject)this.context.Pop();
-                            this.context.lastreceiver = iobj;
+                            this.context.LastReceiver = iobj;
                             this.context.Push(iobj.Behavior.NoInstanceVariables);
                             break;
                         case ByteCode.InstAt:
                             int pos = (int)this.context.Pop();
                             iobj = (IObject)this.context.Pop();
-                            this.context.lastreceiver = iobj;
+                            this.context.LastReceiver = iobj;
                             this.context.Push(iobj[pos]);
                             break;
                         case ByteCode.InstAtPut:
                             object par = this.context.Pop();
                             pos = (int)this.context.Pop();
                             iobj = (IObject)this.context.Pop();
-                            this.context.lastreceiver = iobj;
+                            this.context.LastReceiver = iobj;
                             iobj[pos] = par;
                             break;
                         case ByteCode.BasicAt:
                             pos = (int)this.context.Pop();
                             IIndexedObject indexedObj = (IIndexedObject)this.context.Pop();
-                            this.context.lastreceiver = indexedObj;
+                            this.context.LastReceiver = indexedObj;
                             this.context.Push(indexedObj.GetIndexedValue(pos));
                             break;
                         case ByteCode.BasicAtPut:
                             par = this.context.Pop();
                             pos = (int)this.context.Pop();
                             indexedObj = (IIndexedObject)this.context.Pop();
-                            this.context.lastreceiver = indexedObj;
+                            this.context.LastReceiver = indexedObj;
                             indexedObj.SetIndexedValue(pos, par);
                             break;
                         case ByteCode.ChainedSend:
                             this.context.Pop();
-                            this.context.Push(this.context.lastreceiver);
+                            this.context.Push(this.context.LastReceiver);
                             break;
                         case ByteCode.Send:
-                            this.context.ip++;
-                            arg = this.context.block.ByteCodes[this.context.ip];
-                            mthname = (string)this.context.block.GetConstant(arg);
-                            this.context.ip++;
+                            this.context.InstructionPointer++;
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
+                            mthname = (string)this.context.Block.GetConstant(arg);
+                            this.context.InstructionPointer++;
 
-                            arg = this.context.block.ByteCodes[this.context.ip];
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
                             args = new object[arg];
 
                             for (int k = arg - 1; k >= 0; k--)
@@ -185,18 +185,18 @@
                             }
 
                             object obj = this.context.Pop();
-                            this.context.lastreceiver = obj;
+                            this.context.LastReceiver = obj;
 
                             object value;
 
                             if (obj == super)
                                 //// TODO this.context.nativeSelf processing
-                                value = ((IMethod)this.context.block).Behavior.SuperClass.SendMessageToObject(this.context.self, this.context.machine, mthname, args);
-                            //// TODO this.context.machine is null in many tests, not in real world
-                            else if (this.context.machine == null)
+                                value = ((IMethod)this.context.Block).Behavior.SuperClass.SendMessageToObject(this.context.Self, this.context.Machine, mthname, args);
+                            //// TODO this.context.Machine is null in many tests, not in real world
+                            else if (this.context.Machine == null)
                                 value = ((IObject)obj).SendMessage(null, mthname, args);
                             else
-                                value = this.context.machine.SendMessage(obj, mthname, args);
+                                value = this.context.Machine.SendMessage(obj, mthname, args);
 
                             if (value == this)
                                 continue;
@@ -205,8 +205,8 @@
 
                             break;
                         case ByteCode.MakeCollection:
-                            this.context.ip++;
-                            arg = this.context.block.ByteCodes[this.context.ip];
+                            this.context.InstructionPointer++;
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
                             args = new object[arg];
 
                             for (int k = arg - 1; k >= 0; k--)
@@ -218,8 +218,8 @@
 
                             break;
                         case ByteCode.NewDotNetObject:
-                            this.context.ip++;
-                            arg = this.context.block.ByteCodes[this.context.ip];
+                            this.context.InstructionPointer++;
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
 
                             args = new object[arg];
 
@@ -229,18 +229,18 @@
                             }
 
                             obj = this.context.Pop();
-                            this.context.lastreceiver = obj;
+                            this.context.LastReceiver = obj;
 
                             this.context.Push(DotNetObject.NewObject((Type)obj, args));
 
                             break;
                         case ByteCode.InvokeDotNetMethod:
-                            this.context.ip++;
-                            arg = this.context.block.ByteCodes[this.context.ip];
-                            mthname = (string)this.context.block.GetConstant(arg);
-                            this.context.ip++;
+                            this.context.InstructionPointer++;
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
+                            mthname = (string)this.context.Block.GetConstant(arg);
+                            this.context.InstructionPointer++;
 
-                            arg = this.context.block.ByteCodes[this.context.ip];
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
                             args = new object[arg];
 
                             for (int k = arg - 1; k >= 0; k--)
@@ -249,32 +249,32 @@
                             }
 
                             obj = this.context.Pop();
-                            this.context.lastreceiver = obj;
+                            this.context.LastReceiver = obj;
 
                             Type type = obj as Type;
 
                             if (type != null)
                                 this.context.Push(DotNetObject.SendNativeStaticMessage(type, mthname, args));
                             else
-                                this.context.Push(DotNetObject.SendNativeMessage(this.context.machine, obj, mthname, args));
+                                this.context.Push(DotNetObject.SendNativeMessage(this.context.Machine, obj, mthname, args));
 
                             break;
 
                         case ByteCode.SetLocal:
-                            this.context.ip++;
-                            arg = this.context.block.ByteCodes[this.context.ip];
+                            this.context.InstructionPointer++;
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
                             value = this.context.Pop();
                             this.context.SetLocal(arg, value);
                             this.context.Push(value);
-                            this.context.lastreceiver = null;
+                            this.context.LastReceiver = null;
                             break;
                         case ByteCode.SetInstanceVariable:
-                            this.context.ip++;
-                            arg = this.context.block.ByteCodes[this.context.ip];
+                            this.context.InstructionPointer++;
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
                             value = this.context.Pop();
-                            this.context.self[arg] = value;
+                            this.context.Self[arg] = value;
                             this.context.Push(value);
-                            this.context.lastreceiver = this.context.self;
+                            this.context.LastReceiver = this.context.Self;
                             break;
                         case ByteCode.RaiseException:
                             throw (Exception)this.context.Pop();
@@ -282,13 +282,13 @@
                             throw new Exception("Not implemented");
                     }
 
-                    this.context.ip++;
+                    this.context.InstructionPointer++;
 
-                    while ((this.context.hasreturnvalue || this.context.ip >= this.context.block.ByteCodes.Length) && this.context.sender != null)
+                    while ((this.context.HasReturnValue || this.context.InstructionPointer >= this.context.Block.ByteCodes.Length) && this.context.Sender != null)
                     {
                         object retvalue = this.GetReturnValue();
                         this.PopContext(retvalue);
-                        this.context.ip++;
+                        this.context.InstructionPointer++;
                     }
                 }
 
@@ -297,51 +297,29 @@
 
         public void PushContext(ExecutionContext newcontext)
         {
-            newcontext.sender = this.context;
+            newcontext.Sender = this.context;
             this.context = newcontext;
         }
 
         public void PopContext(object retvalue)
         {
-            this.context = this.context.sender;
+            this.context = this.context.Sender;
             this.context.Push(retvalue);
-        }
-
-        private object GetReturnValue()
-        {
-            if (this.context.hasreturnvalue)
-            {
-                if (this.context.block.Closure != null)
-                {
-                    this.context.block.Closure.hasreturnvalue = true;
-                    this.context.block.Closure.returnvalue = this.context.returnvalue;
-                }
-
-                return this.context.returnvalue;
-            }
-
-            if (this.context.block.IsMethod)
-                return this.context.self;
-
-            if (this.context.stack.Count == 0)
-                return null;
-
-            return this.context.Pop();
         }
 
         private static void DoGetConstant(ExecutionContext context)
         {
-            context.ip++;
-            byte arg = context.block.ByteCodes[context.ip];
-            context.Push(context.block.GetConstant(arg));
+            context.InstructionPointer++;
+            byte arg = context.Block.ByteCodes[context.InstructionPointer];
+            context.Push(context.Block.GetConstant(arg));
         }
 
         private static void DoGetBlock(ExecutionContext context)
         {
-            context.ip++;
-            byte arg = context.block.ByteCodes[context.ip];
+            context.InstructionPointer++;
+            byte arg = context.Block.ByteCodes[context.InstructionPointer];
 
-            Block newblock = (Block)context.block.GetConstant(arg);
+            Block newblock = (Block)context.Block.GetConstant(arg);
 
             newblock = newblock.Clone(context);
 
@@ -350,8 +328,8 @@
 
         private static void DoMultiValue(ExecutionContext context)
         {
-            context.ip++;
-            byte arg = context.block.ByteCodes[context.ip];
+            context.InstructionPointer++;
+            byte arg = context.Block.ByteCodes[context.InstructionPointer];
 
             object[] args = new object[arg];
 
@@ -359,35 +337,35 @@
                 args[k] = context.Pop();
 
             Block newblock = (Block)context.Pop();
-            context.lastreceiver = newblock;
+            context.LastReceiver = newblock;
 
-            context.Push(new ExecutionContext(context.machine, context.Receiver, newblock, args).Execute());
+            context.Push(new ExecutionContext(context.Machine, context.Receiver, newblock, args).Execute());
         }
 
         private static void DoGetArgument(ExecutionContext context)
         {
-            context.ip++;
-            byte arg = context.block.ByteCodes[context.ip];
+            context.InstructionPointer++;
+            byte arg = context.Block.ByteCodes[context.InstructionPointer];
             context.Push(context.GetArgument(arg));
         }
 
         private static void DoSetArgument(ExecutionContext context)
         {
-            context.ip++;
-            byte arg = context.block.ByteCodes[context.ip];
+            context.InstructionPointer++;
+            byte arg = context.Block.ByteCodes[context.InstructionPointer];
             var value = context.Pop();
             context.SetArgument(arg, value);
-            context.lastreceiver = null;
+            context.LastReceiver = null;
         }
 
         private static void DoGetClass(ExecutionContext context)
         {
             object value = context.Pop();
-            context.lastreceiver = value;
+            context.LastReceiver = value;
 
             if (value == null)
             {
-                context.Push(context.machine.UndefinedObjectClass);
+                context.Push(context.Machine.UndefinedObjectClass);
                 return;
             }
 
@@ -399,7 +377,7 @@
                 return;
             }
 
-            var behavior = context.machine.GetNativeBehavior(value.GetType());
+            var behavior = context.Machine.GetNativeBehavior(value.GetType());
 
             if (behavior != null)
             {
@@ -413,46 +391,68 @@
         private static void DoBasicSize(ExecutionContext context)
         {
             IIndexedObject indexedObj = (IIndexedObject)context.Pop();
-            context.lastreceiver = indexedObj;
+            context.LastReceiver = indexedObj;
             context.Push(indexedObj.BasicSize);
         }
 
         private static void DoGetGlobalVariable(ExecutionContext context)
         {
-            context.ip++;
-            byte arg = context.block.ByteCodes[context.ip];
-            string name = context.block.GetGlobalName(arg);
+            context.InstructionPointer++;
+            byte arg = context.Block.ByteCodes[context.InstructionPointer];
+            string name = context.Block.GetGlobalName(arg);
             object value;
 
-            if (context.self != null)
-                value = context.self.Behavior.Scope.GetValue(name);
+            if (context.Self != null)
+                value = context.Self.Behavior.Scope.GetValue(name);
             else
-                value = context.machine.CurrentEnvironment.GetValue(name);
+                value = context.Machine.CurrentEnvironment.GetValue(name);
 
             context.Push(value);
         }
 
         private static void DoSetGlobalVariable(ExecutionContext context)
         {
-            context.ip++;
-            byte arg = context.block.ByteCodes[context.ip];
-            string name = context.block.GetGlobalName(arg);
+            context.InstructionPointer++;
+            byte arg = context.Block.ByteCodes[context.InstructionPointer];
+            string name = context.Block.GetGlobalName(arg);
             object value = context.Pop();
 
-            if (context.self != null)
-                context.self.Behavior.Scope.SetValue(name, value);
+            if (context.Self != null)
+                context.Self.Behavior.Scope.SetValue(name, value);
             else
-                context.machine.CurrentEnvironment.SetValue(name, value);
+                context.Machine.CurrentEnvironment.SetValue(name, value);
 
-            context.lastreceiver = value;
+            context.LastReceiver = value;
             context.Push(value);
         }
 
         private static void DoGetDotNetType(ExecutionContext context)
         {
-            context.ip++;
-            byte arg = context.block.ByteCodes[context.ip];
-            context.Push(TypeUtilities.AsType(context.block.GetGlobalName(arg)));
+            context.InstructionPointer++;
+            byte arg = context.Block.ByteCodes[context.InstructionPointer];
+            context.Push(TypeUtilities.AsType(context.Block.GetGlobalName(arg)));
+        }
+
+        private object GetReturnValue()
+        {
+            if (this.context.HasReturnValue)
+            {
+                if (this.context.Block.Closure != null)
+                {
+                    this.context.Block.Closure.HasReturnValue = true;
+                    this.context.Block.Closure.ReturnValue = this.context.ReturnValue;
+                }
+
+                return this.context.ReturnValue;
+            }
+
+            if (this.context.Block.IsMethod)
+                return this.context.Self;
+
+            if (this.context.Stack.Count == 0)
+                return null;
+
+            return this.context.Pop();
         }
     }
 }

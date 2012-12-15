@@ -6,19 +6,19 @@ namespace AjTalk.Language
 
     public class ExecutionContext
     {
-        internal Block block;
-        internal Machine machine;
-        internal IObject self;
+        public int InstructionPointer;
+        public object LastReceiver = null;
+        public bool HasReturnValue;
+        public object ReturnValue;
+        public ExecutionContext Sender;
+        public IList Stack;
+
+        private Block block;
+        private Machine machine;
+        private IObject self;
         private object[] arguments;
         private object[] locals;
-        internal object nativeSelf;
-        internal object lastreceiver = null;
-        internal bool hasreturnvalue;
-        internal object returnvalue;
-        internal ExecutionContext sender;
-
-        internal int ip;
-        internal IList stack;
+        private object nativeSelf;
 
         public ExecutionContext(Machine machine, IObject self, Block block, object[] arguments)
             : this(block, arguments)
@@ -38,7 +38,7 @@ namespace AjTalk.Language
         private ExecutionContext(Block block, object[] arguments)
         {
             this.block = block;
-            this.stack = new ArrayList(5);
+            this.Stack = new ArrayList(5);
 
             this.arguments = arguments;
             if (this.block.NoLocals > 0)
@@ -84,7 +84,7 @@ namespace AjTalk.Language
 
         public Block Block { get { return this.block; } }
 
-        public bool HasReturnValue { get { return this.hasreturnvalue; } }
+        public Machine Machine { get { return this.machine; } }
 
         public IObject Receiver
         {
@@ -102,7 +102,7 @@ namespace AjTalk.Language
 
         public object Execute()
         {
-            this.ip = 0;
+            this.InstructionPointer = 0;
             return (new Interpreter(this)).Execute();
         }
 
@@ -158,13 +158,13 @@ namespace AjTalk.Language
 
         internal void Push(object obj)
         {
-            this.stack.Add(obj);
+            this.Stack.Add(obj);
         }
 
         internal object Pop()
         {
-            object obj = this.stack[this.stack.Count - 1];
-            this.stack.RemoveAt(this.stack.Count - 1);
+            object obj = this.Stack[this.Stack.Count - 1];
+            this.Stack.RemoveAt(this.Stack.Count - 1);
             return obj;
         }
     }

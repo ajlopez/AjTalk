@@ -18,10 +18,6 @@
 
         private object DoMethod(Machine machine, object obj, object[] arguments)
         {
-            if (arguments == null)
-                throw new ArgumentException("arguments");
-            if (arguments.Count() != 1 || !(arguments[0] is IBlock))
-                throw new InvalidOperationException("A Block was expected");
             IBlock block = (IBlock)arguments[0];
             IEnumerable elements = (IEnumerable)obj;
             object result = null;
@@ -32,10 +28,6 @@
 
         private object SelectMethod(Machine machine, object obj, object[] arguments)
         {
-            if (arguments == null)
-                throw new ArgumentException("arguments");
-            if (arguments.Count() != 1 || !(arguments[0] is IBlock))
-                throw new InvalidOperationException("A Block was expected");
             IBlock block = (IBlock)arguments[0];
             IEnumerable elements = (IEnumerable)obj;
             ArrayList result = new ArrayList();

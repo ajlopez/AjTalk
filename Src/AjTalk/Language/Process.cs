@@ -54,7 +54,7 @@
             ExecutionContext context = this.block.CreateContext(this.machine, this.arguments);
             this.interpreter = new Interpreter(context);
 
-            interpreter.Execute();
+            this.interpreter.Execute();
         }
     }
 }
