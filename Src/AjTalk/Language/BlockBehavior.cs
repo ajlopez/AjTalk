@@ -21,14 +21,14 @@
         {
             Block block = (Block)obj;
             Block body = (Block)arguments[0];
-            var result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
+            var result = block.Execute(machine, null);
 
             while (result.Equals(true))
             {
                 body.Execute(this.Machine, arguments);
                 if (body.Closure != null && body.Closure.HasReturnValue)
                     return null;
-                result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
+                result = block.Execute(machine, null);
             }
 
             return null;
@@ -38,14 +38,14 @@
         {
             Block block = (Block)obj;
             Block body = (Block)arguments[0];
-            var result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
+            var result = block.Execute(machine, null);
 
             while (result.Equals(false))
             {
                 body.Execute(this.Machine, arguments);
                 if (body.Closure != null && body.Closure.HasReturnValue)
                     return null;
-                result = (new ExecutionContext(machine, block.Receiver, block, null)).Execute();
+                result = block.Execute(machine, null);
             }
 
             return null;
@@ -54,7 +54,7 @@
         private object AssertMethod(Machine machine, object obj, object[] arguments)
         {
             Block block = (Block)obj;
-            var result = (new ExecutionContext(machine, block.Receiver, block, arguments)).Execute();
+            var result = block.Execute(machine, arguments);
 
             // TODO review what is true
             if (result is bool && (bool)result == true)
