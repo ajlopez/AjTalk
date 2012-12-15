@@ -5,38 +5,42 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using AjTalk.Compiler;
 
     public class EnumerableBehavior : NativeBehavior
     {
         public EnumerableBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
             : base(behavior, superclass, machine, typeof(IEnumerable))
         {
-            this.DefineInstanceMethod(new FunctionalMethod("do:", this, this.DoMethod));
-            this.DefineInstanceMethod(new FunctionalMethod("select:", this, this.SelectMethod));
+            string dosource = @"
+do: aBlock
+    | enumerator |
+    
+    enumerator := self !GetEnumerator.
+    
+    [enumerator !MoveNext] whileTrue:
+		[ aBlock value: enumerator !Current ]
+            ";
+            string selectsource = @"
+select: aBlock
+    | enumerator list |
+    
+    enumerator := self !GetEnumerator.
+    list := @System.Collections.ArrayList !new.
+    
+    [enumerator !MoveNext] whileTrue:
+		[ | item |
+          item := enumerator !Current.
+            (aBlock value: item) ifTrue:  [ list add: item ]
+        ].
+    ^list
+            ";
+
+            Parser parser = new Parser(dosource);
+            this.DefineInstanceMethod(parser.CompileInstanceMethod(this));
+            parser = new Parser(selectsource);
+            this.DefineInstanceMethod(parser.CompileInstanceMethod(this));
             this.DefineInstanceMethod(new FunctionalMethod("includes:", this, this.IncludesMethod));
-        }
-
-        private object DoMethod(Machine machine, object obj, object[] arguments)
-        {
-            IBlock block = (IBlock)arguments[0];
-            IEnumerable elements = (IEnumerable)obj;
-            object result = null;
-            foreach (object element in elements)
-                result = block.Execute(this.Machine, new object[] { element });
-            return result;
-        }
-
-        private object SelectMethod(Machine machine, object obj, object[] arguments)
-        {
-            IBlock block = (IBlock)arguments[0];
-            IEnumerable elements = (IEnumerable)obj;
-            ArrayList result = new ArrayList();
-
-            foreach (object element in elements)
-                if ((bool)block.Execute(this.Machine, new object[] { element }))
-                    result.Add(element);
-
-            return result;
         }
 
         private object IncludesMethod(Machine machine, object obj, object[] arguments)

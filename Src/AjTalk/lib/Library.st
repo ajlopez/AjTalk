@@ -350,11 +350,13 @@ size
     self do: [each | tally := tally + 1].
     ^tally
 
-! !        
+! !
+
+Object subclass: #TEnumerable nativeType: @System.Collections.IEnumerable!
 
 Collection subclass: #ObjectList nativeType: @System.Collections.ArrayList!
 
-ObjectList !!AddTrait: (Machine !!GetNativeBehavior: @System.Collections.IEnumerable))!
+ObjectList !!AddTrait: TEnumerable!
 
 !ObjectList methods!
 
