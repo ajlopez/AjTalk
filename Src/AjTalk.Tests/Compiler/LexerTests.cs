@@ -139,6 +139,21 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
+        public void ProcessQuotedSymbol()
+        {
+            Lexer tokenizer = new Lexer("#'hello world'");
+            Token token;
+
+            token = tokenizer.NextToken();
+            Assert.IsNotNull(token);
+            Assert.AreEqual("hello world", token.Value);
+            Assert.AreEqual(TokenType.Symbol, token.Type);
+
+            token = tokenizer.NextToken();
+            Assert.IsNull(token);
+        }
+
+        [TestMethod]
         public void ProcessDottedName()
         {
             Lexer tokenizer = new Lexer("Smalltalk.MyPackage");

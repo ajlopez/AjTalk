@@ -845,7 +845,6 @@ namespace AjTalk.Tests
         }
 
         [TestMethod]
-        [Ignore]
         [DeploymentItem(@"CodeFiles\Library2.st")]
         [DeploymentItem(@"CodeFiles\PharoCoreKernelObjects.st")]
         [DeploymentItem(@"CodeFiles\PharoKernelClasses.st")]
@@ -858,13 +857,21 @@ namespace AjTalk.Tests
             Machine machine = CreateMachine();
 
             loaderlib.LoadAndExecute(machine);
-            loaderobj.LoadAndExecute(machine);
-            loader.LoadAndExecute(machine);
-
             object result = machine.GetGlobalObject("Object");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            result = machine.GetGlobalObject("Behavior");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+            var cls = (BaseClass)result;
+            Assert.IsNotNull(cls.GetInstanceMethod("uses:instanceVariableNames:"));
+            Assert.IsNotNull(cls.GetInstanceMethod("subclass:uses:instanceVariableNames:classVariableNames:poolDictionaries:category:"));
+
+            loaderobj.LoadAndExecute(machine);
+            loader.LoadAndExecute(machine);
 
             result = machine.GetGlobalObject("ProtoObject");
 

@@ -85,6 +85,8 @@ namespace AjTalk.Compiler
                     return new Token() { Type = TokenType.Punctuation, Value = "#[" };
                 if (ch2 == '{')
                     return this.NextEnclosedSymbol();
+                if (ch2 == '\'')
+                    return new Token() { Type = TokenType.Symbol, Value = this.NextString().Value };
 
                 this.PushChar(ch2);
 

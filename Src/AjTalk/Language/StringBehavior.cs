@@ -12,6 +12,7 @@
         public StringBehavior(IBehavior behavior, IBehavior superclass, Machine machine)
             : base(behavior, superclass, machine, typeof(string))
         {
+            this.DefineInstanceMethod(new FunctionalMethod("nat:", this, AtMethod));
             this.DefineInstanceMethod(new FunctionalMethod(",", this, this.ConcatenateMethod));
         }
 
@@ -26,6 +27,11 @@
                 arg = arg.ToString();
 
             return str + arg;
+        }
+
+        private static object AtMethod(Machine machine, object obj, object[] args)
+        {
+            return ((string)obj)[(int)args[0]];
         }
     }
 }

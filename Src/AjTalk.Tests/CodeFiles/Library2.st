@@ -67,6 +67,10 @@ subclass: nameOfClass
 	^@AjTalk.Language.ObjectOperators equals: self with: anObject.
 !
 
+initialize
+	^self
+!
+
 == anObject
 	^@AjTalk.Language.ObjectOperators same: self with: anObject.
 !
@@ -152,10 +156,57 @@ ClassDescription subclass:#Metaclass
 	category:'Kernel-Classes'
 !
 
-!UndefinedObject class methods!
+Object subclass:#Collection
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Collections-Abstract'
+!
+
+!Collection methods!
+
+isEmpty
+    ^self size == 0
+!
+
+size
+    | tally |
+    tally := 0.
+    self do: [:each | tally := tally + 1].
+    ^tally
+
+! !
+
+Collection subclass: #TEnumerable nativeType: @System.Collections.IEnumerable!
+
+Object subclass: #String nativeType: @System.String
+!
+
+!String methods!
+
+subStrings: separator
+	^self !!Split: (separator nat: 0).
+!
+
+size
+    ^self !!Length
+! !
+
+
+!UndefinedObject methods!
+
+environment
+    ^nil
+!
 
 classTrait
 	^nil
+! !
+
+!UndefinedObject class methods!
+
+environment
+    ^nil
 ! !
 
 "To use in PharoCoreKernelObjects, Object initialize"
@@ -165,3 +216,11 @@ Object subclass: #WeakIdentityKeyDictionary
 	poolDictionaries: ''
 	category:'Kernel-Classes'
 !
+
+Object subclass: #IdentityDictionary
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category:'Kernel-Classes'
+!
+ 

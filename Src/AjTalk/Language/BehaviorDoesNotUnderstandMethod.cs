@@ -21,6 +21,12 @@
             "variableSubclass:instanceVariableNames:classVariableNames:poolDictionaries:category:"
         };
 
+        private static IList<string> reservedRedefinedMethods = new List<string>() 
+        {
+            "uses:instanceVariableNames:",
+            "subclass:uses:instanceVariableNames:classVariableNames:poolDictionaries:category:"
+        };
+
         public BehaviorDoesNotUnderstandMethod(Machine machine, IBehavior behavior)
             : base(machine, behavior)
         {
@@ -49,6 +55,8 @@
                 {
                     var method = compiler.CompileInstanceMethod(text, behavior);
                     if (reservedMethods.Contains(method.Name))
+                        return;
+                    if (reservedRedefinedMethods.Contains(method.Name) && behavior.GetInstanceMethod(method.Name) != null)
                         return;
                     behavior.DefineInstanceMethod(compiler.CompileInstanceMethod(text, behavior));
                 });

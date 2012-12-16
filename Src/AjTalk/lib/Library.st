@@ -350,7 +350,7 @@ isEmpty
 size
     | tally |
     tally := 0.
-    self do: [each | tally := tally + 1].
+    self do: [:each | tally := tally + 1].
     ^tally
 
 ! !
