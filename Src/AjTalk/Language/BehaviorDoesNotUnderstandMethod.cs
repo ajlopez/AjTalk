@@ -26,6 +26,11 @@
         {
         }
 
+        protected override object DoesNotUnderstand(Interpreter interpreter, IObject self, string msgname, object[] args)
+        {
+            return DoesNotUnderstand(interpreter.Machine, self, msgname, args);
+        }
+
         protected override object DoesNotUnderstand(Machine machine, IObject self, string msgname, object[] args)
         {
             if (self != null && !(self is IBehavior))

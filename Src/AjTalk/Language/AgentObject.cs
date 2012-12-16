@@ -45,6 +45,13 @@
             return null;    // TODO what to return?
         }
 
+        public override object ExecuteMethod(Interpreter interpreter, IMethod method, object[] arguments)
+        {
+            Message message = new Message(interpreter.Machine, method, arguments);
+            this.queue.PostMessage(message);
+            return null;    // TODO what to return?
+        }
+
         private void Execute()
         {
             while (true)

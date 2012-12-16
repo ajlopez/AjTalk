@@ -32,7 +32,7 @@
             Assert.AreEqual(2, this.block.NoConstants);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(6, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
         }
 
@@ -46,7 +46,7 @@
             Assert.AreEqual(3, this.block.NoConstants);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(7, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
             BlockDecompiler decompiler = new BlockDecompiler(this.block);
             var program = decompiler.Decompile();
@@ -67,7 +67,7 @@
             Assert.AreEqual(3, this.block.NoConstants);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(7, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
             BlockDecompiler decompiler = new BlockDecompiler(this.block);
             var program = decompiler.Decompile();
@@ -88,7 +88,7 @@
             Assert.AreEqual(5, this.block.NoConstants);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(21, this.block.ByteCodes.Length);
+            Assert.AreEqual(12, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
             BlockDecompiler decompiler = new BlockDecompiler(this.block);
             var program = decompiler.Decompile();
@@ -112,7 +112,7 @@
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.AreEqual(2, this.block.NoGlobalNames);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(8, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
             BlockDecompiler decompiler = new BlockDecompiler(this.block);
             var program = decompiler.Decompile();
@@ -135,7 +135,7 @@
             Assert.AreEqual(3, this.block.NoGlobalNames);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(10, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
         }
 
@@ -150,7 +150,7 @@
             Assert.AreEqual(2, this.block.NoConstants);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(21, this.block.ByteCodes.Length);
+            Assert.AreEqual(12, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
         }
 
@@ -165,7 +165,7 @@
             Assert.AreEqual(3, this.block.NoConstants);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(21, this.block.ByteCodes.Length);
+            Assert.AreEqual(14, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
         }
 
@@ -190,7 +190,7 @@
             Assert.AreEqual(1, this.block.NoGlobalNames);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(2, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
         }
 
@@ -205,7 +205,7 @@
             Assert.AreEqual(0, this.block.NoGlobalNames);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(6, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
         }
 
@@ -219,7 +219,7 @@
             Assert.AreEqual(3, this.block.NoConstants);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(8, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
         }
 
@@ -233,7 +233,7 @@
             Assert.AreEqual(1, this.block.NoGlobalNames);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(10, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
         }
 
@@ -246,7 +246,7 @@
             Assert.AreEqual(3, this.block.NoConstants);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(21, this.block.ByteCodes.Length);
+            Assert.AreEqual(12, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
         }
 
@@ -260,7 +260,7 @@
             Assert.AreEqual(1, this.block.NoConstants);
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(4, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
 
             object constant = this.block.GetConstant(0);
@@ -272,7 +272,7 @@
             Assert.AreEqual(0, newblock.Arity);
             Assert.AreEqual(0, newblock.NoLocals);
             Assert.IsNotNull(newblock.ByteCodes);
-            Assert.AreEqual(11, newblock.ByteCodes.Length);
+            Assert.AreEqual(4, newblock.ByteCodes.Length);
         }
 
         [TestMethod]
@@ -286,7 +286,7 @@
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.AreEqual(1, this.block.NoConstants);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(2, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
 
             object constant = this.block.GetConstant(0);
@@ -299,7 +299,7 @@
             Assert.AreEqual(0, newblock.NoLocals);
             Assert.AreEqual(1, newblock.NoConstants);
             Assert.IsNotNull(newblock.ByteCodes);
-            Assert.AreEqual(11, newblock.ByteCodes.Length);
+            Assert.AreEqual(5, newblock.ByteCodes.Length);
             Assert.AreEqual(1, newblock.Arity);
         }
 
@@ -314,7 +314,7 @@
             Assert.AreEqual(0, this.block.NoLocals);
             Assert.AreEqual(1, this.block.NoConstants);
             Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(11, this.block.ByteCodes.Length);
+            Assert.AreEqual(2, this.block.ByteCodes.Length);
             Assert.AreEqual(0, this.block.Arity);
 
             object constant = this.block.GetConstant(0);
@@ -327,7 +327,7 @@
             Assert.AreEqual(0, newblock.NoGlobalNames);
             Assert.AreEqual(1, newblock.NoConstants);
             Assert.IsNotNull(newblock.ByteCodes);
-            Assert.AreEqual(11, newblock.ByteCodes.Length);
+            Assert.AreEqual(7, newblock.ByteCodes.Length);
             Assert.AreEqual(2, newblock.Arity);
         }
 

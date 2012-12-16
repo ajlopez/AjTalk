@@ -52,6 +52,11 @@
             return this.obj.ExecuteMethod(machine, method, arguments);
         }
 
+        public object ExecuteMethod(Interpreter interpreter, IMethod method, object[] arguments)
+        {
+            return this.obj.ExecuteMethod(interpreter, method, arguments);
+        }
+
         public void DefineObjectMethod(IMethod method)
         {
             this.obj.DefineObjectMethod(method);

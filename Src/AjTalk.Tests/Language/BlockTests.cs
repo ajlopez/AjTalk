@@ -88,7 +88,7 @@ namespace AjTalk.Tests.Language
 
             block = new Block();
 
-            object obj = block.Execute(null, null);
+            object obj = block.Execute((Machine)null, null);
 
             Assert.IsNull(obj);
         }

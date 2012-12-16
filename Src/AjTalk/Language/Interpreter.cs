@@ -32,6 +32,8 @@
             this.context = context;
         }
 
+        public Machine Machine { get { return this.context.Machine; } }
+
         public object Execute()
         {
             this.context.InstructionPointer = 0;
@@ -41,8 +43,18 @@
             // TODO refactor lastreceiver process
             // TODO refactor switch
             if (this.context.Block.Bytecodes != null)
-                while (this.context.HasReturnValue == false && this.context.InstructionPointer < this.context.Block.ByteCodes.Length)
+                while (true)
                 {
+                    while (this.context.Sender != null && (this.context.HasReturnValue || this.context.Block.Bytecodes == null || this.context.InstructionPointer >= this.context.Block.ByteCodes.Length))
+                    {
+                        object retvalue = this.GetReturnValue();
+                        this.PopContext(retvalue);
+                        this.context.InstructionPointer++;
+                    }
+
+                    if (this.context.HasReturnValue || this.context.Block.Bytecodes == null || this.context.InstructionPointer >= this.context.Block.ByteCodes.Length)
+                        break;
+
                     ByteCode bc = (ByteCode)this.context.Block.ByteCodes[this.context.InstructionPointer];
                     byte arg;
 
@@ -250,7 +262,7 @@
                             else if (this.context.Machine == null)
                                 value = ((IObject)obj).SendMessage(null, mthname, args);
                             else
-                                value = this.context.Machine.SendMessage(obj, mthname, args);
+                                value = this.context.Machine.SendMessage(obj, mthname, args, this);
 
                             if (value == this)
                                 continue;
@@ -264,9 +276,7 @@
                             args = new object[arg];
 
                             for (int k = arg - 1; k >= 0; k--)
-                            {
                                 args[k] = this.context.Pop();
-                            }
 
                             this.context.Push(new ArrayList(args));
 
@@ -278,9 +288,7 @@
                             args = new object[arg];
 
                             for (int k = arg - 1; k >= 0; k--)
-                            {
                                 args[k] = this.context.Pop();
-                            }
 
                             obj = this.context.Pop();
                             this.context.LastReceiver = obj;
@@ -298,9 +306,7 @@
                             args = new object[arg];
 
                             for (int k = arg - 1; k >= 0; k--)
-                            {
                                 args[k] = this.context.Pop();
-                            }
 
                             obj = this.context.Pop();
                             this.context.LastReceiver = obj;
@@ -337,14 +343,6 @@
                     }
 
                     this.context.InstructionPointer++;
-
-                    // TODO review is ask for Sender or ReturnExecutionContext
-                    while ((this.context.HasReturnValue || this.context.InstructionPointer >= this.context.Block.ByteCodes.Length) && this.context.Sender != null)
-                    {
-                        object retvalue = this.GetReturnValue();
-                        this.PopContext(retvalue);
-                        this.context.InstructionPointer++;
-                    }
                 }
 
             return this.GetReturnValue();

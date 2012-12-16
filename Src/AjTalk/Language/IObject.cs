@@ -17,6 +17,8 @@ namespace AjTalk.Language
 
         object ExecuteMethod(Machine machine, IMethod method, object[] arguments);
 
+        object ExecuteMethod(Interpreter interpreter, IMethod method, object[] arguments);
+
         void DefineObjectMethod(IMethod method);
     }
 }

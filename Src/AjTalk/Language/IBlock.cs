@@ -12,6 +12,6 @@ namespace AjTalk.Language
 
         object Execute(Machine machine, object[] args);
 
-        object ExecuteInProcess(Process process, object[] args);
+        object ExecuteInInterpreter(Interpreter interpreter, object[] args);
     }
 }

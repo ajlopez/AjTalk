@@ -319,7 +319,7 @@ namespace AjTalk
             return this.remotehosts.Values;
         }
 
-        public object SendMessage(object obj, string msgname, object[] args)
+        public object SendMessage(object obj, string msgname, object[] args, Interpreter interpreter)
         {
             if (this.debug)
             {
@@ -355,7 +355,13 @@ namespace AjTalk
             IObject iobj = obj as IObject;
 
             if (iobj != null)
-                return iobj.Behavior.SendMessageToObject(iobj, this, msgname, args);
+                if (interpreter == null)
+                    return iobj.Behavior.SendMessageToObject(iobj, this, msgname, args);
+                else
+                    return iobj.Behavior.SendMessageToObject(iobj, interpreter, msgname, args);
+
+            if (interpreter != null)
+                return DotNetObject.SendMessage(interpreter, obj, msgname, args);
 
             return DotNetObject.SendMessage(this, obj, msgname, args);
         }

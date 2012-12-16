@@ -83,9 +83,21 @@ namespace AjTalk.Language
             return (new Interpreter(new ExecutionContext(machine, self, this, args))).Execute();
         }
 
+        public object ExecuteInInterpreter(Interpreter interpreter, IObject self, object[] args)
+        {
+            interpreter.PushContext(new ExecutionContext(interpreter.Machine, self, this, args));
+            return interpreter;
+        }
+
         public object ExecuteNative(Machine machine, object self, object[] args)
         {
             return (new Interpreter(new ExecutionContext(machine, self, this, args))).Execute();
+        }
+
+        public object ExecuteNativeInInterpreter(Interpreter interpreter, object self, object[] args)
+        {
+            interpreter.PushContext(new ExecutionContext(interpreter.Machine, self, this, args));
+            return interpreter;
         }
 
         public override string GetInstanceVariableName(int n)

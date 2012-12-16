@@ -79,7 +79,7 @@
         {
             var cls = this.machine.CreateClass("MyClass", this.machine.UndefinedObjectClass, "x", string.Empty);
             this.machine.SetCurrentEnvironmentObject(cls.Name, cls);
-            var result = this.Evaluate("myobj := MyClass new");
+            var result = this.Evaluate("myobj := MyClass basicNew");
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IObject));
             var iobj = (IObject)result;
@@ -378,7 +378,7 @@
         public void BasicNewObject()
         {
             IClass clss = (IClass)this.Evaluate("nil subclass: #Object");
-            object result = this.Evaluate("Object new");
+            object result = this.Evaluate("Object basicNew");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IObject));
@@ -432,7 +432,7 @@
         [TestMethod]
         public void CreateAgent()
         {
-            object result = this.Evaluate("nil agent: #Agent. Agent new");
+            object result = this.Evaluate("nil agent: #Agent. Agent basicNew");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(AgentObject));
@@ -469,7 +469,7 @@
 
             behavior.DefineInstanceMethod(new FunctionalMethod("sethandle", null, (self, receiver, args) => { thread = Thread.CurrentThread;  return handle.Set(); }));
 
-            object result = this.Evaluate("Agent new sethandle");
+            object result = this.Evaluate("Agent basicNew sethandle");
 
             handle.WaitOne();
             Assert.IsNull(result);

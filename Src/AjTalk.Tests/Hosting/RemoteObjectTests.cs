@@ -49,7 +49,7 @@
             BaseObject obj = new BaseObject(cls, new object[1]);
             RemoteObject ro = new RemoteObject(obj, null);
 
-            machine.SendMessage(ro, "x:", new object[] { 10 });
+            machine.SendMessage(ro, "x:", new object[] { 10 }, null);
 
             Assert.AreEqual(10, obj[0]);
         }

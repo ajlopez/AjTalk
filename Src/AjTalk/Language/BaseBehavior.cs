@@ -161,6 +161,22 @@
             return DotNetObject.SendMessage(machine, self, msgname, args);
         }
 
+        public object SendMessageToObject(IObject self, Interpreter interpreter, string msgname, object[] args)
+        {
+            IMethod mth = this.GetInstanceMethod(msgname);
+
+            // TODO refactor self == null, it could be all in SendMessageToNilObject
+            if (mth != null)
+                return self.ExecuteMethod(interpreter, mth, args);
+
+            mth = this.GetInstanceMethod("doesNotUnderstand:with:");
+
+            if (mth != null)
+                return self.ExecuteMethod(interpreter, mth, new object[] { msgname, args });
+
+            return DotNetObject.SendMessage(interpreter.Machine, self, msgname, args);
+        }
+
         public object SendMessageToNilObject(Machine machine, string msgname, object[] args)
         {
             IMethod mth = this.GetInstanceMethod(msgname);

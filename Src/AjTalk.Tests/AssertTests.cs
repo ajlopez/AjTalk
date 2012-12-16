@@ -66,6 +66,7 @@
         }
 
         [TestMethod]
+        [Ignore]
         public void ObjectAsserts()
         {
             DoAssert("Object");

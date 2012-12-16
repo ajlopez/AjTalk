@@ -25,7 +25,7 @@ rect := Rectangle new.
 
 [rect isMemberOf: Rectangle] assert.
 [obj isMemberOf: Rectangle] assertFalse.
-
+"
 [rect isKindOf: Object] assert.
 [obj isKindOf: Object] assert.
 
@@ -36,7 +36,7 @@ rect := Rectangle new.
 [1 isMemberOf: String] assertFalse.
 
 [[true] isMemberOf: Block] assert.
-
+"
 !
 
 | obj |
@@ -51,4 +51,3 @@ obj compile: 'sayHello: name ^''Hello '', name'.
 [obj isPrototype] assert.
 [obj isMemberOf: Object] assertFalse.
 [obj isKindOf: Object] assert.
-

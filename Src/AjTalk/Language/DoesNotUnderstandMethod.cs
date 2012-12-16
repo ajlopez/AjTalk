@@ -36,17 +36,27 @@
             return this.DoesNotUnderstand(machine, self, (string)args[0], (object[])args[1]);
         }
 
+        public object ExecuteInInterpreter(Interpreter interpreter, IObject self, object[] args)
+        {
+            return this.DoesNotUnderstand(interpreter, self, (string)args[0], (object[])args[1]);
+        }
+
         public object Execute(Machine machine, object[] args)
         {
             throw new NotImplementedException();
         }
 
-        public object ExecuteInProcess(Process process, object[] args)
+        public object ExecuteInInterpreter(Interpreter interpreter, object[] args)
         {
             throw new NotImplementedException();
         }
 
         public object ExecuteNative(Machine machine, object self, object[] args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object ExecuteNativeInInterpreter(Interpreter interpreter, object self, object[] args)
         {
             throw new NotImplementedException();
         }
@@ -72,6 +82,29 @@
             }
 
             return DotNetObject.SendMessage(machine, self, msgname, args);
+        }
+
+        protected virtual object DoesNotUnderstand(Interpreter interpreter, IObject self, string msgname, object[] args)
+        {
+            if (interpreter.Machine.HostMachine != null)
+            {
+                IBehavior behavior = interpreter.Machine.HostMachine.GetAssociatedBehavior(self.Behavior);
+
+                if (behavior != null)
+                {
+                    IMethod method = behavior.GetInstanceMethod(msgname);
+
+                    if (method != null)
+                        return method.ExecuteInInterpreter(interpreter, self, args);
+
+                    method = behavior.GetInstanceMethod(this.Name);
+
+                    if (method != null)
+                        return method.ExecuteInInterpreter(interpreter, self, new object[] { msgname, args });
+                }
+            }
+
+            return DotNetObject.SendMessage(interpreter.Machine, self, msgname, args);
         }
     }
 }

@@ -101,7 +101,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(2, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(6, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -113,7 +113,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(2, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(6, block.ByteCodes.Length);
             Assert.AreEqual(ByteCode.GetSelf, (ByteCode)block.ByteCodes[0]);
             Assert.AreEqual(0, block.Arity);
         }
@@ -125,7 +125,7 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(block);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(7, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -137,7 +137,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(3, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(7, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -149,7 +149,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(5, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(21, block.ByteCodes.Length);
+            Assert.AreEqual(12, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -162,7 +162,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(0, block.NoLocals);
             Assert.AreEqual(2, block.NoGlobalNames);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(8, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -175,7 +175,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(3, block.NoGlobalNames);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(10, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -188,7 +188,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(2, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(21, block.ByteCodes.Length);
+            Assert.AreEqual(12, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -201,7 +201,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(3, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(21, block.ByteCodes.Length);
+            Assert.AreEqual(14, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -223,7 +223,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(1, block.NoGlobalNames);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(2, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -236,7 +236,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(0, block.NoGlobalNames);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(6, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -248,7 +248,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(3, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(8, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -261,7 +261,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(1, block.NoGlobalNames);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(10, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -273,7 +273,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(3, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(21, block.ByteCodes.Length);
+            Assert.AreEqual(12, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
         }
 
@@ -294,7 +294,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(1, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(4, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
 
             object constant = block.GetConstant(0);
@@ -306,7 +306,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(0, newblock.Arity);
             Assert.AreEqual(0, newblock.NoLocals);
             Assert.IsNotNull(newblock.ByteCodes);
-            Assert.AreEqual(11, newblock.ByteCodes.Length);
+            Assert.AreEqual(4, newblock.ByteCodes.Length);
         }
 
         [TestMethod]
@@ -319,7 +319,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(0, block.NoLocals);
             Assert.AreEqual(1, block.NoConstants);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(5, block.ByteCodes.Length);
             Assert.AreEqual(1, block.Arity);
 
             object constant = block.GetConstant(0);
@@ -339,7 +339,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(0, block.NoGlobalNames);
             Assert.AreEqual(1, block.NoConstants);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(7, block.ByteCodes.Length);
             Assert.AreEqual(2, block.Arity);
         }
 

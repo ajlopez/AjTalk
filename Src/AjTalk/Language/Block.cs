@@ -306,9 +306,10 @@ namespace AjTalk.Language
             return (new Interpreter(this.CreateContext(machine, args)).Execute());
         }
 
-        public virtual object ExecuteInProcess(Process process, object[] args)
+        public virtual object ExecuteInInterpreter(Interpreter interpreter, object[] args)
         {
-            return process.CallContext(this.CreateContext(process.Machine, args));
+            interpreter.PushContext(this.CreateContext(interpreter.Machine, args));
+            return interpreter;
         }
 
         public virtual void CompileGet(string name)
@@ -505,7 +506,7 @@ namespace AjTalk.Language
 
             if (this.nextbytecode >= this.bytecodes.Length)
             {
-                byte[] aux = new byte[this.bytecodes.Length + 10];
+                byte[] aux = new byte[this.bytecodes.Length + 1];
                 Array.Copy(this.bytecodes, aux, this.bytecodes.Length);
                 this.bytecodes = aux;
             }

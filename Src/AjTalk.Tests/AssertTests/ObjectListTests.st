@@ -11,8 +11,10 @@ list add: 2.
 [(list at: 2) == 2] assert.
 
 [list anySatisfy: [ :item | item == 1]] assert.
+"
 [list anySatisfy: [ :item | item == 2]] assert.
 [list anySatisfy: [ :item | item == 3]] assertFalse.
+"
 
 list at: 1 put: 10.
 

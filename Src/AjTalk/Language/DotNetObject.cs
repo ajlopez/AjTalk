@@ -152,6 +152,60 @@
             return SendNativeMessage(machine, obj, mthname, args);
         }
 
+        public static object SendMessage(Interpreter interpreter, object obj, string msgname, object[] args)
+        {
+            if (obj == null)
+                return SendNativeMessage(interpreter.Machine, obj, msgname, args);
+
+            NativeBehavior behavior = interpreter.Machine.GetNativeBehavior(obj.GetType());
+
+            if (behavior != null)
+            {
+                IMethod mth = behavior.GetInstanceMethod(msgname);
+
+                if (mth != null)
+                    return mth.ExecuteNativeInInterpreter(interpreter, obj, args);
+            }
+
+            string mthname = msgname;
+            int p = msgname.IndexOf(":");
+
+            if (p > 0)
+                mthname = msgname.Substring(0, p);
+            else
+                mthname = msgname;
+
+            if (obj is Type)
+            {
+                if (msgname == "new" || msgname.StartsWith("new:"))
+                    return NewObject((Type)obj, args);
+            }
+
+            if (obj is IList)
+            {
+                behavior = interpreter.Machine.GetNativeBehavior(typeof(IList));
+                IMethod mth = behavior.GetInstanceMethod(msgname);
+
+                if (mth != null)
+                    return mth.ExecuteNativeInInterpreter(interpreter, obj, args);
+            }
+
+            if (obj is IEnumerable)
+            {
+                behavior = interpreter.Machine.GetNativeBehavior(typeof(IEnumerable));
+                IMethod mth = behavior.GetInstanceMethod(msgname);
+
+                if (mth != null)
+                    return mth.ExecuteNativeInInterpreter(interpreter, obj, args);
+            }
+
+            // TODO how to use doesNotUnderstand in native behavior
+            // mth = behavior.GetInstanceMethod("doesNotUnderstand:with:");
+            // if (mth != null)
+            //    return mth.ExecuteNative(obj, new object[] { msgname, args });
+            return SendNativeMessage(interpreter.Machine, obj, mthname, args);
+        }
+
         private static object AtMethod(Machine machine, object obj, object[] args)
         {
             return ((IList)obj)[(int)args[0]];

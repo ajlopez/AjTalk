@@ -106,6 +106,11 @@
             return method.Execute(machine, this, arguments);
         }
 
+        public virtual object ExecuteMethod(Interpreter interpreter, IMethod method, object[] arguments)
+        {
+            return method.ExecuteInInterpreter(interpreter, this, arguments);
+        }
+
         public virtual object ExecuteMethod(IObject self, Machine machine, IMethod method, object[] arguments)
         {
             return method.Execute(machine, self, arguments);

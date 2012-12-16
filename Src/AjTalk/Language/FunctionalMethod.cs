@@ -51,6 +51,11 @@
             return this.function(machine, self, self, args);
         }
 
+        public object ExecuteInInterpreter(Interpreter interpreter, IObject self, object[] args)
+        {
+            return this.Execute(interpreter.Machine, self, args);
+        }
+
         public object Execute(Machine machine, IObject self, IObject receiver, object[] args)
         {
             // TODO review, used in Machine to define ifNil:
@@ -65,12 +70,17 @@
             return this.nativeFunction(machine, self, args);
         }
 
+        public object ExecuteNativeInInterpreter(Interpreter interpreter, object self, object[] args)
+        {
+            return this.nativeFunction(interpreter.Machine, self, args);
+        }
+
         public object Execute(Machine machine, object[] args)
         {
             throw new NotImplementedException();
         }
 
-        public object ExecuteInProcess(Process process, object[] args)
+        public object ExecuteInInterpreter(Interpreter interpreter, object[] args)
         {
             throw new NotImplementedException();
         }
