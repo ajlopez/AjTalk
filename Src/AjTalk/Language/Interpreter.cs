@@ -191,27 +191,34 @@
                             arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
                             this.context.Push(this.context.Self[arg]);
                             break;
+
                         case ByteCode.NewObject:
                             IBehavior ibeh = (IBehavior)this.context.Pop();
                             this.context.LastReceiver = ibeh;
                             this.context.Push(ibeh.NewObject());
                             break;
+
                         case ByteCode.Nop:
                             break;
+
                         case ByteCode.Pop:
                             this.context.Pop();
+
                             break;
+
                         case ByteCode.InstSize:
                             IObject iobj = (IObject)this.context.Pop();
                             this.context.LastReceiver = iobj;
                             this.context.Push(iobj.Behavior.NoInstanceVariables);
                             break;
+
                         case ByteCode.InstAt:
                             int pos = (int)this.context.Pop();
                             iobj = (IObject)this.context.Pop();
                             this.context.LastReceiver = iobj;
                             this.context.Push(iobj[pos]);
                             break;
+
                         case ByteCode.InstAtPut:
                             object par = this.context.Pop();
                             pos = (int)this.context.Pop();
@@ -296,6 +303,7 @@
                             this.context.Push(DotNetObject.NewObject((Type)obj, args));
 
                             break;
+
                         case ByteCode.InvokeDotNetMethod:
                             this.context.InstructionPointer++;
                             arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
@@ -328,6 +336,45 @@
                             this.context.Push(value);
                             this.context.LastReceiver = null;
                             break;
+
+                        case ByteCode.JumpIfFalse:
+                            cond = (bool)this.context.Pop();
+                            this.context.InstructionPointer++;
+                            int jump = this.context.Block.Bytecodes[this.context.InstructionPointer];
+                            this.context.InstructionPointer++;
+                            jump = jump * 256 + this.context.Block.Bytecodes[this.context.InstructionPointer];
+                            
+                            if (!cond)
+                            {
+                                this.context.InstructionPointer = jump;
+                                continue;
+                            }
+
+                            break;
+
+                        case ByteCode.JumpIfTrue:
+                            cond = (bool)this.context.Pop();
+                            this.context.InstructionPointer++;
+                            jump = this.context.Block.Bytecodes[this.context.InstructionPointer];
+                            this.context.InstructionPointer++;
+                            jump = jump * 256 + this.context.Block.Bytecodes[this.context.InstructionPointer];
+
+                            if (cond)
+                            {
+                                this.context.InstructionPointer = jump;
+                                continue;
+                            }
+
+                            break;
+
+                        case ByteCode.Jump:
+                            this.context.InstructionPointer++;
+                            jump = this.context.Block.Bytecodes[this.context.InstructionPointer];
+                            this.context.InstructionPointer++;
+                            jump = jump * 256 + this.context.Block.Bytecodes[this.context.InstructionPointer];
+                            this.context.InstructionPointer = jump;
+                            continue;
+
                         case ByteCode.SetInstanceVariable:
                             this.context.InstructionPointer++;
                             arg = this.context.Block.ByteCodes[this.context.InstructionPointer];

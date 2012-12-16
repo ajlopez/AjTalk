@@ -1142,6 +1142,46 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual("Send new 0", steps[1]);
         }
 
+        [TestMethod]
+        public void CompileWhileFalse()
+        {
+            Parser compiler = new Parser(":arg | [arg < 3] whileFalse: [arg := arg + 1]");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(13, block.Bytecodes.Length);
+            var decompiler = new BlockDecompiler(block);
+            var steps = decompiler.Decompile();
+            Assert.IsNotNull(steps);
+            Assert.AreEqual(7, steps.Count);
+            Assert.AreEqual("GetBlock { GetArgument arg; GetConstant 3; Send < 1 }", steps[0]);
+            Assert.AreEqual("Value", steps[1]);
+            Assert.AreEqual("JumpIfTrue 13", steps[2]);
+            Assert.AreEqual("GetBlock { GetArgument arg; GetConstant 1; Send + 1; SetArgument arg }", steps[3]);
+            Assert.AreEqual("Value", steps[4]);
+            Assert.AreEqual("Pop", steps[5]);
+            Assert.AreEqual("Jump 0", steps[6]);
+        }
+
+        [TestMethod]
+        public void CompileWhileTrue()
+        {
+            Parser compiler = new Parser(":arg | [arg < 3] whileTrue: [arg := arg + 1]");
+            Block block = compiler.CompileBlock();
+            Assert.IsNotNull(block);
+            Assert.AreEqual(13, block.Bytecodes.Length);
+            var decompiler = new BlockDecompiler(block);
+            var steps = decompiler.Decompile();
+            Assert.IsNotNull(steps);
+            Assert.AreEqual(7, steps.Count);
+            Assert.AreEqual("GetBlock { GetArgument arg; GetConstant 3; Send < 1 }", steps[0]);
+            Assert.AreEqual("Value", steps[1]);
+            Assert.AreEqual("JumpIfFalse 13", steps[2]);
+            Assert.AreEqual("GetBlock { GetArgument arg; GetConstant 1; Send + 1; SetArgument arg }", steps[3]);
+            Assert.AreEqual("Value", steps[4]);
+            Assert.AreEqual("Pop", steps[5]);
+            Assert.AreEqual("Jump 0", steps[6]);
+        }
+
         internal static IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return CompileClass(clsname, varnames, methods, null);

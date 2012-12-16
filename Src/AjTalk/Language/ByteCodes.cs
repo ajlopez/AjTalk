@@ -56,6 +56,10 @@ namespace AjTalk.Language
         IfTrue = 90,
         IfFalse = 91,
         IfTrueFalse = 92,
-        IfFalseTrue = 93
+        IfFalseTrue = 93,
+
+        Jump = 100,
+        JumpIfFalse = 101,
+        JumpIfTrue = 102
     }
 }

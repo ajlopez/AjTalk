@@ -833,6 +833,64 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual("Send at: 1", steps[4]);
         }
 
+        [TestMethod]
+        public void CompileBlockWithDot()
+        {
+            Block block = this.compiler.CompileBlock("[. 1. 2]");
+            Assert.IsNotNull(block);
+        }
+
+        [TestMethod]
+        public void CompileSuperNew()
+        {
+            Block block = this.compiler.CompileInstanceMethod("new super new", null);
+            Assert.IsNotNull(block);
+            var decompiler = new BlockDecompiler(block);
+            var steps = decompiler.Decompile();
+            Assert.IsNotNull(steps);
+            Assert.AreEqual(2, steps.Count);
+            Assert.AreEqual("GetSuper", steps[0]);
+            Assert.AreEqual("Send new 0", steps[1]);
+        }
+
+        [TestMethod]
+        public void CompileWhileFalse()
+        {
+            Block block = this.compiler.CompileBlock(":arg | [arg < 3] whileFalse: [arg := arg + 1]");
+            Assert.IsNotNull(block);
+            Assert.AreEqual(13, block.Bytecodes.Length);
+            var decompiler = new BlockDecompiler(block);
+            var steps = decompiler.Decompile();
+            Assert.IsNotNull(steps);
+            Assert.AreEqual(7, steps.Count);
+            Assert.AreEqual("GetBlock { GetArgument arg; GetConstant 3; Send < 1 }", steps[0]);
+            Assert.AreEqual("Value", steps[1]);
+            Assert.AreEqual("JumpIfTrue 13", steps[2]);
+            Assert.AreEqual("GetBlock { GetArgument arg; GetConstant 1; Send + 1; SetArgument arg }", steps[3]);
+            Assert.AreEqual("Value", steps[4]);
+            Assert.AreEqual("Pop", steps[5]);
+            Assert.AreEqual("Jump 0", steps[6]);
+        }
+
+        [TestMethod]
+        public void CompileWhileTrue()
+        {
+            Block block = this.compiler.CompileBlock(":arg | [arg < 3] whileTrue: [arg := arg + 1]");
+            Assert.IsNotNull(block);
+            Assert.AreEqual(13, block.Bytecodes.Length);
+            var decompiler = new BlockDecompiler(block);
+            var steps = decompiler.Decompile();
+            Assert.IsNotNull(steps);
+            Assert.AreEqual(7, steps.Count);
+            Assert.AreEqual("GetBlock { GetArgument arg; GetConstant 3; Send < 1 }", steps[0]);
+            Assert.AreEqual("Value", steps[1]);
+            Assert.AreEqual("JumpIfFalse 13", steps[2]);
+            Assert.AreEqual("GetBlock { GetArgument arg; GetConstant 1; Send + 1; SetArgument arg }", steps[3]);
+            Assert.AreEqual("Value", steps[4]);
+            Assert.AreEqual("Pop", steps[5]);
+            Assert.AreEqual("Jump 0", steps[6]);
+        }
+
         internal IClass CompileClass(string clsname, string[] varnames, string[] methods)
         {
             return this.CompileClass(clsname, varnames, methods, null);

@@ -204,6 +204,37 @@ namespace AjTalk.Language
             this.CompileByte((byte)b);
         }
 
+        public void CompileJumpByteCode(ByteCode b, short jump)
+        {
+            this.CompileByte((byte)b);
+            this.CompileByte((byte)(jump >> 8));
+            this.CompileByte((byte)(jump & 0xff));
+        }
+
+        public void CompileJumpByteCodeAt(ByteCode b, short jump, int position)
+        {
+            this.bytecodes[position] = (byte)b;
+            this.bytecodes[position + 1] = (byte)(jump >> 8);
+            this.bytecodes[position + 2] = (byte)(jump & 0xff);
+        }
+
+        public void CompileBlockJumpByteCodeAt(ByteCode b, short jump, int position)
+        {
+            this.bytecodes[position] = (byte)ByteCode.Value;
+            this.bytecodes[position + 1] = (byte)b;
+            this.bytecodes[position + 2] = (byte)(jump >> 8);
+            this.bytecodes[position + 3] = (byte)(jump & 0xff);
+        }
+
+        public void CompileInsert(int position, int count)
+        {
+            byte[] aux = new byte[this.bytecodes.Length + count];
+            Array.Copy(this.bytecodes, aux, position);
+            Array.Copy(this.bytecodes, position, aux, position + count, this.bytecodes.Length - position);
+            this.bytecodes = aux;
+            this.nextbytecode += (short)count;
+        }
+
         public void CompileByteCode(ByteCode b, byte arg)
         {
             this.CompileByteCode(b);

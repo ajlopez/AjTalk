@@ -134,7 +134,20 @@
                     case ByteCode.GetSelf:
                     case ByteCode.GetSuper:
                     case ByteCode.Value:
+                    case ByteCode.IfTrue:
+                    case ByteCode.IfFalse:
+                    case ByteCode.Pop:
                         codes.Add(string.Format("{0}", bc));
+                        break;
+
+                    case ByteCode.Jump:
+                    case ByteCode.JumpIfFalse:
+                    case ByteCode.JumpIfTrue:
+                        ip++;
+                        int jump = this.block.ByteCodes[ip];
+                        ip++;
+                        jump = jump * 256 + this.block.ByteCodes[ip];
+                        codes.Add(string.Format("{0} {1}", bc, jump));
                         break;
 
                     case ByteCode.MakeCollection:

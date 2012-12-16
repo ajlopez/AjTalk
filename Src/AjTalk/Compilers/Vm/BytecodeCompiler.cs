@@ -88,12 +88,25 @@
 
         public override void Visit(MessageExpression expression)
         {
+            int initialposition = this.block.Bytecodes == null ? 0 : this.block.Bytecodes.Length;
+
             expression.Target.Visit(this);
-            
+
+            int condposition = this.block.Bytecodes == null ? 0 : this.block.Bytecodes.Length;
+
             foreach (var arg in expression.Arguments)
                 arg.Visit(this);
 
-            if (expression.IsBinaryMessage)
+            if (expression.Selector == "whileTrue:" || expression.Selector == "whileFalse:")
+            {
+                this.block.CompileByteCode(ByteCode.Value);
+                this.block.CompileByteCode(ByteCode.Pop);
+                this.block.CompileJumpByteCode(ByteCode.Jump, (short)initialposition);
+                this.block.CompileInsert(condposition, 4);
+                int finalposition = this.block.Bytecodes.Length;
+                this.block.CompileBlockJumpByteCodeAt(expression.Selector == "whileFalse:" ? ByteCode.JumpIfTrue : ByteCode.JumpIfFalse, (short)finalposition, condposition);
+            }
+            else if (expression.IsBinaryMessage)
                 this.block.CompileBinarySend(expression.Selector);
             else
                 this.block.CompileSend(expression.Selector);

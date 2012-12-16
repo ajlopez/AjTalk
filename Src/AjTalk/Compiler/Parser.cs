@@ -538,7 +538,11 @@ namespace AjTalk.Compiler
 
         private void CompileKeywordExpression()
         {
+            int initialposition = this.block.Bytecodes == null ? 0 : this.block.Bytecodes.Length;
+
             this.CompileBinaryExpression();
+
+            int condposition = this.block.Bytecodes == null ? 0 : this.block.Bytecodes.Length;
 
             string mthname = string.Empty;
             Token token;
@@ -553,14 +557,19 @@ namespace AjTalk.Compiler
             }
 
             if (token != null)
-            {
                 this.PushToken(token);
-            }
 
-            if (mthname != string.Empty)
+            if (mthname == "whileFalse:" || mthname == "whileTrue:")
             {
-                this.block.CompileSend(mthname);
+                this.block.CompileByteCode(ByteCode.Value);
+                this.block.CompileByteCode(ByteCode.Pop);
+                this.block.CompileJumpByteCode(ByteCode.Jump, (short)initialposition);
+                this.block.CompileInsert(condposition, 4);
+                int finalposition = this.block.Bytecodes.Length;
+                this.block.CompileBlockJumpByteCodeAt(mthname == "whileFalse:" ? ByteCode.JumpIfTrue : ByteCode.JumpIfFalse, (short)finalposition, condposition);
             }
+            else if (mthname != string.Empty)
+                this.block.CompileSend(mthname);
         }
 
         private void CompileExpression()

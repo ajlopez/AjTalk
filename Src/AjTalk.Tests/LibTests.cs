@@ -35,6 +35,13 @@
         }
 
         [TestMethod]
+        public void EvaluateObjectSuperclass()
+        {
+            Assert.IsNull(this.Evaluate("Object superclass"));
+        }
+
+        [TestMethod]
+        [Ignore]
         public void EvaluateInheritsFrom()
         {
             IClass objcls = (IClass)this.machine.GetGlobalObject("Object");

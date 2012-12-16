@@ -112,6 +112,34 @@
         }
 
         [TestMethod]
+        public void DecompileIfFalse()
+        {
+            Block block = new Block();
+            block.CompileByteCode(ByteCode.IfFalse);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("IfFalse", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileIfTrue()
+        {
+            Block block = new Block();
+            block.CompileByteCode(ByteCode.IfTrue);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("IfTrue", result[0]);
+        }
+
+        [TestMethod]
         public void DecompileGetArgument()
         {
             Block block = new Block();
@@ -341,6 +369,26 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual("NamedPrimitive \"do\" \"mod\"", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileJumps()
+        {
+            Block block = new Block();
+            
+            block.CompileJumpByteCode(ByteCode.Jump, 100);
+            block.CompileJumpByteCode(ByteCode.JumpIfFalse, 99);
+            block.CompileJumpByteCode(ByteCode.JumpIfTrue, 101);
+
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual("Jump 100", result[0]);
+            Assert.AreEqual("JumpIfFalse 99", result[1]);
+            Assert.AreEqual("JumpIfTrue 101", result[2]);
         }
     }
 }

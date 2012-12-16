@@ -245,6 +245,87 @@ namespace AjTalk.Tests.Language
             Block block = new Block("x", method);
             Assert.AreEqual(0, block.GetInstanceVariableOffset("x"));
         }
+
+        [TestMethod]
+        public void CompileInsert()
+        {
+            Block block = new Block();
+
+            block.CompileByteCode((ByteCode)1);
+            block.CompileByteCode((ByteCode)2);
+            block.CompileByteCode((ByteCode)3);
+
+            block.CompileInsert(1, 3);
+
+            Assert.AreEqual(6, block.Bytecodes.Length);
+            Assert.AreEqual(1, block.Bytecodes[0]);
+            Assert.AreEqual(0, block.Bytecodes[1]);
+            Assert.AreEqual(0, block.Bytecodes[2]);
+            Assert.AreEqual(0, block.Bytecodes[3]);
+            Assert.AreEqual(2, block.Bytecodes[4]);
+            Assert.AreEqual(3, block.Bytecodes[5]);
+        }
+
+        [TestMethod]
+        public void CompileInsertAndCompileByte()
+        {
+            Block block = new Block();
+
+            block.CompileByteCode((ByteCode)1);
+            block.CompileByteCode((ByteCode)2);
+            block.CompileInsert(1, 3);
+            block.CompileByteCode((ByteCode)3);
+
+            Assert.AreEqual(6, block.Bytecodes.Length);
+            Assert.AreEqual(1, block.Bytecodes[0]);
+            Assert.AreEqual(0, block.Bytecodes[1]);
+            Assert.AreEqual(0, block.Bytecodes[2]);
+            Assert.AreEqual(0, block.Bytecodes[3]);
+            Assert.AreEqual(2, block.Bytecodes[4]);
+            Assert.AreEqual(3, block.Bytecodes[5]);
+        }
+
+        [TestMethod]
+        public void CompileJumps()
+        {
+            Block block = new Block();
+
+            block.CompileJumpByteCode(ByteCode.Jump, 10);
+            block.CompileJumpByteCode(ByteCode.JumpIfFalse, 256);
+            block.CompileJumpByteCode(ByteCode.JumpIfTrue, 1024);
+
+            Assert.AreEqual(9, block.Bytecodes.Length);
+            Assert.AreEqual((byte)ByteCode.Jump, block.Bytecodes[0]);
+            Assert.AreEqual(0, block.Bytecodes[1]);
+            Assert.AreEqual(10, block.Bytecodes[2]);
+            Assert.AreEqual((byte)ByteCode.JumpIfFalse, block.Bytecodes[3]);
+            Assert.AreEqual(1, block.Bytecodes[4]);
+            Assert.AreEqual(0, block.Bytecodes[5]);
+            Assert.AreEqual((byte)ByteCode.JumpIfTrue, block.Bytecodes[6]);
+            Assert.AreEqual(4, block.Bytecodes[7]);
+            Assert.AreEqual(0, block.Bytecodes[8]);
+        }
+
+        [TestMethod]
+        public void CompileJumpAt()
+        {
+            Block block = new Block();
+
+            block.CompileByteCode((ByteCode)1);
+            block.CompileByteCode((ByteCode)2);
+            block.CompileByteCode((ByteCode)3);
+
+            block.CompileInsert(1, 3);
+            block.CompileJumpByteCodeAt(ByteCode.Jump, 10, 1);
+
+            Assert.AreEqual(6, block.Bytecodes.Length);
+            Assert.AreEqual(1, block.Bytecodes[0]);
+            Assert.AreEqual((byte)ByteCode.Jump, block.Bytecodes[1]);
+            Assert.AreEqual(0, block.Bytecodes[2]);
+            Assert.AreEqual(10, block.Bytecodes[3]);
+            Assert.AreEqual(2, block.Bytecodes[4]);
+            Assert.AreEqual(3, block.Bytecodes[5]);
+        }
     }
 }
 

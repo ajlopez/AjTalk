@@ -107,7 +107,9 @@ inheritsFrom: aClass
     aSuperclass := self superclass.
     [aSuperclass == nil]
         whileFalse:
-            [aSuperclass == aClass ifTrue: [^true].
+            [
+            @System.Diagnostics.Trace !!WriteLine: aSuperclass name.
+            aSuperclass == aClass ifTrue: [^true].
             aSuperclass := aSuperclass superclass].
     ^false
 !
@@ -515,7 +517,7 @@ assertAreSame: aValue with: otherValue message: aMessage
 Collection subclass: #Array nativeType: ((@System.Array !!CreateInstance: @System.Object with: 0) !!GetType).
 !
 
-Array !!AddTrait: (Machine !!GetNativeBehavior: @System.Collections.IEnumerable))!
+Array !!AddTrait: (Machine !!GetNativeBehavior: @System.Collections.IEnumerable)!
 
 !Array methods!
 
@@ -533,7 +535,7 @@ at: anIndex put: aValue
 
 Collection subclass: #ObjectDictionary nativeType: @System.Collections.Hashtable!
 
-ObjectDictionary !!AddTrait: (Machine !!GetNativeBehavior: @System.Collections.IEnumerable))!
+ObjectDictionary !!AddTrait: (Machine !!GetNativeBehavior: @System.Collections.IEnumerable)!
 
 !ObjectDictionary methods!
 
