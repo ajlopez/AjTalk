@@ -41,7 +41,6 @@
         }
 
         [TestMethod]
-        [Ignore]
         public void EvaluateInheritsFrom()
         {
             IClass objcls = (IClass)this.machine.GetGlobalObject("Object");
