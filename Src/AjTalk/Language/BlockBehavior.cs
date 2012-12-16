@@ -25,7 +25,7 @@
 
             while (result.Equals(true))
             {
-                body.Execute(this.Machine, arguments);
+                body.Execute(this.Machine, null);
                 if (body.Closure != null && body.Closure.HasReturnValue)
                     return null;
                 result = block.Execute(machine, null);
@@ -42,7 +42,7 @@
 
             while (result.Equals(false))
             {
-                body.Execute(this.Machine, arguments);
+                body.Execute(this.Machine, null);
                 if (body.Closure != null && body.Closure.HasReturnValue)
                     return null;
                 result = block.Execute(machine, null);

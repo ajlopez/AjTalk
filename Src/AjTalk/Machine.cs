@@ -8,6 +8,7 @@ namespace AjTalk
     using AjTalk.Hosting;
     using AjTalk.Language;
     using AjTalk.Transactions;
+    using System.Diagnostics;
 
     public class Machine
     {
@@ -324,9 +325,9 @@ namespace AjTalk
             if (this.debug)
             {
                 if (obj == null)
-                    Console.Write("UndefinedObject");
+                    Trace.Write("UndefinedObject");
                 else if ((obj as IObject) == null)
-                    Console.Write(obj.GetType().FullName);
+                    Trace.Write(obj.GetType().FullName);
                 else 
                 {
                     IObject io = (IObject)obj;
@@ -336,17 +337,17 @@ namespace AjTalk
                         IClass cls = ((IMetaClass)io.Behavior).ClassInstance;
 
                         if (cls == null)
-                            Console.Write("meta");
+                            Trace.Write("meta");
                         else
-                            Console.Write(cls.Name);
-                        Console.Write(" class");
+                            Trace.Write(cls.Name);
+                        Trace.Write(" class");
                     }
                     else
-                        Console.Write(((IClass)io.Behavior).Name);
+                        Trace.Write(((IClass)io.Behavior).Name);
                 }
 
-                Console.Write(">>");
-                Console.WriteLine(msgname);
+                Trace.Write(">>");
+                Trace.WriteLine(msgname);
             }
 
             if (obj == null)

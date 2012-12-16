@@ -254,6 +254,34 @@
         }
 
         [TestMethod]
+        public void DecompileValue()
+        {
+            Block block = new Block();
+            block.CompileByteCode(ByteCode.Value);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("Value", result[0]);
+        }
+
+        [TestMethod]
+        public void DecompileMultiValue()
+        {
+            Block block = new Block();
+            block.CompileByteCode(ByteCode.MultiValue, 2);
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("MultiValue 2", result[0]);
+        }
+
+        [TestMethod]
         public void DecompileGetNativeType()
         {
             Block block = new Block();

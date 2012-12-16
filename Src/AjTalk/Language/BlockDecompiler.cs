@@ -43,7 +43,9 @@
 
             while (ip < nbytes)
             {
-                switch ((ByteCode)this.block.ByteCodes[ip]) 
+                ByteCode bc = (ByteCode)this.block.ByteCodes[ip];
+
+                switch (bc)
                 {
                     case ByteCode.GetConstant:
                         ip++;
@@ -113,6 +115,12 @@
                         codes.Add(string.Format("{0} {1} {2}", ByteCode.Send, selector, arity));
                         break;
 
+                    case ByteCode.MultiValue:
+                        ip++;
+                        arity = this.block.ByteCodes[ip];
+                        codes.Add(string.Format("{0} {1}", ByteCode.MultiValue, arity));
+                        break;
+
                     case ByteCode.GetBlock:
                         ip++;
                         nconstant = this.block.ByteCodes[ip];
@@ -125,7 +133,8 @@
                     case ByteCode.ChainedSend:
                     case ByteCode.GetSelf:
                     case ByteCode.GetSuper:
-                        codes.Add(string.Format("{0}", (ByteCode)this.block.ByteCodes[ip]));
+                    case ByteCode.Value:
+                        codes.Add(string.Format("{0}", bc));
                         break;
 
                     case ByteCode.MakeCollection:

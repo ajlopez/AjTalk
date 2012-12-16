@@ -54,6 +54,7 @@
     <Compile Include="Compiler\SimpleCompilerTests.cs" />
     <Compile Include="Compiler\ParserExpressionsTests.cs" />
     <Compile Include="ContextTests.cs" />
+    <Compile Include="LibTests.cs" />
     <Compile Include="EvaluateProcessTests.cs" />
     <Compile Include="Language\ProcessTests.cs" />
     <Compile Include="LibraryEvaluateTests.cs" />
