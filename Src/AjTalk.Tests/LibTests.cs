@@ -46,7 +46,6 @@
             IClass objcls = (IClass)this.machine.GetGlobalObject("Object");
             IClass rectcls = this.machine.CreateClass("Rectangle", objcls, "x y width rect", "");
             this.machine.SetGlobalObject("Rectangle", rectcls);
-            this.machine.Debug = true;
             Assert.AreEqual(true, this.Evaluate("Rectangle inheritsFrom: Object"));
         }
 
