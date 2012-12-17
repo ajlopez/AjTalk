@@ -112,34 +112,6 @@
         }
 
         [TestMethod]
-        public void DecompileIfFalse()
-        {
-            Block block = new Block();
-            block.CompileByteCode(ByteCode.IfFalse);
-            BlockDecompiler decompiler = new BlockDecompiler(block);
-
-            var result = decompiler.Decompile();
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual("IfFalse", result[0]);
-        }
-
-        [TestMethod]
-        public void DecompileIfTrue()
-        {
-            Block block = new Block();
-            block.CompileByteCode(ByteCode.IfTrue);
-            BlockDecompiler decompiler = new BlockDecompiler(block);
-
-            var result = decompiler.Decompile();
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual("IfTrue", result[0]);
-        }
-
-        [TestMethod]
         public void DecompileGetArgument()
         {
             Block block = new Block();

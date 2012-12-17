@@ -53,8 +53,8 @@ namespace AjTalk.Language
         InvokeDotNetMethod = 82, 
         RaiseException = 83,
 
-        IfTrue = 90,
-        IfFalse = 91,
+        /*IfTrue = 90,
+        IfFalse = 91,*/
         IfTrueFalse = 92,
         IfFalseTrue = 93,
 

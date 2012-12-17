@@ -306,10 +306,6 @@ namespace AjTalk.Language
                 this.CompileByteCode(ByteCode.BasicAt);
             else if (msgname == "basicAt:put:")
                 this.CompileByteCode(ByteCode.BasicAtPut);
-            else if (msgname == "ifTrue:")
-                this.CompileByteCode(ByteCode.IfTrue);
-            else if (msgname == "ifFalse:")
-                this.CompileByteCode(ByteCode.IfFalse);
             else if (msgname == "ifTrue:ifFalse:")
                 this.CompileByteCode(ByteCode.IfTrueFalse);
             else if (msgname == "ifFalse:ifTrue:")

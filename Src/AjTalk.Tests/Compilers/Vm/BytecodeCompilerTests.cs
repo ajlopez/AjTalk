@@ -256,14 +256,14 @@
             ModelParser parser = new ModelParser("nil ifFalse: [self halt]");
             this.compiler.CompileExpression(parser.ParseExpression());
 
-            Assert.IsNotNull(this.block);
-            Assert.AreEqual(1, this.block.NoConstants);
-            Assert.AreEqual(0, this.block.NoLocals);
-            Assert.IsNotNull(this.block.ByteCodes);
-            Assert.AreEqual(4, this.block.ByteCodes.Length);
-            Assert.AreEqual(0, this.block.Arity);
+            Assert.IsNotNull(block);
+            Assert.AreEqual(1, block.NoConstants);
+            Assert.AreEqual(0, block.NoLocals);
+            Assert.IsNotNull(block.ByteCodes);
+            Assert.AreEqual(11, block.ByteCodes.Length);
+            Assert.AreEqual(0, block.Arity);
 
-            object constant = this.block.GetConstant(0);
+            object constant = block.GetConstant(0);
 
             Assert.IsNotNull(constant);
             Assert.IsInstanceOfType(constant, typeof(Block));
@@ -273,6 +273,16 @@
             Assert.AreEqual(0, newblock.NoLocals);
             Assert.IsNotNull(newblock.ByteCodes);
             Assert.AreEqual(4, newblock.ByteCodes.Length);
+
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("GetNil", result[0]);
+            Assert.AreEqual("JumpIfFalse 8", result[1]);
+            Assert.AreEqual("GetNil", result[2]);
+            Assert.AreEqual("Jump 11", result[3]);
+            Assert.AreEqual("GetBlock { GetSelf; Send halt 0 }", result[4]);
         }
 
         [TestMethod]

@@ -106,6 +106,15 @@
                 int finalposition = this.block.Bytecodes.Length;
                 this.block.CompileBlockJumpByteCodeAt(expression.Selector == "whileFalse:" ? ByteCode.JumpIfTrue : ByteCode.JumpIfFalse, (short)finalposition, condposition);
             }
+            else if (expression.Selector == "ifFalse:" || expression.Selector == "ifTrue:")
+            {
+                this.block.CompileByteCode(ByteCode.Value);
+                this.block.CompileInsert(condposition, 7);
+                this.block.CompileJumpByteCodeAt(expression.Selector == "ifFalse:" ? ByteCode.JumpIfFalse : ByteCode.JumpIfTrue, (short)(condposition + 7), condposition);
+                this.block.CompileByteCodeAt(ByteCode.GetNil, condposition + 3);
+                int finalposition = this.block.Bytecodes.Length;
+                this.block.CompileJumpByteCodeAt(ByteCode.Jump, (short)finalposition, condposition + 4);
+            }
             else if (expression.IsBinaryMessage)
                 this.block.CompileBinarySend(expression.Selector);
             else

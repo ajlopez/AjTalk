@@ -101,36 +101,10 @@
                             this.PushContext(newblock.CreateContext(this.context.Machine, null));
                             continue;
 
-                        case ByteCode.IfTrue:
-                            newblock = (Block)this.context.Pop();
-                            bool cond = (bool)this.context.Pop();
-
-                            if (cond)
-                            {
-                                this.PushContext(newblock.CreateContext(this.context.Machine, null));
-                                continue;
-                            }
-
-                            this.context.Push(null);
-                            break;
-
-                        case ByteCode.IfFalse:
-                            newblock = (Block)this.context.Pop();
-                            cond = (bool)this.context.Pop();
-
-                            if (!cond)
-                            {
-                                this.PushContext(newblock.CreateContext(this.context.Machine, null));
-                                continue;
-                            }
-
-                            this.context.Push(null);
-                            break;
-
                         case ByteCode.IfTrueFalse:
                             Block elseblock = (Block)this.context.Pop();
                             Block thenblock = (Block)this.context.Pop();
-                            cond = (bool)this.context.Pop();
+                            bool cond = (bool)this.context.Pop();
 
                             if (cond)
                                 this.PushContext(thenblock.CreateContext(this.context.Machine, null));
