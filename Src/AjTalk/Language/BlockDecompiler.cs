@@ -137,6 +137,7 @@
                     case ByteCode.IfTrue:
                     case ByteCode.IfFalse:
                     case ByteCode.Pop:
+                    case ByteCode.GetNil:
                         codes.Add(string.Format("{0}", bc));
                         break;
 

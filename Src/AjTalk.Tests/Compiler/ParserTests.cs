@@ -387,7 +387,7 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(1, block.NoConstants);
             Assert.AreEqual(0, block.NoLocals);
             Assert.IsNotNull(block.ByteCodes);
-            Assert.AreEqual(4, block.ByteCodes.Length);
+            Assert.AreEqual(11, block.ByteCodes.Length);
             Assert.AreEqual(0, block.Arity);
 
             object constant = block.GetConstant(0);
@@ -400,6 +400,16 @@ namespace AjTalk.Tests.Compiler
             Assert.AreEqual(0, newblock.NoLocals);
             Assert.IsNotNull(newblock.ByteCodes);
             Assert.AreEqual(4, newblock.ByteCodes.Length);
+
+            BlockDecompiler decompiler = new BlockDecompiler(block);
+            var result = decompiler.Decompile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("GetNil", result[0]);
+            Assert.AreEqual("JumpIfFalse 8", result[1]);
+            Assert.AreEqual("GetNil", result[2]);
+            Assert.AreEqual("Jump 11", result[3]);
+            Assert.AreEqual("GetBlock { GetSelf; Send halt 0 }", result[4]);
         }
 
         [TestMethod]

@@ -568,6 +568,15 @@ namespace AjTalk.Compiler
                 int finalposition = this.block.Bytecodes.Length;
                 this.block.CompileBlockJumpByteCodeAt(mthname == "whileFalse:" ? ByteCode.JumpIfTrue : ByteCode.JumpIfFalse, (short)finalposition, condposition);
             }
+            else if (mthname == "ifFalse:" || mthname == "ifTrue:")
+            {
+                this.block.CompileByteCode(ByteCode.Value);
+                this.block.CompileInsert(condposition, 7);
+                this.block.CompileJumpByteCodeAt(mthname == "ifFalse:" ? ByteCode.JumpIfFalse : ByteCode.JumpIfTrue, (short)(condposition + 7), condposition);
+                this.block.CompileByteCodeAt(ByteCode.GetNil, condposition + 3);
+                int finalposition = this.block.Bytecodes.Length;
+                this.block.CompileJumpByteCodeAt(ByteCode.Jump, (short)finalposition, condposition + 4);
+            }
             else if (mthname != string.Empty)
                 this.block.CompileSend(mthname);
         }

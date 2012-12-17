@@ -204,6 +204,11 @@ namespace AjTalk.Language
             this.CompileByte((byte)b);
         }
 
+        public void CompileByteCodeAt(ByteCode b, int position)
+        {
+            this.bytecodes[position] = (byte)b;
+        }
+
         public void CompileJumpByteCode(ByteCode b, short jump)
         {
             this.CompileByte((byte)b);
