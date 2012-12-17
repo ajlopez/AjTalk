@@ -101,30 +101,6 @@
                             this.PushContext(newblock.CreateContext(this.context.Machine, null));
                             continue;
 
-                        case ByteCode.IfTrueFalse:
-                            Block elseblock = (Block)this.context.Pop();
-                            Block thenblock = (Block)this.context.Pop();
-                            bool cond = (bool)this.context.Pop();
-
-                            if (cond)
-                                this.PushContext(thenblock.CreateContext(this.context.Machine, null));
-                            else
-                                this.PushContext(elseblock.CreateContext(this.context.Machine, null));
-
-                            continue;
-
-                        case ByteCode.IfFalseTrue:
-                            thenblock = (Block)this.context.Pop();
-                            elseblock = (Block)this.context.Pop();
-                            cond = (bool)this.context.Pop();
-
-                            if (cond)
-                                this.PushContext(thenblock.CreateContext(this.context.Machine, null));
-                            else
-                                this.PushContext(elseblock.CreateContext(this.context.Machine, null));
-
-                            continue;
-
                         case ByteCode.MultiValue:
                             this.context.InstructionPointer++;
                             arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
@@ -312,7 +288,7 @@
                             break;
 
                         case ByteCode.JumpIfFalse:
-                            cond = (bool)this.context.Pop();
+                            bool cond = (bool)this.context.Pop();
                             this.context.InstructionPointer++;
                             int jump = this.context.Block.Bytecodes[this.context.InstructionPointer];
                             this.context.InstructionPointer++;

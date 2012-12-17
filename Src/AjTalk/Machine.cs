@@ -58,10 +58,12 @@ namespace AjTalk
             // Native Behaviors
             var nativeObjectBehavior = new NativeObjectBehavior(meta, null, this);
             var enumerableBehavior = new EnumerableBehavior(meta, nativeObjectBehavior, this);
+            var booleanBehavior = new BooleanBehavior(meta, nativeObjectBehavior, this);
             var listBehavior = new ListBehavior(meta, enumerableBehavior, this);
             var stringBehavior = new StringBehavior(meta, nativeObjectBehavior, this);
 
             this.RegisterNativeBehavior(typeof(IEnumerable), enumerableBehavior);
+            this.RegisterNativeBehavior(typeof(bool), booleanBehavior);
             this.RegisterNativeBehavior(typeof(IList), listBehavior);
             this.RegisterNativeBehavior(typeof(Block), new BlockBehavior(meta, this.nilclass, this));
             this.RegisterNativeBehavior(typeof(string), stringBehavior);

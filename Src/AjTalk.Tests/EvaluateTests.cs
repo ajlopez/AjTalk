@@ -724,6 +724,13 @@
         }
 
         [TestMethod]
+        public void EvaluateTrueIfTrueIfFalse()
+        {
+            var result = this.Evaluate("true ifTrue: [2] ifFalse: [3]");
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
         public void EvaluateAssertWhenTrue()
         {
             var result = this.Evaluate("[1==1] assert");
