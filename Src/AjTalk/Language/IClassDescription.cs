@@ -6,6 +6,8 @@ namespace AjTalk.Language
 
     public interface IClassDescription : IBehavior
     {
+        int NoClassVariables { get; }
+
         void DefineClassVariable(string varname);
 
         void DefineInstanceVariable(string varname);

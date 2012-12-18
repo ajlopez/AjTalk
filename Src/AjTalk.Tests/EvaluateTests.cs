@@ -329,7 +329,8 @@
             Assert.IsNotNull(clss.MetaClass);
             Assert.AreEqual("MyClass", clss.Name);
             Assert.AreEqual(2, clss.NoInstanceVariables);
-            Assert.AreEqual(1, clss.MetaClass.NoInstanceVariables);
+            Assert.AreEqual(0, clss.MetaClass.NoInstanceVariables);
+            Assert.AreEqual(1, clss.NoClassVariables);
             Assert.AreEqual("MyCategory", clss.Category);
         }
 
@@ -348,7 +349,8 @@
             Assert.IsTrue(clss.IsIndexed);
             Assert.AreEqual("MyClass", clss.Name);
             Assert.AreEqual(2, clss.NoInstanceVariables);
-            Assert.AreEqual(1, clss.MetaClass.NoInstanceVariables);
+            Assert.AreEqual(0, clss.MetaClass.NoInstanceVariables);
+            Assert.AreEqual(1, clss.NoClassVariables);
             Assert.AreEqual("MyCategory", clss.Category);
         }
 

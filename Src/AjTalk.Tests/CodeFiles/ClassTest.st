@@ -5,7 +5,7 @@ Object subclass: #MyClass.
 
 Object subclass: #Rectangle
 	instanceVariableNames: 'width height'
-	classVariableNames: 'number'
+	classVariableNames: 'Number'
 	poolDictionaries: ''
 	category: 'Test'.
 !

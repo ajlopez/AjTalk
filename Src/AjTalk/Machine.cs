@@ -213,8 +213,9 @@ namespace AjTalk
                 supermeta = superclass.MetaClass;
 
             // TODO review using a provisional metaclassclass, for test that doesn't define Metaclass yet
-            IMetaClass meta = new BaseMetaClass(this.metaclassclass ?? this.nilclass.Behavior, supermeta, this, classvarnames);
+            IMetaClass meta = new BaseMetaClass(this.metaclassclass ?? this.nilclass.Behavior, supermeta, this, null);
             IClass cls = meta.CreateClass(clsname, instancevarnames);
+            cls.RedefineClassVariables(classvarnames);
 
             return cls;
         }

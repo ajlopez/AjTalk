@@ -14,6 +14,8 @@
 
         int NoInstanceVariables { get; }
 
+        int NoClassVariables { get; }
+
         IMetaClass MetaClass { get; }
 
         void DefineClassMethod(IMethod method);

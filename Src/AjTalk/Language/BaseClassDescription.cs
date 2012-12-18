@@ -9,6 +9,8 @@ namespace AjTalk.Language
     public class BaseClassDescription : BaseBehavior, IClassDescription
     {
         private List<string> instancevariables = new List<string>();
+        private List<string> classvariables = new List<string>();
+        private List<object> classvariablevalues = new List<object>();
 
         public BaseClassDescription(Machine machine)
             : this(null, null, machine, string.Empty)
@@ -43,16 +45,29 @@ namespace AjTalk.Language
             }
         }
 
+        public override int NoClassVariables
+        {
+            get
+            {
+                if (this.SuperClass != null)
+                {
+                    return this.classvariables.Count + this.SuperClass.NoClassVariables;
+                }
+
+                return this.classvariables.Count;
+            }
+        }
+
         public void DefineClassVariable(string varname)
         {
-            if (varname == null)
-            {
-                throw new ArgumentNullException("varname");
-            }
+            if (this.classvariables.Contains(varname))
+                throw new InvalidOperationException("Class variable already defined");
 
-            this.MetaClass.DefineInstanceVariable(varname);
-            this.ResizeVariables(this.MetaClass.NoInstanceVariables);
-            return;
+            if (this.SuperClass != null && this.SuperClass is IClassDescription && ((IClassDescription)this.SuperClass).GetClassVariableOffset(varname) >= 0)
+                throw new InvalidOperationException("Class variable already defined");
+
+            this.classvariables.Add(varname);
+            this.classvariablevalues.Add(null);
         }
 
         public void DefineInstanceVariable(string varname)
@@ -72,10 +87,24 @@ namespace AjTalk.Language
 
         public int GetClassVariableOffset(string varname)
         {
-            if (!(this.Behavior is IMetaClass))
-                return -1;
+            int offset;
 
-            return this.MetaClass.GetInstanceVariableOffset(varname);
+            if (this.SuperClass != null && this.SuperClass is IClassDescription)
+            {
+                offset = ((IClassDescription)this.SuperClass).GetClassVariableOffset(varname);
+                if (offset >= 0)
+                    return offset;
+            }
+
+            offset = this.classvariables.IndexOf(varname);
+
+            if (offset < 0)
+                return offset;
+
+            if (this.SuperClass != null)
+                offset += this.SuperClass.NoClassVariables;
+
+            return offset;
         }
 
         public int GetInstanceVariableOffset(string varname)
@@ -155,18 +184,53 @@ namespace AjTalk.Language
 
         public ICollection<string> GetClassVariableNames()
         {
-            if (this.Behavior == null || !(this.Behavior is IClassDescription))
-                return null;
+            IList<string> names = null;
 
-            return ((IClassDescription)this.Behavior).GetInstanceVariableNames();
+            if (this.SuperClass != null && this.SuperClass is IClassDescription)
+            {
+                var supernames = ((IClassDescription)this.SuperClass).GetClassVariableNames();
+
+                if (supernames != null && supernames.Count > 0)
+                    names = new List<string>(supernames);
+            }
+
+            if (this.classvariables != null && this.classvariables.Count > 0)
+            {
+                if (names == null)
+                    names = new List<string>();
+
+                foreach (var name in this.classvariables)
+                    names.Add(name);
+            }
+
+            return names;
         }
 
         public string GetClassVariableNamesAsString()
         {
-            if (this.Behavior == null || !(this.Behavior is IClassDescription))
-                return string.Empty;
+            int nv = 0;
+            StringBuilder sb = new StringBuilder();
 
-            return ((IClassDescription)this.Behavior).GetInstanceVariableNamesAsString();
+            if (this.SuperClass != null && this.SuperClass is IClassDescription)
+            {
+                string vars = ((IClassDescription)this.SuperClass).GetClassVariableNamesAsString();
+
+                if (!string.IsNullOrEmpty(vars))
+                {
+                    nv++;
+                    sb.Append(vars);
+                }
+            }
+
+            foreach (string varname in this.classvariables)
+            {
+                if (nv > 0)
+                    sb.Append(" ");
+                sb.Append(varname);
+                nv++;
+            }
+
+            return sb.ToString();
         }
 
         public void RedefineClassVariables(string varnames)

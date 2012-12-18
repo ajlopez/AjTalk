@@ -60,17 +60,18 @@ namespace AjTalk.Tests
         public void CreateClassWithInstanceAndClassVariables()
         {
             Machine machine = new Machine();
-            IClass cls = machine.CreateClass("TestClass", null, "x", "count");
+            IClass cls = machine.CreateClass("TestClass", null, "x", "Count");
 
             Assert.IsNotNull(cls);
             Assert.AreEqual("TestClass", cls.Name);
             Assert.AreEqual(0, cls.GetInstanceVariableOffset("x"));
             Assert.AreEqual(-1, cls.GetInstanceVariableOffset("y"));
-            Assert.AreEqual(0, cls.GetClassVariableOffset("count"));
+            Assert.AreEqual(0, cls.GetClassVariableOffset("Count"));
             Assert.AreEqual(-1, cls.GetClassVariableOffset("y"));
             Assert.AreEqual("x", cls.GetInstanceVariableNamesAsString());
-            Assert.AreEqual("count", cls.GetClassVariableNamesAsString());
-            Assert.AreEqual(1, cls.NoVariables);
+            Assert.AreEqual("Count", cls.GetClassVariableNamesAsString());
+            Assert.AreEqual(0, cls.NoVariables);
+            Assert.AreEqual(1, cls.NoClassVariables);
 
             Assert.IsNull(cls.GetInstanceMethod("x"));
             Assert.IsNotNull(cls.SuperClass);

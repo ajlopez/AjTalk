@@ -67,6 +67,19 @@
             }
         }
 
+        public virtual int NoClassVariables
+        {
+            get
+            {
+                if (this.superclass != null)
+                {
+                    return this.superclass.NoClassVariables;
+                }
+
+                return 0;
+            }
+        }
+
         public void DefineClassMethod(IMethod method)
         {
             this.MetaClass.DefineInstanceMethod(method);
