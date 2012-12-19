@@ -126,6 +126,58 @@
         }
 
         [TestMethod]
+        public void GetSetClassVariables()
+        {
+            Machine machine = new Machine();
+            IClass bclass = new BaseClass("MyClass", machine);
+
+            bclass.DefineClassVariable("Count");
+            bclass.DefineClassVariable("Items");
+
+            int countoffset = bclass.GetClassVariableOffset("Count");
+            int itemsoffset = bclass.GetClassVariableOffset("Items");
+
+            Assert.AreEqual(0, countoffset);
+            Assert.AreEqual(1, itemsoffset);
+
+            bclass.SetClassVariable(countoffset, 1);
+            bclass.SetClassVariable(itemsoffset, "foo");
+
+            Assert.AreEqual(1, bclass.GetClassVariable(countoffset));
+            Assert.AreEqual("foo", bclass.GetClassVariable(itemsoffset));
+        }
+
+        [TestMethod]
+        public void GetSetClassVariablesInSubclass()
+        {
+            Machine machine = new Machine();
+            IClass bclass = new BaseClass("MyClass", machine);
+            IClass bsubclass = new BaseClass(null, "MySubClass", bclass, machine, null);
+
+            bclass.DefineClassVariable("Count");
+            bclass.DefineClassVariable("Items");
+            bsubclass.DefineClassVariable("Value");
+
+            int countoffset = bsubclass.GetClassVariableOffset("Count");
+            int itemsoffset = bsubclass.GetClassVariableOffset("Items");
+            int valueoffset = bsubclass.GetClassVariableOffset("Value");
+
+            Assert.AreEqual(0, countoffset);
+            Assert.AreEqual(1, itemsoffset);
+            Assert.AreEqual(2, valueoffset);
+
+            bsubclass.SetClassVariable(countoffset, 1);
+            bsubclass.SetClassVariable(itemsoffset, "foo");
+            bsubclass.SetClassVariable(valueoffset, "value");
+
+            Assert.AreEqual(1, bclass.GetClassVariable(countoffset));
+            Assert.AreEqual("foo", bclass.GetClassVariable(itemsoffset));
+            Assert.AreEqual(1, bsubclass.GetClassVariable(countoffset));
+            Assert.AreEqual("foo", bsubclass.GetClassVariable(itemsoffset));
+            Assert.AreEqual("value", bsubclass.GetClassVariable(valueoffset));
+        }
+
+        [TestMethod]
         public void GetDefineString()
         {
             Machine machine = new Machine();

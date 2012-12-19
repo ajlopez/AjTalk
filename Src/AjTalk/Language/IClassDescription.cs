@@ -27,6 +27,10 @@ namespace AjTalk.Language
         ICollection<string> GetInstanceVariableNames();
 
         ICollection<string> GetClassVariableNames();
+
+        void SetClassVariable(int offset, object value);
+
+        object GetClassVariable(int offset);
     }
 }
 

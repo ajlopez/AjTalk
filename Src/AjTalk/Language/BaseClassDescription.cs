@@ -246,6 +246,35 @@ namespace AjTalk.Language
                     this.DefineInstanceVariable(varname);
         }
 
+        public void SetClassVariable(int offset, object value)
+        {
+            if (this.SuperClass != null && this.SuperClass is IClassDescription)
+            {
+                int super = this.SuperClass.NoClassVariables;
+                if (super > offset)
+                    ((IClassDescription)this.SuperClass).SetClassVariable(offset, value);
+                else
+                    this.classvariablevalues[offset - super] = value;
+                return;
+            }
+
+            this.classvariablevalues[offset] = value;
+        }
+
+        public object GetClassVariable(int offset)
+        {
+            if (this.SuperClass != null && this.SuperClass is IClassDescription)
+            {
+                int super = this.SuperClass.NoClassVariables;
+                if (super > offset)
+                    return ((IClassDescription)this.SuperClass).GetClassVariable(offset);
+                else
+                    return this.classvariablevalues[offset - super];
+            }
+
+            return this.classvariablevalues[offset];
+        }
+
         private static IEnumerable<string> AsNames(string varnames)
         {
             if (string.IsNullOrEmpty(varnames))
