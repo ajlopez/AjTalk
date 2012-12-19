@@ -85,7 +85,7 @@ namespace AjTalk.Language
             this.instancevariables.Add(varname);
         }
 
-        public int GetClassVariableOffset(string varname)
+        public virtual int GetClassVariableOffset(string varname)
         {
             int offset;
 
@@ -182,7 +182,7 @@ namespace AjTalk.Language
             return sb.ToString();
         }
 
-        public ICollection<string> GetClassVariableNames()
+        public virtual ICollection<string> GetClassVariableNames()
         {
             IList<string> names = null;
 
@@ -206,7 +206,7 @@ namespace AjTalk.Language
             return names;
         }
 
-        public string GetClassVariableNamesAsString()
+        public virtual string GetClassVariableNamesAsString()
         {
             int nv = 0;
             StringBuilder sb = new StringBuilder();
@@ -246,7 +246,7 @@ namespace AjTalk.Language
                     this.DefineInstanceVariable(varname);
         }
 
-        public void SetClassVariable(int offset, object value)
+        public virtual void SetClassVariable(int offset, object value)
         {
             if (this.SuperClass != null && this.SuperClass is IClassDescription)
             {
@@ -261,7 +261,7 @@ namespace AjTalk.Language
             this.classvariablevalues[offset] = value;
         }
 
-        public object GetClassVariable(int offset)
+        public virtual object GetClassVariable(int offset)
         {
             if (this.SuperClass != null && this.SuperClass is IClassDescription)
             {

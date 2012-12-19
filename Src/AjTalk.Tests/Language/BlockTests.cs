@@ -50,7 +50,7 @@ namespace AjTalk.Tests.Language
             Assert.AreEqual(3, result.Count);
 
             Assert.AreEqual("GetArgument newX", result[0]);
-            Assert.AreEqual("GetGlobalVariable count", result[1]);
+            Assert.AreEqual("GetClassVariable count", result[1]);
             Assert.AreEqual("SetInstanceVariable x", result[2]);
         }
 

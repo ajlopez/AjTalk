@@ -393,6 +393,14 @@ namespace AjTalk.Language
             throw new NotSupportedException();
         }
 
+        public virtual string GetClassVariableName(int n)
+        {
+            if (this.outer != null)
+                return this.outer.GetClassVariableName(n);
+
+            throw new NotSupportedException();
+        }
+
         public virtual int GetInstanceVariableOffset(string name)
         {
             if (this.outer != null)
@@ -401,7 +409,7 @@ namespace AjTalk.Language
             return -1;
         }
 
-        protected bool TryCompileGet(string name)
+        protected virtual bool TryCompileGet(string name)
         {
             if (name.Equals("false"))
             {
@@ -475,7 +483,7 @@ namespace AjTalk.Language
             return false;
         }
 
-        protected bool TryCompileSet(string name)
+        protected virtual bool TryCompileSet(string name)
         {
             int p;
 

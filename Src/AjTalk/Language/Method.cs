@@ -49,25 +49,13 @@ namespace AjTalk.Language
                 return;
             }
 
-            if (this.TryCompileGetVariable(name))
-            {
-                return;
-            }
-
             this.CompileByteCode(ByteCode.GetGlobalVariable, this.CompileGlobal(name));
         }
 
         public override void CompileSet(string name)
         {
             if (this.TryCompileSet(name))
-            {
                 return;
-            }
-
-            if (this.TryCompileSetVariable(name))
-            {
-                return;
-            }
 
             this.CompileByteCode(ByteCode.SetGlobalVariable, CompileGlobal(name));
         }
@@ -105,6 +93,11 @@ namespace AjTalk.Language
             return ((IClassDescription)this.mthclass).GetInstanceVariableNames().ElementAt(n);
         }
 
+        public override string GetClassVariableName(int n)
+        {
+            return ((IClassDescription)this.mthclass).GetClassVariableNames().ElementAt(n);
+        }
+
         public override int GetInstanceVariableOffset(string name)
         {
             var cls = this.mthclass as IClassDescription;
@@ -118,12 +111,13 @@ namespace AjTalk.Language
             this.mthclass = behavior;
         }
 
-        private bool TryCompileGetVariable(string name)
+        protected override bool TryCompileGet(string name)
         {
+            if (base.TryCompileGet(name))
+                return true;
+
             if (this.mthclass == null)
-            {
                 return false;
-            }
 
             IClassDescription cls = this.mthclass as IClassDescription;
 
@@ -138,15 +132,24 @@ namespace AjTalk.Language
                 return true;
             }
 
+            p = cls.GetClassVariableOffset(name);
+
+            if (p >= 0)
+            {
+                CompileByteCode(ByteCode.GetClassVariable, (byte)p);
+                return true;
+            }
+
             return false;
         }
 
-        private bool TryCompileSetVariable(string name)
+        protected override bool TryCompileSet(string name)
         {
+            if (base.TryCompileSet(name))
+                return true;
+
             if (this.mthclass == null)
-            {
                 return false;
-            }
 
             IClassDescription cls = this.mthclass as IClassDescription;
 
@@ -158,6 +161,14 @@ namespace AjTalk.Language
             if (p >= 0)
             {
                 this.CompileByteCode(ByteCode.SetInstanceVariable, (byte)p);
+                return true;
+            }
+
+            p = cls.GetClassVariableOffset(name);
+
+            if (p >= 0)
+            {
+                this.CompileByteCode(ByteCode.SetClassVariable, (byte)p);
                 return true;
             }
 

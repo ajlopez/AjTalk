@@ -50,6 +50,34 @@ namespace AjTalk.Language
 
             return cls;
         }
+
+        public override object GetClassVariable(int offset)
+        {
+            return this.classInstance.GetClassVariable(offset);
+        }
+
+        public override void SetClassVariable(int offset, object value)
+        {
+            this.classInstance.SetClassVariable(offset, value);
+        }
+
+        public override int GetClassVariableOffset(string varname)
+        {
+            if (this.classInstance == null)
+                return -1;
+
+            return this.classInstance.GetClassVariableOffset(varname);
+        }
+
+        public override ICollection<string> GetClassVariableNames()
+        {
+            return this.classInstance.GetClassVariableNames();
+        }
+
+        public override string GetClassVariableNamesAsString()
+        {
+            return this.classInstance.GetClassVariableNamesAsString();
+        }
     }
 }
 

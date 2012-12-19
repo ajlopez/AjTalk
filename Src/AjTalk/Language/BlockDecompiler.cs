@@ -162,6 +162,13 @@
                         ip++;
                         break;
 
+                    case ByteCode.GetClassVariable:
+                    case ByteCode.SetClassVariable:
+                        nvariable = this.block.ByteCodes[ip + 1];
+                        codes.Add(string.Format("{0} {1}", (ByteCode)this.block.ByteCodes[ip], this.block.GetClassVariableName(nvariable)));
+                        ip++;
+                        break;
+
                     case ByteCode.Primitive:
                         ip++;
                         int nprimitive = this.block.ByteCodes[ip];

@@ -351,7 +351,55 @@
             Assert.AreEqual(2, clss.NoInstanceVariables);
             Assert.AreEqual(0, clss.MetaClass.NoInstanceVariables);
             Assert.AreEqual(1, clss.NoClassVariables);
+            Assert.AreEqual("z", clss.GetClassVariableNamesAsString());
             Assert.AreEqual("MyCategory", clss.Category);
+        }
+
+        [TestMethod]
+        public void SetGetClassVariableInClassMethod()
+        {
+            object result = this.Evaluate("nil variableSubclass: #MyClass instanceVariableNames: '' classVariableNames: 'Count' poolDictionaries: '' category:'MyCategory'");           
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            BaseClass clss = (BaseClass)result;
+
+            this.CompileClassMethod(clss, "count: aValue Count := aValue", this.machine);
+            this.CompileClassMethod(clss, "count ^Count", this.machine);
+
+            Assert.IsNotNull(clss.GetClassMethod("count"));
+            Assert.IsNotNull(clss.GetClassMethod("count:"));
+
+            this.Evaluate("MyClass count: 3");
+
+            Assert.AreEqual(3, clss.GetClassVariable(0));
+
+            Assert.AreEqual(3, this.Evaluate("MyClass count"));
+        }
+
+        [TestMethod]
+        public void SetGetClassVariableInInstanceMethod()
+        {
+            object result = this.Evaluate("nil variableSubclass: #MyClass instanceVariableNames: '' classVariableNames: 'Count' poolDictionaries: '' category:'MyCategory'");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseClass));
+
+            BaseClass clss = (BaseClass)result;
+
+            this.CompileInstanceMethod(clss, "count: aValue Count := aValue", this.machine);
+            this.CompileInstanceMethod(clss, "count ^Count", this.machine);
+
+            Assert.IsNotNull(clss.GetInstanceMethod("count"));
+            Assert.IsNotNull(clss.GetInstanceMethod("count:"));
+
+            this.Evaluate("myobj := MyClass new");
+            this.Evaluate("myobj count: 3");
+
+            Assert.AreEqual(3, clss.GetClassVariable(0));
+
+            Assert.AreEqual(3, this.Evaluate("myobj count"));
         }
 
         [TestMethod]
@@ -889,6 +937,18 @@
             Parser parser = new Parser(text);
             Block block = parser.CompileBlock();
             return block.Execute(machine, null);
+        }
+
+        private void CompileClassMethod(IBehavior cls, string text, Machine machine)
+        {
+            Parser parser = new Parser(text);
+            cls.DefineClassMethod(parser.CompileClassMethod(cls));
+        }
+
+        private void CompileInstanceMethod(IBehavior cls, string text, Machine machine)
+        {
+            Parser parser = new Parser(text);
+            cls.DefineInstanceMethod(parser.CompileInstanceMethod(cls));
         }
 
         private object Evaluate(string text)

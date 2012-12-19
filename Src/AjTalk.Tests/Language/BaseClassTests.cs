@@ -110,14 +110,28 @@
             Assert.AreEqual(0, bclass.Behavior.NoInstanceVariables);
             Assert.AreEqual(0, bclass.NoVariables);
             Assert.AreEqual(2, bclass.NoClassVariables);
+
             Assert.AreEqual(0, bclass.GetClassVariableOffset("Count"));
             Assert.AreEqual(1, bclass.GetClassVariableOffset("Items"));
             Assert.AreEqual(-1, bclass.GetClassVariableOffset("Z"));
+
+            Assert.AreEqual(0, ((IClassDescription)bclass.Behavior).GetClassVariableOffset("Count"));
+            Assert.AreEqual(1, ((IClassDescription)bclass.Behavior).GetClassVariableOffset("Items"));
+            Assert.AreEqual(-1, ((IClassDescription)bclass.Behavior).GetClassVariableOffset("Z"));
+
             Assert.AreEqual("Count Items", bclass.GetClassVariableNamesAsString());
+            Assert.AreEqual("Count Items", ((IClassDescription)bclass.Behavior).GetClassVariableNamesAsString());
             Assert.AreEqual(string.Empty, bclass.GetInstanceVariableNamesAsString());
             Assert.AreEqual(null, bclass.GetInstanceVariableNames());
 
             var result = bclass.GetClassVariableNames();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("Count", result.ElementAt(0));
+            Assert.AreEqual("Items", result.ElementAt(1));
+
+            result = ((IClassDescription)bclass.Behavior).GetClassVariableNames();
 
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count);

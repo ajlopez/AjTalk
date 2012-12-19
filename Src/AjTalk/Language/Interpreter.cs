@@ -142,6 +142,12 @@
                             this.context.Push(this.context.Self[arg]);
                             break;
 
+                        case ByteCode.GetClassVariable:
+                            this.context.InstructionPointer++;
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
+                            this.context.Push(((IClassDescription)((IMethod)this.context.Block).Behavior).GetClassVariable(arg));
+                            break;
+
                         case ByteCode.NewObject:
                             IBehavior ibeh = (IBehavior)this.context.Pop();
                             this.context.LastReceiver = ibeh;
@@ -333,6 +339,16 @@
                             this.context.Push(value);
                             this.context.LastReceiver = this.context.Self;
                             break;
+
+                        case ByteCode.SetClassVariable:
+                            this.context.InstructionPointer++;
+                            arg = this.context.Block.ByteCodes[this.context.InstructionPointer];
+                            value = this.context.Pop();
+                            ((IClassDescription)((IMethod)this.context.Block).Behavior).SetClassVariable(arg, value);
+                            this.context.Push(value);
+                            this.context.LastReceiver = this.context.Self;
+                            break;
+
                         case ByteCode.RaiseException:
                             throw (Exception)this.context.Pop();
                         default:
