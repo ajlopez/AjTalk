@@ -20,6 +20,14 @@ yourself
     ^self
 !
 
+instVarAt: index
+	^self !!nget: 'Item' at: index - 1
+!
+
+instVarAt: index put: value
+	^self !!nset: 'Item' at: index - 1 put: value
+!
+
 isMemberOf: aClass
     ^self class == aClass
 !

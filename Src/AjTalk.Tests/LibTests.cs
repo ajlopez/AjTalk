@@ -49,6 +49,21 @@
             Assert.AreEqual(true, this.Evaluate("Rectangle inheritsFrom: Object"));
         }
 
+        [TestMethod]
+        public void EvaluateInstVarAtPut()
+        {
+            IClass objcls = (IClass)this.machine.GetGlobalObject("Object");
+            IClass rectcls = this.machine.CreateClass("Rectangle", objcls, "x y width rect", "");
+            this.machine.SetGlobalObject("Rectangle", rectcls);
+            var rect = (IObject)this.Evaluate("rect := Rectangle new");
+            Assert.IsNull(this.Evaluate("rect instVarAt: 1"));
+            Assert.IsNull(this.Evaluate("rect instVarAt: 2"));
+            Assert.AreEqual(10, this.Evaluate("rect instVarAt: 1 put: 10"));
+            Assert.AreEqual(20, this.Evaluate("rect instVarAt: 2 put: 20"));
+            Assert.AreEqual(10, rect[0]);
+            Assert.AreEqual(20, rect[1]);
+        }
+
         private void LoadFile(string filename)
         {
             Loader loader = new Loader(filename, new VmCompiler());
