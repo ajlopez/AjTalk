@@ -116,6 +116,23 @@
         }
 
         [TestMethod]
+        public void InvokeNativeGetAt()
+        {
+            BaseObject obj = new BaseObject(null, new object[] { 1, 2, 3 });
+            Assert.AreEqual(1, DotNetObject.SendNativeMessage(null, obj, "ngetat", new object[] { "Item", 0 }));
+            Assert.AreEqual(2, DotNetObject.SendNativeMessage(null, obj, "ngetat", new object[] { "Item", 1 }));
+            Assert.AreEqual(3, DotNetObject.SendNativeMessage(null, obj, "ngetat", new object[] { "Item", 2 }));
+        }
+
+        [TestMethod]
+        public void InvokeNativeSetAtPut()
+        {
+            BaseObject obj = new BaseObject(null, new object[] { 1, 2, 3 });
+            Assert.AreEqual(10, DotNetObject.SendNativeMessage(null, obj, "nsetatput", new object[] { "Item", 0, 10 }));
+            Assert.AreEqual(10, obj[0]);
+        }
+
+        [TestMethod]
         public void GetEnum()
         {
             object result = DotNetObject.SendNativeStaticMessage(typeof(ByteCode), "Send", null);

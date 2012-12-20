@@ -11,6 +11,7 @@
         private static Dictionary<string, IMethod> binaryMethods = new Dictionary<string, IMethod>();
         private static Dictionary<string, IMethod> unaryMethods = new Dictionary<string, IMethod>();
         private static Dictionary<string, IMethod> ternaryMethods = new Dictionary<string, IMethod>();
+        private static Dictionary<string, IMethod> cuaternaryMethods = new Dictionary<string, IMethod>();
 
         static DotNetObject()
         {
@@ -31,6 +32,8 @@
             unaryMethods["minus"] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Negate(obj));
             ternaryMethods["natput"] = new FunctionalMethod(AtPutMethod);
             ternaryMethods["nsetput"] = new FunctionalMethod(SetPutMethod);
+            ternaryMethods["ngetat"] = new FunctionalMethod(GetAtMethod);
+            cuaternaryMethods["nsetatput"] = new FunctionalMethod(SetAtPutMethod);
         }
 
         public static object NewObject(Type type, object[] args)
@@ -62,6 +65,14 @@
                 {
                     IMethod ternarymethod = ternaryMethods[mthname];
                     return ternarymethod.ExecuteNative(machine, obj, args);
+                }
+            }
+            else if (args.Length == 3)
+            {
+                if (cuaternaryMethods.ContainsKey(mthname))
+                {
+                    IMethod cuaternarymethod = cuaternaryMethods[mthname];
+                    return cuaternarymethod.ExecuteNative(machine, obj, args);
                 }
             }
 
@@ -230,6 +241,17 @@
         {
             obj.GetType().GetProperty((string)args[0]).SetValue(obj, args[1], null);
             return args[1];
+        }
+
+        private static object GetAtMethod(Machine machine, object obj, object[] args)
+        {
+            return obj.GetType().GetProperty((string)args[0]).GetValue(obj, new object[] { args[1] });
+        }
+
+        private static object SetAtPutMethod(Machine machine, object obj, object[] args)
+        {
+            obj.GetType().GetProperty((string)args[0]).SetValue(obj, args[2], new object[] { args[1] });
+            return args[2];
         }
     }
 }
