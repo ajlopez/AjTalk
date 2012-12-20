@@ -91,6 +91,31 @@
         }
 
         [TestMethod]
+        public void InvokeDefaultProperty()
+        {
+            BaseObject obj = new BaseObject(null, new object[] { 1, 2, 3 });
+            Assert.AreEqual(2, DotNetObject.SendNativeMessage(null, obj, string.Empty, new object[] { 1 }));
+        }
+
+        [TestMethod]
+        public void InvokeNativeGet()
+        {
+            Rectangle rectangle = new Rectangle() { Width = 10, Height = 20 };
+            Assert.AreEqual(10, DotNetObject.SendNativeMessage(null, rectangle, "nget", new object[] { "Width" }));
+            Assert.AreEqual(20, DotNetObject.SendNativeMessage(null, rectangle, "nget", new object[] { "Height" }));
+        }
+
+        [TestMethod]
+        public void InvokeNativeSet()
+        {
+            Rectangle rectangle = new Rectangle() { Width = 10, Height = 20 };
+            Assert.AreEqual(11, DotNetObject.SendNativeMessage(null, rectangle, "nsetput", new object[] { "Width", 11 }));
+            Assert.AreEqual(21, DotNetObject.SendNativeMessage(null, rectangle, "nsetput", new object[] { "Height", 21 }));
+            Assert.AreEqual(11, rectangle.Width);
+            Assert.AreEqual(21, rectangle.Height);
+        }
+
+        [TestMethod]
         public void GetEnum()
         {
             object result = DotNetObject.SendNativeStaticMessage(typeof(ByteCode), "Send", null);

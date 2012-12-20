@@ -3,7 +3,7 @@
 
 + whileTrue:, whileFalse: inline
 + Fix [Ignore] in AssertTests
-- Use Processor/Interpreter in AjTalk.Console
++ Use Processor/Interpreter in AjTalk.Console
 - Processor suspend
 
 + Remove EndOfInput exception in Lexer processing

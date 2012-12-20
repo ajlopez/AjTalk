@@ -27,8 +27,10 @@
             binaryMethods["=="] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Same(obj, args[0]));
             binaryMethods["~~"] = new FunctionalMethod((machine, obj, args) => !ObjectOperators.Same(obj, args[0]));
             binaryMethods["nat"] = new FunctionalMethod(AtMethod);
+            binaryMethods["nget"] = new FunctionalMethod(GetMethod);
             unaryMethods["minus"] = new FunctionalMethod((machine, obj, args) => ObjectOperators.Negate(obj));
             ternaryMethods["natput"] = new FunctionalMethod(AtPutMethod);
+            ternaryMethods["nsetput"] = new FunctionalMethod(SetPutMethod);
         }
 
         public static object NewObject(Type type, object[] args)
@@ -217,6 +219,17 @@
             object value = args[1];
             ((IList)obj)[position] = value;
             return value;
+        }
+
+        private static object GetMethod(Machine machine, object obj, object[] args)
+        {
+            return obj.GetType().GetProperty((string)args[0]).GetValue(obj, null);
+        }
+
+        private static object SetPutMethod(Machine machine, object obj, object[] args)
+        {
+            obj.GetType().GetProperty((string)args[0]).SetValue(obj, args[1], null);
+            return args[1];
         }
     }
 }
