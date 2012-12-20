@@ -21,11 +21,19 @@ yourself
 !
 
 instVarAt: index
-	^self !!nget: 'Item' at: index - 1
+	^self basicInstVarAt: index
 !
 
 instVarAt: index put: value
-	^self !!nset: 'Item' at: index - 1 put: value
+	^self basicInstVarAt: index put: value
+!
+
+at: index
+	^self basicAt: index
+!
+
+at: index put: value
+	^self basicAt: index put: value
 !
 
 isMemberOf: aClass

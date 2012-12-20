@@ -40,9 +40,9 @@ namespace AjTalk.Language
         NamedPrimitive = 54,
         PrimitiveError = 55,
 
-        InstAt = 60,
-        InstAtPut = 61,
-        InstSize = 62,
+        BasicInstVarAt = 60,
+        BasicInstVarAtPut = 61,
+        BasicInstSize = 62,
         BasicSize = 63,
         BasicAt = 64,
         BasicAtPut = 65,

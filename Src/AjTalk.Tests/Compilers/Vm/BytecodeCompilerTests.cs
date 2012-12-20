@@ -399,7 +399,7 @@
         }
 
         [TestMethod]
-        public void ExecuteInstSize()
+        public void ExecuteBasicInstSize()
         {
             Machine machine = new Machine();
 
@@ -408,7 +408,7 @@
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            ModelParser parser = new ModelParser("^UndefinedObject new instSize");
+            ModelParser parser = new ModelParser("^UndefinedObject new basicInstSize");
             this.compiler.CompileExpression(parser.ParseExpression());
 
             object result = this.block.Execute(machine, null);
@@ -417,7 +417,7 @@
         }
 
         [TestMethod]
-        public void ExecuteInstSizeInRectangle()
+        public void ExecuteBasicInstSizeInRectangle()
         {
             Machine machine = new Machine();
             IClass cls = CompileClass(
@@ -427,7 +427,7 @@
 
             machine.SetGlobalObject("aRectangle", cls.NewObject());
 
-            ModelParser parser = new ModelParser("^aRectangle instSize");
+            ModelParser parser = new ModelParser("^aRectangle basicInstSize");
             this.compiler.CompileExpression(parser.ParseExpression());
 
             object result = this.block.Execute(machine, null);
@@ -436,7 +436,7 @@
         }
 
         [TestMethod]
-        public void ExecuteInstAt()
+        public void ExecuteBasicInstVarAt()
         {
             Machine machine = new Machine();
             IClass cls = CompileClass(
@@ -450,7 +450,7 @@
 
             iobj[0] = 100;
 
-            ModelParser parser = new ModelParser("^aRectangle instAt: 0");
+            ModelParser parser = new ModelParser("^aRectangle basicInstVarAt: 1");
             this.compiler.CompileExpression(parser.ParseExpression());
 
             object result = this.block.Execute(machine, null);
@@ -459,7 +459,7 @@
         }
 
         [TestMethod]
-        public void ExecuteInstAtPut()
+        public void ExecuteBasicInstVarAtPut()
         {
             Machine machine = new Machine();
             IClass cls = CompileClass(
@@ -471,7 +471,7 @@
 
             machine.SetGlobalObject("aRectangle", iobj);
 
-            ModelParser parser = new ModelParser("aRectangle instAt: 0 put: 200");
+            ModelParser parser = new ModelParser("aRectangle basicInstVarAt: 1 put: 200");
             this.compiler.CompileExpression(parser.ParseExpression());
 
             this.block.Execute(machine, null);

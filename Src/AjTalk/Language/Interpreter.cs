@@ -162,38 +162,40 @@
 
                             break;
 
-                        case ByteCode.InstSize:
+                        case ByteCode.BasicInstSize:
                             IObject iobj = (IObject)this.context.Pop();
                             this.context.LastReceiver = iobj;
                             this.context.Push(iobj.Behavior.NoInstanceVariables);
                             break;
 
-                        case ByteCode.InstAt:
+                        case ByteCode.BasicInstVarAt:
                             int pos = (int)this.context.Pop();
                             iobj = (IObject)this.context.Pop();
                             this.context.LastReceiver = iobj;
-                            this.context.Push(iobj[pos]);
+                            this.context.Push(iobj[pos - 1]);
                             break;
 
-                        case ByteCode.InstAtPut:
+                        case ByteCode.BasicInstVarAtPut:
                             object par = this.context.Pop();
                             pos = (int)this.context.Pop();
                             iobj = (IObject)this.context.Pop();
                             this.context.LastReceiver = iobj;
-                            iobj[pos] = par;
+                            iobj[pos - 1] = par;
+                            this.context.Push(par);
                             break;
                         case ByteCode.BasicAt:
                             pos = (int)this.context.Pop();
                             IIndexedObject indexedObj = (IIndexedObject)this.context.Pop();
                             this.context.LastReceiver = indexedObj;
-                            this.context.Push(indexedObj.GetIndexedValue(pos));
+                            this.context.Push(indexedObj.GetIndexedValue(pos - 1));
                             break;
                         case ByteCode.BasicAtPut:
                             par = this.context.Pop();
                             pos = (int)this.context.Pop();
                             indexedObj = (IIndexedObject)this.context.Pop();
                             this.context.LastReceiver = indexedObj;
-                            indexedObj.SetIndexedValue(pos, par);
+                            indexedObj.SetIndexedValue(pos - 1, par);
+                            this.context.Push(par);
                             break;
                         case ByteCode.ChainedSend:
                             this.context.Pop();

@@ -522,7 +522,7 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
-        public void ExecuteInstSize()
+        public void ExecuteBasicInstSize()
         {
             Machine machine = new Machine();
 
@@ -531,7 +531,7 @@ namespace AjTalk.Tests.Compiler
             Assert.IsNotNull(nil);
             Assert.IsInstanceOfType(nil, typeof(IClass));
 
-            Parser compiler = new Parser("^UndefinedObject new instSize");
+            Parser compiler = new Parser("^UndefinedObject new basicInstSize");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);
@@ -542,7 +542,7 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
-        public void ExecuteInstSizeInRectangle()
+        public void ExecuteBasicInstSizeInRectangle()
         {
             Machine machine = new Machine();
             IClass cls = CompileClass(
@@ -552,7 +552,7 @@ namespace AjTalk.Tests.Compiler
 
             machine.SetGlobalObject("aRectangle", cls.NewObject());
 
-            Parser compiler = new Parser("^aRectangle instSize");
+            Parser compiler = new Parser("^aRectangle basicInstSize");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);
@@ -563,7 +563,7 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
-        public void ExecuteInstAt()
+        public void ExecuteBasicInstAt()
         {
             Machine machine = new Machine();
             IClass cls = CompileClass(
@@ -577,7 +577,7 @@ namespace AjTalk.Tests.Compiler
 
             iobj[0] = 100;
 
-            Parser compiler = new Parser("^aRectangle instAt: 0");
+            Parser compiler = new Parser("^aRectangle basicInstVarAt: 1");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);
@@ -588,7 +588,7 @@ namespace AjTalk.Tests.Compiler
         }
 
         [TestMethod]
-        public void ExecuteInstAtPut()
+        public void ExecuteBasicInstVarAtPut()
         {
             Machine machine = new Machine();
             IClass cls = CompileClass(
@@ -600,7 +600,7 @@ namespace AjTalk.Tests.Compiler
 
             machine.SetGlobalObject("aRectangle", iobj);
 
-            Parser compiler = new Parser("aRectangle instAt: 0 put: 200");
+            Parser compiler = new Parser("aRectangle basicInstVarAt: 1 put: 200");
             Block block = compiler.CompileBlock();
 
             Assert.IsNotNull(block);

@@ -292,12 +292,12 @@ namespace AjTalk.Language
                 return;
             }
 
-            if (msgname == "instSize")
-                this.CompileByteCode(ByteCode.InstSize);
-            else if (msgname == "instAt:")
-                this.CompileByteCode(ByteCode.InstAt);
-            else if (msgname == "instAt:put:")
-                this.CompileByteCode(ByteCode.InstAtPut);
+            if (msgname == "basicInstSize")
+                this.CompileByteCode(ByteCode.BasicInstSize);
+            else if (msgname == "basicInstVarAt:")
+                this.CompileByteCode(ByteCode.BasicInstVarAt);
+            else if (msgname == "basicInstVarAt:put:")
+                this.CompileByteCode(ByteCode.BasicInstVarAtPut);
             else if (msgname == "basicNew")
                 this.CompileByteCode(ByteCode.NewObject);
             else if (msgname == "basicSize")

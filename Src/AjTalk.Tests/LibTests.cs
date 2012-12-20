@@ -64,6 +64,36 @@
             Assert.AreEqual(20, rect[1]);
         }
 
+        [TestMethod]
+        public void EvaluateBasicAtPut()
+        {
+            IClass objcls = (IClass)this.machine.GetGlobalObject("Object");
+            IClass arraycls = this.machine.CreateClass("MyArray", true);
+            this.machine.SetGlobalObject("MyArray", arraycls);
+            var array = (IIndexedObject)this.Evaluate("array := MyArray new");
+            Assert.IsNull(this.Evaluate("array basicAt: 1"));
+            Assert.IsNull(this.Evaluate("array basicAt: 2"));
+            Assert.AreEqual(10, this.Evaluate("array basicAt: 1 put: 10"));
+            Assert.AreEqual(20, this.Evaluate("array basicAt: 2 put: 20"));
+            Assert.AreEqual(10, array.GetIndexedValue(0));
+            Assert.AreEqual(20, array.GetIndexedValue(1));
+        }
+
+        [TestMethod]
+        public void EvaluateAtPut()
+        {
+            IClass objcls = (IClass)this.machine.GetGlobalObject("Object");
+            IClass arraycls = this.machine.CreateClass("MyArray", true);
+            this.machine.SetGlobalObject("MyArray", arraycls);
+            var array = (IIndexedObject)this.Evaluate("array := MyArray new");
+            Assert.IsNull(this.Evaluate("array at: 1"));
+            Assert.IsNull(this.Evaluate("array at: 2"));
+            Assert.AreEqual(10, this.Evaluate("array at: 1 put: 10"));
+            Assert.AreEqual(20, this.Evaluate("array at: 2 put: 20"));
+            Assert.AreEqual(10, array.GetIndexedValue(0));
+            Assert.AreEqual(20, array.GetIndexedValue(1));
+        }
+
         private void LoadFile(string filename)
         {
             Loader loader = new Loader(filename, new VmCompiler());
