@@ -637,3 +637,21 @@ wait
 
 Object subclass: #Process nativeType: @AjTalk.Language.Process
 !
+
+Collection variableSubclass:#OrderedCollection
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category:'Kernel-Classes'
+!
+
+!OrderedCollection methods!
+
+add: value
+	self at: self size + 1 put: value.
+	^value
+!
+
+size
+	^self basicSize
+! !

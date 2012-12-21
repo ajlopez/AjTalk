@@ -94,6 +94,20 @@
             Assert.AreEqual(20, array.GetIndexedValue(1));
         }
 
+        [TestMethod]
+        public void EvaluateAddToArrayedCollection()
+        {
+            var array = (IIndexedObject)this.Evaluate("array := OrderedCollection new");
+            Assert.IsNull(this.Evaluate("array basicAt: 1"));
+            Assert.IsNull(this.Evaluate("array basicAt: 2"));
+            Assert.AreEqual(0, this.Evaluate("array size"));
+            Assert.AreEqual(10, this.Evaluate("array add: 10"));
+            Assert.AreEqual(20, this.Evaluate("array add: 20"));
+            Assert.AreEqual(2, this.Evaluate("array size"));
+            Assert.AreEqual(10, array.GetIndexedValue(0));
+            Assert.AreEqual(20, array.GetIndexedValue(1));
+        }
+
         private void LoadFile(string filename)
         {
             Loader loader = new Loader(filename, new VmCompiler());
