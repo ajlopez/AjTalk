@@ -402,10 +402,8 @@ namespace AjTalk
             }
         }
 
-        public void ImportModule(string modulename)
+        public void LoadModule(string modulename)
         {
-            var context = this.GetOrCreateChildEnvironment(this.CurrentEnvironment, modulename);
-
             string modulefilename = modulename.Replace(".", "/");
             string filename = this.GetFilename("modules/" + modulefilename + ".st");
 
@@ -417,10 +415,18 @@ namespace AjTalk
 
             var original = this.CurrentEnvironment;
 
+            this.LoadFile(filename);
+        }
+
+        public void ImportModule(string modulename)
+        {
+            var context = this.GetOrCreateChildEnvironment(this.CurrentEnvironment, modulename);
+            var original = this.CurrentEnvironment;
+
             try
             {
                 this.CurrentEnvironment = context;
-                this.LoadFile(filename);
+                this.LoadModule(modulename);
             }
             finally
             {

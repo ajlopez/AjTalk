@@ -454,6 +454,10 @@ Object subclass:#Module
 
 !Module class methods!
 
+load: aName
+    Machine !!LoadModule: aName
+!
+
 import: aName
     Machine !!ImportModule: aName
 ! !

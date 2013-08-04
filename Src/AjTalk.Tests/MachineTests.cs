@@ -270,6 +270,34 @@ namespace AjTalk.Tests
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IClass));
         }
+
+        [TestMethod]
+        [DeploymentItem("modules", "modules")]
+        public void LoadModule1()
+        {
+            Machine machine = new Machine();
+
+            machine.LoadModule("Module1");
+
+            var result = machine.Environment.GetValue("Class1");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IClass));
+        }
+
+        [TestMethod]
+        [DeploymentItem("node_modules", "node_modules")]
+        public void LoadModule3FromNodeModules()
+        {
+            Machine machine = new Machine();
+
+            machine.LoadModule("Module3");
+
+            var result = machine.Environment.GetValue("Class3");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IClass));
+        }
     }
 }
 

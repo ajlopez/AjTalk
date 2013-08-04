@@ -28,4 +28,9 @@ Smalltalk setCurrent.
 [MyEnvironment.Module2.Submodule2.Class22 isNil not] assert.
 [MyEnvironment.Module3 isNil not] assert.
 
+Module load: #Module3.
+
+[Class3 isNil not] assert.
+
+
 
