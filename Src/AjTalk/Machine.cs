@@ -412,6 +412,9 @@ namespace AjTalk
             if (filename == null)
                 filename = this.GetFilename("modules/" + modulefilename + "/Init.st");
 
+            if (filename == null)
+                filename = this.GetFilename("node_modules/ajtalk-" + modulefilename.ToLower() + "/Init.st");
+
             var original = this.CurrentEnvironment;
 
             try

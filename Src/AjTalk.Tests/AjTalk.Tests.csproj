@@ -305,6 +305,9 @@
     <None Include="Library\Object.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="node_modules\ajtalk-module3\Init.st">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="modules\Module1.st">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
