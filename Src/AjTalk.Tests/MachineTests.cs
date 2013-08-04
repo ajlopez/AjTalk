@@ -182,7 +182,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem("modules", "modules")]
-        public void LoadModule1()
+        public void ImportModule1()
         {
             Machine machine = new Machine();
 
@@ -203,7 +203,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem("modules", "modules")]
-        public void LoadModule2()
+        public void ImportModule2()
         {
             Machine machine = new Machine();
 
@@ -224,7 +224,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem("modules", "modules")]
-        public void LoadModule2Submodule1()
+        public void ImportModule2Submodule1()
         {
             Machine machine = new Machine();
 
@@ -252,7 +252,7 @@ namespace AjTalk.Tests
 
         [TestMethod]
         [DeploymentItem("node_modules", "node_modules")]
-        public void LoadModule3FromNodeModules()
+        public void ImportModule3FromNodeModules()
         {
             Machine machine = new Machine();
 
