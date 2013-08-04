@@ -79,6 +79,7 @@
 
         [TestMethod]
         [DeploymentItem("modules", "modules")]
+        [DeploymentItem("node_modules", "node_modules")]
         public void ModuleAsserts()
         {
             DoAssert("Module");

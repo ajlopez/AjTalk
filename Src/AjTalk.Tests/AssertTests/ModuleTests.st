@@ -19,10 +19,13 @@ Module import: #{Module2.Submodule2}.
 
 Module import: #{Module2.Submodule2}.
 
+Module import: #Module3.
+
 Smalltalk setCurrent.
 
 [MyEnvironment.Module2 isNil not] assert.
 [MyEnvironment.Module2.Submodule2 isNil not] assert.
 [MyEnvironment.Module2.Submodule2.Class22 isNil not] assert.
+[MyEnvironment.Module3 isNil not] assert.
 
 
