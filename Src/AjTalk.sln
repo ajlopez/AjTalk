@@ -1,13 +1,13 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjTalk", "AjTalk\AjTalk.csproj", "{232A3EF3-8392-409E-8D6B-961EFEE30347}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{79A09A41-9D11-4858-9734-D2623F4CAC72}"
 	ProjectSection(SolutionItems) = preProject
 		AjTalk.vsmdi = AjTalk.vsmdi
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 		Todo.txt = Todo.txt
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjTalk", "AjTalk\AjTalk.csproj", "{232A3EF3-8392-409E-8D6B-961EFEE30347}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjTalk.Tests", "AjTalk.Tests\AjTalk.Tests.csproj", "{982F7B02-75F1-44E6-A757-4E5D25A7FE49}"
 EndProject
