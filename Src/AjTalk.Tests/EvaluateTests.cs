@@ -55,6 +55,42 @@
         }
 
         [TestMethod]
+        public void EvaluateEqual()
+        {
+            Assert.AreEqual(true, this.Evaluate("1 = 1"));
+            Assert.AreEqual(true, this.Evaluate("'foo' = 'foo'"));
+            Assert.AreEqual(false, this.Evaluate("1 = 2"));
+            Assert.AreEqual(false, this.Evaluate("'foo' = 'bar'"));
+        }
+
+        [TestMethod]
+        public void EvaluateEqualEqual()
+        {
+            Assert.AreEqual(true, this.Evaluate("1 == 1"));
+            Assert.AreEqual(true, this.Evaluate("'foo' == 'foo'"));
+            Assert.AreEqual(false, this.Evaluate("1 == 2"));
+            Assert.AreEqual(false, this.Evaluate("'foo' == 'bar'"));
+        }
+
+        [TestMethod]
+        public void EvaluateLess()
+        {
+            Assert.AreEqual(true, this.Evaluate("1 < 2"));
+            Assert.AreEqual(true, this.Evaluate("'foo' < 'zoo'"));
+            Assert.AreEqual(false, this.Evaluate("3 < 2"));
+            Assert.AreEqual(false, this.Evaluate("'foo' < 'bar'"));
+        }
+
+        [TestMethod]
+        public void EvaluateGreater()
+        {
+            Assert.AreEqual(false, this.Evaluate("1 > 2"));
+            Assert.AreEqual(false, this.Evaluate("'foo' > 'zoo'"));
+            Assert.AreEqual(true, this.Evaluate("3 > 2"));
+            Assert.AreEqual(true, this.Evaluate("'foo' > 'bar'"));
+        }
+
+        [TestMethod]
         public void EvaluateBlockWithIntegerInMethod()
         {
             var cls = this.machine.CreateClass("MyClass");
