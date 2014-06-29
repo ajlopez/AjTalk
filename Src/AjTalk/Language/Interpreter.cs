@@ -300,7 +300,7 @@
                             this.context.InstructionPointer++;
                             int jump = this.context.Block.Bytecodes[this.context.InstructionPointer];
                             this.context.InstructionPointer++;
-                            jump = jump * 256 + this.context.Block.Bytecodes[this.context.InstructionPointer];
+                            jump = (jump * 256) + this.context.Block.Bytecodes[this.context.InstructionPointer];
                             
                             if (!cond)
                             {
@@ -315,7 +315,7 @@
                             this.context.InstructionPointer++;
                             jump = this.context.Block.Bytecodes[this.context.InstructionPointer];
                             this.context.InstructionPointer++;
-                            jump = jump * 256 + this.context.Block.Bytecodes[this.context.InstructionPointer];
+                            jump = (jump * 256) + this.context.Block.Bytecodes[this.context.InstructionPointer];
 
                             if (cond)
                             {
@@ -329,7 +329,7 @@
                             this.context.InstructionPointer++;
                             jump = this.context.Block.Bytecodes[this.context.InstructionPointer];
                             this.context.InstructionPointer++;
-                            jump = jump * 256 + this.context.Block.Bytecodes[this.context.InstructionPointer];
+                            jump = (jump * 256) + this.context.Block.Bytecodes[this.context.InstructionPointer];
                             this.context.InstructionPointer = jump;
                             continue;
 

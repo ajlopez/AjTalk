@@ -3,12 +3,12 @@ namespace AjTalk
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
     using AjTalk.Compiler;
     using AjTalk.Hosting;
     using AjTalk.Language;
     using AjTalk.Transactions;
-    using System.Diagnostics;
 
     public class Machine
     {

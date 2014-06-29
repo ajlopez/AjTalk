@@ -5,8 +5,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using AjTalk.Exceptions;
     using AjTalk.Compiler;
+    using AjTalk.Exceptions;
 
     public class BlockBehavior : NativeBehavior
     {
@@ -20,7 +20,7 @@ assert
 ";
             Parser parser = new Parser(assertcode);
             this.DefineInstanceMethod(parser.CompileInstanceMethod(this));
-            //this.DefineInstanceMethod(new FunctionalMethod("assert", this, this.AssertMethod));
+            ////this.DefineInstanceMethod(new FunctionalMethod("assert", this, this.AssertMethod));
         }
 
         private object AssertMethod(Machine machine, object obj, object[] arguments)

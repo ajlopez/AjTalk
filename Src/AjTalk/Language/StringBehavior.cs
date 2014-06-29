@@ -16,6 +16,11 @@
             this.DefineInstanceMethod(new FunctionalMethod(",", this, this.ConcatenateMethod));
         }
 
+        private static object AtMethod(Machine machine, object obj, object[] args)
+        {
+            return ((string)obj)[(int)args[0]];
+        }
+
         private object ConcatenateMethod(Machine machine, object obj, object[] arguments)
         {
             string str = (string)obj;
@@ -27,11 +32,6 @@
                 arg = arg.ToString();
 
             return str + arg;
-        }
-
-        private static object AtMethod(Machine machine, object obj, object[] args)
-        {
-            return ((string)obj)[(int)args[0]];
         }
     }
 }

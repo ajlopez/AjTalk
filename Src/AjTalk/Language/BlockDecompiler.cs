@@ -145,7 +145,7 @@
                         ip++;
                         int jump = this.block.ByteCodes[ip];
                         ip++;
-                        jump = jump * 256 + this.block.ByteCodes[ip];
+                        jump = (jump * 256) + this.block.ByteCodes[ip];
                         codes.Add(string.Format("{0} {1}", bc, jump));
                         break;
 
